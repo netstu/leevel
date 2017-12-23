@@ -15,16 +15,16 @@
 
 
 /**
- * 沙盒 database 别名
+ * 沙盒 router
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.23
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Db) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Router) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Db, queryyetsimple, db, queryyetsimple_support_face_ce, queryyetsimple_db_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Router, queryyetsimple, router, queryyetsimple_support_face_ce, queryyetsimple_router_method_entry, 0);
 
 	return SUCCESS;
 
@@ -35,12 +35,12 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Db) {
  *
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Db, name) {
+PHP_METHOD(Queryyetsimple_Router, name) {
 
 	zval *this_ptr = getThis();
 
 
-	RETURN_STRING("databases");
+	RETURN_STRING("router");
 
 }
 

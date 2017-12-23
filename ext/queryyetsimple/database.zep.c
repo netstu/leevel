@@ -40,7 +40,7 @@ PHP_METHOD(Queryyetsimple_Database, name) {
 	zval *this_ptr = getThis();
 
 
-	RETURN_STRING("database");
+	RETURN_STRING("databases");
 
 }
 

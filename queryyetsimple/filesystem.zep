@@ -21,14 +21,14 @@ namespace Queryyetsimple;
 use Queryyetsimple\Support\Face;
 
 /**
- * 沙盒 database
+ * 沙盒 filesystem
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.23
  * @version 1.0
  */
-class Database extends Face
+class Filesystem extends Face
 {
 
     /**
@@ -37,6 +37,6 @@ class Database extends Face
      * @return string
      */
     protected static function name() -> string {
-    	return "databases";
+    	return "filesystems";
     }
 }
