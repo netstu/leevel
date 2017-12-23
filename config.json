@@ -22,6 +22,7 @@
         "possible-wrong-parameter": true,
         "possible-wrong-parameter-undefined": false,
         "nonexistent-function": true,
+        "nonexistent-method": false,
         "nonexistent-class": true,
         "non-valid-isset": true,
         "non-array-update": true,
@@ -55,8 +56,8 @@
     "namespace": "queryyetsimple",
     "name": "queryyetsimple",
     "description": "",
-    "author": "",
-    "version": "0.0.1",
+    "author": "Xiangmin Liu <635750556@qq.com>",
+    "version": "4.0.0",
     "verbose": false,
     "requires": {
         "extensions": []

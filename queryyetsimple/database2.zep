@@ -1,11 +1,11 @@
 namespace Queryyetsimple;
 
-class Greeting
+class Database2
 {
 
     public static function say()
     {
-        echo "hello world, m php ext!";
+        echo "database";
     }
 
 }

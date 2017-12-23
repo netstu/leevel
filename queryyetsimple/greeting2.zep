@@ -1,6 +1,6 @@
 namespace Queryyetsimple;
 
-class Greeting
+class Greeting2
 {
 
     public static function say()

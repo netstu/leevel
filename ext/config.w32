@@ -10,7 +10,8 @@ if (PHP_QUERYYETSIMPLE != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/queryyetsimple", "greeting.zep.c", "queryyetsimple");
+  ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "face.zep.c icontainer.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple", "database.zep.c database2.zep.c db.zep.c greeting.zep.c greeting2.zep.c", "queryyetsimple");
   ADD_FLAG("CFLAGS_QUERYYETSIMPLE", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");

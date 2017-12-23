@@ -1,9 +1,9 @@
 namespace Queryyetsimple;
 
-class Greeting
+class Db
 {
 
-    public static function say()
+    public static function say2()
     {
         echo "hello world, m php ext!";
     }

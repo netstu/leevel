@@ -23,6 +23,12 @@
 
 
 
+zend_class_entry *queryyetsimple_support_icontainer_ce;
+zend_class_entry *queryyetsimple_support_face_ce;
+zend_class_entry *queryyetsimple_database2_ce;
+zend_class_entry *queryyetsimple_database_ce;
+zend_class_entry *queryyetsimple_db_ce;
+zend_class_entry *queryyetsimple_greeting2_ce;
 zend_class_entry *queryyetsimple_greeting_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(queryyetsimple)
@@ -35,7 +41,13 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 {
 	REGISTER_INI_ENTRIES();
 	zephir_module_init();
+	ZEPHIR_INIT(Queryyetsimple_Support_Icontainer);
+	ZEPHIR_INIT(Queryyetsimple_Support_Face);
+	ZEPHIR_INIT(Queryyetsimple_Database);
+	ZEPHIR_INIT(Queryyetsimple_Database2);
+	ZEPHIR_INIT(Queryyetsimple_Db);
 	ZEPHIR_INIT(Queryyetsimple_Greeting);
+	ZEPHIR_INIT(Queryyetsimple_Greeting2);
 	return SUCCESS;
 }
 
@@ -93,6 +105,7 @@ static PHP_RINIT_FUNCTION(queryyetsimple)
 	php_zephir_init_globals(queryyetsimple_globals_ptr TSRMLS_CC);
 	zephir_initialize_memory(queryyetsimple_globals_ptr TSRMLS_CC);
 
+	zephir_init_static_properties_Queryyetsimple_Support_Face(TSRMLS_C);
 
 	return SUCCESS;
 }

@@ -14,20 +14,20 @@
 #include "kernel/main.h"
 
 
-ZEPHIR_INIT_CLASS(Queryyetsimple_Greeting) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Database2) {
 
-	ZEPHIR_REGISTER_CLASS(Queryyetsimple, Greeting, queryyetsimple, greeting, queryyetsimple_greeting_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS(Queryyetsimple, Database2, queryyetsimple, database2, queryyetsimple_database2_method_entry, 0);
 
 	return SUCCESS;
 
 }
 
-PHP_METHOD(Queryyetsimple_Greeting, say) {
+PHP_METHOD(Queryyetsimple_Database2, say) {
 
 	zval *this_ptr = getThis();
 
 
-	php_printf("%s", "hello world, m php ext!");
+	php_printf("%s", "database");
 
 }
 

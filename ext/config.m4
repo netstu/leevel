@@ -9,7 +9,13 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	fi
 
 	AC_DEFINE(HAVE_QUERYYETSIMPLE, 1, [Whether you have Queryyetsimple])
-	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/greeting.zep.c "
+	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/face.zep.c
+	queryyetsimple/database.zep.c
+	queryyetsimple/database2.zep.c
+	queryyetsimple/db.zep.c
+	queryyetsimple/greeting.zep.c
+	queryyetsimple/greeting2.zep.c
+	queryyetsimple/support/icontainer.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 
