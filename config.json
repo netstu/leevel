@@ -22,7 +22,7 @@
         "possible-wrong-parameter": true,
         "possible-wrong-parameter-undefined": false,
         "nonexistent-function": false,
-        "nonexistent-class": true,
+        "nonexistent-class": false,
         "non-valid-isset": true,
         "non-array-update": true,
         "non-valid-objectupdate": true,

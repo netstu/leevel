@@ -339,7 +339,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 			}
 			ZEPHIR_INIT_NVAR(&mixValues);
 			ZVAL_COPY(&mixValues, _0$$3);
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 5, &sKey, &mixValues);
+			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 6, &sKey, &mixValues);
 			zephir_check_call_status();
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&mixValues);
@@ -642,7 +642,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, setRecursion) {
 	ZEPHIR_INIT_VAR(&arrResult);
 	array_init(&arrResult);
 	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 6, &arrPart);
+	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 5, &arrPart);
 	ZEPHIR_UNREF(&arrPart);
 	zephir_check_call_status();
 	if (!(zephir_array_isset(&arrResult, &sItem))) {
@@ -688,7 +688,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, deleteRecursion) {
 
 
 	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 6, &arrPart);
+	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 5, &arrPart);
 	ZEPHIR_UNREF(&arrPart);
 	zephir_check_call_status();
 	if (!(zephir_array_isset(&arrResult, &sItem))) {
