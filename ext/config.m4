@@ -12,6 +12,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/face.zep.c
 	queryyetsimple/mvc/iaction.zep.c
 	queryyetsimple/mvc/iview.zep.c
+	queryyetsimple/option/ioption.zep.c
 	queryyetsimple/auth.zep.c
 	queryyetsimple/cache.zep.c
 	queryyetsimple/cookie.zep.c
@@ -26,12 +27,15 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/action.zep.c
 	queryyetsimple/mvc/icontroller.zep.c
 	queryyetsimple/option.zep.c
+	queryyetsimple/option/option.zep.c
 	queryyetsimple/psr4.zep.c
 	queryyetsimple/request.zep.c
 	queryyetsimple/response.zep.c
 	queryyetsimple/router.zep.c
 	queryyetsimple/session.zep.c
 	queryyetsimple/support/icontainer.zep.c
+	queryyetsimple/support/ihtml.zep.c
+	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/throttler.zep.c
 	queryyetsimple/validate.zep.c
 	queryyetsimple/view.zep.c "

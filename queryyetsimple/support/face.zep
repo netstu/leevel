@@ -66,7 +66,7 @@ abstract class Face
 
         let instance = self::container()->make(strUnique);
         if typeof instance != "object" {
-            throw new RuntimeException(sprintf("Services %s was found in the IOC container.", strUnique));
+            throw new RuntimeException(sprintf("Services %s was not found in the IOC container.", strUnique));
         }
 
         return instance;

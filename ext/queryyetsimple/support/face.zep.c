@@ -87,7 +87,7 @@ PHP_METHOD(Queryyetsimple_Support_Face, faces) {
 		ZEPHIR_INIT_VAR(&_2$$4);
 		object_init_ex(&_2$$4, spl_ce_RuntimeException);
 		ZEPHIR_INIT_VAR(&_3$$4);
-		ZVAL_STRING(&_3$$4, "Services %s was found in the IOC container.");
+		ZVAL_STRING(&_3$$4, "Services %s was not found in the IOC container.");
 		ZEPHIR_CALL_FUNCTION(&_4$$4, "sprintf", NULL, 1, &_3$$4, &strUnique);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 2, &_4$$4);

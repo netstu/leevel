@@ -25,8 +25,11 @@
 
 zend_class_entry *queryyetsimple_mvc_iaction_ce;
 zend_class_entry *queryyetsimple_mvc_iview_ce;
+zend_class_entry *queryyetsimple_option_ioption_ce;
 zend_class_entry *queryyetsimple_mvc_icontroller_ce;
 zend_class_entry *queryyetsimple_support_icontainer_ce;
+zend_class_entry *queryyetsimple_support_ihtml_ce;
+zend_class_entry *queryyetsimple_support_ijson_ce;
 zend_class_entry *queryyetsimple_support_face_ce;
 zend_class_entry *queryyetsimple_auth_ce;
 zend_class_entry *queryyetsimple_cache_ce;
@@ -41,6 +44,7 @@ zend_class_entry *queryyetsimple_log_ce;
 zend_class_entry *queryyetsimple_mail_ce;
 zend_class_entry *queryyetsimple_mvc_action_ce;
 zend_class_entry *queryyetsimple_option_ce;
+zend_class_entry *queryyetsimple_option_option_ce;
 zend_class_entry *queryyetsimple_psr4_ce;
 zend_class_entry *queryyetsimple_request_ce;
 zend_class_entry *queryyetsimple_response_ce;
@@ -62,8 +66,11 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	zephir_module_init();
 	ZEPHIR_INIT(Queryyetsimple_Mvc_Iaction);
 	ZEPHIR_INIT(Queryyetsimple_Mvc_Iview);
+	ZEPHIR_INIT(Queryyetsimple_Option_Ioption);
 	ZEPHIR_INIT(Queryyetsimple_Mvc_Icontroller);
 	ZEPHIR_INIT(Queryyetsimple_Support_Icontainer);
+	ZEPHIR_INIT(Queryyetsimple_Support_Ihtml);
+	ZEPHIR_INIT(Queryyetsimple_Support_Ijson);
 	ZEPHIR_INIT(Queryyetsimple_Support_Face);
 	ZEPHIR_INIT(Queryyetsimple_Auth);
 	ZEPHIR_INIT(Queryyetsimple_Cache);
@@ -78,6 +85,7 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	ZEPHIR_INIT(Queryyetsimple_Mail);
 	ZEPHIR_INIT(Queryyetsimple_Mvc_Action);
 	ZEPHIR_INIT(Queryyetsimple_Option);
+	ZEPHIR_INIT(Queryyetsimple_Option_Option);
 	ZEPHIR_INIT(Queryyetsimple_Psr4);
 	ZEPHIR_INIT(Queryyetsimple_Request);
 	ZEPHIR_INIT(Queryyetsimple_Response);
