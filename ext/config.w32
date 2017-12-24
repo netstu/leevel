@@ -11,7 +11,7 @@ if (PHP_QUERYYETSIMPLE != "no") {
   }
   
   ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "face.zep.c icontainer.zep.c", "queryyetsimple");
-	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iview.zep.c iaction.zep.c icontroller.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iaction.zep.c iview.zep.c action.zep.c icontroller.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple", "auth.zep.c cache.zep.c cookie.zep.c database.zep.c db.zep.c encryption.zep.c event.zep.c filesystem.zep.c i18n.zep.c log.zep.c mail.zep.c option.zep.c psr4.zep.c request.zep.c response.zep.c router.zep.c session.zep.c throttler.zep.c validate.zep.c view.zep.c", "queryyetsimple");
   ADD_FLAG("CFLAGS_QUERYYETSIMPLE", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
