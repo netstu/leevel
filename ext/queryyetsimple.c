@@ -23,6 +23,9 @@
 
 
 
+zend_class_entry *queryyetsimple_mvc_iview_ce;
+zend_class_entry *queryyetsimple_mvc_iaction_ce;
+zend_class_entry *queryyetsimple_mvc_icontroller_ce;
 zend_class_entry *queryyetsimple_support_icontainer_ce;
 zend_class_entry *queryyetsimple_support_face_ce;
 zend_class_entry *queryyetsimple_auth_ce;
@@ -56,6 +59,9 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 {
 	REGISTER_INI_ENTRIES();
 	zephir_module_init();
+	ZEPHIR_INIT(Queryyetsimple_Mvc_Iview);
+	ZEPHIR_INIT(Queryyetsimple_Mvc_Iaction);
+	ZEPHIR_INIT(Queryyetsimple_Mvc_Icontroller);
 	ZEPHIR_INIT(Queryyetsimple_Support_Icontainer);
 	ZEPHIR_INIT(Queryyetsimple_Support_Face);
 	ZEPHIR_INIT(Queryyetsimple_Auth);

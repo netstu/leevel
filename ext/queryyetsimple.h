@@ -5,6 +5,7 @@
 #define ZEPHIR_CLASS_ENTRIES_H
 
 #include "queryyetsimple/support/face.zep.h"
+#include "queryyetsimple/mvc/iview.zep.h"
 #include "queryyetsimple/auth.zep.h"
 #include "queryyetsimple/cache.zep.h"
 #include "queryyetsimple/cookie.zep.h"
@@ -16,6 +17,8 @@
 #include "queryyetsimple/i18n.zep.h"
 #include "queryyetsimple/log.zep.h"
 #include "queryyetsimple/mail.zep.h"
+#include "queryyetsimple/mvc/iaction.zep.h"
+#include "queryyetsimple/mvc/icontroller.zep.h"
 #include "queryyetsimple/option.zep.h"
 #include "queryyetsimple/psr4.zep.h"
 #include "queryyetsimple/request.zep.h"
