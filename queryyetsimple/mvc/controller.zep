@@ -19,6 +19,7 @@
 namespace Queryyetsimple\Mvc;
 
 use RuntimeException;
+use Queryyetsimple\Mvc\Iview;
 use Queryyetsimple\Router\Router;
 
 /**
@@ -152,7 +153,7 @@ abstract class Controller implements Icontroller
 			this->objView,
 			"deleteAssign"
 		], func_get_args());
-		
+
 		return this;
 	}
 

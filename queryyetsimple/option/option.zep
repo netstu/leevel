@@ -115,7 +115,7 @@ class Option implements ArrayAccess, Ioption
 			return array_key_exists(sName, this->arrOption[strNamespace]) ? this->arrOption[strNamespace][sName] : mixDefault;
 		}
 
-		let arrParts = explode('.', sName);
+		let arrParts = explode(".", sName);
 		let arrOption = this->arrOption[strNamespace];
 		for sPart in arrParts {
 			if ! isset arrOption[sPart] {
@@ -197,7 +197,7 @@ class Option implements ArrayAccess, Ioption
 				unset(this->arrOption[strNamespace][sName]);
 			}
 		} else {
-			let arrParts = explode('.', sName);
+			let arrParts = explode(".", sName);
 			let arrOption = this->deleteRecursion(arrParts, this->arrOption[strNamespace]);
 			let this->arrOption[strNamespace] = arrOption;		
 		}
