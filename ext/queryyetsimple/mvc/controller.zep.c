@@ -156,7 +156,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
 	}
 	zephir_read_property(&_1, this_ptr, SL("objRouter"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Router is not set in controller", "queryyetsimple/mvc/controller.zep", 105);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Router is not set in controller", "queryyetsimple/mvc/controller.zep", 106);
 		return;
 	}
 	zephir_read_property(&_2, this_ptr, SL("objRouter"), PH_NOISY_CC | PH_READONLY);
@@ -370,7 +370,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("objView"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 199);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 200);
 		return;
 	}
 

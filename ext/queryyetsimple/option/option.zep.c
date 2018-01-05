@@ -176,7 +176,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, has) {
 PHP_METHOD(Queryyetsimple_Option_Option, get) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sName_param = NULL, *mixDefault = NULL, mixDefault_sub, __$null, sTempName, arrName, strNamespace, arrParts, sPart, arrOption, _2, _3, _9, _10, _11, *_12, _0$$3, _1$$3, _4$$4, _5$$4, _6$$4, _7$$4, _8$$4, _13$$5;
+	zval *sName_param = NULL, *mixDefault = NULL, mixDefault_sub, __$null, sTempName, arrName, strNamespace, arrParts, sPart, arrOption, _2, _3, _9, _10, *_11, _0$$3, _1$$3, _4$$4, _5$$4, _6$$4, _7$$4, _8$$4, _12$$5;
 	zval sName;
 	zval *this_ptr = getThis();
 
@@ -193,7 +193,6 @@ PHP_METHOD(Queryyetsimple_Option_Option, get) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_9);
 	ZVAL_UNDEF(&_10);
-	ZVAL_UNDEF(&_11);
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_4$$4);
@@ -201,7 +200,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, get) {
 	ZVAL_UNDEF(&_6$$4);
 	ZVAL_UNDEF(&_7$$4);
 	ZVAL_UNDEF(&_8$$4);
-	ZVAL_UNDEF(&_13$$5);
+	ZVAL_UNDEF(&_12$$5);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 2, &sName_param, &mixDefault);
@@ -247,24 +246,22 @@ PHP_METHOD(Queryyetsimple_Option_Option, get) {
 		}
 		RETURN_CCTOR(&_4$$4);
 	}
-	ZEPHIR_INIT_VAR(&_9);
-	ZVAL_STRING(&_9, ".");
 	ZEPHIR_INIT_VAR(&arrParts);
-	zephir_fast_explode(&arrParts, &_9, &sName, LONG_MAX TSRMLS_CC);
-	zephir_read_property(&_10, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_11, &_10, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 119 TSRMLS_CC);
-	ZEPHIR_CPY_WRT(&arrOption, &_11);
+	zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
+	zephir_read_property(&_9, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch(&_10, &_9, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 119 TSRMLS_CC);
+	ZEPHIR_CPY_WRT(&arrOption, &_10);
 	zephir_is_iterable(&arrParts, 0, "queryyetsimple/option/option.zep", 126);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrParts), _12)
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrParts), _11)
 	{
 		ZEPHIR_INIT_NVAR(&sPart);
-		ZVAL_COPY(&sPart, _12);
+		ZVAL_COPY(&sPart, _11);
 		if (!(zephir_array_isset(&arrOption, &sPart))) {
 			RETVAL_ZVAL(mixDefault, 1, 0);
 			RETURN_MM();
 		}
-		zephir_array_fetch(&_13$$5, &arrOption, &sPart, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 124 TSRMLS_CC);
-		ZEPHIR_CPY_WRT(&arrOption, &_13$$5);
+		zephir_array_fetch(&_12$$5, &arrOption, &sPart, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 124 TSRMLS_CC);
+		ZEPHIR_CPY_WRT(&arrOption, &_12$$5);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&sPart);
 	RETURN_CCTOR(&arrOption);
@@ -387,7 +384,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval sName, *sName_param = NULL, sTempName, arrName, strNamespace, arrParts, arrOption, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$5, _7$$6, _8$$6, _9$$6;
+	zval sName, *sName_param = NULL, sTempName, arrName, strNamespace, arrParts, arrOption, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$5, _7$$6, _8$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&sName);
@@ -405,7 +402,6 @@ PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 	ZVAL_UNDEF(&_6$$5);
 	ZVAL_UNDEF(&_7$$6);
 	ZVAL_UNDEF(&_8$$6);
-	ZVAL_UNDEF(&_9$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &sName_param);
@@ -439,13 +435,11 @@ PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 			zephir_array_unset(&_6$$5, &sName, PH_SEPARATE);
 		}
 	} else {
-		ZEPHIR_INIT_VAR(&_7$$6);
-		ZVAL_STRING(&_7$$6, ".");
 		ZEPHIR_INIT_VAR(&arrParts);
-		zephir_fast_explode(&arrParts, &_7$$6, &sName, LONG_MAX TSRMLS_CC);
-		zephir_read_property(&_8$$6, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_9$$6, &_8$$6, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 201 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&arrOption, this_ptr, "deleterecursion", NULL, 0, &arrParts, &_9$$6);
+		zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
+		zephir_read_property(&_7$$6, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_8$$6, &_7$$6, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 201 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&arrOption, this_ptr, "deleterecursion", NULL, 0, &arrParts, &_8$$6);
 		zephir_check_call_status();
 		zephir_update_property_array(this_ptr, SL("arrOption"), &strNamespace, &arrOption TSRMLS_CC);
 	}

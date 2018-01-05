@@ -10,6 +10,8 @@
 #include "queryyetsimple/mvc/icontroller.zep.h"
 #include "queryyetsimple/mvc/ientity.zep.h"
 #include "queryyetsimple/option/ioption.zep.h"
+#include "queryyetsimple/pipeline/ipipeline.zep.h"
+#include "queryyetsimple/view/itheme.zep.h"
 #include "queryyetsimple/auth.zep.h"
 #include "queryyetsimple/cache.zep.h"
 #include "queryyetsimple/cookie.zep.h"
@@ -24,8 +26,10 @@
 #include "queryyetsimple/mvc/action.zep.h"
 #include "queryyetsimple/mvc/controller.zep.h"
 #include "queryyetsimple/mvc/imodel.zep.h"
+#include "queryyetsimple/mvc/view.zep.h"
 #include "queryyetsimple/option.zep.h"
 #include "queryyetsimple/option/option.zep.h"
+#include "queryyetsimple/pipeline/pipeline.zep.h"
 #include "queryyetsimple/psr4.zep.h"
 #include "queryyetsimple/request.zep.h"
 #include "queryyetsimple/response.zep.h"
@@ -37,5 +41,7 @@
 #include "queryyetsimple/throttler.zep.h"
 #include "queryyetsimple/validate.zep.h"
 #include "queryyetsimple/view.zep.h"
+#include "queryyetsimple/view/theme.zep.h"
+#include "queryyetsimple/0__closure.zep.h"
 
 #endif

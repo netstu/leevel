@@ -12,8 +12,10 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/concat.h"
 #include "kernel/memory.h"
+#include "kernel/array.h"
+#include "kernel/main.h"
+#include "kernel/fcall.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_0__closure) {
@@ -26,17 +28,29 @@ ZEPHIR_INIT_CLASS(queryyetsimple_0__closure) {
 
 PHP_METHOD(queryyetsimple_0__closure, __invoke) {
 
-	zval *sPart, sPart_sub;
+	zval _1;
+	zval _0, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sPart_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_1);
 
-	zephir_fetch_params(0, 1, 0, &sPart);
+	ZEPHIR_MM_GROW();
 
-
-
-	ZEPHIR_CONCAT_SVS(return_value, "['", sPart, "']");
-	return;
+	ZEPHIR_INIT_VAR(&_0);
+	ZEPHIR_INIT_VAR(&_1);
+	zephir_create_array(&_1, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_1, this_ptr);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "traverseGenerator");
+	zephir_array_fast_append(&_1, &_2);
+	ZEPHIR_INIT_NVAR(&_2);
+	zephir_get_args(&_2);
+	ZEPHIR_CALL_USER_FUNC_ARRAY(&_0, &_1, &_2);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 
