@@ -277,7 +277,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, traverseGenerator) {
 	ZEPHIR_INIT_NVAR(&_8);
 	zephir_create_closure_ex(&_8, NULL, queryyetsimple_0__closure_ce, SL("__invoke"));
 	ZEPHIR_MAKE_REF(&aArgs);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 9, &aArgs, &_8);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 13, &aArgs, &_8);
 	ZEPHIR_UNREF(&aArgs);
 	zephir_check_call_status();
 	zephir_read_property(&_9, this_ptr, SL("objGenerator"), PH_NOISY_CC | PH_READONLY);
@@ -317,7 +317,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 
 	ZVAL_NULL(&_0);
 	ZEPHIR_MAKE_REF(&arrStage);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 9, &arrStage, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 13, &arrStage, &_0);
 	ZEPHIR_UNREF(&arrStage);
 	zephir_check_call_status();
 	if (!_1) {
@@ -400,7 +400,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 			ZVAL_STRING(&_4$$8, "Stage %s is not valid.");
 			ZEPHIR_CALL_FUNCTION(&_5$$8, "sprintf", NULL, 1, &_4$$8, &strStage);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_3$$8, "__construct", NULL, 10, &_5$$8);
+			ZEPHIR_CALL_METHOD(NULL, &_3$$8, "__construct", NULL, 14, &_5$$8);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(&_3$$8, "queryyetsimple/pipeline/pipeline.zep", 202 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
@@ -448,7 +448,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse) {
 	ZEPHIR_INIT_VAR(&_1);
 	array_init(&_1);
 	ZVAL_LONG(&_2, 2);
-	ZEPHIR_CALL_FUNCTION(&tempArray, "array_pad", NULL, 11, &_0, &_2, &_1);
+	ZEPHIR_CALL_FUNCTION(&tempArray, "array_pad", NULL, 15, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&strName);
 	zephir_array_fetch_long(&strName, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 223 TSRMLS_CC);
