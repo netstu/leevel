@@ -336,7 +336,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 			}
 			ZEPHIR_INIT_NVAR(&mixValues);
 			ZVAL_COPY(&mixValues, _0$$3);
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 10, &sKey, &mixValues);
+			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 11, &sKey, &mixValues);
 			zephir_check_call_status();
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&mixValues);
@@ -636,7 +636,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, setRecursion) {
 	ZEPHIR_INIT_VAR(&arrResult);
 	array_init(&arrResult);
 	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 9, &arrPart);
+	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 10, &arrPart);
 	ZEPHIR_UNREF(&arrPart);
 	zephir_check_call_status();
 	if (!(zephir_array_isset(&arrResult, &sItem))) {
@@ -645,7 +645,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, setRecursion) {
 		zephir_array_update_zval(&arrResult, &sItem, &_0$$3, PH_COPY | PH_SEPARATE);
 	}
 	if (!(ZEPHIR_IS_EMPTY(&arrPart))) {
-		ZEPHIR_CALL_METHOD(&_1$$4, this_ptr, "setrecursion", NULL, 11, &arrPart, mixValue);
+		ZEPHIR_CALL_METHOD(&_1$$4, this_ptr, "setrecursion", NULL, 12, &arrPart, mixValue);
 		zephir_check_call_status();
 		zephir_array_update_zval(&arrResult, &sItem, &_1$$4, PH_COPY | PH_SEPARATE);
 	} else {
@@ -682,7 +682,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, deleteRecursion) {
 
 
 	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 9, &arrPart);
+	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 10, &arrPart);
 	ZEPHIR_UNREF(&arrPart);
 	zephir_check_call_status();
 	if (!(zephir_array_isset(&arrResult, &sItem))) {
@@ -690,7 +690,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, deleteRecursion) {
 	}
 	if (!(ZEPHIR_IS_EMPTY(&arrPart))) {
 		zephir_array_fetch(&_1$$4, &arrResult, &sItem, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 313 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_0$$4, this_ptr, "deleterecursion", NULL, 12, &arrPart, &_1$$4);
+		ZEPHIR_CALL_METHOD(&_0$$4, this_ptr, "deleterecursion", NULL, 13, &arrPart, &_1$$4);
 		zephir_check_call_status();
 		zephir_array_update_zval(&arrResult, &sItem, &_0$$4, PH_COPY | PH_SEPARATE);
 	} else {

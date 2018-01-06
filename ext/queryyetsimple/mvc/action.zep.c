@@ -417,7 +417,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 		ZVAL_STRING(&_1$$3, "Run method is not allowed.");
 		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", &_3, 1, &_1$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 8, &_2$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 9, &_2$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/mvc/action.zep", 219 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -429,7 +429,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 	ZVAL_STRING(&_5, "Method %s is not defined.");
 	ZEPHIR_CALL_FUNCTION(&_6, "sprintf", &_3, 1, &_5, &sMethod);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 8, &_6);
+	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 9, &_6);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_4, "queryyetsimple/mvc/action.zep", 221 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();

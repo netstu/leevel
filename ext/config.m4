@@ -13,6 +13,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/iview.zep.c
 	queryyetsimple/cookie/icookie.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
+	queryyetsimple/log/ilog.zep.c
 	queryyetsimple/mvc/iaction.zep.c
 	queryyetsimple/mvc/icontroller.zep.c
 	queryyetsimple/mvc/ientity.zep.c
@@ -31,6 +32,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
 	queryyetsimple/log.zep.c
+	queryyetsimple/log/iconnect.zep.c
+	queryyetsimple/log/log.zep.c
 	queryyetsimple/mail.zep.c
 	queryyetsimple/mvc/action.zep.c
 	queryyetsimple/mvc/controller.zep.c

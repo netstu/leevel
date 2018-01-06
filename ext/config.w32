@@ -14,6 +14,7 @@ if (PHP_QUERYYETSIMPLE != "no") {
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iview.zep.c iaction.zep.c icontroller.zep.c ientity.zep.c action.zep.c controller.zep.c imodel.zep.c view.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/cookie", "icookie.zep.c cookie.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/i18n", "ii18n.zep.c i18n.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/log", "ilog.zep.c iconnect.zep.c log.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/option", "ioption.zep.c option.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/pipeline", "ipipeline.zep.c pipeline.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/view", "itheme.zep.c theme.zep.c", "queryyetsimple");
