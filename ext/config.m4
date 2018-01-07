@@ -11,6 +11,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	AC_DEFINE(HAVE_QUERYYETSIMPLE, 1, [Whether you have Queryyetsimple])
 	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/face.zep.c
 	queryyetsimple/mvc/iview.zep.c
+	queryyetsimple/log/aconnect.zep.c
+	queryyetsimple/log/iconnect.zep.c
 	queryyetsimple/cookie/icookie.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
 	queryyetsimple/log/ilog.zep.c
@@ -19,6 +21,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/ientity.zep.c
 	queryyetsimple/option/ioption.zep.c
 	queryyetsimple/pipeline/ipipeline.zep.c
+	queryyetsimple/support/manager.zep.c
 	queryyetsimple/view/itheme.zep.c
 	queryyetsimple/auth.zep.c
 	queryyetsimple/cache.zep.c
@@ -32,8 +35,10 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
 	queryyetsimple/log.zep.c
-	queryyetsimple/log/iconnect.zep.c
+	queryyetsimple/log/file.zep.c
 	queryyetsimple/log/log.zep.c
+	queryyetsimple/log/manager.zep.c
+	queryyetsimple/log/monolog.zep.c
 	queryyetsimple/mail.zep.c
 	queryyetsimple/mvc/action.zep.c
 	queryyetsimple/mvc/controller.zep.c
@@ -47,6 +52,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/response.zep.c
 	queryyetsimple/router.zep.c
 	queryyetsimple/session.zep.c
+	queryyetsimple/support/iarray.zep.c
 	queryyetsimple/support/icontainer.zep.c
 	queryyetsimple/support/ihtml.zep.c
 	queryyetsimple/support/ijson.zep.c
@@ -54,7 +60,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/validate.zep.c
 	queryyetsimple/view.zep.c
 	queryyetsimple/view/theme.zep.c
-	queryyetsimple/0__closure.zep.c "
+	queryyetsimple/0__closure.zep.c
+	queryyetsimple/1__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

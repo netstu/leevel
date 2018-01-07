@@ -143,7 +143,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
 		ZEPHIR_INIT_VAR(&arrArgs);
 		zephir_get_args(&arrArgs);
 		ZEPHIR_MAKE_REF(&arrArgs);
-		ZEPHIR_CALL_FUNCTION(NULL, "array_shift", NULL, 10, &arrArgs);
+		ZEPHIR_CALL_FUNCTION(NULL, "array_shift", NULL, 11, &arrArgs);
 		ZEPHIR_UNREF(&arrArgs);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_0$$3);

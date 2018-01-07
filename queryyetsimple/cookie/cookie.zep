@@ -19,6 +19,7 @@
 namespace Queryyetsimple\Cookie;
 
 use Exception;
+use InvalidArgumentException;
 use Queryyetsimple\Cookie\Icookie;
 
 /**

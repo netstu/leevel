@@ -593,7 +593,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, log) {
 	ZVAL_STRING(&_1, "time_format");
 	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getoption", &_2, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_5, "date", NULL, 8, &_4);
+	ZEPHIR_CALL_FUNCTION(&_5, "date", NULL, 9, &_4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_6, this_ptr, "formatmessage", NULL, 0, mixMessage);
 	zephir_check_call_status();
@@ -1256,7 +1256,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, formatMessage) {
 	}
 	_1 = Z_TYPE_P(mixMessage) == IS_OBJECT;
 	if (_1) {
-		_1 = zephir_is_instance_of(mixMessage, SL("Queryyetsimple\\Support\\Iarray") TSRMLS_CC);
+		_1 = zephir_instance_of_ev(mixMessage, queryyetsimple_support_iarray_ce TSRMLS_CC);
 	}
 	if (Z_TYPE_P(mixMessage) == IS_ARRAY) {
 		ZEPHIR_INIT_VAR(&_2$$3);

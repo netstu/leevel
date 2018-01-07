@@ -6,6 +6,8 @@
 
 #include "queryyetsimple/support/face.zep.h"
 #include "queryyetsimple/mvc/iview.zep.h"
+#include "queryyetsimple/log/aconnect.zep.h"
+#include "queryyetsimple/log/iconnect.zep.h"
 #include "queryyetsimple/cookie/icookie.zep.h"
 #include "queryyetsimple/i18n/ii18n.zep.h"
 #include "queryyetsimple/log/ilog.zep.h"
@@ -14,6 +16,7 @@
 #include "queryyetsimple/mvc/ientity.zep.h"
 #include "queryyetsimple/option/ioption.zep.h"
 #include "queryyetsimple/pipeline/ipipeline.zep.h"
+#include "queryyetsimple/support/manager.zep.h"
 #include "queryyetsimple/view/itheme.zep.h"
 #include "queryyetsimple/auth.zep.h"
 #include "queryyetsimple/cache.zep.h"
@@ -27,8 +30,10 @@
 #include "queryyetsimple/i18n.zep.h"
 #include "queryyetsimple/i18n/i18n.zep.h"
 #include "queryyetsimple/log.zep.h"
-#include "queryyetsimple/log/iconnect.zep.h"
+#include "queryyetsimple/log/file.zep.h"
 #include "queryyetsimple/log/log.zep.h"
+#include "queryyetsimple/log/manager.zep.h"
+#include "queryyetsimple/log/monolog.zep.h"
 #include "queryyetsimple/mail.zep.h"
 #include "queryyetsimple/mvc/action.zep.h"
 #include "queryyetsimple/mvc/controller.zep.h"
@@ -42,6 +47,7 @@
 #include "queryyetsimple/response.zep.h"
 #include "queryyetsimple/router.zep.h"
 #include "queryyetsimple/session.zep.h"
+#include "queryyetsimple/support/iarray.zep.h"
 #include "queryyetsimple/support/icontainer.zep.h"
 #include "queryyetsimple/support/ihtml.zep.h"
 #include "queryyetsimple/support/ijson.zep.h"
@@ -50,5 +56,6 @@
 #include "queryyetsimple/view.zep.h"
 #include "queryyetsimple/view/theme.zep.h"
 #include "queryyetsimple/0__closure.zep.h"
+#include "queryyetsimple/1__closure.zep.h"
 
 #endif
