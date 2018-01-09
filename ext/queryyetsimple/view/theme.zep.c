@@ -316,7 +316,7 @@ PHP_METHOD(Queryyetsimple_View_Theme, display) {
 			zephir_fast_strpos(&_15$$7, &sChildCache, &_14$$7, 0 );
 			ZEPHIR_INIT_VAR(&_16$$7);
 			zephir_substr(&_16$$7, &sChildCache, zephir_get_intval(&_15$$7), 0, ZEPHIR_SUBSTR_NO_LENGTH);
-			ZEPHIR_CALL_FUNCTION(&_17$$7, "preg_replace", NULL, 34, &_13$$7, &_16$$7, &sTargetContent);
+			ZEPHIR_CALL_FUNCTION(&_17$$7, "preg_replace", NULL, 51, &_13$$7, &_16$$7, &sTargetContent);
 			zephir_check_call_status();
 			ZEPHIR_CPY_WRT(&sTargetContent, &_17$$7);
 			zephir_file_put_contents(NULL, &sTargetCache, &sTargetContent TSRMLS_CC);
@@ -335,14 +335,14 @@ PHP_METHOD(Queryyetsimple_View_Theme, display) {
 		}
 	}
 	if (bDisplay == 0) {
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 35);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 52);
 		zephir_check_call_status();
 		if (zephir_require_zval(&sCachePath TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_CALL_FUNCTION(&sReturn, "ob_get_contents", NULL, 36);
+		ZEPHIR_CALL_FUNCTION(&sReturn, "ob_get_contents", NULL, 53);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 37);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 54);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "fixie", NULL, 0, &sReturn);
 		zephir_check_call_status();
@@ -568,7 +568,7 @@ PHP_METHOD(Queryyetsimple_View_Theme, getCachePath) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_9);
 	ZEPHIR_CONCAT_SV(&_9, ".", &_8);
-	ZEPHIR_CALL_FUNCTION(&_10, "basename", NULL, 38, &sFile, &_9);
+	ZEPHIR_CALL_FUNCTION(&_10, "basename", NULL, 55, &sFile, &_9);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_11);
 	zephir_md5(&_11, &sFile);
@@ -1436,14 +1436,14 @@ PHP_METHOD(Queryyetsimple_View_Theme, fixIe) {
 		ZVAL_STRING(&_2$$3, "/<!--<\\#\\#\\#\\#incl\\*(.*?)\\*ude\\#\\#\\#\\#>-->/");
 		ZEPHIR_INIT_VAR(&_3$$3);
 		ZVAL_STRING(&_3$$3, "");
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "preg_replace", &_5, 34, &_2$$3, &_3$$3, &sContent);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "preg_replace", &_5, 51, &_2$$3, &_3$$3, &sContent);
 		zephir_check_call_status();
 		zephir_get_strval(&sContent, &_4$$3);
 		ZEPHIR_INIT_NVAR(&_2$$3);
 		ZVAL_STRING(&_2$$3, "/<!--<\\/\\#\\#\\#\\#incl\\*(.*?)\\*ude\\#\\#\\#\\#\\/>-->/");
 		ZEPHIR_INIT_NVAR(&_3$$3);
 		ZVAL_STRING(&_3$$3, "");
-		ZEPHIR_CALL_FUNCTION(&_6$$3, "preg_replace", &_5, 34, &_2$$3, &_3$$3, &sContent);
+		ZEPHIR_CALL_FUNCTION(&_6$$3, "preg_replace", &_5, 51, &_2$$3, &_3$$3, &sContent);
 		zephir_check_call_status();
 		zephir_get_strval(&sContent, &_6$$3);
 	}

@@ -76,6 +76,20 @@ class Pipeline implements Ipipeline
 	}
 
 	/**
+     * 管道初始化
+     *
+     * @return $this
+     */
+    public function reset()
+    {
+        let this->arrPassed = [];
+        let this->arrStage = [];
+        let this->objGenerator = null;
+
+        return this;
+    }
+
+	/**
 	 * 将传输对象传入管道
 	 *
 	 * @param mixed $mixPassed
@@ -118,16 +132,17 @@ class Pipeline implements Ipipeline
 	 * @since 2018.01.03
 	 * @return void
 	 */
-	public function then(var calEnd)
+	public function then(var calEnd = null)
 	{
-		var arrStage; 
-
-		if ! is_callable(calEnd) {
-			throw new InvalidArgumentException("Pipeline then must be a callable.");
-		}
+		var arrStage;
 
 		let arrStage = this->arrStage;
-		let arrStage[] = calEnd;
+		if (calEnd) {
+			if ! is_callable(calEnd) {
+				throw new InvalidArgumentException("Pipeline then must be a callable.");
+			}
+			let arrStage[] = calEnd;
+		} 
 		let this->objGenerator = this->stageGenerator(arrStage);
 
 		call_user_func_array([this, "traverseGenerator"], this->arrPassed);
@@ -139,7 +154,7 @@ class Pipeline implements Ipipeline
 	 * @since 2018.01.03
 	 * @return void
 	 */
-	protected function traverseGenerator() {
+	public function traverseGenerator() {
 		var aArgs, calCurrent;
 
 		if ! this->objGenerator->valid() || this->objGenerator->next() || ! this->objGenerator->valid() {
@@ -147,8 +162,16 @@ class Pipeline implements Ipipeline
 		}
 
 		let aArgs = func_get_args();
+
+		// zephir 闭包不支持 this
+		// 从服务容器中读取 pipeline，单一实例
+		// 违背了面向对象，方法为 public 才能够访问到，但是找不到其它办法
 		array_unshift(aArgs, function() {
-			call_user_func_array([this, "traverseGenerator"], func_get_args());
+			var thisPipeline;
+
+			let thisPipeline = app("pipeline");
+
+			call_user_func_array([thisPipeline, "traverseGenerator"], func_get_args());
 		});
 
 		let calCurrent = this->objGenerator->current();
@@ -164,8 +187,15 @@ class Pipeline implements Ipipeline
 	 * @return \queryyetsimple\support\collection
 	 */
 	protected function stageGenerator(array arrStage) {
+		var mixStage;
+
+		array arrTemp = [];
 		array_unshift(arrStage, null);
-		return new collection(arrStage);
+		for mixStage in arrStage {
+			let arrTemp[] = this->stageCallback(mixStage);
+		}
+
+		return new collection(arrTemp);
 	}
 
 	/**

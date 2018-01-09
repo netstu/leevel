@@ -21,10 +21,23 @@
 #include "kernel/object.h"
 
 
+/**
+ * log.file
+ *
+ * @author Xiangmin Liu <635750556@qq.com>
+ * @package $$
+ * @since 2018.01.08
+ * @version 1.0
+ */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Log_File) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, File, queryyetsimple, log_file, queryyetsimple_log_aconnect_ce, queryyetsimple_log_file_method_entry, 0);
 
+	/**
+	 * 配置
+	 *
+	 * @var array
+	 */
 	zend_declare_property_null(queryyetsimple_log_file_ce, SL("arrOption"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	queryyetsimple_log_file_ce->create_object = zephir_init_properties_Queryyetsimple_Log_File;
@@ -34,6 +47,12 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_File) {
 
 }
 
+/**
+ * 日志写入接口
+ *
+ * @param array $arrData
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_File, save) {
 
 	zephir_fcall_cache_entry *_6 = NULL, *_10 = NULL;
@@ -60,19 +79,19 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 	zephir_get_arrval(&arrData, arrData_param);
 
 
-	zephir_array_fetch_long(&_0, &arrData, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 21 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, &_0, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 21 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, &arrData, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, &_0, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&strDestination, this_ptr, "getpath", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checksize", NULL, 0, &strDestination);
 	zephir_check_call_status();
-	zephir_is_iterable(&arrData, 0, "queryyetsimple/log/file.zep", 28);
+	zephir_is_iterable(&arrData, 0, "queryyetsimple/log/file.zep", 65);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrData), _2)
 	{
 		ZEPHIR_INIT_NVAR(&arrItem);
 		ZVAL_COPY(&arrItem, _2);
-		zephir_array_fetch_long(&_4$$3, &arrItem, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 26 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &arrItem, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 26 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &arrItem, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &arrItem, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "formatmessage", &_6, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_7$$3);
@@ -88,6 +107,13 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 
 }
 
+/**
+ * 格式化日志信息
+ *
+ * @param string $strMessage 应该被记录的错误信息
+ * @param array $arrContext
+ * @return string
+ */
 PHP_METHOD(Queryyetsimple_Log_File, formatMessage) {
 
 	zval arrContext;

@@ -13,6 +13,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/iview.zep.c
 	queryyetsimple/log/aconnect.zep.c
 	queryyetsimple/log/iconnect.zep.c
+	queryyetsimple/support/manager.zep.c
 	queryyetsimple/cookie/icookie.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
 	queryyetsimple/log/ilog.zep.c
@@ -21,7 +22,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/ientity.zep.c
 	queryyetsimple/option/ioption.zep.c
 	queryyetsimple/pipeline/ipipeline.zep.c
-	queryyetsimple/support/manager.zep.c
+	queryyetsimple/session/isession.zep.c
 	queryyetsimple/view/itheme.zep.c
 	queryyetsimple/auth.zep.c
 	queryyetsimple/cache.zep.c
@@ -52,6 +53,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/response.zep.c
 	queryyetsimple/router.zep.c
 	queryyetsimple/session.zep.c
+	queryyetsimple/session/manager.zep.c
+	queryyetsimple/session/session.zep.c
 	queryyetsimple/support/iarray.zep.c
 	queryyetsimple/support/icontainer.zep.c
 	queryyetsimple/support/ihtml.zep.c

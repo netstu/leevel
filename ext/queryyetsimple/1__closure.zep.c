@@ -13,9 +13,9 @@
 
 #include "kernel/main.h"
 #include "kernel/memory.h"
+#include "kernel/fcall.h"
 #include "kernel/array.h"
 #include "kernel/main.h"
-#include "kernel/fcall.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_1__closure) {
@@ -29,10 +29,11 @@ ZEPHIR_INIT_CLASS(queryyetsimple_1__closure) {
 PHP_METHOD(queryyetsimple_1__closure, __invoke) {
 
 	zval _1;
-	zval _0, _2;
+	zval thisPipeline, _0, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&thisPipeline);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_1);
@@ -40,9 +41,13 @@ PHP_METHOD(queryyetsimple_1__closure, __invoke) {
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&_0);
+	ZVAL_STRING(&_0, "pipeline");
+	ZEPHIR_CALL_FUNCTION(&thisPipeline, "app", NULL, 0, &_0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_0);
 	ZEPHIR_INIT_VAR(&_1);
 	zephir_create_array(&_1, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&_1, this_ptr);
+	zephir_array_fast_append(&_1, &thisPipeline);
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "traverseGenerator");
 	zephir_array_fast_append(&_1, &_2);

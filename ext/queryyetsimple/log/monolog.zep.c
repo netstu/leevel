@@ -21,14 +21,37 @@
 #include "kernel/string.h"
 
 
+/**
+ * log.monolog
+ *
+ * @author Xiangmin Liu <635750556@qq.com>
+ * @package $$
+ * @since 2018.01.08
+ * @version 1.0
+ */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Monolog) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, Monolog, queryyetsimple, log_monolog, queryyetsimple_log_aconnect_ce, queryyetsimple_log_monolog_method_entry, 0);
 
+	/**
+	 * Monolog
+	 *
+	 * @var \Monolog\Logger
+	 */
 	zend_declare_property_null(queryyetsimple_log_monolog_ce, SL("objMonolog"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
+	/**
+	 * 配置
+	 *
+	 * @var array
+	 */
 	zend_declare_property_null(queryyetsimple_log_monolog_ce, SL("arrOption"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
+	/**
+	 * Monolog 支持日志级别
+	 *
+	 * @var array
+	 */
 	zend_declare_property_null(queryyetsimple_log_monolog_ce, SL("arrSupportLevel"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	queryyetsimple_log_monolog_ce->create_object = zephir_init_properties_Queryyetsimple_Log_Monolog;
@@ -38,6 +61,12 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Monolog) {
 
 }
 
+/**
+ * 构造函数
+ *
+ * @param array $arrOption
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 
 	zend_class_entry *_2 = NULL;
@@ -88,7 +117,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 	ZVAL_STRING(&_4, "type");
 	ZEPHIR_CALL_METHOD(&_5, this_ptr, "getoption", NULL, 0, &_4);
 	zephir_check_call_status();
-	zephir_is_iterable(&_5, 0, "queryyetsimple/log/monolog.zep", 60);
+	zephir_is_iterable(&_5, 0, "queryyetsimple/log/monolog.zep", 107);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_5), _6)
 	{
 		ZEPHIR_INIT_NVAR(&strType);
@@ -107,6 +136,13 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 
 }
 
+/**
+ * 注册文件 handler
+ *
+ * @param string $strPath
+ * @param string $strLevel
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, file) {
 
 	zend_class_entry *_0 = NULL;
@@ -156,6 +192,14 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, file) {
 
 }
 
+/**
+ * 注册每日文件 handler
+ *
+ * @param string $strPath
+ * @param int $intDays
+ * @param string $level
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, dailyFile) {
 
 	zend_class_entry *_0 = NULL;
@@ -211,6 +255,13 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, dailyFile) {
 
 }
 
+/**
+ * 注册系统 handler
+ *
+ * @param string $strName
+ * @param string $strLevel
+ * @return \Psr\Log\LoggerInterface
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, syslog) {
 
 	zend_class_entry *_0 = NULL;
@@ -258,6 +309,13 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, syslog) {
 
 }
 
+/**
+ * 注册 error_log handler
+ *
+ * @param string $strLevel
+ * @param int $intMessageType
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, errorLog) {
 
 	zend_class_entry *_0 = NULL;
@@ -311,6 +369,12 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, errorLog) {
 
 }
 
+/**
+ * monolog 回调
+ *
+ * @param callable|null $mixCallback
+ * @return $this
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, monolog) {
 
 	zval _1$$3;
@@ -344,6 +408,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, monolog) {
 
 }
 
+/**
+ * 取得 Monolog
+ *
+ * @return \Monolog\Logger
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, getMonolog) {
 
 	zval *this_ptr = getThis();
@@ -353,6 +422,12 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getMonolog) {
 
 }
 
+/**
+ * 日志写入接口
+ *
+ * @param array $arrData
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, save) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -379,22 +454,22 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, save) {
 	zephir_read_property(&_0, this_ptr, SL("arrSupportLevel"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&arrLevel);
 	zephir_array_keys(&arrLevel, &_0 TSRMLS_CC);
-	zephir_is_iterable(&arrData, 0, "queryyetsimple/log/monolog.zep", 124);
+	zephir_is_iterable(&arrData, 0, "queryyetsimple/log/monolog.zep", 217);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrData), _1)
 	{
 		ZEPHIR_INIT_NVAR(&arrItem);
 		ZVAL_COPY(&arrItem, _1);
-		zephir_array_fetch_long(&_2$$3, &arrItem, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 116 TSRMLS_CC);
+		zephir_array_fetch_long(&_2$$3, &arrItem, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 209 TSRMLS_CC);
 		if (!(zephir_fast_in_array(&_2$$3, &arrLevel TSRMLS_CC))) {
 			ZEPHIR_INIT_NVAR(&strLevel);
 			ZVAL_STRING(&strLevel, "debug");
 		} else {
 			ZEPHIR_OBS_NVAR(&strLevel);
-			zephir_array_fetch_long(&strLevel, &arrItem, 0, PH_NOISY, "queryyetsimple/log/monolog.zep", 119 TSRMLS_CC);
+			zephir_array_fetch_long(&strLevel, &arrItem, 0, PH_NOISY, "queryyetsimple/log/monolog.zep", 212 TSRMLS_CC);
 		}
 		zephir_read_property(&_3$$3, this_ptr, SL("objMonolog"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_long(&_4$$3, &arrItem, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 122 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &arrItem, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 122 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &arrItem, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 215 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &arrItem, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 215 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD_ZVAL(NULL, &_3$$3, &strLevel, NULL, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
@@ -403,6 +478,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, save) {
 
 }
 
+/**
+ * 初始化文件 handler
+ *
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, makeFileHandler) {
 
 	zval strPath;
@@ -423,6 +503,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, makeFileHandler) {
 
 }
 
+/**
+ * 初始化每日文件 handler
+ *
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, makeDailyFileHandler) {
 
 	zval strPath, _0;
@@ -446,6 +531,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, makeDailyFileHandler) {
 
 }
 
+/**
+ * 初始化系统 handler
+ *
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, makeSyslogHandler) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -460,6 +550,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, makeSyslogHandler) {
 
 }
 
+/**
+ * 初始化 error_log handler
+ *
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, makeErrorLogHandler) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -474,6 +569,12 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, makeErrorLogHandler) {
 
 }
 
+/**
+ * 每日文件真实路径
+ *
+ * @param string $strPath
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -528,6 +629,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 
 }
 
+/**
+ * 默认格式化
+ *
+ * @return \Monolog\Formatter\LineFormatter
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, getDefaultFormatter) {
 
 	zval _1, _2, _3, _4;
@@ -558,6 +664,13 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDefaultFormatter) {
 
 }
 
+/**
+ * 获取 Monolog 级别
+ * 不支持级别归并到 DEBUG
+ *
+ * @param string $strLevel
+ * @return int
+ */
 PHP_METHOD(Queryyetsimple_Log_Monolog, parseMonologLevel) {
 
 	zval *strLevel_param = NULL, _0, _3, _4, _1$$3, _2$$3;
@@ -580,11 +693,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, parseMonologLevel) {
 	zephir_read_property(&_0, this_ptr, SL("arrSupportLevel"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_0, &strLevel)) {
 		zephir_read_property(&_1$$3, this_ptr, SL("arrSupportLevel"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &strLevel, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 170 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &strLevel, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 301 TSRMLS_CC);
 		RETURN_CTOR(&_2$$3);
 	}
 	zephir_read_property(&_3, this_ptr, SL("arrSupportLevel"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 172 TSRMLS_CC);
+	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 303 TSRMLS_CC);
 	RETURN_CTOR(&_4);
 
 }
