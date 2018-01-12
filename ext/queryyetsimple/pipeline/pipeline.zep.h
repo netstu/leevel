@@ -9,6 +9,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, send);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, through);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, then);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, traverseGenerator);
+PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, makeNextClosure);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse);
@@ -49,6 +50,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_pipeline_pipeline_method_entry) {
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, through, arginfo_queryyetsimple_pipeline_pipeline_through, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, then, arginfo_queryyetsimple_pipeline_pipeline_then, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, traverseGenerator, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Pipeline_Pipeline, makeNextClosure, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, stageGenerator, arginfo_queryyetsimple_pipeline_pipeline_stagegenerator, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, stageCallback, arginfo_queryyetsimple_pipeline_pipeline_stagecallback, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, parse, arginfo_queryyetsimple_pipeline_pipeline_parse, ZEND_ACC_PROTECTED)

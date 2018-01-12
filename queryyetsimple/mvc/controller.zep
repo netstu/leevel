@@ -21,6 +21,7 @@ namespace Queryyetsimple\Mvc;
 use RuntimeException;
 use Queryyetsimple\Mvc\Iview;
 use Queryyetsimple\Router\Router;
+use Queryyetsimple\View\Iview as view_iview;
 
 /**
  * 基类控制器
@@ -112,6 +113,19 @@ abstract class Controller implements Icontroller
 	// ---------------- 实现 view 接口 start ----------------
 	// ######################################################
 
+    /**
+     * 切换视图
+     *
+     * @param \queryyetsimple\view\iview $objTheme
+     * @param boolean $booForever
+     * @return $this
+     */
+    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    {
+        this->checkView();
+        this->objView->switchView(objTheme, booForever);
+        return this;
+    }
 
 	/**
 	 * 变量赋值

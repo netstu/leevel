@@ -171,6 +171,48 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, action) {
 }
 
 /**
+ * 切换视图
+ *
+ * @param \queryyetsimple\view\iview $objTheme
+ * @param boolean $booForever
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Mvc_Action, switchView) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zend_bool booForever;
+	zval *objTheme, objTheme_sub, *booForever_param = NULL, _0, _1;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&objTheme_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 1, &objTheme, &booForever_param);
+
+	if (!booForever_param) {
+		booForever = 0;
+	} else {
+		booForever = zephir_get_boolval(booForever_param);
+	}
+
+
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
+	zephir_check_call_status();
+	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
+	if (booForever) {
+		ZVAL_BOOL(&_1, 1);
+	} else {
+		ZVAL_BOOL(&_1, 0);
+	}
+	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, objTheme, &_1);
+	zephir_check_call_status();
+	RETURN_THIS();
+
+}
+
+/**
  * 变量赋值
  *
  * @param mixed $mixName
@@ -372,7 +414,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, checkController) {
 
 	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Controller is not set in action", "queryyetsimple/mvc/action.zep", 205);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Controller is not set in action", "queryyetsimple/mvc/action.zep", 219);
 		return;
 	}
 
@@ -419,7 +461,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 27, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/mvc/action.zep", 219 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/mvc/action.zep", 233 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -431,7 +473,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 27, &_6);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_4, "queryyetsimple/mvc/action.zep", 221 TSRMLS_CC);
+	zephir_throw_exception_debug(&_4, "queryyetsimple/mvc/action.zep", 235 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

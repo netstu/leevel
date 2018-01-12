@@ -29,6 +29,15 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Iview) {
 }
 
 /**
+ * 切换视图
+ *
+ * @param \queryyetsimple\view\iview $objTheme
+ * @param boolean $booForever
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_Iview, switchView);
+
+/**
  * 变量赋值
  *
  * @param mixed $mixName

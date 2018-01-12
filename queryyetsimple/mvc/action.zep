@@ -24,6 +24,7 @@ use Queryyetsimple\Mvc\Iview;
 use Queryyetsimple\Mvc\Iaction;
 use Queryyetsimple\Router\Router;
 use Queryyetsimple\Mvc\Icontroller;
+use Queryyetsimple\View\Iview as view_iview;
 
 /**
  * 基类方法器
@@ -114,6 +115,19 @@ abstract class Action implements Iaction
     // ---------------- 实现 view 接口 start ----------------
     // ######################################################
 
+    /**
+     * 切换视图
+     *
+     * @param \queryyetsimple\view\iview $objTheme
+     * @param boolean $booForever
+     * @return $this
+     */
+    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    {
+        this->checkController();
+        this->objController->switchView(objTheme, booForever);
+        return this;
+    }
 
     /**
      * 变量赋值

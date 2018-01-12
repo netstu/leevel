@@ -22,6 +22,7 @@ use Closure;
 use RuntimeException;
 use Queryyetsimple\Mvc\Iview;
 use Queryyetsimple\View\Itheme;
+use Queryyetsimple\View\Iview as view_iview;
 
 /**
  * 视图
@@ -37,9 +38,23 @@ class View implements Iview
 	/**
 	 * 视图模板
 	 *
-	 * @var \queryyessimple\view\itheme
+	 * @var \queryyessimple\view\iview
 	 */
 	protected objTheme;
+
+	/**
+     * 备份视图模板
+     *
+     * @var \queryyessimple\view\iview
+     */
+    protected objBackupTheme;
+
+    /**
+     * 是否永久切换
+     *
+     * @var boolean
+     */
+    protected booForever = false;
 
 	/**
 	 * 响应工厂
@@ -58,13 +73,37 @@ class View implements Iview
 	/**
 	 * 构造函数
 	 *
-	 * @param \queryyetsimple\view\itheme $objTheme
+	 * @param \queryyetsimple\view\iview $objTheme
 	 * @return void
 	 */
-	public function __construct(<Itheme> objTheme)
+	public function __construct(<view_iview> objTheme)
 	{
 		let this->objTheme = objTheme;
 	}
+
+	/**
+     * 切换视图
+     *
+     * @param \queryyetsimple\view\iview $objTheme
+     * @param boolean $booForever
+     * @return $this
+     */
+    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    {
+    	var arrAssign;
+
+        let arrAssign = this->getAssign();
+
+        if booForever === false {
+            let this->objBackupTheme = this->objTheme;
+        }
+        
+        let this->booForever = booForever;
+        let this->objTheme = objTheme;
+        this->assign(arrAssign);
+
+        return this;
+    }
 
 	/**
 	 * 设置响应工厂
@@ -163,7 +202,7 @@ class View implements Iview
 	 */
 	public function display(string sFile = null, array arrOption = [])
 	{
-		var arrInitOption;
+		var arrInitOption, strResult;
 
 		this->checkTheme();
 
@@ -178,7 +217,14 @@ class View implements Iview
 
 		this->responseHeader(arrOption["content_type"], arrOption["charset"]);
 
-		return this->objTheme->display(sFile, false);
+		let strResult = this->objTheme->display(sFile, false);
+
+		if this->booForever === false {
+            let this->objTheme = this->objBackupTheme;
+        }
+        let this->booForever = false;
+
+		return strResult;
 	}
 
 	/**

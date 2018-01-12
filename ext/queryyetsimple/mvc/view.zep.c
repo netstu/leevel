@@ -14,8 +14,8 @@
 #include "kernel/main.h"
 #include "kernel/object.h"
 #include "kernel/memory.h"
-#include "kernel/operators.h"
 #include "kernel/fcall.h"
+#include "kernel/operators.h"
 #include "kernel/main.h"
 #include "kernel/array.h"
 #include "kernel/exception.h"
@@ -37,9 +37,23 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_View) {
 	/**
 	 * 视图模板
 	 *
-	 * @var \queryyessimple\view\itheme
+	 * @var \queryyessimple\view\iview
 	 */
 	zend_declare_property_null(queryyetsimple_mvc_view_ce, SL("objTheme"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	/**
+	 * 备份视图模板
+	 *
+	 * @var \queryyessimple\view\iview
+	 */
+	zend_declare_property_null(queryyetsimple_mvc_view_ce, SL("objBackupTheme"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	/**
+	 * 是否永久切换
+	 *
+	 * @var boolean
+	 */
+	zend_declare_property_bool(queryyetsimple_mvc_view_ce, SL("booForever"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
 	 * 响应工厂
@@ -63,7 +77,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_View) {
 /**
  * 构造函数
  *
- * @param \queryyetsimple\view\itheme $objTheme
+ * @param \queryyetsimple\view\iview $objTheme
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Mvc_View, __construct) {
@@ -78,6 +92,54 @@ PHP_METHOD(Queryyetsimple_Mvc_View, __construct) {
 
 
 	zephir_update_property_zval(this_ptr, SL("objTheme"), objTheme);
+
+}
+
+/**
+ * 切换视图
+ *
+ * @param \queryyetsimple\view\iview $objTheme
+ * @param boolean $booForever
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Mvc_View, switchView) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zend_bool booForever;
+	zval *objTheme, objTheme_sub, *booForever_param = NULL, __$true, __$false, arrAssign, _0$$3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&objTheme_sub);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
+	ZVAL_UNDEF(&arrAssign);
+	ZVAL_UNDEF(&_0$$3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 1, &objTheme, &booForever_param);
+
+	if (!booForever_param) {
+		booForever = 0;
+	} else {
+		booForever = zephir_get_boolval(booForever_param);
+	}
+
+
+	ZEPHIR_CALL_METHOD(&arrAssign, this_ptr, "getassign", NULL, 0);
+	zephir_check_call_status();
+	if (booForever == 0) {
+		zephir_read_property(&_0$$3, this_ptr, SL("objTheme"), PH_NOISY_CC | PH_READONLY);
+		zephir_update_property_zval(this_ptr, SL("objBackupTheme"), &_0$$3);
+	}
+	if (booForever) {
+		zephir_update_property_zval(this_ptr, SL("booForever"), &__$true);
+	} else {
+		zephir_update_property_zval(this_ptr, SL("booForever"), &__$false);
+	}
+	zephir_update_property_zval(this_ptr, SL("objTheme"), objTheme);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "assign", NULL, 0, &arrAssign);
+	zephir_check_call_status();
+	RETURN_THIS();
 
 }
 
@@ -284,17 +346,21 @@ PHP_METHOD(Queryyetsimple_Mvc_View, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval arrOption;
-	zval *sFile_param = NULL, *arrOption_param = NULL, arrInitOption, _0, _1, _2, _3, _4;
+	zval *sFile_param = NULL, *arrOption_param = NULL, __$true, __$false, arrInitOption, strResult, _0, _1, _2, _3, _4, _5$$4;
 	zval sFile;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&sFile);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&arrInitOption);
+	ZVAL_UNDEF(&strResult);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&arrOption);
 
 	ZEPHIR_MM_GROW();
@@ -327,15 +393,25 @@ PHP_METHOD(Queryyetsimple_Mvc_View, display) {
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_fast_array_merge(&_0, &arrInitOption, &arrOption TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&arrOption, &_0);
-	zephir_array_fetch_string(&_1, &arrOption, SL("content_type"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 179 TSRMLS_CC);
-	zephir_array_fetch_string(&_2, &arrOption, SL("charset"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 179 TSRMLS_CC);
+	zephir_array_fetch_string(&_1, &arrOption, SL("content_type"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 218 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, &arrOption, SL("charset"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 218 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "responseheader", NULL, 0, &_1, &_2);
 	zephir_check_call_status();
 	zephir_read_property(&_3, this_ptr, SL("objTheme"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_BOOL(&_4, 0);
-	ZEPHIR_RETURN_CALL_METHOD(&_3, "display", NULL, 0, &sFile, &_4);
+	ZEPHIR_CALL_METHOD(&strResult, &_3, "display", NULL, 0, &sFile, &_4);
 	zephir_check_call_status();
-	RETURN_MM();
+	zephir_read_property(&_4, this_ptr, SL("booForever"), PH_NOISY_CC | PH_READONLY);
+	if (ZEPHIR_IS_FALSE_IDENTICAL(&_4)) {
+		zephir_read_property(&_5$$4, this_ptr, SL("objBackupTheme"), PH_NOISY_CC | PH_READONLY);
+		zephir_update_property_zval(this_ptr, SL("objTheme"), &_5$$4);
+	}
+	if (0) {
+		zephir_update_property_zval(this_ptr, SL("booForever"), &__$true);
+	} else {
+		zephir_update_property_zval(this_ptr, SL("booForever"), &__$false);
+	}
+	RETURN_CCTOR(&strResult);
 
 }
 
@@ -354,7 +430,7 @@ PHP_METHOD(Queryyetsimple_Mvc_View, checkTheme) {
 
 	zephir_read_property(&_0, this_ptr, SL("objTheme"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "queryyetsimple/mvc/view.zep", 192);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "queryyetsimple/mvc/view.zep", 238);
 		return;
 	}
 
@@ -401,7 +477,7 @@ PHP_METHOD(Queryyetsimple_Mvc_View, responseHeader) {
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("objResponse"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Response is not set in view", "queryyetsimple/mvc/view.zep", 208);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Response is not set in view", "queryyetsimple/mvc/view.zep", 254);
 		return;
 	}
 	zephir_read_property(&_1, this_ptr, SL("objResponse"), PH_NOISY_CC | PH_READONLY);

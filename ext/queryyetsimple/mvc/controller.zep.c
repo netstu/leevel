@@ -156,7 +156,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
 	}
 	zephir_read_property(&_1, this_ptr, SL("objRouter"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Router is not set in controller", "queryyetsimple/mvc/controller.zep", 106);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Router is not set in controller", "queryyetsimple/mvc/controller.zep", 107);
 		return;
 	}
 	zephir_read_property(&_2, this_ptr, SL("objRouter"), PH_NOISY_CC | PH_READONLY);
@@ -166,6 +166,48 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
 	ZEPHIR_RETURN_CALL_METHOD(&_2, "dobind", NULL, 0, &_3, &sActionName, &_4, &_5);
 	zephir_check_call_status();
 	RETURN_MM();
+
+}
+
+/**
+ * 切换视图
+ *
+ * @param \queryyetsimple\view\iview $objTheme
+ * @param boolean $booForever
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Mvc_Controller, switchView) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zend_bool booForever;
+	zval *objTheme, objTheme_sub, *booForever_param = NULL, _0, _1;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&objTheme_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 1, &objTheme, &booForever_param);
+
+	if (!booForever_param) {
+		booForever = 0;
+	} else {
+		booForever = zephir_get_boolval(booForever_param);
+	}
+
+
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
+	zephir_check_call_status();
+	zephir_read_property(&_0, this_ptr, SL("objView"), PH_NOISY_CC | PH_READONLY);
+	if (booForever) {
+		ZVAL_BOOL(&_1, 1);
+	} else {
+		ZVAL_BOOL(&_1, 0);
+	}
+	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, objTheme, &_1);
+	zephir_check_call_status();
+	RETURN_THIS();
 
 }
 
@@ -370,7 +412,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("objView"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 200);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 214);
 		return;
 	}
 

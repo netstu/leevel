@@ -155,7 +155,7 @@ class Pipeline implements Ipipeline
 	 * @return void
 	 */
 	public function traverseGenerator() {
-		var aArgs, calCurrent;
+		var aArgs, calCurrent, calNext;
 
 		if ! this->objGenerator->valid() || this->objGenerator->next() || ! this->objGenerator->valid() {
 		   return;
@@ -163,19 +163,22 @@ class Pipeline implements Ipipeline
 
 		let aArgs = func_get_args();
 
-		// zephir 闭包不支持 this
-		// 从服务容器中读取 pipeline，单一实例
-		// 违背了面向对象，方法为 public 才能够访问到，但是找不到其它办法
-		array_unshift(aArgs, function() {
-			var thisPipeline;
+		let calNext = Closure::fromCallable([this, "makeNextClosure"]);
 
-			let thisPipeline = app("pipeline");
-
-			call_user_func_array([thisPipeline, "traverseGenerator"], func_get_args());
-		});
+		array_unshift(aArgs, calNext);
 
 		let calCurrent = this->objGenerator->current();
 		call_user_func_array(calCurrent, aArgs);
+	}
+
+	/**
+	 * 下一次迭代执行回调
+	 *
+	 * @since 2018.01.12
+	 * @return void
+	 */
+	protected function makeNextClosure() {
+		call_user_func_array([this, "traverseGenerator"], func_get_args());
 	}
 
 	/**

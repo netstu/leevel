@@ -8,6 +8,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, setController);
 PHP_METHOD(Queryyetsimple_Mvc_Action, setView);
 PHP_METHOD(Queryyetsimple_Mvc_Action, setRouter);
 PHP_METHOD(Queryyetsimple_Mvc_Action, action);
+PHP_METHOD(Queryyetsimple_Mvc_Action, switchView);
 PHP_METHOD(Queryyetsimple_Mvc_Action, assign);
 PHP_METHOD(Queryyetsimple_Mvc_Action, getAssign);
 PHP_METHOD(Queryyetsimple_Mvc_Action, deleteAssign);
@@ -30,6 +31,11 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_action, 0, 0, 1)
 	ZEND_ARG_INFO(0, sActionName)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_switchview, 0, 0, 1)
+	ZEND_ARG_OBJ_INFO(0, objTheme, Queryyetsimple\\View\\Iview, 0)
+	ZEND_ARG_INFO(0, booForever)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_assign, 0, 0, 1)
@@ -61,6 +67,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_mvc_action_method_entry) {
 	PHP_ME(Queryyetsimple_Mvc_Action, setView, arginfo_queryyetsimple_mvc_action_setview, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Mvc_Action, setRouter, arginfo_queryyetsimple_mvc_action_setrouter, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Mvc_Action, action, arginfo_queryyetsimple_mvc_action_action, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Mvc_Action, switchView, arginfo_queryyetsimple_mvc_action_switchview, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Mvc_Action, assign, arginfo_queryyetsimple_mvc_action_assign, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Mvc_Action, getAssign, arginfo_queryyetsimple_mvc_action_getassign, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Mvc_Action, deleteAssign, arginfo_queryyetsimple_mvc_action_deleteassign, ZEND_ACC_PUBLIC)

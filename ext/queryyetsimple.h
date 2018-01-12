@@ -18,7 +18,6 @@
 #include "queryyetsimple/option/ioption.zep.h"
 #include "queryyetsimple/pipeline/ipipeline.zep.h"
 #include "queryyetsimple/session/isession.zep.h"
-#include "queryyetsimple/view/itheme.zep.h"
 #include "queryyetsimple/auth.zep.h"
 #include "queryyetsimple/cache.zep.h"
 #include "queryyetsimple/cookie.zep.h"
@@ -57,8 +56,6 @@
 #include "queryyetsimple/throttler.zep.h"
 #include "queryyetsimple/validate.zep.h"
 #include "queryyetsimple/view.zep.h"
-#include "queryyetsimple/view/theme.zep.h"
 #include "queryyetsimple/0__closure.zep.h"
-#include "queryyetsimple/1__closure.zep.h"
 
 #endif

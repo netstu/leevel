@@ -23,7 +23,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/option/ioption.zep.c
 	queryyetsimple/pipeline/ipipeline.zep.c
 	queryyetsimple/session/isession.zep.c
-	queryyetsimple/view/itheme.zep.c
 	queryyetsimple/auth.zep.c
 	queryyetsimple/cache.zep.c
 	queryyetsimple/cookie.zep.c
@@ -62,9 +61,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/throttler.zep.c
 	queryyetsimple/validate.zep.c
 	queryyetsimple/view.zep.c
-	queryyetsimple/view/theme.zep.c
-	queryyetsimple/0__closure.zep.c
-	queryyetsimple/1__closure.zep.c "
+	queryyetsimple/0__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 
