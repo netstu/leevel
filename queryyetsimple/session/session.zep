@@ -53,7 +53,7 @@ class Session implements Isession
      *
      * @var array
      */
-    protected arrOption = [
+    protected option = [
         "default" : null,
         "prefix" : "q_",
         "id" : null,
@@ -93,13 +93,13 @@ class Session implements Isession
      * 构造函数
      *
      * @param \SessionHandlerInterface|null $objConnect
-     * @param array $arrOption
+     * @param array $option
      * @return void
      */
-    public function __construct(<SessionHandlerInterface> objConnect = null, array arrOption = [])
+    public function __construct(<SessionHandlerInterface> objConnect = null, array option = [])
     {
         let this->objConnect =  objConnect;
-        this->options(arrOption);
+        this->options(option);
     }
 
     /**
@@ -832,48 +832,48 @@ class Session implements Isession
     /**
      * 修改单个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function option(string strName, var mixValue)
+    public function option(string name, var value)
     {
-        if ! is_string(strName) {
+        if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
-        let this->arrOption[strName] = mixValue;
+        let this->option[name] = value;
         return this;
     }
 
     /**
      * 修改数组配置
      *
-     * @param string $strName
-     * @param array $arrValue
+     * @param string $name
+     * @param array $value
      * @return $this
      */
-    public function optionArray(string $strName, array $arrValue)
+    public function optionArray(string name, array value)
     {
-        return this->option(strName, array_merge(this->getOption(strName), arrValue));
+        return this->option(name, array_merge(this->getOption(name), value));
     }
 
     /**
      * 修改多个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function options(array $arrOption = [])
+    public function options(array option = [])
     {
-    	var strName, mixValue;
+    	var name, value;
 
-        if empty arrOption {
+        if empty option {
             return this;
         }
 
-        for strName, mixValue in arrOption {
-        	this->option(strName, mixValue);
+        for name, value in option {
+        	this->option(name, value);
         }
 
         return this;
@@ -882,40 +882,40 @@ class Session implements Isession
     /**
      * 获取单个配置
      *
-     * @param string $strName
-     * @param mixed $mixDefault
+     * @param string $name
+     * @param mixed $defaults
      * @return mixed
      */
-    public function getOption(string strName, var mixDefault = null)
+    public function getOption(string name, var defaults = null)
     {
-        return isset(this->arrOption[strName]) ? this->arrOption[strName] : mixDefault;
+        return isset(this->option[name]) ? this->option[name] : defaults;
     }
 
     /**
      * 获取所有配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return mixed
      */
-    public function getOptions(array arrOption = [])
+    public function getOptions(array option = [])
     {
-    	if ! empty arrOption {
-    		return array_merge(this->arrOption, arrOption);
+    	if ! empty option {
+    		return array_merge(this->option, option);
     	} else {
-    		return this->arrOption;
+    		return this->option;
     	}
     }
 
     /**
      * 删除单个配置
      *
-     * @param string $strName
+     * @param string $name
      * @return $this
      */
-    public function deleteOption(string strName)
+    public function deleteOption(string name)
     {
-        if isset this->arrOption[strName] {
-            unset(this->arrOption[strName]);
+        if isset this->option[name] {
+            unset(this->option[name]);
         }
 
         return this;
@@ -924,24 +924,24 @@ class Session implements Isession
     /**
      * 删除多个配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return $this
      */
-    public function deleteOptions(array arrOption = [])
+    public function deleteOptions(array option = [])
     {
-    	var strOption;
+    	var key;
 
-        if ! empty arrOption {
+        if ! empty option {
             return this;
         }
 
-        for strOption in arrOption {
-        	this->deleteOption(strOption);
+        for key in option {
+        	this->deleteOption(key);
         }
 
         return this;
     }
-
+    
     /**
      * 返回 session 名字
      *

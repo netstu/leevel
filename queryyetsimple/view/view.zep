@@ -16,54 +16,49 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Queryyetsimple\I18n;
+namespace Queryyetsimple\View;
+
+use Queryyetsimple\View\Iview;
+use Queryyetsimple\View\Iconnect;
 
 /**
- * ii18n 接口
+ * view 仓储
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
- * @since 2018.01.06
+ * @since 2018.01.10
  * @version 1.0
  */
-interface Ii18n
+class View implements Iview
 {
 
     /**
-     * 获取语言 text
+     * 连接驱动
      *
-     * @return string
+     * @var \queryyetsimple\view\iconnect
      */
-    public function getText();
+    protected oConnect;
 
     /**
-     * 获取语言 text
+     * 构造函数
      *
-     * @return string
-     */
-    public function __();
-
-    /**
-     * 添加语言包
-     *
-     * @param string $i18n 语言名字
-     * @param array $data 语言包数据
+     * @param \queryyetsimple\view\iconnect $oConnect
      * @return void
      */
-    public function addText(string i18n, array data = []);
+    public function __construct(<Iconnect> oConnect)
+    {
+        let this->oConnect =  oConnect;
+    }
 
     /**
-     * 设置当前语言包上下文环境
+     * call 
      *
-     * @param string $i18n
-     * @return void
+     * @param string $sMethod
+     * @param array $arrArgs
+     * @return mixed
      */
-    public function setI18n(string i18n);
-
-    /**
-     * 获取当前语言包
-     *
-     * @return string
-     */
-    public function getI18n();
+    public function __call(string sMethod, array arrArgs)
+    {
+        return call_user_func_array([this->oConnect, sMethod], arrArgs);
+    }
 }

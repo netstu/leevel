@@ -143,7 +143,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
 		ZEPHIR_INIT_VAR(&arrArgs);
 		zephir_get_args(&arrArgs);
 		ZEPHIR_MAKE_REF(&arrArgs);
-		ZEPHIR_CALL_FUNCTION(NULL, "array_shift", NULL, 11, &arrArgs);
+		ZEPHIR_CALL_FUNCTION(NULL, "array_shift", NULL, 4, &arrArgs);
 		ZEPHIR_UNREF(&arrArgs);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_0$$3);
@@ -412,7 +412,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("objView"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 214);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 205);
 		return;
 	}
 

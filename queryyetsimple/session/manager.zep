@@ -47,21 +47,21 @@ class Manager extends support_manager
     /**
      * 创建连接对象
      *
-     * @param object $objConnect
+     * @param object $connect
      * @return object
      */
-    protected function createConnect(var objConnect)
+    protected function createConnect(var connect)
     {
-        return new Session(objConnect, this->getOptionCommon());
+        return new Session(connect, this->getOptionCommon());
     }
 
     /**
      * 创建 cookie 缓存
      *
-     * @param array $arrOption
+     * @param array $options
      * @return null
      */
-    protected function makeConnectCookie(array arrOption = [])
+    protected function makeConnectCookie(array options = [])
     {
         return null;
     }
@@ -69,33 +69,33 @@ class Manager extends support_manager
     /**
      * 创建 memcache 缓存
      *
-     * @param array $arrOption
+     * @param array $options
      * @return \queryyetsimple\session\memcache
      */
-    protected function makeConnectMemcache(array arrOption = [])
+    protected function makeConnectMemcache(array options = [])
     {
-        return new Memcache(this->getOption("memcache", arrOption));
+        return new Memcache(this->getOption("memcache", options));
     }
 
     /**
      * 创建 redis 缓存
      *
-     * @param array $arrOption
+     * @param array $options
      * @return \queryyetsimple\session\redis
      */
-    protected function makeConnectRedis(array arrOption = [])
+    protected function makeConnectRedis(array options = [])
     {
-        return new Redis(this->getOption("redis", arrOption));
+        return new Redis(this->getOption("redis", options));
     }
 
     /**
      * 读取连接配置
      *
-     * @param string $strConnect
+     * @param string $connect
      * @return array
      */
-    protected function getOptionConnect(string strConnect)
+    protected function getOptionConnect(string connect)
     {
-        return this->optionFilterNull(parent::getOptionConnect(strConnect));
+        return this->optionFilterNull(parent::getOptionConnect(connect));
     }
 }

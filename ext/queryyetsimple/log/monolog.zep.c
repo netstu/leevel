@@ -124,7 +124,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 		ZVAL_COPY(&strType, _6);
 		ZEPHIR_CALL_METHOD(&_7$$3, this_ptr, "camelize", &_8, 0, &strType);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_9$$3, "ucwords", &_10, 13, &_7$$3);
+		ZEPHIR_CALL_FUNCTION(&_9$$3, "ucwords", &_10, 6, &_7$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&strMake);
 		ZEPHIR_CONCAT_SVS(&strMake, "make", &_9$$3, "Handler");
@@ -600,12 +600,12 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 
 
 	ZVAL_LONG(&_0, 4);
-	ZEPHIR_CALL_FUNCTION(&strExt, "pathinfo", NULL, 25, &strPath, &_0);
+	ZEPHIR_CALL_FUNCTION(&strExt, "pathinfo", NULL, 18, &strPath, &_0);
 	zephir_check_call_status();
 	if (zephir_is_true(&strExt)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZEPHIR_CONCAT_SV(&_1$$3, ".", &strExt);
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 26, &strPath, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 27, &strPath, &_1$$3);
 		zephir_check_call_status();
 		ZVAL_LONG(&_3$$3, 0);
 		ZEPHIR_INIT_VAR(&_4$$3);
@@ -614,7 +614,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 	}
 	ZEPHIR_INIT_VAR(&_5);
 	ZVAL_STRING(&_5, "-Y-m-d");
-	ZEPHIR_CALL_FUNCTION(&_6, "date", NULL, 9, &_5);
+	ZEPHIR_CALL_FUNCTION(&_6, "date", NULL, 15, &_5);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_7);
 	if (zephir_is_true(&strExt)) {
@@ -749,7 +749,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, camelize) {
 	ZEPHIR_CONCAT_VV(&_3, &strSeparator, &_0);
 	zephir_get_strval(&strValue, &_3);
 	ZEPHIR_INIT_VAR(&_4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ucwords", NULL, 13, &strValue);
+	ZEPHIR_CALL_FUNCTION(&_5, "ucwords", NULL, 6, &strValue);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_6);
 	ZVAL_STRING(&_6, " ");
@@ -763,14 +763,16 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, camelize) {
 
 zend_object *zephir_init_properties_Queryyetsimple_Log_Monolog(zend_class_entry *class_type TSRMLS_DC) {
 
-		zval _1$$3, _3$$4, _4$$4;
-	zval _0, _2, _5$$4;
+		zval _1$$3, _5$$5, _6$$5;
+	zval _0, _2, _4, _3$$4, _7$$5;
 		ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_5$$4);
-	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_3$$4);
-	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_7$$5);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_5$$5);
+	ZVAL_UNDEF(&_6$$5);
 
 		ZEPHIR_MM_GROW();
 	
@@ -791,21 +793,27 @@ zend_object *zephir_init_properties_Queryyetsimple_Log_Monolog(zend_class_entry 
 			add_assoc_long_ex(&_1$$3, SL("emergency"), 600);
 			zephir_update_property_zval(this_ptr, SL("arrSupportLevel"), &_1$$3);
 		}
-		zephir_read_property(&_2, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_2) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_3$$4);
-			zephir_create_array(&_3$$4, 5, 0 TSRMLS_CC);
-			ZEPHIR_INIT_VAR(&_4$$4);
-			zephir_create_array(&_4$$4, 1, 0 TSRMLS_CC);
-			ZEPHIR_INIT_VAR(&_5$$4);
-			ZVAL_STRING(&_5$$4, "file");
-			zephir_array_fast_append(&_4$$4, &_5$$4);
-			zephir_array_update_string(&_3$$4, SL("type"), &_4$$4, PH_COPY | PH_SEPARATE);
-			add_assoc_stringl_ex(&_3$$4, SL("channel"), SL("Q"));
-			add_assoc_stringl_ex(&_3$$4, SL("name"), SL("Y-m-d H"));
-			add_assoc_long_ex(&_3$$4, SL("size"), 2097152);
-			add_assoc_stringl_ex(&_3$$4, SL("path"), SL(""));
-			zephir_update_property_zval(this_ptr, SL("arrOption"), &_3$$4);
+			array_init(&_3$$4);
+			zephir_update_property_zval(this_ptr, SL("option"), &_3$$4);
+		}
+		zephir_read_property(&_4, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		if (Z_TYPE_P(&_4) == IS_NULL) {
+			ZEPHIR_INIT_VAR(&_5$$5);
+			zephir_create_array(&_5$$5, 5, 0 TSRMLS_CC);
+			ZEPHIR_INIT_VAR(&_6$$5);
+			zephir_create_array(&_6$$5, 1, 0 TSRMLS_CC);
+			ZEPHIR_INIT_VAR(&_7$$5);
+			ZVAL_STRING(&_7$$5, "file");
+			zephir_array_fast_append(&_6$$5, &_7$$5);
+			zephir_array_update_string(&_5$$5, SL("type"), &_6$$5, PH_COPY | PH_SEPARATE);
+			add_assoc_stringl_ex(&_5$$5, SL("channel"), SL("Q"));
+			add_assoc_stringl_ex(&_5$$5, SL("name"), SL("Y-m-d H"));
+			add_assoc_long_ex(&_5$$5, SL("size"), 2097152);
+			add_assoc_stringl_ex(&_5$$5, SL("path"), SL(""));
+			zephir_update_property_zval(this_ptr, SL("arrOption"), &_5$$5);
 		}
 		ZEPHIR_MM_RESTORE();
 		return Z_OBJ_P(this_ptr);

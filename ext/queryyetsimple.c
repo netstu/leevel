@@ -34,14 +34,17 @@ zend_class_entry *queryyetsimple_mvc_ientity_ce;
 zend_class_entry *queryyetsimple_option_ioption_ce;
 zend_class_entry *queryyetsimple_pipeline_ipipeline_ce;
 zend_class_entry *queryyetsimple_session_isession_ce;
+zend_class_entry *queryyetsimple_view_iconnect_ce;
+zend_class_entry *queryyetsimple_view_iview_ce;
 zend_class_entry *queryyetsimple_mvc_imodel_ce;
 zend_class_entry *queryyetsimple_support_iarray_ce;
 zend_class_entry *queryyetsimple_support_icontainer_ce;
 zend_class_entry *queryyetsimple_support_ihtml_ce;
 zend_class_entry *queryyetsimple_support_ijson_ce;
 zend_class_entry *queryyetsimple_support_face_ce;
-zend_class_entry *queryyetsimple_log_aconnect_ce;
 zend_class_entry *queryyetsimple_support_manager_ce;
+zend_class_entry *queryyetsimple_log_aconnect_ce;
+zend_class_entry *queryyetsimple_view_aconnect_ce;
 zend_class_entry *queryyetsimple_0__closure_ce;
 zend_class_entry *queryyetsimple_auth_ce;
 zend_class_entry *queryyetsimple_cache_ce;
@@ -76,6 +79,9 @@ zend_class_entry *queryyetsimple_session_session_ce;
 zend_class_entry *queryyetsimple_throttler_ce;
 zend_class_entry *queryyetsimple_validate_ce;
 zend_class_entry *queryyetsimple_view_ce;
+zend_class_entry *queryyetsimple_view_html_ce;
+zend_class_entry *queryyetsimple_view_manager_ce;
+zend_class_entry *queryyetsimple_view_view_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(queryyetsimple)
 
@@ -98,14 +104,17 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	ZEPHIR_INIT(Queryyetsimple_Option_Ioption);
 	ZEPHIR_INIT(Queryyetsimple_Pipeline_Ipipeline);
 	ZEPHIR_INIT(Queryyetsimple_Session_Isession);
+	ZEPHIR_INIT(Queryyetsimple_View_Iconnect);
+	ZEPHIR_INIT(Queryyetsimple_View_Iview);
 	ZEPHIR_INIT(Queryyetsimple_Mvc_Imodel);
 	ZEPHIR_INIT(Queryyetsimple_Support_Iarray);
 	ZEPHIR_INIT(Queryyetsimple_Support_Icontainer);
 	ZEPHIR_INIT(Queryyetsimple_Support_Ihtml);
 	ZEPHIR_INIT(Queryyetsimple_Support_Ijson);
 	ZEPHIR_INIT(Queryyetsimple_Support_Face);
-	ZEPHIR_INIT(Queryyetsimple_Log_Aconnect);
 	ZEPHIR_INIT(Queryyetsimple_Support_Manager);
+	ZEPHIR_INIT(Queryyetsimple_Log_Aconnect);
+	ZEPHIR_INIT(Queryyetsimple_View_Aconnect);
 	ZEPHIR_INIT(Queryyetsimple_Auth);
 	ZEPHIR_INIT(Queryyetsimple_Cache);
 	ZEPHIR_INIT(Queryyetsimple_Cookie);
@@ -139,6 +148,9 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	ZEPHIR_INIT(Queryyetsimple_Throttler);
 	ZEPHIR_INIT(Queryyetsimple_Validate);
 	ZEPHIR_INIT(Queryyetsimple_View);
+	ZEPHIR_INIT(Queryyetsimple_View_Html);
+	ZEPHIR_INIT(Queryyetsimple_View_Manager);
+	ZEPHIR_INIT(Queryyetsimple_View_View);
 	ZEPHIR_INIT(queryyetsimple_0__closure);
 	return SUCCESS;
 }

@@ -38,7 +38,7 @@ class File extends Aconnect implements Iconnect
      *
      * @var array
      */
-    protected arrOption = [
+    protected option = [
         "name" : "Y-m-d H",
         "size" : 2097152,
         "path" : ""
@@ -47,32 +47,32 @@ class File extends Aconnect implements Iconnect
     /**
      * 日志写入接口
      *
-     * @param array $arrData
+     * @param array $datas
      * @return void
      */
-    public function save(array arrData)
+    public function save(array datas)
     {
-        var strDestination, arrItem;
+        var filepath, item;
 
         // 保存日志
-        let strDestination = this->getPath(arrData[0][0]);
-        this->checkSize(strDestination);
+        let filepath = this->getPath(datas[0][0]);
+        this->checkSize(filepath);
 
         // 记录到系统
-        for arrItem in arrData {
-            error_log(this->formatMessage(arrItem[1], arrItem[2]) . PHP_EOL, 3, strDestination);
+        for item in datas {
+            error_log(this->formatMessage(item[1], item[2]) . PHP_EOL, 3, filepath);
         }
     }
 
     /**
      * 格式化日志信息
      *
-     * @param string $strMessage 应该被记录的错误信息
-     * @param array $arrContext
+     * @param string $message 应该被记录的错误信息
+     * @param array $contexts
      * @return string
      */
-    protected function formatMessage(string strMessage, array arrContext = [])
+    protected function formatMessage(string message, array contexts = [])
     {
-        return strMessage . " " . json_encode(arrContext, JSON_UNESCAPED_UNICODE);
+        return message . " " . json_encode(contexts, JSON_UNESCAPED_UNICODE);
     }
 }

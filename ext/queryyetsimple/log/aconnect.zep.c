@@ -41,7 +41,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Aconnect) {
 	 *
 	 * @var array
 	 */
-	zend_declare_property_null(queryyetsimple_log_aconnect_ce, SL("arrOption"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(queryyetsimple_log_aconnect_ce, SL("option"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	queryyetsimple_log_aconnect_ce->create_object = zephir_init_properties_Queryyetsimple_Log_Aconnect;
 	return SUCCESS;
@@ -51,30 +51,30 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Aconnect) {
 /**
  * 构造函数
  *
- * @param array $arrOption
+ * @param array $option
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, __construct) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrOption_param = NULL;
-	zval arrOption;
+	zval *option_param = NULL;
+	zval option;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &option_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&option, option_param);
 	}
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "options", NULL, 0, &arrOption);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "options", NULL, 0, &option);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -83,30 +83,30 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, __construct) {
 /**
  * 修改单个配置
  *
- * @param string $strName
- * @param mixed $mixValue
+ * @param string $name
+ * @param mixed $value
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, option) {
 
-	zval *strName_param = NULL, *mixValue, mixValue_sub;
-	zval strName;
+	zval *name_param = NULL, *value, value_sub;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&value_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &strName_param, &mixValue);
+	zephir_fetch_params(1, 2, 0, &name_param, &value);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	if (!(Z_TYPE_P(&strName) == IS_STRING)) {
+	if (!(Z_TYPE_P(&name) == IS_STRING)) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "queryyetsimple/log/aconnect.zep", 63);
 		return;
 	}
-	zephir_update_property_array(this_ptr, SL("arrOption"), &strName, mixValue TSRMLS_CC);
+	zephir_update_property_array(this_ptr, SL("option"), &name, value TSRMLS_CC);
 	RETURN_THIS();
 
 }
@@ -114,35 +114,35 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, option) {
 /**
  * 修改数组配置
  *
- * @param string $strName
- * @param array $arrValue
+ * @param string $name
+ * @param array $value
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, optionArray) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval arrValue;
-	zval *strName_param = NULL, *arrValue_param = NULL, _0, _1;
-	zval strName;
+	zval value;
+	zval *name_param = NULL, *value_param = NULL, _0, _1;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
+	ZVAL_UNDEF(&name);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&arrValue);
+	ZVAL_UNDEF(&value);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &strName_param, &arrValue_param);
+	zephir_fetch_params(1, 2, 0, &name_param, &value_param);
 
-	zephir_get_strval(&strName, strName_param);
-	zephir_get_arrval(&arrValue, arrValue_param);
+	zephir_get_strval(&name, name_param);
+	zephir_get_arrval(&value, value_param);
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &strName);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &name);
 	zephir_check_call_status();
-	zephir_fast_array_merge(&_0, &_1, &arrValue TSRMLS_CC);
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "option", NULL, 0, &strName, &_0);
+	zephir_fast_array_merge(&_0, &_1, &value TSRMLS_CC);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "option", NULL, 0, &name, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -151,8 +151,8 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, optionArray) {
 /**
  * 修改多个配置
  *
- * @param string $strName
- * @param mixed $mixValue
+ * @param string $name
+ * @param mixed $value
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, options) {
@@ -161,44 +161,44 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, options) {
 	zend_ulong _1;
 	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrOption_param = NULL, strName, mixValue, *_0;
-	zval arrOption;
+	zval *option_param = NULL, name, value, *_0;
+	zval option;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
-	ZVAL_UNDEF(&strName);
-	ZVAL_UNDEF(&mixValue);
+	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&value);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &option_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&option, option_param);
 	}
 
 
-	if (ZEPHIR_IS_EMPTY(&arrOption)) {
+	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&arrOption, 0, "queryyetsimple/log/aconnect.zep", 100);
-	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&arrOption), _1, _2, _0)
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/aconnect.zep", 100);
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
-		ZEPHIR_INIT_NVAR(&strName);
+		ZEPHIR_INIT_NVAR(&name);
 		if (_2 != NULL) { 
-			ZVAL_STR_COPY(&strName, _2);
+			ZVAL_STR_COPY(&name, _2);
 		} else {
-			ZVAL_LONG(&strName, _1);
+			ZVAL_LONG(&name, _1);
 		}
-		ZEPHIR_INIT_NVAR(&mixValue);
-		ZVAL_COPY(&mixValue, _0);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "option", &_3, 0, &strName, &mixValue);
+		ZEPHIR_INIT_NVAR(&value);
+		ZVAL_COPY(&value, _0);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "option", &_3, 0, &name, &value);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&mixValue);
-	ZEPHIR_INIT_NVAR(&strName);
+	ZEPHIR_INIT_NVAR(&value);
+	ZEPHIR_INIT_NVAR(&name);
 	RETURN_THIS();
 
 }
@@ -206,40 +206,40 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, options) {
 /**
  * 获取单个配置
  *
- * @param string $strName
- * @param mixed $mixDefault
+ * @param string $name
+ * @param mixed $defaults
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, getOption) {
 
-	zval *strName_param = NULL, *mixDefault = NULL, mixDefault_sub, __$null, _0, _1, _2;
-	zval strName;
+	zval *name_param = NULL, *defaults = NULL, defaults_sub, __$null, _0, _1, _2;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
-	ZVAL_UNDEF(&mixDefault_sub);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&defaults_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &strName_param, &mixDefault);
+	zephir_fetch_params(1, 1, 1, &name_param, &defaults);
 
-	zephir_get_strval(&strName, strName_param);
-	if (!mixDefault) {
-		mixDefault = &mixDefault_sub;
-		mixDefault = &__$null;
+	zephir_get_strval(&name, name_param);
+	if (!defaults) {
+		defaults = &defaults_sub;
+		defaults = &__$null;
 	}
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	zephir_read_property(&_1, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-	if (zephir_array_isset(&_1, &strName)) {
-		zephir_read_property(&_2, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &strName, PH_NOISY, "queryyetsimple/log/aconnect.zep", 112 TSRMLS_CC);
+	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_1, &name)) {
+		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/log/aconnect.zep", 112 TSRMLS_CC);
 	} else {
-		ZEPHIR_CPY_WRT(&_0, mixDefault);
+		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
 	RETURN_CCTOR(&_0);
 
@@ -248,35 +248,35 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, getOption) {
 /**
  * 获取所有配置
  *
- * @param array $arrOption
+ * @param array $option
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, getOptions) {
 
-	zval *arrOption_param = NULL, _0$$3;
-	zval arrOption;
+	zval *option_param = NULL, _0$$3;
+	zval option;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_0$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &option_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&option, option_param);
 	}
 
 
-	if (!(ZEPHIR_IS_EMPTY(&arrOption))) {
-		zephir_read_property(&_0$$3, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-		zephir_fast_array_merge(return_value, &_0$$3, &arrOption TSRMLS_CC);
+	if (!(ZEPHIR_IS_EMPTY(&option))) {
+		zephir_read_property(&_0$$3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		zephir_fast_array_merge(return_value, &_0$$3, &option TSRMLS_CC);
 		RETURN_MM();
 	} else {
-		RETURN_MM_MEMBER(getThis(), "arrOption");
+		RETURN_MM_MEMBER(getThis(), "option");
 	}
 
 }
@@ -284,29 +284,29 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, getOptions) {
 /**
  * 删除单个配置
  *
- * @param string $strName
+ * @param string $name
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, deleteOption) {
 
-	zval *strName_param = NULL, _0, _1$$3;
-	zval strName;
+	zval *name_param = NULL, _0, _1$$3;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
+	ZVAL_UNDEF(&name);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	zephir_read_property(&_0, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-	if (zephir_array_isset(&_0, &strName)) {
-		zephir_read_property(&_1$$3, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_unset(&_1$$3, &strName, PH_SEPARATE);
+	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_0, &name)) {
+		zephir_read_property(&_1$$3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_unset(&_1$$3, &name, PH_SEPARATE);
 	}
 	RETURN_THIS();
 
@@ -315,43 +315,43 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, deleteOption) {
 /**
  * 删除多个配置
  *
- * @param array $arrOption
+ * @param array $option
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Log_Aconnect, deleteOptions) {
 
 	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrOption_param = NULL, strOption, *_0;
-	zval arrOption;
+	zval *option_param = NULL, key, *_0;
+	zval option;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
-	ZVAL_UNDEF(&strOption);
+	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&key);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &option_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&option, option_param);
 	}
 
 
-	if (!(ZEPHIR_IS_EMPTY(&arrOption))) {
+	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&arrOption, 0, "queryyetsimple/log/aconnect.zep", 163);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrOption), _0)
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/aconnect.zep", 163);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
-		ZEPHIR_INIT_NVAR(&strOption);
-		ZVAL_COPY(&strOption, _0);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "deleteoption", &_1, 0, &strOption);
+		ZEPHIR_INIT_NVAR(&key);
+		ZVAL_COPY(&key, _0);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "deleteoption", &_1, 0, &key);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&strOption);
+	ZEPHIR_INIT_NVAR(&key);
 	RETURN_THIS();
 
 }
@@ -395,20 +395,20 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, checkSize) {
 	zephir_get_strval(&sFilePath, sFilePath_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&sFileDir, "dirname", NULL, 4, &sFilePath);
+	ZEPHIR_CALL_FUNCTION(&sFileDir, "dirname", NULL, 10, &sFilePath);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 5, &sFilePath);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 11, &sFilePath);
 	zephir_check_call_status();
 	_2 = !zephir_is_true(&_0);
 	if (_2) {
-		ZEPHIR_CALL_FUNCTION(&_3, "is_dir", NULL, 6, &sFileDir);
+		ZEPHIR_CALL_FUNCTION(&_3, "is_dir", NULL, 12, &sFileDir);
 		zephir_check_call_status();
 		_2 = !zephir_is_true(&_3);
 	}
 	_4 = _2;
 	if (_4) {
 		ZVAL_LONG(&_5, 0777);
-		ZEPHIR_CALL_FUNCTION(&_6, "mkdir", NULL, 7, &sFileDir, &_5, &__$true);
+		ZEPHIR_CALL_FUNCTION(&_6, "mkdir", NULL, 13, &sFileDir, &_5, &__$true);
 		zephir_check_call_status();
 		_4 = !zephir_is_true(&_6);
 	}
@@ -425,7 +425,7 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, checkSize) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_10, "is_file", &_1, 5, &sFilePath);
+	ZEPHIR_CALL_FUNCTION(&_10, "is_file", &_1, 11, &sFilePath);
 	zephir_check_call_status();
 	_11 = zephir_is_true(&_10);
 	if (_11) {
@@ -433,20 +433,20 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, checkSize) {
 		ZVAL_STRING(&_13, "size");
 		ZEPHIR_CALL_METHOD(&_12, this_ptr, "getoption", NULL, 0, &_13);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_14, "filesize", NULL, 8, &sFilePath);
+		ZEPHIR_CALL_FUNCTION(&_14, "filesize", NULL, 14, &sFilePath);
 		zephir_check_call_status();
 		_11 = ZEPHIR_GE_LONG(&_14, zephir_floor(&_12 TSRMLS_CC));
 	}
 	if (_11) {
 		ZEPHIR_INIT_VAR(&_15$$4);
 		ZVAL_STRING(&_15$$4, "Y-m-d H.i.s");
-		ZEPHIR_CALL_FUNCTION(&_16$$4, "date", NULL, 9, &_15$$4);
+		ZEPHIR_CALL_FUNCTION(&_16$$4, "date", NULL, 15, &_15$$4);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_15$$4);
 		zephir_basename(&_15$$4, &sFilePath TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_17$$4);
 		ZEPHIR_CONCAT_VSVSV(&_17$$4, &sFileDir, "/", &_16$$4, "~@", &_15$$4);
-		ZEPHIR_CALL_FUNCTION(NULL, "rename", NULL, 10, &sFilePath, &_17$$4);
+		ZEPHIR_CALL_FUNCTION(NULL, "rename", NULL, 16, &sFilePath, &_17$$4);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -515,7 +515,7 @@ PHP_METHOD(Queryyetsimple_Log_Aconnect, getPath) {
 		ZVAL_STRING(&_1$$3, "name");
 		ZEPHIR_CALL_METHOD(&_6$$3, this_ptr, "getoption", &_2, 0, &_1$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_7$$3, "date", NULL, 9, &_6$$3);
+		ZEPHIR_CALL_FUNCTION(&_7$$3, "date", NULL, 15, &_6$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&sFilePath);
 		ZEPHIR_CONCAT_VSVVS(&sFilePath, &_3$$3, "/", &_4$$3, &_7$$3, ".log");
@@ -535,11 +535,11 @@ zend_object *zephir_init_properties_Queryyetsimple_Log_Aconnect(zend_class_entry
 	{
 		zval local_this_ptr, *this_ptr = &local_this_ptr;
 		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
-		zephir_read_property(&_0, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
 			array_init(&_1$$3);
-			zephir_update_property_zval(this_ptr, SL("arrOption"), &_1$$3);
+			zephir_update_property_zval(this_ptr, SL("option"), &_1$$3);
 		}
 		ZEPHIR_MM_RESTORE();
 		return Z_OBJ_P(this_ptr);

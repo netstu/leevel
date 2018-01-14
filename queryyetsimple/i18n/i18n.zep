@@ -37,31 +37,24 @@ class I18n implements Ii18n
      *
      * @var string
      */
-    protected sI18n;
-
-    /**
-     * 默认语言上下文
-     *
-     * @var string
-     */
-    protected sDefault = "zh-cn";
+    protected i18n;
 
     /**
      * 语言数据
      *
      * @var array
      */
-    protected arrText = [];
+    protected text = [];
 
     /**
      * 构造函数
      *
-     * @param string $sI18n
+     * @param string $i18n
      * @return void
      */
-    public function __construct(string sI18n)
+    public function __construct(string i18n)
     {
-        let this->sI18n =  sI18n;
+        let this->i18n =  i18n;
     }
 
     /**
@@ -71,7 +64,7 @@ class I18n implements Ii18n
      */
     public function getText()
     {
- 		var arr, sI18n;
+ 		var arr, i18n;
 
   		let arr = func_get_args(); 
 
@@ -79,13 +72,13 @@ class I18n implements Ii18n
             return "";
         }
       
-        let sI18n = this->getI18n();
-        if isset this->arrText[sI18n][arr[0]] {
-        	let arr[0] = this->arrText[sI18n][arr[0]];
+        let i18n = this->getI18n();
+        if isset this->text[i18n][arr[0]] {
+        	let arr[0] = this->text[i18n][arr[0]];
         }
 
         if count(arr) > 1 {
-            let arr[0] =  call_user_func_array("sprintf", arr);
+            let arr[0] = call_user_func_array("sprintf", arr);
         }
         
         return arr[0];
@@ -106,28 +99,28 @@ class I18n implements Ii18n
     /**
      * 添加语言包
      *
-     * @param string $sI18n 语言名字
-     * @param array $arrData 语言包数据
+     * @param string $i18n 语言名字
+     * @param array $data 语言包数据
      * @return void
      */
-    public function addText(string sI18n, array arrData = [])
+    public function addText(string i18n, array data = [])
     {
-        if array_key_exists(sI18n, this->arrText) {
-            let this->arrText[sI18n] =  array_merge(this->arrText[sI18n], arrData);
+        if array_key_exists(i18n, this->text) {
+            let this->text[i18n] = array_merge(this->text[i18n], data);
         } else {
-            let this->arrText[sI18n] =  arrData;
+            let this->text[i18n] = data;
         }
     }
 
     /**
      * 设置当前语言包上下文环境
      *
-     * @param string $sI18n
+     * @param string $i18n
      * @return void
      */
-    public function setI18n(string sI18n)
+    public function setI18n(string i18n)
     {
-        let this->sI18n =  sI18n;
+        let this->i18n = i18n;
     }
 
     /**
@@ -137,27 +130,6 @@ class I18n implements Ii18n
      */
     public function getI18n()
     {
-        return this->sI18n;
-    }
-
-    /**
-     * 设置默认语言包
-     *
-     * @param string $sI18nName
-     * @return void
-     */
-    public function setDefault(string sI18n)
-    {
-        let this->sDefault =  sI18n;
-    }
-
-    /**
-     * 获取默认语言包
-     *
-     * @return string
-     */
-    public function getDefault()
-    {
-        return this->sDefault;
+        return this->i18n;
     }
 }

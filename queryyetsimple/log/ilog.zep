@@ -18,8 +18,8 @@
  */
 namespace Queryyetsimple\Log;
 
-// todo: zephir 加载无法通过编译，后面回来看看解决 @ 2018.01.06
-use Psr\Log\LoggerInterface;
+// [2018.01.06]Todo: zephir 加载无法通过编译
+// use Psr\Log\LoggerInterface;
 
 /**
  * ilog 接口
@@ -32,78 +32,78 @@ use Psr\Log\LoggerInterface;
 interface Ilog /* extends LoggerInterface */
 {
 
-    /**
-     * debug
-     *
-     * @var string
-     */
-    const DEBUG = "debug";
+	/**
+	 * debug
+	 *
+	 * @var string
+	 */
+	const DEBUG = "debug";
 
-    /**
-     * info
-     *
-     * @var string
-     */
-    const INFO = "info";
+	/**
+	 * info
+	 *
+	 * @var string
+	 */
+	const INFO = "info";
 
-    /**
-     * notice
-     *
-     * @var string
-     */
-    const NOTICE = "notice";
+	/**
+	 * notice
+	 *
+	 * @var string
+	 */
+	const NOTICE = "notice";
 
-    /**
-     * warning
-     *
-     * @var string
-     */
-    const WARNING = "warning";
+	/**
+	 * warning
+	 *
+	 * @var string
+	 */
+	const WARNING = "warning";
 
-    /**
-     * error
-     *
-     * @var string
-     */
-    const ERROR = "error";
+	/**
+	 * error
+	 *
+	 * @var string
+	 */
+	const ERROR = "error";
 
-    /**
-     * critical
-     *
-     * @var string
-     */
-    const CRITICAL = "critical";
+	/**
+	 * critical
+	 *
+	 * @var string
+	 */
+	const CRITICAL = "critical";
 
-    /**
-     * alert
-     *
-     * @var string
-     */
-    const ALERT = "alert";
+	/**
+	 * alert
+	 *
+	 * @var string
+	 */
+	const ALERT = "alert";
 
-    /**
-     * emergency
-     *
-     * @var string
-     */
-    const EMERGENCY = "emergency";
+	/**
+	 * emergency
+	 *
+	 * @var string
+	 */
+	const EMERGENCY = "emergency";
 
-    /**
-     * sql
-     *
-     * @var string
-     */
-    const SQL = "sql";
+	/**
+	 * sql
+	 *
+	 * @var string
+	 */
+	const SQL = "sql";
 
     /**
      * 记录错误消息并写入
      *
-     * @param string $strLevel 日志类型
-     * @param string $strMessage 应该被记录的错误信息
-     * @param array $arrContext
+     * @param string $level 日志类型
+     * @param string $message 应该被记录的错误信息
+     * @param array $context
      * @return void
      */
-    public function write(string strLevel, string strMessage, array arrContext = []);
+    public function write(string level, string message, array context = []);
 
     /**
      * 保存日志信息
@@ -115,40 +115,40 @@ interface Ilog /* extends LoggerInterface */
     /**
      * 注册日志过滤器
      *
-     * @param callable $calFilter
+     * @param callable $filter
      * @return void
      */
-    public function registerFilter(var calFilter);
+    public function registerFilter(var filter);
 
     /**
      * 注册日志处理器
      *
-     * @param callable $calProcessor
+     * @param callable $processor
      * @return void
      */
-    public function registerProcessor(var calProcessor);
+    public function registerProcessor(var processor);
 
     /**
      * 清理日志记录
      *
-     * @param string $strLevel
+     * @param string $level
      * @return int
      */
-    public function clear(string strLevel = null);
+    public function clear(string level = null);
 
     /**
      * 获取日志记录
      *
-     * @param string $strLevel
+     * @param string $level
      * @return array
      */
-    public function get(string strLevel = null);
+    public function get(string level = null);
 
     /**
      * 获取日志记录数量
      *
-     * @param string $strLevel
+     * @param string $level
      * @return int
      */
-    public function count(string strLevel = null);
+    public function count(string level = null);
 }

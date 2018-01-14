@@ -320,7 +320,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, traverseGenerator) {
 	ZEPHIR_CALL_CE_STATIC(&calNext, _8, "fromcallable", NULL, 0, &_9);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&aArgs);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 31, &aArgs, &calNext);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 32, &aArgs, &calNext);
 	ZEPHIR_UNREF(&aArgs);
 	zephir_check_call_status();
 	zephir_read_property(&_11, this_ptr, SL("objGenerator"), PH_NOISY_CC | PH_READONLY);
@@ -333,6 +333,12 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, traverseGenerator) {
 
 }
 
+/**
+ * 下一次迭代执行回调
+ *
+ * @since 2018.01.12
+ * @return void
+ */
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, makeNextClosure) {
 
 	zval _1;
@@ -394,17 +400,17 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 	array_init(&arrTemp);
 	ZVAL_NULL(&_0);
 	ZEPHIR_MAKE_REF(&arrStage);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 31, &arrStage, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 32, &arrStage, &_0);
 	ZEPHIR_UNREF(&arrStage);
 	zephir_check_call_status();
-	zephir_is_iterable(&arrStage, 0, "queryyetsimple/pipeline/pipeline.zep", 206);
+	zephir_is_iterable(&arrStage, 0, "queryyetsimple/pipeline/pipeline.zep", 201);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrStage), _1)
 	{
 		ZEPHIR_INIT_NVAR(&mixStage);
 		ZVAL_COPY(&mixStage, _1);
 		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "stagecallback", &_3, 0, &mixStage);
 		zephir_check_call_status();
-		zephir_array_append(&arrTemp, &_2$$3, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 203);
+		zephir_array_append(&arrTemp, &_2$$3, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 198);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&mixStage);
 	if (!_4) {
@@ -459,9 +465,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 		ZEPHIR_CALL_METHOD(&tempArray, this_ptr, "parse", NULL, 0, mixStage);
 		zephir_check_call_status();
 		ZEPHIR_OBS_VAR(&strStage);
-		zephir_array_fetch_long(&strStage, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 227 TSRMLS_CC);
+		zephir_array_fetch_long(&strStage, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 222 TSRMLS_CC);
 		ZEPHIR_OBS_VAR(&arrParams);
-		zephir_array_fetch_long(&arrParams, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 228 TSRMLS_CC);
+		zephir_array_fetch_long(&arrParams, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 223 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_0$$5);
 		ZVAL_STRING(&_0$$5, "@");
 		ZEPHIR_INIT_VAR(&_1$$5);
@@ -470,9 +476,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 			ZEPHIR_INIT_NVAR(&tempArray);
 			zephir_fast_explode_str(&tempArray, SL("@"), &strStage, LONG_MAX TSRMLS_CC);
 			ZEPHIR_OBS_NVAR(&strStage);
-			zephir_array_fetch_long(&strStage, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 232 TSRMLS_CC);
+			zephir_array_fetch_long(&strStage, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 227 TSRMLS_CC);
 			ZEPHIR_OBS_VAR(&strMethod);
-			zephir_array_fetch_long(&strMethod, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 233 TSRMLS_CC);
+			zephir_array_fetch_long(&strMethod, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 228 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&strMethod);
 			ZVAL_STRING(&strMethod, "handle");
@@ -487,9 +493,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 			ZVAL_STRING(&_4$$8, "Stage %s is not valid.");
 			ZEPHIR_CALL_FUNCTION(&_5$$8, "sprintf", NULL, 1, &_4$$8, &strStage);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_3$$8, "__construct", NULL, 32, &_5$$8);
+			ZEPHIR_CALL_METHOD(NULL, &_3$$8, "__construct", NULL, 17, &_5$$8);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_3$$8, "queryyetsimple/pipeline/pipeline.zep", 240 TSRMLS_CC);
+			zephir_throw_exception_debug(&_3$$8, "queryyetsimple/pipeline/pipeline.zep", 235 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -538,9 +544,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse) {
 	ZEPHIR_CALL_FUNCTION(&tempArray, "array_pad", NULL, 33, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&strName);
-	zephir_array_fetch_long(&strName, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 261 TSRMLS_CC);
+	zephir_array_fetch_long(&strName, &tempArray, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 256 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&arrArgs);
-	zephir_array_fetch_long(&arrArgs, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 262 TSRMLS_CC);
+	zephir_array_fetch_long(&arrArgs, &tempArray, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 257 TSRMLS_CC);
 	if (Z_TYPE_P(&arrArgs) == IS_STRING) {
 		ZEPHIR_INIT_VAR(&_3$$3);
 		zephir_fast_explode_str(&_3$$3, SL(","), &arrArgs, LONG_MAX TSRMLS_CC);

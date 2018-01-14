@@ -6,9 +6,9 @@
 
 #include "queryyetsimple/support/face.zep.h"
 #include "queryyetsimple/mvc/iview.zep.h"
+#include "queryyetsimple/support/manager.zep.h"
 #include "queryyetsimple/log/aconnect.zep.h"
 #include "queryyetsimple/log/iconnect.zep.h"
-#include "queryyetsimple/support/manager.zep.h"
 #include "queryyetsimple/cookie/icookie.zep.h"
 #include "queryyetsimple/i18n/ii18n.zep.h"
 #include "queryyetsimple/log/ilog.zep.h"
@@ -18,6 +18,9 @@
 #include "queryyetsimple/option/ioption.zep.h"
 #include "queryyetsimple/pipeline/ipipeline.zep.h"
 #include "queryyetsimple/session/isession.zep.h"
+#include "queryyetsimple/view/aconnect.zep.h"
+#include "queryyetsimple/view/iconnect.zep.h"
+#include "queryyetsimple/view/iview.zep.h"
 #include "queryyetsimple/auth.zep.h"
 #include "queryyetsimple/cache.zep.h"
 #include "queryyetsimple/cookie.zep.h"
@@ -56,6 +59,9 @@
 #include "queryyetsimple/throttler.zep.h"
 #include "queryyetsimple/validate.zep.h"
 #include "queryyetsimple/view.zep.h"
+#include "queryyetsimple/view/html.zep.h"
+#include "queryyetsimple/view/manager.zep.h"
+#include "queryyetsimple/view/view.zep.h"
 #include "queryyetsimple/0__closure.zep.h"
 
 #endif

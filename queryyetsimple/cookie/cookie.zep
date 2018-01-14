@@ -38,7 +38,7 @@ class Cookie implements Icookie
      *
      * @var array
      */
-    protected arrOption = [
+    protected option = [
         "prefix" : "q_",
         "expire" : 86400,
         "domain" : "",
@@ -49,230 +49,235 @@ class Cookie implements Icookie
     /**
      * 构造函数
      *
-     * @param array $arrOption
+     * @param array $option
      * @return void
      */
-    public function __construct(array arrOption = [])
+    public function __construct(array option = [])
     {
-        this->options(arrOption);
+        this->options(option);
     }
 
     /**
      * 设置 COOKIE
      *
-     * @param string $sName
-     * @param string $mixValue
-     * @param array $arrOption
+     * @param string $name
+     * @param string $value
+     * @param array $option
      * @return void
      */
-    public function set(string sName, var mixValue = "", array arrOption = [])
+    public function set(string name, var value = "", array option = [])
     {
-    	boolean booHttp = false;
+    	boolean isHttpSecure = false;
 
-        let arrOption = this->getOptions(arrOption);
+        let option = this->getOptions(option);
 
-        if typeof mixValue == "array" {
-            let mixValue = json_encode(mixValue);
+        if typeof value == "array" {
+            let value = json_encode(value);
         }
 
-        if ! is_scalar(mixValue) && ! is_null(mixValue) {
+        if ! is_scalar(value) && ! is_null(value) {
             throw new Exception("Cookie value must be scalar or null");
         }
 
-        let sName = arrOption["prefix"] . sName;
+        let name = option["prefix"] . name;
 
-        if typeof mixValue == "null" || arrOption["expire"] < 0 {
-            if isset _COOKIE[sName] {
-                unset _COOKIE[sName];
+        if typeof value == "null" || option["expire"] < 0 {
+            if isset _COOKIE[name] {
+                unset _COOKIE[name];
             }
         } else {
-            let _COOKIE[sName] = mixValue;
+            let _COOKIE[name] = value;
         }
 
-        if arrOption["expire"] > 0 {
-        	let arrOption["expire"] = time() + arrOption["expire"];
-        } elseif arrOption["expire"] < 0 {
-        	let arrOption["expire"] = time() - 31536000;
+        if option["expire"] > 0 {
+        	let option["expire"] = time() + option["expire"];
+        } elseif option["expire"] < 0 {
+        	let option["expire"] = time() - 31536000;
         } else {
-        	let arrOption["expire"] = 0;
+        	let option["expire"] = 0;
         }
 
         if isset _SERVER["HTTPS"] && strtoupper(_SERVER["HTTPS"]) === "ON" {
-        	let booHttp = true;
+        	let isHttpSecure = true;
         }
        
-     	setcookie(sName, mixValue, arrOption["expire"], arrOption["path"], arrOption["domain"], booHttp, arrOption["httponly"]);
+     	setcookie(name, value, option["expire"], option["path"], option["domain"], isHttpSecure, option["httponly"]);
     }
 
     /**
      * 批量插入
      *
-     * @param string|array $mixKey
-     * @param mixed $mixValue
-     * @param array $arrOption
+     * @param string|array $keys
+     * @param mixed $value
+     * @param array $option
      * @return void
      */
-    public function put(var mixKey, var mixValue = null, array arrOption = [])
+    public function put(var keys, var value = null, array option = [])
     {
-        var strKey;
-        if typeof mixKey != "array" {
-            let mixKey = [
-                mixKey : mixValue
+        var key;
+        if typeof keys != "array" {
+            let keys = [
+                keys : value
             ];
         }
 
-        for strKey, mixValue in mixKey {
-            this->set(strKey, mixValue, arrOption);
+        for key, value in keys {
+            this->set(key, value, option);
         }
     }
 
     /**
      * 数组插入数据
      *
-     * @param string $strKey
-     * @param mixed $mixValue
-     * @param array $arrOption
+     * @param string $key
+     * @param mixed $value
+     * @param array $option
      * @return void
      */
-    public function push(string strKey, var mixValue, array arrOption = [])
+    public function push(string key, var value, array option = [])
     {
         var arr;
-        let arr = this->get(strKey, [], arrOption);
-        let arr[] = mixValue;
-        this->set(strKey, arr, arrOption);
+        let arr = this->get(key, [], option);
+        let arr[] = value;
+        this->set(key, arr, option);
     }
 
     /**
      * 合并元素
      *
-     * @param string $strKey
-     * @param array $arrValue
-     * @param array $arrOption
+     * @param string $key
+     * @param array $value
+     * @param array $option
      * @return void
      */
-    public function merge(string strKey, array arrValue, array arrOption = [])
+    public function merge(string key, array value, array option = [])
     {
-        this->set(strKey, array_unique(array_merge(this->get(strKey, [], arrOption), arrValue)), arrOption);
+        this->set(key, array_unique(array_merge(this->get(key, [], option), value)), option);
     }
 
     /**
      * 弹出元素
      *
-     * @param string $strKey
-     * @param mixed $mixValue
-     * @param array $arrOption
+     * @param string $key
+     * @param mixed $value
+     * @param array $option
      * @return void
      */
-    public function pop(string strKey, array arrValue, array arrOption = [])
+    public function pop(string key, array value, array option = [])
     {
-        this->set(strKey, array_diff(this->get(strKey, [], arrOption), arrValue), arrOption);
+        this->set(key, array_diff(this->get(key, [], option), value), option);
     }
 
     /**
      * 数组插入键值对数据
      *
-     * @param string $strKey
-     * @param mixed $mixKey
-     * @param mixed $mixValue
-     * @param array $arrOption
+     * @param string $key
+     * @param mixed $keys
+     * @param mixed $value
+     * @param array $option
      * @return void
      */
-    public function arrays(string strKey, var mixKey, var mixValue = null, array arrOption = [])
+    public function arrays(string key, var keys, var value = null, array option = [])
     {
         var arr;
-        let arr = this->get(strKey, [], arrOption);
-        if typeof mixKey == "string" {
-            let arr[mixKey] = mixValue;
-        } elseif typeof mixKey == "array" {
-            let arr = array_merge(arr, mixKey);
+
+        let arr = this->get(key, [], option);
+
+        if typeof keys == "string" {
+            let arr[keys] = value;
+        } elseif typeof keys == "array" {
+            let arr = array_merge(arr, keys);
         }
-        this->set(strKey, arr, arrOption);
+
+        this->set(key, arr, option);
     }
 
     /**
      * 数组键值删除数据
      *
-     * @param string $strKey
-     * @param mixed $mixKey
+     * @param string $key
+     * @param mixed $keys
      * @return void
      */
-    public function arraysDelete(string strKey, var mixKey, array arrOption = [])
+    public function arraysDelete(string key, var keys, array option = [])
     {
-        var arr, strFoo, arrDeleteKey;
-        let arr =  this->get(strKey, [], arrOption);
-        if typeof mixKey != "array" {
+        var arr, tempKey, arrDeleteKey;
+
+        let arr =  this->get(key, [], option);
+
+        if typeof keys != "array" {
             let arrDeleteKey = [
-                mixKey
+                keys
             ];
         } else {
-        	let arrDeleteKey = mixKey;
+        	let arrDeleteKey = keys;
         }
 
-        for strFoo in arrDeleteKey {
-            if isset arr[strFoo] {
-                unset arr[strFoo];
+        for tempKey in arrDeleteKey {
+            if isset arr[tempKey] {
+                unset arr[tempKey];
             }
         }
 
-        this->set(strKey, arr, arrOption);
+        this->set(key, arr, option);
     }
 
     /**
      * 获取 cookie
      *
-     * @param string $sName
-     * @param mixed $mixDefault
-     * @param array $arrOption
+     * @param string $name
+     * @param mixed $defaults
+     * @param array $option
      * @return mixed
      */
-    public function get(string sName, var mixDefault = null, array arrOption = [])
+    public function get(string name, var defaults = null, array option = [])
     {
-        let arrOption = this->getOptions(arrOption);
-        let sName = arrOption["prefix"] . sName;
+        let option = this->getOptions(option);
+        let name = option["prefix"] . name;
 
-        if isset _COOKIE[sName] {
-            if this->isJson(_COOKIE[sName]) {
-                return json_decode(_COOKIE[sName], true);
+        if isset _COOKIE[name] {
+            if this->isJson(_COOKIE[name]) {
+                return json_decode(_COOKIE[name], true);
             }
-            return _COOKIE[sName];
+            return _COOKIE[name];
         } else {
-            return mixDefault;
+            return defaults;
         }
     }
 
     /**
      * 删除 cookie
      *
-     * @param string $sName
-     * @param array $arrOption
+     * @param string $name
+     * @param array $option
      * @return void
      */
-    public function delete(string sName, array arrOption = [])
+    public function delete(string name, array option = [])
     {
-        this->set(sName, null, arrOption);
+        this->set(name, null, option);
     }
 
     /**
      * 清空 cookie
      *
-     * @param boolean $bOnlyPrefix
-     * @param array $arrOption
+     * @param boolean $deletePrefix
+     * @param array $option
      * @return void
      */
-    public function clear(boolean bOnlyPrefix = true, array arrOption = [])
+    public function clear(boolean deletePrefix = true, array option = [])
     {
-        var strPrefix, sKey;
-        let arrOption = this->getOptions(arrOption);
-        let strPrefix = arrOption["prefix"];
-        let arrOption["prefix"] = "";
+        var prefix, key;
+        let option = this->getOptions(option);
+        let prefix = option["prefix"];
+        let option["prefix"] = "";
 
-        for sKey, _ in _COOKIE {
-            if bOnlyPrefix === true && strPrefix {
-                if strpos(sKey, strPrefix) === 0 {
-                    this->delete(sKey, arrOption);
+        for key, _ in _COOKIE {
+            if deletePrefix === true && prefix {
+                if strpos(key, prefix) === 0 {
+                    this->delete(key, option);
                 }
             } else {
-                this->delete(sKey, arrOption);
+                this->delete(key, option);
             }
         }
     }
@@ -280,48 +285,48 @@ class Cookie implements Icookie
     /**
      * 修改单个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function option(string strName, var mixValue)
+    public function option(string name, var value)
     {
-        if ! is_string(strName) {
+        if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
-        let this->arrOption[strName] = mixValue;
+        let this->option[name] = value;
         return this;
     }
 
     /**
      * 修改数组配置
      *
-     * @param string $strName
-     * @param array $arrValue
+     * @param string $name
+     * @param array $value
      * @return $this
      */
-    public function optionArray(string $strName, array $arrValue)
+    public function optionArray(string name, array value)
     {
-        return this->option(strName, array_merge(this->getOption(strName), arrValue));
+        return this->option(name, array_merge(this->getOption(name), value));
     }
 
     /**
      * 修改多个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function options(array $arrOption = [])
+    public function options(array option = [])
     {
-    	var strName, mixValue;
+    	var name, value;
 
-        if empty arrOption {
+        if empty option {
             return this;
         }
 
-        for strName, mixValue in arrOption {
-        	this->option(strName, mixValue);
+        for name, value in option {
+        	this->option(name, value);
         }
 
         return this;
@@ -330,40 +335,40 @@ class Cookie implements Icookie
     /**
      * 获取单个配置
      *
-     * @param string $strName
-     * @param mixed $mixDefault
+     * @param string $name
+     * @param mixed $defaults
      * @return mixed
      */
-    public function getOption(string strName, var mixDefault = null)
+    public function getOption(string name, var defaults = null)
     {
-        return isset(this->arrOption[strName]) ? this->arrOption[strName] : mixDefault;
+        return isset(this->option[name]) ? this->option[name] : defaults;
     }
 
     /**
      * 获取所有配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return mixed
      */
-    public function getOptions(array arrOption = [])
+    public function getOptions(array option = [])
     {
-    	if ! empty arrOption {
-    		return array_merge(this->arrOption, arrOption);
+    	if ! empty option {
+    		return array_merge(this->option, option);
     	} else {
-    		return this->arrOption;
+    		return this->option;
     	}
     }
 
     /**
      * 删除单个配置
      *
-     * @param string $strName
+     * @param string $name
      * @return $this
      */
-    public function deleteOption(string strName)
+    public function deleteOption(string name)
     {
-        if isset this->arrOption[strName] {
-            unset(this->arrOption[strName]);
+        if isset this->option[name] {
+            unset(this->option[name]);
         }
 
         return this;
@@ -372,19 +377,19 @@ class Cookie implements Icookie
     /**
      * 删除多个配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return $this
      */
-    public function deleteOptions(array arrOption = [])
+    public function deleteOptions(array option = [])
     {
-    	var strOption;
+    	var key;
 
-        if ! empty arrOption {
+        if ! empty option {
             return this;
         }
 
-        for strOption in arrOption {
-        	this->deleteOption(strOption);
+        for key in option {
+        	this->deleteOption(key);
         }
 
         return this;
@@ -393,16 +398,16 @@ class Cookie implements Icookie
     /**
      * 验证是否为正常的 JSON 字符串
      *
-     * @param mixed $mixData
+     * @param mixed $data
      * @return boolean
      */
-    protected function isJson(var mixData)
+    protected function isJson(var data)
     {
-        if ! is_scalar(mixData) && ! method_exists(mixData, "__toString") {
+        if ! is_scalar(data) && ! method_exists(data, "__toString") {
             return false;
         }
 
-        json_decode(mixData);
+        json_decode(data);
 
         return json_last_error() === JSON_ERROR_NONE;
     }

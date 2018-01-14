@@ -109,10 +109,6 @@ abstract class Controller implements Icontroller
 		return this->objRouter->doBind(null, sActionName, null, true);
 	}
 
-	// ######################################################
-	// ---------------- 实现 view 接口 start ----------------
-	// ######################################################
-
     /**
      * 切换视图
      *
@@ -197,11 +193,6 @@ abstract class Controller implements Icontroller
 		this->checkView();
 		return this->objView->display(sFile, arrOption);
 	}
-
-	// ######################################################
-	// ---------------- 实现 view 接口 end ----------------
-	// ######################################################
-
 
 	/**
 	 * 验证 view

@@ -41,35 +41,35 @@ class Log implements Ilog
      *
      * @var \queryyetsimple\log\iconnect
      */
-    protected oConnect;
+    protected connect;
 
     /**
      * 当前记录的日志信息
      *
      * @var array
      */
-    protected arrLog = [];
+    protected logs = [];
 
     /**
      * 日志过滤器
      *
      * @var callable
      */
-    protected calFilter;
+    protected filter;
 
     /**
      * 日志处理器
      *
      * @var callable
      */
-    protected calProcessor;
+    protected processor;
 
     /**
      * 配置
      *
      * @var array
      */
-    protected arrOption = [
+    protected option = [
         "enabled" : true,
         "level" : [
             self::DEBUG,
@@ -88,151 +88,147 @@ class Log implements Ilog
     /**
      * 构造函数
      *
-     * @param \queryyetsimple\log\iconnect $oConnect
-     * @param array $arrOption
+     * @param \queryyetsimple\log\iconnect $connect
+     * @param array $option
      * @return void
      */
-    public function __construct(<Iconnect> oConnect, array arrOption = [])
+    public function __construct(<Iconnect> connect, array option = [])
     {
-        let this->oConnect =  oConnect;
-        this->options(arrOption);
+        let this->connect = connect;
+        this->options(option);
     }
-
-    // ######################################################
-    // ------ 实现 \Psr\Log\LoggerInterface 接口 start -------
-    // ######################################################
 
     /**
      * 记录 emergency 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function emergency(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function emergency(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::EMERGENCY, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::EMERGENCY, message, context);
     }
 
     /**
      * 记录 alert 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function alert(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function alert(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::ALERT, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::ALERT, message, context);
     }
 
     /**
      * 记录 critical 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function critical(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function critical(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::CRITICAL, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::CRITICAL, message, context);
     }
 
     /**
      * 记录 error 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function error(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function error(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::ERROR, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::ERROR, message, context);
     }
 
     /**
      * 记录 warning 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function warning(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function warning(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::WARNING, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::WARNING, message, context);
     }
 
     /**
      * 记录 notice 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function notice(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function notice(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::NOTICE, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::NOTICE, message, context);
     }
 
     /**
      * 记录 info 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function info(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function info(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::INFO, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::INFO, message, context);
     }
 
     /**
      * 记录 debug 日志
      *
-     * @param string $mixMessage
-     * @param array $arrContext
-     * @param boolean $booWrite
+     * @param string $message
+     * @param array $context
+     * @param boolean $write
      * @return array
      */
-    public function debug(var mixMessage, array arrContext = [], boolean booWrite = false)
+    public function debug(var message, array context = [], boolean write = false)
     {
-    	var strAction;
-    	let strAction = booWrite ? "write" : "log";
-        return this->{strAction}(self::DEBUG, mixMessage, arrContext);
+    	var action;
+    	let action = write ? "write" : "log";
+        return this->{action}(self::DEBUG, message, context);
     }
 
     /**
      * 记录日志
      *
-     * @param string $strLevel
-     * @param mixed $mixMessage
-     * @param array $arrContext
+     * @param string $level
+     * @param mixed $message
+     * @param array $context
      * @return array
      */
-    public function log(string strLevel, var mixMessage, array arrContext = [])
+    public function log(string level, var message, array context = [])
     {
-        var arrData;
+        var data;
 
         // 是否开启日志
         if ! this->getOption("enabled") {
@@ -240,48 +236,44 @@ class Log implements Ilog
         }
 
         // 只记录系统允许的日志级别
-        if ! in_array(strLevel, this->getOption("level")) {
+        if ! in_array(level, this->getOption("level")) {
             return;
         }
 
-        let mixMessage = date(this->getOption("time_format")) . this->formatMessage(mixMessage);
+        let message = date(this->getOption("time_format")) . this->formatMessage(message);
 
-        let arrData = [
-            strLevel,
-            mixMessage,
-            arrContext
+        let data = [
+            level,
+            message,
+            context
         ];
 
         // 执行过滤器
-        if typeof this->calFilter != "null" && call_user_func_array(this->calFilter, arrData) === false {
+        if typeof this->filter != "null" && call_user_func_array(this->filter, data) === false {
             return;
         }
 
         // 记录到内存方便后期调用
-        if ! isset this->arrLog[strLevel] {
-            let this->arrLog[strLevel] = [];
+        if ! isset this->logs[level] {
+            let this->logs[level] = [];
         }
-        let this->arrLog[strLevel][] = arrData;
+        let this->logs[level][] = data;
 
-        return arrData;
+        return data;
     }
-
-    // ######################################################
-    // ------- 实现 \Psr\Log\LoggerInterface 接口 end --------
-    // ######################################################
 
     /**
      * 记录错误消息并写入
      *
-     * @param string $strLevel 日志类型
-     * @param string $strMessage 应该被记录的错误信息
-     * @param array $arrContext
+     * @param string $level 日志类型
+     * @param string $message 应该被记录的错误信息
+     * @param array $context
      * @return void
      */
-    public function write(string strLevel, string strMessage, array arrContext = [])
+    public function write(string level, string message, array context = [])
     {
         this->saveStore([
-            this->log(strLevel, strMessage, arrContext)
+            this->log(level, message, context)
         ]);
     }
 
@@ -292,14 +284,14 @@ class Log implements Ilog
      */
     public function save()
     {
-        var arrData;
+        var data;
 
-        if ! this->arrLog {
+        if ! this->logs {
             return;
         }
 
-        for arrData in this->arrLog {
-            this->saveStore(arrData);
+        for data in this->logs {
+            this->saveStore(data);
         }
 
         this->clear();
@@ -308,127 +300,127 @@ class Log implements Ilog
     /**
      * 注册日志过滤器
      *
-     * @param callable $calFilter
+     * @param callable $filter
      * @return void
      */
-    public function registerFilter(var calFilter)
+    public function registerFilter(var filter)
     {
-    	if ! is_callable(calFilter) {
+    	if ! is_callable(filter) {
     		throw new InvalidArgumentException("Filter must be callable.");
     	}
-        let this->calFilter = calFilter;
+        let this->filter = filter;
     }
 
     /**
      * 注册日志处理器
      *
-     * @param callable $calProcessor
+     * @param callable $processor
      * @return void
      */
-    public function registerProcessor(var calProcessor)
+    public function registerProcessor(var processor)
     {
-    	if ! is_callable(calProcessor) {
+    	if ! is_callable(processor) {
     		throw new InvalidArgumentException("Processor must be callable.");
     	}
-        let this->calProcessor = calProcessor;
+        let this->processor = processor;
     }
 
     /**
      * 清理日志记录
      *
-     * @param string $strLevel
+     * @param string $level
      * @return int
      */
-    public function clear(string strLevel = null)
+    public function clear(string level = null)
     {
-        var nCount;
+        var count;
 
-        if strLevel && isset this->arrLog[strLevel] {
-            let nCount = count(this->arrLog[strLevel]);
-            let this->arrLog[strLevel] = [];
+        if level && isset this->logs[level] {
+            let count = count(this->logs[level]);
+            let this->logs[level] = [];
         } else {
-            let nCount = count(this->arrLog);
-            let this->arrLog = [];
+            let count = count(this->logs);
+            let this->logs = [];
         }
 
-        return nCount;
+        return count;
     }
 
     /**
      * 获取日志记录
      *
-     * @param string $strLevel
+     * @param string $level
      * @return array
      */
-    public function get(string strLevel = null)
+    public function get(string level = null)
     {
-        if strLevel && isset this->arrLog[strLevel] {
-            return this->arrLog[strLevel];
+        if level && isset this->logs[level] {
+            return this->logs[level];
         } else {
-            return this->arrLog;
+            return this->logs;
         }
     }
 
     /**
      * 获取日志记录数量
      *
-     * @param string $strLevel
+     * @param string $level
      * @return int
      */
-    public function count(string strLevel = null)
+    public function count(string level = null)
     {
-        if strLevel && isset this->arrLog[strLevel] {
-            return count(this->arrLog[strLevel]);
+        if level && isset this->logs[level] {
+            return count(this->logs[level]);
         } else {
-            return count(this->arrLog);
+            return count(this->logs);
         }
     }
 
     /**
      * 修改单个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function option(string strName, var mixValue)
+    public function option(string name, var value)
     {
-        if ! is_string(strName) {
+        if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
-        let this->arrOption[strName] = mixValue;
+        let this->option[name] = value;
         return this;
     }
 
     /**
      * 修改数组配置
      *
-     * @param string $strName
-     * @param array $arrValue
+     * @param string $name
+     * @param array $value
      * @return $this
      */
-    public function optionArray(string $strName, array $arrValue)
+    public function optionArray(string name, array value)
     {
-        return this->option(strName, array_merge(this->getOption(strName), arrValue));
+        return this->option(name, array_merge(this->getOption(name), value));
     }
 
     /**
      * 修改多个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function options(array $arrOption = [])
+    public function options(array option = [])
     {
-    	var strName, mixValue;
+    	var name, value;
 
-        if empty arrOption {
+        if empty option {
             return this;
         }
 
-        for strName, mixValue in arrOption {
-        	this->option(strName, mixValue);
+        for name, value in option {
+        	this->option(name, value);
         }
 
         return this;
@@ -437,40 +429,40 @@ class Log implements Ilog
     /**
      * 获取单个配置
      *
-     * @param string $strName
-     * @param mixed $mixDefault
+     * @param string $name
+     * @param mixed $defaults
      * @return mixed
      */
-    public function getOption(string strName, var mixDefault = null)
+    public function getOption(string name, var defaults = null)
     {
-        return isset(this->arrOption[strName]) ? this->arrOption[strName] : mixDefault;
+        return isset(this->option[name]) ? this->option[name] : defaults;
     }
 
     /**
      * 获取所有配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return mixed
      */
-    public function getOptions(array arrOption = [])
+    public function getOptions(array option = [])
     {
-    	if ! empty arrOption {
-    		return array_merge(this->arrOption, arrOption);
+    	if ! empty option {
+    		return array_merge(this->option, option);
     	} else {
-    		return this->arrOption;
+    		return this->option;
     	}
     }
 
     /**
      * 删除单个配置
      *
-     * @param string $strName
+     * @param string $name
      * @return $this
      */
-    public function deleteOption(string strName)
+    public function deleteOption(string name)
     {
-        if isset this->arrOption[strName] {
-            unset(this->arrOption[strName]);
+        if isset this->option[name] {
+            unset(this->option[name]);
         }
 
         return this;
@@ -479,19 +471,19 @@ class Log implements Ilog
     /**
      * 删除多个配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return $this
      */
-    public function deleteOptions(array arrOption = [])
+    public function deleteOptions(array option = [])
     {
-    	var strOption;
+    	var key;
 
-        if ! empty arrOption {
+        if ! empty option {
             return this;
         }
 
-        for strOption in arrOption {
-        	this->deleteOption(strOption);
+        for key in option {
+        	this->deleteOption(key);
         }
 
         return this;
@@ -500,48 +492,48 @@ class Log implements Ilog
     /**
      * 存储日志
      *
-     * @param array $arrData
+     * @param array $data
      * @return void
      */
-    protected function saveStore(array arrData)
+    protected function saveStore(array data)
     {
         // 执行处理器
-        if typeof this->calProcessor != "null" {
-            call_user_func_array(this->calProcessor, arrData);
+        if typeof this->processor != "null" {
+            call_user_func_array(this->processor, data);
         }
-        this->oConnect->save(arrData);
+        this->connect->save(data);
     }
 
     /**
      * 格式化日志消息
      *
-     * @param mixed $mixMessage
+     * @param mixed $message
      * @return mixed
      */
-    protected function formatMessage(var mixMessage)
+    protected function formatMessage(var message)
     {
-        if typeof mixMessage == "array" {
-            return var_export(mixMessage, true);
-        } elseif typeof mixMessage == "object" && mixMessage instanceof Ijson {
-            return mixMessage->toJson();
-        } elseif typeof mixMessage == "object" && mixMessage instanceof Iarray {
-            return var_export(mixMessage->toArray(), true);
-        } elseif is_scalar(mixMessage) {
-            return mixMessage;
+        if typeof message == "array" {
+            return var_export(message, true);
+        } elseif typeof message == "object" && message instanceof Ijson {
+            return message->toJson();
+        } elseif typeof message == "object" && message instanceof Iarray {
+            return var_export(message->toArray(), true);
+        } elseif is_scalar(message) {
+            return message;
         }
         
-        throw new RuntimeException("Message is invalid");
+        throw new RuntimeException("Message is invalid.");
     }
 
     /**
      * call 
      *
-     * @param string $sMethod
-     * @param array $arrArgs
+     * @param string $method
+     * @param array $args
      * @return mixed
      */
-    public function __call(string sMethod, array arrArgs)
+    public function __call(string method, array args)
     {
-    	return call_user_func_array([this->oConnect, sMethod], arrArgs);
+    	return call_user_func_array([this->connect, method], args);
     }
 }

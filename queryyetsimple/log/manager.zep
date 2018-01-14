@@ -47,33 +47,33 @@ class Manager extends support_manager
     /**
      * 创建连接对象
      *
-     * @param object $objConnect
+     * @param object $connect
      * @return object
      */
-    protected function createConnect(var objConnect)
+    protected function createConnect(var connect)
     {
-        return new Log(objConnect, this->getOptionCommon());
+        return new Log(connect, this->getOptionCommon());
     }
 
     /**
      * 创建 file 日志驱动
      *
-     * @param array $arrOption
+     * @param array $options
      * @return \queryyetsimple\log\file
      */
-    protected function makeConnectFile(array arrOption = [])
+    protected function makeConnectFile(array options = [])
     {
-        return new File(this->getOption("file", arrOption));
+        return new File(this->getOption("file", options));
     }
 
     /**
      * 创建 monolog 日志驱动
      *
-     * @param array $arrOption
+     * @param array $options
      * @return \queryyetsimple\log\monolog
      */
-    protected function makeConnectMonolog(array arrOption = [])
+    protected function makeConnectMonolog(array options = [])
     {
-        return new Monolog(this->getOption("monolog", arrOption));
+        return new Monolog(this->getOption("monolog", options));
     }
 }

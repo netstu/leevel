@@ -37,64 +37,64 @@ abstract class Aconnect
      *
      * @var array
      */
-    protected arrOption = [];
+    protected option = [];
 
     /**
      * 构造函数
      *
-     * @param array $arrOption
+     * @param array $option
      * @return void
      */
-    public function __construct(array arrOption = [])
+    public function __construct(array option = [])
     {
-        this->options(arrOption);
+        this->options(option);
     }
 
     /**
      * 修改单个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function option(string strName, var mixValue)
+    public function option(string name, var value)
     {
-        if ! is_string(strName) {
+        if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
-        let this->arrOption[strName] = mixValue;
+        let this->option[name] = value;
         return this;
     }
 
     /**
      * 修改数组配置
      *
-     * @param string $strName
-     * @param array $arrValue
+     * @param string $name
+     * @param array $value
      * @return $this
      */
-    public function optionArray(string $strName, array $arrValue)
+    public function optionArray(string name, array value)
     {
-        return this->option(strName, array_merge(this->getOption(strName), arrValue));
+        return this->option(name, array_merge(this->getOption(name), value));
     }
 
     /**
      * 修改多个配置
      *
-     * @param string $strName
-     * @param mixed $mixValue
+     * @param string $name
+     * @param mixed $value
      * @return $this
      */
-    public function options(array $arrOption = [])
+    public function options(array option = [])
     {
-    	var strName, mixValue;
+    	var name, value;
 
-        if empty arrOption {
+        if empty option {
             return this;
         }
 
-        for strName, mixValue in arrOption {
-        	this->option(strName, mixValue);
+        for name, value in option {
+        	this->option(name, value);
         }
 
         return this;
@@ -103,40 +103,40 @@ abstract class Aconnect
     /**
      * 获取单个配置
      *
-     * @param string $strName
-     * @param mixed $mixDefault
+     * @param string $name
+     * @param mixed $defaults
      * @return mixed
      */
-    public function getOption(string strName, var mixDefault = null)
+    public function getOption(string name, var defaults = null)
     {
-        return isset(this->arrOption[strName]) ? this->arrOption[strName] : mixDefault;
+        return isset(this->option[name]) ? this->option[name] : defaults;
     }
 
     /**
      * 获取所有配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return mixed
      */
-    public function getOptions(array arrOption = [])
+    public function getOptions(array option = [])
     {
-    	if ! empty arrOption {
-    		return array_merge(this->arrOption, arrOption);
+    	if ! empty option {
+    		return array_merge(this->option, option);
     	} else {
-    		return this->arrOption;
+    		return this->option;
     	}
     }
 
     /**
      * 删除单个配置
      *
-     * @param string $strName
+     * @param string $name
      * @return $this
      */
-    public function deleteOption(string strName)
+    public function deleteOption(string name)
     {
-        if isset this->arrOption[strName] {
-            unset(this->arrOption[strName]);
+        if isset this->option[name] {
+            unset(this->option[name]);
         }
 
         return this;
@@ -145,19 +145,19 @@ abstract class Aconnect
     /**
      * 删除多个配置
      *
-     * @param array $arrOption
+     * @param array $option
      * @return $this
      */
-    public function deleteOptions(array arrOption = [])
+    public function deleteOptions(array option = [])
     {
-    	var strOption;
+    	var key;
 
-        if ! empty arrOption {
+        if ! empty option {
             return this;
         }
 
-        for strOption in arrOption {
-        	this->deleteOption(strOption);
+        for key in option {
+        	this->deleteOption(key);
         }
 
         return this;
@@ -166,45 +166,45 @@ abstract class Aconnect
     /**
      * 验证日志文件大小
      *
-     * @param string $sFilePath
+     * @param string $filepath
      * @return void
      */
-    protected function checkSize(string sFilePath)
+    protected function checkSize(string filepath)
     {
-    	var sFileDir;
+    	var filedir;
 
-    	let sFileDir = dirname(sFilePath);
+    	let filedir = dirname(filepath);
 
         // 如果不是文件，则创建
-        if ! is_file(sFilePath) && ! is_dir(sFileDir) && ! mkdir(sFileDir, 0777, true) {
-            throw new RuntimeException(sprintf("Unable to create log file：%s.", sFilePath));
+        if ! is_file(filepath) && ! is_dir(filedir) && ! mkdir(filedir, 0777, true) {
+            throw new RuntimeException(sprintf("Unable to create log file：%s.", filepath));
         }
 
         // 检测日志文件大小，超过配置大小则备份日志文件重新生成
-        if is_file(sFilePath) && floor(this->getOption("size")) <= filesize(sFilePath) {
-            rename(sFilePath, sFileDir . "/" . date("Y-m-d H.i.s") . "~@" . basename(sFilePath));
+        if is_file(filepath) && floor(this->getOption("size")) <= filesize(filepath) {
+            rename(filepath, filedir . "/" . date("Y-m-d H.i.s") . "~@" . basename(filepath));
         }
     }
     
     /**
      * 获取日志路径
      *
-     * @param string $strLevel
-     * @param string $sFilePath
+     * @param string $level
+     * @param string $filepath
      * @return string
      */
-    protected function getPath(string strLevel = "")
+    protected function getPath(string level = "")
     {
-        var sFilePath;
+        var filepath;
 
         // 不存在路径，则直接使用项目默认路径
-        if empty sFilePath {
+        if empty filepath {
             if ! this->getOption("path") {
                 throw new RuntimeException("Default path for log has not specified.");
             }
-            let sFilePath =  this->getOption("path") . "/" . (strLevel ? strLevel . "/" : "") . date(this->getOption("name")) . ".log";
+            let filepath =  this->getOption("path") . "/" . (level ? level . "/" : "") . date(this->getOption("name")) . ".log";
         }
 
-        return sFilePath;
+        return filepath;
     }
 }

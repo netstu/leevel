@@ -20,7 +20,7 @@ PHP_METHOD(Queryyetsimple_Option_Option, parseNamespace);
 zend_object *zephir_init_properties_Queryyetsimple_Option_Option(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option___construct, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOptions, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_has, 0, 0, 0)

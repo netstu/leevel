@@ -99,7 +99,7 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 		ZEPHIR_INIT_LNVAR(_8$$3);
 		ZEPHIR_CONCAT_VV(&_8$$3, &_3$$3, &_7$$3);
 		ZVAL_LONG(&_9$$3, 3);
-		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 21, &_8$$3, &_9$$3, &strDestination);
+		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 23, &_8$$3, &_9$$3, &strDestination);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&arrItem);
@@ -148,24 +148,32 @@ PHP_METHOD(Queryyetsimple_Log_File, formatMessage) {
 
 zend_object *zephir_init_properties_Queryyetsimple_Log_File(zend_class_entry *class_type TSRMLS_DC) {
 
-		zval _1$$3;
-	zval _0;
+		zval _3$$4;
+	zval _0, _2, _1$$3;
 		ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_3$$4);
 
 		ZEPHIR_MM_GROW();
 	
 	{
 		zval local_this_ptr, *this_ptr = &local_this_ptr;
 		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
-		zephir_read_property(&_0, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
-			zephir_create_array(&_1$$3, 3, 0 TSRMLS_CC);
-			add_assoc_stringl_ex(&_1$$3, SL("name"), SL("Y-m-d H"));
-			add_assoc_long_ex(&_1$$3, SL("size"), 2097152);
-			add_assoc_stringl_ex(&_1$$3, SL("path"), SL(""));
-			zephir_update_property_zval(this_ptr, SL("arrOption"), &_1$$3);
+			array_init(&_1$$3);
+			zephir_update_property_zval(this_ptr, SL("option"), &_1$$3);
+		}
+		zephir_read_property(&_2, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
+		if (Z_TYPE_P(&_2) == IS_NULL) {
+			ZEPHIR_INIT_VAR(&_3$$4);
+			zephir_create_array(&_3$$4, 3, 0 TSRMLS_CC);
+			add_assoc_stringl_ex(&_3$$4, SL("name"), SL("Y-m-d H"));
+			add_assoc_long_ex(&_3$$4, SL("size"), 2097152);
+			add_assoc_stringl_ex(&_3$$4, SL("path"), SL(""));
+			zephir_update_property_zval(this_ptr, SL("arrOption"), &_3$$4);
 		}
 		ZEPHIR_MM_RESTORE();
 		return Z_OBJ_P(this_ptr);

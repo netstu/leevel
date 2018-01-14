@@ -34,7 +34,7 @@ zend_object *zephir_init_properties_Queryyetsimple_Log_Log(zend_class_entry *cla
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log___construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, oConnect, Queryyetsimple\\Log\\Iconnect, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_emergency, 0, 0, 1)
@@ -118,34 +118,34 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_count, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_option, 0, 0, 2)
-	ZEND_ARG_INFO(0, strName)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_optionarray, 0, 0, 2)
-	ZEND_ARG_INFO(0, strName)
-	ZEND_ARG_ARRAY_INFO(0, arrValue, 0)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_ARRAY_INFO(0, value, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_options, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_getoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
-	ZEND_ARG_INFO(0, mixDefault)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, defaults)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_getoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_deleteoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_deleteoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_log_savestore, 0, 0, 1)
