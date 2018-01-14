@@ -37,7 +37,7 @@ abstract class Aconnect
 	 *
 	 * @var array
 	 */
-	protected arrVar = [];
+	protected vars = [];
 
 	/**
 	 * 配置
@@ -60,48 +60,48 @@ abstract class Aconnect
 	/**
 	 * 设置模板变量
 	 *
-	 * @param mixed $mixName
-	 * @param mixed $mixValue
+	 * @param mixed $name
+	 * @param mixed $value
 	 * @return void
 	 */
-	public function setVar(var mixName, var mixValue = null)
+	public function setVar(var name, var value = null)
 	{
-		if is_array(mixName) {
-			let this->arrVar = array_merge(this->arrVar, mixName);
+		if is_array(name) {
+			let this->vars = array_merge(this->vars, name);
 		} else {
-			let this->arrVar[mixName] = mixValue;
+			let this->vars[name] = value;
 		}
 	}
 
 	/**
 	 * 获取变量值
 	 *
-	 * @param string|null $sName
+	 * @param string|null $name
 	 * @return mixed
 	 */
-	public function getVar(string sName = null)
+	public function getVar(string name = null)
 	{
-		if typeof sName == "null" {
-			return this->arrVar;
+		if typeof name == "null" {
+			return this->vars;
 		}
-		return isset(this->arrVar[sName]) ? this->arrVar[sName] : null;
+		return isset(this->vars[name]) ? this->vars[name] : null;
 	}
 
 	/**
 	 * 删除变量值
 	 *
-	 * @param mixed $mixName
+	 * @param mixed $name
 	 * @return $this
 	 */
-	public function deleteVar(var mixName)
+	public function deleteVar(var name)
 	{
-		var strName;
+		var item;
 
-		let mixName = is_array(mixName) ? mixName : func_get_args();
+		let name = is_array(name) ? name : func_get_args();
 
-		for strName in mixName {
-			if isset this->arrVar[strName] {
-				unset(this->arrVar[strName]);
+		for item in name {
+			if isset this->vars[item] {
+				unset(this->vars[item]);
 			}
 		}
 
@@ -111,12 +111,12 @@ abstract class Aconnect
 	/**
 	 * 清空变量值
 	 *
-	 * @param string|null $sName
+	 * @param string|null $name
 	 * @return $this
 	 */
 	public function clearVar()
 	{
-		let this->arrVar = [];
+		let this->vars = [];
 		return this;
 	}
 
@@ -236,96 +236,94 @@ abstract class Aconnect
 	/**
 	 * 分析展示的视图文件
 	 *
-	 * @param string $sFile 视图文件地址
-	 * @param string $strExt 后缀
+	 * @param string $file 视图文件地址
+	 * @param string $ext 后缀
 	 * @return string|void
 	 */
-	protected function parseDisplayFile(string sFile, string strExt = "")
+	protected function parseDisplayFile(string file, string ext = "")
 	{
 		// 加载视图文件
-		if ! is_file(sFile) {
-			let sFile = this->parseFile(sFile, strExt);
+		if ! is_file(file) {
+			let file = this->parseFile(file, ext);
 		}
 
 		// 分析默认视图文件
-		if ! is_file(sFile) {
-			let sFile = this->parseDefaultFile(sFile);
+		if ! is_file(file) {
+			let file = this->parseDefaultFile(file);
 		}
 
-		if ! is_file(sFile) {
-			throw new InvalidArgumentException(sprintf("Template file %s does not exist.", sFile));
+		if ! is_file(file) {
+			throw new InvalidArgumentException(sprintf("Template file %s does not exist.", file));
 		}
 
-		return sFile;
+		return file;
 	}
 
 	/**
 	 * 分析模板真实路径			
 	 *
-	 * @param string $sTpl 文件地址
-	 * @param string $sExt 扩展名
+	 * @param string $tpl 文件地址
+	 * @param string $ext 扩展名
 	 * @return string
 	 */
-	protected function parseFile(string sTpl, string sExt = "")
+	protected function parseFile(string tpl, string ext = "")
 	{
-		var arrArray, sTheme, sTempTheme, sTempTpl, sReturnFile = "";
+		var arr, theme, tempTheme, tempTpl, result = "";
 
-		let sTpl = trim(str_replace("->", ".", sTpl));
+		let tpl = trim(str_replace("->", ".", tpl));
 
 		// 完整路径或者变量
-		if pathinfo(sTpl, PATHINFO_EXTENSION) || strpos(sTpl, "$") === 0 {
-			return this->formatFile(sTpl);
-		} elseif strpos(sTpl, "(") !== false { // 存在表达式
-			return this->formatFile(sTpl);
+		if pathinfo(tpl, PATHINFO_EXTENSION) || strpos(tpl, "$") === 0 || strpos(tpl, "(") !== false {
+			return this->formatFile(tpl);
 		} else {
 			if ! this->getOption("theme_path") {
 				throw new RuntimeException("Theme path must be set");
 			}
 
 			// 空取默认控制器和方法
-			if sTpl == "" {
-				let sTpl = this->getOption("controller_name") . this->getOption("controlleraction_depr") . this->getOption("action_name");
+			if tpl == "" {
+				let tpl = this->getOption("controller_name") . this->getOption("controlleraction_depr") . this->getOption("action_name");
 			}
 
-			if strpos(sTpl, "@") !== false { // 分析主题
-				let arrArray = explode("@", sTpl);
-				let sTempTheme = array_shift(arrArray);
-				let sTheme = sTempTheme;
-				let sTempTpl = array_shift(arrArray);
-				let sTpl = sTempTpl; 
+			if strpos(tpl, "@") !== false { // 分析主题
+				let arr = explode("@", tpl);
+				let tempTheme = array_shift(arr);
+				let theme = tempTheme;
+				let tempTpl = array_shift(arr);
+				let tpl = tempTpl; 
 			}
 
-			let sTpl = str_replace([
+			let tpl = str_replace([
 				"+",
 				":"
-			], this->getOption("controlleraction_depr"), sTpl);
+			], this->getOption("controlleraction_depr"), tpl);
 
-			let sReturnFile = dirname(this->getOption("theme_path")) . "/";
-			if sTheme {
-				let sReturnFile .= sTheme . "/";
+			let result = dirname(this->getOption("theme_path")) . "/";
+			if theme {
+				let result .= theme . "/";
 			} else {
-				let sReturnFile .= this->getOption("theme_name") . "/";
+				let result .= this->getOption("theme_name") . "/";
 			}
 
-			let sReturnFile .= sTpl;
+			let result .= tpl;
 
-			if ! empty sExt {
-				let sReturnFile .= sExt;
+			if ! empty ext {
+				let result .= ext;
 			} else {
-				let sReturnFile .= this->getOption("suffix");
+				let result .= this->getOption("suffix");
 			}
 
-			return sReturnFile;
+			return result;
 		}
 	}
 
 	/**
 	 * 格式化文件名
 	 *
-	 * @param string $sContent
+	 * @param string $content
 	 * @return string
 	 */
-	protected function formatFile(string sContent)
+	protected function formatFile(string content)
 	{
 		return str_replace([
 			":",
@@ -333,46 +331,46 @@ abstract class Aconnect
 		], [
 			"->",
 			"::"
-		], sContent);
+		], content);
 	}
 
 	/**
 	 * 匹配默认地址（文件不存在）
 	 *
-	 * @param string $sTpl 文件地址
+	 * @param string $tpl 文件地址
 	 * @return string
 	 */
-	protected function parseDefaultFile(string sTpl)
+	protected function parseDefaultFile(string tpl)
 	{
-		var sBakTpl, sTempTpl;
+		var bak, tempTpl;
 
-		if is_file(sTpl) {
-			return sTpl;
+		if is_file(tpl) {
+			return tpl;
 		}
 
 		if ! $this->getOption("theme_path") {
 			throw new RuntimeException("Theme path must be set");
 		}
 
-		let sBakTpl = sTpl;
+		let bak = tpl;
 
 		// 物理路径
-		if strpos(sTpl, ":") !== false || strpos(sTpl, "/") === 0 || strpos(sTpl, "\\") === 0 {
-			let sTpl = str_replace(str_replace("\\", "/", this->getOption("theme_path") . "/"), "", str_replace("\\", "/", sTpl));
+		if strpos(tpl, ":") !== false || strpos(tpl, "/") === 0 || strpos(tpl, "\\") === 0 {
+			let tpl = str_replace(str_replace("\\", "/", this->getOption("theme_path") . "/"), "", str_replace("\\", "/", tpl));
 		}
 
 		// 备用地址
-		let sTempTpl = this->getOption("theme_path_default") . "/" . sTpl;
-		if this->getOption("theme_path_default") && is_file(sTempTpl) {
-			return sTempTpl;
+		let tempTpl = this->getOption("theme_path_default") . "/" . tpl;
+		if this->getOption("theme_path_default") && is_file(tempTpl) {
+			return tempTpl;
 		}
 
 		// default 主题
-		let sTempTpl = dirname(this->getOption("theme_path")) . "/default/" . sTpl;
-		if this->getOption("theme_name") != "default" && is_file(sTempTpl) {
-			return sTempTpl;
+		let tempTpl = dirname(this->getOption("theme_path")) . "/default/" . tpl;
+		if this->getOption("theme_name") != "default" && is_file(tempTpl) {
+			return tempTpl;
 		}
 
-		return sBakTpl;
+		return bak;
 	}
 }
