@@ -34,8 +34,8 @@ interface Iaction
 	/**
 	 * 设置父控制器
 	 *
-	 * @param \queryyetsimple\mvc\icontroller $objController
+	 * @param \queryyetsimple\mvc\icontroller $controller
 	 * @return $this
 	 */
-	public function setController(<Icontroller> objController);
+	public function setController(<Icontroller> controller);
 }

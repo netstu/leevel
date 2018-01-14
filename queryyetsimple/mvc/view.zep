@@ -40,67 +40,67 @@ class View implements Iview
 	 *
 	 * @var \queryyessimple\view\iview
 	 */
-	protected objTheme;
+	protected theme;
 
 	/**
      * 备份视图模板
      *
      * @var \queryyessimple\view\iview
      */
-    protected objBackupTheme;
+    protected backupTheme;
 
     /**
      * 是否永久切换
      *
      * @var boolean
      */
-    protected booForever = false;
+    protected foreverSwitch = false;
 
 	/**
 	 * 响应工厂
 	 *
 	 * @var \Closure
 	 */
-	protected calResponseFactory;
+	protected responseFactory;
 
 	/**
 	 * 响应
 	 *
 	 * @var \queryyetsimple\http\response
 	 */
-	protected objResponse;
+	protected response;
 
 	/**
 	 * 构造函数
 	 *
-	 * @param \queryyetsimple\view\iview $objTheme
+	 * @param \queryyetsimple\view\iview $theme
 	 * @return void
 	 */
-	public function __construct(<view_iview> objTheme)
+	public function __construct(<view_iview> theme)
 	{
-		let this->objTheme = objTheme;
+		let this->theme = theme;
 	}
 
 	/**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $objTheme
-     * @param boolean $booForever
+     * @param \queryyetsimple\view\iview $theme
+     * @param boolean $foreverSwitch
      * @return $this
      */
-    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    public function switchView(<view_iview> theme, boolean foreverSwitch = false)
     {
-    	var arrAssign;
+    	var assign;
 
-        let arrAssign = this->getAssign();
+        let assign = this->getAssign();
 
-        if booForever === false {
-            let this->objBackupTheme = this->objTheme;
+        if foreverSwitch === false {
+            let this->backupTheme = this->theme;
         }
         
-        let this->booForever = booForever;
-        let this->objTheme = objTheme;
-        this->assign(arrAssign);
+        let this->foreverSwitch = foreverSwitch;
+        let this->theme = theme;
+        this->assign(assign);
 
         return this;
     }
@@ -108,72 +108,72 @@ class View implements Iview
 	/**
 	 * 设置响应工厂
 	 *
-	 * @param \Closure $calResponseFactory
+	 * @param \Closure $responseFactory
 	 * @return $this;
 	 */
-	public function setResponseFactory(<Closure> calResponseFactory)
+	public function setResponseFactory(<Closure> responseFactory)
 	{
-		let this->calResponseFactory = calResponseFactory;
+		let this->responseFactory = responseFactory;
 		return this;
 	}
 
 	/**
 	 * 获取响应
 	 *
-	 * @return \queryyetsimple\http\response $objResponse
+	 * @return \queryyetsimple\http\response $response
 	 */
 	public function getResponse()
 	{
-		if ! this->objResponse {
-			let this->objResponse = call_user_func(this->calResponseFactory);
+		if ! this->response {
+			let this->response = call_user_func(this->responseFactory);
 		}
-		return this->objResponse;
+		return this->response;
 	}
 
 	/**
 	 * 变量赋值
 	 *
-	 * @param mixed $mixName
-	 * @param mixed $mixValue
+	 * @param mixed $name
+	 * @param mixed $value
 	 * @return $this
 	 */
-	public function assign(var mixName, var mixValue = null)
+	public function assign(var name, var value = null)
 	{
 		this->checkTheme();
-		this->objTheme->setVar(mixName, mixValue);
+		this->theme->setVar(name, value);
 		return this;
 	}
 
 	/**
 	 * 获取变量赋值
 	 *
-	 * @param string|null $sName
+	 * @param string|null $name
 	 * @return mixed
 	 */
-	public function getAssign(var sName = null)
+	public function getAssign(var name = null)
 	{
 		this->checkTheme();
-		return this->objTheme->getVar(sName);
+		return this->theme->getVar(name);
 	}
 
 	/**
 	 * 删除变量值
 	 *
-	 * @param mixed $mixName
+	 * @param mixed $name
 	 * @return $this
 	 */
-	public function deleteAssign(var mixName)
+	public function deleteAssign(var name)
 	{
-		var arrArgs;
+		var args;
 
 		this->checkTheme();
 
-		let arrArgs = func_get_args();
+		let args = func_get_args();
 
 		call_user_func_array([
-			this->objTheme,
+			this->theme,
 			"deleteVar"
-		], arrArgs);
+		], args);
 
 		return this;
 	}
@@ -181,28 +181,28 @@ class View implements Iview
 	/**
 	 * 清空变量值
 	 *
-	 * @param string|null $sName
+	 * @param string|null $name
 	 * @return $this
 	 */
 	public function clearAssign()
 	{
 		this->checkTheme();
-		this->objTheme->clearVar();
+		this->theme->clearVar();
 		return this;
 	}
 
 	/**
 	 * 加载视图文件
 	 *
-	 * @param string $sFile
-	 * @param array $arrOption
+	 * @param string $file
+	 * @param array $option
 	 * @sub string charset 编码
 	 * @sub string content_type 内容类型
 	 * @return string
 	 */
-	public function display(string sFile = null, array arrOption = [])
+	public function display(string file = null, array option = [])
 	{
-		var arrInitOption, strResult;
+		var arrInitOption, result;
 
 		this->checkTheme();
 
@@ -210,21 +210,21 @@ class View implements Iview
 			"charset" : "utf-8",
 			"content_type" : "text/html"
 		];
-		if empty arrOption {
-			let arrOption = [];
+		if empty option {
+			let option = [];
 		}
-		let arrOption = array_merge(arrInitOption, arrOption);
+		let option = array_merge(arrInitOption, option);
 
-		this->responseHeader(arrOption["content_type"], arrOption["charset"]);
+		this->responseHeader(option["content_type"], option["charset"]);
 
-		let strResult = this->objTheme->display(sFile, false);
+		let result = this->theme->display(file, false);
 
-		if this->booForever === false {
-            let this->objTheme = this->objBackupTheme;
+		if this->foreverSwitch === false {
+            let this->theme = this->backupTheme;
         }
-        let this->booForever = false;
+        let this->foreverSwitch = false;
 
-		return strResult;
+		return result;
 	}
 
 	/**
@@ -234,7 +234,7 @@ class View implements Iview
 	 */
 	protected function checkTheme()
 	{
-		if ! this->objTheme {
+		if ! this->theme {
 			throw new RuntimeException("Theme is not set in view");
 		}
 	}
@@ -242,18 +242,18 @@ class View implements Iview
 	/**
 	 * 发送 header
 	 *
-	 * @param string $strContentType
-	 * @param string $strCharset
+	 * @param string $contentType
+	 * @param string $charset
 	 * @return void
 	 */
-	protected function responseHeader(string strContentType = "text/html", string strCharset = "utf-8")
+	protected function responseHeader(string contentType = "text/html", string charset = "utf-8")
 	{
 		this->getResponse();
 
-		if ! this->objResponse {
+		if ! this->response {
 			throw new RuntimeException("Response is not set in view");
 		}
 
-		this->objResponse->contentType(strContentType)->charset(strCharset);
+		this->response->contentType(contentType)->charset(charset);
 	}
 }

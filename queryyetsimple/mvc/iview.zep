@@ -34,41 +34,41 @@ interface Iview
 	/**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $objTheme
-     * @param boolean $booForever
+     * @param \queryyetsimple\view\iview $theme
+     * @param boolean $forever
      * @return $this
      */
-    public function switchView(<view_iview> objTheme, boolean booForever = false);
+    public function switchView(<view_iview> theme, boolean forever = false);
 
     /**
      * 变量赋值
      *
-     * @param mixed $mixName
-     * @param mixed $mixValue
+     * @param mixed $name
+     * @param mixed $value
      * @return $this
      */
-    public function assign(var mixName, var mixValue = null);
+    public function assign(var name, var value = null);
 
     /**
      * 获取变量赋值
      *
-     * @param string|null $sName
+     * @param string|null $name
      * @return mixed
      */
-    public function getAssign(var sName = null);
+    public function getAssign(var name = null);
 
     /**
      * 删除变量值
      *
-     * @param mixed $mixName
+     * @param mixed $name
      * @return $this
      */
-    public function deleteAssign(var mixName);
+    public function deleteAssign(var name);
 
     /**
      * 清空变量值
      *
-     * @param string|null $sName
+     * @param string|null $name
      * @return $this
      */
     public function clearAssign();
@@ -76,11 +76,11 @@ interface Iview
     /**
      * 加载视图文件
      *
-     * @param string $sFile
-     * @param array $arrOption
+     * @param string $file
+     * @param array $option
      * @sub string charset 编码
      * @sub string content_type 内容类型
      * @return string
      */
-    public function display(string sFile = null, array arrOption = []);
+    public function display(string file = null, array option = []);
 }

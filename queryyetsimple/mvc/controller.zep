@@ -39,14 +39,14 @@ abstract class Controller implements Icontroller
 	 *
 	 * @var \queryyetsimple\mvc\iview
 	 */
-	protected objView;
+	protected view;
 
 	/**
 	 * 视图
 	 *
 	 * @var \queryyetsimple\router\router
 	 */
-	protected objRouter;
+	protected router;
 
 	/**
 	 * 构造函数
@@ -60,107 +60,107 @@ abstract class Controller implements Icontroller
 	/**
 	 * 设置视图
 	 *
-	 * @param \queryyetsimple\mvc\iview $objView
+	 * @param \queryyetsimple\mvc\iview $view
 	 * @return $this
 	 */
-	public function setView(<Iview> objView)
+	public function setView(<Iview> view)
 	{
-		let this->objView = objView;
+		let this->view = view;
 		return this;
 	}
 
 	/**
 	 * 设置路由
 	 *
-	 * @param \queryyetsimple\router\router $objRouter
+	 * @param \queryyetsimple\router\router $router
 	 * @return $this
 	 */
-	public function setRouter(<Router> objRouter)
+	public function setRouter(<Router> router)
 	{
-		let this->objRouter = objRouter;
+		let this->router = router;
 		return this;
 	}
 
 	/**
 	 * 执行子方法器
 	 *
-	 * @param string $sActionName 方法名
+	 * @param string $action 方法名
 	 * @return void
 	 */
-	public function action(string sActionName)
+	public function action(string action)
 	{
-		var arrArgs;
+		var args;
 
 		// 判断是否存在方法
-		if method_exists(this, sActionName) {
-			let arrArgs = func_get_args();
-			array_shift(arrArgs);
+		if method_exists(this, action) {
+			let args = func_get_args();
+			array_shift(args);
 
 			return call_user_func_array([
 				this,
-				sActionName
-			], arrArgs);
+				action
+			], args);
 		}
 
 		// 执行默认方法器
-		if ! this->objRouter {
+		if ! this->router {
 			throw new RuntimeException("Router is not set in controller");
 		}
-		return this->objRouter->doBind(null, sActionName, null, true);
+		return this->router->doBind(null, action, null, true);
 	}
 
     /**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $objTheme
-     * @param boolean $booForever
+     * @param \queryyetsimple\view\iview $theme
+     * @param boolean $forever
      * @return $this
      */
-    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    public function switchView(<view_iview> theme, boolean forever = false)
     {
         this->checkView();
-        this->objView->switchView(objTheme, booForever);
+        this->view->switchView(theme, forever);
         return this;
     }
 
 	/**
 	 * 变量赋值
 	 *
-	 * @param mixed $mixName
-	 * @param mixed $mixValue
+	 * @param mixed $name
+	 * @param mixed $value
 	 * @return $this
 	 */
-	public function assign(var mixName, mixValue = null)
+	public function assign(var name, value = null)
 	{
 		this->checkView();
-		this->objView->assign(mixName, mixValue);
+		this->view->assign(name, value);
 		return this;
 	}
 
 	/**
 	 * 获取变量赋值
 	 *
-	 * @param string|null $sName
+	 * @param string|null $name
 	 * @return mixed
 	 */
-	public function getAssign(string sName = null)
+	public function getAssign(string name = null)
 	{
 		this->checkView();
-		return this->objView->getAssign(sName);
+		return this->view->getAssign(name);
 	}
 
 	/**
 	 * 删除变量值
 	 *
-	 * @param mixed $mixName
+	 * @param mixed $name
 	 * @return $this
 	 */
-	public function deleteAssign(var mixName)
+	public function deleteAssign(var name)
 	{
 		$this->checkView();
 
 		call_user_func_array([
-			this->objView,
+			this->view,
 			"deleteAssign"
 		], func_get_args());
 
@@ -175,23 +175,23 @@ abstract class Controller implements Icontroller
 	public function clearAssign()
 	{
 		this->checkView();
-		this->objView->clearAssign();
+		this->view->clearAssign();
 		return this;
 	}
 
 	/**
 	 * 加载视图文件
 	 *
-	 * @param string $sFile
-	 * @param array $arrOption
+	 * @param string $file
+	 * @param array $option
 	 * @sub string charset 编码
 	 * @sub string content_type 类型
 	 * @return string
 	 */
-	public function display(string sFile = null, array arrOption = [])
+	public function display(string file = null, array option = [])
 	{
 		this->checkView();
-		return this->objView->display(sFile, arrOption);
+		return this->view->display(file, option);
 	}
 
 	/**
@@ -201,7 +201,7 @@ abstract class Controller implements Icontroller
 	 */
 	protected function checkView()
 	{
-		if ! this->objView {
+		if ! this->view {
 			throw new RuntimeException("View is not set in controller");
 		}
 	}
@@ -209,23 +209,23 @@ abstract class Controller implements Icontroller
 	/**
 	 * 赋值
 	 *
-	 * @param mixed $mixName
+	 * @param mixed $name
 	 * @param mixed $Value
 	 * @return void
 	 */
-	public function __set(var mixName, var mixValue)
+	public function __set(var name, var value)
 	{
-		this->assign(mixName, mixValue);
+		this->assign(name, value);
 	}
 
 	/**
 	 * 获取值
 	 *
-	 * @param string $sName
+	 * @param string $name
 	 * @return mixed
 	 */
-	public function __get(string sName)
+	public function __get(string name)
 	{
-		return this->getAssign(sName);
+		return this->getAssign(name);
 	}
 }

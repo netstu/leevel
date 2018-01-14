@@ -42,7 +42,7 @@ abstract class Action implements Iaction
      *
      * @var \queryyetsimple\mvc\icontroller
      */
-    protected objController;
+    protected controller;
 
     /**
      * 构造函数
@@ -56,108 +56,108 @@ abstract class Action implements Iaction
     /**
      * 设置父控制器
      *
-     * @param \queryyetsimple\mvc\icontroller $objController
+     * @param \queryyetsimple\mvc\icontroller $controller
      * @return $this
      */
-    public function setController(<Icontroller> objController)
+    public function setController(<Icontroller> controller)
     {
-        let this->objController = objController;
+        let this->controller = controller;
         return this;
     }
 
     /**
      * 设置视图
      *
-     * @param \queryyetsimple\mvc\iview $objView
+     * @param \queryyetsimple\mvc\iview $view
      * @return $this
      */
-    public function setView(<Iview> objView)
+    public function setView(<Iview> view)
     {
         this->checkController();
-        return this->objController->setView(objView);
+        return this->controller->setView(view);
     }
 
     /**
      * 设置路由
      *
-     * @param \queryyetsimple\router\router $objRouter
+     * @param \queryyetsimple\router\router $router
      * @return $this
      */
-    public function setRouter(<Router> objRouter)
+    public function setRouter(<Router> router)
     {
         this->checkController();
-        return this->objController->setRouter(objRouter);
+        return this->controller->setRouter(router);
     }
 
     /**
      * 执行子方法器
      *
-     * @param string $sActionName 方法名
+     * @param string $action 方法名
      * @return void
      */
-    public function action(string sActionName)
+    public function action(string action)
     {
         this->checkController();
-        return this->objController->action(sActionName);
+        return this->controller->action(action);
     }
 
     /**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $objTheme
-     * @param boolean $booForever
+     * @param \queryyetsimple\view\iview $theme
+     * @param boolean $forever
      * @return $this
      */
-    public function switchView(<view_iview> objTheme, boolean booForever = false)
+    public function switchView(<view_iview> theme, boolean forever = false)
     {
         this->checkController();
-        this->objController->switchView(objTheme, booForever);
+        this->controller->switchView(theme, forever);
         return this;
     }
 
     /**
      * 变量赋值
      *
-     * @param mixed $mixName
-     * @param mixed $mixValue
+     * @param mixed $name
+     * @param mixed $value
      * @return $this
      */
-    public function assign(var mixName, var mixValue = null)
+    public function assign(var name, var value = null)
     {
         this->checkController();
-        return this->objController->assign(mixName, mixValue);
+        return this->controller->assign(name, value);
     }
 
     /**
      * 获取变量赋值
      *
-     * @param string|null $sName
+     * @param string|null $name
      * @return mixed
      */
-    public function getAssign(string $sName = null)
+    public function getAssign(string $name = null)
     {
         this->checkController();
-        return this->objController->getAssign(sName);
+        return this->controller->getAssign(name);
     }
 
     /**
      * 删除变量值
      *
-     * @param mixed $mixName
+     * @param mixed $name
      * @return $this
      */
-    public function deleteAssign(mixName)
+    public function deleteAssign(name)
     {
-    	var arrArgs;
+    	var args;
 
         this->checkController();
 
-        let arrArgs = func_get_args();
+        let args = func_get_args();
 
         call_user_func_array([
-        	this->objController,
+        	this->controller,
         	"deleteAssign"
-        ], arrArgs);
+        ], args);
 
         return this;
     }
@@ -170,23 +170,23 @@ abstract class Action implements Iaction
     public function clearAssign()
     {
         this->checkController();
-        this->objController->clearAssign();
+        this->controller->clearAssign();
         return this;
     }
 
     /**
      * 加载视图文件
      *
-     * @param string $sFile
-     * @param array $arrOption
+     * @param string $file
+     * @param array $option
      * @sub string charset 编码
      * @sub string content_type 类型
      * @return string
      */
-    public function display(string sFile = null, array arrOption = [])
+    public function display(string file = null, array option = [])
     {
         this->checkController();
-        return this->objController->display(sFile, arrOption);
+        return this->controller->display(file, option);
     }
 
     /**
@@ -196,7 +196,7 @@ abstract class Action implements Iaction
      */
     protected function checkController()
     {
-        if ! this->objController {
+        if ! this->controller {
             throw new RuntimeException("Controller is not set in action");
         }
     }
@@ -204,15 +204,15 @@ abstract class Action implements Iaction
     /**
      * call 
      *
-     * @param string $sMethod
-     * @param array $arrArgs
+     * @param string $method
+     * @param array $args
      * @return mixed
      */
-    public function __call(string sMethod, array arrArgs)
+    public function __call(string method, array args)
     {
-        if sMethod == "run" {
+        if method == "run" {
             throw new BadFunctionCallException(sprintf("Run method is not allowed."));
         }
-        throw new BadFunctionCallException(sprintf("Method %s is not defined.", sMethod));
+        throw new BadFunctionCallException(sprintf("Method %s is not defined.", method));
     }
 }

@@ -40,279 +40,279 @@ use Monolog\Handler\RotatingFileHandler;
 class Monolog extends Aconnect implements Iconnect
 {
 
-    /**
-     * Monolog
-     *
-     * @var \Monolog\Logger
-     */
-    protected objMonolog;
+	/**
+	 * Monolog
+	 *
+	 * @var \Monolog\Logger
+	 */
+	protected monolog;
 
-    /**
-     * 配置
-     *
-     * @var array
-     */
-    protected arrOption = [
-        "type" : [
-            "file"
-        ],
-        "channel" : "Q",
-        "name" : "Y-m-d H",
-        "size" : 2097152,
-        "path" : ""
-    ];
+	/**
+	 * 配置
+	 *
+	 * @var array
+	 */
+	protected option = [
+		"type" : [
+			"file"
+		],
+		"channel" : "Q",
+		"name" : "Y-m-d H",
+		"size" : 2097152,
+		"path" : ""
+	];
 
-    /**
-     * Monolog 支持日志级别
-     *
-     * @var array
-     */
-    protected arrSupportLevel = [
-        // ilog::DEBUG : Logger::DEBUG,
-        // ilog::INFO : Logger::INFO,
-        // ilog::NOTICE : Logger::NOTICE,
-        // ilog::WARNING : Logger::WARNING,
-        // ilog::ERROR : Logger::ERROR,
-        // ilog::CRITICAL : Logger::CRITICAL,
-        // ilog::ALERT : Logger::ALERT,
-        // ilog::EMERGENCY : Logger::EMERGENCY
-        "debug" : 100,
-        "info" : 200,
-        "notice" : 250,
-        "warning" : 300,
-        "error" : 400,
-        "critical" : 500,
-        "alert" : 550,
-        "emergency" : 600
-    ];
+	/**
+	 * Monolog 支持日志级别
+	 *
+	 * @var array
+	 */
+	protected supportLevel = [
+		// ilog::DEBUG : Logger::DEBUG,
+		// ilog::INFO : Logger::INFO,
+		// ilog::NOTICE : Logger::NOTICE,
+		// ilog::WARNING : Logger::WARNING,
+		// ilog::ERROR : Logger::ERROR,
+		// ilog::CRITICAL : Logger::CRITICAL,
+		// ilog::ALERT : Logger::ALERT,
+		// ilog::EMERGENCY : Logger::EMERGENCY
+		"debug" : 100,
+		"info" : 200,
+		"notice" : 250,
+		"warning" : 300,
+		"error" : 400,
+		"critical" : 500,
+		"alert" : 550,
+		"emergency" : 600
+	];
 
-    /**
-     * 构造函数
-     *
-     * @param array $arrOption
-     * @return void
-     */
-    public function __construct(array arrOption = [])
-    {
-        var strType, strMake;
+	/**
+	 * 构造函数
+	 *
+	 * @param array $option
+	 * @return void
+	 */
+	public function __construct(array option = [])
+	{
+		var type, make;
 
-        parent::__construct(arrOption);
+		parent::__construct(option);
 
-        let this->objMonolog = new Logger(this->getOption("channel"));
+		let this->monolog = new Logger(this->getOption("channel"));
 
-        for strType in this->getOption("type") {
-        	let strMake = "make" . ucwords(this->camelize(strType)) . "Handler";
-            this->{strMake}();
-        }
-    }
+		for type in this->getOption("type") {
+			let make = "make" . ucwords(this->camelize(type)) . "Handler";
+			this->{make}();
+		}
+	}
 
-    /**
-     * 注册文件 handler
-     *
-     * @param string $strPath
-     * @param string $strLevel
-     * @return void
-     */
-    public function file(string strPath, string strLevel = ilog::DEBUG)
-    {
-        var objHandler;
-        let objHandler = new StreamHandler(strPath, this->parseMonologLevel(strLevel));
-        this->objMonolog->pushHandler(objHandler);
-        objHandler->setFormatter(this->getDefaultFormatter());
-    }
+	/**
+	 * 注册文件 handler
+	 *
+	 * @param string $path
+	 * @param string $level
+	 * @return void
+	 */
+	public function file(string path, string level = ilog::DEBUG)
+	{
+		var handler;
+		let handler = new StreamHandler(path, this->parseMonologLevel(level));
+		this->monolog->pushHandler(handler);
+		handler->setFormatter(this->getDefaultFormatter());
+	}
 
-    /**
-     * 注册每日文件 handler
-     *
-     * @param string $strPath
-     * @param int $intDays
-     * @param string $level
-     * @return void
-     */
-    public function dailyFile(string strPath, int intDays = 0, string strLevel = ilog::DEBUG)
-    {
-        var objHandler;
-        let objHandler = new RotatingFileHandler(strPath, intDays, this->parseMonologLevel(strLevel));
-        this->objMonolog->pushHandler(objHandler);
-        objHandler->setFormatter(this->getDefaultFormatter());
-    }
+	/**
+	 * 注册每日文件 handler
+	 *
+	 * @param string $path
+	 * @param int $days
+	 * @param string $level
+	 * @return void
+	 */
+	public function dailyFile(string path, int days = 0, string level = ilog::DEBUG)
+	{
+		var handler;
+		let handler = new RotatingFileHandler(path, days, this->parseMonologLevel(level));
+		this->monolog->pushHandler(handler);
+		handler->setFormatter(this->getDefaultFormatter());
+	}
 
-    /**
-     * 注册系统 handler
-     *
-     * @param string $strName
-     * @param string $strLevel
-     * @return \Psr\Log\LoggerInterface
-     */
-    public function syslog(string strName = "queryphp", string strLevel = ilog::DEBUG)
-    {
-    	var objHandler;
-    	let objHandler = new SyslogHandler(strName, LOG_USER, strLevel);
-        return this->objMonolog->pushHandler(objHandler);
-    }
+	/**
+	 * 注册系统 handler
+	 *
+	 * @param string $name
+	 * @param string $level
+	 * @return \Psr\Log\LoggerInterface
+	 */
+	public function syslog(string name = "queryphp", string level = ilog::DEBUG)
+	{
+		var handler;
+		let handler = new SyslogHandler(name, LOG_USER, level);
+		return this->monolog->pushHandler(handler);
+	}
 
-    /**
-     * 注册 error_log handler
-     *
-     * @param string $strLevel
-     * @param int $intMessageType
-     * @return void
-     */
-    public function errorLog(string strLevel = ilog::DEBUG, int intMessageType = 0/* ErrorLogHandler::OPERATING_SYSTEM */)
-    {
-        var objHandler;
-        let objHandler = new ErrorLogHandler(intMessageType, this->parseMonologLevel(strLevel));
-        this->objMonolog->pushHandler(objHandler);
-        objHandler->setFormatter(this->getDefaultFormatter());
-    }
+	/**
+	 * 注册 error_log handler
+	 *
+	 * @param string $level
+	 * @param int $messageType
+	 * @return void
+	 */
+	public function errorLog(string level = ilog::DEBUG, int messageType = 0/* ErrorLogHandler::OPERATING_SYSTEM */)
+	{
+		var handler;
+		let handler = new ErrorLogHandler(messageType, this->parseMonologLevel(level));
+		this->monolog->pushHandler(handler);
+		handler->setFormatter(this->getDefaultFormatter());
+	}
 
-    /**
-     * monolog 回调
-     *
-     * @param callable|null $mixCallback
-     * @return $this
-     */
-    public function monolog(var mixCallback = null)
-    {
-        if is_callable(mixCallback) {
-            call_user_func_array(mixCallback, [
-                this
-            ]);
-        }
+	/**
+	 * monolog 回调
+	 *
+	 * @param callable|null $callback
+	 * @return $this
+	 */
+	public function monolog(var callback = null)
+	{
+		if is_callable(callback) {
+			call_user_func_array(callback, [
+				this
+			]);
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 取得 Monolog
-     *
-     * @return \Monolog\Logger
-     */
-    public function getMonolog()
-    {
-        return this->objMonolog;
-    }
+	/**
+	 * 取得 Monolog
+	 *
+	 * @return \Monolog\Logger
+	 */
+	public function getMonolog()
+	{
+		return this->monolog;
+	}
 
-    /**
-     * 日志写入接口
-     *
-     * @param array $arrData
-     * @return void
-     */
-    public function save(array arrData)
-    {
-        var arrItem, arrLevel, strLevel;
+	/**
+	 * 日志写入接口
+	 *
+	 * @param array $data
+	 * @return void
+	 */
+	public function save(array data)
+	{
+		var item, level, level;
 
-        let arrLevel = array_keys(this->arrSupportLevel);
+		let level = array_keys(this->supportLevel);
 
-        for arrItem in arrData {
-        	if ! in_array(arrItem[0], arrLevel) {
-                let strLevel = "debug";
-            } else {
-            	let strLevel = arrItem[0];
-            }
+		for item in data {
+			if ! in_array(item[0], level) {
+				let level = "debug";
+			} else {
+				let level = item[0];
+			}
 
-            this->objMonolog->{strLevel}(arrItem[1], arrItem[2]);
-        }
-    }
+			this->monolog->{level}(item[1], item[2]);
+		}
+	}
 
-    /**
-     * 初始化文件 handler
-     *
-     * @return void
-     */
-    protected function makeFileHandler()
-    {
-        var strPath;
-        let strPath = this->getPath();
-        this->checkSize(strPath);
-        this->file(strPath);
-    }
+	/**
+	 * 初始化文件 handler
+	 *
+	 * @return void
+	 */
+	protected function makeFileHandler()
+	{
+		var path;
+		let path = this->getPath();
+		this->checkSize(path);
+		this->file(path);
+	}
 
-    /**
-     * 初始化每日文件 handler
-     *
-     * @return void
-     */
-    protected function makeDailyFileHandler()
-    {
-        var strPath;
-        let strPath = this->getPath();
-        this->checkSize(this->getDailyFilePath(strPath));
-        this->dailyFile(strPath);
-    }
+	/**
+	 * 初始化每日文件 handler
+	 *
+	 * @return void
+	 */
+	protected function makeDailyFileHandler()
+	{
+		var path;
+		let path = this->getPath();
+		this->checkSize(this->getDailyFilePath(path));
+		this->dailyFile(path);
+	}
 
-    /**
-     * 初始化系统 handler
-     *
-     * @return void
-     */
-    protected function makeSyslogHandler()
-    {
-        this->syslog();
-    }
+	/**
+	 * 初始化系统 handler
+	 *
+	 * @return void
+	 */
+	protected function makeSyslogHandler()
+	{
+		this->syslog();
+	}
 
-    /**
-     * 初始化 error_log handler
-     *
-     * @return void
-     */
-    protected function makeErrorLogHandler()
-    {
-        this->errorLog();
-    }
+	/**
+	 * 初始化 error_log handler
+	 *
+	 * @return void
+	 */
+	protected function makeErrorLogHandler()
+	{
+		this->errorLog();
+	}
 
-    /**
-     * 每日文件真实路径
-     *
-     * @param string $strPath
-     * @return void
-     */
-    protected function getDailyFilePath(string strPath)
-    {
-        var strExt;
-        let strExt = pathinfo(strPath, PATHINFO_EXTENSION);
-        if strExt {
-            let strPath = substr(strPath, 0, strrpos(strPath, "." . strExt));
-        }
-        return strPath . date("-Y-m-d") . (strExt ? "." . strExt : "");
-    }
+	/**
+	 * 每日文件真实路径
+	 *
+	 * @param string $path
+	 * @return void
+	 */
+	protected function getDailyFilePath(string path)
+	{
+		var ext;
+		let ext = pathinfo(path, PATHINFO_EXTENSION);
+		if ext {
+			let path = substr(path, 0, strrpos(path, "." . ext));
+		}
+		return path . date("-Y-m-d") . (ext ? "." . ext : "");
+	}
 
-    /**
-     * 默认格式化
-     *
-     * @return \Monolog\Formatter\LineFormatter
-     */
-    protected function getDefaultFormatter()
-    {
-        return new LineFormatter(null, null, true, true);
-    }
+	/**
+	 * 默认格式化
+	 *
+	 * @return \Monolog\Formatter\LineFormatter
+	 */
+	protected function getDefaultFormatter()
+	{
+		return new LineFormatter(null, null, true, true);
+	}
 
-    /**
-     * 获取 Monolog 级别
-     * 不支持级别归并到 DEBUG
-     *
-     * @param string $strLevel
-     * @return int
-     */
-    protected function parseMonologLevel(string strLevel)
-    {
-        if isset(this->arrSupportLevel[strLevel]) {
-            return this->arrSupportLevel[strLevel];
-        }
-        return this->arrSupportLevel[ilog::DEBUG];
-    }
+	/**
+	 * 获取 Monolog 级别
+	 * 不支持级别归并到 DEBUG
+	 *
+	 * @param string $level
+	 * @return int
+	 */
+	protected function parseMonologLevel(string level)
+	{
+		if isset(this->supportLevel[level]) {
+			return this->supportLevel[level];
+		}
+		return this->supportLevel[ilog::DEBUG];
+	}
 
-    /**
-     * 下划线转驼峰
-     *
-     * @param string $strValue
-     * @param string $strSeparator
-     * @return string
-     */
-    protected function camelize(string strValue, string strSeparator = "_")
-    {
-        let strValue = strSeparator . str_replace(strSeparator, " ", strtolower(strValue));
-        return ltrim(str_replace(" ", "", ucwords(strValue)), strSeparator);
-    }
+	/**
+	 * 下划线转驼峰
+	 *
+	 * @param string $value
+	 * @param string $separator
+	 * @return string
+	 */
+	protected function camelize(string value, string separator = "_")
+	{
+		let value = separator . str_replace(separator, " ", strtolower(value));
+		return ltrim(str_replace(" ", "", ucwords(value)), separator);
+	}
 }
