@@ -41,38 +41,38 @@ class Pipeline implements Ipipeline
 	 *
 	 * @var \queryyetsimple\support\icontainer
 	 */
-	protected objContainer;
+	protected container;
 
 	/**
 	 * 管道传递的对象
 	 *
 	 * @var array
 	 */
-	protected arrPassed = [];
+	protected passed = [];
 
 	/**
 	 * 管道中所有执行工序
 	 *
 	 * @var array
 	 */
-	protected arrStage = [];
+	protected stage = [];
 
 	/**
 	 * 迭代器
 	 *
 	 * @var \queryyetsimple\support\collection
 	 */
-	protected objGenerator;
+	protected generator;
 
 	/**
 	 * 创建一个管道
 	 *
-	 * @param \queryyetsimple\support\icontainer $objContainer
+	 * @param \queryyetsimple\support\icontainer $container
 	 * @return void
 	 */
-	public function __construct(<Icontainer> objContainer)
+	public function __construct(<Icontainer> container)
 	{
-		let this->objContainer = objContainer;
+		let this->container = container;
 	}
 
 	/**
@@ -82,9 +82,9 @@ class Pipeline implements Ipipeline
      */
     public function reset()
     {
-        let this->arrPassed = [];
-        let this->arrStage = [];
-        let this->objGenerator = null;
+        let this->passed = [];
+        let this->stage = [];
+        let this->generator = null;
 
         return this;
     }
@@ -92,16 +92,16 @@ class Pipeline implements Ipipeline
 	/**
 	 * 将传输对象传入管道
 	 *
-	 * @param mixed $mixPassed
+	 * @param mixed $passed
 	 * @return $this
 	 */
-	public function send(var mixPassed)
+	public function send(var passed)
 	{
-		var mixItem;
+		var item;
 
-		let mixPassed = typeof mixPassed == "array" ? mixPassed : func_get_args();
-		for mixItem in mixPassed {
-			let this->arrPassed[] = mixItem;
+		let passed = typeof passed == "array" ? passed : func_get_args();
+		for item in passed {
+			let this->passed[] = item;
 		}
 
 		return this;
@@ -110,16 +110,16 @@ class Pipeline implements Ipipeline
 	/**
 	 * 设置管道中的执行工序
 	 *
-	 * @param dynamic|array $mixStage
+	 * @param dynamic|array $stage
 	 * @return $this
 	 */
-	public function through(var mixStage)
+	public function through(var stage)
 	{
-		var mixItem;
+		var item;
 
-		let mixStage = typeof mixStage == "array" ? mixStage : func_get_args();
-		for mixItem in mixStage {
-			let this->arrStage[] = mixItem;
+		let stage = typeof stage == "array" ? stage : func_get_args();
+		for item in stage {
+			let this->stage[] = item;
 		}
 
 		return this;
@@ -128,24 +128,24 @@ class Pipeline implements Ipipeline
 	/**
 	 * 执行管道工序响应结果
 	 *
-	 * @param callable $calEnd
+	 * @param callable $end
 	 * @since 2018.01.03
 	 * @return void
 	 */
-	public function then(var calEnd = null)
+	public function then(var end = null)
 	{
-		var arrStage;
+		var stage;
 
-		let arrStage = this->arrStage;
-		if (calEnd) {
-			if ! is_callable(calEnd) {
+		let stage = this->stage;
+		if (end) {
+			if ! is_callable(end) {
 				throw new InvalidArgumentException("Pipeline then must be a callable.");
 			}
-			let arrStage[] = calEnd;
+			let stage[] = end;
 		} 
-		let this->objGenerator = this->stageGenerator(arrStage);
+		let this->generator = this->stageGenerator(stage);
 
-		call_user_func_array([this, "traverseGenerator"], this->arrPassed);
+		call_user_func_array([this, "traverseGenerator"], this->passed);
 	}
 
 	/**
@@ -155,20 +155,20 @@ class Pipeline implements Ipipeline
 	 * @return void
 	 */
 	public function traverseGenerator() {
-		var aArgs, calCurrent, calNext;
+		var args, current, next;
 
-		if ! this->objGenerator->valid() || this->objGenerator->next() || ! this->objGenerator->valid() {
+		if ! this->generator->valid() || this->generator->next() || ! this->generator->valid() {
 		   return;
 		}
 
-		let aArgs = func_get_args();
+		let args = func_get_args();
 
-		let calNext = Closure::fromCallable([this, "makeNextClosure"]);
+		let next = Closure::fromCallable([this, "makeNextClosure"]);
 
-		array_unshift(aArgs, calNext);
+		array_unshift(args, next);
 
-		let calCurrent = this->objGenerator->current();
-		call_user_func_array(calCurrent, aArgs);
+		let current = this->generator->current();
+		call_user_func_array(current, args);
 	}
 
 	/**
@@ -186,58 +186,58 @@ class Pipeline implements Ipipeline
 	 * 添加一个空的迭代器，第一次迭代 next 自动移除
 	 * zephir 不支持 yield，用集合替代
 	 *
-	 * @param array $arrStage
+	 * @param array $stage
 	 * @return \queryyetsimple\support\collection
 	 */
-	protected function stageGenerator(array arrStage) {
-		var mixStage;
+	protected function stageGenerator(array stage) {
+		var item;
 
-		array arrTemp = [];
-		array_unshift(arrStage, null);
-		for mixStage in arrStage {
-			let arrTemp[] = this->stageCallback(mixStage);
+		array temp = [];
+		array_unshift(stage, null);
+		for item in stage {
+			let temp[] = this->stageCallback(item);
 		}
 
-		return new collection(arrTemp);
+		return new collection(temp);
 	}
 
 	/**
 	 * 工序回调
 	 *
-	 * @param mixed $mixStage
+	 * @param mixed $stages
 	 * @return null|callable
 	 */
-	protected function stageCallback(var mixStage)
+	protected function stageCallback(var stages)
 	{   
-		var strStage, arrParams, strMethod, objStage, tempArray;
+		var stage, params, method, temp;
 
-		if is_null(mixStage) {
+		if is_null(stages) {
 			return;
 		}
 
-		if is_callable(mixStage) {
-			return mixStage;
+		if is_callable(stages) {
+			return stages;
 		} else {
-			let tempArray = this->parse(mixStage);
-			let strStage = tempArray[0];
-			let arrParams = tempArray[1];
+			let temp = this->parse(stages);
+			let stage = temp[0];
+			let params = temp[1];
 
-			if strpos(strStage, "@") !== false {
-				let tempArray = explode("@", strStage);
-				let strStage = tempArray[0];
-				let strMethod = tempArray[1];
+			if strpos(stage, "@") !== false {
+				let temp = explode("@", stage);
+				let stage = temp[0];
+				let method = temp[1];
 			} else {
-				let strMethod = "handle";
+				let method = "handle";
 			}
 
-			let objStage = this->objContainer->make(strStage);
-			if (objStage === false) {
-				throw new InvalidArgumentException(sprintf("Stage %s is not valid.", strStage));
+			let stage = this->container->make(stage);
+			if (stage === false) {
+				throw new InvalidArgumentException("Stage is invalid.");
 			}
 
 			return [
-				objStage,
-				strMethod
+				stage,
+				method
 			];
 		}
 	}
@@ -245,24 +245,24 @@ class Pipeline implements Ipipeline
 	/**
 	 * 解析工序
 	 *
-	 * @param string $strStage
+	 * @param string $stage
 	 * @return array
 	 */
-	protected function parse(string strStage)
+	protected function parse(string stage)
 	{
-		var strName, arrArgs, tempArray;
+		var name, args, temp;
 
-		let tempArray = array_pad(explode(":", strStage, 2), 2, []);
-		let strName = tempArray[0];
-		let arrArgs = tempArray[1];
+		let temp = array_pad(explode(":", stage, 2), 2, []);
+		let name = temp[0];
+		let args = temp[1];
 
-		if typeof arrArgs == "string" {
-			let arrArgs = explode(",", arrArgs);
+		if typeof args == "string" {
+			let args = explode(",", args);
 		}
 
 		return [
-			strName,
-			arrArgs
+			name,
+			args
 		];
 	}
 }

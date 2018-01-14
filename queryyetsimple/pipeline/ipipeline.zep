@@ -39,24 +39,24 @@ interface Ipipeline
 	/**
 	 * 将传输对象传入管道
 	 *
-	 * @param mixed $mixPassed
+	 * @param mixed $passed
 	 * @return $this
 	 */
-	public function send(var mixPassed);
+	public function send(var passed);
 
 	/**
 	 * 设置管道中的执行工序
 	 *
-	 * @param dynamic|array $mixStage
+	 * @param dynamic|array $stage
 	 * @return $this
 	 */
-	public function through(var mixStage);
+	public function through(var stage);
 
 	/**
 	 * 执行管道工序响应结果
 	 *
-	 * @param callable $calEnd
+	 * @param callable $end
 	 * @return mixed
 	 */
-	public function then(var calEnd = null);
+	public function then(var end = null);
 }

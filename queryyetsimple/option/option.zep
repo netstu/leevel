@@ -49,80 +49,82 @@ class Option implements ArrayAccess, Ioption
 	/**
 	 * 构造函数
 	 *
-	 * @param array $options
+	 * @param array $option
 	 * @return void
 	 */
-	public function __construct(array options = [])
+	public function __construct(array option = [])
 	{
-		let this->option = options;
+		let this->option = option;
 	}
 
 	/**
 	 * 是否存在配置
 	 *
-	 * @param string $sName 配置键值
+	 * @param string $name 配置键值
 	 * @return string
 	 */
-	public function has(string sName = "app\\")
+	public function has(string name = "app\\")
 	{
-		var sTempName, arrName, strNamespace, arrParts, sPart, option;
+		var tempname, names, namespaces, parts, part, option;
 
-		let arrName = this->parseNamespace(sName);
-		let strNamespace = arrName[0];
-		let sTempName = arrName[1];
-		let sName = sTempName;
+		let names = this->parseNamespace(name);
+		let namespaces = names[0];
+		let tempname = names[1];
+		let name = tempname;
 
-		if sName == "*" {
-			return isset(this->option[strNamespace]);
+		if name == "*" {
+			return isset(this->option[namespaces]);
 		}
 
-		if ! strpos(sName, ".") {
-			return array_key_exists(sName, this->option[strNamespace]);
+		if ! strpos(name, ".") {
+			return array_key_exists(name, this->option[namespaces]);
 		}
 
-		let arrParts = explode(".", sName);
-		let option = this->option[strNamespace];
-		for sPart in arrParts {
-			if ! isset option[sPart] {
+		let parts = explode(".", name);
+		let option = this->option[namespaces];
+		for part in parts {
+			if ! isset option[part] {
 				return false;
 			}
-			let option = option[sPart];
+			let option = option[part];
 		}
+
 		return true;
 	}
 
 	/**
 	 * 获取配置
 	 *
-	 * @param string $sName 配置键值
-	 * @param mixed $mixDefault 配置默认值
+	 * @param string $name 配置键值
+	 * @param mixed $defaults 配置默认值
 	 * @return string
 	 */
-	public function get(string sName = "app\\", var mixDefault = null)
+	public function get(string name = "app\\", var defaults = null)
 	{
-		var sTempName, arrName, strNamespace, arrParts, sPart, option;
+		var tempname, names, namespaces, parts, part, option;
 
-		let arrName = this->parseNamespace(sName);
-		let strNamespace = arrName[0];
-		let sTempName = arrName[1];
-		let sName = sTempName;
+		let names = this->parseNamespace(name);
+		let namespaces = names[0];
+		let tempname = names[1];
+		let name = tempname;
 
-		if sName == "*" {
-			return this->option[strNamespace];
+		if name == "*" {
+			return this->option[namespaces];
 		}
 
-		if ! strpos(sName, ".") {
-			return array_key_exists(sName, this->option[strNamespace]) ? this->option[strNamespace][sName] : mixDefault;
+		if ! strpos(name, ".") {
+			return array_key_exists(name, this->option[namespaces]) ? this->option[namespaces][name] : defaults;
 		}
 
-		let arrParts = explode(".", sName);
-		let option = this->option[strNamespace];
-		for sPart in arrParts {
-			if ! isset option[sPart] {
-				return mixDefault;
+		let parts = explode(".", name);
+		let option = this->option[namespaces];
+		for part in parts {
+			if ! isset option[part] {
+				return defaults;
 			}
-			let option = option[sPart];
+			let option = option[part];
 		}
+
 		return option;
 	}
 
@@ -139,35 +141,35 @@ class Option implements ArrayAccess, Ioption
 	/**
 	 * 设置配置
 	 *
-	 * @param mixed $mixName 配置键值
-	 * @param mixed $mixValue 配置值
+	 * @param mixed $name 配置键值
+	 * @param mixed $value 配置值
 	 * @return array
 	 */
-	public function set(var mixName, var mixValue = null)
+	public function set(var name, var value = null)
 	{
-		var sTempName, sKey, mixValues, sName, arrName, strNamespace, arrParts, option;
+		var tempname, key, values, name, names, namespaces, parts, option;
 
-		if typeof mixName == "array" {
-			for sKey,mixValues in mixName {
-				this->set(sKey, mixValues);
+		if typeof name == "array" {
+			for key, values in name {
+				this->set(key, values);
 			}
 		} else {
-			let arrName = this->parseNamespace(mixName);
-			let strNamespace = arrName[0];
-			let sTempName = arrName[1];
-			let sName = sTempName;
+			let names = this->parseNamespace(name);
+			let namespaces = names[0];
+			let tempname = names[1];
+			let name = tempname;
 
-			if sName == "*" {
-				let this->option[strNamespace] = mixValue;
+			if name == "*" {
+				let this->option[namespaces] = value;
 				return;
 			}
 
-			if ! strpos(sName, ".") {
-				let this->option[strNamespace][mixName] = mixValue;
+			if ! strpos(name, ".") {
+				let this->option[namespaces][name] = value;
 			} else {
-				let arrParts = explode(".", sName);
-				let option = this->setRecursion(arrParts ,mixValue);
-				let this->option[strNamespace] = array_merge(this->option[strNamespace], option);
+				let parts = explode(".", name);
+				let option = this->setRecursion(parts ,value);
+				let this->option[namespaces] = array_merge(this->option[namespaces], option);
 			}
 		}
 	}
@@ -175,47 +177,47 @@ class Option implements ArrayAccess, Ioption
 	/**
 	 * 删除配置
 	 *
-	 * @param string $sName 配置键值
+	 * @param string $name 配置键值
 	 * @return string
 	 */
-	public function delete(string sName)
+	public function delete(string name)
 	{
-		var sTempName, sName, arrName, strNamespace, arrParts, option;
+		var tempname, name, names, namespaces, parts, option;
 
-		let arrName = this->parseNamespace(sName);
-		let strNamespace = arrName[0];
-		let sTempName = arrName[1];
-		let sName = sTempName;
+		let names = this->parseNamespace(name);
+		let namespaces = names[0];
+		let tempname = names[1];
+		let name = tempname;
 
-		if sName == "*" {
-			let this->option[strNamespace] = [];
+		if name == "*" {
+			let this->option[namespaces] = [];
 			return;
 		}
 
-		if ! strpos(sName, ".") {
-			if isset this->option[strNamespace][sName] {
-				unset(this->option[strNamespace][sName]);
+		if ! strpos(name, ".") {
+			if isset this->option[namespaces][name] {
+				unset(this->option[namespaces][name]);
 			}
 		} else {
-			let arrParts = explode(".", sName);
-			let option = this->deleteRecursion(arrParts, this->option[strNamespace]);
-			let this->option[strNamespace] = option;		
+			let parts = explode(".", name);
+			let option = this->deleteRecursion(parts, this->option[namespaces]);
+			let this->option[namespaces] = option;		
 		}
 	}
 
 	/**
 	 * 初始化配置参数
 	 *
-	 * @param mixed $mixNamespace
+	 * @param mixed $namespaces
 	 * @return boolean
 	 */
-	public function reset(var mixNamespace = null)
+	public function reset(var namespaces = null)
 	{
-		if typeof mixNamespace == "array" {
-			let this->option = mixNamespace;
-		} elseif typeof mixNamespace == "string" {
-			if isset this->option[mixNamespace] {
-				let this->option[mixNamespace] = [];
+		if typeof namespaces == "array" {
+			let this->option = namespaces;
+		} elseif typeof namespaces == "string" {
+			if isset this->option[namespaces] {
+				let this->option[namespaces] = [];
 			}
 		} else {
 			let this->option = [];
@@ -227,128 +229,128 @@ class Option implements ArrayAccess, Ioption
 	/**
 	 * 判断配置是否存在
 	 *
-	 * @param string $strName
+	 * @param string $name
 	 * @return bool
 	 */
-	public function offsetExists(string strName)
+	public function offsetExists(string name)
 	{
-		return this->has(strName);
+		return this->has(name);
 	}
 
 	/**
 	 * 获取配置
 	 *
-	 * @param string $strName
+	 * @param string $name
 	 * @return mixed
 	 */
-	public function offsetGet(string strName)
+	public function offsetGet(string name)
 	{
-		return this->get(strName);
+		return this->get(name);
 	}
 
 	/**
 	 * 设置配置
 	 *
-	 * @param string $strName
-	 * @param mixed $mixValue
+	 * @param string $name
+	 * @param mixed $value
 	 * @return void
 	 */
-	public function offsetSet(string strName, mixValue)
+	public function offsetSet(string name, value)
 	{
-		return this->set(strName, mixValue);
+		return this->set(name, value);
 	}
 
 	/**
 	 * 删除配置
 	 *
-	 * @param string $strName
+	 * @param string $name
 	 * @return void
 	 */
-	public function offsetUnset(string strName)
+	public function offsetUnset(string name)
 	{
-		this->delete(strName);
+		this->delete(name);
 	}
 
 	/**
 	 * 递归设置配置数据
 	 *
-	 * @param array $arrPart
-	 * @param mixed $mixValue
+	 * @param array $part
+	 * @param mixed $value
 	 * @return array
 	 */
-	protected function setRecursion(array! arrPart, var mixValue = null) -> array
+	protected function setRecursion(array! part, var value = null) -> array
 	{
-		var arrResult = [], sItem;
+		var result = [], item;
 
-		let sItem = array_shift(arrPart);
-        if ! isset arrResult[sItem] {
-            let arrResult[sItem] = [];
+		let item = array_shift(part);
+        if ! isset result[item] {
+            let result[item] = [];
         }
 
-        if !empty arrPart {
-            let arrResult[sItem] = this->setRecursion(arrPart, mixValue);
+        if !empty part {
+            let result[item] = this->setRecursion(part, value);
         } else {
-            let arrResult[sItem] = mixValue;
+            let result[item] = value;
         }
 
-        return arrResult;
+        return result;
 	}
 
 	/**
 	 * 递归删除配置数据
 	 *
-	 * @param array $arrPart
+	 * @param array $part
 	 * @return array
 	 */
-	protected function deleteRecursion(array! arrPart, array! arrResult) -> array
+	protected function deleteRecursion(array! part, array! result) -> array
 	{
-		var sItem;
+		var item;
 
-		let sItem = array_shift(arrPart);
-        if ! isset arrResult[sItem] {
-            return arrResult;
+		let item = array_shift(part);
+        if ! isset result[item] {
+            return result;
         }
 
-        if !empty arrPart {
-            let arrResult[sItem] = this->deleteRecursion(arrPart, arrResult[sItem]);
+        if !empty part {
+            let result[item] = this->deleteRecursion(part, result[item]);
         } else {
-        	if isset arrResult[sItem] {
-				unset(arrResult[sItem]);
+        	if isset result[item] {
+				unset(result[item]);
         	}
         }
 
-        return arrResult;
+        return result;
 	}
 
 	/**
 	 * 分析命名空间
 	 *
-	 * @param string $strName
+	 * @param string $name
 	 * @return array
 	 */
-	protected function parseNamespace(string strName)
+	protected function parseNamespace(string name)
 	{
-		var arrName, sTempName, strNamespace;
+		var names, tempname, namespaces;
 
-		if strpos(strName, "\\") {
-			let arrName = explode("\\", strName);
-			if empty arrName[1] {
-				let arrName[1] = "*";
+		if strpos(name, "\\") {
+			let names = explode("\\", name);
+			if empty names[1] {
+				let names[1] = "*";
 			}
-			let sTempName = arrName[1];
-			let strName = sTempName;
-			let strNamespace = arrName[0];
+			let tempname = names[1];
+			let name = tempname;
+			let namespaces = names[0];
 		} else {
-			let strNamespace = self::DEFAUTL_NAMESPACE;
+			let namespaces = self::DEFAUTL_NAMESPACE;
 		}
 
-		if ! isset this->option[strNamespace] {
-			let this->option[strNamespace] = [];
+		if ! isset this->option[namespaces] {
+			let this->option[namespaces] = [];
 		}
 
 		return [
-			strNamespace,
-			strName
+			namespaces,
+			name
 		];
 	}
 }

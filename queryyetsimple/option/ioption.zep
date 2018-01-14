@@ -32,19 +32,19 @@ interface Ioption
 	/**
 	 * 是否存在配置
 	 *
-	 * @param string $sName 配置键值
+	 * @param string $name 配置键值
 	 * @return string
 	 */
-	public function has(string sName = 'app\\');
+	public function has(string name = 'app\\');
 
 	/**
 	 * 获取配置
 	 *
-	 * @param string $sName 配置键值
-	 * @param mixed $mixDefault 配置默认值
+	 * @param string $name 配置键值
+	 * @param mixed $defaults 配置默认值
 	 * @return string
 	 */
-	public function get(string sName = 'app\\', var mixDefault = null);
+	public function get(string name = 'app\\', var defaults = null);
 
 	/**
 	 * 返回所有配置
@@ -56,25 +56,25 @@ interface Ioption
 	/**
 	 * 设置配置
 	 *
-	 * @param mixed $mixName 配置键值
-	 * @param mixed $mixValue 配置值
+	 * @param mixed $name 配置键值
+	 * @param mixed $value 配置值
 	 * @return array
 	 */
-	public function set(var mixName, var mixValue = null);
+	public function set(var name, var value = null);
 
 	/**
 	 * 删除配置
 	 *
-	 * @param string $sName 配置键值
+	 * @param string $name 配置键值
 	 * @return string
 	 */
-	public function delete(string sName);
+	public function delete(string name);
 
 	/**
 	 * 初始化配置参数
 	 *
-	 * @param mixed $mixNamespace
+	 * @param mixed $namespaces
 	 * @return boolean
 	 */
-	public function reset(var mixNamespace = null);
+	public function reset(var namespaces = null);
 }
