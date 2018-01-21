@@ -21,7 +21,7 @@ namespace Queryyetsimple\Session;
 use RuntimeException;
 use BadMethodCallException;
 use SessionHandlerInterface;
-use Queryyetsimple\Session\Isession;
+use Queryyetsimple\Session\ISession;
 
 /**
  * session 仓储
@@ -31,7 +31,7 @@ use Queryyetsimple\Session\Isession;
  * @since 2018.01.09
  * @version 1.0
  */
-class Session implements Isession
+class Session implements ISession
 {
 
 	/**

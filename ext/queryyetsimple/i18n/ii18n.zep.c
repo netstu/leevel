@@ -13,16 +13,16 @@
 
 
 /**
- * ii18n 接口
+ * II18n 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.06
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_I18n_Ii18n) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_I18n_II18n) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\I18n, Ii18n, queryyetsimple, i18n_ii18n, queryyetsimple_i18n_ii18n_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\I18n, II18n, queryyetsimple, i18n_ii18n, queryyetsimple_i18n_ii18n_method_entry);
 
 	return SUCCESS;
 
@@ -33,14 +33,14 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_I18n_Ii18n) {
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, getText);
+ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_II18n, getText);
 
 /**
  * 获取语言 text
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, __);
+ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_II18n, __);
 
 /**
  * 添加语言包
@@ -49,7 +49,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, __);
  * @param array $data 语言包数据
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, addText);
+ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_II18n, addText);
 
 /**
  * 设置当前语言包上下文环境
@@ -57,12 +57,12 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, addText);
  * @param string $i18n
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, setI18n);
+ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_II18n, setI18n);
 
 /**
  * 获取当前语言包
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_Ii18n, getI18n);
+ZEPHIR_DOC_METHOD(Queryyetsimple_I18n_II18n, getI18n);
 

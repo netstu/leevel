@@ -21,8 +21,8 @@ namespace Queryyetsimple\Log;
 use Monolog\Logger;
 use RuntimeException;
 use InvalidArgumentException;
-use Queryyetsimple\Log\Aconnect;
-use Queryyetsimple\Log\Iconnect;
+use Queryyetsimple\Log\Connect;
+use Queryyetsimple\Log\IConnect;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogHandler;
 use Monolog\Handler\ErrorLogHandler;
@@ -37,7 +37,7 @@ use Monolog\Handler\RotatingFileHandler;
  * @since 2018.01.08
  * @version 1.0
  */
-class Monolog extends Aconnect implements Iconnect
+class Monolog extends Connect implements IConnect
 {
 
 	/**
@@ -68,14 +68,14 @@ class Monolog extends Aconnect implements Iconnect
 	 * @var array
 	 */
 	protected supportLevel = [
-		// ilog::DEBUG : Logger::DEBUG,
-		// ilog::INFO : Logger::INFO,
-		// ilog::NOTICE : Logger::NOTICE,
-		// ilog::WARNING : Logger::WARNING,
-		// ilog::ERROR : Logger::ERROR,
-		// ilog::CRITICAL : Logger::CRITICAL,
-		// ilog::ALERT : Logger::ALERT,
-		// ilog::EMERGENCY : Logger::EMERGENCY
+		// ILog::DEBUG : Logger::DEBUG,
+		// ILog::INFO : Logger::INFO,
+		// ILog::NOTICE : Logger::NOTICE,
+		// ILog::WARNING : Logger::WARNING,
+		// ILog::ERROR : Logger::ERROR,
+		// ILog::CRITICAL : Logger::CRITICAL,
+		// ILog::ALERT : Logger::ALERT,
+		// ILog::EMERGENCY : Logger::EMERGENCY
 		"debug" : 100,
 		"info" : 200,
 		"notice" : 250,
@@ -201,7 +201,7 @@ class Monolog extends Aconnect implements Iconnect
 	 */
 	public function save(array data)
 	{
-		var item, level, level;
+		var item, level;
 
 		let level = array_keys(this->supportLevel);
 

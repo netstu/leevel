@@ -49,8 +49,8 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Option_Option) {
 	 */
 	zephir_declare_class_constant_string(queryyetsimple_option_option_ce, SL("DEFAUTL_NAMESPACE"), "app");
 
-	zend_class_implements(queryyetsimple_option_option_ce TSRMLS_CC, 1, zend_ce_arrayaccess);
 	zend_class_implements(queryyetsimple_option_option_ce TSRMLS_CC, 1, queryyetsimple_option_ioption_ce);
+	zend_class_implements(queryyetsimple_option_option_ce TSRMLS_CC, 1, zend_ce_arrayaccess);
 	return SUCCESS;
 
 }
@@ -58,29 +58,29 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Option_Option) {
 /**
  * 构造函数
  *
- * @param array $options
+ * @param array $option
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Option_Option, __construct) {
 
-	zval *options_param = NULL;
-	zval options;
+	zval *option_param = NULL;
+	zval option;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&options);
+	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &options_param);
+	zephir_fetch_params(1, 0, 1, &option_param);
 
-	if (!options_param) {
-		ZEPHIR_INIT_VAR(&options);
-		array_init(&options);
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
 	} else {
-		zephir_get_arrval(&options, options_param);
+		zephir_get_arrval(&option, option_param);
 	}
 
 
-	zephir_update_property_zval(this_ptr, SL("option"), &options);
+	zephir_update_property_zval(this_ptr, SL("option"), &option);
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -88,22 +88,22 @@ PHP_METHOD(Queryyetsimple_Option_Option, __construct) {
 /**
  * 是否存在配置
  *
- * @param string $sName 配置键值
+ * @param string $name 配置键值
  * @return string
  */
 PHP_METHOD(Queryyetsimple_Option_Option, has) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sName_param = NULL, sTempName, arrName, strNamespace, arrParts, sPart, option, _1, _2, _5, _6, *_7, _0$$3, _3$$4, _4$$4, _8$$5;
-	zval sName;
+	zval *name_param = NULL, tempname, names, namespaces, parts, part, option, _1, _2, _5, _6, *_7, _0$$3, _3$$4, _4$$4, _8$$5;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sName);
-	ZVAL_UNDEF(&sTempName);
-	ZVAL_UNDEF(&arrName);
-	ZVAL_UNDEF(&strNamespace);
-	ZVAL_UNDEF(&arrParts);
-	ZVAL_UNDEF(&sPart);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&tempname);
+	ZVAL_UNDEF(&names);
+	ZVAL_UNDEF(&namespaces);
+	ZVAL_UNDEF(&parts);
+	ZVAL_UNDEF(&part);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -115,53 +115,53 @@ PHP_METHOD(Queryyetsimple_Option_Option, has) {
 	ZVAL_UNDEF(&_8$$5);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &sName_param);
+	zephir_fetch_params(1, 0, 1, &name_param);
 
-	if (!sName_param) {
-		ZEPHIR_INIT_VAR(&sName);
-		ZVAL_STRING(&sName, "app\\");
+	if (!name_param) {
+		ZEPHIR_INIT_VAR(&name);
+		ZVAL_STRING(&name, "app\\");
 	} else {
-		zephir_get_strval(&sName, sName_param);
+		zephir_get_strval(&name, name_param);
 	}
 
 
-	ZEPHIR_CALL_METHOD(&arrName, this_ptr, "parsenamespace", NULL, 0, &sName);
+	ZEPHIR_CALL_METHOD(&names, this_ptr, "parsenamespace", NULL, 0, &name);
 	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(&strNamespace);
-	zephir_array_fetch_long(&strNamespace, &arrName, 0, PH_NOISY, "queryyetsimple/option/option.zep", 71 TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&sTempName);
-	zephir_array_fetch_long(&sTempName, &arrName, 1, PH_NOISY, "queryyetsimple/option/option.zep", 72 TSRMLS_CC);
-	zephir_get_strval(&sName, &sTempName);
-	if (ZEPHIR_IS_STRING(&sName, "*")) {
+	ZEPHIR_OBS_VAR(&namespaces);
+	zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "queryyetsimple/option/option.zep", 71 TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&tempname);
+	zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY, "queryyetsimple/option/option.zep", 72 TSRMLS_CC);
+	zephir_get_strval(&name, &tempname);
+	if (ZEPHIR_IS_STRING(&name, "*")) {
 		zephir_read_property(&_0$$3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		RETURN_MM_BOOL(zephir_array_isset(&_0$$3, &strNamespace));
+		RETURN_MM_BOOL(zephir_array_isset(&_0$$3, &namespaces));
 	}
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, ".");
 	ZEPHIR_INIT_VAR(&_2);
-	zephir_fast_strpos(&_2, &sName, &_1, 0 );
+	zephir_fast_strpos(&_2, &name, &_1, 0 );
 	if (!(zephir_is_true(&_2))) {
 		zephir_read_property(&_3$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_4$$4, &_3$$4, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 80 TSRMLS_CC);
-		RETURN_MM_BOOL(zephir_array_key_exists(&_4$$4, &sName TSRMLS_CC));
+		zephir_array_fetch(&_4$$4, &_3$$4, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 80 TSRMLS_CC);
+		RETURN_MM_BOOL(zephir_array_key_exists(&_4$$4, &name TSRMLS_CC));
 	}
-	ZEPHIR_INIT_VAR(&arrParts);
-	zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&parts);
+	zephir_fast_explode_str(&parts, SL("."), &name, LONG_MAX TSRMLS_CC);
 	zephir_read_property(&_5, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_6, &_5, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 84 TSRMLS_CC);
+	zephir_array_fetch(&_6, &_5, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 84 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&option, &_6);
-	zephir_is_iterable(&arrParts, 0, "queryyetsimple/option/option.zep", 91);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrParts), _7)
+	zephir_is_iterable(&parts, 0, "queryyetsimple/option/option.zep", 92);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&parts), _7)
 	{
-		ZEPHIR_INIT_NVAR(&sPart);
-		ZVAL_COPY(&sPart, _7);
-		if (!(zephir_array_isset(&option, &sPart))) {
+		ZEPHIR_INIT_NVAR(&part);
+		ZVAL_COPY(&part, _7);
+		if (!(zephir_array_isset(&option, &part))) {
 			RETURN_MM_BOOL(0);
 		}
-		zephir_array_fetch(&_8$$5, &option, &sPart, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 89 TSRMLS_CC);
+		zephir_array_fetch(&_8$$5, &option, &part, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 89 TSRMLS_CC);
 		ZEPHIR_CPY_WRT(&option, &_8$$5);
 	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&sPart);
+	ZEPHIR_INIT_NVAR(&part);
 	RETURN_MM_BOOL(1);
 
 }
@@ -169,25 +169,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, has) {
 /**
  * 获取配置
  *
- * @param string $sName 配置键值
- * @param mixed $mixDefault 配置默认值
+ * @param string $name 配置键值
+ * @param mixed $defaults 配置默认值
  * @return string
  */
 PHP_METHOD(Queryyetsimple_Option_Option, get) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sName_param = NULL, *mixDefault = NULL, mixDefault_sub, __$null, sTempName, arrName, strNamespace, arrParts, sPart, option, _2, _3, _9, _10, *_11, _0$$3, _1$$3, _4$$4, _5$$4, _6$$4, _7$$4, _8$$4, _12$$5;
-	zval sName;
+	zval *name_param = NULL, *defaults = NULL, defaults_sub, __$null, tempname, names, namespaces, parts, part, option, _2, _3, _9, _10, *_11, _0$$3, _1$$3, _4$$4, _5$$4, _6$$4, _7$$4, _8$$4, _12$$5;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sName);
-	ZVAL_UNDEF(&mixDefault_sub);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&defaults_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&sTempName);
-	ZVAL_UNDEF(&arrName);
-	ZVAL_UNDEF(&strNamespace);
-	ZVAL_UNDEF(&arrParts);
-	ZVAL_UNDEF(&sPart);
+	ZVAL_UNDEF(&tempname);
+	ZVAL_UNDEF(&names);
+	ZVAL_UNDEF(&namespaces);
+	ZVAL_UNDEF(&parts);
+	ZVAL_UNDEF(&part);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
@@ -203,67 +203,67 @@ PHP_METHOD(Queryyetsimple_Option_Option, get) {
 	ZVAL_UNDEF(&_12$$5);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &sName_param, &mixDefault);
+	zephir_fetch_params(1, 0, 2, &name_param, &defaults);
 
-	if (!sName_param) {
-		ZEPHIR_INIT_VAR(&sName);
-		ZVAL_STRING(&sName, "app\\");
+	if (!name_param) {
+		ZEPHIR_INIT_VAR(&name);
+		ZVAL_STRING(&name, "app\\");
 	} else {
-		zephir_get_strval(&sName, sName_param);
+		zephir_get_strval(&name, name_param);
 	}
-	if (!mixDefault) {
-		mixDefault = &mixDefault_sub;
-		mixDefault = &__$null;
+	if (!defaults) {
+		defaults = &defaults_sub;
+		defaults = &__$null;
 	}
 
 
-	ZEPHIR_CALL_METHOD(&arrName, this_ptr, "parsenamespace", NULL, 0, &sName);
+	ZEPHIR_CALL_METHOD(&names, this_ptr, "parsenamespace", NULL, 0, &name);
 	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(&strNamespace);
-	zephir_array_fetch_long(&strNamespace, &arrName, 0, PH_NOISY, "queryyetsimple/option/option.zep", 106 TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&sTempName);
-	zephir_array_fetch_long(&sTempName, &arrName, 1, PH_NOISY, "queryyetsimple/option/option.zep", 107 TSRMLS_CC);
-	zephir_get_strval(&sName, &sTempName);
-	if (ZEPHIR_IS_STRING(&sName, "*")) {
+	ZEPHIR_OBS_VAR(&namespaces);
+	zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "queryyetsimple/option/option.zep", 107 TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&tempname);
+	zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY, "queryyetsimple/option/option.zep", 108 TSRMLS_CC);
+	zephir_get_strval(&name, &tempname);
+	if (ZEPHIR_IS_STRING(&name, "*")) {
 		zephir_read_property(&_0$$3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_1$$3, &_0$$3, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 111 TSRMLS_CC);
+		zephir_array_fetch(&_1$$3, &_0$$3, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 112 TSRMLS_CC);
 		RETURN_CTOR(&_1$$3);
 	}
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, ".");
 	ZEPHIR_INIT_VAR(&_3);
-	zephir_fast_strpos(&_3, &sName, &_2, 0 );
+	zephir_fast_strpos(&_3, &name, &_2, 0 );
 	if (!(zephir_is_true(&_3))) {
 		ZEPHIR_INIT_VAR(&_4$$4);
 		zephir_read_property(&_5$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_6$$4, &_5$$4, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 115 TSRMLS_CC);
-		if (zephir_array_key_exists(&_6$$4, &sName TSRMLS_CC)) {
+		zephir_array_fetch(&_6$$4, &_5$$4, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 116 TSRMLS_CC);
+		if (zephir_array_key_exists(&_6$$4, &name TSRMLS_CC)) {
 			zephir_read_property(&_7$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_8$$4, &_7$$4, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 115 TSRMLS_CC);
-			zephir_array_fetch(&_4$$4, &_8$$4, &sName, PH_NOISY, "queryyetsimple/option/option.zep", 115 TSRMLS_CC);
+			zephir_array_fetch(&_8$$4, &_7$$4, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 116 TSRMLS_CC);
+			zephir_array_fetch(&_4$$4, &_8$$4, &name, PH_NOISY, "queryyetsimple/option/option.zep", 116 TSRMLS_CC);
 		} else {
-			ZEPHIR_CPY_WRT(&_4$$4, mixDefault);
+			ZEPHIR_CPY_WRT(&_4$$4, defaults);
 		}
 		RETURN_CCTOR(&_4$$4);
 	}
-	ZEPHIR_INIT_VAR(&arrParts);
-	zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&parts);
+	zephir_fast_explode_str(&parts, SL("."), &name, LONG_MAX TSRMLS_CC);
 	zephir_read_property(&_9, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_10, &_9, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 119 TSRMLS_CC);
+	zephir_array_fetch(&_10, &_9, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 120 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&option, &_10);
-	zephir_is_iterable(&arrParts, 0, "queryyetsimple/option/option.zep", 126);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrParts), _11)
+	zephir_is_iterable(&parts, 0, "queryyetsimple/option/option.zep", 128);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&parts), _11)
 	{
-		ZEPHIR_INIT_NVAR(&sPart);
-		ZVAL_COPY(&sPart, _11);
-		if (!(zephir_array_isset(&option, &sPart))) {
-			RETVAL_ZVAL(mixDefault, 1, 0);
+		ZEPHIR_INIT_NVAR(&part);
+		ZVAL_COPY(&part, _11);
+		if (!(zephir_array_isset(&option, &part))) {
+			RETVAL_ZVAL(defaults, 1, 0);
 			RETURN_MM();
 		}
-		zephir_array_fetch(&_12$$5, &option, &sPart, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 124 TSRMLS_CC);
+		zephir_array_fetch(&_12$$5, &option, &part, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 125 TSRMLS_CC);
 		ZEPHIR_CPY_WRT(&option, &_12$$5);
 	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&sPart);
+	ZEPHIR_INIT_NVAR(&part);
 	RETURN_CCTOR(&option);
 
 }
@@ -285,8 +285,8 @@ PHP_METHOD(Queryyetsimple_Option_Option, all) {
 /**
  * 设置配置
  *
- * @param mixed $mixName 配置键值
- * @param mixed $mixValue 配置值
+ * @param mixed $name 配置键值
+ * @param mixed $value 配置值
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Option_Option, set) {
@@ -295,19 +295,17 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 	zend_ulong _1$$3;
 	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *mixName, mixName_sub, *mixValue = NULL, mixValue_sub, __$null, sTempName, sKey, mixValues, sName, arrName, strNamespace, arrParts, option, *_0$$3, _4$$5, _5$$5, _6$$8, _7$$8, _8$$8;
+	zval *name = NULL, name_sub, *value = NULL, value_sub, __$null, key, values, names, namespaces, parts, option, *_0$$3, _4$$5, _5$$5, _6$$8, _7$$8, _8$$8;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&mixName_sub);
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&value_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&sTempName);
-	ZVAL_UNDEF(&sKey);
-	ZVAL_UNDEF(&mixValues);
-	ZVAL_UNDEF(&sName);
-	ZVAL_UNDEF(&arrName);
-	ZVAL_UNDEF(&strNamespace);
-	ZVAL_UNDEF(&arrParts);
+	ZVAL_UNDEF(&key);
+	ZVAL_UNDEF(&values);
+	ZVAL_UNDEF(&names);
+	ZVAL_UNDEF(&namespaces);
+	ZVAL_UNDEF(&parts);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_4$$5);
 	ZVAL_UNDEF(&_5$$5);
@@ -316,59 +314,59 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 	ZVAL_UNDEF(&_8$$8);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &mixName, &mixValue);
+	zephir_fetch_params(1, 1, 1, &name, &value);
 
-	if (!mixValue) {
-		mixValue = &mixValue_sub;
-		mixValue = &__$null;
+	ZEPHIR_SEPARATE_PARAM(name);
+	if (!value) {
+		value = &value_sub;
+		value = &__$null;
 	}
 
 
-	if (Z_TYPE_P(mixName) == IS_ARRAY) {
-		zephir_is_iterable(mixName, 0, "queryyetsimple/option/option.zep", 154);
-		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(mixName), _1$$3, _2$$3, _0$$3)
+	if (Z_TYPE_P(name) == IS_ARRAY) {
+		zephir_is_iterable(name, 0, "queryyetsimple/option/option.zep", 156);
+		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(name), _1$$3, _2$$3, _0$$3)
 		{
-			ZEPHIR_INIT_NVAR(&sKey);
+			ZEPHIR_INIT_NVAR(&key);
 			if (_2$$3 != NULL) { 
-				ZVAL_STR_COPY(&sKey, _2$$3);
+				ZVAL_STR_COPY(&key, _2$$3);
 			} else {
-				ZVAL_LONG(&sKey, _1$$3);
+				ZVAL_LONG(&key, _1$$3);
 			}
-			ZEPHIR_INIT_NVAR(&mixValues);
-			ZVAL_COPY(&mixValues, _0$$3);
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 29, &sKey, &mixValues);
+			ZEPHIR_INIT_NVAR(&values);
+			ZVAL_COPY(&values, _0$$3);
+			ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", &_3, 29, &key, &values);
 			zephir_check_call_status();
 		} ZEND_HASH_FOREACH_END();
-		ZEPHIR_INIT_NVAR(&mixValues);
-		ZEPHIR_INIT_NVAR(&sKey);
+		ZEPHIR_INIT_NVAR(&values);
+		ZEPHIR_INIT_NVAR(&key);
 	} else {
-		ZEPHIR_CALL_METHOD(&arrName, this_ptr, "parsenamespace", NULL, 0, mixName);
+		ZEPHIR_CALL_METHOD(&names, this_ptr, "parsenamespace", NULL, 0, name);
 		zephir_check_call_status();
-		ZEPHIR_OBS_VAR(&strNamespace);
-		zephir_array_fetch_long(&strNamespace, &arrName, 0, PH_NOISY, "queryyetsimple/option/option.zep", 156 TSRMLS_CC);
-		ZEPHIR_OBS_VAR(&sTempName);
-		zephir_array_fetch_long(&sTempName, &arrName, 1, PH_NOISY, "queryyetsimple/option/option.zep", 157 TSRMLS_CC);
-		ZEPHIR_CPY_WRT(&sName, &sTempName);
-		if (ZEPHIR_IS_STRING(&sName, "*")) {
-			zephir_update_property_array(this_ptr, SL("option"), &strNamespace, mixValue TSRMLS_CC);
+		ZEPHIR_OBS_VAR(&namespaces);
+		zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "queryyetsimple/option/option.zep", 158 TSRMLS_CC);
+		ZEPHIR_OBS_NVAR(name);
+		zephir_array_fetch_long(name, &names, 1, PH_NOISY, "queryyetsimple/option/option.zep", 159 TSRMLS_CC);
+		if (ZEPHIR_IS_STRING(name, "*")) {
+			zephir_update_property_array(this_ptr, SL("option"), &namespaces, value TSRMLS_CC);
 			RETURN_MM_NULL();
 		}
 		ZEPHIR_INIT_VAR(&_4$$5);
 		ZVAL_STRING(&_4$$5, ".");
 		ZEPHIR_INIT_VAR(&_5$$5);
-		zephir_fast_strpos(&_5$$5, &sName, &_4$$5, 0 );
+		zephir_fast_strpos(&_5$$5, name, &_4$$5, 0 );
 		if (!(zephir_is_true(&_5$$5))) {
-			zephir_update_property_array_multi(this_ptr, SL("option"), mixValue TSRMLS_CC, SL("zz"), 2, &strNamespace, mixName);
+			zephir_update_property_array_multi(this_ptr, SL("option"), value TSRMLS_CC, SL("zz"), 2, &namespaces, name);
 		} else {
-			ZEPHIR_INIT_VAR(&arrParts);
-			zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
-			ZEPHIR_CALL_METHOD(&option, this_ptr, "setrecursion", NULL, 0, &arrParts, mixValue);
+			ZEPHIR_INIT_VAR(&parts);
+			zephir_fast_explode_str(&parts, SL("."), name, LONG_MAX TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&option, this_ptr, "setrecursion", NULL, 0, &parts, value);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_6$$8);
 			zephir_read_property(&_7$$8, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_8$$8, &_7$$8, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 170 TSRMLS_CC);
+			zephir_array_fetch(&_8$$8, &_7$$8, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 171 TSRMLS_CC);
 			zephir_fast_array_merge(&_6$$8, &_8$$8, &option TSRMLS_CC);
-			zephir_update_property_array(this_ptr, SL("option"), &strNamespace, &_6$$8 TSRMLS_CC);
+			zephir_update_property_array(this_ptr, SL("option"), &namespaces, &_6$$8 TSRMLS_CC);
 		}
 	}
 	ZEPHIR_MM_RESTORE();
@@ -378,20 +376,20 @@ PHP_METHOD(Queryyetsimple_Option_Option, set) {
 /**
  * 删除配置
  *
- * @param string $sName 配置键值
+ * @param string $name 配置键值
  * @return string
  */
 PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval sName, *sName_param = NULL, sTempName, arrName, strNamespace, arrParts, option, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$5, _7$$6, _8$$6;
+	zval name, *name_param = NULL, tempname, names, namespaces, parts, option, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$5, _7$$6, _8$$6;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sName);
-	ZVAL_UNDEF(&sTempName);
-	ZVAL_UNDEF(&arrName);
-	ZVAL_UNDEF(&strNamespace);
-	ZVAL_UNDEF(&arrParts);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&tempname);
+	ZVAL_UNDEF(&names);
+	ZVAL_UNDEF(&namespaces);
+	ZVAL_UNDEF(&parts);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -404,44 +402,44 @@ PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 	ZVAL_UNDEF(&_8$$6);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &sName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&sName, sName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_CALL_METHOD(&arrName, this_ptr, "parsenamespace", NULL, 0, &sName);
+	ZEPHIR_CALL_METHOD(&names, this_ptr, "parsenamespace", NULL, 0, &name);
 	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(&strNamespace);
-	zephir_array_fetch_long(&strNamespace, &arrName, 0, PH_NOISY, "queryyetsimple/option/option.zep", 186 TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&sTempName);
-	zephir_array_fetch_long(&sTempName, &arrName, 1, PH_NOISY, "queryyetsimple/option/option.zep", 187 TSRMLS_CC);
-	ZEPHIR_CPY_WRT(&sName, &sTempName);
-	if (ZEPHIR_IS_STRING(&sName, "*")) {
+	ZEPHIR_OBS_VAR(&namespaces);
+	zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "queryyetsimple/option/option.zep", 187 TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&tempname);
+	zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY, "queryyetsimple/option/option.zep", 188 TSRMLS_CC);
+	ZEPHIR_CPY_WRT(&name, &tempname);
+	if (ZEPHIR_IS_STRING(&name, "*")) {
 		ZEPHIR_INIT_VAR(&_0$$3);
 		array_init(&_0$$3);
-		zephir_update_property_array(this_ptr, SL("option"), &strNamespace, &_0$$3 TSRMLS_CC);
+		zephir_update_property_array(this_ptr, SL("option"), &namespaces, &_0$$3 TSRMLS_CC);
 		RETURN_MM_NULL();
 	}
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, ".");
 	ZEPHIR_INIT_VAR(&_2);
-	zephir_fast_strpos(&_2, &sName, &_1, 0 );
+	zephir_fast_strpos(&_2, &name, &_1, 0 );
 	if (!(zephir_is_true(&_2))) {
 		zephir_read_property(&_3$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_4$$4, &_3$$4, &strNamespace, PH_READONLY, "queryyetsimple/option/option.zep", 196 TSRMLS_CC);
-		if (zephir_array_isset(&_4$$4, &sName)) {
+		zephir_array_fetch(&_4$$4, &_3$$4, &namespaces, PH_READONLY, "queryyetsimple/option/option.zep", 197 TSRMLS_CC);
+		if (zephir_array_isset(&_4$$4, &name)) {
 			zephir_read_property(&_5$$5, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_6$$5, &_5$$5, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 197 TSRMLS_CC);
-			zephir_array_unset(&_6$$5, &sName, PH_SEPARATE);
+			zephir_array_fetch(&_6$$5, &_5$$5, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 198 TSRMLS_CC);
+			zephir_array_unset(&_6$$5, &name, PH_SEPARATE);
 		}
 	} else {
-		ZEPHIR_INIT_VAR(&arrParts);
-		zephir_fast_explode_str(&arrParts, SL("."), &sName, LONG_MAX TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&parts);
+		zephir_fast_explode_str(&parts, SL("."), &name, LONG_MAX TSRMLS_CC);
 		zephir_read_property(&_7$$6, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_8$$6, &_7$$6, &strNamespace, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 201 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&option, this_ptr, "deleterecursion", NULL, 0, &arrParts, &_8$$6);
+		zephir_array_fetch(&_8$$6, &_7$$6, &namespaces, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 202 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&option, this_ptr, "deleterecursion", NULL, 0, &parts, &_8$$6);
 		zephir_check_call_status();
-		zephir_update_property_array(this_ptr, SL("option"), &strNamespace, &option TSRMLS_CC);
+		zephir_update_property_array(this_ptr, SL("option"), &namespaces, &option TSRMLS_CC);
 	}
 	ZEPHIR_MM_RESTORE();
 
@@ -450,37 +448,37 @@ PHP_METHOD(Queryyetsimple_Option_Option, delete) {
 /**
  * 初始化配置参数
  *
- * @param mixed $mixNamespace
+ * @param mixed $namespaces
  * @return boolean
  */
 PHP_METHOD(Queryyetsimple_Option_Option, reset) {
 
-	zval *mixNamespace = NULL, mixNamespace_sub, __$null, _0$$4, _1$$5, _2$$6;
+	zval *namespaces = NULL, namespaces_sub, __$null, _0$$4, _1$$5, _2$$6;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&mixNamespace_sub);
+	ZVAL_UNDEF(&namespaces_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0$$4);
 	ZVAL_UNDEF(&_1$$5);
 	ZVAL_UNDEF(&_2$$6);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &mixNamespace);
+	zephir_fetch_params(1, 0, 1, &namespaces);
 
-	if (!mixNamespace) {
-		mixNamespace = &mixNamespace_sub;
-		mixNamespace = &__$null;
+	if (!namespaces) {
+		namespaces = &namespaces_sub;
+		namespaces = &__$null;
 	}
 
 
-	if (Z_TYPE_P(mixNamespace) == IS_ARRAY) {
-		zephir_update_property_zval(this_ptr, SL("option"), mixNamespace);
-	} else if (Z_TYPE_P(mixNamespace) == IS_STRING) {
+	if (Z_TYPE_P(namespaces) == IS_ARRAY) {
+		zephir_update_property_zval(this_ptr, SL("option"), namespaces);
+	} else if (Z_TYPE_P(namespaces) == IS_STRING) {
 		zephir_read_property(&_0$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		if (zephir_array_isset(&_0$$4, mixNamespace)) {
+		if (zephir_array_isset(&_0$$4, namespaces)) {
 			ZEPHIR_INIT_VAR(&_1$$5);
 			array_init(&_1$$5);
-			zephir_update_property_array(this_ptr, SL("option"), mixNamespace, &_1$$5 TSRMLS_CC);
+			zephir_update_property_array(this_ptr, SL("option"), namespaces, &_1$$5 TSRMLS_CC);
 		}
 	} else {
 		ZEPHIR_INIT_VAR(&_2$$6);
@@ -494,25 +492,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, reset) {
 /**
  * 判断配置是否存在
  *
- * @param string $strName
+ * @param string $name
  * @return bool
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetExists) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *strName_param = NULL;
-	zval strName;
+	zval *name_param = NULL;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
+	ZVAL_UNDEF(&name);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "has", NULL, 0, &strName);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "has", NULL, 0, &name);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -521,25 +519,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetExists) {
 /**
  * 获取配置
  *
- * @param string $strName
+ * @param string $name
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetGet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *strName_param = NULL;
-	zval strName;
+	zval *name_param = NULL;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
+	ZVAL_UNDEF(&name);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "get", NULL, 0, &strName);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "get", NULL, 0, &name);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -548,27 +546,27 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetGet) {
 /**
  * 设置配置
  *
- * @param string $strName
- * @param mixed $mixValue
+ * @param string $name
+ * @param mixed $value
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetSet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *strName_param = NULL, *mixValue, mixValue_sub;
-	zval strName;
+	zval *name_param = NULL, *value, value_sub;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&value_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &strName_param, &mixValue);
+	zephir_fetch_params(1, 2, 0, &name_param, &value);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "set", NULL, 0, &strName, mixValue);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "set", NULL, 0, &name, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -577,25 +575,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetSet) {
 /**
  * 删除配置
  *
- * @param string $strName
+ * @param string $name
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetUnset) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *strName_param = NULL;
-	zval strName;
+	zval *name_param = NULL;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
+	ZVAL_UNDEF(&name);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", NULL, 0, &strName);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", NULL, 0, &name);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -604,120 +602,120 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetUnset) {
 /**
  * 递归设置配置数据
  *
- * @param array $arrPart
- * @param mixed $mixValue
+ * @param array $part
+ * @param mixed $value
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Option_Option, setRecursion) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrPart_param = NULL, *mixValue = NULL, mixValue_sub, __$null, arrResult, sItem, _0$$3, _1$$4;
-	zval arrPart;
+	zval *part_param = NULL, *value = NULL, value_sub, __$null, result, item, _0$$3, _1$$4;
+	zval part;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrPart);
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&part);
+	ZVAL_UNDEF(&value_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&arrResult);
-	ZVAL_UNDEF(&sItem);
+	ZVAL_UNDEF(&result);
+	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_1$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &arrPart_param, &mixValue);
+	zephir_fetch_params(1, 1, 1, &part_param, &value);
 
-	ZEPHIR_OBS_COPY_OR_DUP(&arrPart, arrPart_param);
-	if (!mixValue) {
-		mixValue = &mixValue_sub;
-		mixValue = &__$null;
+	ZEPHIR_OBS_COPY_OR_DUP(&part, part_param);
+	if (!value) {
+		value = &value_sub;
+		value = &__$null;
 	}
 
 
-	ZEPHIR_INIT_VAR(&arrResult);
-	array_init(&arrResult);
-	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 4, &arrPart);
-	ZEPHIR_UNREF(&arrPart);
+	ZEPHIR_INIT_VAR(&result);
+	array_init(&result);
+	ZEPHIR_MAKE_REF(&part);
+	ZEPHIR_CALL_FUNCTION(&item, "array_shift", NULL, 4, &part);
+	ZEPHIR_UNREF(&part);
 	zephir_check_call_status();
-	if (!(zephir_array_isset(&arrResult, &sItem))) {
+	if (!(zephir_array_isset(&result, &item))) {
 		ZEPHIR_INIT_VAR(&_0$$3);
 		array_init(&_0$$3);
-		zephir_array_update_zval(&arrResult, &sItem, &_0$$3, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&result, &item, &_0$$3, PH_COPY | PH_SEPARATE);
 	}
-	if (!(ZEPHIR_IS_EMPTY(&arrPart))) {
-		ZEPHIR_CALL_METHOD(&_1$$4, this_ptr, "setrecursion", NULL, 30, &arrPart, mixValue);
+	if (!(ZEPHIR_IS_EMPTY(&part))) {
+		ZEPHIR_CALL_METHOD(&_1$$4, this_ptr, "setrecursion", NULL, 30, &part, value);
 		zephir_check_call_status();
-		zephir_array_update_zval(&arrResult, &sItem, &_1$$4, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&result, &item, &_1$$4, PH_COPY | PH_SEPARATE);
 	} else {
-		zephir_array_update_zval(&arrResult, &sItem, mixValue, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&result, &item, value, PH_COPY | PH_SEPARATE);
 	}
-	RETURN_CCTOR(&arrResult);
+	RETURN_CCTOR(&result);
 
 }
 
 /**
  * 递归删除配置数据
  *
- * @param array $arrPart
+ * @param array $part
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Option_Option, deleteRecursion) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrPart_param = NULL, *arrResult_param = NULL, sItem, _0$$4, _1$$4;
-	zval arrPart, arrResult;
+	zval *part_param = NULL, *result_param = NULL, item, _0$$4, _1$$4;
+	zval part, result;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrPart);
-	ZVAL_UNDEF(&arrResult);
-	ZVAL_UNDEF(&sItem);
+	ZVAL_UNDEF(&part);
+	ZVAL_UNDEF(&result);
+	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0$$4);
 	ZVAL_UNDEF(&_1$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &arrPart_param, &arrResult_param);
+	zephir_fetch_params(1, 2, 0, &part_param, &result_param);
 
-	ZEPHIR_OBS_COPY_OR_DUP(&arrPart, arrPart_param);
-	ZEPHIR_OBS_COPY_OR_DUP(&arrResult, arrResult_param);
+	ZEPHIR_OBS_COPY_OR_DUP(&part, part_param);
+	ZEPHIR_OBS_COPY_OR_DUP(&result, result_param);
 
 
-	ZEPHIR_MAKE_REF(&arrPart);
-	ZEPHIR_CALL_FUNCTION(&sItem, "array_shift", NULL, 4, &arrPart);
-	ZEPHIR_UNREF(&arrPart);
+	ZEPHIR_MAKE_REF(&part);
+	ZEPHIR_CALL_FUNCTION(&item, "array_shift", NULL, 4, &part);
+	ZEPHIR_UNREF(&part);
 	zephir_check_call_status();
-	if (!(zephir_array_isset(&arrResult, &sItem))) {
-		RETURN_CTOR(&arrResult);
+	if (!(zephir_array_isset(&result, &item))) {
+		RETURN_CTOR(&result);
 	}
-	if (!(ZEPHIR_IS_EMPTY(&arrPart))) {
-		zephir_array_fetch(&_1$$4, &arrResult, &sItem, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 313 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&_0$$4, this_ptr, "deleterecursion", NULL, 31, &arrPart, &_1$$4);
+	if (!(ZEPHIR_IS_EMPTY(&part))) {
+		zephir_array_fetch(&_1$$4, &result, &item, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 314 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&_0$$4, this_ptr, "deleterecursion", NULL, 31, &part, &_1$$4);
 		zephir_check_call_status();
-		zephir_array_update_zval(&arrResult, &sItem, &_0$$4, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&result, &item, &_0$$4, PH_COPY | PH_SEPARATE);
 	} else {
-		if (zephir_array_isset(&arrResult, &sItem)) {
-			zephir_array_unset(&arrResult, &sItem, PH_SEPARATE);
+		if (zephir_array_isset(&result, &item)) {
+			zephir_array_unset(&result, &item, PH_SEPARATE);
 		}
 	}
-	RETURN_CTOR(&arrResult);
+	RETURN_CTOR(&result);
 
 }
 
 /**
  * 分析命名空间
  *
- * @param string $strName
+ * @param string $name
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Option_Option, parseNamespace) {
 
-	zval *strName_param = NULL, arrName, sTempName, strNamespace, _0, _1, _4, _2$$3, _3$$4, _5$$6;
-	zval strName;
+	zval *name_param = NULL, names, tempname, namespaces, _0, _1, _4, _2$$3, _3$$4, _5$$6;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strName);
-	ZVAL_UNDEF(&arrName);
-	ZVAL_UNDEF(&sTempName);
-	ZVAL_UNDEF(&strNamespace);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&names);
+	ZVAL_UNDEF(&tempname);
+	ZVAL_UNDEF(&namespaces);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_4);
@@ -726,41 +724,41 @@ PHP_METHOD(Queryyetsimple_Option_Option, parseNamespace) {
 	ZVAL_UNDEF(&_5$$6);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strName_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
-	zephir_get_strval(&strName, strName_param);
+	zephir_get_strval(&name, name_param);
 
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "\\");
 	ZEPHIR_INIT_VAR(&_1);
-	zephir_fast_strpos(&_1, &strName, &_0, 0 );
+	zephir_fast_strpos(&_1, &name, &_0, 0 );
 	if (zephir_is_true(&_1)) {
-		ZEPHIR_INIT_VAR(&arrName);
-		zephir_fast_explode_str(&arrName, SL("\\"), &strName, LONG_MAX TSRMLS_CC);
-		zephir_array_fetch_long(&_2$$3, &arrName, 1, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 335 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&names);
+		zephir_fast_explode_str(&names, SL("\\"), &name, LONG_MAX TSRMLS_CC);
+		zephir_array_fetch_long(&_2$$3, &names, 1, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 336 TSRMLS_CC);
 		if (ZEPHIR_IS_EMPTY(&_2$$3)) {
 			ZEPHIR_INIT_VAR(&_3$$4);
 			ZVAL_STRING(&_3$$4, "*");
-			zephir_array_update_long(&arrName, 1, &_3$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+			zephir_array_update_long(&names, 1, &_3$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 		}
-		zephir_array_fetch_long(&sTempName, &arrName, 1, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 338 TSRMLS_CC);
-		zephir_get_strval(&strName, &sTempName);
-		ZEPHIR_OBS_VAR(&strNamespace);
-		zephir_array_fetch_long(&strNamespace, &arrName, 0, PH_NOISY, "queryyetsimple/option/option.zep", 340 TSRMLS_CC);
+		zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY | PH_READONLY, "queryyetsimple/option/option.zep", 339 TSRMLS_CC);
+		zephir_get_strval(&name, &tempname);
+		ZEPHIR_OBS_VAR(&namespaces);
+		zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "queryyetsimple/option/option.zep", 341 TSRMLS_CC);
 	} else {
-		ZEPHIR_INIT_NVAR(&strNamespace);
-		ZVAL_STRING(&strNamespace, "app");
+		ZEPHIR_INIT_NVAR(&namespaces);
+		ZVAL_STRING(&namespaces, "app");
 	}
 	zephir_read_property(&_4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_array_isset(&_4, &strNamespace))) {
+	if (!(zephir_array_isset(&_4, &namespaces))) {
 		ZEPHIR_INIT_VAR(&_5$$6);
 		array_init(&_5$$6);
-		zephir_update_property_array(this_ptr, SL("option"), &strNamespace, &_5$$6 TSRMLS_CC);
+		zephir_update_property_array(this_ptr, SL("option"), &namespaces, &_5$$6 TSRMLS_CC);
 	}
 	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(return_value, &strNamespace);
-	zephir_array_fast_append(return_value, &strName);
+	zephir_array_fast_append(return_value, &namespaces);
+	zephir_array_fast_append(return_value, &name);
 	RETURN_MM();
 
 }

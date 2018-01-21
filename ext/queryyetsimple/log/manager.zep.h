@@ -9,15 +9,15 @@ PHP_METHOD(Queryyetsimple_Log_Manager, makeConnectFile);
 PHP_METHOD(Queryyetsimple_Log_Manager, makeConnectMonolog);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_manager_createconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, objConnect)
+	ZEND_ARG_INFO(0, connect)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_manager_makeconnectfile, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_manager_makeconnectmonolog, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_log_manager_method_entry) {

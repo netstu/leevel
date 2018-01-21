@@ -16,31 +16,31 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse);
 zend_object *zephir_init_properties_Queryyetsimple_Pipeline_Pipeline(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline___construct, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objContainer, Queryyetsimple\\Support\\Icontainer, 0)
+	ZEND_ARG_OBJ_INFO(0, container, Queryyetsimple\\Support\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_send, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixPassed)
+	ZEND_ARG_INFO(0, passed)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_through, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixStage)
+	ZEND_ARG_INFO(0, stage)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_then, 0, 0, 0)
-	ZEND_ARG_INFO(0, calEnd)
+	ZEND_ARG_INFO(0, end)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_stagegenerator, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrStage, 0)
+	ZEND_ARG_ARRAY_INFO(0, stage, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_stagecallback, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixStage)
+	ZEND_ARG_INFO(0, stages)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_pipeline_pipeline_parse, 0, 0, 1)
-	ZEND_ARG_INFO(0, strStage)
+	ZEND_ARG_INFO(0, stage)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_pipeline_pipeline_method_entry) {

@@ -26,7 +26,7 @@ namespace Queryyetsimple\Pipeline;
  * @since 2018.01.05
  * @version 1.0
  */
-interface Ipipeline
+interface IPipeline
 {
 
 	/**

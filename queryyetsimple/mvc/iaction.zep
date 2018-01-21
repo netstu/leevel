@@ -18,24 +18,24 @@
  */
 namespace Queryyetsimple\Mvc;
 
-use Queryyetsimple\Mvc\Icontroller;
+use Queryyetsimple\Mvc\IController;
 
 /**
- * iaction 接口
+ * IAction 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-interface Iaction
+interface IAction
 {
 
 	/**
 	 * 设置父控制器
 	 *
-	 * @param \queryyetsimple\mvc\icontroller $controller
+	 * @param \Queryyetsimple\Mvc\IController $controller
 	 * @return $this
 	 */
-	public function setController(<Icontroller> controller);
+	public function setController(<IController> controller);
 }

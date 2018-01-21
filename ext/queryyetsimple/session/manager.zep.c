@@ -51,27 +51,27 @@ PHP_METHOD(Queryyetsimple_Session_Manager, getOptionNamespace) {
 /**
  * 创建连接对象
  *
- * @param object $objConnect
+ * @param object $connect
  * @return object
  */
 PHP_METHOD(Queryyetsimple_Session_Manager, createConnect) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *objConnect, objConnect_sub, _0;
+	zval *connect, connect_sub, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&objConnect_sub);
+	ZVAL_UNDEF(&connect_sub);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &objConnect);
+	zephir_fetch_params(1, 1, 0, &connect);
 
 
 
 	object_init_ex(return_value, queryyetsimple_session_session_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptioncommon", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 34, objConnect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 34, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -80,25 +80,25 @@ PHP_METHOD(Queryyetsimple_Session_Manager, createConnect) {
 /**
  * 创建 cookie 缓存
  *
- * @param array $arrOption
+ * @param array $options
  * @return null
  */
 PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectCookie) {
 
-	zval *arrOption_param = NULL;
-	zval arrOption;
+	zval *options_param = NULL;
+	zval options;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&options);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &options_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!options_param) {
+		ZEPHIR_INIT_VAR(&options);
+		array_init(&options);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&options, options_param);
 	}
 
 
@@ -109,29 +109,29 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectCookie) {
 /**
  * 创建 memcache 缓存
  *
- * @param array $arrOption
- * @return \queryyetsimple\session\memcache
+ * @param array $options
+ * @return \Queryyetsimple\Session\memcache
  */
 PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectMemcache) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrOption_param = NULL, _1, _2;
-	zval arrOption;
+	zval *options_param = NULL, _1, _2;
+	zval options;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&options);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &options_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!options_param) {
+		ZEPHIR_INIT_VAR(&options);
+		array_init(&options);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&options, options_param);
 	}
 
 
@@ -142,7 +142,7 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectMemcache) {
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
 		ZVAL_STRING(&_2, "memcache");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &arrOption);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &options);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
 		zephir_check_call_status();
@@ -154,29 +154,29 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectMemcache) {
 /**
  * 创建 redis 缓存
  *
- * @param array $arrOption
- * @return \queryyetsimple\session\redis
+ * @param array $options
+ * @return \Queryyetsimple\Session\redis
  */
 PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectRedis) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrOption_param = NULL, _1, _2;
-	zval arrOption;
+	zval *options_param = NULL, _1, _2;
+	zval options;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&options);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &arrOption_param);
+	zephir_fetch_params(1, 0, 1, &options_param);
 
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!options_param) {
+		ZEPHIR_INIT_VAR(&options);
+		array_init(&options);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+		zephir_get_arrval(&options, options_param);
 	}
 
 
@@ -187,7 +187,7 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectRedis) {
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
 		ZVAL_STRING(&_2, "redis");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &arrOption);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &options);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
 		zephir_check_call_status();
@@ -199,27 +199,27 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectRedis) {
 /**
  * 读取连接配置
  *
- * @param string $strConnect
+ * @param string $connect
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Session_Manager, getOptionConnect) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_1 = NULL;
-	zval *strConnect_param = NULL, _0;
-	zval strConnect;
+	zval *connect_param = NULL, _0;
+	zval connect;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strConnect);
+	ZVAL_UNDEF(&connect);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &strConnect_param);
+	zephir_fetch_params(1, 1, 0, &connect_param);
 
-	zephir_get_strval(&strConnect, strConnect_param);
+	zephir_get_strval(&connect, connect_param);
 
 
-	ZEPHIR_CALL_PARENT(&_0, queryyetsimple_session_manager_ce, getThis(), "getoptionconnect", &_1, 0, &strConnect);
+	ZEPHIR_CALL_PARENT(&_0, queryyetsimple_session_manager_ce, getThis(), "getoptionconnect", &_1, 0, &connect);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "optionfilternull", NULL, 0, &_0);
 	zephir_check_call_status();

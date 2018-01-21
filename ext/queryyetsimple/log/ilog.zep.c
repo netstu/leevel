@@ -13,16 +13,16 @@
 
 
 /**
- * ilog 接口
+ * ILog 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.07
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Ilog) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Log_ILog) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Log, Ilog, queryyetsimple, log_ilog, queryyetsimple_log_ilog_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Log, ILog, queryyetsimple, log_ilog, queryyetsimple_log_ilog_method_entry);
 
 	/**
 	 * debug
@@ -94,57 +94,57 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Ilog) {
 /**
  * 记录错误消息并写入
  *
- * @param string $strLevel 日志类型
- * @param string $strMessage 应该被记录的错误信息
- * @param array $arrContext
+ * @param string $level 日志类型
+ * @param string $message 应该被记录的错误信息
+ * @param array $context
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, write);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, write);
 
 /**
  * 保存日志信息
  *
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, save);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, save);
 
 /**
  * 注册日志过滤器
  *
- * @param callable $calFilter
+ * @param callable $filter
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, registerFilter);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, registerFilter);
 
 /**
  * 注册日志处理器
  *
- * @param callable $calProcessor
+ * @param callable $processor
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, registerProcessor);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, registerProcessor);
 
 /**
  * 清理日志记录
  *
- * @param string $strLevel
+ * @param string $level
  * @return int
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, clear);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, clear);
 
 /**
  * 获取日志记录
  *
- * @param string $strLevel
+ * @param string $level
  * @return array
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, get);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, get);
 
 /**
  * 获取日志记录数量
  *
- * @param string $strLevel
+ * @param string $level
  * @return int
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Log_Ilog, count);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Log_ILog, count);
 

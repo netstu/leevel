@@ -16,39 +16,40 @@ PHP_METHOD(Queryyetsimple_Mvc_View, checkTheme);
 PHP_METHOD(Queryyetsimple_Mvc_View, responseHeader);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view___construct, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objTheme, Queryyetsimple\\View\\Iview, 0)
+	ZEND_ARG_OBJ_INFO(0, theme, Queryyetsimple\\View\\IView, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_switchview, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objTheme, Queryyetsimple\\View\\Iview, 0)
-	ZEND_ARG_INFO(0, booForever)
+	ZEND_ARG_OBJ_INFO(0, theme, Queryyetsimple\\View\\IView, 0)
+	ZEND_ARG_INFO(0, foreverSwitch)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_setresponsefactory, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, calResponseFactory, Closure, 0)
+	ZEND_ARG_OBJ_INFO(0, responseFactory, Closure, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_assign, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixName)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_getassign, 0, 0, 0)
-	ZEND_ARG_INFO(0, sName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_deleteassign, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_display, 0, 0, 0)
-	ZEND_ARG_INFO(0, sFile)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_INFO(0, file)
+	ZEND_ARG_ARRAY_INFO(0, vars, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_view_responseheader, 0, 0, 0)
-	ZEND_ARG_INFO(0, strContentType)
-	ZEND_ARG_INFO(0, strCharset)
+	ZEND_ARG_INFO(0, contentType)
+	ZEND_ARG_INFO(0, charset)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_mvc_view_method_entry) {

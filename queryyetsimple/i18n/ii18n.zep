@@ -19,14 +19,14 @@
 namespace Queryyetsimple\I18n;
 
 /**
- * ii18n 接口
+ * II18n 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.06
  * @version 1.0
  */
-interface Ii18n
+interface II18n
 {
 
     /**

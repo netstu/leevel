@@ -20,9 +20,9 @@
  * @since 2018.01.05
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Ipipeline) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_IPipeline) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Pipeline, Ipipeline, queryyetsimple, pipeline_ipipeline, queryyetsimple_pipeline_ipipeline_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Pipeline, IPipeline, queryyetsimple, pipeline_ipipeline, queryyetsimple_pipeline_ipipeline_method_entry);
 
 	return SUCCESS;
 
@@ -33,29 +33,29 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Ipipeline) {
  *
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_Ipipeline, reset);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, reset);
 
 /**
  * 将传输对象传入管道
  *
- * @param mixed $mixPassed
+ * @param mixed $passed
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_Ipipeline, send);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, send);
 
 /**
  * 设置管道中的执行工序
  *
- * @param dynamic|array $mixStage
+ * @param dynamic|array $stage
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_Ipipeline, through);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, through);
 
 /**
  * 执行管道工序响应结果
  *
- * @param callable $calEnd
+ * @param callable $end
  * @return mixed
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_Ipipeline, then);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, then);
 

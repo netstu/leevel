@@ -20,9 +20,9 @@
  * @since 2017.12.24
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Option_Ioption) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Option_IOption) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Option, Ioption, queryyetsimple, option_ioption, queryyetsimple_option_ioption_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Option, IOption, queryyetsimple, option_ioption, queryyetsimple_option_ioption_method_entry);
 
 	return SUCCESS;
 
@@ -31,49 +31,49 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Option_Ioption) {
 /**
  * 是否存在配置
  *
- * @param string $sName 配置键值
+ * @param string $name 配置键值
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, has);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, has);
 
 /**
  * 获取配置
  *
- * @param string $sName 配置键值
- * @param mixed $mixDefault 配置默认值
+ * @param string $name 配置键值
+ * @param mixed $defaults 配置默认值
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, get);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, get);
 
 /**
  * 返回所有配置
  *
  * @return array
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, all);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, all);
 
 /**
  * 设置配置
  *
- * @param mixed $mixName 配置键值
- * @param mixed $mixValue 配置值
+ * @param mixed $name 配置键值
+ * @param mixed $value 配置值
  * @return array
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, set);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, set);
 
 /**
  * 删除配置
  *
- * @param string $sName 配置键值
+ * @param string $name 配置键值
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, delete);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, delete);
 
 /**
  * 初始化配置参数
  *
- * @param mixed $mixNamespace
+ * @param mixed $namespaces
  * @return boolean
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Option_Ioption, reset);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Option_IOption, reset);
 

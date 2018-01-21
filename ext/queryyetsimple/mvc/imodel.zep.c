@@ -13,16 +13,16 @@
 
 
 /**
- * imodel 接口
+ * IModel 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.07.10
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Imodel) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_IModel) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Mvc, Imodel, queryyetsimple, mvc_imodel, NULL);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Mvc, IModel, queryyetsimple, mvc_imodel, NULL);
 
 	/**
 	 * 批量查找前事件

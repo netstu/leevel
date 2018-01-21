@@ -19,21 +19,21 @@
 namespace Queryyetsimple\Support;
 
 /**
- * ijson 接口
+ * IJson 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-interface Ijson
+interface IJson
 {
 
     /**
      * 对象转 JSON
      *
-     * @param integer $intOption
+     * @param integer $option
      * @return string
      */
-    public function toJson($intOption = JSON_UNESCAPED_UNICODE);
+    public function toJson($option = JSON_UNESCAPED_UNICODE);
 }

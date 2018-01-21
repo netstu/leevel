@@ -20,10 +20,11 @@ namespace Queryyetsimple\View;
 
 use Closure;
 use Queryyetsimple\View\View;
-use queryyetsimple\View\Html;
+use Queryyetsimple\View\Html;
+use Queryyetsimple\View\Twig;
 use Queryyetsimple\View\Phpui;
 use Queryyetsimple\View\V8 as V8s;
-use Queryyetsimple\Support\Manager as support_manager;
+use Queryyetsimple\Support\Manager as SupportManager;
 
 /**
  * view 入口
@@ -33,7 +34,7 @@ use Queryyetsimple\Support\Manager as support_manager;
  * @since 2018.01.12
  * @version 1.0
  */
-class Manager extends support_manager
+class Manager extends SupportManager
 {
 
     /**
@@ -61,31 +62,55 @@ class Manager extends support_manager
      * 创建 html 模板驱动
      *
      * @param array $options
-     * @return \queryyetsimple\view\html
+     * @return \Queryyetsimple\View\Html
      */
 	protected function makeConnectHtml(array options = [])
 	{
-		var parser;
+		var parser, html;
 
 		let options = this->getOption("html", options);
 		let options = array_merge(options, this->viewOptionCommon());
 
 		let parser = Closure::fromCallable([this, "makeParserClosure"]);
-		Html::setParseResolver(parser);
 
-		return new Html(options);
+		let html = new Html(options);
+		html->setParseResolver(parser);
+
+		return html;
+	}
+
+	/**
+     * 创建 twig 模板驱动
+     *
+     * @param array $options
+     * @return \Queryyetsimple\View\Twig
+     */
+	protected function makeConnectTwig(array options = [])
+	{
+		var parser, twig;
+
+		let options = this->getOption("twig", options);
+		let options = array_merge(options, this->viewOptionCommon());
+
+		let parser = Closure::fromCallable([this, "makeTwigParserClosure"]);
+
+		let twig = new Twig(options);
+		twig->setParseResolver(parser);
+
+		return twig;
 	}
 
     /**
      * 创建 phpui 模板驱动
      *
      * @param array $options
-     * @return \queryyetsimple\view\phpui
+     * @return \Queryyetsimple\View\Phpui
      */
 	protected function makeConnectPhpui(array options = [])
 	{
 		let options = this->getOption("phpui", options);
 		let options = array_merge(options, this->viewOptionCommon());
+
 		return new Phpui(options);
 	}
 
@@ -93,7 +118,7 @@ class Manager extends support_manager
      * 创建 v8 模板驱动
      *
      * @param array $options
-     * @return \queryyetsimple\view\vue
+     * @return \Queryyetsimple\View\Vue
      */
 	protected function makeConnectV8(array options = [])
 	{
@@ -115,7 +140,7 @@ class Manager extends support_manager
 			"development" : this->container->development(),
 			"controller_name" : this->container->make("controller_name"),
 			"action_name" : this->container->make("action_name"),
-			"theme_path" : this->container->pathApplicationDir("theme") . "/" . this->container->make("option")->get("view\theme_name"),
+			"theme_path" : this->container->pathApplicationDir("theme") . "/" . this->container->make("option")->get("view\\theme_name"),
 
 			// 仅 html 模板需要缓存路径
 			"theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . this->container->make("app_name")
@@ -132,5 +157,15 @@ class Manager extends support_manager
 	 */
 	protected function makeParserClosure() {
 		return this->container->make("view.parser");
+	}
+
+	/**
+	 * 创建 twig 分析器回调
+	 *
+	 * @since 2018.01.15
+	 * @return void
+	 */
+	protected function makeTwigParserClosure() {
+		return this->container->make("view.twig.parser");
 	}
 }

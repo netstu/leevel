@@ -20,9 +20,8 @@ namespace Queryyetsimple\Mvc;
 
 use Closure;
 use RuntimeException;
-use Queryyetsimple\Mvc\Iview;
-use Queryyetsimple\View\Itheme;
-use Queryyetsimple\View\Iview as view_iview;
+use Queryyetsimple\Mvc\IView;
+use Queryyetsimple\View\IView as ViewIView;
 
 /**
  * 视图
@@ -32,20 +31,20 @@ use Queryyetsimple\View\Iview as view_iview;
  * @since 2018.01.02
  * @version 1.0
  */
-class View implements Iview
+class View implements IView
 {
 
 	/**
 	 * 视图模板
 	 *
-	 * @var \queryyessimple\view\iview
+	 * @var \Queryyessimple\View\IView
 	 */
 	protected theme;
 
 	/**
      * 备份视图模板
      *
-     * @var \queryyessimple\view\iview
+     * @var \Queryyessimple\View\IView
      */
     protected backupTheme;
 
@@ -66,17 +65,17 @@ class View implements Iview
 	/**
 	 * 响应
 	 *
-	 * @var \queryyetsimple\http\response
+	 * @var \Queryyetsimple\Http\Response
 	 */
 	protected response;
 
 	/**
 	 * 构造函数
 	 *
-	 * @param \queryyetsimple\view\iview $theme
+	 * @param \Queryyetsimple\View\IView $theme
 	 * @return void
 	 */
-	public function __construct(<view_iview> theme)
+	public function __construct(<ViewIView> theme)
 	{
 		let this->theme = theme;
 	}
@@ -84,11 +83,11 @@ class View implements Iview
 	/**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $theme
+     * @param \Queryyetsimple\View\IView $theme
      * @param boolean $foreverSwitch
      * @return $this
      */
-    public function switchView(<view_iview> theme, boolean foreverSwitch = false)
+    public function switchView(<ViewIView> theme, boolean foreverSwitch = false)
     {
     	var assign;
 
@@ -120,7 +119,7 @@ class View implements Iview
 	/**
 	 * 获取响应
 	 *
-	 * @return \queryyetsimple\http\response $response
+	 * @return \Queryyetsimple\Http\Response $response
 	 */
 	public function getResponse()
 	{
@@ -195,29 +194,31 @@ class View implements Iview
 	 * 加载视图文件
 	 *
 	 * @param string $file
+	 * @param array $vars
 	 * @param array $option
 	 * @sub string charset 编码
 	 * @sub string content_type 内容类型
 	 * @return string
 	 */
-	public function display(string file = null, array option = [])
+	public function display(string file = null, array! vars = [], array option = [])
 	{
-		var arrInitOption, result;
+		var initOption, result, ext;
 
 		this->checkTheme();
 
-		let arrInitOption = [
+		let initOption = [
 			"charset" : "utf-8",
 			"content_type" : "text/html"
 		];
 		if empty option {
 			let option = [];
 		}
-		let option = array_merge(arrInitOption, option);
+		let option = array_merge(initOption, option);
 
 		this->responseHeader(option["content_type"], option["charset"]);
 
-		let result = this->theme->display(file, false);
+		let ext = isset(option["ext"]) ? option["ext"] : "";
+		let result = this->theme->display(file, vars, ext, false);
 
 		if this->foreverSwitch === false {
             let this->theme = this->backupTheme;

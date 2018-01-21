@@ -19,9 +19,9 @@
 namespace Queryyetsimple\Mvc;
 
 use RuntimeException;
-use Queryyetsimple\Mvc\Iview;
+use Queryyetsimple\Mvc\IView;
 use Queryyetsimple\Router\Router;
-use Queryyetsimple\View\Iview as view_iview;
+use Queryyetsimple\View\IView as ViewIView;
 
 /**
  * 基类控制器
@@ -31,20 +31,20 @@ use Queryyetsimple\View\Iview as view_iview;
  * @since 2017.12.24
  * @version 1.0
  */
-abstract class Controller implements Icontroller
+abstract class Controller implements IController
 {
 
 	/**
 	 * 视图
 	 *
-	 * @var \queryyetsimple\mvc\iview
+	 * @var \Queryyetsimple\Mvc\IView
 	 */
 	protected view;
 
 	/**
 	 * 视图
 	 *
-	 * @var \queryyetsimple\router\router
+	 * @var \Queryyetsimple\Router\Router
 	 */
 	protected router;
 
@@ -60,10 +60,10 @@ abstract class Controller implements Icontroller
 	/**
 	 * 设置视图
 	 *
-	 * @param \queryyetsimple\mvc\iview $view
+	 * @param \Queryyetsimple\Mvc\IView $view
 	 * @return $this
 	 */
-	public function setView(<Iview> view)
+	public function setView(<IView> view)
 	{
 		let this->view = view;
 		return this;
@@ -72,7 +72,7 @@ abstract class Controller implements Icontroller
 	/**
 	 * 设置路由
 	 *
-	 * @param \queryyetsimple\router\router $router
+	 * @param \Queryyetsimple\Router\Router $router
 	 * @return $this
 	 */
 	public function setRouter(<Router> router)
@@ -112,11 +112,11 @@ abstract class Controller implements Icontroller
     /**
      * 切换视图
      *
-     * @param \queryyetsimple\view\iview $theme
+     * @param \Queryyetsimple\View\IView $theme
      * @param boolean $forever
      * @return $this
      */
-    public function switchView(<view_iview> theme, boolean forever = false)
+    public function switchView(<ViewIView> theme, boolean forever = false)
     {
         this->checkView();
         this->view->switchView(theme, forever);
@@ -183,15 +183,16 @@ abstract class Controller implements Icontroller
 	 * 加载视图文件
 	 *
 	 * @param string $file
+	 * @param array $vars
 	 * @param array $option
 	 * @sub string charset 编码
 	 * @sub string content_type 类型
 	 * @return string
 	 */
-	public function display(string file = null, array option = [])
+	public function display(string file = null, array! vars = [], array option = [])
 	{
 		this->checkView();
-		return this->view->display(file, option);
+		return this->view->display(file, vars, option);
 	}
 
 	/**

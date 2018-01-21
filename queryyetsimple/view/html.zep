@@ -20,8 +20,8 @@ namespace Queryyetsimple\View;
 
 use RuntimeException;
 use InvalidArgumentException;
-use Queryyetsimple\View\Aconnect;
-use Queryyetsimple\View\Iconnect;
+use Queryyetsimple\View\Connect;
+use Queryyetsimple\View\IConnect;
 
 /**
  * html 模板处理类
@@ -31,29 +31,29 @@ use Queryyetsimple\View\Iconnect;
  * @since 2016.11.18
  * @version 1.0
  */
-class Html extends Aconnect implements Iconnect
+class Html extends Connect implements IConnect
 {
 
 	/**
 	 * 视图分析器
 	 *
-	 * @var \queryyetsimple\view\iparser
+	 * @var \Queryyetsimple\View\IParserr
 	 */
-	protected objParse;
+	protected parser;
 
 	/**
-	 * 解析 parse
+	 * 解析 parser
 	 *
 	 * @var callable
 	 */
-	protected static calParseResolver;
+	protected parserResolver;
 
 	/**
 	 * 配置
 	 *
 	 * @var array
 	 */
-	protected arrOption = [
+	protected option = [
 		"development" : false,
 		"controller_name" : "index",
 		"action_name" : "index",
@@ -63,119 +63,125 @@ class Html extends Aconnect implements Iconnect
 		"theme_path_default" : "",
 		"suffix" : ".html",
 		"theme_cache_path" : "",
-		"cache_children" : false
+		"cache_children" : false,
+		"cache_lifetime" : 2592000
 	];
 
 	/**
 	 * 加载视图文件
 	 *
-	 * @param string $sFile 视图文件地址
-	 * @param boolean $bDisplay 是否显示
-	 * @param string $strExt 后缀
+	 * @param string $file 视图文件地址
+	 * @param array $vars
+	 * @param boolean $display 是否显示
+	 * @param string $ext 后缀
 	 * @return string
 	 */
-	public function display(string sFile, boolean bDisplay = true, string strExt = "")
+	public function display(string file, array! vars = [], string ext = "", boolean display = true)
 	{
-		var sCachePath, sReturn, strVarKey, mixVarValue;
+		var cachepath, result, key, value;
 
 		// 加载视图文件
-		let sFile = this->parseDisplayFile(sFile, strExt);
+		let file = this->parseDisplayFile(file, ext);
 
 		// 变量赋值
-		if ! empty this->arrVar {
-			for strVarKey, mixVarValue in this->arrVar {
-				let {strVarKey} = mixVarValue;
+		if typeof vars == "array" {
+            this->setVar(vars);
+        }
+
+		if ! empty this->vars {
+			for key, value in this->vars {
+				let {key} = value;
 			}
 		}
 
-		let sCachePath = this->getCachePath(sFile); // 编译文件路径
+		let cachepath = this->getCachePath(file); // 编译文件路径
 
-		if this->isCacheExpired(sFile, sCachePath) { // 重新编译
-			this->parser()->doCombile(sFile, sCachePath);
+		if this->isCacheExpired(file, cachepath) { // 重新编译
+			this->parser()->doCombile(file, cachepath);
 		}
 
 		// 返回类型
-		if bDisplay === false {
+		if display === false {
 			ob_start();
-			require sCachePath;
-			let sReturn = ob_get_contents();
+			require cachepath;
+			let result = ob_get_contents();
 			ob_end_clean();
 
-			return sReturn;
+			return result;
 		} else {
-			require sCachePath;
+			require cachepath;
 		}
 	}
 
 	/**
-	 * 设置 parse 解析回调
+	 * 设置 parser 解析回调
 	 *
-	 * @param callable $calParseResolver
+	 * @param callable $parserResolver
 	 * @return void
 	 */
-	public static function setParseResolver(calParseResolver)
+	public function setParseResolver(parserResolver)
 	{
-		let self::calParseResolver = calParseResolver;
+		let this->parserResolver = parserResolver;
 	}
 
 	/**
-	 * 解析 parse
+	 * 解析 parser
 	 *
-	 * @return \queryyetsimple\view\iparser
+	 * @return \Queryyetsimple\View\IParserr
 	 */
-	public function resolverParse()
+	public function resolverParser()
 	{
-		if ! self::calParseResolver {
-			throw new RuntimeException("Theme not set parse resolver");
+		if ! this->parserResolver {
+			throw new RuntimeException("Html theme not set parser resolver");
 		}
-		return call_user_func(self::calParseResolver);
+		return call_user_func(this->parserResolver);
 	}
 
 	/**
 	 * 获取分析器
 	 *
-	 * @return \queryyetsimple\view\iparser
+	 * @return \Queryyetsimple\View\IParserr
 	 */
 	public function parser()
 	{
-		if typeof this->objParse != "null" {
-			return this->objParse;
+		if typeof this->parser != "null" {
+			return this->parser;
 		}
 
-		let this->objParse = this->resolverParse();
-		return this->objParse;
+		let this->parser = this->resolverParser();
+		return this->parser;
 	}
 
 	/**
 	 * 获取编译路径
 	 *
-	 * @param string $sFile
+	 * @param string $file
 	 * @return string
 	 */
-	protected function getCachePath(string sFile)
+	protected function getCachePath(string file)
 	{
 		if ! this->getOption("theme_cache_path") {
 			throw new RuntimeException("Theme cache path must be set");
 		}
 
 		// 统一斜线
-		let sFile = str_replace("//", "/", str_replace("\\", "/", sFile));
+		let file = str_replace("//", "/", str_replace("\\", "/", file));
 
 		// 统一缓存文件
-		let sFile = basename(sFile, "." . pathinfo(sFile, PATHINFO_EXTENSION)) . "." . md5(sFile) . ".php";
+		let file = basename(file, "." . pathinfo(file, PATHINFO_EXTENSION)) . "." . md5(file) . ".php";
 
 		// 返回真实路径
-		return this->getOption("theme_cache_path") . "/" . sFile;
+		return this->getOption("theme_cache_path") . "/" . file;
 	}
 
 	/**
 	 * 判断缓存是否过期
 	 *
-	 * @param string $sFile
-	 * @param string $sCachePath
+	 * @param string $file
+	 * @param string $cachepath
 	 * @return boolean
 	 */
-	protected function isCacheExpired(string sFile, string sCachePath)
+	protected function isCacheExpired(string file, string cachepath)
 	{
 		// 开启调试
 		if this->getOption("app_development") {
@@ -183,7 +189,7 @@ class Html extends Aconnect implements Iconnect
 		}
 
 		// 缓存文件不存在过期
-		if ! is_file(sCachePath) {
+		if ! is_file(cachepath) {
 			return true;
 		}
 
@@ -193,12 +199,12 @@ class Html extends Aconnect implements Iconnect
 		}
 
 		// 缓存时间到期
-		if filemtime(sCachePath) + intval(this->getOption("cache_lifetime")) < time() {
+		if filemtime(cachepath) + intval(this->getOption("cache_lifetime")) < time() {
 			return true;
 		}
 
 		// 文件有更新
-		if filemtime(sFile) >= filemtime(sCachePath) {
+		if filemtime(file) >= filemtime(cachepath) {
 			return true;
 		}
 

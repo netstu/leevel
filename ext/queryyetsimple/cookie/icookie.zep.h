@@ -1,7 +1,7 @@
 
 extern zend_class_entry *queryyetsimple_cookie_icookie_ce;
 
-ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie_Icookie);
+ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie_ICookie);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_cookie_icookie_set, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
@@ -63,15 +63,15 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_cookie_icookie_clear, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_cookie_icookie_method_entry) {
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, set, arginfo_queryyetsimple_cookie_icookie_set)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, put, arginfo_queryyetsimple_cookie_icookie_put)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, push, arginfo_queryyetsimple_cookie_icookie_push)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, merge, arginfo_queryyetsimple_cookie_icookie_merge)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, pop, arginfo_queryyetsimple_cookie_icookie_pop)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, arrays, arginfo_queryyetsimple_cookie_icookie_arrays)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, arraysDelete, arginfo_queryyetsimple_cookie_icookie_arraysdelete)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, get, arginfo_queryyetsimple_cookie_icookie_get)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, delete, arginfo_queryyetsimple_cookie_icookie_delete)
-	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_Icookie, clear, arginfo_queryyetsimple_cookie_icookie_clear)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, set, arginfo_queryyetsimple_cookie_icookie_set)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, put, arginfo_queryyetsimple_cookie_icookie_put)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, push, arginfo_queryyetsimple_cookie_icookie_push)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, merge, arginfo_queryyetsimple_cookie_icookie_merge)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, pop, arginfo_queryyetsimple_cookie_icookie_pop)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, arrays, arginfo_queryyetsimple_cookie_icookie_arrays)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, arraysDelete, arginfo_queryyetsimple_cookie_icookie_arraysdelete)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, get, arginfo_queryyetsimple_cookie_icookie_get)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, delete, arginfo_queryyetsimple_cookie_icookie_delete)
+	PHP_ABSTRACT_ME(Queryyetsimple_Cookie_ICookie, clear, arginfo_queryyetsimple_cookie_icookie_clear)
 	PHP_FE_END
 };

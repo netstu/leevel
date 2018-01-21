@@ -18,47 +18,48 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, checkController);
 PHP_METHOD(Queryyetsimple_Mvc_Action, __call);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_setcontroller, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objController, Queryyetsimple\\Mvc\\Icontroller, 0)
+	ZEND_ARG_OBJ_INFO(0, controller, Queryyetsimple\\Mvc\\IController, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_setview, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objView, Queryyetsimple\\Mvc\\Iview, 0)
+	ZEND_ARG_OBJ_INFO(0, view, Queryyetsimple\\Mvc\\IView, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_setrouter, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objRouter, Queryyetsimple\\Router\\Router, 0)
+	ZEND_ARG_OBJ_INFO(0, router, Queryyetsimple\\Router\\Router, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_action, 0, 0, 1)
-	ZEND_ARG_INFO(0, sActionName)
+	ZEND_ARG_INFO(0, action)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_switchview, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objTheme, Queryyetsimple\\View\\Iview, 0)
-	ZEND_ARG_INFO(0, booForever)
+	ZEND_ARG_OBJ_INFO(0, theme, Queryyetsimple\\View\\IView, 0)
+	ZEND_ARG_INFO(0, forever)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_assign, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixName)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_getassign, 0, 0, 0)
-	ZEND_ARG_INFO(0, sName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_deleteassign, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action_display, 0, 0, 0)
-	ZEND_ARG_INFO(0, sFile)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_INFO(0, file)
+	ZEND_ARG_ARRAY_INFO(0, vars, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_action___call, 0, 0, 2)
-	ZEND_ARG_INFO(0, sMethod)
-	ZEND_ARG_ARRAY_INFO(0, arrArgs, 0)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_mvc_action_method_entry) {

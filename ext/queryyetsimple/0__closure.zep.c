@@ -25,16 +25,16 @@ ZEPHIR_INIT_CLASS(queryyetsimple_0__closure) {
 
 PHP_METHOD(queryyetsimple_0__closure, __invoke) {
 
-	zval *mixValue, mixValue_sub;
+	zval *value, value_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&value_sub);
 
-	zephir_fetch_params(0, 1, 0, &mixValue);
+	zephir_fetch_params(0, 1, 0, &value);
 
 
 
-	RETURN_BOOL(Z_TYPE_P(mixValue) != IS_NULL);
+	RETURN_BOOL(Z_TYPE_P(value) != IS_NULL);
 
 }
 

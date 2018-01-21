@@ -22,14 +22,14 @@ namespace Queryyetsimple\Log;
 // use Psr\Log\LoggerInterface;
 
 /**
- * ilog 接口
+ * ILog 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.07
  * @version 1.0
  */
-interface Ilog /* extends LoggerInterface */
+interface ILog /* extends LoggerInterface */
 {
 
 	/**

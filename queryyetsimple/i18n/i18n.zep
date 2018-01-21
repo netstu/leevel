@@ -19,7 +19,7 @@
 namespace Queryyetsimple\I18n;
 
 use InvalidArgumentException;
-use Queryyetsimple\I18n\Ii18n;
+use Queryyetsimple\I18n\II18n;
 
 /**
  * 国际化组件
@@ -29,7 +29,7 @@ use Queryyetsimple\I18n\Ii18n;
  * @since 2018.01.06
  * @version 1.0
  */
-class I18n implements Ii18n
+class I18n implements II18n
 {
 
     /**

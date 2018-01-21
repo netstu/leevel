@@ -21,7 +21,7 @@ namespace Queryyetsimple\Session;
 use Queryyetsimple\Session\Redis;
 use Queryyetsimple\Session\Session;
 use Queryyetsimple\Session\Memcache;
-use Queryyetsimple\Support\Manager as support_manager;
+use Queryyetsimple\Support\Manager as SupportManager;
 
 /**
  * manager 入口
@@ -31,7 +31,7 @@ use Queryyetsimple\Support\Manager as support_manager;
  * @since 2018.01.09
  * @version 1.0
  */
-class Manager extends support_manager
+class Manager extends SupportManager
 {
 
     /**
@@ -70,7 +70,7 @@ class Manager extends support_manager
      * 创建 memcache 缓存
      *
      * @param array $options
-     * @return \queryyetsimple\session\memcache
+     * @return \Queryyetsimple\Session\memcache
      */
     protected function makeConnectMemcache(array options = [])
     {
@@ -81,7 +81,7 @@ class Manager extends support_manager
      * 创建 redis 缓存
      *
      * @param array $options
-     * @return \queryyetsimple\session\redis
+     * @return \Queryyetsimple\Session\redis
      */
     protected function makeConnectRedis(array options = [])
     {

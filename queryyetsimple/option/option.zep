@@ -19,7 +19,7 @@
 namespace Queryyetsimple\Option;
 
 use ArrayAccess;
-use Queryyetsimple\Option\Ioption;
+use Queryyetsimple\Option\IOption;
 
 /**
  * 配置管理类
@@ -29,7 +29,7 @@ use Queryyetsimple\Option\Ioption;
  * @since 2017.12.24
  * @version 1.0
  */
-class Option implements ArrayAccess, Ioption
+class Option implements IOption, ArrayAccess
 {
 
 	/**
@@ -147,7 +147,7 @@ class Option implements ArrayAccess, Ioption
 	 */
 	public function set(var name, var value = null)
 	{
-		var tempname, key, values, name, names, namespaces, parts, option;
+		var key, values, names, namespaces, parts, option;
 
 		if typeof name == "array" {
 			for key, values in name {
@@ -156,8 +156,7 @@ class Option implements ArrayAccess, Ioption
 		} else {
 			let names = this->parseNamespace(name);
 			let namespaces = names[0];
-			let tempname = names[1];
-			let name = tempname;
+			let name = names[1];
 
 			if name == "*" {
 				let this->option[namespaces] = value;
@@ -168,7 +167,7 @@ class Option implements ArrayAccess, Ioption
 				let this->option[namespaces][name] = value;
 			} else {
 				let parts = explode(".", name);
-				let option = this->setRecursion(parts ,value);
+				let option = this->setRecursion(parts, value);
 				let this->option[namespaces] = array_merge(this->option[namespaces], option);
 			}
 		}

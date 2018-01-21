@@ -19,11 +19,11 @@
 namespace Queryyetsimple\Log;
 
 use RuntimeException;
-use Queryyetsimple\Log\Ilog;
+use Queryyetsimple\Log\ILog;
 use InvalidArgumentException;
-use Queryyetsimple\Log\Iconnect;
-use Queryyetsimple\Support\Ijson;
-use Queryyetsimple\Support\Iarray;
+use Queryyetsimple\Log\IConnect;
+use Queryyetsimple\Support\IJson;
+use Queryyetsimple\Support\IArray;
 
 /**
  * 日志仓储
@@ -33,13 +33,13 @@ use Queryyetsimple\Support\Iarray;
  * @since 2018.01.07
  * @version 1.0
  */
-class Log implements Ilog
+class Log implements ILog
 {
 
     /**
      * 存储连接对象
      *
-     * @var \queryyetsimple\log\iconnect
+     * @var \Queryyetsimple\Log\IConnect
      */
     protected connect;
 
@@ -88,11 +88,11 @@ class Log implements Ilog
     /**
      * 构造函数
      *
-     * @param \queryyetsimple\log\iconnect $connect
+     * @param \Queryyetsimple\Log\IConnect $connect
      * @param array $option
      * @return void
      */
-    public function __construct(<Iconnect> connect, array option = [])
+    public function __construct(<IConnect> connect, array option = [])
     {
         let this->connect = connect;
         this->options(option);

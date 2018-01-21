@@ -18,69 +18,70 @@
  */
 namespace Queryyetsimple\Mvc;
 
-use Queryyetsimple\View\Iview as view_iview;
+use Queryyetsimple\View\IView as ViewIView;
 
 /**
- * iview 接口
+ * IView 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-interface Iview
+interface IView
 {
 
 	/**
-     * 切换视图
-     *
-     * @param \queryyetsimple\view\iview $theme
-     * @param boolean $forever
-     * @return $this
-     */
-    public function switchView(<view_iview> theme, boolean forever = false);
+	 * 切换视图
+	 *
+	 * @param \Queryyetsimple\View\IView $theme
+	 * @param boolean $forever
+	 * @return $this
+	 */
+	public function switchView(<ViewIView> theme, boolean forever = false);
 
-    /**
-     * 变量赋值
-     *
-     * @param mixed $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function assign(var name, var value = null);
+	/**
+	 * 变量赋值
+	 *
+	 * @param mixed $name
+	 * @param mixed $value
+	 * @return $this
+	 */
+	public function assign(var name, var value = null);
 
-    /**
-     * 获取变量赋值
-     *
-     * @param string|null $name
-     * @return mixed
-     */
-    public function getAssign(var name = null);
+	/**
+	 * 获取变量赋值
+	 *
+	 * @param string|null $name
+	 * @return mixed
+	 */
+	public function getAssign(var name = null);
 
-    /**
-     * 删除变量值
-     *
-     * @param mixed $name
-     * @return $this
-     */
-    public function deleteAssign(var name);
+	/**
+	 * 删除变量值
+	 *
+	 * @param mixed $name
+	 * @return $this
+	 */
+	public function deleteAssign(var name);
 
-    /**
-     * 清空变量值
-     *
-     * @param string|null $name
-     * @return $this
-     */
-    public function clearAssign();
+	/**
+	 * 清空变量值
+	 *
+	 * @param string|null $name
+	 * @return $this
+	 */
+	public function clearAssign();
 
-    /**
-     * 加载视图文件
-     *
-     * @param string $file
-     * @param array $option
-     * @sub string charset 编码
-     * @sub string content_type 内容类型
-     * @return string
-     */
-    public function display(string file = null, array option = []);
+	/**
+	 * 加载视图文件
+	 *
+	 * @param string $file
+	 * @param array $vars
+	 * @param array $option
+	 * @sub string charset 编码
+	 * @sub string content_type 内容类型
+	 * @return string
+	 */
+	public function display(string file = null, array! vars = [], array option = []);
 }

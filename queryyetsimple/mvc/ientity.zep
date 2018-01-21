@@ -26,7 +26,7 @@ namespace Queryyetsimple\Mvc;
  * @since 2017.12.24
  * @version 1.0
  */
-interface Ientity
+interface IEntity
 {
 
     /**

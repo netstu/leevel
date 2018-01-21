@@ -29,75 +29,75 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionObject);
 PHP_METHOD(Queryyetsimple_Support_Manager, __call);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager___construct, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, objContainer, Queryyetsimple\\Support\\Icontainer, 0)
+	ZEND_ARG_OBJ_INFO(0, container, Queryyetsimple\\Support\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_connect, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixOption)
+	ZEND_ARG_INFO(0, options)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_reconnect, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixOption)
+	ZEND_ARG_INFO(0, options)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_disconnect, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixOption)
+	ZEND_ARG_INFO(0, options)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_setdefaultdriver, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_createconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, objConnect)
+	ZEND_ARG_INFO(0, connect)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_getoptionname, 0, 0, 0)
-	ZEND_ARG_INFO(0, strOptionName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_makeconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, strConnect)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_INFO(0, connect)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_createconnectcommon, 0, 0, 1)
-	ZEND_ARG_INFO(0, strConnect)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_INFO(0, connect)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_parseoptionandunique, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixOption)
+	ZEND_ARG_INFO(0, options)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_parseoptionparameter, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixOption)
+	ZEND_ARG_INFO(0, options)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_getunique, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 0)
+	ZEND_ARG_ARRAY_INFO(0, options, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_getoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, strConnect)
-	ZEND_ARG_ARRAY_INFO(0, arrExtendOption, 1)
+	ZEND_ARG_INFO(0, connect)
+	ZEND_ARG_ARRAY_INFO(0, extendOption, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_filteroptioncommon, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 0)
+	ZEND_ARG_ARRAY_INFO(0, options, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_getoptionconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, strConnect)
+	ZEND_ARG_INFO(0, connect)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager_optionfilternull, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 0)
+	ZEND_ARG_ARRAY_INFO(0, options, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_manager___call, 0, 0, 2)
-	ZEND_ARG_INFO(0, sMethod)
-	ZEND_ARG_ARRAY_INFO(0, arrArgs, 0)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_support_manager_method_entry) {

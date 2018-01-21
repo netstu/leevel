@@ -22,49 +22,49 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, camelize);
 zend_object *zephir_init_properties_Queryyetsimple_Log_Monolog(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog___construct, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_file, 0, 0, 1)
-	ZEND_ARG_INFO(0, strPath)
-	ZEND_ARG_INFO(0, strLevel)
+	ZEND_ARG_INFO(0, path)
+	ZEND_ARG_INFO(0, level)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_dailyfile, 0, 0, 1)
-	ZEND_ARG_INFO(0, strPath)
-	ZEND_ARG_INFO(0, intDays)
-	ZEND_ARG_INFO(0, strLevel)
+	ZEND_ARG_INFO(0, path)
+	ZEND_ARG_INFO(0, days)
+	ZEND_ARG_INFO(0, level)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_syslog, 0, 0, 0)
-	ZEND_ARG_INFO(0, strName)
-	ZEND_ARG_INFO(0, strLevel)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, level)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_errorlog, 0, 0, 0)
-	ZEND_ARG_INFO(0, strLevel)
-	ZEND_ARG_INFO(0, intMessageType)
+	ZEND_ARG_INFO(0, level)
+	ZEND_ARG_INFO(0, messageType)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_monolog, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixCallback)
+	ZEND_ARG_INFO(0, callback)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_save, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrData, 0)
+	ZEND_ARG_ARRAY_INFO(0, data, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_getdailyfilepath, 0, 0, 1)
-	ZEND_ARG_INFO(0, strPath)
+	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_parsemonologlevel, 0, 0, 1)
-	ZEND_ARG_INFO(0, strLevel)
+	ZEND_ARG_INFO(0, level)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_log_monolog_camelize, 0, 0, 1)
-	ZEND_ARG_INFO(0, strValue)
-	ZEND_ARG_INFO(0, strSeparator)
+	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_INFO(0, separator)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_log_monolog_method_entry) {

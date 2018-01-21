@@ -21,14 +21,14 @@ namespace Queryyetsimple\Support;
 use Closure;
 
 /**
- * icontainer 接口
+ * IContainer 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.23
  * @version 1.0
  */
-interface Icontainer
+interface IContainer
 {
 
 }

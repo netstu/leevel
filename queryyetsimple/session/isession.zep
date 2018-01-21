@@ -19,14 +19,14 @@
 namespace Queryyetsimple\Session;
 
 /**
- * isession 接口
+ * ISession 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.09
  * @version 1.0
  */
-interface Isession
+interface ISession
 {
 
      /**

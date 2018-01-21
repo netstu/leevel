@@ -13,16 +13,16 @@
 
 
 /**
- * iarray 接口
+ * IArray 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.07
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Iarray) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Support_IArray) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, Iarray, queryyetsimple, support_iarray, queryyetsimple_support_iarray_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, IArray, queryyetsimple, support_iarray, queryyetsimple_support_iarray_method_entry);
 
 	return SUCCESS;
 
@@ -33,5 +33,5 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Iarray) {
  *
  * @return array
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Support_Iarray, toArray);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Support_IArray, toArray);
 

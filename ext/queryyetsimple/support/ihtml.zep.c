@@ -13,16 +13,16 @@
 
 
 /**
- * ihtml 接口
+ * IHtml 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Ihtml) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Support_IHtml) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, Ihtml, queryyetsimple, support_ihtml, queryyetsimple_support_ihtml_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, IHtml, queryyetsimple, support_ihtml, queryyetsimple_support_ihtml_method_entry);
 
 	return SUCCESS;
 
@@ -33,5 +33,5 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Ihtml) {
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Support_Ihtml, toHtml);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Support_IHtml, toHtml);
 

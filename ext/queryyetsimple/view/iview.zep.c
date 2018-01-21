@@ -13,16 +13,16 @@
 
 
 /**
- * iview 接口
+ * IView 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.10
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_View_Iview) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_View_IView) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\View, Iview, queryyetsimple, view_iview, NULL);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\View, IView, queryyetsimple, view_iview, NULL);
 
 	return SUCCESS;
 

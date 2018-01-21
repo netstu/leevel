@@ -20,9 +20,9 @@
  * @since 2018.01.02
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_View_Iconnect) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_View_IConnect) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\View, Iconnect, queryyetsimple, view_iconnect, queryyetsimple_view_iconnect_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\View, IConnect, queryyetsimple, view_iconnect, queryyetsimple_view_iconnect_method_entry);
 
 	return SUCCESS;
 
@@ -31,45 +31,43 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_View_Iconnect) {
 /**
  * 加载视图文件
  *
- * @param string $sFile 视图文件地址
- * @param boolean $bDisplay 是否显示
- * @param string $strExt 后缀
- * @param string $sTargetCache 主模板缓存路径
- * @param string $sMd5 源文件地址 md5 标记
+ * @param string $file 视图文件地址
+ * @param array $vars
+ * @param string $ext 后缀
+ * @param boolean $display 是否显示
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_View_Iconnect, display);
+ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, display);
 
 /**
  * 设置模板变量
  *
- * @param mixed $mixName
- * @param mixed $mixValue
+ * @param mixed $name
+ * @param mixed $value
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_View_Iconnect, setVar);
+ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, setVar);
 
 /**
  * 获取变量值
  *
- * @param string|null $sName
+ * @param string|null $name
  * @return mixed
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_View_Iconnect, getVar);
+ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, getVar);
 
 /**
  * 删除变量值
  *
- * @param mixed $mixName
+ * @param mixed $name
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_View_Iconnect, deleteVar);
+ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, deleteVar);
 
 /**
  * 清空变量值
  *
- * @param string|null $sName
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_View_Iconnect, clearVar);
+ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, clearVar);
 

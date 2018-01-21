@@ -20,60 +20,60 @@ PHP_METHOD(Queryyetsimple_Option_Option, parseNamespace);
 zend_object *zephir_init_properties_Queryyetsimple_Option_Option(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option___construct, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, options, 1)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_has, 0, 0, 0)
-	ZEND_ARG_INFO(0, sName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_get, 0, 0, 0)
-	ZEND_ARG_INFO(0, sName)
-	ZEND_ARG_INFO(0, mixDefault)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, defaults)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_set, 0, 0, 1)
-	ZEND_ARG_INFO(0, mixName)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_delete, 0, 0, 1)
-	ZEND_ARG_INFO(0, sName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_reset, 0, 0, 0)
-	ZEND_ARG_INFO(0, mixNamespace)
+	ZEND_ARG_INFO(0, namespaces)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_offsetexists, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_offsetget, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_offsetset, 0, 0, 2)
-	ZEND_ARG_INFO(0, strName)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_offsetunset, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_setrecursion, 0, 0, 1)
-	ZEND_ARG_ARRAY_INFO(0, arrPart, 0)
-	ZEND_ARG_INFO(0, mixValue)
+	ZEND_ARG_ARRAY_INFO(0, part, 0)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_deleterecursion, 0, 0, 2)
-	ZEND_ARG_ARRAY_INFO(0, arrPart, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrResult, 0)
+	ZEND_ARG_ARRAY_INFO(0, part, 0)
+	ZEND_ARG_ARRAY_INFO(0, result, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_option_option_parsenamespace, 0, 0, 1)
-	ZEND_ARG_INFO(0, strName)
+	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_option_option_method_entry) {

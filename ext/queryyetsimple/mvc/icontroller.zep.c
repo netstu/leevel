@@ -13,16 +13,16 @@
 
 
 /**
- * icontroller 接口
+ * IController 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Icontroller) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_IController) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Mvc, Icontroller, queryyetsimple, mvc_icontroller, queryyetsimple_mvc_icontroller_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Mvc, IController, queryyetsimple, mvc_icontroller, queryyetsimple_mvc_icontroller_method_entry);
 
 	zend_class_implements(queryyetsimple_mvc_icontroller_ce TSRMLS_CC, 1, queryyetsimple_mvc_iview_ce);
 	return SUCCESS;
@@ -32,24 +32,24 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Icontroller) {
 /**
  * 返回父控制器
  *
- * @param \queryyetsimple\mvc\iview $objView
+ * @param \Queryyetsimple\Mvc\IView $view
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_Icontroller, setView);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, setView);
 
 /**
  * 返回父控制器
  *
- * @param \queryyetsimple\router\router $objRouter
+ * @param \Queryyetsimple\Router\Router $router
  * @return $this
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_Icontroller, setRouter);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, setRouter);
 
 /**
  * 执行子方法器
  *
- * @param string $sActionName 方法名
+ * @param string $action 方法名
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_Icontroller, action);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, action);
 

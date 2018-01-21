@@ -21,9 +21,9 @@ namespace Queryyetsimple\Pipeline;
 use Closure;
 use Generator;
 use InvalidArgumentException;
-use Queryyetsimple\Support\Icontainer;
-use Queryyetsimple\Pipeline\Ipipeline;
-use queryyetsimple\support\collection;
+use Queryyetsimple\Support\IContainer;
+use Queryyetsimple\Pipeline\IPipeline;
+use Queryyetsimple\Support\Collection;
 
 /**
  * 管道实现类
@@ -33,13 +33,13 @@ use queryyetsimple\support\collection;
  * @since 2018.01.05
  * @version 1.0
  */
-class Pipeline implements Ipipeline
+class Pipeline implements IPipeline
 {
 
 	/**
 	 * 容器
 	 *
-	 * @var \queryyetsimple\support\icontainer
+	 * @var \Queryyetsimple\Support\IContainer
 	 */
 	protected container;
 
@@ -60,17 +60,17 @@ class Pipeline implements Ipipeline
 	/**
 	 * 迭代器
 	 *
-	 * @var \queryyetsimple\support\collection
+	 * @var \Queryyetsimple\Support\Collection
 	 */
 	protected generator;
 
 	/**
 	 * 创建一个管道
 	 *
-	 * @param \queryyetsimple\support\icontainer $container
+	 * @param \Queryyetsimple\Support\IContainer $container
 	 * @return void
 	 */
-	public function __construct(<Icontainer> container)
+	public function __construct(<IContainer> container)
 	{
 		let this->container = container;
 	}
@@ -130,7 +130,7 @@ class Pipeline implements Ipipeline
 	 *
 	 * @param callable $end
 	 * @since 2018.01.03
-	 * @return void
+	 * @return mixed
 	 */
 	public function then(var end = null)
 	{
@@ -145,14 +145,14 @@ class Pipeline implements Ipipeline
 		} 
 		let this->generator = this->stageGenerator(stage);
 
-		call_user_func_array([this, "traverseGenerator"], this->passed);
+		return call_user_func_array([this, "traverseGenerator"], this->passed);
 	}
 
 	/**
 	 * 遍历迭代器
 	 *
 	 * @since 2018.01.03
-	 * @return void
+	 * @return mixed
 	 */
 	public function traverseGenerator() {
 		var args, current, next;
@@ -168,17 +168,17 @@ class Pipeline implements Ipipeline
 		array_unshift(args, next);
 
 		let current = this->generator->current();
-		call_user_func_array(current, args);
+		return call_user_func_array(current, args);
 	}
 
 	/**
 	 * 下一次迭代执行回调
 	 *
 	 * @since 2018.01.12
-	 * @return void
+	 * @return mixed
 	 */
 	protected function makeNextClosure() {
-		call_user_func_array([this, "traverseGenerator"], func_get_args());
+		return call_user_func_array([this, "traverseGenerator"], func_get_args());
 	}
 
 	/**
@@ -187,7 +187,7 @@ class Pipeline implements Ipipeline
 	 * zephir 不支持 yield，用集合替代
 	 *
 	 * @param array $stage
-	 * @return \queryyetsimple\support\collection
+	 * @return \Queryyetsimple\Support\Collection
 	 */
 	protected function stageGenerator(array stage) {
 		var item;
@@ -198,7 +198,7 @@ class Pipeline implements Ipipeline
 			let temp[] = this->stageCallback(item);
 		}
 
-		return new collection(temp);
+		return new Collection(temp);
 	}
 
 	/**

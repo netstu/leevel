@@ -19,14 +19,14 @@
 namespace Queryyetsimple\Support;
 
 /**
- * iarray 接口
+ * IArray 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.07
  * @version 1.0
  */
-interface Iarray
+interface IArray
 {
 
     /**

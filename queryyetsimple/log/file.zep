@@ -19,8 +19,8 @@
 namespace Queryyetsimple\Log;
 
 use RuntimeException;
-use Queryyetsimple\Log\Aconnect;
-use Queryyetsimple\Log\Iconnect;
+use Queryyetsimple\Log\Connect;
+use Queryyetsimple\Log\IConnect;
 
 /**
  * log.file
@@ -30,7 +30,7 @@ use Queryyetsimple\Log\Iconnect;
  * @since 2018.01.08
  * @version 1.0
  */
-class File extends Aconnect implements Iconnect
+class File extends Connect implements IConnect
 {
 
     /**

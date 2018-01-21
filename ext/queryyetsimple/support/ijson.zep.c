@@ -13,16 +13,16 @@
 
 
 /**
- * ijson 接口
+ * IJson 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2017.12.24
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Ijson) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Support_IJson) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, Ijson, queryyetsimple, support_ijson, queryyetsimple_support_ijson_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, IJson, queryyetsimple, support_ijson, queryyetsimple_support_ijson_method_entry);
 
 	return SUCCESS;
 
@@ -31,8 +31,8 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Ijson) {
 /**
  * 对象转 JSON
  *
- * @param integer $intOption
+ * @param integer $option
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Support_Ijson, toJson);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Support_IJson, toJson);
 

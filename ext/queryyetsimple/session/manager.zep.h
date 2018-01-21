@@ -11,23 +11,23 @@ PHP_METHOD(Queryyetsimple_Session_Manager, makeConnectRedis);
 PHP_METHOD(Queryyetsimple_Session_Manager, getOptionConnect);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_manager_createconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, objConnect)
+	ZEND_ARG_INFO(0, connect)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_manager_makeconnectcookie, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_manager_makeconnectmemcache, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_manager_makeconnectredis, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, arrOption, 1)
+	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_manager_getoptionconnect, 0, 0, 1)
-	ZEND_ARG_INFO(0, strConnect)
+	ZEND_ARG_INFO(0, connect)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_session_manager_method_entry) {

@@ -26,17 +26,18 @@ namespace Queryyetsimple\View;
  * @since 2018.01.02
  * @version 1.0
  */
-interface Iconnect
+interface IConnect
 {
 	/**
 	 * 加载视图文件
 	 *
 	 * @param string $file 视图文件地址
-	 * @param boolean $display 是否显示
+	 * @param array $vars
 	 * @param string $ext 后缀
+	 * @param boolean $display 是否显示
 	 * @return string
 	 */
-	public function display(string file, boolean display = true, string ext = "");
+	public function display(string file, array! vars = [], string ext = "", boolean display = true);
 
 	/**
 	 * 设置模板变量

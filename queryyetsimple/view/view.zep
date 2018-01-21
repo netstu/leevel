@@ -18,8 +18,8 @@
  */
 namespace Queryyetsimple\View;
 
-use Queryyetsimple\View\Iview;
-use Queryyetsimple\View\Iconnect;
+use Queryyetsimple\View\IView;
+use Queryyetsimple\View\IConnect;
 
 /**
  * view 仓储
@@ -29,36 +29,36 @@ use Queryyetsimple\View\Iconnect;
  * @since 2018.01.10
  * @version 1.0
  */
-class View implements Iview
+class View implements IView
 {
 
-    /**
-     * 连接驱动
-     *
-     * @var \queryyetsimple\view\iconnect
-     */
-    protected connect;
+	/**
+	 * 连接驱动
+	 *
+	 * @var \Queryyetsimple\View\IConnect
+	 */
+	protected connect;
 
-    /**
-     * 构造函数
-     *
-     * @param \queryyetsimple\view\iconnect $connect
-     * @return void
-     */
-    public function __construct(<Iconnect> connect)
-    {
-        let this->connect = connect;
-    }
+	/**
+	 * 构造函数
+	 *
+	 * @param \Queryyetsimple\View\IConnect $connect
+	 * @return void
+	 */
+	public function __construct(<IConnect> connect)
+	{
+		let this->connect = connect;
+	}
 
-    /**
-     * call 
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call(string method, array args)
-    {
-        return call_user_func_array([this->connect, method], args);
-    }
+	/**
+	 * call 
+	 *
+	 * @param string $method
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function __call(string method, array args)
+	{
+		return call_user_func_array([this->connect, method], args);
+	}
 }

@@ -22,7 +22,7 @@ use Closure;
 use Exception;
 use RuntimeException;
 use BadMethodCallException;
-use Queryyetsimple\Support\Icontainer;
+use Queryyetsimple\Support\IContainer;
 
 /**
  * 实现类的静态访问门面
@@ -35,98 +35,98 @@ use Queryyetsimple\Support\Icontainer;
 abstract class Face
 {
 
-    /**
-     * 项目容器
-     *
-     * @var \queryyetsimple\support\icontainer
-     */
-    protected static objContainer = null;
+	/**
+	 * 项目容器
+	 *
+	 * @var \Queryyetsimple\Support\IContainer
+	 */
+	protected static container = null;
 
-    /**
-     * 注入容器实例
-     *
-     * @var object
-     */
-    protected static arrInstance = [];
+	/**
+	 * 注入容器实例
+	 *
+	 * @var object
+	 */
+	protected static instances = [];
 
-    /**
-     * 获取注册容器的实例
-     *
-     * @return mixed
-     */
-    public static function faces()
-    {
-    	var strUnique, instance;
+	/**
+	 * 获取注册容器的实例
+	 *
+	 * @return mixed
+	 */
+	public static function faces()
+	{
+		var unique, instance;
 
-        let strUnique = static::name();
+		let unique = static::name();
 
-        if fetch instance, self::arrInstance[strUnique] {
-            return instance;
-        }
+		if fetch instance, self::instances[unique] {
+			return instance;
+		}
 
-        let instance = self::container()->make(strUnique);
-        if typeof instance != "object" {
-            throw new RuntimeException(sprintf("Services %s was not found in the IOC container.", strUnique));
-        }
+		let instance = self::container()->make(unique);
+		if typeof instance != "object" {
+			throw new RuntimeException(sprintf("Services %s was not found in the IOC container.", unique));
+		}
 
-        return instance;
-    }
+		return instance;
+	}
 
-    /**
-     * 返回服务容器
-     *
-     * @return \queryyetsimple\support\icontainer
-     */
-    public static function container() -> <Icontainer>
-    {
-        return self::objContainer;
-    }
+	/**
+	 * 返回服务容器
+	 *
+	 * @return \Queryyetsimple\Support\IContainer
+	 */
+	public static function container() -> <IContainer>
+	{
+		return self::container;
+	}
 
-     /**
-     * 设置服务容器
-     *
-     * @param \queryyetsimple\support\icontainer $objContainer
-     * @return void
-     */
-    public static function setContainer(<Icontainer> objContainer) -> void
-    {
-        let self::objContainer = objContainer;
-    }
+	 /**
+	 * 设置服务容器
+	 *
+	 * @param \Queryyetsimple\Support\IContainer $container
+	 * @return void
+	 */
+	public static function setContainer(<IContainer> container) -> void
+	{
+		let self::container = container;
+	}
 
-    /**
-     * 门面名字
-     *
-     * @return string
-     */
-    protected static function name() -> string {
-    	return "";
-    }
+	/**
+	 * 门面名字
+	 *
+	 * @return string
+	 */
+	protected static function name() -> string {
+		return "";
+	}
 
-    /**
-     * call 
-     *
-     * @param string $sMethod
-     * @param array $arrArgs
-     * @return mixed
-     */
-    public static function __callStatic(string sMethod, array arrArgs)
-    {
-    	var objInstance, calMethod;
+	/**
+	 * call 
+	 *
+	 * @param string $method
+	 * @param array $args
+	 * @return mixed
+	 */
+	public static function __callStatic(string method, array args)
+	{
+		var instance, callback;
 
-        let objInstance = self::faces();
-        if ! objInstance {
-            throw new RuntimeException("Can not find instance from container.");
-        }
+		let instance = self::faces();
+		if ! instance {
+			throw new RuntimeException("Can not find instance from container.");
+		}
 
-        let calMethod = [
-            objInstance,
-            sMethod
-        ];
-        if ! is_callable(calMethod) {
-            throw new BadMethodCallException(sprintf("Method %s is not exits.", sMethod));
-        }
+		let callback = [
+			instance,
+			method
+		];
+		if ! is_callable(callback) {
+			throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
+		}
 
-        return call_user_func_array(calMethod, arrArgs);
-    }
+		return call_user_func_array(callback, args);
+	}
 
 }

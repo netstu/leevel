@@ -18,8 +18,8 @@
 #include "kernel/operators.h"
 #include "kernel/main.h"
 #include "kernel/array.h"
-#include "kernel/exception.h"
 #include "ext/spl/spl_exceptions.h"
+#include "kernel/exception.h"
 
 
 /**
@@ -37,9 +37,9 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Action) {
 	/**
 	 * 父控制器
 	 *
-	 * @var \queryyetsimple\mvc\icontroller
+	 * @var \Queryyetsimple\Mvc\IController
 	 */
-	zend_declare_property_null(queryyetsimple_mvc_action_ce, SL("objController"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(queryyetsimple_mvc_action_ce, SL("controller"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	zend_class_implements(queryyetsimple_mvc_action_ce TSRMLS_CC, 1, queryyetsimple_mvc_iaction_ce);
 	return SUCCESS;
@@ -62,21 +62,21 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __construct) {
 /**
  * 设置父控制器
  *
- * @param \queryyetsimple\mvc\icontroller $objController
+ * @param \Queryyetsimple\Mvc\IController $controller
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, setController) {
 
-	zval *objController, objController_sub;
+	zval *controller, controller_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&objController_sub);
+	ZVAL_UNDEF(&controller_sub);
 
-	zephir_fetch_params(0, 1, 0, &objController);
+	zephir_fetch_params(0, 1, 0, &controller);
 
 
 
-	zephir_update_property_zval(this_ptr, SL("objController"), objController);
+	zephir_update_property_zval(this_ptr, SL("controller"), controller);
 	RETURN_THISW();
 
 }
@@ -84,27 +84,27 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, setController) {
 /**
  * 设置视图
  *
- * @param \queryyetsimple\mvc\iview $objView
+ * @param \Queryyetsimple\Mvc\IView $view
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, setView) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *objView, objView_sub, _0;
+	zval *view, view_sub, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&objView_sub);
+	ZVAL_UNDEF(&view_sub);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &objView);
+	zephir_fetch_params(1, 1, 0, &view);
 
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "setview", NULL, 0, objView);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "setview", NULL, 0, view);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -113,27 +113,27 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, setView) {
 /**
  * 设置路由
  *
- * @param \queryyetsimple\router\router $objRouter
+ * @param \Queryyetsimple\Router\Router $router
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, setRouter) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *objRouter, objRouter_sub, _0;
+	zval *router, router_sub, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&objRouter_sub);
+	ZVAL_UNDEF(&router_sub);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &objRouter);
+	zephir_fetch_params(1, 1, 0, &router);
 
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "setrouter", NULL, 0, objRouter);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "setrouter", NULL, 0, router);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -142,29 +142,29 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, setRouter) {
 /**
  * 执行子方法器
  *
- * @param string $sActionName 方法名
+ * @param string $action 方法名
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, action) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sActionName_param = NULL, _0;
-	zval sActionName;
+	zval *action_param = NULL, _0;
+	zval action;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sActionName);
+	ZVAL_UNDEF(&action);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &sActionName_param);
+	zephir_fetch_params(1, 1, 0, &action_param);
 
-	zephir_get_strval(&sActionName, sActionName_param);
+	zephir_get_strval(&action, action_param);
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "action", NULL, 0, &sActionName);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "action", NULL, 0, &action);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -173,40 +173,40 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, action) {
 /**
  * 切换视图
  *
- * @param \queryyetsimple\view\iview $objTheme
- * @param boolean $booForever
+ * @param \Queryyetsimple\View\IView $theme
+ * @param boolean $forever
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, switchView) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool booForever;
-	zval *objTheme, objTheme_sub, *booForever_param = NULL, _0, _1;
+	zend_bool forever;
+	zval *theme, theme_sub, *forever_param = NULL, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&objTheme_sub);
+	ZVAL_UNDEF(&theme_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &objTheme, &booForever_param);
+	zephir_fetch_params(1, 1, 1, &theme, &forever_param);
 
-	if (!booForever_param) {
-		booForever = 0;
+	if (!forever_param) {
+		forever = 0;
 	} else {
-		booForever = zephir_get_boolval(booForever_param);
+		forever = zephir_get_boolval(forever_param);
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	if (booForever) {
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	if (forever) {
 		ZVAL_BOOL(&_1, 1);
 	} else {
 		ZVAL_BOOL(&_1, 0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, objTheme, &_1);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, theme, &_1);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -215,34 +215,34 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, switchView) {
 /**
  * 变量赋值
  *
- * @param mixed $mixName
- * @param mixed $mixValue
+ * @param mixed $name
+ * @param mixed $value
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, assign) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *mixName, mixName_sub, *mixValue = NULL, mixValue_sub, __$null, _0;
+	zval *name, name_sub, *value = NULL, value_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&mixName_sub);
-	ZVAL_UNDEF(&mixValue_sub);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&value_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &mixName, &mixValue);
+	zephir_fetch_params(1, 1, 1, &name, &value);
 
-	if (!mixValue) {
-		mixValue = &mixValue_sub;
-		mixValue = &__$null;
+	if (!value) {
+		value = &value_sub;
+		value = &__$null;
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "assign", NULL, 0, mixName, mixValue);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "assign", NULL, 0, name, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -251,34 +251,34 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, assign) {
 /**
  * 获取变量赋值
  *
- * @param string|null $sName
+ * @param string|null $name
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, getAssign) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sName_param = NULL, _0;
-	zval sName;
+	zval *name_param = NULL, _0;
+	zval name;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sName);
+	ZVAL_UNDEF(&name);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &sName_param);
+	zephir_fetch_params(1, 0, 1, &name_param);
 
-	if (!sName_param) {
-		ZEPHIR_INIT_VAR(&sName);
-		ZVAL_STRING(&sName, "");
+	if (!name_param) {
+		ZEPHIR_INIT_VAR(&name);
+		ZVAL_STRING(&name, "");
 	} else {
-		zephir_get_strval(&sName, sName_param);
+		zephir_get_strval(&name, name_param);
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "getassign", NULL, 0, &sName);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "getassign", NULL, 0, &name);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -287,42 +287,42 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, getAssign) {
 /**
  * 删除变量值
  *
- * @param mixed $mixName
+ * @param mixed $name
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, deleteAssign) {
 
 	zval _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *mixName, mixName_sub, arrArgs, _0, _2, _3;
+	zval *name, name_sub, args, _0, _2, _3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&mixName_sub);
-	ZVAL_UNDEF(&arrArgs);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&args);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &mixName);
+	zephir_fetch_params(1, 1, 0, &name);
 
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&arrArgs);
-	zephir_get_args(&arrArgs);
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_VAR(&_1);
 	zephir_create_array(&_1, 2, 0 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&_2);
-	zephir_read_property(&_2, this_ptr, SL("objController"), PH_NOISY_CC);
+	zephir_read_property(&_2, this_ptr, SL("controller"), PH_NOISY_CC);
 	zephir_array_fast_append(&_1, &_2);
 	ZEPHIR_INIT_VAR(&_3);
 	ZVAL_STRING(&_3, "deleteAssign");
 	zephir_array_fast_append(&_1, &_3);
-	ZEPHIR_CALL_USER_FUNC_ARRAY(&_0, &_1, &arrArgs);
+	ZEPHIR_CALL_USER_FUNC_ARRAY(&_0, &_1, &args);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -345,7 +345,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, clearAssign) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(NULL, &_0, "clearassign", NULL, 0);
 	zephir_check_call_status();
 	RETURN_THIS();
@@ -355,8 +355,9 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, clearAssign) {
 /**
  * 加载视图文件
  *
- * @param string $sFile
- * @param array $arrOption
+ * @param string $file
+ * @param array $vars
+ * @param array $option
  * @sub string charset 编码
  * @sub string content_type 类型
  * @return string
@@ -364,36 +365,43 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, clearAssign) {
 PHP_METHOD(Queryyetsimple_Mvc_Action, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval arrOption;
-	zval *sFile_param = NULL, *arrOption_param = NULL, _0;
-	zval sFile;
+	zval vars, option;
+	zval *file_param = NULL, *vars_param = NULL, *option_param = NULL, _0;
+	zval file;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sFile);
+	ZVAL_UNDEF(&file);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&arrOption);
+	ZVAL_UNDEF(&vars);
+	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &sFile_param, &arrOption_param);
+	zephir_fetch_params(1, 0, 3, &file_param, &vars_param, &option_param);
 
-	if (!sFile_param) {
-		ZEPHIR_INIT_VAR(&sFile);
-		ZVAL_STRING(&sFile, "");
+	if (!file_param) {
+		ZEPHIR_INIT_VAR(&file);
+		ZVAL_STRING(&file, "");
 	} else {
-		zephir_get_strval(&sFile, sFile_param);
+		zephir_get_strval(&file, file_param);
 	}
-	if (!arrOption_param) {
-		ZEPHIR_INIT_VAR(&arrOption);
-		array_init(&arrOption);
+	if (!vars_param) {
+		ZEPHIR_INIT_VAR(&vars);
+		array_init(&vars);
 	} else {
-		zephir_get_arrval(&arrOption, arrOption_param);
+	ZEPHIR_OBS_COPY_OR_DUP(&vars, vars_param);
+	}
+	if (!option_param) {
+		ZEPHIR_INIT_VAR(&option);
+		array_init(&option);
+	} else {
+		zephir_get_arrval(&option, option_param);
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkcontroller", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, &sFile, &arrOption);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, &file, &vars, &option);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -412,9 +420,9 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, checkController) {
 	ZVAL_UNDEF(&_0);
 
 
-	zephir_read_property(&_0, this_ptr, SL("objController"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_0, this_ptr, SL("controller"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Controller is not set in action", "queryyetsimple/mvc/action.zep", 200);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Controller is not set in action", "queryyetsimple/mvc/action.zep", 201);
 		return;
 	}
 
@@ -423,36 +431,36 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, checkController) {
 /**
  * call 
  *
- * @param string $sMethod
- * @param array $arrArgs
+ * @param string $method
+ * @param array $args
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_3 = NULL;
-	zval arrArgs;
-	zval *sMethod_param = NULL, *arrArgs_param = NULL, _0$$3, _1$$3, _2$$3, _4, _5, _6;
-	zval sMethod;
+	zval args;
+	zval *method_param = NULL, *args_param = NULL, _0$$3, _1$$3, _2$$3, _4, _5, _6;
+	zval method;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&sMethod);
+	ZVAL_UNDEF(&method);
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&arrArgs);
+	ZVAL_UNDEF(&args);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &sMethod_param, &arrArgs_param);
+	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
 
-	zephir_get_strval(&sMethod, sMethod_param);
-	zephir_get_arrval(&arrArgs, arrArgs_param);
+	zephir_get_strval(&method, method_param);
+	zephir_get_arrval(&args, args_param);
 
 
-	if (ZEPHIR_IS_STRING(&sMethod, "run")) {
+	if (ZEPHIR_IS_STRING(&method, "run")) {
 		ZEPHIR_INIT_VAR(&_0$$3);
 		object_init_ex(&_0$$3, spl_ce_BadFunctionCallException);
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -461,7 +469,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 28, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/mvc/action.zep", 214 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/mvc/action.zep", 215 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -469,11 +477,11 @@ PHP_METHOD(Queryyetsimple_Mvc_Action, __call) {
 	object_init_ex(&_4, spl_ce_BadFunctionCallException);
 	ZEPHIR_INIT_VAR(&_5);
 	ZVAL_STRING(&_5, "Method %s is not defined.");
-	ZEPHIR_CALL_FUNCTION(&_6, "sprintf", &_3, 1, &_5, &sMethod);
+	ZEPHIR_CALL_FUNCTION(&_6, "sprintf", &_3, 1, &_5, &method);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 28, &_6);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_4, "queryyetsimple/mvc/action.zep", 216 TSRMLS_CC);
+	zephir_throw_exception_debug(&_4, "queryyetsimple/mvc/action.zep", 217 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

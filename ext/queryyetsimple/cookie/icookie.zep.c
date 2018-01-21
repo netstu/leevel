@@ -13,16 +13,16 @@
 
 
 /**
- * icookie 接口
+ * ICookie 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
  * @since 2018.01.06
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie_Icookie) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie_ICookie) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Cookie, Icookie, queryyetsimple, cookie_icookie, queryyetsimple_cookie_icookie_method_entry);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Cookie, ICookie, queryyetsimple, cookie_icookie, queryyetsimple_cookie_icookie_method_entry);
 
 	return SUCCESS;
 
@@ -36,7 +36,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie_Icookie) {
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, set);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, set);
 
 /**
  * 批量插入
@@ -46,7 +46,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, set);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, put);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, put);
 
 /**
  * 数组插入数据
@@ -56,7 +56,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, put);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, push);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, push);
 
 /**
  * 合并元素
@@ -66,7 +66,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, push);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, merge);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, merge);
 
 /**
  * 弹出元素
@@ -76,7 +76,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, merge);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, pop);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, pop);
 
 /**
  * 数组插入键值对数据
@@ -87,7 +87,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, pop);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, arrays);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, arrays);
 
 /**
  * 数组键值删除数据
@@ -96,7 +96,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, arrays);
  * @param mixed $keys
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, arraysDelete);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, arraysDelete);
 
 /**
  * 获取 cookie
@@ -106,7 +106,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, arraysDelete);
  * @param array $option
  * @return mixed
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, get);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, get);
 
 /**
  * 删除 cookie
@@ -115,7 +115,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, get);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, delete);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, delete);
 
 /**
  * 清空 cookie
@@ -124,5 +124,5 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, delete);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_Icookie, clear);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Cookie_ICookie, clear);
 

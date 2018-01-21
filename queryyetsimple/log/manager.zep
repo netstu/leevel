@@ -19,9 +19,9 @@
 namespace Queryyetsimple\Log;
 
 use Queryyetsimple\Log\Log;
-use queryyetsimple\Log\File;
+use Queryyetsimple\Log\File;
 use Queryyetsimple\Log\Monolog;
-use Queryyetsimple\Support\Manager as support_manager;
+use Queryyetsimple\Support\Manager as SupportManager;
 
 /**
  * log 入口
@@ -31,7 +31,7 @@ use Queryyetsimple\Support\Manager as support_manager;
  * @since 2018.01.07
  * @version 1.0
  */
-class Manager extends support_manager
+class Manager extends SupportManager
 {
 
     /**
@@ -59,7 +59,7 @@ class Manager extends support_manager
      * 创建 file 日志驱动
      *
      * @param array $options
-     * @return \queryyetsimple\log\file
+     * @return \Queryyetsimple\Log\File
      */
     protected function makeConnectFile(array options = [])
     {
@@ -70,7 +70,7 @@ class Manager extends support_manager
      * 创建 monolog 日志驱动
      *
      * @param array $options
-     * @return \queryyetsimple\log\monolog
+     * @return \Queryyetsimple\Log\Monolog
      */
     protected function makeConnectMonolog(array options = [])
     {

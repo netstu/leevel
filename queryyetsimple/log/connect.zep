@@ -29,7 +29,7 @@ use InvalidArgumentException;
  * @since 2018.01.07
  * @version 1.0
  */
-abstract class Aconnect
+abstract class Connect
 {
 
     /**

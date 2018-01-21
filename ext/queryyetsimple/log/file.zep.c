@@ -31,14 +31,14 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Log_File) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, File, queryyetsimple, log_file, queryyetsimple_log_aconnect_ce, queryyetsimple_log_file_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, File, queryyetsimple, log_file, queryyetsimple_log_connect_ce, queryyetsimple_log_file_method_entry, 0);
 
 	/**
 	 * 配置
 	 *
 	 * @var array
 	 */
-	zend_declare_property_null(queryyetsimple_log_file_ce, SL("arrOption"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(queryyetsimple_log_file_ce, SL("option"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	queryyetsimple_log_file_ce->create_object = zephir_init_properties_Queryyetsimple_Log_File;
 
@@ -50,20 +50,20 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Log_File) {
 /**
  * 日志写入接口
  *
- * @param array $arrData
+ * @param array $datas
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Log_File, save) {
 
 	zephir_fcall_cache_entry *_6 = NULL, *_10 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *arrData_param = NULL, strDestination, arrItem, _0, _1, *_2, _3$$3, _4$$3, _5$$3, _7$$3, _8$$3, _9$$3;
-	zval arrData;
+	zval *datas_param = NULL, filepath, item, _0, _1, *_2, _3$$3, _4$$3, _5$$3, _7$$3, _8$$3, _9$$3;
+	zval datas;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arrData);
-	ZVAL_UNDEF(&strDestination);
-	ZVAL_UNDEF(&arrItem);
+	ZVAL_UNDEF(&datas);
+	ZVAL_UNDEF(&filepath);
+	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_3$$3);
@@ -74,24 +74,24 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 	ZVAL_UNDEF(&_9$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &arrData_param);
+	zephir_fetch_params(1, 1, 0, &datas_param);
 
-	zephir_get_arrval(&arrData, arrData_param);
+	zephir_get_arrval(&datas, datas_param);
 
 
-	zephir_array_fetch_long(&_0, &arrData, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, &datas, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
 	zephir_array_fetch_long(&_1, &_0, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&strDestination, this_ptr, "getpath", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&filepath, this_ptr, "getpath", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checksize", NULL, 0, &strDestination);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checksize", NULL, 0, &filepath);
 	zephir_check_call_status();
-	zephir_is_iterable(&arrData, 0, "queryyetsimple/log/file.zep", 65);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arrData), _2)
+	zephir_is_iterable(&datas, 0, "queryyetsimple/log/file.zep", 65);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&datas), _2)
 	{
-		ZEPHIR_INIT_NVAR(&arrItem);
-		ZVAL_COPY(&arrItem, _2);
-		zephir_array_fetch_long(&_4$$3, &arrItem, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &arrItem, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
+		ZEPHIR_INIT_NVAR(&item);
+		ZVAL_COPY(&item, _2);
+		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "formatmessage", &_6, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_7$$3);
@@ -99,10 +99,10 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 		ZEPHIR_INIT_LNVAR(_8$$3);
 		ZEPHIR_CONCAT_VV(&_8$$3, &_3$$3, &_7$$3);
 		ZVAL_LONG(&_9$$3, 3);
-		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 23, &_8$$3, &_9$$3, &strDestination);
+		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 23, &_8$$3, &_9$$3, &filepath);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&arrItem);
+	ZEPHIR_INIT_NVAR(&item);
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -110,50 +110,48 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 /**
  * 格式化日志信息
  *
- * @param string $strMessage 应该被记录的错误信息
- * @param array $arrContext
+ * @param string $message 应该被记录的错误信息
+ * @param array $contexts
  * @return string
  */
 PHP_METHOD(Queryyetsimple_Log_File, formatMessage) {
 
-	zval arrContext;
-	zval *strMessage_param = NULL, *arrContext_param = NULL, _0, _1;
-	zval strMessage;
+	zval contexts;
+	zval *message_param = NULL, *contexts_param = NULL, _0, _1;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&strMessage);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&arrContext);
+	ZVAL_UNDEF(&contexts);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &strMessage_param, &arrContext_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &contexts_param);
 
-	zephir_get_strval(&strMessage, strMessage_param);
-	if (!arrContext_param) {
-		ZEPHIR_INIT_VAR(&arrContext);
-		array_init(&arrContext);
+	zephir_get_strval(&message, message_param);
+	if (!contexts_param) {
+		ZEPHIR_INIT_VAR(&contexts);
+		array_init(&contexts);
 	} else {
-		zephir_get_arrval(&arrContext, arrContext_param);
+		zephir_get_arrval(&contexts, contexts_param);
 	}
 
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_LONG(&_1, 256);
-	zephir_json_encode(&_0, &arrContext, zephir_get_intval(&_1) );
-	ZEPHIR_CONCAT_VSV(return_value, &strMessage, " ", &_0);
+	zephir_json_encode(&_0, &contexts, zephir_get_intval(&_1) );
+	ZEPHIR_CONCAT_VSV(return_value, &message, " ", &_0);
 	RETURN_MM();
 
 }
 
 zend_object *zephir_init_properties_Queryyetsimple_Log_File(zend_class_entry *class_type TSRMLS_DC) {
 
-		zval _3$$4;
-	zval _0, _2, _1$$3;
+		zval _1$$3;
+	zval _0;
 		ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_3$$4);
 
 		ZEPHIR_MM_GROW();
 	
@@ -163,17 +161,11 @@ zend_object *zephir_init_properties_Queryyetsimple_Log_File(zend_class_entry *cl
 		zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
-			array_init(&_1$$3);
+			zephir_create_array(&_1$$3, 3, 0 TSRMLS_CC);
+			add_assoc_stringl_ex(&_1$$3, SL("name"), SL("Y-m-d H"));
+			add_assoc_long_ex(&_1$$3, SL("size"), 2097152);
+			add_assoc_stringl_ex(&_1$$3, SL("path"), SL(""));
 			zephir_update_property_zval(this_ptr, SL("option"), &_1$$3);
-		}
-		zephir_read_property(&_2, this_ptr, SL("arrOption"), PH_NOISY_CC | PH_READONLY);
-		if (Z_TYPE_P(&_2) == IS_NULL) {
-			ZEPHIR_INIT_VAR(&_3$$4);
-			zephir_create_array(&_3$$4, 3, 0 TSRMLS_CC);
-			add_assoc_stringl_ex(&_3$$4, SL("name"), SL("Y-m-d H"));
-			add_assoc_long_ex(&_3$$4, SL("size"), 2097152);
-			add_assoc_stringl_ex(&_3$$4, SL("path"), SL(""));
-			zephir_update_property_zval(this_ptr, SL("arrOption"), &_3$$4);
 		}
 		ZEPHIR_MM_RESTORE();
 		return Z_OBJ_P(this_ptr);
