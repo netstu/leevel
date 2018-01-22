@@ -24,7 +24,7 @@ use Queryyetsimple\View\Html;
 use Queryyetsimple\View\Twig;
 use Queryyetsimple\View\Phpui;
 use Queryyetsimple\View\V8 as V8s;
-use Queryyetsimple\Support\Manager as SupportManager;
+use Queryyetsimple\Manager\Manager as Managers;
 
 /**
  * view 入口
@@ -34,7 +34,7 @@ use Queryyetsimple\Support\Manager as SupportManager;
  * @since 2018.01.12
  * @version 1.0
  */
-class Manager extends SupportManager
+class Manager extends Managers
 {
 
     /**

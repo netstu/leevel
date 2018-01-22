@@ -21,7 +21,7 @@ namespace Queryyetsimple\Session;
 use Queryyetsimple\Session\Redis;
 use Queryyetsimple\Session\Session;
 use Queryyetsimple\Session\Memcache;
-use Queryyetsimple\Support\Manager as SupportManager;
+use Queryyetsimple\Manager\Manager as Managers;
 
 /**
  * manager 入口
@@ -31,71 +31,71 @@ use Queryyetsimple\Support\Manager as SupportManager;
  * @since 2018.01.09
  * @version 1.0
  */
-class Manager extends SupportManager
+class Manager extends Managers
 {
 
-    /**
-     * 取得配置命名空间
-     *
-     * @return string
-     */
-    protected function getOptionNamespace()
-    {
-        return "session";
-    }
+	/**
+	 * 取得配置命名空间
+	 *
+	 * @return string
+	 */
+	protected function getOptionNamespace()
+	{
+		return "session";
+	}
 
-    /**
-     * 创建连接对象
-     *
-     * @param object $connect
-     * @return object
-     */
-    protected function createConnect(var connect)
-    {
-        return new Session(connect, this->getOptionCommon());
-    }
+	/**
+	 * 创建连接对象
+	 *
+	 * @param object $connect
+	 * @return object
+	 */
+	protected function createConnect(var connect)
+	{
+		return new Session(connect, this->getOptionCommon());
+	}
 
-    /**
-     * 创建 cookie 缓存
-     *
-     * @param array $options
-     * @return null
-     */
-    protected function makeConnectCookie(array options = [])
-    {
-        return null;
-    }
+	/**
+	 * 创建 cookie 缓存
+	 *
+	 * @param array $options
+	 * @return null
+	 */
+	protected function makeConnectCookie(array options = [])
+	{
+		return null;
+	}
 
-    /**
-     * 创建 memcache 缓存
-     *
-     * @param array $options
-     * @return \Queryyetsimple\Session\memcache
-     */
-    protected function makeConnectMemcache(array options = [])
-    {
-        return new Memcache(this->getOption("memcache", options));
-    }
+	/**
+	 * 创建 memcache 缓存
+	 *
+	 * @param array $options
+	 * @return \Queryyetsimple\Session\memcache
+	 */
+	protected function makeConnectMemcache(array options = [])
+	{
+		return new Memcache(this->getOption("memcache", options));
+	}
 
-    /**
-     * 创建 redis 缓存
-     *
-     * @param array $options
-     * @return \Queryyetsimple\Session\redis
-     */
-    protected function makeConnectRedis(array options = [])
-    {
-        return new Redis(this->getOption("redis", options));
-    }
+	/**
+	 * 创建 redis 缓存
+	 *
+	 * @param array $options
+	 * @return \Queryyetsimple\Session\redis
+	 */
+	protected function makeConnectRedis(array options = [])
+	{
+		return new Redis(this->getOption("redis", options));
+	}
 
-    /**
-     * 读取连接配置
-     *
-     * @param string $connect
-     * @return array
-     */
-    protected function getOptionConnect(string connect)
-    {
-        return this->optionFilterNull(parent::getOptionConnect(connect));
-    }
+	/**
+	 * 读取连接配置
+	 *
+	 * @param string $connect
+	 * @return array
+	 */
+	protected function getOptionConnect(string connect)
+	{
+		return this->optionFilterNull(parent::getOptionConnect(connect));
+	}
 }

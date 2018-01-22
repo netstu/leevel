@@ -21,7 +21,7 @@ namespace Queryyetsimple\Log;
 use Queryyetsimple\Log\Log;
 use Queryyetsimple\Log\File;
 use Queryyetsimple\Log\Monolog;
-use Queryyetsimple\Support\Manager as SupportManager;
+use Queryyetsimple\Manager\Manager as Managers;
 
 /**
  * log 入口
@@ -31,49 +31,49 @@ use Queryyetsimple\Support\Manager as SupportManager;
  * @since 2018.01.07
  * @version 1.0
  */
-class Manager extends SupportManager
+class Manager extends Managers
 {
 
-    /**
-     * 取得配置命名空间
-     *
-     * @return string
-     */
-    protected function getOptionNamespace()
-    {
-        return "log";
-    }
+	/**
+	 * 取得配置命名空间
+	 *
+	 * @return string
+	 */
+	protected function getOptionNamespace()
+	{
+		return "log";
+	}
 
-    /**
-     * 创建连接对象
-     *
-     * @param object $connect
-     * @return object
-     */
-    protected function createConnect(var connect)
-    {
-        return new Log(connect, this->getOptionCommon());
-    }
+	/**
+	 * 创建连接对象
+	 *
+	 * @param object $connect
+	 * @return object
+	 */
+	protected function createConnect(var connect)
+	{
+		return new Log(connect, this->getOptionCommon());
+	}
 
-    /**
-     * 创建 file 日志驱动
-     *
-     * @param array $options
-     * @return \Queryyetsimple\Log\File
-     */
-    protected function makeConnectFile(array options = [])
-    {
-        return new File(this->getOption("file", options));
-    }
+	/**
+	 * 创建 file 日志驱动
+	 *
+	 * @param array $options
+	 * @return \Queryyetsimple\Log\File
+	 */
+	protected function makeConnectFile(array options = [])
+	{
+		return new File(this->getOption("file", options));
+	}
 
-    /**
-     * 创建 monolog 日志驱动
-     *
-     * @param array $options
-     * @return \Queryyetsimple\Log\Monolog
-     */
-    protected function makeConnectMonolog(array options = [])
-    {
-        return new Monolog(this->getOption("monolog", options));
-    }
+	/**
+	 * 创建 monolog 日志驱动
+	 *
+	 * @param array $options
+	 * @return \Queryyetsimple\Log\Monolog
+	 */
+	protected function makeConnectMonolog(array options = [])
+	{
+		return new Monolog(this->getOption("monolog", options));
+	}
 }

@@ -30,7 +30,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_View_Manager) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\View, Manager, queryyetsimple, view_manager, queryyetsimple_support_manager_ce, queryyetsimple_view_manager_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\View, Manager, queryyetsimple, view_manager, queryyetsimple_manager_manager_ce, queryyetsimple_view_manager_method_entry, 0);
 
 	return SUCCESS;
 

@@ -31,23 +31,23 @@
  * @since 2018.01.07
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Manager) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Manager_Manager) {
 
-	ZEPHIR_REGISTER_CLASS(Queryyetsimple\\Support, Manager, queryyetsimple, support_manager, queryyetsimple_support_manager_method_entry, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
+	ZEPHIR_REGISTER_CLASS(Queryyetsimple\\Manager, Manager, queryyetsimple, manager_manager, queryyetsimple_manager_manager_method_entry, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
 
 	/**
 	 * IOC Container
 	 *
-	 * @var \Queryyetsimple\Support\IContainer
+	 * @var \Queryyetsimple\Di\IContainer
 	 */
-	zend_declare_property_null(queryyetsimple_support_manager_ce, SL("container"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(queryyetsimple_manager_manager_ce, SL("container"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
 	 * 连接对象
 	 *
 	 * @var object[]
 	 */
-	zend_declare_property_null(queryyetsimple_support_manager_ce, SL("connects"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(queryyetsimple_manager_manager_ce, SL("connects"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -56,10 +56,10 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Manager) {
 /**
  * 构造函数
  *
- * @param \Queryyetsimple\Support\IContainer $container
+ * @param \Queryyetsimple\Di\IContainer $container
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, __construct) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, __construct) {
 
 	zval *container, container_sub;
 	zval *this_ptr = getThis();
@@ -77,9 +77,9 @@ PHP_METHOD(Queryyetsimple_Support_Manager, __construct) {
 /**
  * 返回 IOC 容器
  *
- * @return \Queryyetsimple\Support\IContainer
+ * @return \Queryyetsimple\Di\IContainer
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, container) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, container) {
 
 	zval *this_ptr = getThis();
 
@@ -94,7 +94,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, container) {
  * @param array|string|null $options
  * @return object
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, connect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, connect) {
 
 	zephir_fcall_cache_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -137,12 +137,12 @@ PHP_METHOD(Queryyetsimple_Support_Manager, connect) {
 	zephir_read_property(&_1, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &unique)) {
 		zephir_read_property(&_2$$3, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/support/manager.zep", 86 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 86 TSRMLS_CC);
 		RETURN_CTOR(&_3$$3);
 	}
 	if (zephir_array_isset_string(options, SL("driver"))) {
 		ZEPHIR_OBS_VAR(&driver);
-		zephir_array_fetch_string(&driver, options, SL("driver"), PH_NOISY, "queryyetsimple/support/manager.zep", 89 TSRMLS_CC);
+		zephir_array_fetch_string(&driver, options, SL("driver"), PH_NOISY, "queryyetsimple/manager/manager.zep", 89 TSRMLS_CC);
 	} else {
 		ZEPHIR_CALL_METHOD(&driver, this_ptr, "getdefaultdriver", NULL, 0);
 		zephir_check_call_status();
@@ -151,7 +151,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, connect) {
 	zephir_check_call_status();
 	zephir_update_property_array(this_ptr, SL("connects"), &unique, &_4 TSRMLS_CC);
 	zephir_read_property(&_5, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_6, &_5, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/support/manager.zep", 93 TSRMLS_CC);
+	zephir_array_fetch(&_6, &_5, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 93 TSRMLS_CC);
 	RETURN_CTOR(&_6);
 
 }
@@ -162,7 +162,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, connect) {
  * @param array|string $options
  * @return object
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, reconnect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, reconnect) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options = NULL, options_sub;
@@ -194,7 +194,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, reconnect) {
  * @param array|string $options
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, disconnect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, disconnect) {
 
 	zephir_fcall_cache_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -243,7 +243,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, disconnect) {
  *
  * @return object[]
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getConnects) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getConnects) {
 
 	zval *this_ptr = getThis();
 
@@ -257,7 +257,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getConnects) {
  *
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getDefaultDriver) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getDefaultDriver) {
 
 	zval strDefault, _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -287,7 +287,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getDefaultDriver) {
  * @param string $name
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, setDefaultDriver) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, setDefaultDriver) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *name_param = NULL, strDefault, _0, _1;
@@ -322,7 +322,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, setDefaultDriver) {
  *
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOptionNamespace) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionNamespace) {
 
 }
 
@@ -332,7 +332,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionNamespace) {
  * @param object $connect
  * @return object
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, createConnect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, createConnect) {
 
 }
 
@@ -342,7 +342,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, createConnect) {
  * @param string $name
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOptionName) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionName) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *name_param = NULL, _0;
@@ -377,7 +377,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionName) {
  * @param array $options
  * @return object
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, makeConnect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, makeConnect) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval options;
@@ -425,7 +425,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, makeConnect) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 5, &_5$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$3, "queryyetsimple/support/manager.zep", 200 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$3, "queryyetsimple/manager/manager.zep", 200 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -444,7 +444,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, makeConnect) {
  * @param array $options
  * @return object
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, createConnectCommon) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, createConnectCommon) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval options;
@@ -485,7 +485,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, createConnectCommon) {
  * @param array|string $options
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, parseOptionAndUnique) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, parseOptionAndUnique) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options = NULL, options_sub, unique, _0;
@@ -525,7 +525,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, parseOptionAndUnique) {
  * @param array|string $options
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, parseOptionParameter) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, parseOptionParameter) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options = NULL, options_sub, _0$$4, _1$$4, _2$$4;
@@ -577,7 +577,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, parseOptionParameter) {
  * @param array $options
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getUnique) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getUnique) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, _0;
@@ -607,7 +607,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getUnique) {
  * @param array $extendOption
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOption) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOption) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval extendOption;
@@ -651,7 +651,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOption) {
  *
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOptionCommon) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionCommon) {
 
 	zval options, _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -683,7 +683,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionCommon) {
  * @param array $options
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, filterOptionCommon) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, filterOptionCommon) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, item, _0, *_1;
@@ -702,7 +702,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, filterOptionCommon) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "filteroptioncommonitem", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&_0, 0, "queryyetsimple/support/manager.zep", 315);
+	zephir_is_iterable(&_0, 0, "queryyetsimple/manager/manager.zep", 315);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -721,7 +721,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, filterOptionCommon) {
  *
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, filterOptionCommonItem) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, filterOptionCommonItem) {
 
 	zval _0;
 	zval *this_ptr = getThis();
@@ -747,7 +747,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, filterOptionCommonItem) {
  * @param string $connect
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOptionConnect) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionConnect) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *connect_param = NULL, _0, _1;
@@ -783,7 +783,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionConnect) {
  * @param array $options
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, optionFilterNull) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, optionFilterNull) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, _0;
@@ -813,7 +813,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, optionFilterNull) {
  *
  * @return \Queryyetsimple\Option\Option
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, getOptionObject) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionObject) {
 
 	zval _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -840,7 +840,7 @@ PHP_METHOD(Queryyetsimple_Support_Manager, getOptionObject) {
  * @param array $args
  * @return mixed
  */
-PHP_METHOD(Queryyetsimple_Support_Manager, __call) {
+PHP_METHOD(Queryyetsimple_Manager_Manager, __call) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval args, _0;

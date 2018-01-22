@@ -5,8 +5,8 @@
 #define ZEPHIR_CLASS_ENTRIES_H
 
 #include "queryyetsimple/support/face.zep.h"
+#include "queryyetsimple/manager/manager.zep.h"
 #include "queryyetsimple/mvc/iview.zep.h"
-#include "queryyetsimple/support/manager.zep.h"
 #include "queryyetsimple/log/connect.zep.h"
 #include "queryyetsimple/log/iconnect.zep.h"
 #include "queryyetsimple/cookie/icookie.zep.h"
@@ -27,6 +27,7 @@
 #include "queryyetsimple/cookie/cookie.zep.h"
 #include "queryyetsimple/database.zep.h"
 #include "queryyetsimple/db.zep.h"
+#include "queryyetsimple/di/icontainer.zep.h"
 #include "queryyetsimple/encryption.zep.h"
 #include "queryyetsimple/event.zep.h"
 #include "queryyetsimple/filesystem.zep.h"
@@ -53,7 +54,6 @@
 #include "queryyetsimple/session/manager.zep.h"
 #include "queryyetsimple/session/session.zep.h"
 #include "queryyetsimple/support/iarray.zep.h"
-#include "queryyetsimple/support/icontainer.zep.h"
 #include "queryyetsimple/support/ihtml.zep.h"
 #include "queryyetsimple/support/ijson.zep.h"
 #include "queryyetsimple/throttler.zep.h"

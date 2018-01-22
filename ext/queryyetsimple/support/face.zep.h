@@ -11,7 +11,7 @@ PHP_METHOD(Queryyetsimple_Support_Face, __callStatic);
 void zephir_init_static_properties_Queryyetsimple_Support_Face(TSRMLS_D);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_face_setcontainer, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, container, Queryyetsimple\\Support\\IContainer, 0)
+	ZEND_ARG_OBJ_INFO(0, container, Queryyetsimple\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_support_face___callstatic, 0, 0, 2)

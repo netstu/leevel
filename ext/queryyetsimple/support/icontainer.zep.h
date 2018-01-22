@@ -1,5 +1,0 @@
-
-extern zend_class_entry *queryyetsimple_support_icontainer_ce;
-
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_IContainer);
-

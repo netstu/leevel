@@ -21,7 +21,7 @@ namespace Queryyetsimple\Pipeline;
 use Closure;
 use Generator;
 use InvalidArgumentException;
-use Queryyetsimple\Support\IContainer;
+use Queryyetsimple\Di\IContainer;
 use Queryyetsimple\Pipeline\IPipeline;
 use Queryyetsimple\Support\Collection;
 
@@ -39,7 +39,7 @@ class Pipeline implements IPipeline
 	/**
 	 * 容器
 	 *
-	 * @var \Queryyetsimple\Support\IContainer
+	 * @var \Queryyetsimple\Di\IContainer
 	 */
 	protected container;
 
@@ -67,7 +67,7 @@ class Pipeline implements IPipeline
 	/**
 	 * 创建一个管道
 	 *
-	 * @param \Queryyetsimple\Support\IContainer $container
+	 * @param \Queryyetsimple\Di\IContainer $container
 	 * @return void
 	 */
 	public function __construct(<IContainer> container)

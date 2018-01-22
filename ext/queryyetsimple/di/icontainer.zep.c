@@ -20,9 +20,9 @@
  * @since 2017.12.23
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Support_IContainer) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Di_IContainer) {
 
-	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Support, IContainer, queryyetsimple, support_icontainer, NULL);
+	ZEPHIR_REGISTER_INTERFACE(Queryyetsimple\\Di, IContainer, queryyetsimple, di_icontainer, NULL);
 
 	return SUCCESS;
 

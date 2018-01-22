@@ -10,8 +10,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 
 	AC_DEFINE(HAVE_QUERYYETSIMPLE, 1, [Whether you have Queryyetsimple])
 	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/face.zep.c
+	queryyetsimple/manager/manager.zep.c
 	queryyetsimple/mvc/iview.zep.c
-	queryyetsimple/support/manager.zep.c
 	queryyetsimple/log/connect.zep.c
 	queryyetsimple/log/iconnect.zep.c
 	queryyetsimple/cookie/icookie.zep.c
@@ -32,6 +32,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/cookie/cookie.zep.c
 	queryyetsimple/database.zep.c
 	queryyetsimple/db.zep.c
+	queryyetsimple/di/icontainer.zep.c
 	queryyetsimple/encryption.zep.c
 	queryyetsimple/event.zep.c
 	queryyetsimple/filesystem.zep.c
@@ -58,7 +59,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/session/manager.zep.c
 	queryyetsimple/session/session.zep.c
 	queryyetsimple/support/iarray.zep.c
-	queryyetsimple/support/icontainer.zep.c
 	queryyetsimple/support/ihtml.zep.c
 	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/throttler.zep.c

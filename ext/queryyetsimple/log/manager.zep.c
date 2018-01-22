@@ -27,7 +27,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Log_Manager) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, Manager, queryyetsimple, log_manager, queryyetsimple_support_manager_ce, queryyetsimple_log_manager_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Log, Manager, queryyetsimple, log_manager, queryyetsimple_manager_manager_ce, queryyetsimple_log_manager_method_entry, 0);
 
 	return SUCCESS;
 

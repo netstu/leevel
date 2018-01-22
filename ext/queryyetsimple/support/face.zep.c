@@ -36,7 +36,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Support_Face) {
 	/**
 	 * 项目容器
 	 *
-	 * @var \Queryyetsimple\Support\IContainer
+	 * @var \Queryyetsimple\Di\IContainer
 	 */
 	zend_declare_property_null(queryyetsimple_support_face_ce, SL("container"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
 
@@ -103,7 +103,7 @@ PHP_METHOD(Queryyetsimple_Support_Face, faces) {
 /**
  * 返回服务容器
  *
- * @return \Queryyetsimple\Support\IContainer
+ * @return \Queryyetsimple\Di\IContainer
  */
 PHP_METHOD(Queryyetsimple_Support_Face, container) {
 
@@ -121,7 +121,7 @@ PHP_METHOD(Queryyetsimple_Support_Face, container) {
 /**
  * 设置服务容器
  *
- * @param \Queryyetsimple\Support\IContainer $container
+ * @param \Queryyetsimple\Di\IContainer $container
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Support_Face, setContainer) {

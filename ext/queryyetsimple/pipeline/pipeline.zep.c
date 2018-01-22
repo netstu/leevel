@@ -38,7 +38,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Pipeline) {
 	/**
 	 * 容器
 	 *
-	 * @var \Queryyetsimple\Support\IContainer
+	 * @var \Queryyetsimple\Di\IContainer
 	 */
 	zend_declare_property_null(queryyetsimple_pipeline_pipeline_ce, SL("container"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
@@ -73,7 +73,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Pipeline) {
 /**
  * 创建一个管道
  *
- * @param \Queryyetsimple\Support\IContainer $container
+ * @param \Queryyetsimple\Di\IContainer $container
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, __construct) {
