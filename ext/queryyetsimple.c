@@ -218,6 +218,7 @@ static PHP_RINIT_FUNCTION(queryyetsimple)
 	zephir_initialize_memory(queryyetsimple_globals_ptr TSRMLS_CC);
 
 	zephir_init_static_properties_Queryyetsimple_Support_Facade(TSRMLS_C);
+	zephir_init_static_properties_Queryyetsimple_Di_Container(TSRMLS_C);
 
 	return SUCCESS;
 }

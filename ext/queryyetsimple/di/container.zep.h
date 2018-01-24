@@ -34,6 +34,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, __get);
 PHP_METHOD(Queryyetsimple_Di_Container, __set);
 PHP_METHOD(Queryyetsimple_Di_Container, __call);
 zend_object *zephir_init_properties_Queryyetsimple_Di_Container(zend_class_entry *class_type TSRMLS_DC);
+void zephir_init_static_properties_Queryyetsimple_Di_Container(TSRMLS_D);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_bind, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)

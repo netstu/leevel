@@ -75,6 +75,13 @@ class Container implements IContainer, ArrayAccess {
     protected groups = [];
 
     /**
+     * share 静态变量值
+     *
+     * @var array
+     */
+    public static shareClosure = [];
+
+    /**
      * 注册到容器
      *
      * @param mixed $name
@@ -152,16 +159,22 @@ class Container implements IContainer, ArrayAccess {
      */
     public function share(<Closure> closures)
     {
-        return ClosureUse::make(function (container) {
-        	var args, closures, obj;
+    	// 动态参数不能定义 container，否则 zephir 编译后报错提示
+    	// Wrong number of parameters
+        return ClosureUse::make(function () {
+        	var args, closures, obj, hash, container;
 
-            //static obj;
+        	let args = func_get_args();
+        	let container = args[0];
+            let closures = args[1];
+            let hash = spl_object_hash(closures);
 
-            if is_null(obj) {
-            	let args = func_get_args();
-            	let closures = args[1];
-                let obj = closures(container);
-            }
+			if fetch obj, \Queryyetsimple\Di\Container::shareClosure[hash] {
+				return obj;
+			}
+
+			let obj = call_user_func(closures, container);
+			let \Queryyetsimple\Di\Container::shareClosure[hash] = closures;
 
             return obj;
         }, [closures]);
