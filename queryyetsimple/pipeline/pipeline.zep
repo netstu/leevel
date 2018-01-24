@@ -23,7 +23,7 @@ use Generator;
 use InvalidArgumentException;
 use Queryyetsimple\Di\IContainer;
 use Queryyetsimple\Pipeline\IPipeline;
-use Queryyetsimple\Support\Collection;
+use Queryyetsimple\Collection\Collection;
 
 /**
  * 管道实现类
@@ -60,7 +60,7 @@ class Pipeline implements IPipeline
 	/**
 	 * 迭代器
 	 *
-	 * @var \Queryyetsimple\Support\Collection
+	 * @var \Queryyetsimple\Collection\Collection
 	 */
 	protected generator;
 
@@ -187,7 +187,7 @@ class Pipeline implements IPipeline
 	 * zephir 不支持 yield，用集合替代
 	 *
 	 * @param array $stage
-	 * @return \Queryyetsimple\Support\Collection
+	 * @return \Queryyetsimple\Collection\Collection
 	 */
 	protected function stageGenerator(array stage) {
 		var item;

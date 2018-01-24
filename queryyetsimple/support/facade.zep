@@ -32,7 +32,7 @@ use Queryyetsimple\Di\IContainer;
  * @since 2017.12.23
  * @version 1.0
  */
-abstract class Face
+abstract class Facade
 {
 
 	/**
@@ -54,7 +54,7 @@ abstract class Face
 	 *
 	 * @return mixed
 	 */
-	public static function faces()
+	public static function facades()
 	{
 		var unique, instance;
 
@@ -113,7 +113,7 @@ abstract class Face
 	{
 		var instance, callback;
 
-		let instance = self::faces();
+		let instance = self::facades();
 		if ! instance {
 			throw new RuntimeException("Can not find instance from container.");
 		}

@@ -18,7 +18,7 @@
  */
 namespace Queryyetsimple;
 
-use Queryyetsimple\Support\Face;
+use Queryyetsimple\Support\Facade;
 
 /**
  * 沙盒 psr4
@@ -28,15 +28,15 @@ use Queryyetsimple\Support\Face;
  * @since 2017.12.23
  * @version 1.0
  */
-class Psr4 extends Face
+class Psr4 extends Facade
 {
 
-    /**
-     * 返回门面名字
-     *
-     * @return string
-     */
-    protected static function name() -> string {
-    	return "psr4";
-    }
+	/**
+	 * 返回门面名字
+	 *
+	 * @return string
+	 */
+	protected static function name() -> string {
+		return "psr4";
+	}
 }

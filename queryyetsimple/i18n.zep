@@ -18,7 +18,7 @@
  */
 namespace Queryyetsimple;
 
-use Queryyetsimple\Support\Face;
+use Queryyetsimple\Support\Facade;
 
 /**
  * 沙盒 i18n
@@ -28,15 +28,15 @@ use Queryyetsimple\Support\Face;
  * @since 2017.12.23
  * @version 1.0
  */
-class I18n extends Face
+class I18n extends Facade
 {
 
-    /**
-     * 返回门面名字
-     *
-     * @return string
-     */
-    protected static function name() -> string {
-    	return "i18n";
-    }
+	/**
+	 * 返回门面名字
+	 *
+	 * @return string
+	 */
+	protected static function name() -> string {
+		return "i18n";
+	}
 }

@@ -22,6 +22,7 @@ use RuntimeException;
 use Queryyetsimple\Log\ILog;
 use InvalidArgumentException;
 use Queryyetsimple\Log\IConnect;
+use Queryyetsimple\Option\IClass;
 use Queryyetsimple\Support\IJson;
 use Queryyetsimple\Support\IArray;
 
@@ -33,7 +34,7 @@ use Queryyetsimple\Support\IArray;
  * @since 2018.01.07
  * @version 1.0
  */
-class Log implements ILog
+class Log implements ILog, IClass
 {
 
     /**

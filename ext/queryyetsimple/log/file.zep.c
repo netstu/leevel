@@ -99,7 +99,7 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 		ZEPHIR_INIT_LNVAR(_8$$3);
 		ZEPHIR_CONCAT_VV(&_8$$3, &_3$$3, &_7$$3);
 		ZVAL_LONG(&_9$$3, 3);
-		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 23, &_8$$3, &_9$$3, &filepath);
+		ZEPHIR_CALL_FUNCTION(NULL, "error_log", &_10, 35, &_8$$3, &_9$$3, &filepath);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);

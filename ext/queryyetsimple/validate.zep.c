@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Validate) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Validate, queryyetsimple, validate, queryyetsimple_support_face_ce, queryyetsimple_validate_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Validate, queryyetsimple, validate, queryyetsimple_support_facade_ce, queryyetsimple_validate_method_entry, 0);
 
 	return SUCCESS;
 

@@ -18,7 +18,7 @@
  */
 namespace Queryyetsimple;
 
-use Queryyetsimple\Support\Face;
+use Queryyetsimple\Support\Facade;
 
 /**
  * 沙盒 request
@@ -28,15 +28,15 @@ use Queryyetsimple\Support\Face;
  * @since 2017.12.23
  * @version 1.0
  */
-class Request extends Face
+class Request extends Facade
 {
 
-    /**
-     * 返回门面名字
-     *
-     * @return string
-     */
-    protected static function name() -> string {
-    	return "request";
-    }
+	/**
+	 * 返回门面名字
+	 *
+	 * @return string
+	 */
+	protected static function name() -> string {
+		return "request";
+	}
 }

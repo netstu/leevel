@@ -4,12 +4,14 @@
 #ifndef ZEPHIR_CLASS_ENTRIES_H
 #define ZEPHIR_CLASS_ENTRIES_H
 
-#include "queryyetsimple/support/face.zep.h"
+#include "queryyetsimple/support/facade.zep.h"
+#include "queryyetsimple/option/iclass.zep.h"
 #include "queryyetsimple/manager/manager.zep.h"
 #include "queryyetsimple/mvc/iview.zep.h"
 #include "queryyetsimple/log/connect.zep.h"
 #include "queryyetsimple/log/iconnect.zep.h"
 #include "queryyetsimple/cookie/icookie.zep.h"
+#include "queryyetsimple/di/icontainer.zep.h"
 #include "queryyetsimple/i18n/ii18n.zep.h"
 #include "queryyetsimple/log/ilog.zep.h"
 #include "queryyetsimple/mvc/iaction.zep.h"
@@ -27,7 +29,7 @@
 #include "queryyetsimple/cookie/cookie.zep.h"
 #include "queryyetsimple/database.zep.h"
 #include "queryyetsimple/db.zep.h"
-#include "queryyetsimple/di/icontainer.zep.h"
+#include "queryyetsimple/di/container.zep.h"
 #include "queryyetsimple/encryption.zep.h"
 #include "queryyetsimple/event.zep.h"
 #include "queryyetsimple/filesystem.zep.h"
@@ -53,6 +55,7 @@
 #include "queryyetsimple/session.zep.h"
 #include "queryyetsimple/session/manager.zep.h"
 #include "queryyetsimple/session/session.zep.h"
+#include "queryyetsimple/support/closureuse.zep.h"
 #include "queryyetsimple/support/iarray.zep.h"
 #include "queryyetsimple/support/ihtml.zep.h"
 #include "queryyetsimple/support/ijson.zep.h"
@@ -63,5 +66,6 @@
 #include "queryyetsimple/view/manager.zep.h"
 #include "queryyetsimple/view/view.zep.h"
 #include "queryyetsimple/0__closure.zep.h"
+#include "queryyetsimple/1__closure.zep.h"
 
 #endif

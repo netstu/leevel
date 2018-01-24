@@ -20,6 +20,7 @@ namespace Queryyetsimple\Cookie;
 
 use Exception;
 use InvalidArgumentException;
+use Queryyetsimple\Option\IClass;
 use Queryyetsimple\Cookie\ICookie;
 
 /**
@@ -30,7 +31,7 @@ use Queryyetsimple\Cookie\ICookie;
  * @since 2018.01.06
  * @version 1.0
  */
-class Cookie implements ICookie
+class Cookie implements ICookie, IClass
 {
 
     /**

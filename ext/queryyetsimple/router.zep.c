@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Router) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Router, queryyetsimple, router, queryyetsimple_support_face_ce, queryyetsimple_router_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Router, queryyetsimple, router, queryyetsimple_support_facade_ce, queryyetsimple_router_method_entry, 0);
 
 	return SUCCESS;
 

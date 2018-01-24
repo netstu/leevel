@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Encryption) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Encryption, queryyetsimple, encryption, queryyetsimple_support_face_ce, queryyetsimple_encryption_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Encryption, queryyetsimple, encryption, queryyetsimple_support_facade_ce, queryyetsimple_encryption_method_entry, 0);
 
 	return SUCCESS;
 

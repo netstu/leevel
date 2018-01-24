@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Cookie) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Cookie, queryyetsimple, cookie, queryyetsimple_support_face_ce, queryyetsimple_cookie_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Cookie, queryyetsimple, cookie, queryyetsimple_support_facade_ce, queryyetsimple_cookie_method_entry, 0);
 
 	return SUCCESS;
 

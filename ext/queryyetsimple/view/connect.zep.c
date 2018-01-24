@@ -51,6 +51,8 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_View_Connect) {
 	zend_declare_property_null(queryyetsimple_view_connect_ce, SL("option"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	queryyetsimple_view_connect_ce->create_object = zephir_init_properties_Queryyetsimple_View_Connect;
+
+	zend_class_implements(queryyetsimple_view_connect_ce TSRMLS_CC, 1, queryyetsimple_option_iclass_ce);
 	return SUCCESS;
 
 }
@@ -161,7 +163,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, getVar) {
 	zephir_read_property(&_1, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/view/connect.zep", 87 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/view/connect.zep", 88 TSRMLS_CC);
 	} else {
 		ZVAL_NULL(&_0);
 	}
@@ -200,7 +202,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, deleteVar) {
 		zephir_get_args(&_0);
 	}
 	ZEPHIR_CPY_WRT(name, &_0);
-	zephir_is_iterable(name, 0, "queryyetsimple/view/connect.zep", 108);
+	zephir_is_iterable(name, 0, "queryyetsimple/view/connect.zep", 109);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(name), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -261,7 +263,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, option) {
 
 
 	if (!(Z_TYPE_P(&name) == IS_STRING)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "queryyetsimple/view/connect.zep", 133);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "queryyetsimple/view/connect.zep", 134);
 		return;
 	}
 	zephir_update_property_array(this_ptr, SL("option"), &name, value TSRMLS_CC);
@@ -341,7 +343,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/view/connect.zep", 170);
+	zephir_is_iterable(&option, 0, "queryyetsimple/view/connect.zep", 171);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -395,7 +397,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/view/connect.zep", 182 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/view/connect.zep", 183 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -501,7 +503,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/view/connect.zep", 233);
+	zephir_is_iterable(&option, 0, "queryyetsimple/view/connect.zep", 234);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -577,7 +579,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDisplayFile) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", NULL, 17, &_8$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_6$$5, "queryyetsimple/view/connect.zep", 256 TSRMLS_CC);
+		zephir_throw_exception_debug(&_6$$5, "queryyetsimple/view/connect.zep", 257 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -690,7 +692,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseFile) {
 		ZEPHIR_CALL_METHOD(&_11$$4, this_ptr, "getoption", &_13, 0, &_12$$4);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_11$$4))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme path must be set", "queryyetsimple/view/connect.zep", 280);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme path must be set", "queryyetsimple/view/connect.zep", 281);
 			return;
 		}
 		if (ZEPHIR_IS_STRING(&tpl, "")) {
@@ -886,7 +888,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDefaultFile) {
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "getoption", &_4, 0, &_3);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme path must be set", "queryyetsimple/view/connect.zep", 352);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme path must be set", "queryyetsimple/view/connect.zep", 353);
 		return;
 	}
 	ZEPHIR_CPY_WRT(&bak, &tpl);

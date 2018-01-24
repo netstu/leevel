@@ -20,6 +20,7 @@ namespace Queryyetsimple\Log;
 
 use RuntimeException;
 use InvalidArgumentException;
+use Queryyetsimple\Option\IClass;
 
 /**
  * aconnect 驱动抽象类
@@ -29,7 +30,7 @@ use InvalidArgumentException;
  * @since 2018.01.07
  * @version 1.0
  */
-abstract class Connect
+abstract class Connect implements IClass
 {
 
     /**

@@ -20,6 +20,7 @@ namespace Queryyetsimple\View;
 
 use RuntimeException;
 use InvalidArgumentException;
+use Queryyetsimple\Option\IClass;
 
 /**
  * 模板处理抽象类
@@ -29,7 +30,7 @@ use InvalidArgumentException;
  * @since 2018.01.02
  * @version 1.0
  */
-abstract class Connect
+abstract class Connect implements IClass
 {
 
 	/**

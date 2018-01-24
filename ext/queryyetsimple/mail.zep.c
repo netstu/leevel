@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Mail) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Mail, queryyetsimple, mail, queryyetsimple_support_face_ce, queryyetsimple_mail_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Mail, queryyetsimple, mail, queryyetsimple_support_facade_ce, queryyetsimple_mail_method_entry, 0);
 
 	return SUCCESS;
 

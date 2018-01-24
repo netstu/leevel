@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Session) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Session, queryyetsimple, session, queryyetsimple_support_face_ce, queryyetsimple_session_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Session, queryyetsimple, session, queryyetsimple_support_facade_ce, queryyetsimple_session_method_entry, 0);
 
 	return SUCCESS;
 

@@ -24,7 +24,7 @@
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Throttler) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Throttler, queryyetsimple, throttler, queryyetsimple_support_face_ce, queryyetsimple_throttler_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple, Throttler, queryyetsimple, throttler, queryyetsimple_support_facade_ce, queryyetsimple_throttler_method_entry, 0);
 
 	return SUCCESS;
 
