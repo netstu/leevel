@@ -174,7 +174,7 @@ class Container implements IContainer, ArrayAccess {
 			}
 
 			let obj = call_user_func(closures, container);
-			let \Queryyetsimple\Di\Container::shareClosure[hash] = closures;
+			let \Queryyetsimple\Di\Container::shareClosure[hash] = obj;
 
             return obj;
         }, [closures]);

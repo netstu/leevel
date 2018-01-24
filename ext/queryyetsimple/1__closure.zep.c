@@ -57,7 +57,7 @@ PHP_METHOD(queryyetsimple_1__closure, __invoke) {
 	}
 	ZEPHIR_CALL_FUNCTION(&obj, "call_user_func", NULL, 71, &closures, &container);
 	zephir_check_call_status();
-	zephir_update_static_property_array_multi_ce(queryyetsimple_di_container_ce, SL("shareClosure"), &closures TSRMLS_CC, SL("z"), 1, &hash);
+	zephir_update_static_property_array_multi_ce(queryyetsimple_di_container_ce, SL("shareClosure"), &obj TSRMLS_CC, SL("z"), 1, &hash);
 	RETURN_CCTOR(&obj);
 
 }
