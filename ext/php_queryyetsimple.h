@@ -11,7 +11,7 @@
 #include "kernel/globals.h"
 
 #define PHP_QUERYYETSIMPLE_NAME        "queryyetsimple"
-#define PHP_QUERYYETSIMPLE_VERSION     "4.0.0"
+#define PHP_QUERYYETSIMPLE_VERSION     "1.0.0"
 #define PHP_QUERYYETSIMPLE_EXTNAME     "queryyetsimple"
 #define PHP_QUERYYETSIMPLE_AUTHOR      "Xiangmin Liu <635750556@qq.com>"
 #define PHP_QUERYYETSIMPLE_ZEPVERSION  "0.10.6-0b7210d4f6"

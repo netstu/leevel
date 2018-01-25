@@ -12,16 +12,21 @@ if (PHP_QUERYYETSIMPLE != "no") {
   
   ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "facade.zep.c closureuse.zep.c iarray.zep.c ihtml.zep.c ijson.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/option", "iclass.zep.c ioption.zep.c option.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/di", "provider.zep.c icontainer.zep.c container.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/manager", "manager.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iview.zep.c iaction.zep.c icontroller.zep.c ientity.zep.c action.zep.c controller.zep.c imodel.zep.c view.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/log", "connect.zep.c iconnect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c monolog.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/cookie", "icookie.zep.c cookie.zep.c", "queryyetsimple");
-	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/di", "icontainer.zep.c container.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/i18n", "ii18n.zep.c i18n.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/pipeline", "ipipeline.zep.c pipeline.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/psr4", "ipsr4.zep.c psr4.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/session", "isession.zep.c manager.zep.c session.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/view", "connect.zep.c iconnect.zep.c iview.zep.c html.zep.c manager.zep.c view.zep.c", "queryyetsimple");
-	ADD_SOURCES(configure_module_dirname + "/queryyetsimple", "auth.zep.c cache.zep.c cookie.zep.c database.zep.c db.zep.c encryption.zep.c event.zep.c filesystem.zep.c i18n.zep.c log.zep.c mail.zep.c option.zep.c psr4.zep.c request.zep.c response.zep.c router.zep.c session.zep.c throttler.zep.c validate.zep.c view.zep.c 0__closure.zep.c 1__closure.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple", "auth.zep.c cache.zep.c cookie.zep.c database.zep.c db.zep.c encryption.zep.c event.zep.c filesystem.zep.c i18n.zep.c log.zep.c mail.zep.c option.zep.c psr4.zep.c request.zep.c response.zep.c router.zep.c session.zep.c throttler.zep.c validate.zep.c view.zep.c 0__closure.zep.c 1__closure.zep.c 2__closure.zep.c 3__closure.zep.c 4__closure.zep.c 5__closure.zep.c 6__closure.zep.c 7__closure.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/cache/provider", "register.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/cookie/provider", "register.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/pipeline/provider", "register.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/validate/provider", "register.zep.c", "queryyetsimple");
   ADD_FLAG("CFLAGS_QUERYYETSIMPLE", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("CFLAGS", "/D ZEPHIR_RELEASE /Oi /Ot /Oy /Ob2 /Gs /GF /Gy /GL");
   ADD_FLAG("LDFLAGS", "/LTCG");

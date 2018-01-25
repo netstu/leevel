@@ -262,7 +262,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, share) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, queryyetsimple_1__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, queryyetsimple_5__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	zephir_create_array(&_2, 1, 0 TSRMLS_CC);
 	zephir_array_fast_append(&_2, closures);

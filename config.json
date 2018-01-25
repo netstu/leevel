@@ -56,7 +56,7 @@
     "name": "queryyetsimple",
     "description": "",
     "author": "Xiangmin Liu <635750556@qq.com>",
-    "version": "4.0.0",
+    "version": "1.0.0",
     "verbose": false,
     "requires": {
         "extensions": []
