@@ -19,16 +19,23 @@
 
 
 /**
- * pipeline 服务提供者
+ * encryption 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
- * @since 2017.05.25
+ * @since 2018.01.26
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Provider_Register) {
+ZEPHIR_INIT_CLASS(Queryyetsimple_Encryption_Provider_Register) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Pipeline\\Provider, Register, queryyetsimple, pipeline_provider_register, queryyetsimple_di_provider_ce, queryyetsimple_pipeline_provider_register_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Encryption\\Provider, Register, queryyetsimple, encryption_provider_register, queryyetsimple_di_provider_ce, queryyetsimple_encryption_provider_register_method_entry, 0);
+
+	/**
+	 * 是否延迟载入
+	 *
+	 * @var boolean
+	 */
+	zend_declare_property_bool(queryyetsimple_encryption_provider_register_ce, SL("defer"), 1, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
 
@@ -40,7 +47,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Provider_Register) {
  * @param \Queryyetsimple\Di\IContainer $container
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, __construct) {
+PHP_METHOD(Queryyetsimple_Encryption_Provider_Register, __construct) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_0 = NULL;
@@ -54,7 +61,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, __construct) {
 
 
 
-	ZEPHIR_CALL_PARENT(NULL, queryyetsimple_pipeline_provider_register_ce, getThis(), "__construct", &_0, 0, container);
+	ZEPHIR_CALL_PARENT(NULL, queryyetsimple_encryption_provider_register_ce, getThis(), "__construct", &_0, 0, container);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -65,7 +72,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, __construct) {
  *
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, register) {
+PHP_METHOD(Queryyetsimple_Encryption_Provider_Register, register) {
 
 	zval _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -78,9 +85,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, register) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_16__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_8__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "pipeline");
+	ZVAL_STRING(&_1, "encryption");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -92,7 +99,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, register) {
  *
  * @return array
  */
-PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, providers) {
+PHP_METHOD(Queryyetsimple_Encryption_Provider_Register, providers) {
 
 	zval _0;
 	zval tmp, _1;
@@ -109,18 +116,18 @@ PHP_METHOD(Queryyetsimple_Pipeline_Provider_Register, providers) {
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 4, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "Queryyetsimple\\Pipeline\\Pipeline");
+	ZVAL_STRING(&_1, "Queryyetsimple\\Encryption\\Encryption");
 	zephir_array_fast_append(&_0, &_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Queryyetsimple\\Pipeline\\IPipeline");
+	ZVAL_STRING(&_1, "Queryyetsimple\\Encryption\\IEncryption");
 	zephir_array_fast_append(&_0, &_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Qys\\Pipeline\\Pipeline");
+	ZVAL_STRING(&_1, "Qys\\Encryption\\Encryption");
 	zephir_array_fast_append(&_0, &_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Qys\\Pipeline\\IPipeline");
+	ZVAL_STRING(&_1, "Qys\\Encryption\\IEncryption");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("pipeline"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&tmp, SL("encryption"), &_0, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&tmp);
 
 }

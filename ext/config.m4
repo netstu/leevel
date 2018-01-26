@@ -10,8 +10,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 
 	AC_DEFINE(HAVE_QUERYYETSIMPLE, 1, [Whether you have Queryyetsimple])
 	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/facade.zep.c
-	queryyetsimple/option/iclass.zep.c
 	queryyetsimple/di/provider.zep.c
+	queryyetsimple/option/iclass.zep.c
 	queryyetsimple/manager/manager.zep.c
 	queryyetsimple/mvc/iview.zep.c
 	queryyetsimple/log/connect.zep.c
@@ -37,19 +37,25 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/cookie/cookie.zep.c
 	queryyetsimple/cookie/provider/register.zep.c
 	queryyetsimple/database.zep.c
+	queryyetsimple/database/provider/register.zep.c
 	queryyetsimple/db.zep.c
 	queryyetsimple/di/container.zep.c
 	queryyetsimple/encryption.zep.c
+	queryyetsimple/encryption/provider/register.zep.c
 	queryyetsimple/event.zep.c
+	queryyetsimple/event/provider/register.zep.c
 	queryyetsimple/filesystem.zep.c
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
+	queryyetsimple/i18n/provider/register.zep.c
 	queryyetsimple/log.zep.c
 	queryyetsimple/log/file.zep.c
 	queryyetsimple/log/log.zep.c
 	queryyetsimple/log/manager.zep.c
 	queryyetsimple/log/monolog.zep.c
+	queryyetsimple/log/provider/register.zep.c
 	queryyetsimple/mail.zep.c
+	queryyetsimple/mail/provider/register.zep.c
 	queryyetsimple/mvc/action.zep.c
 	queryyetsimple/mvc/controller.zep.c
 	queryyetsimple/mvc/imodel.zep.c
@@ -65,6 +71,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/router.zep.c
 	queryyetsimple/session.zep.c
 	queryyetsimple/session/manager.zep.c
+	queryyetsimple/session/provider/register.zep.c
 	queryyetsimple/session/session.zep.c
 	queryyetsimple/support/closureuse.zep.c
 	queryyetsimple/support/iarray.zep.c
@@ -76,6 +83,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/view.zep.c
 	queryyetsimple/view/html.zep.c
 	queryyetsimple/view/manager.zep.c
+	queryyetsimple/view/provider/register.zep.c
 	queryyetsimple/view/view.zep.c
 	queryyetsimple/0__closure.zep.c
 	queryyetsimple/1__closure.zep.c
@@ -84,7 +92,24 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/4__closure.zep.c
 	queryyetsimple/5__closure.zep.c
 	queryyetsimple/6__closure.zep.c
-	queryyetsimple/7__closure.zep.c "
+	queryyetsimple/7__closure.zep.c
+	queryyetsimple/8__closure.zep.c
+	queryyetsimple/9__closure.zep.c
+	queryyetsimple/10__closure.zep.c
+	queryyetsimple/11__closure.zep.c
+	queryyetsimple/12__closure.zep.c
+	queryyetsimple/13__closure.zep.c
+	queryyetsimple/14__closure.zep.c
+	queryyetsimple/15__closure.zep.c
+	queryyetsimple/16__closure.zep.c
+	queryyetsimple/17__closure.zep.c
+	queryyetsimple/18__closure.zep.c
+	queryyetsimple/19__closure.zep.c
+	queryyetsimple/20__closure.zep.c
+	queryyetsimple/21__closure.zep.c
+	queryyetsimple/22__closure.zep.c
+	queryyetsimple/23__closure.zep.c
+	queryyetsimple/24__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

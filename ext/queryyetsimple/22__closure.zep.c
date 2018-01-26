@@ -17,15 +17,15 @@
 #include "kernel/memory.h"
 
 
-ZEPHIR_INIT_CLASS(queryyetsimple_5__closure) {
+ZEPHIR_INIT_CLASS(queryyetsimple_22__closure) {
 
-	ZEPHIR_REGISTER_CLASS(queryyetsimple, 5__closure, queryyetsimple, 5__closure, queryyetsimple_5__closure_method_entry, ZEND_ACC_FINAL_CLASS);
+	ZEPHIR_REGISTER_CLASS(queryyetsimple, 22__closure, queryyetsimple, 22__closure, queryyetsimple_22__closure_method_entry, ZEND_ACC_FINAL_CLASS);
 
 	return SUCCESS;
 
 }
 
-PHP_METHOD(queryyetsimple_5__closure, __invoke) {
+PHP_METHOD(queryyetsimple_22__closure, __invoke) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -40,11 +40,11 @@ PHP_METHOD(queryyetsimple_5__closure, __invoke) {
 
 
 	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Database\\Manager"), ZEND_FETCH_CLASS_AUTO);
+	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\View\\Compiler"), ZEND_FETCH_CLASS_AUTO);
 	}
 	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, project);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
 	RETURN_MM();

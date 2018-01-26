@@ -16,15 +16,15 @@
 #include "kernel/fcall.h"
 
 
-ZEPHIR_INIT_CLASS(queryyetsimple_6__closure) {
+ZEPHIR_INIT_CLASS(queryyetsimple_21__closure) {
 
-	ZEPHIR_REGISTER_CLASS(queryyetsimple, 6__closure, queryyetsimple, 6__closure, queryyetsimple_6__closure_method_entry, ZEND_ACC_FINAL_CLASS);
+	ZEPHIR_REGISTER_CLASS(queryyetsimple, 21__closure, queryyetsimple, 21__closure, queryyetsimple_21__closure_method_entry, ZEND_ACC_FINAL_CLASS);
 
 	return SUCCESS;
 
 }
 
-PHP_METHOD(queryyetsimple_6__closure, __invoke) {
+PHP_METHOD(queryyetsimple_21__closure, __invoke) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *project, project_sub, _0, _1;
@@ -40,7 +40,7 @@ PHP_METHOD(queryyetsimple_6__closure, __invoke) {
 
 
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "databases");
+	ZVAL_STRING(&_1, "view.views");
 	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
