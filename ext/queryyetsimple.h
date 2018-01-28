@@ -40,6 +40,7 @@
 #include "queryyetsimple/event.zep.h"
 #include "queryyetsimple/event/provider/register.zep.h"
 #include "queryyetsimple/filesystem.zep.h"
+#include "queryyetsimple/http/provider/register.zep.h"
 #include "queryyetsimple/i18n.zep.h"
 #include "queryyetsimple/i18n/i18n.zep.h"
 #include "queryyetsimple/i18n/provider/register.zep.h"
@@ -64,6 +65,7 @@
 #include "queryyetsimple/request.zep.h"
 #include "queryyetsimple/response.zep.h"
 #include "queryyetsimple/router.zep.h"
+#include "queryyetsimple/router/provider/register.zep.h"
 #include "queryyetsimple/session.zep.h"
 #include "queryyetsimple/session/manager.zep.h"
 #include "queryyetsimple/session/provider/register.zep.h"
@@ -105,5 +107,8 @@
 #include "queryyetsimple/22__closure.zep.h"
 #include "queryyetsimple/23__closure.zep.h"
 #include "queryyetsimple/24__closure.zep.h"
+#include "queryyetsimple/25__closure.zep.h"
+#include "queryyetsimple/26__closure.zep.h"
+#include "queryyetsimple/27__closure.zep.h"
 
 #endif
