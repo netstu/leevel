@@ -31,6 +31,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/view/iconnect.zep.c
 	queryyetsimple/view/iview.zep.c
 	queryyetsimple/auth.zep.c
+	queryyetsimple/auth/provider/register.zep.c
 	queryyetsimple/cache.zep.c
 	queryyetsimple/cache/provider/register.zep.c
 	queryyetsimple/cookie.zep.c
@@ -45,6 +46,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/event.zep.c
 	queryyetsimple/event/provider/register.zep.c
 	queryyetsimple/filesystem.zep.c
+	queryyetsimple/filesystem/provider/register.zep.c
 	queryyetsimple/http/provider/register.zep.c
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
@@ -53,6 +55,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/log/file.zep.c
 	queryyetsimple/log/log.zep.c
 	queryyetsimple/log/manager.zep.c
+	queryyetsimple/log/middleware/log.zep.c
 	queryyetsimple/log/monolog.zep.c
 	queryyetsimple/log/provider/register.zep.c
 	queryyetsimple/mail.zep.c
@@ -63,6 +66,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/view.zep.c
 	queryyetsimple/option.zep.c
 	queryyetsimple/option/option.zep.c
+	queryyetsimple/option/provider/register.zep.c
 	queryyetsimple/pipeline/pipeline.zep.c
 	queryyetsimple/pipeline/provider/register.zep.c
 	queryyetsimple/psr4.zep.c
@@ -73,6 +77,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/router/provider/register.zep.c
 	queryyetsimple/session.zep.c
 	queryyetsimple/session/manager.zep.c
+	queryyetsimple/session/middleware/session.zep.c
 	queryyetsimple/session/provider/register.zep.c
 	queryyetsimple/session/session.zep.c
 	queryyetsimple/support/closureuse.zep.c
@@ -80,6 +85,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/support/ihtml.zep.c
 	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/throttler.zep.c
+	queryyetsimple/throttler/provider/register.zep.c
 	queryyetsimple/validate.zep.c
 	queryyetsimple/validate/provider/register.zep.c
 	queryyetsimple/view.zep.c
@@ -114,7 +120,14 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/24__closure.zep.c
 	queryyetsimple/25__closure.zep.c
 	queryyetsimple/26__closure.zep.c
-	queryyetsimple/27__closure.zep.c "
+	queryyetsimple/27__closure.zep.c
+	queryyetsimple/28__closure.zep.c
+	queryyetsimple/29__closure.zep.c
+	queryyetsimple/30__closure.zep.c
+	queryyetsimple/31__closure.zep.c
+	queryyetsimple/32__closure.zep.c
+	queryyetsimple/33__closure.zep.c
+	queryyetsimple/34__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

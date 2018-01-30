@@ -26,7 +26,7 @@ use Queryyetsimple\Di\IContainer;
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
- * @since 2017.05.12
+ * @since 2018.01.28
  * @version 1.0
  */
 class Register extends Provider
@@ -51,22 +51,39 @@ class Register extends Provider
     public function register()
     {
         this->singleton("router", function (project) {
-            var option, options, item, tmp;
+            var option, options = [], item, tmp;
             
             let option = project->make("option");
-            let options = option->get("url\\");
             let tmp = [
-                "~apps~", 
                 "default_app", 
                 "default_controller", 
                 "default_action", 
                 "middleware_group", 
-                "middleware_alias"
+                "middleware_alias",
+                "model",
+                "rewrite",
+                "pathinfo_depr",
+                "html_suffix",
+                "router_cache",
+                "router_strict",
+                "router_domain_on",
+                "router_domain_top",
+                "make_subdomain_on",
+                "public",
+                "pathinfo_restful",
+                "args_protected",
+                "args_regex",
+                "args_strict",
+                "middleware_strict",
+                "method_strict",
+                "controller_dir"
             ];
 
             for item in tmp {
                 let options[item] = option->get(item);
             }
+
+            let options["apps"] = project->apps();
 
             return new \Queryyetsimple\Router\Router(project, project->make("pipeline"), project->make("request"), options);
         });

@@ -12,8 +12,8 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/fcall.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_21__closure) {
@@ -27,23 +27,23 @@ ZEPHIR_INIT_CLASS(queryyetsimple_21__closure) {
 PHP_METHOD(queryyetsimple_21__closure, __invoke) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, sessions, _0;
+	zval *project, project_sub, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&sessions);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "sessions");
-	ZEPHIR_CALL_METHOD(&sessions, project, "make", NULL, 0, &_0);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "mails");
+	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&sessions, "connect", NULL, 0);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 

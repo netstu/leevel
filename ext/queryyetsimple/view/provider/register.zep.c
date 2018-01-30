@@ -185,7 +185,7 @@ PHP_METHOD(Queryyetsimple_View_Provider_Register, viewViews) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_23__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_30__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.views");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -212,7 +212,7 @@ PHP_METHOD(Queryyetsimple_View_Provider_Register, viewView) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_24__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_31__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.view");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -239,7 +239,7 @@ PHP_METHOD(Queryyetsimple_View_Provider_Register, viewCompiler) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_25__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_32__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.compiler");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -266,7 +266,7 @@ PHP_METHOD(Queryyetsimple_View_Provider_Register, viewParser) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_26__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_33__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.parser");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -293,7 +293,7 @@ PHP_METHOD(Queryyetsimple_View_Provider_Register, viewTwigParser) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_27__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_34__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.twig.parser");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);

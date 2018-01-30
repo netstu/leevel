@@ -23,7 +23,7 @@
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
- * @since 2017.05.12
+ * @since 2018.01.28
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Queryyetsimple_Router_Provider_Register) {
@@ -78,7 +78,7 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, register) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_19__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_25__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "router");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);

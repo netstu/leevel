@@ -12,10 +12,10 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/fcall.h"
 #include "kernel/memory.h"
-#include "kernel/array.h"
+#include "kernel/fcall.h"
 #include "kernel/object.h"
+#include "kernel/array.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_11__closure) {
@@ -28,68 +28,31 @@ ZEPHIR_INIT_CLASS(queryyetsimple_11__closure) {
 
 PHP_METHOD(queryyetsimple_11__closure, __invoke) {
 
-	zend_class_entry *_2 = NULL;
+	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, option, tmp, _0, _1, _3, _4, _5;
+	zval *project, project_sub, option, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
 	ZVAL_UNDEF(&option);
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "option");
-	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
+	ZEPHIR_INIT_VAR(&option);
+	array_init(&option);
+	ZEPHIR_CALL_METHOD(&option, project, "appoption", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "view\\action_fail");
-	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
-	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("action_fail"), &_1, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "view\\action_success");
-	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
-	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("action_success"), &_1, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "default_response");
-	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
-	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("default_response"), &_1, PH_COPY | PH_SEPARATE);
-	if (!_2) {
-	_2 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\Response"), ZEND_FETCH_CLASS_AUTO);
+	if (!_0) {
+	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Event\\Dispatch"), ZEND_FETCH_CLASS_AUTO);
 	}
-	object_init_ex(return_value, _2);
+	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_NVAR(&_0);
-		ZVAL_STRING(&_0, "router");
-		ZEPHIR_CALL_METHOD(&_1, project, "make", NULL, 0, &_0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_0);
-		ZVAL_STRING(&_0, "view");
-		ZEPHIR_CALL_METHOD(&_3, project, "make", NULL, 0, &_0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_0);
-		ZVAL_STRING(&_0, "session");
-		ZEPHIR_CALL_METHOD(&_4, project, "make", NULL, 0, &_0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_0);
-		ZVAL_STRING(&_0, "cookie");
-		ZEPHIR_CALL_METHOD(&_5, project, "make", NULL, 0, &_0);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_3, &_4, &_5, &tmp);
+		zephir_array_fetch_string(&_1, &option, SL("event_strict"), PH_NOISY | PH_READONLY, "queryyetsimple/event/provider/register.zep", 57 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, project, &_1);
 		zephir_check_call_status();
 	}
 	RETURN_MM();

@@ -37,8 +37,8 @@ PHP_METHOD(queryyetsimple_18__closure, __invoke) {
 
 
 
-	object_init_ex(return_value, queryyetsimple_pipeline_pipeline_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 77, project);
+	object_init_ex(return_value, queryyetsimple_log_manager_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 76, project);
 	zephir_check_call_status();
 	RETURN_MM();
 

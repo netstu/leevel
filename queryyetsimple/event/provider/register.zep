@@ -51,7 +51,10 @@ class Register extends Provider
     public function register()
     {
         this->singleton("event", function (project) {
-            return new \Queryyetsimple\Event\Dispatch(project);
+        	var option = [];
+
+        	let option = project->appOption();
+            return new \Queryyetsimple\Event\Dispatch(project, option["event_strict"]);
         });
     }
     

@@ -262,7 +262,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, share) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, queryyetsimple_7__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, queryyetsimple_9__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	zephir_create_array(&_2, 1, 0 TSRMLS_CC);
 	zephir_array_fast_append(&_2, closures);
@@ -1124,7 +1124,6 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseMethodReflection) {
  */
 PHP_METHOD(Queryyetsimple_Di_Container, parseClassReflection) {
 
-	zend_bool _4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *injection_param = NULL, reflection, constructor, param, _0, _1$$3, _2$$3, _3$$3;
 	zval injection;
@@ -1166,13 +1165,11 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassReflection) {
 	}
 	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 31);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &constructor, "getparameters", NULL, 0);
-	zephir_check_call_status();
-	_4 = zephir_is_true(&constructor);
-	if (_4) {
-		_4 = !zephir_is_true(&param);
+	if (zephir_is_true(&constructor)) {
+		ZEPHIR_CALL_METHOD(&param, &constructor, "getparameters", NULL, 0);
+		zephir_check_call_status();
 	}
-	if (_4) {
+	if (!(zephir_is_true(&param))) {
 		ZEPHIR_INIT_NVAR(&param);
 		array_init(&param);
 	}
@@ -1365,7 +1362,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetUnset) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "singletons");
 	zephir_array_fast_append(&prop, &_1);
-	zephir_is_iterable(&prop, 0, "queryyetsimple/di/container.zep", 664);
+	zephir_is_iterable(&prop, 0, "queryyetsimple/di/container.zep", 667);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&prop), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1471,7 +1468,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 699 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 702 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

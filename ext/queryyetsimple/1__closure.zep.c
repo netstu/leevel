@@ -40,7 +40,7 @@ PHP_METHOD(queryyetsimple_1__closure, __invoke) {
 
 
 	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Cache\\Manager"), ZEND_FETCH_CLASS_AUTO);
+	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Auth\\Manager"), ZEND_FETCH_CLASS_AUTO);
 	}
 	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {

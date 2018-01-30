@@ -38,136 +38,136 @@ use Queryyetsimple\Support\ClosureUse;
  * @version 1.0
  */
 class Container implements IContainer, ArrayAccess {
-    
-    /**
-     * 注册服务
-     *
-     * @var array
-     */
-    protected services = [];
+	
+	/**
+	 * 注册服务
+	 *
+	 * @var array
+	 */
+	protected services = [];
 
-    /**
-     * 注册的实例
-     *
-     * @var array
-     */
-    protected instances = [];
+	/**
+	 * 注册的实例
+	 *
+	 * @var array
+	 */
+	protected instances = [];
 
-    /**
-     * 单一实例
-     *
-     * @var array
-     */
-    protected singletons = [];
+	/**
+	 * 单一实例
+	 *
+	 * @var array
+	 */
+	protected singletons = [];
 
-    /**
-     * 别名支持
-     *
-     * @var array
-     */
-    protected alias = [];
+	/**
+	 * 别名支持
+	 *
+	 * @var array
+	 */
+	protected alias = [];
 
-    /**
-     * 分组
-     *
-     * @var array
-     */
-    protected groups = [];
+	/**
+	 * 分组
+	 *
+	 * @var array
+	 */
+	protected groups = [];
 
-    /**
-     * share 静态变量值
-     *
-     * @var array
-     */
-    public static shareClosure = [];
+	/**
+	 * share 静态变量值
+	 *
+	 * @var array
+	 */
+	public static shareClosure = [];
 
-    /**
-     * 注册到容器
-     *
-     * @param mixed $name
-     * @param mixed $service
-     * @param boolean $share
-     * @return $this
-     */
-    public function bind(var name, var service = null, boolean share = false)
-    {
-        var alias;
+	/**
+	 * 注册到容器
+	 *
+	 * @param mixed $name
+	 * @param mixed $service
+	 * @param boolean $share
+	 * @return $this
+	 */
+	public function bind(var name, var service = null, boolean share = false)
+	{
+		var alias;
 
-        if typeof name == "array" {
-            var templist = this->parseAlias(name);
-            let name = array_shift(templist);
-            let alias = array_shift(templist);
-            this->alias(name, alias);
-        }
+		if typeof name == "array" {
+			var templist = this->parseAlias(name);
+			let name = array_shift(templist);
+			let alias = array_shift(templist);
+			this->alias(name, alias);
+		}
 
-        if is_null(service) {
-            let service = name;
-        }
+		if is_null(service) {
+			let service = name;
+		}
 
-        let this->services[name] = service;
+		let this->services[name] = service;
 
-        if share {
-            let this->singletons[] = name;
-        }
+		if share {
+			let this->singletons[] = name;
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 注册为实例
-     *
-     * @param mixed $name
-     * @param mixed $service
-     * @return $this
-     */
-    public function instance(var name, var service = null)
-    {
-        var alias;
+	/**
+	 * 注册为实例
+	 *
+	 * @param mixed $name
+	 * @param mixed $service
+	 * @return $this
+	 */
+	public function instance(var name, var service = null)
+	{
+		var alias;
 
-        if typeof name == "array" {
-            var templist = this->parseAlias(name);
-            let name = array_shift(templist);
-            let alias = array_shift(templist);
-            this->alias(name, alias);
-        }
+		if typeof name == "array" {
+			var templist = this->parseAlias(name);
+			let name = array_shift(templist);
+			let alias = array_shift(templist);
+			this->alias(name, alias);
+		}
 
-        if is_null(service) {
-            let service = name;
-        }
-        let this->instances[name] = service;
+		if is_null(service) {
+			let service = name;
+		}
+		let this->instances[name] = service;
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 注册单一实例
-     *
-     * @param scalar|array $name
-     * @param mixed $service
-     * @return $this
-     */
-    public function singleton(var name, var service = null)
-    {
-        return this->bind(name, service, true);
-    }
+	/**
+	 * 注册单一实例
+	 *
+	 * @param scalar|array $name
+	 * @param mixed $service
+	 * @return $this
+	 */
+	public function singleton(var name, var service = null)
+	{
+		return this->bind(name, service, true);
+	}
 
-    /**
-     * 创建共享的闭包
-     *
-     * @param \Closure $closures
-     * @return \Closure
-     */
-    public function share(<Closure> closures)
-    {
-    	// 动态参数不能定义 container，否则 zephir 编译后报错提示
-    	// Wrong number of parameters
-        return ClosureUse::make(function () {
-        	var args, closures, obj, hash, container;
+	/**
+	 * 创建共享的闭包
+	 *
+	 * @param \Closure $closures
+	 * @return \Closure
+	 */
+	public function share(<Closure> closures)
+	{
+		// 动态参数不能定义 container，否则 zephir 编译后报错提示
+		// Wrong number of parameters
+		return ClosureUse::make(function () {
+			var args, closures, obj, hash, container;
 
-        	let args = func_get_args();
-        	let container = args[0];
-            let closures = args[1];
-            let hash = spl_object_hash(closures);
+			let args = func_get_args();
+			let container = args[0];
+			let closures = args[1];
+			let hash = spl_object_hash(closures);
 
 			if fetch obj, \Queryyetsimple\Di\Container::shareClosure[hash] {
 				return obj;
@@ -176,526 +176,529 @@ class Container implements IContainer, ArrayAccess {
 			let obj = call_user_func(closures, container);
 			let \Queryyetsimple\Di\Container::shareClosure[hash] = obj;
 
-            return obj;
-        }, [closures]);
-    }
+			return obj;
+		}, [closures]);
+	}
 
-    /**
-     * 设置别名
-     *
-     * @param array|string $alias
-     * @param string|null|array $value
-     * @return $this
-     */
-    public function alias(var alias, var value = null)
-    {
-        var key, item;
+	/**
+	 * 设置别名
+	 *
+	 * @param array|string $alias
+	 * @param string|null|array $value
+	 * @return $this
+	 */
+	public function alias(var alias, var value = null)
+	{
+		var key, item;
 
-        if typeof alias == "array" {
-            for key,item in alias {
-                if typeof key == "integer" {
-                    continue;
-                }
-                this->alias(key, item);
-            }
-        } else {
-            let value = ( array ) value;
-            for item in value {
-                let this->alias[item] = alias;
-            }
-        }
+		if typeof alias == "array" {
+			for key,item in alias {
+				if typeof key == "integer" {
+					continue;
+				}
+				this->alias(key, item);
+			}
+		} else {
+			let value = ( array ) value;
+			for item in value {
+				let this->alias[item] = alias;
+			}
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 分组注册
-     *
-     * @param string $group
-     * @param mixed $data
-     * @return $this
-     */
-    public function group(var group, var data)
-    {
-        if ! isset this->groups[group] {
-            let this->groups[group] = [];
-        }
-        let this->groups[group] = data;
+	/**
+	 * 分组注册
+	 *
+	 * @param string $group
+	 * @param mixed $data
+	 * @return $this
+	 */
+	public function group(var group, var data)
+	{
+		if ! isset this->groups[group] {
+			let this->groups[group] = [];
+		}
+		let this->groups[group] = data;
 
-        return this;
-    }
+		return this;
+	}
 
-    /**
-     * 分组制造
-     *
-     * @param string $group
-     * @param array $args
-     * @return array
-     */
-    public function groupMake(var group, array args = [])
-    {
-        var result, instance, item;
+	/**
+	 * 分组制造
+	 *
+	 * @param string $group
+	 * @param array $args
+	 * @return array
+	 */
+	public function groupMake(var group, array args = [])
+	{
+		var result, instance, item;
 
-        if ! isset this->groups[group] {
-            return [];
-        }
+		if ! isset this->groups[group] {
+			return [];
+		}
 
-        let result = [];
-        let instance = ( array ) this->groups[group];
-        for item in instance {
-            let result[item] = this->make(item, args);
-        }
+		let result = [];
+		let instance = ( array ) this->groups[group];
+		for item in instance {
+			let result[item] = this->make(item, args);
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * 服务容器返回对象
-     *
-     * @param string $name
-     * @param array $args
-     * @return object|false
-     */
-    public function make(var name, array args = [])
-    {
-        var instance;
+	/**
+	 * 服务容器返回对象
+	 *
+	 * @param string $name
+	 * @param array $args
+	 * @return object|false
+	 */
+	public function make(var name, array args = [])
+	{
+		var instance;
 
-        // 别名
-        let name = this->getAlias(name);
+		// 别名
+		let name = this->getAlias(name);
 
-        // 存在直接返回
-        if (isset this->instances[name]) {
-            return this->instances[name];
-        }
+		// 存在直接返回
+		if (isset this->instances[name]) {
+			return this->instances[name];
+		}
 
-        // 生成实例
-        if ! isset this->services[name] {
-            return this->getInjectionObject(name, args);
-        }
+		// 生成实例
+		if ! isset this->services[name] {
+			return this->getInjectionObject(name, args);
+		}
  
-        if typeof this->services[name] != "string" && is_callable(this->services[name]) {
-        	if empty args {
-        		let args = [];
-        	}
-            array_unshift(args, this);
+		if typeof this->services[name] != "string" && is_callable(this->services[name]) {
+			if empty args {
+				let args = [];
+			}
+			array_unshift(args, this);
 
-            let instance = call_user_func_array(this->services[name], args);
-        } else {
-            if typeof this->services[name] == "string" {
-                let instance = this->getInjectionObject(this->services[name], args);
-            } else {
-                let instance = this->services[name];
-            }
-        }
+			let instance = call_user_func_array(this->services[name], args);
+		} else {
+			if typeof this->services[name] == "string" {
+				let instance = this->getInjectionObject(this->services[name], args);
+			} else {
+				let instance = this->services[name];
+			}
+		}
 
-        // 单一实例
-        if in_array(name, this->singletons) {
-            let this->instances[name] = instance;
-            return this->instances[name] ;
-        }
+		// 单一实例
+		if in_array(name, this->singletons) {
+			let this->instances[name] = instance;
+			return this->instances[name] ;
+		}
 
-        // 多个实例
-        else {
-            return instance;
-        }
-    }
+		// 多个实例
+		else {
+			return instance;
+		}
+	}
 
-    /**
-     * 实例回调自动注入
-     *
-     * @param callable $callback
-     * @param array $args
-     * @return mixed
-     */
-    public function call(var callback, array args = [])
-    {
-    	var temp = [];
+	/**
+	 * 实例回调自动注入
+	 *
+	 * @param callable $callback
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function call(var callback, array args = [])
+	{
+		var temp = [];
 
-        if empty args {
-            let temp = this->parseInjection(callback);
-        } else {
-        	let temp = args;
-        }
+		if empty args {
+			let temp = this->parseInjection(callback);
+		} else {
+			let temp = args;
+		}
 
-        return call_user_func_array(callback, temp);
-    }
+		return call_user_func_array(callback, temp);
+	}
 
-    /**
-     * 统一去掉前面的斜杠
-     *
-     * @param string $name
-     * @return mixed
-     */
-    protected function normalize(var name)
-    {
-        return ltrim(name, "\\");
-    }
+	/**
+	 * 统一去掉前面的斜杠
+	 *
+	 * @param string $name
+	 * @return mixed
+	 */
+	protected function normalize(var name)
+	{
+		return ltrim(name, "\\");
+	}
 
-    /**
-     * 返回对象别名
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function getAlias(var name)
-    {
-        return (isset this->alias[name]) ? this->alias[name] : name;
-    }
+	/**
+	 * 返回对象别名
+	 *
+	 * @param string $name
+	 * @return string
+	 */
+	protected function getAlias(var name)
+	{
+		return (isset this->alias[name]) ? this->alias[name] : name;
+	}
 
-    /**
-     * 根据 class 名字创建实例
-     *
-     * @param string $classname
-     * @param array $args
-     * @return object
-     */
-    protected function getInjectionObject(var classname, array args = [])
-    {
-    	var temp = [];
+	/**
+	 * 根据 class 名字创建实例
+	 *
+	 * @param string $classname
+	 * @param array $args
+	 * @return object
+	 */
+	protected function getInjectionObject(var classname, array args = [])
+	{
+		var temp = [];
 
-        if ! class_exists(classname) {
-            return false;
-        }
+		if ! class_exists(classname) {
+			return false;
+		}
 
-        if empty args {
-            let temp = this->parseInjection(classname);
-        } else {
-        	let temp = args;
-        }
+		if empty args {
+			let temp = this->parseInjection(classname);
+		} else {
+			let temp = args;
+		}
 
-        return this->newInstanceArgs(classname, temp);
-    }
+		return this->newInstanceArgs(classname, temp);
+	}
 
-    /**
-     * 分析自动依赖注入
-     *
-     * @param mixed $injection
-     * @return array
-     */
-    protected function parseInjection(var injection)
-    {
-        var result, param, item, argsclass, data, e;
+	/**
+	 * 分析自动依赖注入
+	 *
+	 * @param mixed $injection
+	 * @return array
+	 */
+	protected function parseInjection(var injection)
+	{
+		var result, param, item, argsclass, data, e;
 
-        let result = [];
+		let result = [];
 
-        let param = this->parseReflection(injection);
+		let param = this->parseReflection(injection);
 
-        for item in param {
-            try {
-            	let argsclass = this->parseParameterClass(item);
+		for item in param {
+			try {
+				let argsclass = this->parseParameterClass(item);
 
-            	if (argsclass) {
-            		let data = this->parseClassInstance(argsclass);
-            	} elseif (item->isDefaultValueAvailable()) {
-            		let data = this->parseClassInstance(argsclass);
-            	} else {
-            		let data = null;
-            	}
+				if (argsclass) {
+					let data = this->parseClassInstance(argsclass);
+				} elseif (item->isDefaultValueAvailable()) {
+					let data = this->parseClassInstance(argsclass);
+				} else {
+					let data = null;
+				}
 
-                let result[item->name] = data;
-            } catch ReflectionException, e {
-                throw new InvalidArgumentException(e->getMessage());
-            }
-        }
+				let result[item->name] = data;
+			} catch ReflectionException, e {
+				throw new InvalidArgumentException(e->getMessage());
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * 分析反射参数的类
-     * 
-     * @param \ReflectionParameter $param
-     * @return boolean|string
-     */
-    protected function parseParameterClass(<ReflectionParameter> param)
-    {
-        var classObject;
+	/**
+	 * 分析反射参数的类
+	 * 
+	 * @param \ReflectionParameter $param
+	 * @return boolean|string
+	 */
+	protected function parseParameterClass(<ReflectionParameter> param)
+	{
+		var classObject;
 
-        let classObject = param->getClass();
-        if ! classObject || ! (typeof classObject == "object" && classObject instanceof ReflectionClass) {
-            return false;
-        }
+		let classObject = param->getClass();
+		if ! classObject || ! (typeof classObject == "object" && classObject instanceof ReflectionClass) {
+			return false;
+		}
 
-        return classObject->getName();
-    }
+		return classObject->getName();
+	}
 
-    /**
-     * 解析反射参数类实例
-     * 
-     * @param string $argsclass
-     * @return array
-     */
-    protected function parseClassInstance(string argsclass)
-    {
-        var result;
+	/**
+	 * 解析反射参数类实例
+	 * 
+	 * @param string $argsclass
+	 * @return array
+	 */
+	protected function parseClassInstance(string argsclass)
+	{
+		var result;
 
 		let result = this->parseClassFromContainer(argsclass);
-        if (result) {
-        	return result;
-        }
+		if (result) {
+			return result;
+		}
 
-        let result = this->parseClassNotExists(argsclass);
-        if (result) {
-        	return result;
-        }
+		let result = this->parseClassNotExists(argsclass);
+		if (result) {
+			return result;
+		}
 
-        throw new InvalidArgumentException(sprintf("Class or interface %s is not register in container", argsclass));
-    }
+		throw new InvalidArgumentException(sprintf("Class or interface %s is not register in container", argsclass));
+	}
 
-    /**
-     * 从服务容器中获取解析反射参数类实例
-     * 
-     * @param string $argsclass
-     * @return boolean|object
-     */
-    protected function parseClassFromContainer(string argsclass)
-    {
-        var itemMake, result;
+	/**
+	 * 从服务容器中获取解析反射参数类实例
+	 * 
+	 * @param string $argsclass
+	 * @return boolean|object
+	 */
+	protected function parseClassFromContainer(string argsclass)
+	{
+		var itemMake, result;
 
-        let itemMake = this->make(argsclass);
-        if itemMake === false {
-            return false;
-        }
+		let itemMake = this->make(argsclass);
+		if itemMake === false {
+			return false;
+		}
 
-        // 实例对象
-        if typeof itemMake == "object" {
-            return itemMake;
-        }
+		// 实例对象
+		if typeof itemMake == "object" {
+			return itemMake;
+		}
 
-        // 接口绑定实现
-        if class_exists(itemMake) {
-            let result = this->make(itemMake);
-            if typeof result != "object" {
-                throw new InvalidArgumentException(sprintf("Class or interface %s is register in container is not object.", argsclass));
-            }
+		// 接口绑定实现
+		if class_exists(itemMake) {
+			let result = this->make(itemMake);
+			if typeof result != "object" {
+				throw new InvalidArgumentException(sprintf("Class or interface %s is register in container is not object.", argsclass));
+			}
 
-            return result;
-        }
+			return result;
+		}
 
-        throw new InvalidArgumentException(sprintf("Class or interface %s is not register in container", argsclass));
-    }
+		throw new InvalidArgumentException(sprintf("Class or interface %s is not register in container", argsclass));
+	}
 
-    /**
-     * 独立类作为解析反射参数类实例
-     * 
-     * @param string $argsclass
-     * @return boolean|object
-     */
-    protected function parseClassNotExists(string argsclass)
-    {
-        var result;
+	/**
+	 * 独立类作为解析反射参数类实例
+	 * 
+	 * @param string $argsclass
+	 * @return boolean|object
+	 */
+	protected function parseClassNotExists(string argsclass)
+	{
+		var result;
 
-        if ! class_exists(argsclass) {
-            return false;
-        }
+		if ! class_exists(argsclass) {
+			return false;
+		}
 
-        let result = this->make(argsclass);
-        if typeof result != "object" {
-            throw new InvalidArgumentException(sprintf("Class or interface %s is register in container is not object.", argsclass));
-        }
+		let result = this->make(argsclass);
+		if typeof result != "object" {
+			throw new InvalidArgumentException(sprintf("Class or interface %s is register in container is not object.", argsclass));
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * 不同的类型不同的反射
-     * 
-     * @param mixed $injection
-     * @return array
-     */
-    protected function parseReflection(var injection)
-    {
-    	if typeof injection == "object" && injection instanceof Closure {
-    		return this->parseClosureReflection(injection);
-    	} elseif typeof injection != "string" && is_callable(injection) {
-    		return this->parseMethodReflection(injection);
-    	} elseif typeof injection == "string" {
-    		return this->parseClassReflection(injection);
-    	}
+	/**
+	 * 不同的类型不同的反射
+	 * 
+	 * @param mixed $injection
+	 * @return array
+	 */
+	protected function parseReflection(var injection)
+	{
+		if typeof injection == "object" && injection instanceof Closure {
+			return this->parseClosureReflection(injection);
+		} elseif typeof injection != "string" && is_callable(injection) {
+			return this->parseMethodReflection(injection);
+		} elseif typeof injection == "string" {
+			return this->parseClassReflection(injection);
+		}
 
-    	throw new InvalidArgumentException("Unsupported callback types.");
-    }
+		throw new InvalidArgumentException("Unsupported callback types.");
+	}
 
-    /**
-     * 解析闭包反射参数
-     * 
-     * @param Closure $injection
-     * @return array
-     */
-    protected function parseClosureReflection(<Closure> injection)
-    {
-        var reflection, param;
+	/**
+	 * 解析闭包反射参数
+	 * 
+	 * @param Closure $injection
+	 * @return array
+	 */
+	protected function parseClosureReflection(<Closure> injection)
+	{
+		var reflection, param;
 
-        let reflection = new ReflectionFunction(injection);
-        let param = reflection->getParameters();
-        if empty param {
-            let param = [];
-        }
+		let reflection = new ReflectionFunction(injection);
+		let param = reflection->getParameters();
+		if empty param {
+			let param = [];
+		}
 
-        return param;
-    }
+		return param;
+	}
 
-    /**
-     * 解析数组回调反射参数
-     * 
-     * @param array&callback $injection
-     * @return array
-     */
-    protected function parseMethodReflection(var injection)
-    {
-        var reflection, param;
+	/**
+	 * 解析数组回调反射参数
+	 * 
+	 * @param array&callback $injection
+	 * @return array
+	 */
+	protected function parseMethodReflection(var injection)
+	{
+		var reflection, param;
 
-        let reflection = new ReflectionMethod(injection[0], injection[1]);
-        let param = reflection->getParameters();
-        if empty param {
-            let param = [];
-        }
+		let reflection = new ReflectionMethod(injection[0], injection[1]);
+		let param = reflection->getParameters();
+		if empty param {
+			let param = [];
+		}
 
-        return param;
-    }
+		return param;
+	}
 
-    /**
-     * 解析类反射参数
-     * 
-     * @param string $injection
-     * @return array
-     */
-    protected function parseClassReflection(string injection)
-    {
-        var reflection, constructor, param;
+	/**
+	 * 解析类反射参数
+	 * 
+	 * @param string $injection
+	 * @return array
+	 */
+	protected function parseClassReflection(string injection)
+	{
+		var reflection, constructor, param;
 
-        let reflection = new ReflectionClass(injection);
-        if ! reflection->isInstantiable() {
-            throw new InvalidArgumentException(sprintf("Class %s is not instantiable.", injection));
-        }
+		let reflection = new ReflectionClass(injection);
+		if ! reflection->isInstantiable() {
+			throw new InvalidArgumentException(sprintf("Class %s is not instantiable.", injection));
+		}
 
-        let constructor = reflection->getConstructor();
-        let param = constructor->getParameters();
-        if constructor && ! (param) {
-            let param = [];
-        }
+		let constructor = reflection->getConstructor();
+		if (constructor) {
+			let param = constructor->getParameters();
+		}
 
-        return param;
-    }
+		if ! param {
+			let param = [];
+		}
 
-    /**
-     * 动态创建实例对象
-     *
-     * @param string $classname
-     * @param array $args
-     * @return mixed
-     */
-    protected function newInstanceArgs(var classname, var args)
-    {
-        return (new ReflectionClass(classname))->newInstanceArgs(args);
-    }
+		return param;
+	}
 
-    /**
-     * 解析注册容器对象别名
-     *
-     * @param array $name
-     * @return array
-     */
-    protected function parseAlias(array name)
-    {
-        return [
-            key(name),
-            current(name)
-        ];
-    }
+	/**
+	 * 动态创建实例对象
+	 *
+	 * @param string $classname
+	 * @param array $args
+	 * @return mixed
+	 */
+	protected function newInstanceArgs(var classname, var args)
+	{
+		return (new ReflectionClass(classname))->newInstanceArgs(args);
+	}
 
-    /**
-     * 判断容器对象是否存在
-     *
-     * @param string $name
-     * @return bool
-     */
-    public function offsetExists(var name)
-    {
-        return isset this->services[this->normalize(name)];
-    }
+	/**
+	 * 解析注册容器对象别名
+	 *
+	 * @param array $name
+	 * @return array
+	 */
+	protected function parseAlias(array name)
+	{
+		return [
+			key(name),
+			current(name)
+		];
+	}
 
-    /**
-     * 获取一个容器对象
-     *
-     * @param string $name
-     * @return mixed
-     */
-    public function offsetGet(var name)
-    {
-        return this->make(name);
-    }
+	/**
+	 * 判断容器对象是否存在
+	 *
+	 * @param string $name
+	 * @return bool
+	 */
+	public function offsetExists(var name)
+	{
+		return isset this->services[this->normalize(name)];
+	}
 
-    /**
-     * 注册容器对象
-     *
-     * @param string $name
-     * @param mixed $service
-     * @return void
-     */
-    public function offsetSet(var name, var service)
-    {
-        return this->bind(name, service);
-    }
+	/**
+	 * 获取一个容器对象
+	 *
+	 * @param string $name
+	 * @return mixed
+	 */
+	public function offsetGet(var name)
+	{
+		return this->make(name);
+	}
 
-    /**
-     * 删除一个容器对象
-     *
-     * @param string $name
-     * @return void
-     */
-    public function offsetUnset(var name)
-    {
-        var prop, item;
+	/**
+	 * 注册容器对象
+	 *
+	 * @param string $name
+	 * @param mixed $service
+	 * @return void
+	 */
+	public function offsetSet(var name, var service)
+	{
+		return this->bind(name, service);
+	}
 
-        let name = this->normalize(name);
+	/**
+	 * 删除一个容器对象
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+	public function offsetUnset(var name)
+	{
+		var prop, item;
 
-        let prop = [
-            "services",
-            "instances",
-            "singletons"
-        ];
+		let name = this->normalize(name);
 
-        for item in prop {
-            if isset this->{item}[name] {
-                unset this->{item}[name];
-            }
-        }
-    }
+		let prop = [
+			"services",
+			"instances",
+			"singletons"
+		];
 
-    /**
-     * 捕捉支持属性参数
-     *
-     * @param string $name 支持的项
-     * @return 设置项
-     */
-    public function __get(var name)
-    {
-        return this->offsetGet(name);
-    }
+		for item in prop {
+			if isset this->{item}[name] {
+				unset this->{item}[name];
+			}
+		}
+	}
 
-    /**
-     * 设置支持属性参数
-     *
-     * @param string $name 支持的项
-     * @param mixed $service 支持的值
-     * @return void
-     */
-    public function __set(var name, var service)
-    {
-        this->offsetSet(name, service);
-        return this;
-    }
+	/**
+	 * 捕捉支持属性参数
+	 *
+	 * @param string $name 支持的项
+	 * @return 设置项
+	 */
+	public function __get(var name)
+	{
+		return this->offsetGet(name);
+	}
 
-    /**
-     * call 
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call(string method, array args)
-    {
-        throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
-    }
+	/**
+	 * 设置支持属性参数
+	 *
+	 * @param string $name 支持的项
+	 * @param mixed $service 支持的值
+	 * @return void
+	 */
+	public function __set(var name, var service)
+	{
+		this->offsetSet(name, service);
+		return this;
+	}
+
+	/**
+	 * call 
+	 *
+	 * @param string $method
+	 * @param array $args
+	 * @return mixed
+	 */
+	public function __call(string method, array args)
+	{
+		throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
+	}
 }

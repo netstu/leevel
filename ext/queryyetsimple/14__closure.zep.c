@@ -14,6 +14,8 @@
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/array.h"
+#include "kernel/object.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_14__closure) {
@@ -26,20 +28,60 @@ ZEPHIR_INIT_CLASS(queryyetsimple_14__closure) {
 
 PHP_METHOD(queryyetsimple_14__closure, __invoke) {
 
+	zend_class_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *project, project_sub, option, tmp, _0, _1, _3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	object_init_ex(return_value, queryyetsimple_log_manager_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 76, project);
+	ZEPHIR_INIT_VAR(&_0);
+	ZVAL_STRING(&_0, "option");
+	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&tmp);
+	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "var_method");
+	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	zephir_array_update_string(&tmp, SL("var_method"), &_1, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "var_ajax");
+	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	zephir_array_update_string(&tmp, SL("var_ajax"), &_1, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "var_pjax");
+	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	zephir_array_update_string(&tmp, SL("var_pjax"), &_1, PH_COPY | PH_SEPARATE);
+	if (!_2) {
+	_2 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\Request"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(return_value, _2);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "session");
+		ZEPHIR_CALL_METHOD(&_1, project, "make", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "cookie");
+		ZEPHIR_CALL_METHOD(&_3, project, "make", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_3, &tmp);
+		zephir_check_call_status();
+	}
 	RETURN_MM();
 
 }

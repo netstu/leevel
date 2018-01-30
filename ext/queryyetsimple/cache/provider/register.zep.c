@@ -164,7 +164,7 @@ PHP_METHOD(Queryyetsimple_Cache_Provider_Register, caches) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_1__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_3__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "caches");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -191,7 +191,7 @@ PHP_METHOD(Queryyetsimple_Cache_Provider_Register, cache) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_2__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_4__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "cache");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -218,7 +218,7 @@ PHP_METHOD(Queryyetsimple_Cache_Provider_Register, cacheLoad) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_3__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_5__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "cache.load");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
