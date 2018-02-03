@@ -18,6 +18,8 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/log/iconnect.zep.c
 	queryyetsimple/cookie/icookie.zep.c
 	queryyetsimple/di/icontainer.zep.c
+	queryyetsimple/event/idispatch.zep.c
+	queryyetsimple/event/isubject.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
 	queryyetsimple/log/ilog.zep.c
 	queryyetsimple/mvc/iaction.zep.c
@@ -44,7 +46,11 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/encryption.zep.c
 	queryyetsimple/encryption/provider/register.zep.c
 	queryyetsimple/event.zep.c
+	queryyetsimple/event/dispatch.zep.c
+	queryyetsimple/event/eventprovider.zep.c
+	queryyetsimple/event/observer.zep.c
 	queryyetsimple/event/provider/register.zep.c
+	queryyetsimple/event/subject.zep.c
 	queryyetsimple/filesystem.zep.c
 	queryyetsimple/filesystem/provider/register.zep.c
 	queryyetsimple/http/provider/register.zep.c

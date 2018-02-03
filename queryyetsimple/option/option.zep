@@ -237,7 +237,7 @@ class Option implements IOption, ArrayAccess
 	}
 
 	/**
-	 * 获取配置
+	 * 实现 ArrayAccess::offsetGet
 	 *
 	 * @param string $name
 	 * @return mixed
@@ -248,7 +248,7 @@ class Option implements IOption, ArrayAccess
 	}
 
 	/**
-	 * 设置配置
+	 * 实现 ArrayAccess::offsetSet
 	 *
 	 * @param string $name
 	 * @param mixed $value
@@ -260,7 +260,7 @@ class Option implements IOption, ArrayAccess
 	}
 
 	/**
-	 * 删除配置
+	 * 实现 ArrayAccess::offsetUnset
 	 *
 	 * @param string $name
 	 * @return void

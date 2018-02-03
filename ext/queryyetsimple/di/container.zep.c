@@ -1243,7 +1243,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseAlias) {
 }
 
 /**
- * 判断容器对象是否存在
+ * 实现 ArrayAccess::offsetExists
  *
  * @param string $name
  * @return bool
@@ -1271,7 +1271,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetExists) {
 }
 
 /**
- * 获取一个容器对象
+ * 实现 ArrayAccess::offsetGet
  *
  * @param string $name
  * @return mixed
@@ -1296,7 +1296,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetGet) {
 }
 
 /**
- * 注册容器对象
+ * 实现 ArrayAccess::offsetSet
  *
  * @param string $name
  * @param mixed $service
@@ -1323,7 +1323,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetSet) {
 }
 
 /**
- * 删除一个容器对象
+ * 实现 ArrayAccess::offsetUnset
  *
  * @param string $name
  * @return void
