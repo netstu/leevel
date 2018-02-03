@@ -14,6 +14,7 @@
 #include "kernel/main.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
+#include "kernel/array.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_13__closure) {
@@ -27,23 +28,25 @@ ZEPHIR_INIT_CLASS(queryyetsimple_13__closure) {
 PHP_METHOD(queryyetsimple_13__closure, __invoke) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _1;
+	zval *project, project_sub, option, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "filesystems");
-	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
+	ZEPHIR_INIT_VAR(&option);
+	array_init(&option);
+	ZEPHIR_CALL_METHOD(&option, project, "appoption", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
+	object_init_ex(return_value, queryyetsimple_event_dispatch_ce);
+	zephir_array_fetch_string(&_0, &option, SL("event_strict"), PH_NOISY | PH_READONLY, "queryyetsimple/event/provider/register.zep", 57 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 90, project, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

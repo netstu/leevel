@@ -318,7 +318,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, traverseGenerator) {
 	ZEPHIR_CALL_CE_STATIC(&next, _8, "fromcallable", NULL, 0, &_9);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&args);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 24, &args, &next);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 35, &args, &next);
 	ZEPHIR_UNREF(&args);
 	zephir_check_call_status();
 	zephir_read_property(&_11, this_ptr, SL("generator"), PH_NOISY_CC | PH_READONLY);
@@ -372,7 +372,6 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, makeNextClosure) {
  */
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 
-	zend_class_entry *_4 = NULL;
 	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *stage_param = NULL, item, _0, *_1, _2$$3;
@@ -395,7 +394,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 	array_init(&temp);
 	ZVAL_NULL(&_0);
 	ZEPHIR_MAKE_REF(&stage);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 24, &stage, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 35, &stage, &_0);
 	ZEPHIR_UNREF(&stage);
 	zephir_check_call_status();
 	zephir_is_iterable(&stage, 0, "queryyetsimple/pipeline/pipeline.zep", 201);
@@ -408,14 +407,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 		zephir_array_append(&temp, &_2$$3, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 198);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	if (!_4) {
-	_4 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Collection\\Collection"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _4);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &temp);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, queryyetsimple_collection_collection_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 19, &temp);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }
@@ -525,7 +519,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse) {
 	ZEPHIR_INIT_VAR(&_1);
 	array_init(&_1);
 	ZVAL_LONG(&_2, 2);
-	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 47, &_0, &_2, &_1);
+	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 56, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&name);
 	zephir_array_fetch_long(&name, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 256 TSRMLS_CC);

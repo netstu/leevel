@@ -36,7 +36,8 @@ class Response extends Facade
 	 *
 	 * @return string
 	 */
-	protected static function name() -> string {
+	protected static function name() -> string 
+	{
 		return "response";
 	}
 }

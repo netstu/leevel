@@ -262,7 +262,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, share) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, queryyetsimple_9__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, queryyetsimple_11__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	zephir_create_array(&_2, 1, 0 TSRMLS_CC);
 	zephir_array_fast_append(&_2, closures);
@@ -322,7 +322,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, alias) {
 			if (Z_TYPE_P(&key) == IS_LONG) {
 				continue;
 			}
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "alias", &_3, 23, &key, &item);
+			ZEPHIR_CALL_METHOD(NULL, this_ptr, "alias", &_3, 34, &key, &item);
 			zephir_check_call_status();
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&item);
@@ -520,7 +520,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, make) {
 			array_init(&args);
 		}
 		ZEPHIR_MAKE_REF(&args);
-		ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 24, &args, this_ptr);
+		ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 35, &args, this_ptr);
 		ZEPHIR_UNREF(&args);
 		zephir_check_call_status();
 		zephir_read_property(&_11$$5, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
@@ -1065,9 +1065,9 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClosureReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionfunction")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 25, injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 36, injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 26);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 37);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1104,9 +1104,9 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseMethodReflection) {
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionmethod")));
 	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 548 TSRMLS_CC);
 	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 548 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 27, &_0, &_1);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 38, &_0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 28);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 39);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1146,9 +1146,9 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionclass")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 29, &injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 40, &injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 30);
+	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 41);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -1163,7 +1163,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassReflection) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 31);
+	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 42);
 	zephir_check_call_status();
 	if (zephir_is_true(&constructor)) {
 		ZEPHIR_CALL_METHOD(&param, &constructor, "getparameters", NULL, 0);
@@ -1201,9 +1201,9 @@ PHP_METHOD(Queryyetsimple_Di_Container, newInstanceArgs) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	object_init_ex(&_0, zephir_get_internal_ce(SL("reflectionclass")));
-	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 29, classname);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 40, classname);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "newinstanceargs", NULL, 32, args);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "newinstanceargs", NULL, 43, args);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1232,10 +1232,10 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseAlias) {
 
 
 	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_0, "key", NULL, 33, &name);
+	ZEPHIR_CALL_FUNCTION(&_0, "key", NULL, 21, &name);
 	zephir_check_call_status();
 	zephir_array_fast_append(return_value, &_0);
-	ZEPHIR_CALL_FUNCTION(&_0, "current", NULL, 34, &name);
+	ZEPHIR_CALL_FUNCTION(&_0, "current", NULL, 20, &name);
 	zephir_check_call_status();
 	zephir_array_fast_append(return_value, &_0);
 	RETURN_MM();

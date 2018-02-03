@@ -6,7 +6,7 @@ ZEPHIR_INIT_CLASS(queryyetsimple_7__closure);
 PHP_METHOD(queryyetsimple_7__closure, __invoke);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_7__closure___invoke, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_7__closure_method_entry) {

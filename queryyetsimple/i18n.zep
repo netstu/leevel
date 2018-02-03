@@ -36,7 +36,8 @@ class I18n extends Facade
 	 *
 	 * @return string
 	 */
-	protected static function name() -> string {
+	protected static function name() -> string 
+	{
 		return "i18n";
 	}
 }

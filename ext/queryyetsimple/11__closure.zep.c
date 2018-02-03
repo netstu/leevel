@@ -13,8 +13,10 @@
 
 #include "kernel/main.h"
 #include "kernel/memory.h"
-#include "kernel/fcall.h"
+#include "kernel/main.h"
 #include "kernel/array.h"
+#include "kernel/fcall.h"
+#include "kernel/object.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_11__closure) {
@@ -27,28 +29,36 @@ ZEPHIR_INIT_CLASS(queryyetsimple_11__closure) {
 
 PHP_METHOD(queryyetsimple_11__closure, __invoke) {
 
+	zval args, closures, obj, hash, container, _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, option, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&closures);
+	ZVAL_UNDEF(&obj);
+	ZVAL_UNDEF(&hash);
+	ZVAL_UNDEF(&container);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
 
-
-
-	ZEPHIR_INIT_VAR(&option);
-	array_init(&option);
-	ZEPHIR_CALL_METHOD(&option, project, "appoption", NULL, 0);
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
+	ZEPHIR_OBS_VAR(&container);
+	zephir_array_fetch_long(&container, &args, 0, PH_NOISY, "queryyetsimple/di/container.zep", 168 TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&closures);
+	zephir_array_fetch_long(&closures, &args, 1, PH_NOISY, "queryyetsimple/di/container.zep", 169 TSRMLS_CC);
+	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 88, &closures);
 	zephir_check_call_status();
-	object_init_ex(return_value, queryyetsimple_event_dispatch_ce);
-	zephir_array_fetch_string(&_0, &option, SL("event_strict"), PH_NOISY | PH_READONLY, "queryyetsimple/event/provider/register.zep", 57 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 78, project, &_0);
+	ZEPHIR_OBS_VAR(&obj);
+	zephir_read_static_property_ce(&_0, queryyetsimple_di_container_ce, SL("shareClosure"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset_fetch(&obj, &_0, &hash, 0 TSRMLS_CC)) {
+		RETURN_CCTOR(&obj);
+	}
+	ZEPHIR_CALL_FUNCTION(&obj, "call_user_func", NULL, 89, &closures, &container);
 	zephir_check_call_status();
-	RETURN_MM();
+	zephir_update_static_property_array_multi_ce(queryyetsimple_di_container_ce, SL("shareClosure"), &obj TSRMLS_CC, SL("z"), 1, &hash);
+	RETURN_CCTOR(&obj);
 
 }
 

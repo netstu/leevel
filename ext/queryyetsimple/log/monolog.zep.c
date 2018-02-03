@@ -604,7 +604,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 	if (zephir_is_true(&ext)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZEPHIR_CONCAT_SV(&_1$$3, ".", &ext);
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 42, &path, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 51, &path, &_1$$3);
 		zephir_check_call_status();
 		ZVAL_LONG(&_3$$3, 0);
 		ZEPHIR_INIT_VAR(&_4$$3);

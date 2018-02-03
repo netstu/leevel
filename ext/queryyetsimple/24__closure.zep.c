@@ -27,18 +27,13 @@ ZEPHIR_INIT_CLASS(queryyetsimple_24__closure) {
 PHP_METHOD(queryyetsimple_24__closure, __invoke) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
 
-
-
-	object_init_ex(return_value, queryyetsimple_pipeline_pipeline_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 82, project);
+	object_init_ex(return_value, queryyetsimple_option_option_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 93);
 	zephir_check_call_status();
 	RETURN_MM();
 
