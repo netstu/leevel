@@ -18,6 +18,7 @@
  */
 namespace Queryyetsimple\Collection;
 
+use Closure;
 use Iterator;
 use Countable;
 use ArrayAccess;
@@ -28,6 +29,7 @@ use InvalidArgumentException;
 use Queryyetsimple\Support\Type;
 use Queryyetsimple\Support\IJson;
 use Queryyetsimple\Support\IArray;
+use Queryyetsimple\Support\IMacro;
 
 /**
  * 集合
@@ -37,7 +39,7 @@ use Queryyetsimple\Support\IArray;
  * @since 2018.02.03
  * @version 1.0
  */
-class Collection implements IArray, IJson, Iterator, ArrayAccess, Countable, JsonSerializable
+class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Countable, JsonSerializable
 {
 
     /**
@@ -60,6 +62,13 @@ class Collection implements IArray, IJson, Iterator, ArrayAccess, Countable, Jso
      * @var mixed
      */
     protected type = [];
+
+    /**
+     * 注册的动态扩展
+     *
+     * @var array
+     */
+    protected static macro = [];
     
     /**
      * 构造函数
@@ -573,6 +582,71 @@ class Collection implements IArray, IJson, Iterator, ArrayAccess, Countable, Jso
     {
         return array_column(this->elements, key, value);
     }
+
+    /**
+     * 注册一个扩展
+     *
+     * @param string $name
+     * @param callable $macro
+     * @return void
+     */
+    public static function macro(string name, macro)
+    {
+        let self::macro[name] = macro;
+    }
+    
+    /**
+     * 判断一个扩展是否注册
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function hasMacro(string name) -> bool
+    {
+        return isset self::macro[name];
+    }
+
+    /**
+     * __callStatic 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以取消 PHP 版本的静态闭包绑定功能
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public static function callStaticMacro(string method, array args)
+    {
+        if self::hasMacro(method) {
+            return call_user_func_array(self::macro[method], args);
+        }
+
+        throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
+    }
+
+    /**
+     * __call 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以绑定对象但是不绑定作用域，即可以使用 $this,只能访问 public 属性
+     * 
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function callMacro(string method, array args)
+    {
+        if self::hasMacro(method) {
+            if self::macro[method] instanceof Closure {
+            	return call_user_func_array(self::macro[method]->bindTo(this), args);
+            } else {
+                return call_user_func_array(self::macro[method], args);
+            }
+        }
+
+        throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
+    }
     
     /**
      * 验证类型
@@ -638,18 +712,6 @@ class Collection implements IArray, IJson, Iterator, ArrayAccess, Countable, Jso
     }
     
     /**
-     * call 
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call(string method, array args)
-    {
-        throw new BadMethodCallException(sprintf("Collection method %s is not defined.", method));
-    }
-    
-    /**
      * __get 魔术方法
      *
      * @param string $key
@@ -670,5 +732,29 @@ class Collection implements IArray, IJson, Iterator, ArrayAccess, Countable, Jso
     public function __set(string key, value)
     {
         this->offsetSet(key, value);
+    }
+
+    /**
+     * __callStatic 魔术方法
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public static function __callStatic(string method, array args)
+    {
+        return self::callStaticMacro(method, args);
+    }
+    
+    /**
+     * __call 魔术方法
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call(string method, array args)
+    {
+        return this->callMacro(method, args);
     }
 }

@@ -26,6 +26,7 @@
 #include "queryyetsimple/session/isession.zep.h"
 #include "queryyetsimple/support/iarray.zep.h"
 #include "queryyetsimple/support/ijson.zep.h"
+#include "queryyetsimple/support/imacro.zep.h"
 #include "queryyetsimple/view/connect.zep.h"
 #include "queryyetsimple/view/iconnect.zep.h"
 #include "queryyetsimple/view/iview.zep.h"

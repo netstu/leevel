@@ -31,6 +31,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/session/isession.zep.c
 	queryyetsimple/support/iarray.zep.c
 	queryyetsimple/support/ijson.zep.c
+	queryyetsimple/support/imacro.zep.c
 	queryyetsimple/view/connect.zep.c
 	queryyetsimple/view/iconnect.zep.c
 	queryyetsimple/view/iview.zep.c

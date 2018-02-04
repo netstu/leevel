@@ -140,7 +140,7 @@ PHP_METHOD(Queryyetsimple_Support_Type, vars) {
 		if (!zephir_is_true(&_3$$17)) {
 			ZEPHIR_INIT_VAR(&_4$$18);
 			ZEPHIR_INIT_VAR(&_5$$18);
-			ZVAL_STRING(&_5$$18, "if (! function_exists('zephir_instanceof')) {\n\t\t\t\t\t\tfunction zephir_instanceof ($value, $type) {\n\t\t\t\t\t\t\treturn $value instanceof $type;\n\t\t\t\t\t\t}\n\t\t\t\t\t}");
+			ZVAL_STRING(&_5$$18, "if (! function_exists('zephir_instanceof')) {\n\t\t\t\t\t\tfunction zephir_instanceof($value, $type) {\n\t\t\t\t\t\t\treturn $value instanceof $type;\n\t\t\t\t\t\t}\n\t\t\t\t\t}");
 			zephir_eval_php(&_5$$18, &_4$$18, "/mnt/hgfs/newphp/queryyetsimple/queryyetsimple/support/type.zep:123" TSRMLS_CC);
 			zend_update_static_property(queryyetsimple_support_type_ce, ZEND_STRL("zephirInstanceof"), &__$true);
 		}

@@ -121,7 +121,7 @@ class Type
             default:
             	if (! self::zephirInstanceof) {
 					eval("if (! function_exists('zephir_instanceof')) {
-						function zephir_instanceof ($value, $type) {
+						function zephir_instanceof($value, $type) {
 							return $value instanceof $type;
 						}
 					}");

@@ -40,13 +40,19 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, filter);
 PHP_METHOD(Queryyetsimple_Collection_Collection, size);
 PHP_METHOD(Queryyetsimple_Collection_Collection, isEmpty);
 PHP_METHOD(Queryyetsimple_Collection_Collection, map);
+PHP_METHOD(Queryyetsimple_Collection_Collection, macro);
+PHP_METHOD(Queryyetsimple_Collection_Collection, hasMacro);
+PHP_METHOD(Queryyetsimple_Collection_Collection, callStaticMacro);
+PHP_METHOD(Queryyetsimple_Collection_Collection, callMacro);
 PHP_METHOD(Queryyetsimple_Collection_Collection, checkType);
 PHP_METHOD(Queryyetsimple_Collection_Collection, getArrayElements);
 PHP_METHOD(Queryyetsimple_Collection_Collection, parseKey);
-PHP_METHOD(Queryyetsimple_Collection_Collection, __call);
 PHP_METHOD(Queryyetsimple_Collection_Collection, __get);
 PHP_METHOD(Queryyetsimple_Collection_Collection, __set);
+PHP_METHOD(Queryyetsimple_Collection_Collection, __callStatic);
+PHP_METHOD(Queryyetsimple_Collection_Collection, __call);
 zend_object *zephir_init_properties_Queryyetsimple_Collection_Collection(zend_class_entry *class_type TSRMLS_DC);
+void zephir_init_static_properties_Queryyetsimple_Collection_Collection(TSRMLS_D);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___construct, 0, 0, 0)
 	ZEND_ARG_INFO(0, elements)
@@ -139,6 +145,25 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_map, 0, 0, 1
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_macro, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, macro)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_hasmacro, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_callstaticmacro, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_callmacro, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_checktype, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
@@ -151,11 +176,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_parsekey, 0,
 	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___call, 0, 0, 2)
-	ZEND_ARG_INFO(0, method)
-	ZEND_ARG_ARRAY_INFO(0, args, 0)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___get, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
@@ -163,6 +183,16 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___set, 0, 0, 2)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___callstatic, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection___call, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_collection_collection_method_entry) {
@@ -203,11 +233,16 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_collection_collection_method_entry) {
 	PHP_ME(Queryyetsimple_Collection_Collection, size, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Collection_Collection, isEmpty, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Collection_Collection, map, arginfo_queryyetsimple_collection_collection_map, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, macro, arginfo_queryyetsimple_collection_collection_macro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, hasMacro, arginfo_queryyetsimple_collection_collection_hasmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, callStaticMacro, arginfo_queryyetsimple_collection_collection_callstaticmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, callMacro, arginfo_queryyetsimple_collection_collection_callmacro, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Collection_Collection, checkType, arginfo_queryyetsimple_collection_collection_checktype, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Collection_Collection, getArrayElements, arginfo_queryyetsimple_collection_collection_getarrayelements, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Collection_Collection, parseKey, arginfo_queryyetsimple_collection_collection_parsekey, ZEND_ACC_PROTECTED)
-	PHP_ME(Queryyetsimple_Collection_Collection, __call, arginfo_queryyetsimple_collection_collection___call, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Collection_Collection, __get, arginfo_queryyetsimple_collection_collection___get, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Collection_Collection, __set, arginfo_queryyetsimple_collection_collection___set, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, __callStatic, arginfo_queryyetsimple_collection_collection___callstatic, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Queryyetsimple_Collection_Collection, __call, arginfo_queryyetsimple_collection_collection___call, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

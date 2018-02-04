@@ -41,6 +41,7 @@ zend_class_entry *queryyetsimple_psr4_ipsr4_ce;
 zend_class_entry *queryyetsimple_session_isession_ce;
 zend_class_entry *queryyetsimple_support_iarray_ce;
 zend_class_entry *queryyetsimple_support_ijson_ce;
+zend_class_entry *queryyetsimple_support_imacro_ce;
 zend_class_entry *queryyetsimple_view_iconnect_ce;
 zend_class_entry *queryyetsimple_view_iview_ce;
 zend_class_entry *queryyetsimple_mvc_imodel_ce;
@@ -181,6 +182,7 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	ZEPHIR_INIT(Queryyetsimple_Session_ISession);
 	ZEPHIR_INIT(Queryyetsimple_Support_IArray);
 	ZEPHIR_INIT(Queryyetsimple_Support_IJson);
+	ZEPHIR_INIT(Queryyetsimple_Support_IMacro);
 	ZEPHIR_INIT(Queryyetsimple_View_IConnect);
 	ZEPHIR_INIT(Queryyetsimple_View_IView);
 	ZEPHIR_INIT(Queryyetsimple_Mvc_IModel);
@@ -350,6 +352,7 @@ static PHP_RINIT_FUNCTION(queryyetsimple)
 	zephir_initialize_memory(queryyetsimple_globals_ptr TSRMLS_CC);
 
 	zephir_init_static_properties_Queryyetsimple_Support_Facade(TSRMLS_C);
+	zephir_init_static_properties_Queryyetsimple_Collection_Collection(TSRMLS_C);
 	zephir_init_static_properties_Queryyetsimple_Di_Container(TSRMLS_C);
 
 	return SUCCESS;

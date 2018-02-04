@@ -18,76 +18,55 @@
  */
 namespace Queryyetsimple\Support;
 
-use Closure;
-
 /**
- * zephir 不支持 Closure use 替代解决方案
+ * 实现类的无限扩展功能
  *
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
- * @since 2018.01.24
+ * @since 2018.02.04
  * @version 1.0
  */
-class ClosureUse {
+interface IMacro
+{
 
     /**
-     * 待处理的闭包
+     * 注册一个扩展
      *
-     * @var \Closure
-     */
-    protected closures;
-
-    /**
-     * use 参数
-     *
-     * @var array
-     */
-    protected args = [];
-
-    /**
-     * 构造函数
-     *
-     * @param \Closure $closures
-     * @param array $args
+     * @param string $name
+     * @param callable $macro
      * @return void
      */
-    public function __construct(<Closure> closures, array args = []) -> void
-    {
-	    let this->closures = closures;
-	    let this->args = args;
-    }
-
+    public static function macro(string name, macro);
+    
     /**
-     * 生成仿 use 闭包
-     * 
-     * @param \Closure $closures
-     * @param array $args
-     * @return \Closure
-     */
-    public static function make(<Closure> closures, array args = []) -> <Closure>
-    {
-    	var newclosure;
-    	let newclosure = new self(closures, args);
-        return Closure::fromCallable([newclosure, "invoke"]);
-    }
-
-    /**
-     * __invoke 魔术方法不支持
+     * 判断一个扩展是否注册
      *
+     * @param string $name
+     * @return bool
+     */
+    public static function hasMacro(string name) -> bool;
+
+    /**
+     * __callStatic 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以取消 PHP 版本的静态闭包绑定功能
+     *
+     * @param string $method
+     * @param array $args
      * @return mixed
      */
-    protected function invoke() 
-    {
-        var args = [], item;
+    public static function callStaticMacro(string method, array args);
 
-        let args = func_get_args();
-
-        if this->args {
-            for item in this->args {
-                let args[] = item;
-            }
-        }
-
-        return call_user_func_array(this->closures, args);
-    }
+    /**
+     * __call 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以绑定对象但是不绑定作用域，即可以使用 $this,只能访问 public 属性
+     * 
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function callMacro(string method, array args);
 }
