@@ -50,6 +50,39 @@ class Register extends Provider
      */
     public function register()
     {
+        this->router();
+        this->url();
+    }
+    
+    /**
+     * 可用服务提供者
+     *
+     * @return array
+     */
+    public static function providers() -> array
+    {
+        var tmp;
+    
+        let tmp = [
+            "router" : [
+                "Queryyetsimple\\Router\\Router", 
+                "Qys\\Router\\Router"
+            ],
+            "url" : [
+                "Queryyetsimple\\Router\\Url", 
+                "Qys\\Router\\Url"
+            ]
+        ];
+        return tmp;
+    }
+
+    /**
+     * 注册 router 服务
+     *
+     * @return void
+     */
+    protected function router()
+    {
         this->singleton("router", function (project) {
             var option, options = [], item, tmp;
             
@@ -68,7 +101,6 @@ class Register extends Provider
                 "router_strict",
                 "router_domain_on",
                 "router_domain_top",
-                "make_subdomain_on",
                 "public",
                 "pathinfo_restful",
                 "args_protected",
@@ -88,22 +120,44 @@ class Register extends Provider
             return new \Queryyetsimple\Router\Router(project, project->make("pipeline"), project->make("request"), options);
         });
     }
-    
+
     /**
-     * 可用服务提供者
+     * 注册 url 服务
      *
-     * @return array
+     * @return void
      */
-    public static function providers() -> array
+    protected function url()
     {
-        var tmp;
-    
-        let tmp = [
-            "router" : [
-                "Queryyetsimple\\Router\\Router", 
-                "Qys\\Router\\Router"
-            ]
-        ];
-        return tmp;
+        this->singleton("url", function (project) {
+            var option, router, url, options = [], item, tmp;
+            
+            let option = project->make("option");
+            let router = project->make("router");
+            let tmp = [
+                "default_app", 
+                "default_controller", 
+                "default_action", 
+                "model",
+				"html_suffix",
+				"router_domain_top",
+				"make_subdomain_on"
+            ];
+
+            for item in tmp {
+                let options[item] = option->get(item);
+            }
+
+			let url = new \Queryyetsimple\Router\Url(options);
+
+			url->setApp(router->app())->
+
+            setController(router->controller())->
+
+            setAction(router->action())->
+
+            setUrlEnter(project->make("url_enter"));
+
+			return url;
+        });
     }
 }

@@ -14,8 +14,8 @@
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
-#include "kernel/object.h"
 #include "kernel/array.h"
+#include "kernel/object.h"
 
 
 /**
@@ -67,21 +67,15 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, __construct) {
  */
 PHP_METHOD(Queryyetsimple_Router_Provider_Register, register) {
 
-	zval _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_27__closure_ce, SL("__invoke"));
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "router");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "router", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "url", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -105,7 +99,7 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, providers) {
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
+	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
@@ -115,7 +109,70 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, providers) {
 	ZVAL_STRING(&_1, "Qys\\Router\\Router");
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(&tmp, SL("router"), &_0, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Queryyetsimple\\Router\\Url");
+	zephir_array_fast_append(&_0, &_1);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Qys\\Router\\Url");
+	zephir_array_fast_append(&_0, &_1);
+	zephir_array_update_string(&tmp, SL("url"), &_0, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&tmp);
+
+}
+
+/**
+ * 注册 router 服务
+ *
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, router) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZEPHIR_INIT_NVAR(&_0);
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_27__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "router");
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 注册 url 服务
+ *
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, url) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZEPHIR_INIT_NVAR(&_0);
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_28__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "url");
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 

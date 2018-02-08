@@ -12,9 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/memory.h"
 #include "kernel/object.h"
 #include "kernel/fcall.h"
+#include "kernel/memory.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_35__closure) {
@@ -29,37 +29,24 @@ PHP_METHOD(queryyetsimple_35__closure, __invoke) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, parser, _1, _2, _3;
+	zval *project, project_sub;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&parser);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	ZEPHIR_INIT_VAR(&parser);
 	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\View\\Parser"), ZEND_FETCH_CLASS_AUTO);
+	_0 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\View\\Compiler"), ZEND_FETCH_CLASS_AUTO);
 	}
-	object_init_ex(&parser, _0);
-	if (zephir_has_constructor(&parser TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_2);
-		ZVAL_STRING(&_2, "view.compiler");
-		ZEPHIR_CALL_METHOD(&_1, project, "make", NULL, 0, &_2);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &parser, "__construct", NULL, 0, &_1);
+	object_init_ex(return_value, _0);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
-	ZEPHIR_CALL_METHOD(&_3, &parser, "registercompilers", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_3, "registerparsers", NULL, 0);
-	zephir_check_call_status();
 	RETURN_MM();
 
 }

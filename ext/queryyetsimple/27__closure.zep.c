@@ -57,7 +57,7 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 22, 0 TSRMLS_CC);
+	zephir_create_array(&tmp, 21, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "default_app");
 	zephir_array_fast_append(&tmp, &_0);
@@ -98,9 +98,6 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZVAL_STRING(&_0, "router_domain_top");
 	zephir_array_fast_append(&tmp, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "make_subdomain_on");
-	zephir_array_fast_append(&tmp, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "public");
 	zephir_array_fast_append(&tmp, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
@@ -124,7 +121,7 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "controller_dir");
 	zephir_array_fast_append(&tmp, &_0);
-	zephir_is_iterable(&tmp, 0, "queryyetsimple/router/provider/register.zep", 86);
+	zephir_is_iterable(&tmp, 0, "queryyetsimple/router/provider/register.zep", 118);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);

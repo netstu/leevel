@@ -168,7 +168,7 @@ class Psr4 implements IPsr4
         let namespaces = [this->namespaces, this->shortNamespace];
 
         for item in namespaces {
-            let sandboxPath = this->sandbox . "/" . str_replace("\\", "/", classname);
+            let sandboxPath = this->sandbox . "/" . str_replace("\\", "/", classname) . ".php";
             if strpos(classname, item . "\\") === 0 && is_file(sandboxPath) {
                 return require sandboxPath;
             }

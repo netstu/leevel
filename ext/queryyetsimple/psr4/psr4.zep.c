@@ -329,7 +329,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, autoload) {
 		ZVAL_STRING(&_7$$4, "/");
 		zephir_fast_str_replace(&_5$$4, &_6$$4, &_7$$4, &classname TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(&sandboxPath);
-		ZEPHIR_CONCAT_VSV(&sandboxPath, &_4$$4, "/", &_5$$4);
+		ZEPHIR_CONCAT_VSVS(&sandboxPath, &_4$$4, "/", &_5$$4, ".php");
 		ZEPHIR_INIT_LNVAR(_8$$4);
 		ZEPHIR_CONCAT_VS(&_8$$4, &item, "\\");
 		ZEPHIR_INIT_NVAR(&_9$$4);

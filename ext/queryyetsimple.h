@@ -90,6 +90,7 @@
 #include "queryyetsimple/support/type.zep.h"
 #include "queryyetsimple/throttler.zep.h"
 #include "queryyetsimple/throttler/provider/register.zep.h"
+#include "queryyetsimple/url.zep.h"
 #include "queryyetsimple/validate.zep.h"
 #include "queryyetsimple/validate/provider/register.zep.h"
 #include "queryyetsimple/view.zep.h"
@@ -134,5 +135,6 @@
 #include "queryyetsimple/34__closure.zep.h"
 #include "queryyetsimple/35__closure.zep.h"
 #include "queryyetsimple/36__closure.zep.h"
+#include "queryyetsimple/37__closure.zep.h"
 
 #endif
