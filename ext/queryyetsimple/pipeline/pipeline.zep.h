@@ -4,7 +4,6 @@ extern zend_class_entry *queryyetsimple_pipeline_pipeline_ce;
 ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_Pipeline);
 
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, __construct);
-PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, reset);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, send);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, through);
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, then);
@@ -45,7 +44,6 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_pipeline_pipeline_method_entry) {
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, __construct, arginfo_queryyetsimple_pipeline_pipeline___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
-	PHP_ME(Queryyetsimple_Pipeline_Pipeline, reset, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, send, arginfo_queryyetsimple_pipeline_pipeline_send, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, through, arginfo_queryyetsimple_pipeline_pipeline_through, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Pipeline_Pipeline, then, arginfo_queryyetsimple_pipeline_pipeline_then, ZEND_ACC_PUBLIC)

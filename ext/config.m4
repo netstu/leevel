@@ -78,7 +78,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/option/option.zep.c
 	queryyetsimple/option/provider/register.zep.c
 	queryyetsimple/pipeline/pipeline.zep.c
-	queryyetsimple/pipeline/provider/register.zep.c
 	queryyetsimple/psr4.zep.c
 	queryyetsimple/psr4/psr4.zep.c
 	queryyetsimple/request.zep.c
@@ -139,8 +138,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/33__closure.zep.c
 	queryyetsimple/34__closure.zep.c
 	queryyetsimple/35__closure.zep.c
-	queryyetsimple/36__closure.zep.c
-	queryyetsimple/37__closure.zep.c "
+	queryyetsimple/36__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

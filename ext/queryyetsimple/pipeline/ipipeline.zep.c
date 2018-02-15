@@ -29,13 +29,6 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_IPipeline) {
 }
 
 /**
- * 管道初始化
- *
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, reset);
-
-/**
  * 将传输对象传入管道
  *
  * @param mixed $passed

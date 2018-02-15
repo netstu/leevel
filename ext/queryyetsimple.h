@@ -73,7 +73,6 @@
 #include "queryyetsimple/option/option.zep.h"
 #include "queryyetsimple/option/provider/register.zep.h"
 #include "queryyetsimple/pipeline/pipeline.zep.h"
-#include "queryyetsimple/pipeline/provider/register.zep.h"
 #include "queryyetsimple/psr4.zep.h"
 #include "queryyetsimple/psr4/psr4.zep.h"
 #include "queryyetsimple/request.zep.h"
@@ -135,6 +134,5 @@
 #include "queryyetsimple/34__closure.zep.h"
 #include "queryyetsimple/35__closure.zep.h"
 #include "queryyetsimple/36__closure.zep.h"
-#include "queryyetsimple/37__closure.zep.h"
 
 #endif

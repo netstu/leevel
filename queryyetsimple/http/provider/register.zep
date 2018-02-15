@@ -90,7 +90,8 @@ class Register extends Provider
             let tmp = [
                 "var_method" : option->get("var_method"), 
                 "var_ajax" : option->get("var_ajax"), 
-                "var_pjax" : option->get("var_pjax")
+                "var_pjax" : option->get("var_pjax"),
+                "html_suffix" : option->get("html_suffix")
             ];
 
             return new \Queryyetsimple\Http\Request(project->make("session"), project->make("cookie"), tmp);

@@ -50,7 +50,7 @@ PHP_METHOD(queryyetsimple_16__closure, __invoke) {
 	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
+	zephir_create_array(&tmp, 4, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "var_method");
 	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
@@ -66,6 +66,11 @@ PHP_METHOD(queryyetsimple_16__closure, __invoke) {
 	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
 	zephir_array_update_string(&tmp, SL("var_pjax"), &_1, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "html_suffix");
+	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	zephir_array_update_string(&tmp, SL("html_suffix"), &_1, PH_COPY | PH_SEPARATE);
 	if (!_2) {
 	_2 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\Request"), ZEND_FETCH_CLASS_AUTO);
 	}

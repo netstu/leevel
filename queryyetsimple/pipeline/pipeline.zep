@@ -76,20 +76,6 @@ class Pipeline implements IPipeline
 	}
 
 	/**
-     * 管道初始化
-     *
-     * @return $this
-     */
-    public function reset()
-    {
-        let this->passed = [];
-        let this->stage = [];
-        let this->generator = null;
-
-        return this;
-    }
-
-	/**
 	 * 将传输对象传入管道
 	 *
 	 * @param mixed $passed

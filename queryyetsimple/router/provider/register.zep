@@ -95,8 +95,6 @@ class Register extends Provider
                 "middleware_alias",
                 "model",
                 "rewrite",
-                "pathinfo_depr",
-                "html_suffix",
                 "router_cache",
                 "router_strict",
                 "router_domain_on",
@@ -117,7 +115,7 @@ class Register extends Provider
 
             let options["apps"] = project->apps();
 
-            return new \Queryyetsimple\Router\Router(project, project->make("pipeline"), project->make("request"), options);
+            return new \Queryyetsimple\Router\Router(project, project->make("request"), options);
         });
     }
 
