@@ -37,19 +37,3 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_IController) {
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, setView);
 
-/**
- * 返回父控制器
- *
- * @param \Queryyetsimple\Router\Router $router
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, setRouter);
-
-/**
- * 执行子方法器
- *
- * @param string $action 方法名
- * @return void
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IController, action);
-

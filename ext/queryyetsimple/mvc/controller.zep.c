@@ -14,12 +14,12 @@
 #include "kernel/main.h"
 #include "kernel/object.h"
 #include "kernel/memory.h"
-#include "kernel/main.h"
 #include "kernel/fcall.h"
-#include "kernel/array.h"
 #include "kernel/operators.h"
-#include "kernel/exception.h"
+#include "kernel/array.h"
+#include "kernel/main.h"
 #include "ext/spl/spl_exceptions.h"
+#include "kernel/exception.h"
 
 
 /**
@@ -40,13 +40,6 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_Controller) {
 	 * @var \Queryyetsimple\Mvc\IView
 	 */
 	zend_declare_property_null(queryyetsimple_mvc_controller_ce, SL("view"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * 视图
-	 *
-	 * @var \Queryyetsimple\Router\Router
-	 */
-	zend_declare_property_null(queryyetsimple_mvc_controller_ce, SL("router"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	zend_class_implements(queryyetsimple_mvc_controller_ce TSRMLS_CC, 1, queryyetsimple_mvc_icontroller_ce);
 	return SUCCESS;
@@ -85,87 +78,6 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, setView) {
 
 	zephir_update_property_zval(this_ptr, SL("view"), view);
 	RETURN_THISW();
-
-}
-
-/**
- * 设置路由
- *
- * @param \Queryyetsimple\Router\Router $router
- * @return $this
- */
-PHP_METHOD(Queryyetsimple_Mvc_Controller, setRouter) {
-
-	zval *router, router_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&router_sub);
-
-	zephir_fetch_params(0, 1, 0, &router);
-
-
-
-	zephir_update_property_zval(this_ptr, SL("router"), router);
-	RETURN_THISW();
-
-}
-
-/**
- * 执行子方法器
- *
- * @param string $action 方法名
- * @return void
- */
-PHP_METHOD(Queryyetsimple_Mvc_Controller, action) {
-
-	zval _0$$3;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *action_param = NULL, args, _1, _2, _3, _4, _5;
-	zval action;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&action);
-	ZVAL_UNDEF(&args);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_0$$3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &action_param);
-
-	zephir_get_strval(&action, action_param);
-
-
-	if ((zephir_method_exists(this_ptr, &action TSRMLS_CC)  == SUCCESS)) {
-		ZEPHIR_INIT_VAR(&args);
-		zephir_get_args(&args);
-		ZEPHIR_MAKE_REF(&args);
-		ZEPHIR_CALL_FUNCTION(NULL, "array_shift", NULL, 4, &args);
-		ZEPHIR_UNREF(&args);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_0$$3);
-		zephir_create_array(&_0$$3, 2, 0 TSRMLS_CC);
-		zephir_array_fast_append(&_0$$3, this_ptr);
-		zephir_array_fast_append(&_0$$3, &action);
-		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_0$$3, &args);
-		zephir_check_call_status();
-		RETURN_MM();
-	}
-	zephir_read_property(&_1, this_ptr, SL("router"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Router is not set in controller", "queryyetsimple/mvc/controller.zep", 107);
-		return;
-	}
-	zephir_read_property(&_2, this_ptr, SL("router"), PH_NOISY_CC | PH_READONLY);
-	ZVAL_NULL(&_3);
-	ZVAL_NULL(&_4);
-	ZVAL_BOOL(&_5, 1);
-	ZEPHIR_RETURN_CALL_METHOD(&_2, "dobind", NULL, 0, &_3, &action, &_4, &_5);
-	zephir_check_call_status();
-	RETURN_MM();
 
 }
 
@@ -420,7 +332,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 206);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 158);
 		return;
 	}
 

@@ -163,14 +163,14 @@ PHP_METHOD(Queryyetsimple_View_Html, display) {
 		zephir_check_call_status();
 	}
 	if (display == 0) {
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 80);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 79);
 		zephir_check_call_status();
 		if (zephir_require_zval(&cachepath TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_CALL_FUNCTION(&result, "ob_get_contents", NULL, 81);
+		ZEPHIR_CALL_FUNCTION(&result, "ob_get_contents", NULL, 80);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 82);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 81);
 		zephir_check_call_status();
 		RETURN_CCTOR(&result);
 	} else {
@@ -318,7 +318,7 @@ PHP_METHOD(Queryyetsimple_View_Html, getCachePath) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_8);
 	ZEPHIR_CONCAT_SV(&_8, ".", &_7);
-	ZEPHIR_CALL_FUNCTION(&_9, "basename", NULL, 83, &file, &_8);
+	ZEPHIR_CALL_FUNCTION(&_9, "basename", NULL, 82, &file, &_8);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_10);
 	zephir_md5(&_10, &file);
