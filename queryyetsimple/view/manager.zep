@@ -134,16 +134,18 @@ class Manager extends Managers
      */
 	protected function viewOptionCommon()
 	{
-		var options;
+		var options, request;
+
+		let request = this->container->make("request");
 
 		let options =  [
 			"development" : this->container->development(),
-			"controller_name" : this->container->make("controller_name"),
-			"action_name" : this->container->make("action_name"),
+			"controller_name" : request->controller(),
+			"action_name" : request->action(),
 			"theme_path" : this->container->pathApplicationDir("theme") . "/" . this->container->make("option")->get("view\\theme_name"),
 
 			// 仅 html 模板需要缓存路径
-			"theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . this->container->make("app_name")
+			"theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . request->app()
 		];
 
 		return options;

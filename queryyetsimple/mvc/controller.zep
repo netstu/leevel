@@ -136,15 +136,13 @@ abstract class Controller implements IController
 	 *
 	 * @param string $file
 	 * @param array $vars
-	 * @param array $option
-	 * @sub string charset 编码
-	 * @sub string content_type 类型
+     * @param string $ext
 	 * @return string
 	 */
-	public function display(string file = null, array! vars = [], array option = [])
+	public function display(string file = null, array! vars = [], string ext = null)
 	{
 		this->checkView();
-		return this->view->display(file, vars, option);
+		return this->view->display(file, vars, ext);
 	}
 
 	/**
@@ -162,23 +160,23 @@ abstract class Controller implements IController
 	/**
 	 * 赋值
 	 *
-	 * @param mixed $name
-	 * @param mixed $Value
+	 * @param mixed $key
+	 * @param mixed $value
 	 * @return void
 	 */
-	public function __set(var name, var value)
+	public function __set(var key, var value)
 	{
-		this->assign(name, value);
+		this->assign(key, value);
 	}
 
 	/**
 	 * 获取值
 	 *
-	 * @param string $name
+	 * @param string $key
 	 * @return mixed
 	 */
-	public function __get(string name)
+	public function __get(string key)
 	{
-		return this->getAssign(name);
+		return this->getAssign(key);
 	}
 }

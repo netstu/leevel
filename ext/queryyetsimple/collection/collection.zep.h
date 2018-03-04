@@ -65,11 +65,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_make, 0, 0, 
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_offsetexists, 0, 0, 1)
-	ZEND_ARG_INFO(0, key)
+	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_offsetget, 0, 0, 1)
-	ZEND_ARG_INFO(0, key)
+	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_collection_collection_offsetset, 0, 0, 2)

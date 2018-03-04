@@ -312,57 +312,57 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, valid) {
 /**
  * 实现 ArrayAccess::offsetExists
  *
- * @param string $key
+ * @param string $offset
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Collection_Collection, offsetExists) {
 
-	zval *key_param = NULL, _0;
-	zval key;
+	zval *offset_param = NULL, _0;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&key);
+	ZVAL_UNDEF(&offset);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &key_param);
+	zephir_fetch_params(1, 1, 0, &offset_param);
 
-	zephir_get_strval(&key, key_param);
+	zephir_get_strval(&offset, offset_param);
 
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	RETURN_MM_BOOL(zephir_array_isset(&_0, &key));
+	RETURN_MM_BOOL(zephir_array_isset(&_0, &offset));
 
 }
 
 /**
  * 实现 ArrayAccess::offsetGet
  *
- * @param string $key
+ * @param string $offset
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Collection_Collection, offsetGet) {
 
-	zval *key_param = NULL, _0, _1, _2;
-	zval key;
+	zval *offset_param = NULL, _0, _1, _2;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&key);
+	ZVAL_UNDEF(&offset);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &key_param);
+	zephir_fetch_params(1, 1, 0, &offset_param);
 
-	zephir_get_strval(&key, key_param);
+	zephir_get_strval(&offset, offset_param);
 
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	if (zephir_array_isset(&_1, &key)) {
+	if (zephir_array_isset(&_1, &offset)) {
 		zephir_read_property(&_2, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &key, PH_NOISY, "queryyetsimple/collection/collection.zep", 184 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &offset, PH_NOISY, "queryyetsimple/collection/collection.zep", 184 TSRMLS_CC);
 	} else {
 		ZVAL_NULL(&_0);
 	}

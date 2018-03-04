@@ -158,7 +158,7 @@ class Register extends Provider
             let tmp = [
                 "auto_reload" : true, 
                 "debug" : project->development(), 
-                "cache" : project->pathApplicationCache("theme") . "/" . project->make("app_name")
+                "cache" : project->pathApplicationCache("theme") . "/" . project->make("request")->app()
             ];
             return new \Twig_Environment(new \Twig_Loader_Filesystem(), tmp);
         });

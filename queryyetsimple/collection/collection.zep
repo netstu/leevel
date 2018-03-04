@@ -165,23 +165,23 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
     /**
      * 实现 ArrayAccess::offsetExists
      *
-     * @param string $key
+     * @param string $offset
      * @return mixed
      */
-    public function offsetExists(string key)
+    public function offsetExists(string offset)
     {
-        return isset this->elements[key];
+        return isset this->elements[offset];
     }
     
     /**
      * 实现 ArrayAccess::offsetGet
      *
-     * @param string $key
+     * @param string $offset
      * @return mixed
      */
-    public function offsetGet(string key)
+    public function offsetGet(string offset)
     {
-        return  isset this->elements[key] ? this->elements[key] : null;
+        return  isset this->elements[offset] ? this->elements[offset] : null;
     }
     
     /**

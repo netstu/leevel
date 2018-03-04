@@ -319,11 +319,12 @@ PHP_METHOD(Queryyetsimple_View_Manager, makeConnectV8) {
  */
 PHP_METHOD(Queryyetsimple_View_Manager, viewOptionCommon) {
 
-	zval options, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13;
+	zval options, request, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&options);
+	ZVAL_UNDEF(&request);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -336,59 +337,53 @@ PHP_METHOD(Queryyetsimple_View_Manager, viewOptionCommon) {
 	ZVAL_UNDEF(&_9);
 	ZVAL_UNDEF(&_10);
 	ZVAL_UNDEF(&_11);
-	ZVAL_UNDEF(&_12);
-	ZVAL_UNDEF(&_13);
 
 	ZEPHIR_MM_GROW();
 
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "request");
+	ZEPHIR_CALL_METHOD(&request, &_0, "make", NULL, 0, &_1);
+	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&options);
 	zephir_create_array(&options, 5, 0 TSRMLS_CC);
-	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, &_0, "development", NULL, 0);
-	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("development"), &_1, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_2, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_3);
-	ZVAL_STRING(&_3, "controller_name");
-	ZEPHIR_CALL_METHOD(&_1, &_2, "make", NULL, 0, &_3);
+	ZEPHIR_CALL_METHOD(&_3, &_2, "development", NULL, 0);
 	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("controller_name"), &_1, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&options, SL("development"), &_3, PH_COPY | PH_SEPARATE);
+	ZEPHIR_CALL_METHOD(&_3, &request, "controller", NULL, 0);
+	zephir_check_call_status();
+	zephir_array_update_string(&options, SL("controller_name"), &_3, PH_COPY | PH_SEPARATE);
+	ZEPHIR_CALL_METHOD(&_3, &request, "action", NULL, 0);
+	zephir_check_call_status();
+	zephir_array_update_string(&options, SL("action_name"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_4, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "action_name");
-	ZEPHIR_CALL_METHOD(&_1, &_4, "make", NULL, 0, &_3);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "theme");
+	ZEPHIR_CALL_METHOD(&_3, &_4, "pathapplicationdir", NULL, 0, &_1);
 	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("action_name"), &_1, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "theme");
-	ZEPHIR_CALL_METHOD(&_1, &_5, "pathapplicationdir", NULL, 0, &_3);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "option");
+	ZEPHIR_CALL_METHOD(&_6, &_5, "make", NULL, 0, &_1);
 	zephir_check_call_status();
-	zephir_read_property(&_6, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "option");
-	ZEPHIR_CALL_METHOD(&_7, &_6, "make", NULL, 0, &_3);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "view\\theme_name");
+	ZEPHIR_CALL_METHOD(&_7, &_6, "get", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "view\\theme_name");
-	ZEPHIR_CALL_METHOD(&_8, &_7, "get", NULL, 0, &_3);
+	ZEPHIR_INIT_VAR(&_8);
+	ZEPHIR_CONCAT_VSV(&_8, &_3, "/", &_7);
+	zephir_array_update_string(&options, SL("theme_path"), &_8, PH_COPY | PH_SEPARATE);
+	zephir_read_property(&_9, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "theme");
+	ZEPHIR_CALL_METHOD(&_10, &_9, "pathapplicationcache", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_9);
-	ZEPHIR_CONCAT_VSV(&_9, &_1, "/", &_8);
-	zephir_array_update_string(&options, SL("theme_path"), &_9, PH_COPY | PH_SEPARATE);
-	zephir_read_property(&_10, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "theme");
-	ZEPHIR_CALL_METHOD(&_11, &_10, "pathapplicationcache", NULL, 0, &_3);
+	ZEPHIR_CALL_METHOD(&_11, &request, "app", NULL, 0);
 	zephir_check_call_status();
-	zephir_read_property(&_12, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "app_name");
-	ZEPHIR_CALL_METHOD(&_13, &_12, "make", NULL, 0, &_3);
-	zephir_check_call_status();
-	ZEPHIR_INIT_LNVAR(_9);
-	ZEPHIR_CONCAT_VSV(&_9, &_11, "/", &_13);
-	zephir_array_update_string(&options, SL("theme_cache_path"), &_9, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_LNVAR(_8);
+	ZEPHIR_CONCAT_VSV(&_8, &_10, "/", &_11);
+	zephir_array_update_string(&options, SL("theme_cache_path"), &_8, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&options);
 
 }

@@ -492,25 +492,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, reset) {
 /**
  * 判断配置是否存在
  *
- * @param string $name
+ * @param string $offset
  * @return bool
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetExists) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL;
-	zval name;
+	zval *offset_param = NULL;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&offset);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name_param);
+	zephir_fetch_params(1, 1, 0, &offset_param);
 
-	zephir_get_strval(&name, name_param);
+	zephir_get_strval(&offset, offset_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "has", NULL, 0, &name);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "has", NULL, 0, &offset);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -519,25 +519,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetExists) {
 /**
  * 实现 ArrayAccess::offsetGet
  *
- * @param string $name
+ * @param string $offset
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetGet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL;
-	zval name;
+	zval *offset_param = NULL;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&offset);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name_param);
+	zephir_fetch_params(1, 1, 0, &offset_param);
 
-	zephir_get_strval(&name, name_param);
+	zephir_get_strval(&offset, offset_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "get", NULL, 0, &name);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "get", NULL, 0, &offset);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -546,27 +546,27 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetGet) {
 /**
  * 实现 ArrayAccess::offsetSet
  *
- * @param string $name
+ * @param string $offset
  * @param mixed $value
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetSet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, *value, value_sub;
-	zval name;
+	zval *offset_param = NULL, *value, value_sub;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&offset);
 	ZVAL_UNDEF(&value_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &name_param, &value);
+	zephir_fetch_params(1, 2, 0, &offset_param, &value);
 
-	zephir_get_strval(&name, name_param);
+	zephir_get_strval(&offset, offset_param);
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "set", NULL, 0, &name, value);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "set", NULL, 0, &offset, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -575,25 +575,25 @@ PHP_METHOD(Queryyetsimple_Option_Option, offsetSet) {
 /**
  * 实现 ArrayAccess::offsetUnset
  *
- * @param string $name
+ * @param string $offset
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Option_Option, offsetUnset) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL;
-	zval name;
+	zval *offset_param = NULL;
+	zval offset;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&offset);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name_param);
+	zephir_fetch_params(1, 1, 0, &offset_param);
 
-	zephir_get_strval(&name, name_param);
+	zephir_get_strval(&offset, offset_param);
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", NULL, 0, &name);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", NULL, 0, &offset);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

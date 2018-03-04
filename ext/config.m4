@@ -136,7 +136,9 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/33__closure.zep.c
 	queryyetsimple/34__closure.zep.c
 	queryyetsimple/35__closure.zep.c
-	queryyetsimple/36__closure.zep.c "
+	queryyetsimple/36__closure.zep.c
+	queryyetsimple/37__closure.zep.c
+	queryyetsimple/38__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

@@ -1245,26 +1245,26 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseAlias) {
 /**
  * 实现 ArrayAccess::offsetExists
  *
- * @param string $name
+ * @param string $offset
  * @return bool
  */
 PHP_METHOD(Queryyetsimple_Di_Container, offsetExists) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, _0, _1;
+	zval *offset, offset_sub, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&offset_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
+	zephir_fetch_params(1, 1, 0, &offset);
 
 
 
 	zephir_read_property(&_0, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalize", NULL, 0, name);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalize", NULL, 0, offset);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(zephir_array_isset(&_0, &_1));
 
@@ -1273,23 +1273,23 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetExists) {
 /**
  * 实现 ArrayAccess::offsetGet
  *
- * @param string $name
+ * @param string $offset
  * @return mixed
  */
 PHP_METHOD(Queryyetsimple_Di_Container, offsetGet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub;
+	zval *offset, offset_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&offset_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
+	zephir_fetch_params(1, 1, 0, &offset);
 
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "make", NULL, 0, name);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "make", NULL, 0, offset);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1299,24 +1299,24 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetGet) {
  * 实现 ArrayAccess::offsetSet
  *
  * @param string $name
- * @param mixed $service
+ * @param mixed $value
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Di_Container, offsetSet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, *service, service_sub;
+	zval *name, name_sub, *value, value_sub;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&name_sub);
-	ZVAL_UNDEF(&service_sub);
+	ZVAL_UNDEF(&value_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &name, &service);
+	zephir_fetch_params(1, 2, 0, &name, &value);
 
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "bind", NULL, 0, name, service);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "bind", NULL, 0, name, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1383,23 +1383,23 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetUnset) {
 /**
  * 捕捉支持属性参数
  *
- * @param string $name 支持的项
+ * @param string $key
  * @return 设置项
  */
 PHP_METHOD(Queryyetsimple_Di_Container, __get) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub;
+	zval *key, key_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&key_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
+	zephir_fetch_params(1, 1, 0, &key);
 
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "offsetget", NULL, 0, name);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "offsetget", NULL, 0, key);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1408,25 +1408,25 @@ PHP_METHOD(Queryyetsimple_Di_Container, __get) {
 /**
  * 设置支持属性参数
  *
- * @param string $name 支持的项
- * @param mixed $service 支持的值
+ * @param string $key
+ * @param mixed $service
  * @return void
  */
 PHP_METHOD(Queryyetsimple_Di_Container, __set) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, *service, service_sub;
+	zval *key, key_sub, *service, service_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&key_sub);
 	ZVAL_UNDEF(&service_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &name, &service);
+	zephir_fetch_params(1, 2, 0, &key, &service);
 
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "offsetset", NULL, 0, name, service);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "offsetset", NULL, 0, key, service);
 	zephir_check_call_status();
 	RETURN_THIS();
 

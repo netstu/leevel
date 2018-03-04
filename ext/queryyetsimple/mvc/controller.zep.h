@@ -40,16 +40,16 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_controller_display, 0, 0, 0)
 	ZEND_ARG_INFO(0, file)
 	ZEND_ARG_ARRAY_INFO(0, vars, 1)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
+	ZEND_ARG_INFO(0, ext)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_controller___set, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_controller___get, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_mvc_controller_method_entry) {

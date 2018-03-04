@@ -80,6 +80,8 @@ zend_class_entry *queryyetsimple_33__closure_ce;
 zend_class_entry *queryyetsimple_34__closure_ce;
 zend_class_entry *queryyetsimple_35__closure_ce;
 zend_class_entry *queryyetsimple_36__closure_ce;
+zend_class_entry *queryyetsimple_37__closure_ce;
+zend_class_entry *queryyetsimple_38__closure_ce;
 zend_class_entry *queryyetsimple_3__closure_ce;
 zend_class_entry *queryyetsimple_4__closure_ce;
 zend_class_entry *queryyetsimple_5__closure_ce;
@@ -283,6 +285,8 @@ static PHP_MINIT_FUNCTION(queryyetsimple)
 	ZEPHIR_INIT(queryyetsimple_34__closure);
 	ZEPHIR_INIT(queryyetsimple_35__closure);
 	ZEPHIR_INIT(queryyetsimple_36__closure);
+	ZEPHIR_INIT(queryyetsimple_37__closure);
+	ZEPHIR_INIT(queryyetsimple_38__closure);
 	ZEPHIR_INIT(queryyetsimple_3__closure);
 	ZEPHIR_INIT(queryyetsimple_4__closure);
 	ZEPHIR_INIT(queryyetsimple_5__closure);

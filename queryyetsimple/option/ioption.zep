@@ -35,7 +35,7 @@ interface IOption
 	 * @param string $name 配置键值
 	 * @return string
 	 */
-	public function has(string name = 'app\\');
+	public function has(string name = "app\\");
 
 	/**
 	 * 获取配置
@@ -44,7 +44,7 @@ interface IOption
 	 * @param mixed $defaults 配置默认值
 	 * @return string
 	 */
-	public function get(string name = 'app\\', var defaults = null);
+	public function get(string name = "app\\", var defaults = null);
 
 	/**
 	 * 返回所有配置

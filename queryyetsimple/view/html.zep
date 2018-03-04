@@ -72,8 +72,8 @@ class Html extends Connect implements IConnect
 	 *
 	 * @param string $file 视图文件地址
 	 * @param array $vars
-	 * @param boolean $display 是否显示
 	 * @param string $ext 后缀
+	 * @param boolean $display 是否显示
 	 * @return string
 	 */
 	public function display(string file, array! vars = [], string ext = "", boolean display = true)

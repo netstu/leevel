@@ -78,10 +78,8 @@ interface IView
 	 *
 	 * @param string $file
 	 * @param array $vars
-	 * @param array $option
-	 * @sub string charset 编码
-	 * @sub string content_type 内容类型
+     * @param string $ext
 	 * @return string
 	 */
-	public function display(string file = null, array! vars = [], array option = []);
+	public function display(string file = null, array! vars = [], string ext = null);
 }

@@ -140,16 +140,16 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_parsealias, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_offsetexists, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_offsetget, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_offsetset, 0, 0, 2)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, service)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_offsetunset, 0, 0, 1)
@@ -157,11 +157,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container_offsetunset, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container___get, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_di_container___set, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, service)
 ZEND_END_ARG_INFO()
 

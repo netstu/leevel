@@ -75,8 +75,6 @@ PHP_METHOD(Queryyetsimple_Http_Provider_Register, register) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "request", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "response", NULL, 0);
-	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -99,7 +97,7 @@ PHP_METHOD(Queryyetsimple_Http_Provider_Register, providers) {
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
+	zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
@@ -109,15 +107,6 @@ PHP_METHOD(Queryyetsimple_Http_Provider_Register, providers) {
 	ZVAL_STRING(&_1, "Qys\\Http\\Request");
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(&tmp, SL("request"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Queryyetsimple\\Http\\Response");
-	zephir_array_fast_append(&_0, &_1);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Qys\\Http\\Response");
-	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("response"), &_0, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&tmp);
 
 }
@@ -143,33 +132,6 @@ PHP_METHOD(Queryyetsimple_Http_Provider_Register, request) {
 	zephir_create_closure_ex(&_0, NULL, queryyetsimple_16__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * 注册 response 服务
- *
- * @return void
- */
-PHP_METHOD(Queryyetsimple_Http_Provider_Register, response) {
-
-	zval _0, _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_17__closure_ce, SL("__invoke"));
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "response");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();

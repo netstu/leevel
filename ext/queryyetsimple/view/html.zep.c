@@ -71,8 +71,8 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_View_Html) {
  *
  * @param string $file 视图文件地址
  * @param array $vars
- * @param boolean $display 是否显示
  * @param string $ext 后缀
+ * @param boolean $display 是否显示
  * @return string
  */
 PHP_METHOD(Queryyetsimple_View_Html, display) {

@@ -132,5 +132,7 @@
 #include "queryyetsimple/34__closure.zep.h"
 #include "queryyetsimple/35__closure.zep.h"
 #include "queryyetsimple/36__closure.zep.h"
+#include "queryyetsimple/37__closure.zep.h"
+#include "queryyetsimple/38__closure.zep.h"
 
 #endif

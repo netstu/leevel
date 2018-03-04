@@ -189,7 +189,7 @@ PHP_METHOD(Queryyetsimple_Session_Middleware_Session, setPrevUrl) {
 
 
 	zephir_read_property(&_0, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, request, "url", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_1, request, "geturi", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "setprevurl", NULL, 0, &_1);
 	zephir_check_call_status();

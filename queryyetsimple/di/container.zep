@@ -610,35 +610,35 @@ class Container implements IContainer, ArrayAccess {
 	/**
 	 * 实现 ArrayAccess::offsetExists
 	 *
-	 * @param string $name
+	 * @param string $offset
 	 * @return bool
 	 */
-	public function offsetExists(var name)
+	public function offsetExists(var offset)
 	{
-		return isset this->services[this->normalize(name)];
+		return isset this->services[this->normalize(offset)];
 	}
 
 	/**
 	 * 实现 ArrayAccess::offsetGet
 	 *
-	 * @param string $name
+	 * @param string $offset
 	 * @return mixed
 	 */
-	public function offsetGet(var name)
+	public function offsetGet(var offset)
 	{
-		return this->make(name);
+		return this->make(offset);
 	}
 
 	/**
 	 * 实现 ArrayAccess::offsetSet
 	 *
 	 * @param string $name
-	 * @param mixed $service
+	 * @param mixed $value
 	 * @return void
 	 */
-	public function offsetSet(var name, var service)
+	public function offsetSet(var name, var value)
 	{
-		return this->bind(name, service);
+		return this->bind(name, value);
 	}
 
 	/**
@@ -669,24 +669,24 @@ class Container implements IContainer, ArrayAccess {
 	/**
 	 * 捕捉支持属性参数
 	 *
-	 * @param string $name 支持的项
+	 * @param string $key
 	 * @return 设置项
 	 */
-	public function __get(var name)
+	public function __get(var key)
 	{
-		return this->offsetGet(name);
+		return this->offsetGet(key);
 	}
 
 	/**
 	 * 设置支持属性参数
 	 *
-	 * @param string $name 支持的项
-	 * @param mixed $service 支持的值
+	 * @param string $key
+	 * @param mixed $service
 	 * @return void
 	 */
-	public function __set(var name, var service)
+	public function __set(var key, var service)
 	{
-		this->offsetSet(name, service);
+		this->offsetSet(key, service);
 		return this;
 	}
 

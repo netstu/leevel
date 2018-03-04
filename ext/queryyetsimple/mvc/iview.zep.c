@@ -75,9 +75,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IView, clearAssign);
  *
  * @param string $file
  * @param array $vars
- * @param array $option
- * @sub string charset 编码
- * @sub string content_type 内容类型
+ * @param string $ext
  * @return string
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Mvc_IView, display);

@@ -24,7 +24,7 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_mvc_iview_display, 0, 0, 0)
 	ZEND_ARG_INFO(0, file)
 	ZEND_ARG_ARRAY_INFO(0, vars, 1)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
+	ZEND_ARG_INFO(0, ext)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_mvc_iview_method_entry) {

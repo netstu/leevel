@@ -165,7 +165,7 @@ PHP_METHOD(Queryyetsimple_I18n_Provider_Register, i18n) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_18__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_17__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "i18n");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
@@ -192,7 +192,7 @@ PHP_METHOD(Queryyetsimple_I18n_Provider_Register, i18nLoad) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, queryyetsimple_19__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, queryyetsimple_18__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "i18n.load");
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);

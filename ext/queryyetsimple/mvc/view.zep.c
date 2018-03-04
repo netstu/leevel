@@ -55,20 +55,6 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Mvc_View) {
 	 */
 	zend_declare_property_bool(queryyetsimple_mvc_view_ce, SL("foreverSwitch"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
 
-	/**
-	 * 响应工厂
-	 *
-	 * @var \Closure
-	 */
-	zend_declare_property_null(queryyetsimple_mvc_view_ce, SL("responseFactory"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * 响应
-	 *
-	 * @var \Queryyetsimple\Http\Response
-	 */
-	zend_declare_property_null(queryyetsimple_mvc_view_ce, SL("response"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
 	zend_class_implements(queryyetsimple_mvc_view_ce TSRMLS_CC, 1, queryyetsimple_mvc_iview_ce);
 	return SUCCESS;
 
@@ -140,57 +126,6 @@ PHP_METHOD(Queryyetsimple_Mvc_View, switchView) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "assign", NULL, 0, &assign);
 	zephir_check_call_status();
 	RETURN_THIS();
-
-}
-
-/**
- * 设置响应工厂
- *
- * @param \Closure $responseFactory
- * @return $this;
- */
-PHP_METHOD(Queryyetsimple_Mvc_View, setResponseFactory) {
-
-	zval *responseFactory, responseFactory_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&responseFactory_sub);
-
-	zephir_fetch_params(0, 1, 0, &responseFactory);
-
-
-
-	zephir_update_property_zval(this_ptr, SL("responseFactory"), responseFactory);
-	RETURN_THISW();
-
-}
-
-/**
- * 获取响应
- *
- * @return \Queryyetsimple\Http\Response $response
- */
-PHP_METHOD(Queryyetsimple_Mvc_View, getResponse) {
-
-	zval _0, _1$$3, _2$$3;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$3);
-
-	ZEPHIR_MM_GROW();
-
-	zephir_read_property(&_0, this_ptr, SL("response"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		zephir_read_property(&_2$$3, this_ptr, SL("responseFactory"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_USER_FUNC(&_1$$3, &_2$$3);
-		zephir_check_call_status();
-		zephir_update_property_zval(this_ptr, SL("response"), &_1$$3);
-	}
-	RETURN_MM_MEMBER(getThis(), "response");
 
 }
 
@@ -338,36 +273,29 @@ PHP_METHOD(Queryyetsimple_Mvc_View, clearAssign) {
  *
  * @param string $file
  * @param array $vars
- * @param array $option
- * @sub string charset 编码
- * @sub string content_type 内容类型
+ * @param string $ext
  * @return string
  */
 PHP_METHOD(Queryyetsimple_Mvc_View, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval vars, option;
-	zval *file_param = NULL, *vars_param = NULL, *option_param = NULL, __$true, __$false, initOption, result, ext, _0, _1, _2, _3, _4, _5$$4;
-	zval file;
+	zval vars;
+	zval *file_param = NULL, *vars_param = NULL, *ext_param = NULL, __$true, __$false, result, _0, _1, _2$$3;
+	zval file, ext;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&file);
+	ZVAL_UNDEF(&ext);
 	ZVAL_BOOL(&__$true, 1);
 	ZVAL_BOOL(&__$false, 0);
-	ZVAL_UNDEF(&initOption);
 	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&ext);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5$$4);
+	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&vars);
-	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 3, &file_param, &vars_param, &option_param);
+	zephir_fetch_params(1, 0, 3, &file_param, &vars_param, &ext_param);
 
 	if (!file_param) {
 		ZEPHIR_INIT_VAR(&file);
@@ -381,46 +309,24 @@ PHP_METHOD(Queryyetsimple_Mvc_View, display) {
 	} else {
 	ZEPHIR_OBS_COPY_OR_DUP(&vars, vars_param);
 	}
-	if (!option_param) {
-		ZEPHIR_INIT_VAR(&option);
-		array_init(&option);
+	if (!ext_param) {
+		ZEPHIR_INIT_VAR(&ext);
+		ZVAL_STRING(&ext, "");
 	} else {
-		zephir_get_arrval(&option, option_param);
+		zephir_get_strval(&ext, ext_param);
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&initOption);
-	zephir_create_array(&initOption, 2, 0 TSRMLS_CC);
-	add_assoc_stringl_ex(&initOption, SL("charset"), SL("utf-8"));
-	add_assoc_stringl_ex(&initOption, SL("content_type"), SL("text/html"));
-	if (ZEPHIR_IS_EMPTY(&option)) {
-		ZEPHIR_INIT_NVAR(&option);
-		array_init(&option);
-	}
-	ZEPHIR_INIT_VAR(&_0);
-	zephir_fast_array_merge(&_0, &initOption, &option TSRMLS_CC);
-	ZEPHIR_CPY_WRT(&option, &_0);
-	zephir_array_fetch_string(&_1, &option, SL("content_type"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 218 TSRMLS_CC);
-	zephir_array_fetch_string(&_2, &option, SL("charset"), PH_NOISY | PH_READONLY, "queryyetsimple/mvc/view.zep", 218 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "responseheader", NULL, 0, &_1, &_2);
+	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
+	ZVAL_BOOL(&_1, 0);
+	ZEPHIR_CALL_METHOD(&result, &_0, "display", NULL, 0, &file, &vars, &ext, &_1);
 	zephir_check_call_status();
-	if (zephir_array_isset_string(&option, SL("ext"))) {
-		ZEPHIR_OBS_VAR(&ext);
-		zephir_array_fetch_string(&ext, &option, SL("ext"), PH_NOISY, "queryyetsimple/mvc/view.zep", 220 TSRMLS_CC);
-	} else {
-		ZEPHIR_INIT_NVAR(&ext);
-		ZVAL_STRING(&ext, "");
-	}
-	zephir_read_property(&_3, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
-	ZVAL_BOOL(&_4, 0);
-	ZEPHIR_CALL_METHOD(&result, &_3, "display", NULL, 0, &file, &vars, &ext, &_4);
-	zephir_check_call_status();
-	zephir_read_property(&_4, this_ptr, SL("foreverSwitch"), PH_NOISY_CC | PH_READONLY);
-	if (ZEPHIR_IS_FALSE_IDENTICAL(&_4)) {
-		zephir_read_property(&_5$$4, this_ptr, SL("backupTheme"), PH_NOISY_CC | PH_READONLY);
-		zephir_update_property_zval(this_ptr, SL("theme"), &_5$$4);
+	zephir_read_property(&_1, this_ptr, SL("foreverSwitch"), PH_NOISY_CC | PH_READONLY);
+	if (ZEPHIR_IS_FALSE_IDENTICAL(&_1)) {
+		zephir_read_property(&_2$$3, this_ptr, SL("backupTheme"), PH_NOISY_CC | PH_READONLY);
+		zephir_update_property_zval(this_ptr, SL("theme"), &_2$$3);
 	}
 	if (0) {
 		zephir_update_property_zval(this_ptr, SL("foreverSwitch"), &__$true);
@@ -446,62 +352,9 @@ PHP_METHOD(Queryyetsimple_Mvc_View, checkTheme) {
 
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "queryyetsimple/mvc/view.zep", 239);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "queryyetsimple/mvc/view.zep", 185);
 		return;
 	}
-
-}
-
-/**
- * 发送 header
- *
- * @param string $contentType
- * @param string $charset
- * @return void
- */
-PHP_METHOD(Queryyetsimple_Mvc_View, responseHeader) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *contentType_param = NULL, *charset_param = NULL, _0, _1, _2;
-	zval contentType, charset;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&contentType);
-	ZVAL_UNDEF(&charset);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &contentType_param, &charset_param);
-
-	if (!contentType_param) {
-		ZEPHIR_INIT_VAR(&contentType);
-		ZVAL_STRING(&contentType, "text/html");
-	} else {
-		zephir_get_strval(&contentType, contentType_param);
-	}
-	if (!charset_param) {
-		ZEPHIR_INIT_VAR(&charset);
-		ZVAL_STRING(&charset, "utf-8");
-	} else {
-		zephir_get_strval(&charset, charset_param);
-	}
-
-
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "getresponse", NULL, 0);
-	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("response"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Response is not set in view", "queryyetsimple/mvc/view.zep", 255);
-		return;
-	}
-	zephir_read_property(&_1, this_ptr, SL("response"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_2, &_1, "contenttype", NULL, 0, &contentType);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_2, "charset", NULL, 0, &charset);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
 
 }
 

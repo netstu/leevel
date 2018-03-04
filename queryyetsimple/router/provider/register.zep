@@ -52,6 +52,9 @@ class Register extends Provider
     {
         this->router();
         this->url();
+        this->redirect();
+        this->request();
+        this->response();
     }
     
     /**
@@ -71,6 +74,20 @@ class Register extends Provider
             "url" : [
                 "Queryyetsimple\\Router\\Url", 
                 "Qys\\Router\\Url"
+            ],
+            "redirect" : [
+                "Queryyetsimple\\Router\\Redirect",
+                "Qys\\Router\\Redirect"
+            ],
+            "request" : [
+				"Queryyetsimple\\Http\\Request", 
+				"Qys\\Http\\Request"
+			],
+            "response" : [
+                "Queryyetsimple\\Router\\IResponseFactory",
+                "Queryyetsimple\\Router\\ResponseFactory",
+                "Qys\\Router\\IResponseFactory",
+                "Qys\\Router\\ResponseFactory"
             ]
         ];
         return tmp;
@@ -94,12 +111,10 @@ class Register extends Provider
                 "middleware_group", 
                 "middleware_alias",
                 "model",
-                "rewrite",
                 "router_cache",
                 "router_strict",
                 "router_domain_on",
                 "router_domain_top",
-                "public",
                 "pathinfo_restful",
                 "args_protected",
                 "args_regex",
@@ -127,10 +142,10 @@ class Register extends Provider
     protected function url()
     {
         this->singleton("url", function (project) {
-            var option, router, url, options = [], item, tmp;
+            var option, request, options = [], item, tmp;
             
             let option = project->make("option");
-            let router = project->make("router");
+            let request = project->make("request");
             let tmp = [
                 "default_app", 
                 "default_controller", 
@@ -145,17 +160,73 @@ class Register extends Provider
                 let options[item] = option->get(item);
             }
 
-			let url = new \Queryyetsimple\Router\Url(options);
+			return new \Queryyetsimple\Router\Url(request, options);
+        });
+    }
 
-			url->setApp(router->app())->
+    /**
+     * 注册 redirect 服务
+     *
+     * @return void
+     */
+    protected function redirect()
+    {
+        this->bind("redirect", this->share(function (project) {
+        	var redirect, session;
 
-            setController(router->controller())->
+            let redirect = new \Queryyetsimple\Router\Redirect(project->make("url"));
+            let session = project->make("session");
 
-            setAction(router->action())->
+            if (session !== false) {
+                redirect->setSession(session);
+            }
 
-            setUrlEnter(project->make("url_enter"));
+            return redirect;
+        }));
+    }
 
-			return url;
+    /**
+	 * 注册 request 服务
+	 *
+	 * @return void
+	 */
+	protected function request()
+	{
+		this->singleton("request", function (project) {
+			var option, tmp;
+
+			let option = project->make("option");
+			let tmp = [
+				"var_method" : option->get("var_method"), 
+				"var_ajax" : option->get("var_ajax"), 
+				"var_pjax" : option->get("var_pjax"),
+				"html_suffix" : option->get("html_suffix"),
+				"rewrite" : option->get("rewrite"),
+				"public" : option->get("public")
+			];
+
+			return new \Queryyetsimple\Http\Request(_GET, _POST, [], _COOKIE, _FILES, _SERVER, null, tmp);
+		});
+	}
+
+    /**
+     * 注册 response 服务
+     *
+     * @return void
+     */
+    protected function response()
+    {
+        this->singleton("response", function (project) {
+        	var option, response;
+
+        	let option = project->make("option");
+        	let response = new \Queryyetsimple\Router\ResponseFactory(project->make("view"), project->make("redirect"));
+
+        	return response->
+
+        	setViewSuccessTemplate(option->get("view\\action_success"))->
+
+            setViewFailTemplate(option->get("view\\action_fail"));
         });
     }
 }

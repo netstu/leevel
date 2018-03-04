@@ -108,6 +108,6 @@ class Session
      */
     protected function setPrevUrl(<Request> request)
     {
-        this->manager->setPrevUrl(request->url());
+        this->manager->setPrevUrl(request->getUri());
     }
 }
