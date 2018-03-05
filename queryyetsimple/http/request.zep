@@ -1571,7 +1571,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string $name
      * @return bool
      */
-    public static function hasMacro(string name) -> bool
+    public static function hasMacro(string name) -> boolean
     {
         return isset self::macro[name];
     }

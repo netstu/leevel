@@ -601,7 +601,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param string $name
      * @return bool
      */
-    public static function hasMacro(string name) -> bool
+    public static function hasMacro(string name) -> boolean
     {
         return isset self::macro[name];
     }

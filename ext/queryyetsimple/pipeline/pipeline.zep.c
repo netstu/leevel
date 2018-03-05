@@ -492,7 +492,7 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse) {
 	ZEPHIR_INIT_VAR(&_1);
 	array_init(&_1);
 	ZVAL_LONG(&_2, 2);
-	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 85, &_0, &_2, &_1);
+	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 91, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&name);
 	zephir_array_fetch_long(&name, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 242 TSRMLS_CC);

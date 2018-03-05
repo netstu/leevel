@@ -70,7 +70,7 @@ PHP_METHOD(Queryyetsimple_View_Manager, createConnect) {
 
 
 	object_init_ex(return_value, queryyetsimple_view_view_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 110, connect);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 115, connect);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -131,9 +131,9 @@ PHP_METHOD(Queryyetsimple_View_Manager, makeConnectHtml) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&html);
 	object_init_ex(&html, queryyetsimple_view_html_ce);
-	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 111, &options);
+	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 116, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 112, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 117, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&html);
 

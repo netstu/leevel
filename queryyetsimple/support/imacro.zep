@@ -44,7 +44,7 @@ interface IMacro
      * @param string $name
      * @return bool
      */
-    public static function hasMacro(string name) -> bool;
+    public static function hasMacro(string name) -> boolean;
 
     /**
      * __callStatic 魔术方法隐射
