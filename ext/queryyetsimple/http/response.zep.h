@@ -171,7 +171,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_settcontrol, 0, 0, 2)
 	ZEND_ARG_INFO(0, inFlowControl)
-	ZEND_ARG_INFO(0, isFlowontrolTrue)
+	ZEND_ARG_INFO(0, isFlowcontrolTrue)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_placeholdertcontrol, 0, 0, 1)

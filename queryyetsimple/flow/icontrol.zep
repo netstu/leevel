@@ -63,10 +63,10 @@ interface IControl
      * 设置当前条件表达式状态
      *
      * @param boolean $inFlowControl
-     * @param boolean $isFlowontrolTrue
+     * @param boolean $isFlowcontrolTrue
      * @return $this
      */
-    public function setTControl(boolean inFlowControl, boolean isFlowontrolTrue);
+    public function setTControl(boolean inFlowControl, boolean isFlowcontrolTrue);
     
     /**
      * 获取当前条件表达式状态

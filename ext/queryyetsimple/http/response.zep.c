@@ -130,7 +130,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Http_Response) {
 	 *
 	 * @var boolean
 	 */
-	zend_declare_property_bool(queryyetsimple_http_response_ce, SL("isFlowontrolTrue"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_bool(queryyetsimple_http_response_ce, SL("isFlowcontrolTrue"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	zend_class_implements(queryyetsimple_http_response_ce TSRMLS_CC, 1, queryyetsimple_flow_icontrol_ce);
 	zend_class_implements(queryyetsimple_http_response_ce TSRMLS_CC, 1, queryyetsimple_support_imacro_ce);
@@ -1920,22 +1920,22 @@ PHP_METHOD(Queryyetsimple_Http_Response, endIfs) {
  * 设置当前条件表达式状态
  *
  * @param boolean $inFlowControl
- * @param boolean $isFlowontrolTrue
+ * @param boolean $isFlowcontrolTrue
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Http_Response, setTControl) {
 
-	zval *inFlowControl_param = NULL, *isFlowontrolTrue_param = NULL, __$true, __$false;
-	zend_bool inFlowControl, isFlowontrolTrue;
+	zval *inFlowControl_param = NULL, *isFlowcontrolTrue_param = NULL, __$true, __$false;
+	zend_bool inFlowControl, isFlowcontrolTrue;
 	zval *this_ptr = getThis();
 
 	ZVAL_BOOL(&__$true, 1);
 	ZVAL_BOOL(&__$false, 0);
 
-	zephir_fetch_params(0, 2, 0, &inFlowControl_param, &isFlowontrolTrue_param);
+	zephir_fetch_params(0, 2, 0, &inFlowControl_param, &isFlowcontrolTrue_param);
 
 	inFlowControl = zephir_get_boolval(inFlowControl_param);
-	isFlowontrolTrue = zephir_get_boolval(isFlowontrolTrue_param);
+	isFlowcontrolTrue = zephir_get_boolval(isFlowcontrolTrue_param);
 
 
 	if (inFlowControl) {
@@ -1943,10 +1943,10 @@ PHP_METHOD(Queryyetsimple_Http_Response, setTControl) {
 	} else {
 		zephir_update_property_zval(this_ptr, SL("inFlowControl"), &__$false);
 	}
-	if (isFlowontrolTrue) {
-		zephir_update_property_zval(this_ptr, SL("isFlowontrolTrue"), &__$true);
+	if (isFlowcontrolTrue) {
+		zephir_update_property_zval(this_ptr, SL("isFlowcontrolTrue"), &__$true);
 	} else {
-		zephir_update_property_zval(this_ptr, SL("isFlowontrolTrue"), &__$false);
+		zephir_update_property_zval(this_ptr, SL("isFlowcontrolTrue"), &__$false);
 	}
 	RETURN_THISW();
 
@@ -1973,7 +1973,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, getTControl) {
 	zephir_read_property(&_0, this_ptr, SL("inFlowControl"), PH_NOISY_CC);
 	zephir_array_fast_append(&tmp, &_0);
 	ZEPHIR_OBS_NVAR(&_0);
-	zephir_read_property(&_0, this_ptr, SL("isFlowontrolTrue"), PH_NOISY_CC);
+	zephir_read_property(&_0, this_ptr, SL("isFlowcontrolTrue"), PH_NOISY_CC);
 	zephir_array_fast_append(&tmp, &_0);
 	RETURN_CCTOR(&tmp);
 
@@ -1999,7 +1999,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, checkTControl) {
 	_1 = zephir_is_true(&_0);
 	if (_1) {
 		ZEPHIR_OBS_VAR(&_2);
-		zephir_read_property(&_2, this_ptr, SL("isFlowontrolTrue"), PH_NOISY_CC);
+		zephir_read_property(&_2, this_ptr, SL("isFlowcontrolTrue"), PH_NOISY_CC);
 		_1 = !zephir_is_true(&_2);
 	}
 	RETURN_MM_BOOL(_1);

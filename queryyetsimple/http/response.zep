@@ -197,7 +197,7 @@ class Response implements IControl, IMacro, IResponse
      *
      * @var boolean
      */
-    protected isFlowontrolTrue = false;
+    protected isFlowcontrolTrue = false;
 
     /**
      * 构造函数
@@ -950,13 +950,13 @@ class Response implements IControl, IMacro, IResponse
      * 设置当前条件表达式状态
      *
      * @param boolean $inFlowControl
-     * @param boolean $isFlowontrolTrue
+     * @param boolean $isFlowcontrolTrue
      * @return $this
      */
-    public function setTControl(boolean inFlowControl, boolean isFlowontrolTrue)
+    public function setTControl(boolean inFlowControl, boolean isFlowcontrolTrue)
     {
         let this->inFlowControl = inFlowControl;
-        let this->isFlowontrolTrue = isFlowontrolTrue;
+        let this->isFlowcontrolTrue = isFlowcontrolTrue;
 
         return this;
     }
@@ -972,7 +972,7 @@ class Response implements IControl, IMacro, IResponse
     
         let tmp = [
         	this->inFlowControl, 
-        	this->isFlowontrolTrue
+        	this->isFlowcontrolTrue
         ];
 
         return tmp;
@@ -985,7 +985,7 @@ class Response implements IControl, IMacro, IResponse
      */
     public function checkTControl() -> boolean
     {
-        return this->inFlowControl && ! (this->isFlowontrolTrue);
+        return this->inFlowControl && ! (this->isFlowcontrolTrue);
     }
     
     /**

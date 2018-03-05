@@ -62,7 +62,7 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Flow_IControl, endIfs);
  * 设置当前条件表达式状态
  *
  * @param boolean $inFlowControl
- * @param boolean $isFlowontrolTrue
+ * @param boolean $isFlowcontrolTrue
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Flow_IControl, setTControl);
