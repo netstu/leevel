@@ -49,7 +49,7 @@ PHP_METHOD(queryyetsimple_8__closure, __invoke) {
 	ZVAL_STRING(&_0, "cookie\\");
 	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 86, &_1);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 95, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 

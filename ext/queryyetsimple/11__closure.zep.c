@@ -48,14 +48,14 @@ PHP_METHOD(queryyetsimple_11__closure, __invoke) {
 	zephir_array_fetch_long(&container, &args, 0, PH_NOISY, "queryyetsimple/di/container.zep", 168 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&closures);
 	zephir_array_fetch_long(&closures, &args, 1, PH_NOISY, "queryyetsimple/di/container.zep", 169 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 87, &closures);
+	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 96, &closures);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&obj);
 	zephir_read_static_property_ce(&_0, queryyetsimple_di_container_ce, SL("shareClosure"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset_fetch(&obj, &_0, &hash, 0 TSRMLS_CC)) {
 		RETURN_CCTOR(&obj);
 	}
-	ZEPHIR_CALL_FUNCTION(&obj, "call_user_func", NULL, 88, &closures, &container);
+	ZEPHIR_CALL_FUNCTION(&obj, "call_user_func", NULL, 8, &closures, &container);
 	zephir_check_call_status();
 	zephir_update_static_property_array_multi_ce(queryyetsimple_di_container_ce, SL("shareClosure"), &obj TSRMLS_CC, SL("z"), 1, &hash);
 	RETURN_CCTOR(&obj);

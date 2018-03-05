@@ -46,7 +46,7 @@ PHP_METHOD(queryyetsimple_13__closure, __invoke) {
 	zephir_check_call_status();
 	object_init_ex(return_value, queryyetsimple_event_dispatch_ce);
 	zephir_array_fetch_string(&_0, &option, SL("event_strict"), PH_NOISY | PH_READONLY, "queryyetsimple/event/provider/register.zep", 57 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 89, project, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 97, project, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

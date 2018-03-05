@@ -12,6 +12,9 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/facade.zep.c
 	queryyetsimple/di/provider.zep.c
 	queryyetsimple/option/iclass.zep.c
+	queryyetsimple/support/iarray.zep.c
+	queryyetsimple/support/ijson.zep.c
+	queryyetsimple/http/bag.zep.c
 	queryyetsimple/manager/manager.zep.c
 	queryyetsimple/mvc/iview.zep.c
 	queryyetsimple/log/connect.zep.c
@@ -28,8 +31,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/pipeline/ipipeline.zep.c
 	queryyetsimple/psr4/ipsr4.zep.c
 	queryyetsimple/session/isession.zep.c
-	queryyetsimple/support/iarray.zep.c
-	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/support/imacro.zep.c
 	queryyetsimple/view/connect.zep.c
 	queryyetsimple/view/iconnect.zep.c
@@ -56,7 +57,11 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/event/subject.zep.c
 	queryyetsimple/filesystem.zep.c
 	queryyetsimple/filesystem/provider/register.zep.c
-	queryyetsimple/http/provider/register.zep.c
+	queryyetsimple/http/filebag.zep.c
+	queryyetsimple/http/headerbag.zep.c
+	queryyetsimple/http/irequest.zep.c
+	queryyetsimple/http/iresponse.zep.c
+	queryyetsimple/http/serverbag.zep.c
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
 	queryyetsimple/i18n/provider/register.zep.c
@@ -137,8 +142,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/34__closure.zep.c
 	queryyetsimple/35__closure.zep.c
 	queryyetsimple/36__closure.zep.c
-	queryyetsimple/37__closure.zep.c
-	queryyetsimple/38__closure.zep.c "
+	queryyetsimple/37__closure.zep.c "
 	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
 	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
 

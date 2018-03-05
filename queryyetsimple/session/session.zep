@@ -1043,6 +1043,7 @@ class Session implements ISession, IClass
                 }
                 let value = value[part];
             }
+            
             return value;
         } else {
             return defaults;
