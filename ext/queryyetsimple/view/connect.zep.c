@@ -577,7 +577,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDisplayFile) {
 		ZVAL_STRING(&_7$$5, "Template file %s does not exist.");
 		ZEPHIR_CALL_FUNCTION(&_8$$5, "sprintf", NULL, 1, &_7$$5, &file);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", NULL, 25, &_8$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", NULL, 30, &_8$$5);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_6$$5, "queryyetsimple/view/connect.zep", 257 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -664,7 +664,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseFile) {
 	ZEPHIR_INIT_NVAR(&tpl);
 	zephir_fast_trim(&tpl, &_0, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 	ZVAL_LONG(&_3, 4);
-	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 26, &tpl, &_3);
+	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 31, &tpl, &_3);
 	zephir_check_call_status();
 	_5 = zephir_is_true(&_4);
 	if (!(_5)) {

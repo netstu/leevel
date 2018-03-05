@@ -15,7 +15,6 @@
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
 #include "kernel/array.h"
-#include "kernel/object.h"
 
 
 ZEPHIR_INIT_CLASS(queryyetsimple_27__closure) {
@@ -28,9 +27,8 @@ ZEPHIR_INIT_CLASS(queryyetsimple_27__closure) {
 
 PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 
-	zend_class_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, *_GET, *_POST, *_COOKIE, *_FILES, *_SERVER, option, tmp, _0, _1, _3;
+	zval *project, project_sub, *_GET, *_POST, *_COOKIE, *_FILES, *_SERVER, option, tmp, _0, _1, _2;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
@@ -38,7 +36,7 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_get_global(&_SERVER, SL("_SERVER"));
@@ -106,17 +104,12 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
 	zephir_array_update_string(&tmp, SL("public"), &_1, PH_COPY | PH_SEPARATE);
-	if (!_2) {
-	_2 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\Request"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _2);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_NVAR(&_0);
-		array_init(&_0);
-		ZVAL_NULL(&_3);
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, _GET, _POST, &_0, _COOKIE, _FILES, _SERVER, &_3, &tmp);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, queryyetsimple_http_request_ce);
+	ZEPHIR_INIT_NVAR(&_0);
+	array_init(&_0);
+	ZVAL_NULL(&_2);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 66, _GET, _POST, &_0, _COOKIE, _FILES, _SERVER, &_2, &tmp);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

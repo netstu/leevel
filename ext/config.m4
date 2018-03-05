@@ -19,10 +19,15 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/mvc/iview.zep.c
 	queryyetsimple/log/connect.zep.c
 	queryyetsimple/log/iconnect.zep.c
+	queryyetsimple/support/imacro.zep.c
 	queryyetsimple/cookie/icookie.zep.c
 	queryyetsimple/di/icontainer.zep.c
 	queryyetsimple/event/idispatch.zep.c
 	queryyetsimple/event/isubject.zep.c
+	queryyetsimple/http/file.zep.c
+	queryyetsimple/http/fileexception.zep.c
+	queryyetsimple/http/headerbag.zep.c
+	queryyetsimple/http/irequest.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
 	queryyetsimple/log/ilog.zep.c
 	queryyetsimple/mvc/icontroller.zep.c
@@ -31,7 +36,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/pipeline/ipipeline.zep.c
 	queryyetsimple/psr4/ipsr4.zep.c
 	queryyetsimple/session/isession.zep.c
-	queryyetsimple/support/imacro.zep.c
 	queryyetsimple/view/connect.zep.c
 	queryyetsimple/view/iconnect.zep.c
 	queryyetsimple/view/iview.zep.c
@@ -58,10 +62,12 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/filesystem.zep.c
 	queryyetsimple/filesystem/provider/register.zep.c
 	queryyetsimple/http/filebag.zep.c
-	queryyetsimple/http/headerbag.zep.c
-	queryyetsimple/http/irequest.zep.c
+	queryyetsimple/http/filenotfoundexception.zep.c
 	queryyetsimple/http/iresponse.zep.c
+	queryyetsimple/http/request.zep.c
+	queryyetsimple/http/responseheaderbag.zep.c
 	queryyetsimple/http/serverbag.zep.c
+	queryyetsimple/http/uploadedfile.zep.c
 	queryyetsimple/i18n.zep.c
 	queryyetsimple/i18n/i18n.zep.c
 	queryyetsimple/i18n/provider/register.zep.c

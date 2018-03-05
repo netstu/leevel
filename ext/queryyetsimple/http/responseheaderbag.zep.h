@@ -1,0 +1,5 @@
+
+extern zend_class_entry *queryyetsimple_http_responseheaderbag_ce;
+
+ZEPHIR_INIT_CLASS(Queryyetsimple_Http_ResponseHeaderBag);
+

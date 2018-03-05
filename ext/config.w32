@@ -13,7 +13,7 @@ if (PHP_QUERYYETSIMPLE != "no") {
   ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "facade.zep.c iarray.zep.c ijson.zep.c imacro.zep.c closureuse.zep.c ihtml.zep.c type.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/di", "provider.zep.c icontainer.zep.c container.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/option", "iclass.zep.c ioption.zep.c option.zep.c", "queryyetsimple");
-	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/http", "bag.zep.c filebag.zep.c headerbag.zep.c irequest.zep.c iresponse.zep.c serverbag.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/http", "bag.zep.c file.zep.c fileexception.zep.c headerbag.zep.c irequest.zep.c filebag.zep.c filenotfoundexception.zep.c iresponse.zep.c request.zep.c responseheaderbag.zep.c serverbag.zep.c uploadedfile.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/manager", "manager.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iview.zep.c icontroller.zep.c ientity.zep.c controller.zep.c imodel.zep.c view.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/log", "connect.zep.c iconnect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c monolog.zep.c", "queryyetsimple");
