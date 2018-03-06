@@ -62,10 +62,7 @@ class Session implements ISession, IClass
         "cookie_domain" : null,
         "cache_limiter" : null,
         "expire" : 86400,
-        "cookie_lifetime" : null,
-        "gc_maxlifetime" : null,
         "save_path" : null,
-        "use_trans_sid" : null,
         "gc_probability" : null
     ];
 
@@ -119,56 +116,40 @@ class Session implements ISession, IClass
 
         // 设置 session id
         if this->getOption("id") {
-            session_id(this->getOption("id"));
-        } else {
-            if ! this->parseSessionId() {
-                this->sessionId(uniqid(dechex(mt_rand())));
-            }
-        }
-
-        // cookie domain
-        if this->getOption("cookie_domain") {
-            this->cookieDomain(this->getOption("cookie_domain"));
+        	this->setId(this->getOption("id"));
         }
 
         // session name
         if this->getOption("name") {
-            this->sessionName(this->getOption("name"));
+            this->setName(this->getOption("name"));
         }
 
-        // cache expire
+        // cookie set
+        this->setUseCookies(); 
+
+        // save path
+        if this->getOption("save_path") {
+            this->setSavePath(this->getOption("save_path"));
+        }
+        
+        // cookie domain
+        if this->getOption("cookie_domain") {
+            this->setCookieDomain(this->getOption("cookie_domain"));
+        }
+
+        // session expire
         if this->getOption("expire") {
-            this->cacheExpire(this->getOption("expire"));
-        }
-
-        // gc maxlifetime
-        if this->getOption("gc_maxlifetime") {
-            this->gcMaxlifetime(this->getOption("gc_maxlifetime"));
-        }
-
-        // cookie lifetime
-        if this->getOption("cookie_lifetime") {
-            this->cookieLifetime(this->getOption("cookie_lifetime"));
+            this->setCacheExpire(this->getOption("expire"));
         }
 
         // cache limiter
         if this->getOption("cache_limiter") {
-            this->cacheLimiter(this->getOption("cache_limiter"));
-        }
-
-        // save path
-        if this->getOption("save_path") {
-            this->savePath(this->getOption("save_path"));
-        }
-
-        // use_trans_sid
-        if this->getOption("use_trans_sid") {
-            this->useTransSid(this->getOption("use_trans_sid"));
+            this->setCacheLimiter(this->getOption("cache_limiter"));
         }
 
         // gc_probability
         if this->getOption("gc_probability") {
-            this->gcProbability(this->getOption("gc_probability"));
+            this->setGcProbability(this->getOption("gc_probability"));
         }
 
         // 驱动
@@ -183,7 +164,7 @@ class Session implements ISession, IClass
 
         let this->started = true;
 
-        return this;
+		return this;
     }
 
     /**
@@ -197,7 +178,7 @@ class Session implements ISession, IClass
     {
         this->checkStart();
 
-        let name = this->getName(name);
+        let name = this->getNormalizeName(name);
         let _SESSION[name] = value;
     }
 
@@ -235,8 +216,10 @@ class Session implements ISession, IClass
     public function push(string key, var value)
     {
         var arr;
+
         let arr = this->get(key, []);
         let arr[] = value;
+
         this->set(key, arr);
     }
 
@@ -275,12 +258,15 @@ class Session implements ISession, IClass
     public function arr(string key, var keys, var value = null)
     {
         var arr;
+
         let arr = this->get(key, []);
+
         if typeof keys == "string" {
             let arr[keys] = value;
         } elseif typeof keys == "array" {
             let arr = array_merge(arr, keys);
         }
+
         this->set(key, arr);
     }
 
@@ -294,7 +280,9 @@ class Session implements ISession, IClass
     public function arrDelete(string key, var keys)
     {
         var arr, item, deleteKey;
+
         let arr = this->get(key, []);
+
         if typeof keys != "array" {
             let deleteKey = [
                 keys
@@ -308,6 +296,7 @@ class Session implements ISession, IClass
                 unset arr[item];
             }
         }
+
         this->set(key, arr);
     }
 
@@ -322,7 +311,8 @@ class Session implements ISession, IClass
     {
         this->checkStart();
 
-        let name = this->getName(name);
+        let name = this->getNormalizeName(name);
+
         return isset _SESSION[name] ? _SESSION[name] : value;
     }
 
@@ -349,7 +339,7 @@ class Session implements ISession, IClass
         this->checkStart();
 
         if prefix {
-            let name = this->getName(name);
+            let name = this->getNormalizeName(name);
         }
 
         if isset _SESSION[name] {
@@ -369,7 +359,8 @@ class Session implements ISession, IClass
     {
         this->checkStart();
 
-        let name = this->getName(name);
+        let name = this->getNormalizeName(name);
+
         return isset _SESSION[name];
     }
 
@@ -386,6 +377,7 @@ class Session implements ISession, IClass
         this->checkStart();
 
         let strPrefix = this->getOption("prefix");
+
         for sKey, _ in _SESSION {
             if prefix === true && strPrefix && strpos(sKey, strPrefix) === 0 {
                 this->delete(sKey, false);
@@ -408,9 +400,11 @@ class Session implements ISession, IClass
             return this->getFlash(key);
         } else {
             this->set(this->flashDataKey(key), value);
+
             this->mergeNewFlash([
                 key
             ]);
+
             this->popOldFlash([
                 key
             ]);
@@ -442,6 +436,7 @@ class Session implements ISession, IClass
     public function nowFlash(string key, var value)
     {
         this->set(this->flashDataKey(key), value);
+
         this->mergeOldFlash([
             key
         ]);
@@ -589,7 +584,8 @@ class Session implements ISession, IClass
 
         this->clear(false);
 
-        let name = this->sessionName();
+        let name = this->getName();
+
         if isset _COOKIE[name] {
             setcookie(name, "", time() - 42000, "/");
         }
@@ -629,58 +625,91 @@ class Session implements ISession, IClass
     }
 
     /**
-     * 获取解析 session_id
-     *
-     * @param string $id
-     * @return string
-     */
-    public function parseSessionId()
-    {
-        var id, name;
+	 * 设置 SESSION 名字
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+	public function setName(string name)
+	{
+	    session_name(name);
+	}
 
-        let id = this->sessionId();
-        if id {
-            return id;
-        }
+	/**
+	 * 取得 SESSION 名字
+	 *
+	 * @return string
+	 */
+	public function getName() -> string
+	{
+	    return session_name();
+	}
 
-        let name = this->sessionName();
+	/**
+	 * 设置 SESSION ID
+	 *
+	 * @param string $name
+	 * @return void
+	 */
+	public function setId(string id)
+	{
+		session_id(id);
+	}
 
-        if this->useCookies() {
-            if isset _COOKIE[name] {
-                return _COOKIE[name];
-            }
-        } else {
-            if isset _GET[name] {
-                return _GET[name];
-            }
-            if isset _POST[name] {
-                return _POST[name];
-            }
-        }
-
-        return null;
-    }
+	/**
+	 * 取得 SESSION ID
+	 *
+	 * @return string
+	 */
+	public function getId() -> string
+	{
+		return session_id();
+	}
 
     /**
      * 设置 save path
      *
      * @param string $savepath
-     * @return string
+     * @return void
      */
-    public function savePath(string savepath = null)
+    public function setSavePath(string savepath)
     {
-        return savepath ? session_save_path(savepath) : session_save_path();
+        session_save_path(savepath);
     }
 
     /**
-     * 设置 cache limiter
+     * 获取 save path
      *
-     * @param string $limiter
      * @return string
      */
-    public function cacheLimiter(string limiter = null)
+    public function getSavePath()
     {
-        return limiter ? session_cache_limiter(limiter) : session_cache_limiter();
+        return session_save_path();
+    }
+
+    /**
+     * 设置 cookie_domain
+     *
+     * @param string $domain
+     * @return void
+     */
+    public function setCookieDomain(string domain)
+    {
+        ini_set("session.cookie_domain", domain);
+    }
+
+    /**
+     * 获取 cookie_domain
+     *
+     * @return string
+     */
+    public function getCookieDomain()
+    {
+        var result;
+
+        let result = ini_get("session.cookie_domain");
+
+        return result;
     }
 
     /**
@@ -689,143 +718,73 @@ class Session implements ISession, IClass
      * @param int $second
      * @return void
      */
-    public function cacheExpire(string second = null)
+    public function setCacheExpire(int second)
     {
-        return second ? session_cache_expire(intval(second)) : session_cache_expire();
+    	let second = intval(second);
+
+		ini_set("session.gc_maxlifetime", second);
+        ini_set("session.cookie_lifetime", second);
     }
 
     /**
-     * session_name
+     * session 使用 cookie
      *
-     * @param string $name
-     * @return string
-     */
-    public function sessionName(string name = null)
-    {
-        return name ? session_name(name) : session_name();
-    }
-
-    /**
-     * session id
-     *
-     * @param string $id
-     * @return string
-     */
-    public function sessionId(string id = null)
-    {
-        return id ? session_id(id) : session_id();
-    }
-
-    /**
-     * session 的 cookie_domain 设置
-     *
-     * @param string $domain
-     * @return string
-     */
-    public function cookieDomain(string domain = null)
-    {
-        var result;
-
-        let result = ini_get("session.cookie_domain");
-
-        if domain {
-            ini_set("session.cookie_domain", domain); // 跨域访问 session
-        }
-
-        return result;
-    }
-
-    /**
-     * session 是否使用 cookie
-     *
-     * @param boolean $cookies
      * @return boolean
      */
-    public function useCookies(boolean cookies = null)
+    public function setUseCookies()
     {
-        var result;
-
-        let result = ini_get("session.use_cookies") ? true : false;
-
-        if typeof cookies != "null" {
-            ini_set("session.use_cookies", cookies ? 1 : 0);
-        }
-
-        return result;
+        ini_set("session.use_cookies", 1);
+	    ini_set("session.use_trans_sid", 0);
     }
 
     /**
-     * 客户端禁用 cookie 可以开启这个项
+     * 设置 cache limiter
      *
-     * @param string $id
-     * @return boolean
+     * @param string $limiter
+     * @return void
      */
-    public function useTransSid(int id = null)
+    public function setCacheLimiter(string limiter)
     {
-        var result;
-
-        let result =  ini_get("session.use_trans_sid") ? true : false;
-
-        if id {
-            ini_set("session.use_trans_sid", id ? 1 : 0);
-        }
-
-        return result;
+        session_cache_limiter(limiter);
     }
 
     /**
-     * 设置过期 cookie lifetime
+     * 获取 cache limiter
      *
-     * @param int $lifetime
-     * @return int
+     * @return string
      */
-    public function cookieLifetime(int lifetime)
+    public function getCacheLimiter()
     {
-        var result;
-
-        let result = ini_get("session.cookie_lifetime");
-
-        if intval(lifetime) >= 1 {
-            ini_set("session.cookie_lifetime", intval(lifetime));
-        }
-
-        return result;
+        return session_cache_limiter();
     }
 
     /**
-     * gc maxlifetime
-     *
-     * @param int $lifetime
-     * @return int
-     */
-    public function gcMaxlifetime(int lifetime = null)
-    {
-        var result;
-
-        let result = ini_get("session.gc_maxlifetime");
-
-        if intval(lifetime) >= 1 {
-            ini_set("session.gc_maxlifetime", intval(lifetime));
-        }
-
-        return result;
-    }
-
-    /**
-     * session 垃圾回收概率分子 (分母为 session.gc_divisor)
+     * 设置 session 垃圾回收概率分子
+     * 分母为 session.gc_divisor
      *
      * @param int $probability
+     * @return void
+     */
+    public function setGcProbability(int probability)
+    {
+    	let probability = intval(probability);
+
+        if probability >= 1 && probability <= 100 {
+            ini_set("session.gc_probability", probability);
+        }
+    }
+
+    /**
+     * 获取 session 垃圾回收概率分子
+     * 分母为 session.gc_divisor
+     *
      * @return int
      */
-    public function gcProbability(int probability = null)
+    public function getGcProbability()
     {
         var result;
 
-        let result =  ini_get("session.gc_probability");
-
-        if intval(probability) >= 1 && intval(probability) <= 100 {
-            ini_set("session.gc_probability", intval(probability));
-        }
+        let result = ini_get("session.gc_probability");
 
         return result;
     }
@@ -842,7 +801,9 @@ class Session implements ISession, IClass
         if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
+
         let this->option[name] = value;
+
         return this;
     }
 
@@ -949,7 +910,7 @@ class Session implements ISession, IClass
      * @param string $name
      * @return string
      */
-    protected function getName(string name)
+    protected function getNormalizeName(string name)
     {
         return this->getOption("prefix") . name;
     }

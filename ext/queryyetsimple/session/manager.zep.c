@@ -71,7 +71,7 @@ PHP_METHOD(Queryyetsimple_Session_Manager, createConnect) {
 	object_init_ex(return_value, queryyetsimple_session_session_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptioncommon", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 102, connect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 104, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

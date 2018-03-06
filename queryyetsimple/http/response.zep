@@ -413,7 +413,7 @@ class Response implements IControl, IMacro, IResponse
         }
 
         if ! (self::cookieResolver) {
-            return this;
+            throw new InvalidArgumentException("Cookie resolver is not set.");
         }
 
         let cookie = call_user_func(self::cookieResolver);

@@ -124,7 +124,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 		ZVAL_COPY(&type, _6);
 		ZEPHIR_CALL_METHOD(&_7$$3, this_ptr, "camelize", &_8, 0, &type);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_9$$3, "ucwords", &_10, 14, &_7$$3);
+		ZEPHIR_CALL_FUNCTION(&_9$$3, "ucwords", &_10, 23, &_7$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&make);
 		ZEPHIR_CONCAT_SVS(&make, "make", &_9$$3, "Handler");
@@ -599,12 +599,12 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, getDailyFilePath) {
 
 
 	ZVAL_LONG(&_0, 4);
-	ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 39, &path, &_0);
+	ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 41, &path, &_0);
 	zephir_check_call_status();
 	if (zephir_is_true(&ext)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		ZEPHIR_CONCAT_SV(&_1$$3, ".", &ext);
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 95, &path, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "strrpos", NULL, 97, &path, &_1$$3);
 		zephir_check_call_status();
 		ZVAL_LONG(&_3$$3, 0);
 		ZEPHIR_INIT_VAR(&_4$$3);
@@ -748,7 +748,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, camelize) {
 	ZEPHIR_CONCAT_VV(&_3, &separator, &_0);
 	zephir_get_strval(&value, &_3);
 	ZEPHIR_INIT_VAR(&_4);
-	ZEPHIR_CALL_FUNCTION(&_5, "ucwords", NULL, 14, &value);
+	ZEPHIR_CALL_FUNCTION(&_5, "ucwords", NULL, 23, &value);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_6);
 	ZVAL_STRING(&_6, " ");

@@ -221,7 +221,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, set) {
 	zephir_array_fetch_string(&_20, &option, SL("domain"), PH_NOISY | PH_READONLY, "queryyetsimple/cookie/cookie.zep", 105 TSRMLS_CC);
 	zephir_array_fetch_string(&_21, &option, SL("httponly"), PH_NOISY | PH_READONLY, "queryyetsimple/cookie/cookie.zep", 105 TSRMLS_CC);
 	ZVAL_BOOL(&_22, (isHttpSecure ? 1 : 0));
-	ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 51, &name, value, &_18, &_19, &_20, &_22, &_21);
+	ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 53, &name, value, &_18, &_19, &_20, &_22, &_21);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -382,7 +382,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, merge) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "get", NULL, 0, &key, &_2, &option);
 	zephir_check_call_status();
 	zephir_fast_array_merge(&_0, &_1, &value TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 52, &_0);
+	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 54, &_0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_3, &option);
 	zephir_check_call_status();
@@ -430,7 +430,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, pop) {
 	array_init(&_1);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, 0, &key, &_1, &option);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 53, &_0, &value);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 55, &_0, &value);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_2, &option);
 	zephir_check_call_status();
@@ -864,7 +864,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/cookie/cookie.zep", 333);
+	zephir_is_iterable(&option, 0, "queryyetsimple/cookie/cookie.zep", 335);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -918,7 +918,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/cookie/cookie.zep", 345 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/cookie/cookie.zep", 347 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -1024,7 +1024,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/cookie/cookie.zep", 396);
+	zephir_is_iterable(&option, 0, "queryyetsimple/cookie/cookie.zep", 398);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1068,7 +1068,7 @@ PHP_METHOD(Queryyetsimple_Cookie_Cookie, isJson) {
 	}
 	ZEPHIR_INIT_VAR(&_1);
 	zephir_json_decode(&_1, data, 0 );
-	ZEPHIR_CALL_FUNCTION(&_2, "json_last_error", NULL, 24);
+	ZEPHIR_CALL_FUNCTION(&_2, "json_last_error", NULL, 19);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_2, 0));
 

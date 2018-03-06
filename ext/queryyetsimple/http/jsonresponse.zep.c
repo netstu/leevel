@@ -129,7 +129,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, __construct) {
 	if (Z_TYPE_P(data) == IS_NULL) {
 		ZEPHIR_INIT_NVAR(data);
 		object_init_ex(data, spl_ce_ArrayObject);
-		ZEPHIR_CALL_METHOD(NULL, data, "__construct", NULL, 76);
+		ZEPHIR_CALL_METHOD(NULL, data, "__construct", NULL, 39);
 		zephir_check_call_status();
 	}
 	if (json) {
@@ -192,7 +192,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, fromJsonString) {
 	object_init_ex(return_value, queryyetsimple_http_jsonresponse_ce);
 	ZVAL_LONG(&_0, status);
 	ZVAL_BOOL(&_1, 1);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 77, data, &_0, &headers, &_1);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 40, data, &_0, &headers, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -369,14 +369,14 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setData) {
 		zephir_json_encode(&_13$$8, data, zephir_get_intval(&_14$$8) );
 		zephir_update_property_zval(this_ptr, SL("data"), &_13$$8);
 	}
-	ZEPHIR_CALL_FUNCTION(&_15, "json_last_error", NULL, 24);
+	ZEPHIR_CALL_FUNCTION(&_15, "json_last_error", NULL, 19);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_LONG_IDENTICAL(&_15, 0)) {
 		ZEPHIR_INIT_VAR(&_16$$9);
 		object_init_ex(&_16$$9, spl_ce_InvalidArgumentException);
-		ZEPHIR_CALL_FUNCTION(&_17$$9, "json_last_error_msg", NULL, 25);
+		ZEPHIR_CALL_FUNCTION(&_17$$9, "json_last_error_msg", NULL, 20);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_16$$9, "__construct", NULL, 26, &_17$$9);
+		ZEPHIR_CALL_METHOD(NULL, &_16$$9, "__construct", NULL, 21, &_17$$9);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_16$$9, "queryyetsimple/http/jsonresponse.zep", 173 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -512,7 +512,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, isJsonData) {
 	}
 	ZEPHIR_INIT_VAR(&_1);
 	zephir_json_decode(&_1, data, 0 );
-	ZEPHIR_CALL_FUNCTION(&_2, "json_last_error", NULL, 24);
+	ZEPHIR_CALL_FUNCTION(&_2, "json_last_error", NULL, 19);
 	zephir_check_call_status();
 	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_2, 0));
 

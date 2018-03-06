@@ -10,11 +10,11 @@ if (PHP_QUERYYETSIMPLE != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "facade.zep.c iarray.zep.c ijson.zep.c imacro.zep.c closureuse.zep.c ihtml.zep.c type.zep.c", "queryyetsimple");
+  ADD_SOURCES(configure_module_dirname + "/queryyetsimple/support", "facade.zep.c iarray.zep.c imacro.zep.c ijson.zep.c closureuse.zep.c ihtml.zep.c type.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/di", "provider.zep.c icontainer.zep.c container.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/option", "iclass.zep.c ioption.zep.c option.zep.c", "queryyetsimple");
-	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/http", "bag.zep.c iresponse.zep.c response.zep.c file.zep.c fileexception.zep.c headerbag.zep.c irequest.zep.c filebag.zep.c filenotfoundexception.zep.c fileresponse.zep.c jsonresponse.zep.c request.zep.c responseheaderbag.zep.c serverbag.zep.c uploadedfile.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/flow", "icontrol.zep.c", "queryyetsimple");
+	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/http", "iresponse.zep.c bag.zep.c response.zep.c file.zep.c fileexception.zep.c headerbag.zep.c irequest.zep.c jsonresponse.zep.c apiresponse.zep.c filebag.zep.c filenotfoundexception.zep.c fileresponse.zep.c redirectresponse.zep.c request.zep.c responseheaderbag.zep.c serverbag.zep.c uploadedfile.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/manager", "manager.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/mvc", "iview.zep.c icontroller.zep.c ientity.zep.c controller.zep.c imodel.zep.c view.zep.c", "queryyetsimple");
 	ADD_SOURCES(configure_module_dirname + "/queryyetsimple/log", "connect.zep.c iconnect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c monolog.zep.c", "queryyetsimple");

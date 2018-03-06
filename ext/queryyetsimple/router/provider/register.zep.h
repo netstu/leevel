@@ -11,6 +11,8 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, url);
 PHP_METHOD(Queryyetsimple_Router_Provider_Register, redirect);
 PHP_METHOD(Queryyetsimple_Router_Provider_Register, request);
 PHP_METHOD(Queryyetsimple_Router_Provider_Register, response);
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, cookieResolver);
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, makeCookieResolverClosure);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_router_provider_register___construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, container, Queryyetsimple\\Di\\IContainer, 0)
@@ -25,5 +27,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_router_provider_register_method_entry) {
 	PHP_ME(Queryyetsimple_Router_Provider_Register, redirect, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Router_Provider_Register, request, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Router_Provider_Register, response, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Queryyetsimple_Router_Provider_Register, cookieResolver, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Queryyetsimple_Router_Provider_Register, makeCookieResolverClosure, NULL, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

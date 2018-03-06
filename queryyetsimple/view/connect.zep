@@ -133,7 +133,9 @@ abstract class Connect implements IClass
         if ! is_string(name) {
             throw new InvalidArgumentException("Option set name must be a string.");
         }
+
         let this->option[name] = value;
+
         return this;
     }
 

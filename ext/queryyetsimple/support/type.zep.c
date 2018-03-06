@@ -132,7 +132,7 @@ PHP_METHOD(Queryyetsimple_Support_Type, vars) {
 		}
 		if (ZEPHIR_IS_STRING(&type, "callback")) {
 			ZVAL_BOOL(&_2$$16, 0);
-			ZEPHIR_RETURN_CALL_FUNCTION("is_callable", NULL, 118, value, &_2$$16);
+			ZEPHIR_RETURN_CALL_FUNCTION("is_callable", NULL, 116, value, &_2$$16);
 			zephir_check_call_status();
 			RETURN_MM();
 		}

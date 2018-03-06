@@ -423,7 +423,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, makeConnect) {
 		ZVAL_STRING(&_4$$3, "Connect driver %s not exits");
 		ZEPHIR_CALL_FUNCTION(&_5$$3, "sprintf", NULL, 1, &_4$$3, &connect);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 13, &_5$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 22, &_5$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_3$$3, "queryyetsimple/manager/manager.zep", 200 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -468,7 +468,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, createConnectCommon) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "ucwords", NULL, 14, &connect);
+	ZEPHIR_CALL_FUNCTION(&_0, "ucwords", NULL, 23, &connect);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_CONCAT_SV(&_1, "makeConnect", &_0);
@@ -593,7 +593,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, getUnique) {
 	zephir_get_arrval(&options, options_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "serialize", NULL, 15, &options);
+	ZEPHIR_CALL_FUNCTION(&_0, "serialize", NULL, 24, &options);
 	zephir_check_call_status();
 	zephir_md5(return_value, &_0);
 	RETURN_MM();
@@ -640,7 +640,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, getOption) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoptioncommon", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("array_merge", NULL, 16, &_0, &_1, &extendOption);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_merge", NULL, 25, &_0, &_1, &extendOption);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -802,7 +802,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, optionFilterNull) {
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_closure_ex(&_0, NULL, queryyetsimple_0__closure_ce, SL("__invoke"));
-	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 17, &options, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 26, &options, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

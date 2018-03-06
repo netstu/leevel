@@ -258,28 +258,64 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, isStart);
 ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, status);
 
 /**
- * 获取解析 session_id
+ * 设置 SESSION 名字
  *
- * @param string $id
+ * @param string $name
+ * @return void
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setName);
+
+/**
+ * 取得 SESSION 名字
+ *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, parseSessionId);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getName);
+
+/**
+ * 设置 SESSION ID
+ *
+ * @param string $name
+ * @return void
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setId);
+
+/**
+ * 取得 SESSION ID
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getId);
 
 /**
  * 设置 save path
  *
  * @param string $savepath
- * @return string
+ * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, savePath);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setSavePath);
 
 /**
- * 设置 cache limiter
+ * 获取 save path
  *
- * @param string $limiter
  * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, cacheLimiter);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getSavePath);
+
+/**
+ * 设置 cookie_domain
+ *
+ * @param string $domain
+ * @return void
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setCookieDomain);
+
+/**
+ * 获取 cookie_domain
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getCookieDomain);
 
 /**
  * 设置 cache expire
@@ -287,69 +323,44 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, cacheLimiter);
  * @param int $second
  * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, cacheExpire);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setCacheExpire);
 
 /**
- * session_name
+ * session 使用 cookie
  *
- * @param string $name
- * @return string
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, sessionName);
-
-/**
- * session id
- *
- * @param string $id
- * @return string
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, sessionId);
-
-/**
- * session 的 cookie_domain 设置
- *
- * @param string $domain
- * @return string
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, cookieDomain);
-
-/**
- * session 是否使用 cookie
- *
- * @param boolean $cookies
  * @return boolean
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, useCookies);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setUseCookies);
 
 /**
- * 客户端禁用 cookie 可以开启这个项
+ * 设置 cache limiter
  *
- * @param string $id
- * @return boolean
+ * @param string $limiter
+ * @return void
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, useTransSid);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setCacheLimiter);
 
 /**
- * 设置过期 cookie lifetime
+ * 获取 cache limiter
  *
- * @param int $lifetime
- * @return int
+ * @return string
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, cookieLifetime);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getCacheLimiter);
 
 /**
- * gc maxlifetime
- *
- * @param int $lifetime
- * @return int
- */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, gcMaxlifetime);
-
-/**
- * session 垃圾回收概率分子 (分母为 session.gc_divisor)
+ * 设置 session 垃圾回收概率分子
+ * 分母为 session.gc_divisor
  *
  * @param int $probability
+ * @return void
+ */
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, setGcProbability);
+
+/**
+ * 获取 session 垃圾回收概率分子
+ * 分母为 session.gc_divisor
+ *
  * @return int
  */
-ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, gcProbability);
+ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getGcProbability);
 

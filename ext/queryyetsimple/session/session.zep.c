@@ -133,8 +133,8 @@ PHP_METHOD(Queryyetsimple_Session_Session, __construct) {
  */
 PHP_METHOD(Queryyetsimple_Session_Session, start) {
 
-	zend_bool _1, _3, _42;
-	zval __$true, __$false, _0, _2, _4, _5, _6, _7, _15, _18, _21, _24, _27, _30, _33, _36, _39, _43, _44, _50, _9$$4, _10$$4, _11$$5, _12$$6, _13$$6, _14$$6, _16$$7, _17$$7, _19$$8, _20$$8, _22$$9, _23$$9, _25$$10, _26$$10, _28$$11, _29$$11, _31$$12, _32$$12, _34$$13, _35$$13, _37$$14, _38$$14, _40$$15, _41$$15, _45$$16, _46$$16, _47$$16, _48$$16, _49$$16;
+	zend_bool _1, _3, _30;
+	zval __$true, __$false, _0, _2, _4, _5, _6, _7, _11, _12, _15, _18, _21, _24, _27, _31, _32, _38, _9$$4, _10$$4, _13$$5, _14$$5, _16$$6, _17$$6, _19$$7, _20$$7, _22$$8, _23$$8, _25$$9, _26$$9, _28$$10, _29$$10, _33$$11, _34$$11, _35$$11, _36$$11, _37$$11;
 	zephir_fcall_cache_entry *_8 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -147,51 +147,39 @@ PHP_METHOD(Queryyetsimple_Session_Session, start) {
 	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_12);
 	ZVAL_UNDEF(&_15);
 	ZVAL_UNDEF(&_18);
 	ZVAL_UNDEF(&_21);
 	ZVAL_UNDEF(&_24);
 	ZVAL_UNDEF(&_27);
-	ZVAL_UNDEF(&_30);
-	ZVAL_UNDEF(&_33);
-	ZVAL_UNDEF(&_36);
-	ZVAL_UNDEF(&_39);
-	ZVAL_UNDEF(&_43);
-	ZVAL_UNDEF(&_44);
-	ZVAL_UNDEF(&_50);
+	ZVAL_UNDEF(&_31);
+	ZVAL_UNDEF(&_32);
+	ZVAL_UNDEF(&_38);
 	ZVAL_UNDEF(&_9$$4);
 	ZVAL_UNDEF(&_10$$4);
-	ZVAL_UNDEF(&_11$$5);
-	ZVAL_UNDEF(&_12$$6);
-	ZVAL_UNDEF(&_13$$6);
-	ZVAL_UNDEF(&_14$$6);
-	ZVAL_UNDEF(&_16$$7);
-	ZVAL_UNDEF(&_17$$7);
-	ZVAL_UNDEF(&_19$$8);
-	ZVAL_UNDEF(&_20$$8);
-	ZVAL_UNDEF(&_22$$9);
-	ZVAL_UNDEF(&_23$$9);
-	ZVAL_UNDEF(&_25$$10);
-	ZVAL_UNDEF(&_26$$10);
-	ZVAL_UNDEF(&_28$$11);
-	ZVAL_UNDEF(&_29$$11);
-	ZVAL_UNDEF(&_31$$12);
-	ZVAL_UNDEF(&_32$$12);
-	ZVAL_UNDEF(&_34$$13);
-	ZVAL_UNDEF(&_35$$13);
-	ZVAL_UNDEF(&_37$$14);
-	ZVAL_UNDEF(&_38$$14);
-	ZVAL_UNDEF(&_40$$15);
-	ZVAL_UNDEF(&_41$$15);
-	ZVAL_UNDEF(&_45$$16);
-	ZVAL_UNDEF(&_46$$16);
-	ZVAL_UNDEF(&_47$$16);
-	ZVAL_UNDEF(&_48$$16);
-	ZVAL_UNDEF(&_49$$16);
+	ZVAL_UNDEF(&_13$$5);
+	ZVAL_UNDEF(&_14$$5);
+	ZVAL_UNDEF(&_16$$6);
+	ZVAL_UNDEF(&_17$$6);
+	ZVAL_UNDEF(&_19$$7);
+	ZVAL_UNDEF(&_20$$7);
+	ZVAL_UNDEF(&_22$$8);
+	ZVAL_UNDEF(&_23$$8);
+	ZVAL_UNDEF(&_25$$9);
+	ZVAL_UNDEF(&_26$$9);
+	ZVAL_UNDEF(&_28$$10);
+	ZVAL_UNDEF(&_29$$10);
+	ZVAL_UNDEF(&_33$$11);
+	ZVAL_UNDEF(&_34$$11);
+	ZVAL_UNDEF(&_35$$11);
+	ZVAL_UNDEF(&_36$$11);
+	ZVAL_UNDEF(&_37$$11);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&_0, "headers_sent", NULL, 21);
+	ZEPHIR_CALL_FUNCTION(&_0, "headers_sent", NULL, 16);
 	zephir_check_call_status();
 	_1 = zephir_is_true(&_0);
 	if (!(_1)) {
@@ -211,7 +199,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, start) {
 	ZEPHIR_INIT_VAR(&_5);
 	ZVAL_STRING(&_5, "session.auto_start");
 	ZVAL_LONG(&_6, 0);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_5, &_6);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 105, &_5, &_6);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "id");
@@ -222,44 +210,51 @@ PHP_METHOD(Queryyetsimple_Session_Session, start) {
 		ZVAL_STRING(&_10$$4, "id");
 		ZEPHIR_CALL_METHOD(&_9$$4, this_ptr, "getoption", &_8, 0, &_10$$4);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(NULL, "session_id", NULL, 104, &_9$$4);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_METHOD(&_11$$5, this_ptr, "parsesessionid", NULL, 0);
-		zephir_check_call_status();
-		if (!(zephir_is_true(&_11$$5))) {
-			ZEPHIR_CALL_FUNCTION(&_12$$6, "mt_rand", NULL, 105);
-			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_13$$6, "dechex", NULL, 106, &_12$$6);
-			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_14$$6, "uniqid", NULL, 107, &_13$$6);
-			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "sessionid", NULL, 0, &_14$$6);
-			zephir_check_call_status();
-		}
-	}
-	ZEPHIR_INIT_NVAR(&_5);
-	ZVAL_STRING(&_5, "cookie_domain");
-	ZEPHIR_CALL_METHOD(&_15, this_ptr, "getoption", &_8, 0, &_5);
-	zephir_check_call_status();
-	if (zephir_is_true(&_15)) {
-		ZEPHIR_INIT_VAR(&_17$$7);
-		ZVAL_STRING(&_17$$7, "cookie_domain");
-		ZEPHIR_CALL_METHOD(&_16$$7, this_ptr, "getoption", &_8, 0, &_17$$7);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookiedomain", NULL, 0, &_16$$7);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setid", NULL, 0, &_9$$4);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "name");
+	ZEPHIR_INIT_VAR(&_11);
+	ZVAL_STRING(&_11, "hello");
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "option", NULL, 0, &_5, &_11);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_5);
+	ZVAL_STRING(&_5, "name");
+	ZEPHIR_CALL_METHOD(&_12, this_ptr, "getoption", &_8, 0, &_5);
+	zephir_check_call_status();
+	if (zephir_is_true(&_12)) {
+		ZEPHIR_INIT_VAR(&_14$$5);
+		ZVAL_STRING(&_14$$5, "name");
+		ZEPHIR_CALL_METHOD(&_13$$5, this_ptr, "getoption", &_8, 0, &_14$$5);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setname", NULL, 0, &_13$$5);
+		zephir_check_call_status();
+	}
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setusecookies", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_5);
+	ZVAL_STRING(&_5, "save_path");
+	ZEPHIR_CALL_METHOD(&_15, this_ptr, "getoption", &_8, 0, &_5);
+	zephir_check_call_status();
+	if (zephir_is_true(&_15)) {
+		ZEPHIR_INIT_VAR(&_17$$6);
+		ZVAL_STRING(&_17$$6, "save_path");
+		ZEPHIR_CALL_METHOD(&_16$$6, this_ptr, "getoption", &_8, 0, &_17$$6);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setsavepath", NULL, 0, &_16$$6);
+		zephir_check_call_status();
+	}
+	ZEPHIR_INIT_NVAR(&_5);
+	ZVAL_STRING(&_5, "cookie_domain");
 	ZEPHIR_CALL_METHOD(&_18, this_ptr, "getoption", &_8, 0, &_5);
 	zephir_check_call_status();
 	if (zephir_is_true(&_18)) {
-		ZEPHIR_INIT_VAR(&_20$$8);
-		ZVAL_STRING(&_20$$8, "name");
-		ZEPHIR_CALL_METHOD(&_19$$8, this_ptr, "getoption", &_8, 0, &_20$$8);
+		ZEPHIR_INIT_VAR(&_20$$7);
+		ZVAL_STRING(&_20$$7, "cookie_domain");
+		ZEPHIR_CALL_METHOD(&_19$$7, this_ptr, "getoption", &_8, 0, &_20$$7);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "sessionname", NULL, 0, &_19$$8);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcookiedomain", NULL, 0, &_19$$7);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_NVAR(&_5);
@@ -267,113 +262,65 @@ PHP_METHOD(Queryyetsimple_Session_Session, start) {
 	ZEPHIR_CALL_METHOD(&_21, this_ptr, "getoption", &_8, 0, &_5);
 	zephir_check_call_status();
 	if (zephir_is_true(&_21)) {
-		ZEPHIR_INIT_VAR(&_23$$9);
-		ZVAL_STRING(&_23$$9, "expire");
-		ZEPHIR_CALL_METHOD(&_22$$9, this_ptr, "getoption", &_8, 0, &_23$$9);
+		ZEPHIR_INIT_VAR(&_23$$8);
+		ZVAL_STRING(&_23$$8, "expire");
+		ZEPHIR_CALL_METHOD(&_22$$8, this_ptr, "getoption", &_8, 0, &_23$$8);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "cacheexpire", NULL, 0, &_22$$9);
-		zephir_check_call_status();
-	}
-	ZEPHIR_INIT_NVAR(&_5);
-	ZVAL_STRING(&_5, "gc_maxlifetime");
-	ZEPHIR_CALL_METHOD(&_24, this_ptr, "getoption", &_8, 0, &_5);
-	zephir_check_call_status();
-	if (zephir_is_true(&_24)) {
-		ZEPHIR_INIT_VAR(&_26$$10);
-		ZVAL_STRING(&_26$$10, "gc_maxlifetime");
-		ZEPHIR_CALL_METHOD(&_25$$10, this_ptr, "getoption", &_8, 0, &_26$$10);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "gcmaxlifetime", NULL, 0, &_25$$10);
-		zephir_check_call_status();
-	}
-	ZEPHIR_INIT_NVAR(&_5);
-	ZVAL_STRING(&_5, "cookie_lifetime");
-	ZEPHIR_CALL_METHOD(&_27, this_ptr, "getoption", &_8, 0, &_5);
-	zephir_check_call_status();
-	if (zephir_is_true(&_27)) {
-		ZEPHIR_INIT_VAR(&_29$$11);
-		ZVAL_STRING(&_29$$11, "cookie_lifetime");
-		ZEPHIR_CALL_METHOD(&_28$$11, this_ptr, "getoption", &_8, 0, &_29$$11);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookielifetime", NULL, 0, &_28$$11);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcacheexpire", NULL, 0, &_22$$8);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "cache_limiter");
-	ZEPHIR_CALL_METHOD(&_30, this_ptr, "getoption", &_8, 0, &_5);
+	ZEPHIR_CALL_METHOD(&_24, this_ptr, "getoption", &_8, 0, &_5);
 	zephir_check_call_status();
-	if (zephir_is_true(&_30)) {
-		ZEPHIR_INIT_VAR(&_32$$12);
-		ZVAL_STRING(&_32$$12, "cache_limiter");
-		ZEPHIR_CALL_METHOD(&_31$$12, this_ptr, "getoption", &_8, 0, &_32$$12);
+	if (zephir_is_true(&_24)) {
+		ZEPHIR_INIT_VAR(&_26$$9);
+		ZVAL_STRING(&_26$$9, "cache_limiter");
+		ZEPHIR_CALL_METHOD(&_25$$9, this_ptr, "getoption", &_8, 0, &_26$$9);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "cachelimiter", NULL, 0, &_31$$12);
-		zephir_check_call_status();
-	}
-	ZEPHIR_INIT_NVAR(&_5);
-	ZVAL_STRING(&_5, "save_path");
-	ZEPHIR_CALL_METHOD(&_33, this_ptr, "getoption", &_8, 0, &_5);
-	zephir_check_call_status();
-	if (zephir_is_true(&_33)) {
-		ZEPHIR_INIT_VAR(&_35$$13);
-		ZVAL_STRING(&_35$$13, "save_path");
-		ZEPHIR_CALL_METHOD(&_34$$13, this_ptr, "getoption", &_8, 0, &_35$$13);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "savepath", NULL, 0, &_34$$13);
-		zephir_check_call_status();
-	}
-	ZEPHIR_INIT_NVAR(&_5);
-	ZVAL_STRING(&_5, "use_trans_sid");
-	ZEPHIR_CALL_METHOD(&_36, this_ptr, "getoption", &_8, 0, &_5);
-	zephir_check_call_status();
-	if (zephir_is_true(&_36)) {
-		ZEPHIR_INIT_VAR(&_38$$14);
-		ZVAL_STRING(&_38$$14, "use_trans_sid");
-		ZEPHIR_CALL_METHOD(&_37$$14, this_ptr, "getoption", &_8, 0, &_38$$14);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "usetranssid", NULL, 0, &_37$$14);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcachelimiter", NULL, 0, &_25$$9);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "gc_probability");
-	ZEPHIR_CALL_METHOD(&_39, this_ptr, "getoption", &_8, 0, &_5);
+	ZEPHIR_CALL_METHOD(&_27, this_ptr, "getoption", &_8, 0, &_5);
 	zephir_check_call_status();
-	if (zephir_is_true(&_39)) {
-		ZEPHIR_INIT_VAR(&_41$$15);
-		ZVAL_STRING(&_41$$15, "gc_probability");
-		ZEPHIR_CALL_METHOD(&_40$$15, this_ptr, "getoption", &_8, 0, &_41$$15);
+	if (zephir_is_true(&_27)) {
+		ZEPHIR_INIT_VAR(&_29$$10);
+		ZVAL_STRING(&_29$$10, "gc_probability");
+		ZEPHIR_CALL_METHOD(&_28$$10, this_ptr, "getoption", &_8, 0, &_29$$10);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "gcprobability", NULL, 0, &_40$$15);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setgcprobability", NULL, 0, &_28$$10);
 		zephir_check_call_status();
 	}
 	zephir_read_property(&_6, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-	_42 = zephir_is_true(&_6);
-	if (_42) {
-		zephir_read_property(&_43, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(&_44, "session_set_save_handler", NULL, 108, &_43);
+	_30 = zephir_is_true(&_6);
+	if (_30) {
+		zephir_read_property(&_31, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_FUNCTION(&_32, "session_set_save_handler", NULL, 106, &_31);
 		zephir_check_call_status();
-		_42 = !zephir_is_true(&_44);
+		_30 = !zephir_is_true(&_32);
 	}
-	if (_42) {
-		ZEPHIR_INIT_VAR(&_45$$16);
-		object_init_ex(&_45$$16, spl_ce_RuntimeException);
-		ZEPHIR_INIT_VAR(&_46$$16);
-		zephir_read_property(&_47$$16, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-		zephir_get_class(&_46$$16, &_47$$16, 0 TSRMLS_CC);
-		ZEPHIR_INIT_VAR(&_48$$16);
-		ZVAL_STRING(&_48$$16, "Session drive %s settings failed.");
-		ZEPHIR_CALL_FUNCTION(&_49$$16, "sprintf", NULL, 1, &_48$$16, &_46$$16);
+	if (_30) {
+		ZEPHIR_INIT_VAR(&_33$$11);
+		object_init_ex(&_33$$11, spl_ce_RuntimeException);
+		ZEPHIR_INIT_VAR(&_34$$11);
+		zephir_read_property(&_35$$11, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+		zephir_get_class(&_34$$11, &_35$$11, 0 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&_36$$11);
+		ZVAL_STRING(&_36$$11, "Session drive %s settings failed.");
+		ZEPHIR_CALL_FUNCTION(&_37$$11, "sprintf", NULL, 1, &_36$$11, &_34$$11);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_45$$16, "__construct", NULL, 2, &_49$$16);
+		ZEPHIR_CALL_METHOD(NULL, &_33$$11, "__construct", NULL, 2, &_37$$11);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_45$$16, "queryyetsimple/session/session.zep", 176 TSRMLS_CC);
+		zephir_throw_exception_debug(&_33$$11, "queryyetsimple/session/session.zep", 158 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_50, "session_start", NULL, 109);
+	ZEPHIR_CALL_FUNCTION(&_38, "session_start", NULL, 107);
 	zephir_check_call_status();
-	if (!(zephir_is_true(&_50))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session start failed", "queryyetsimple/session/session.zep", 181);
+	if (!(zephir_is_true(&_38))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session start failed", "queryyetsimple/session/session.zep", 163);
 		return;
 	}
 	if (1) {
@@ -416,7 +363,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, set) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getname", NULL, 0, &name);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getnormalizename", NULL, 0, &name);
 	zephir_check_call_status();
 	zephir_get_strval(&name, &_0);
 	zephir_array_update_zval(_SESSION, &name, value, PH_COPY | PH_SEPARATE);
@@ -464,7 +411,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, put) {
 		zephir_create_array(keys, 1, 0 TSRMLS_CC);
 		zephir_array_update_zval(keys, keys, value, PH_COPY);
 	}
-	zephir_is_iterable(keys, 0, "queryyetsimple/session/session.zep", 226);
+	zephir_is_iterable(keys, 0, "queryyetsimple/session/session.zep", 208);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(keys), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -513,7 +460,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, push) {
 	array_init(&_0);
 	ZEPHIR_CALL_METHOD(&arr, this_ptr, "get", NULL, 0, &key, &_0);
 	zephir_check_call_status();
-	zephir_array_append(&arr, value, PH_SEPARATE, "queryyetsimple/session/session.zep", 239);
+	zephir_array_append(&arr, value, PH_SEPARATE, "queryyetsimple/session/session.zep", 222);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &arr);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -555,7 +502,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, merge) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "get", NULL, 0, &key, &_2);
 	zephir_check_call_status();
 	zephir_fast_array_merge(&_0, &_1, &value TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 52, &_0);
+	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 54, &_0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_3);
 	zephir_check_call_status();
@@ -595,7 +542,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, pop) {
 	array_init(&_1);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, 0, &key, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 53, &_0, &value);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 55, &_0, &value);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_2);
 	zephir_check_call_status();
@@ -691,7 +638,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, arrDelete) {
 	} else {
 		ZEPHIR_CPY_WRT(&deleteKey, keys);
 	}
-	zephir_is_iterable(&deleteKey, 0, "queryyetsimple/session/session.zep", 311);
+	zephir_is_iterable(&deleteKey, 0, "queryyetsimple/session/session.zep", 301);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&deleteKey), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -744,12 +691,12 @@ PHP_METHOD(Queryyetsimple_Session_Session, get) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getname", NULL, 0, &name);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getnormalizename", NULL, 0, &name);
 	zephir_check_call_status();
 	zephir_get_strval(&name, &_0);
 	ZEPHIR_INIT_VAR(&_1);
 	if (zephir_array_isset(_SESSION, &name)) {
-		zephir_array_fetch(&_1, _SESSION, &name, PH_NOISY, "queryyetsimple/session/session.zep", 326 TSRMLS_CC);
+		zephir_array_fetch(&_1, _SESSION, &name, PH_NOISY, "queryyetsimple/session/session.zep", 317 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_1, value);
 	}
@@ -828,7 +775,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, delete) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
 	if (prefix) {
-		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "getname", NULL, 0, &name);
+		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "getnormalizename", NULL, 0, &name);
 		zephir_check_call_status();
 		zephir_get_strval(&name, &_0$$3);
 	}
@@ -868,7 +815,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, has) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getname", NULL, 0, &name);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getnormalizename", NULL, 0, &name);
 	zephir_check_call_status();
 	zephir_get_strval(&name, &_0);
 	RETURN_MM_BOOL(zephir_array_isset(_SESSION, &name));
@@ -920,7 +867,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, clear) {
 	ZEPHIR_CALL_METHOD(&strPrefix, this_ptr, "getoption", NULL, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_is_iterable(_SESSION, 0, "queryyetsimple/session/session.zep", 396);
+	zephir_is_iterable(_SESSION, 0, "queryyetsimple/session/session.zep", 389);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(_SESSION), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&sKey);
@@ -1039,7 +986,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, flashs) {
 	zephir_get_arrval(&flash, flash_param);
 
 
-	zephir_is_iterable(&flash, 0, "queryyetsimple/session/session.zep", 433);
+	zephir_is_iterable(&flash, 0, "queryyetsimple/session/session.zep", 428);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&flash), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1257,7 +1204,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, deleteFlash) {
 		zephir_get_args(&_0);
 	}
 	ZEPHIR_CPY_WRT(keys, &_0);
-	zephir_is_iterable(keys, 0, "queryyetsimple/session/session.zep", 505);
+	zephir_is_iterable(keys, 0, "queryyetsimple/session/session.zep", 501);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(keys), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1305,7 +1252,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, clearFlash) {
 	ZEPHIR_CALL_METHOD(&newKey, this_ptr, "get", NULL, 0, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_2);
-	zephir_is_iterable(&newKey, 0, "queryyetsimple/session/session.zep", 523);
+	zephir_is_iterable(&newKey, 0, "queryyetsimple/session/session.zep", 519);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&newKey), _4, _5, _3)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1366,7 +1313,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, unregisterFlash) {
 		array_init(&_7$$3);
 		ZEPHIR_CALL_METHOD(&old, this_ptr, "get", &_4, 0, &_5$$3, &_7$$3);
 		zephir_check_call_status();
-		zephir_is_iterable(&old, 0, "queryyetsimple/session/session.zep", 542);
+		zephir_is_iterable(&old, 0, "queryyetsimple/session/session.zep", 538);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&old), _8$$3)
 		{
 			ZEPHIR_INIT_NVAR(&item);
@@ -1458,7 +1405,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, pause) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "session_write_close", NULL, 110);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_write_close", NULL, 108);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1494,7 +1441,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, destroy) {
 	ZVAL_BOOL(&_0, 0);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "clear", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&name, this_ptr, "sessionname", NULL, 0);
+	ZEPHIR_CALL_METHOD(&name, this_ptr, "getname", NULL, 0);
 	zephir_check_call_status();
 	if (zephir_array_isset(_COOKIE, &name)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -1504,10 +1451,10 @@ PHP_METHOD(Queryyetsimple_Session_Session, destroy) {
 		ZVAL_LONG(&_3$$3, (zephir_get_numberval(&_1$$3) - 42000));
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "/");
-		ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 51, &name, &_2$$3, &_3$$3, &_4$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 53, &name, &_2$$3, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
-	ZEPHIR_CALL_FUNCTION(NULL, "session_destroy", NULL, 111);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_destroy", NULL, 109);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1542,7 +1489,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, status) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&status, "session_status", NULL, 112);
+	ZEPHIR_CALL_FUNCTION(&status, "session_status", NULL, 110);
 	zephir_check_call_status();
 	do {
 		if (ZEPHIR_IS_LONG(&status, 0)) {
@@ -1558,66 +1505,94 @@ PHP_METHOD(Queryyetsimple_Session_Session, status) {
 }
 
 /**
- * 获取解析 session_id
+ * 设置 SESSION 名字
  *
- * @param string $id
+ * @param string $name
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, setName) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *name_param = NULL;
+	zval name;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &name_param);
+
+	zephir_get_strval(&name, name_param);
+
+
+	ZEPHIR_CALL_FUNCTION(NULL, "session_name", NULL, 111, &name);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 取得 SESSION 名字
+ *
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Session_Session, parseSessionId) {
+PHP_METHOD(Queryyetsimple_Session_Session, getName) {
 
-	zval *_COOKIE, *_GET, *_POST, id, name, _0, _1$$5, _2$$7, _3$$8;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&id);
-	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1$$5);
-	ZVAL_UNDEF(&_2$$7);
-	ZVAL_UNDEF(&_3$$8);
 
 	ZEPHIR_MM_GROW();
-	zephir_get_global(&_POST, SL("_POST"));
-	if (!_POST) {
-		ZEPHIR_THROW_EXCEPTION_STR(zend_exception_get_default(), "Invalid superglobal");
-		return;
-	}
-	zephir_get_global(&_GET, SL("_GET"));
-	if (!_GET) {
-		ZEPHIR_THROW_EXCEPTION_STR(zend_exception_get_default(), "Invalid superglobal");
-		return;
-	}
-	zephir_get_global(&_COOKIE, SL("_COOKIE"));
-	if (!_COOKIE) {
-		ZEPHIR_THROW_EXCEPTION_STR(zend_exception_get_default(), "Invalid superglobal");
-		return;
-	}
 
-	ZEPHIR_CALL_METHOD(&id, this_ptr, "sessionid", NULL, 0);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_name", NULL, 111);
 	zephir_check_call_status();
-	if (zephir_is_true(&id)) {
-		RETURN_CCTOR(&id);
-	}
-	ZEPHIR_CALL_METHOD(&name, this_ptr, "sessionname", NULL, 0);
+	RETURN_MM();
+
+}
+
+/**
+ * 设置 SESSION ID
+ *
+ * @param string $name
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, setId) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *id_param = NULL;
+	zval id;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&id);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &id_param);
+
+	zephir_get_strval(&id, id_param);
+
+
+	ZEPHIR_CALL_FUNCTION(NULL, "session_id", NULL, 112, &id);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "usecookies", NULL, 0);
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 取得 SESSION ID
+ *
+ * @return string
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, getId) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_RETURN_CALL_FUNCTION("session_id", NULL, 112);
 	zephir_check_call_status();
-	if (zephir_is_true(&_0)) {
-		if (zephir_array_isset(_COOKIE, &name)) {
-			zephir_array_fetch(&_1$$5, _COOKIE, &name, PH_NOISY | PH_READONLY, "queryyetsimple/session/session.zep", 650 TSRMLS_CC);
-			RETURN_CTOR(&_1$$5);
-		}
-	} else {
-		if (zephir_array_isset(_GET, &name)) {
-			zephir_array_fetch(&_2$$7, _GET, &name, PH_NOISY | PH_READONLY, "queryyetsimple/session/session.zep", 654 TSRMLS_CC);
-			RETURN_CTOR(&_2$$7);
-		}
-		if (zephir_array_isset(_POST, &name)) {
-			zephir_array_fetch(&_3$$8, _POST, &name, PH_NOISY | PH_READONLY, "queryyetsimple/session/session.zep", 657 TSRMLS_CC);
-			RETURN_CTOR(&_3$$8);
-		}
-	}
-	RETURN_MM_NULL();
+	RETURN_MM();
 
 }
 
@@ -1625,77 +1600,99 @@ PHP_METHOD(Queryyetsimple_Session_Session, parseSessionId) {
  * 设置 save path
  *
  * @param string $savepath
- * @return string
+ * @return void
  */
-PHP_METHOD(Queryyetsimple_Session_Session, savePath) {
+PHP_METHOD(Queryyetsimple_Session_Session, setSavePath) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *savepath_param = NULL, _0;
+	zval *savepath_param = NULL;
 	zval savepath;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&savepath);
-	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &savepath_param);
+	zephir_fetch_params(1, 1, 0, &savepath_param);
 
-	if (!savepath_param) {
-		ZEPHIR_INIT_VAR(&savepath);
-		ZVAL_STRING(&savepath, "");
-	} else {
-		zephir_get_strval(&savepath, savepath_param);
-	}
+	zephir_get_strval(&savepath, savepath_param);
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&savepath) == IS_UNDEF) && Z_STRLEN_P(&savepath)) {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_save_path", NULL, 113, &savepath);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_save_path", NULL, 113);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_save_path", NULL, 113, &savepath);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 设置 cache limiter
+ * 获取 save path
  *
- * @param string $limiter
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Session_Session, cacheLimiter) {
+PHP_METHOD(Queryyetsimple_Session_Session, getSavePath) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *limiter_param = NULL, _0;
-	zval limiter;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&limiter);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_RETURN_CALL_FUNCTION("session_save_path", NULL, 113);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 设置 cookie_domain
+ *
+ * @param string $domain
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, setCookieDomain) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *domain_param = NULL, _0;
+	zval domain;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&domain);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &limiter_param);
+	zephir_fetch_params(1, 1, 0, &domain_param);
 
-	if (!limiter_param) {
-		ZEPHIR_INIT_VAR(&limiter);
-		ZVAL_STRING(&limiter, "");
-	} else {
-		zephir_get_strval(&limiter, limiter_param);
-	}
+	zephir_get_strval(&domain, domain_param);
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&limiter) == IS_UNDEF) && Z_STRLEN_P(&limiter)) {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_cache_limiter", NULL, 114, &limiter);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_cache_limiter", NULL, 114);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&_0);
+	ZVAL_STRING(&_0, "session.cookie_domain");
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 105, &_0, &domain);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 获取 cookie_domain
+ *
+ * @return string
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, getCookieDomain) {
+
+	zval result, _0;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&result);
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZVAL_STRING(&_0, "session.cookie_domain");
+	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 91, &_0);
+	zephir_check_call_status();
+	RETURN_CCTOR(&result);
 
 }
 
@@ -1705,414 +1702,178 @@ PHP_METHOD(Queryyetsimple_Session_Session, cacheLimiter) {
  * @param int $second
  * @return void
  */
-PHP_METHOD(Queryyetsimple_Session_Session, cacheExpire) {
+PHP_METHOD(Queryyetsimple_Session_Session, setCacheExpire) {
 
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *second_param = NULL, _0, _1;
-	zval second;
+	zephir_fcall_cache_entry *_3 = NULL;
+	zval *second_param = NULL, _0, _1, _2;
+	zend_long second, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&second);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &second_param);
+	zephir_fetch_params(1, 1, 0, &second_param);
 
-	if (!second_param) {
-		ZEPHIR_INIT_VAR(&second);
-		ZVAL_STRING(&second, "");
-	} else {
-		zephir_get_strval(&second, second_param);
-	}
+	second = zephir_get_intval(second_param);
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&second) == IS_UNDEF) && Z_STRLEN_P(&second)) {
-		ZVAL_LONG(&_1, zephir_get_intval(&second));
-		ZEPHIR_CALL_FUNCTION(&_0, "session_cache_expire", NULL, 115, &_1);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_cache_expire", NULL, 115);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&_0);
-
-}
-
-/**
- * session_name
- *
- * @param string $name
- * @return string
- */
-PHP_METHOD(Queryyetsimple_Session_Session, sessionName) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, _0;
-	zval name;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&_0);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &name_param);
-
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
-	}
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&name) == IS_UNDEF) && Z_STRLEN_P(&name)) {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_name", NULL, 116, &name);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_name", NULL, 116);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&_0);
-
-}
-
-/**
- * session id
- *
- * @param string $id
- * @return string
- */
-PHP_METHOD(Queryyetsimple_Session_Session, sessionId) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *id_param = NULL, _0;
-	zval id;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&id);
-	ZVAL_UNDEF(&_0);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &id_param);
-
-	if (!id_param) {
-		ZEPHIR_INIT_VAR(&id);
-		ZVAL_STRING(&id, "");
-	} else {
-		zephir_get_strval(&id, id_param);
-	}
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&id) == IS_UNDEF) && Z_STRLEN_P(&id)) {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_id", NULL, 104, &id);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CALL_FUNCTION(&_0, "session_id", NULL, 104);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&_0);
-
-}
-
-/**
- * session 的 cookie_domain 设置
- *
- * @param string $domain
- * @return string
- */
-PHP_METHOD(Queryyetsimple_Session_Session, cookieDomain) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *domain_param = NULL, result, _0, _1$$3;
-	zval domain;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&domain);
-	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1$$3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &domain_param);
-
-	if (!domain_param) {
-		ZEPHIR_INIT_VAR(&domain);
-		ZVAL_STRING(&domain, "");
-	} else {
-		zephir_get_strval(&domain, domain_param);
-	}
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "session.cookie_domain");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 89, &_0);
+	ZVAL_LONG(&_0, second);
+	second = zephir_get_intval(&_0);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "session.gc_maxlifetime");
+	ZVAL_LONG(&_2, second);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 105, &_1, &_2);
 	zephir_check_call_status();
-	if (!(Z_TYPE_P(&domain) == IS_UNDEF) && Z_STRLEN_P(&domain)) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		ZVAL_STRING(&_1$$3, "session.cookie_domain");
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_1$$3, &domain);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&result);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "session.cookie_lifetime");
+	ZVAL_LONG(&_2, second);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 105, &_1, &_2);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * session 是否使用 cookie
+ * session 使用 cookie
  *
- * @param boolean $cookies
  * @return boolean
  */
-PHP_METHOD(Queryyetsimple_Session_Session, useCookies) {
+PHP_METHOD(Queryyetsimple_Session_Session, setUseCookies) {
 
+	zval _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *cookies_param = NULL, result, _0, _1, _2$$3, _3$$3;
-	zend_bool cookies;
+	zephir_fcall_cache_entry *_2 = NULL;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&result);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &cookies_param);
-
-	if (!cookies_param) {
-		cookies = 0;
-	} else {
-		cookies = zephir_get_boolval(cookies_param);
-	}
-
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.use_cookies");
-	ZEPHIR_CALL_FUNCTION(&_1, "ini_get", NULL, 89, &_0);
+	ZVAL_LONG(&_1, 1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 105, &_0, &_1);
 	zephir_check_call_status();
-	if (zephir_is_true(&_1)) {
-		ZEPHIR_INIT_VAR(&result);
-		ZVAL_BOOL(&result, 1);
-	} else {
-		ZEPHIR_INIT_NVAR(&result);
-		ZVAL_BOOL(&result, 0);
-	}
-	if (1 != 0) {
-		ZEPHIR_INIT_VAR(&_2$$3);
-		if (cookies) {
-			ZEPHIR_INIT_NVAR(&_2$$3);
-			ZVAL_LONG(&_2$$3, 1);
-		} else {
-			ZEPHIR_INIT_NVAR(&_2$$3);
-			ZVAL_LONG(&_2$$3, 0);
-		}
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "session.use_cookies");
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_3$$3, &_2$$3);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&result);
-
-}
-
-/**
- * 客户端禁用 cookie 可以开启这个项
- *
- * @param string $id
- * @return boolean
- */
-PHP_METHOD(Queryyetsimple_Session_Session, useTransSid) {
-
-	zval *id_param = NULL, result, _0, _1, _2$$3, _3$$3;
-	zend_long id, ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &id_param);
-
-	if (!id_param) {
-		id = 0;
-	} else {
-		id = zephir_get_intval(id_param);
-	}
-
-
-	ZEPHIR_INIT_VAR(&_0);
+	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "session.use_trans_sid");
-	ZEPHIR_CALL_FUNCTION(&_1, "ini_get", NULL, 89, &_0);
+	ZVAL_LONG(&_1, 0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 105, &_0, &_1);
 	zephir_check_call_status();
-	if (zephir_is_true(&_1)) {
-		ZEPHIR_INIT_VAR(&result);
-		ZVAL_BOOL(&result, 1);
-	} else {
-		ZEPHIR_INIT_NVAR(&result);
-		ZVAL_BOOL(&result, 0);
-	}
-	if (id) {
-		ZEPHIR_INIT_VAR(&_2$$3);
-		if (id) {
-			ZEPHIR_INIT_NVAR(&_2$$3);
-			ZVAL_LONG(&_2$$3, 1);
-		} else {
-			ZEPHIR_INIT_NVAR(&_2$$3);
-			ZVAL_LONG(&_2$$3, 0);
-		}
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "session.use_trans_sid");
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_3$$3, &_2$$3);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&result);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 设置过期 cookie lifetime
+ * 设置 cache limiter
  *
- * @param int $lifetime
- * @return int
+ * @param string $limiter
+ * @return void
  */
-PHP_METHOD(Queryyetsimple_Session_Session, cookieLifetime) {
+PHP_METHOD(Queryyetsimple_Session_Session, setCacheLimiter) {
 
-	zval *lifetime_param = NULL, result, _0, _1, _2$$3, _3$$3, _4$$3;
-	zend_long lifetime, ZEPHIR_LAST_CALL_STATUS;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *limiter_param = NULL;
+	zval limiter;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&limiter);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &lifetime_param);
+	zephir_fetch_params(1, 1, 0, &limiter_param);
 
-	lifetime = zephir_get_intval(lifetime_param);
+	zephir_get_strval(&limiter, limiter_param);
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "session.cookie_lifetime");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 89, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_cache_limiter", NULL, 114, &limiter);
 	zephir_check_call_status();
-	ZVAL_LONG(&_1, lifetime);
-	if (zephir_get_intval(&_1) >= 1) {
-		ZVAL_LONG(&_2$$3, lifetime);
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "session.cookie_lifetime");
-		ZVAL_LONG(&_4$$3, zephir_get_intval(&_2$$3));
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_3$$3, &_4$$3);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&result);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * gc maxlifetime
+ * 获取 cache limiter
  *
- * @param int $lifetime
- * @return int
+ * @return string
  */
-PHP_METHOD(Queryyetsimple_Session_Session, gcMaxlifetime) {
+PHP_METHOD(Queryyetsimple_Session_Session, getCacheLimiter) {
 
-	zval *lifetime_param = NULL, result, _0, _1, _2$$3, _3$$3, _4$$3;
-	zend_long lifetime, ZEPHIR_LAST_CALL_STATUS;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &lifetime_param);
 
-	if (!lifetime_param) {
-		lifetime = 0;
-	} else {
-		lifetime = zephir_get_intval(lifetime_param);
-	}
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "session.gc_maxlifetime");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 89, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_cache_limiter", NULL, 114);
 	zephir_check_call_status();
-	ZVAL_LONG(&_1, lifetime);
-	if (zephir_get_intval(&_1) >= 1) {
-		ZVAL_LONG(&_2$$3, lifetime);
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "session.gc_maxlifetime");
-		ZVAL_LONG(&_4$$3, zephir_get_intval(&_2$$3));
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_3$$3, &_4$$3);
-		zephir_check_call_status();
-	}
-	RETURN_CCTOR(&result);
+	RETURN_MM();
 
 }
 
 /**
- * session 垃圾回收概率分子 (分母为 session.gc_divisor)
+ * 设置 session 垃圾回收概率分子
+ * 分母为 session.gc_divisor
  *
  * @param int $probability
- * @return int
+ * @return void
  */
-PHP_METHOD(Queryyetsimple_Session_Session, gcProbability) {
+PHP_METHOD(Queryyetsimple_Session_Session, setGcProbability) {
 
-	zend_bool _2;
-	zval *probability_param = NULL, result, _0, _1, _3, _4$$3, _5$$3, _6$$3;
+	zend_bool _1;
+	zval *probability_param = NULL, _0, _2$$3, _3$$3;
 	zend_long probability, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&result);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$3);
-	ZVAL_UNDEF(&_6$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &probability_param);
+	zephir_fetch_params(1, 1, 0, &probability_param);
 
-	if (!probability_param) {
-		probability = 0;
-	} else {
-		probability = zephir_get_intval(probability_param);
+	probability = zephir_get_intval(probability_param);
+
+
+	ZVAL_LONG(&_0, probability);
+	probability = zephir_get_intval(&_0);
+	_1 = probability >= 1;
+	if (_1) {
+		_1 = probability <= 100;
 	}
+	if (_1) {
+		ZEPHIR_INIT_VAR(&_2$$3);
+		ZVAL_STRING(&_2$$3, "session.gc_probability");
+		ZVAL_LONG(&_3$$3, probability);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 105, &_2$$3, &_3$$3);
+		zephir_check_call_status();
+	}
+	ZEPHIR_MM_RESTORE();
 
+}
+
+/**
+ * 获取 session 垃圾回收概率分子
+ * 分母为 session.gc_divisor
+ *
+ * @return int
+ */
+PHP_METHOD(Queryyetsimple_Session_Session, getGcProbability) {
+
+	zval result, _0;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&result);
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.gc_probability");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 89, &_0);
+	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 91, &_0);
 	zephir_check_call_status();
-	ZVAL_LONG(&_1, probability);
-	_2 = zephir_get_intval(&_1) >= 1;
-	if (_2) {
-		ZVAL_LONG(&_3, probability);
-		_2 = zephir_get_intval(&_3) <= 100;
-	}
-	if (_2) {
-		ZVAL_LONG(&_4$$3, probability);
-		ZEPHIR_INIT_VAR(&_5$$3);
-		ZVAL_STRING(&_5$$3, "session.gc_probability");
-		ZVAL_LONG(&_6$$3, zephir_get_intval(&_4$$3));
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 103, &_5$$3, &_6$$3);
-		zephir_check_call_status();
-	}
 	RETURN_CCTOR(&result);
 
 }
@@ -2155,7 +1916,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, option) {
 			ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 0, &_2$$3);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/session/session.zep", 843 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/session/session.zep", 803 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -2236,7 +1997,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/session/session.zep", 880);
+	zephir_is_iterable(&option, 0, "queryyetsimple/session/session.zep", 842);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -2290,7 +2051,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/session/session.zep", 892 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/session/session.zep", 854 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -2396,7 +2157,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/session/session.zep", 943);
+	zephir_is_iterable(&option, 0, "queryyetsimple/session/session.zep", 905);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -2415,7 +2176,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, deleteOptions) {
  * @param string $name
  * @return string
  */
-PHP_METHOD(Queryyetsimple_Session_Session, getName) {
+PHP_METHOD(Queryyetsimple_Session_Session, getNormalizeName) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *name_param = NULL, _0, _1;
@@ -2459,7 +2220,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, checkStart) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "isstart", NULL, 0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session is not start yet", "queryyetsimple/session/session.zep", 965);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session is not start yet", "queryyetsimple/session/session.zep", 927);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();
@@ -2660,7 +2421,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getPartData) {
 		if (!(zephir_is_true(&_3$$4))) {
 			ZEPHIR_INIT_VAR(&_4$$5);
 			if (zephir_array_key_exists(&value, &name TSRMLS_CC)) {
-				zephir_array_fetch(&_4$$5, &value, &name, PH_NOISY, "queryyetsimple/session/session.zep", 1036 TSRMLS_CC);
+				zephir_array_fetch(&_4$$5, &value, &name, PH_NOISY, "queryyetsimple/session/session.zep", 998 TSRMLS_CC);
 			} else {
 				ZEPHIR_CPY_WRT(&_4$$5, defaults);
 			}
@@ -2668,7 +2429,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getPartData) {
 		}
 		ZEPHIR_INIT_VAR(&parts);
 		zephir_fast_explode_str(&parts, SL("."), &name, LONG_MAX TSRMLS_CC);
-		zephir_is_iterable(&parts, 0, "queryyetsimple/session/session.zep", 1047);
+		zephir_is_iterable(&parts, 0, "queryyetsimple/session/session.zep", 1009);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&parts), _5$$4)
 		{
 			ZEPHIR_INIT_NVAR(&part);
@@ -2677,7 +2438,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getPartData) {
 				RETVAL_ZVAL(defaults, 1, 0);
 				RETURN_MM();
 			}
-			zephir_array_fetch(&_6$$6, &value, &part, PH_NOISY | PH_READONLY, "queryyetsimple/session/session.zep", 1044 TSRMLS_CC);
+			zephir_array_fetch(&_6$$6, &value, &part, PH_NOISY | PH_READONLY, "queryyetsimple/session/session.zep", 1006 TSRMLS_CC);
 			ZEPHIR_CPY_WRT(&value, &_6$$6);
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&part);
@@ -2798,7 +2559,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, __call) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/session/session.zep", 1104 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/session/session.zep", 1066 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -2830,7 +2591,7 @@ zend_object *zephir_init_properties_Queryyetsimple_Session_Session(zend_class_en
 		zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
-			zephir_create_array(&_1$$3, 12, 0 TSRMLS_CC);
+			zephir_create_array(&_1$$3, 9, 0 TSRMLS_CC);
 			zephir_array_update_string(&_1$$3, SL("default"), &__$null, PH_COPY | PH_SEPARATE);
 			add_assoc_stringl_ex(&_1$$3, SL("prefix"), SL("q_"));
 			zephir_array_update_string(&_1$$3, SL("id"), &__$null, PH_COPY | PH_SEPARATE);
@@ -2838,10 +2599,7 @@ zend_object *zephir_init_properties_Queryyetsimple_Session_Session(zend_class_en
 			zephir_array_update_string(&_1$$3, SL("cookie_domain"), &__$null, PH_COPY | PH_SEPARATE);
 			zephir_array_update_string(&_1$$3, SL("cache_limiter"), &__$null, PH_COPY | PH_SEPARATE);
 			add_assoc_long_ex(&_1$$3, SL("expire"), 86400);
-			zephir_array_update_string(&_1$$3, SL("cookie_lifetime"), &__$null, PH_COPY | PH_SEPARATE);
-			zephir_array_update_string(&_1$$3, SL("gc_maxlifetime"), &__$null, PH_COPY | PH_SEPARATE);
 			zephir_array_update_string(&_1$$3, SL("save_path"), &__$null, PH_COPY | PH_SEPARATE);
-			zephir_array_update_string(&_1$$3, SL("use_trans_sid"), &__$null, PH_COPY | PH_SEPARATE);
 			zephir_array_update_string(&_1$$3, SL("gc_probability"), &__$null, PH_COPY | PH_SEPARATE);
 			zephir_update_property_zval(this_ptr, SL("option"), &_1$$3);
 		}

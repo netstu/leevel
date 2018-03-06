@@ -13,14 +13,14 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/di/provider.zep.c
 	queryyetsimple/option/iclass.zep.c
 	queryyetsimple/support/iarray.zep.c
-	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/support/imacro.zep.c
-	queryyetsimple/http/bag.zep.c
+	queryyetsimple/support/ijson.zep.c
 	queryyetsimple/flow/icontrol.zep.c
 	queryyetsimple/http/iresponse.zep.c
+	queryyetsimple/http/bag.zep.c
+	queryyetsimple/http/response.zep.c
 	queryyetsimple/manager/manager.zep.c
 	queryyetsimple/mvc/iview.zep.c
-	queryyetsimple/http/response.zep.c
 	queryyetsimple/log/connect.zep.c
 	queryyetsimple/log/iconnect.zep.c
 	queryyetsimple/cookie/icookie.zep.c
@@ -31,6 +31,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/http/fileexception.zep.c
 	queryyetsimple/http/headerbag.zep.c
 	queryyetsimple/http/irequest.zep.c
+	queryyetsimple/http/jsonresponse.zep.c
 	queryyetsimple/i18n/ii18n.zep.c
 	queryyetsimple/log/ilog.zep.c
 	queryyetsimple/mvc/icontroller.zep.c
@@ -64,10 +65,11 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/event/subject.zep.c
 	queryyetsimple/filesystem.zep.c
 	queryyetsimple/filesystem/provider/register.zep.c
+	queryyetsimple/http/apiresponse.zep.c
 	queryyetsimple/http/filebag.zep.c
 	queryyetsimple/http/filenotfoundexception.zep.c
 	queryyetsimple/http/fileresponse.zep.c
-	queryyetsimple/http/jsonresponse.zep.c
+	queryyetsimple/http/redirectresponse.zep.c
 	queryyetsimple/http/request.zep.c
 	queryyetsimple/http/responseheaderbag.zep.c
 	queryyetsimple/http/serverbag.zep.c

@@ -18,8 +18,10 @@
  */
 namespace Queryyetsimple\Router\Provider;
 
+use Closure;
 use Queryyetsimple\Di\Provider;
 use Queryyetsimple\Di\IContainer;
+use Queryyetsimple\Http\Response;
 
 /**
  * router 服务提供者
@@ -55,6 +57,7 @@ class Register extends Provider
         this->redirect();
         this->request();
         this->response();
+        this->cookieResolver();
     }
     
     /**
@@ -229,4 +232,23 @@ class Register extends Provider
             setViewFailTemplate(option->get("view\\action_fail"));
         });
     }
+
+    /**
+     * 设置 COOKIE Resolver
+     *
+     * @return void
+     */
+    protected function cookieResolver()
+    {
+        Response::setCookieResolver(Closure::fromCallable([this, "makeCookieResolverClosure"]));
+    }
+
+   /**
+	 * 生成 COOKIE
+	 *
+	 * @return \Queryyetsimple\Cookie\ICookie
+	 */
+	protected function makeCookieResolverClosure() {
+		return this->container->make("cookie");
+	}
 }

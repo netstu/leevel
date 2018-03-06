@@ -183,7 +183,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, __construct) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	object_init_ex(&_0, queryyetsimple_http_responseheaderbag_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 18, &headers);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 13, &headers);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("headers"), &_0);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcontent", NULL, 0, content);
@@ -241,7 +241,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, create) {
 
 	object_init_ex(return_value, queryyetsimple_http_response_ce);
 	ZVAL_LONG(&_0, status);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 19, content, &_0, &headers);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 14, content, &_0, &headers);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -286,7 +286,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, send) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "sendcontent", NULL, 0);
 	zephir_check_call_status();
 	if ((zephir_function_exists_ex(SL("fastcgi_finish_request") TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_FUNCTION(NULL, "fastcgi_finish_request", NULL, 20);
+		ZEPHIR_CALL_FUNCTION(NULL, "fastcgi_finish_request", NULL, 15);
 		zephir_check_call_status();
 	}
 	RETURN_THIS();
@@ -331,7 +331,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, sendHeaders) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	ZEPHIR_CALL_FUNCTION(&_1, "headers_sent", NULL, 21);
+	ZEPHIR_CALL_FUNCTION(&_1, "headers_sent", NULL, 16);
 	zephir_check_call_status();
 	if (zephir_is_true(&_1)) {
 		RETURN_THIS();
@@ -353,7 +353,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, sendHeaders) {
 		ZEPHIR_INIT_LNVAR(_7$$5);
 		ZEPHIR_CONCAT_VSV(&_7$$5, &name, ": ", &value);
 		zephir_read_property(&_8$$5, this_ptr, SL("statusCode"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(NULL, "header", &_9, 22, &_7$$5, &__$false, &_8$$5);
+		ZEPHIR_CALL_FUNCTION(NULL, "header", &_9, 17, &_7$$5, &__$false, &_8$$5);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&value);
@@ -366,7 +366,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, sendHeaders) {
 	ZEPHIR_CALL_FUNCTION(&_14, "sprintf", NULL, 1, &_13, &_10, &_11, &_12);
 	zephir_check_call_status();
 	zephir_read_property(&_15, this_ptr, SL("statusCode"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_FUNCTION(NULL, "header", &_9, 22, &_14, &__$true, &_15);
+	ZEPHIR_CALL_FUNCTION(NULL, "header", &_9, 17, &_14, &__$true, &_15);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -482,7 +482,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setContent) {
 		ZVAL_STRING(&_10$$5, "The Response content must be a scalar or object implementing __toString(), %s given.");
 		ZEPHIR_CALL_FUNCTION(&_11$$5, "sprintf", NULL, 1, &_10$$5, &_9$$5);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 23, &_11$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 18, &_11$$5);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_8$$5, "queryyetsimple/http/response.zep", 332 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -695,7 +695,8 @@ PHP_METHOD(Queryyetsimple_Http_Response, setCookie) {
 	}
 	zephir_read_static_property_ce(&_1, queryyetsimple_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_1))) {
-		RETURN_THIS();
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cookie resolver is not set.", "queryyetsimple/http/response.zep", 416);
+		return;
 	}
 	zephir_read_static_property_ce(&_2, queryyetsimple_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&cookie);
@@ -893,14 +894,14 @@ PHP_METHOD(Queryyetsimple_Http_Response, setData) {
 		zephir_json_encode(&_10$$8, data, zephir_get_intval(&_11$$8) );
 		ZEPHIR_CPY_WRT(data, &_10$$8);
 	}
-	ZEPHIR_CALL_FUNCTION(&_12, "json_last_error", NULL, 24);
+	ZEPHIR_CALL_FUNCTION(&_12, "json_last_error", NULL, 19);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_LONG_IDENTICAL(&_12, 0)) {
 		ZEPHIR_INIT_VAR(&_13$$9);
 		object_init_ex(&_13$$9, spl_ce_InvalidArgumentException);
-		ZEPHIR_CALL_FUNCTION(&_14$$9, "json_last_error_msg", NULL, 25);
+		ZEPHIR_CALL_FUNCTION(&_14$$9, "json_last_error_msg", NULL, 20);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_13$$9, "__construct", NULL, 26, &_14$$9);
+		ZEPHIR_CALL_METHOD(NULL, &_13$$9, "__construct", NULL, 21, &_14$$9);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_13$$9, "queryyetsimple/http/response.zep", 493 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -1060,7 +1061,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setStatusCode) {
 		ZVAL_LONG(&_5$$4, code);
 		ZEPHIR_CALL_FUNCTION(&_6$$4, "sprintf", NULL, 1, &_4$$4, &_5$$4);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 26, &_6$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 21, &_6$$4);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_3$$4, "queryyetsimple/http/response.zep", 574 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

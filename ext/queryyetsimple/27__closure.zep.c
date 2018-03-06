@@ -108,7 +108,7 @@ PHP_METHOD(queryyetsimple_27__closure, __invoke) {
 	ZEPHIR_INIT_NVAR(&_0);
 	array_init(&_0);
 	ZVAL_NULL(&_2);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 80, _GET, _POST, &_0, _COOKIE, _FILES, _SERVER, &_2, &tmp);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 82, _GET, _POST, &_0, _COOKIE, _FILES, _SERVER, &_2, &tmp);
 	zephir_check_call_status();
 	RETURN_MM();
 

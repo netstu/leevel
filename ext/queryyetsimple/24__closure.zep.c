@@ -108,7 +108,7 @@ PHP_METHOD(queryyetsimple_24__closure, __invoke) {
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "controller_dir");
 	zephir_array_fast_append(&tmp, &_0);
-	zephir_is_iterable(&tmp, 0, "queryyetsimple/router/provider/register.zep", 131);
+	zephir_is_iterable(&tmp, 0, "queryyetsimple/router/provider/register.zep", 134);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);

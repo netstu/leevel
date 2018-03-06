@@ -32,18 +32,20 @@ PHP_METHOD(Queryyetsimple_Session_Session, pause);
 PHP_METHOD(Queryyetsimple_Session_Session, destroy);
 PHP_METHOD(Queryyetsimple_Session_Session, isStart);
 PHP_METHOD(Queryyetsimple_Session_Session, status);
-PHP_METHOD(Queryyetsimple_Session_Session, parseSessionId);
-PHP_METHOD(Queryyetsimple_Session_Session, savePath);
-PHP_METHOD(Queryyetsimple_Session_Session, cacheLimiter);
-PHP_METHOD(Queryyetsimple_Session_Session, cacheExpire);
-PHP_METHOD(Queryyetsimple_Session_Session, sessionName);
-PHP_METHOD(Queryyetsimple_Session_Session, sessionId);
-PHP_METHOD(Queryyetsimple_Session_Session, cookieDomain);
-PHP_METHOD(Queryyetsimple_Session_Session, useCookies);
-PHP_METHOD(Queryyetsimple_Session_Session, useTransSid);
-PHP_METHOD(Queryyetsimple_Session_Session, cookieLifetime);
-PHP_METHOD(Queryyetsimple_Session_Session, gcMaxlifetime);
-PHP_METHOD(Queryyetsimple_Session_Session, gcProbability);
+PHP_METHOD(Queryyetsimple_Session_Session, setName);
+PHP_METHOD(Queryyetsimple_Session_Session, getName);
+PHP_METHOD(Queryyetsimple_Session_Session, setId);
+PHP_METHOD(Queryyetsimple_Session_Session, getId);
+PHP_METHOD(Queryyetsimple_Session_Session, setSavePath);
+PHP_METHOD(Queryyetsimple_Session_Session, getSavePath);
+PHP_METHOD(Queryyetsimple_Session_Session, setCookieDomain);
+PHP_METHOD(Queryyetsimple_Session_Session, getCookieDomain);
+PHP_METHOD(Queryyetsimple_Session_Session, setCacheExpire);
+PHP_METHOD(Queryyetsimple_Session_Session, setUseCookies);
+PHP_METHOD(Queryyetsimple_Session_Session, setCacheLimiter);
+PHP_METHOD(Queryyetsimple_Session_Session, getCacheLimiter);
+PHP_METHOD(Queryyetsimple_Session_Session, setGcProbability);
+PHP_METHOD(Queryyetsimple_Session_Session, getGcProbability);
 PHP_METHOD(Queryyetsimple_Session_Session, option);
 PHP_METHOD(Queryyetsimple_Session_Session, optionArray);
 PHP_METHOD(Queryyetsimple_Session_Session, options);
@@ -51,7 +53,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getOption);
 PHP_METHOD(Queryyetsimple_Session_Session, getOptions);
 PHP_METHOD(Queryyetsimple_Session_Session, deleteOption);
 PHP_METHOD(Queryyetsimple_Session_Session, deleteOptions);
-PHP_METHOD(Queryyetsimple_Session_Session, getName);
+PHP_METHOD(Queryyetsimple_Session_Session, getNormalizeName);
 PHP_METHOD(Queryyetsimple_Session_Session, checkStart);
 PHP_METHOD(Queryyetsimple_Session_Session, popOldFlash);
 PHP_METHOD(Queryyetsimple_Session_Session, mergeOldFlash);
@@ -160,47 +162,31 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setprevurl, 0, 0, 
 	ZEND_ARG_INFO(0, url)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_savepath, 0, 0, 0)
-	ZEND_ARG_INFO(0, savepath)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_cachelimiter, 0, 0, 0)
-	ZEND_ARG_INFO(0, limiter)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_cacheexpire, 0, 0, 0)
-	ZEND_ARG_INFO(0, second)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_sessionname, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setname, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_sessionid, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setid, 0, 0, 1)
 	ZEND_ARG_INFO(0, id)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_cookiedomain, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setsavepath, 0, 0, 1)
+	ZEND_ARG_INFO(0, savepath)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setcookiedomain, 0, 0, 1)
 	ZEND_ARG_INFO(0, domain)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_usecookies, 0, 0, 0)
-	ZEND_ARG_INFO(0, cookies)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setcacheexpire, 0, 0, 1)
+	ZEND_ARG_INFO(0, second)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_usetranssid, 0, 0, 0)
-	ZEND_ARG_INFO(0, id)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setcachelimiter, 0, 0, 1)
+	ZEND_ARG_INFO(0, limiter)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_cookielifetime, 0, 0, 1)
-	ZEND_ARG_INFO(0, lifetime)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_gcmaxlifetime, 0, 0, 0)
-	ZEND_ARG_INFO(0, lifetime)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_gcprobability, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setgcprobability, 0, 0, 1)
 	ZEND_ARG_INFO(0, probability)
 ZEND_END_ARG_INFO()
 
@@ -235,7 +221,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_deleteoptions, 0, 
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_getname, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_getnormalizename, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
@@ -300,18 +286,20 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_session_session_method_entry) {
 	PHP_ME(Queryyetsimple_Session_Session, destroy, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, isStart, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, status, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, parseSessionId, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, savePath, arginfo_queryyetsimple_session_session_savepath, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, cacheLimiter, arginfo_queryyetsimple_session_session_cachelimiter, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, cacheExpire, arginfo_queryyetsimple_session_session_cacheexpire, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, sessionName, arginfo_queryyetsimple_session_session_sessionname, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, sessionId, arginfo_queryyetsimple_session_session_sessionid, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, cookieDomain, arginfo_queryyetsimple_session_session_cookiedomain, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, useCookies, arginfo_queryyetsimple_session_session_usecookies, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, useTransSid, arginfo_queryyetsimple_session_session_usetranssid, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, cookieLifetime, arginfo_queryyetsimple_session_session_cookielifetime, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, gcMaxlifetime, arginfo_queryyetsimple_session_session_gcmaxlifetime, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, gcProbability, arginfo_queryyetsimple_session_session_gcprobability, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setName, arginfo_queryyetsimple_session_session_setname, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getName, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setId, arginfo_queryyetsimple_session_session_setid, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getId, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setSavePath, arginfo_queryyetsimple_session_session_setsavepath, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getSavePath, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setCookieDomain, arginfo_queryyetsimple_session_session_setcookiedomain, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getCookieDomain, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setCacheExpire, arginfo_queryyetsimple_session_session_setcacheexpire, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setUseCookies, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setCacheLimiter, arginfo_queryyetsimple_session_session_setcachelimiter, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getCacheLimiter, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, setGcProbability, arginfo_queryyetsimple_session_session_setgcprobability, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, getGcProbability, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, option, arginfo_queryyetsimple_session_session_option, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, optionArray, arginfo_queryyetsimple_session_session_optionarray, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, options, arginfo_queryyetsimple_session_session_options, ZEND_ACC_PUBLIC)
@@ -319,7 +307,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_session_session_method_entry) {
 	PHP_ME(Queryyetsimple_Session_Session, getOptions, arginfo_queryyetsimple_session_session_getoptions, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, deleteOption, arginfo_queryyetsimple_session_session_deleteoption, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, deleteOptions, arginfo_queryyetsimple_session_session_deleteoptions, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Session_Session, getName, arginfo_queryyetsimple_session_session_getname, ZEND_ACC_PROTECTED)
+	PHP_ME(Queryyetsimple_Session_Session, getNormalizeName, arginfo_queryyetsimple_session_session_getnormalizename, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Session_Session, checkStart, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Session_Session, popOldFlash, arginfo_queryyetsimple_session_session_popoldflash, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Session_Session, mergeOldFlash, arginfo_queryyetsimple_session_session_mergeoldflash, ZEND_ACC_PROTECTED)

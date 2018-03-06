@@ -169,7 +169,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, run) {
 		}
 	}
 	ZEPHIR_MAKE_REF(&params);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 55, &params, &objects);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 57, &params, &objects);
 	ZEPHIR_UNREF(&params);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_5, this_ptr, "haslisteners", NULL, 0, &event);
@@ -180,7 +180,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, run) {
 	ZEPHIR_CALL_METHOD(&listeners, this_ptr, "getlisteners", NULL, 0, &event);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&listeners);
-	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 64, &listeners);
+	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 66, &listeners);
 	ZEPHIR_UNREF(&listeners);
 	zephir_check_call_status();
 	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 111);
@@ -505,14 +505,14 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, makeSubject) {
 	ZEPHIR_INIT_VAR(&subject);
 	object_init_ex(&subject, queryyetsimple_event_subject_ce);
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, &subject, "__construct", NULL, 65, &_0);
+	ZEPHIR_CALL_METHOD(NULL, &subject, "__construct", NULL, 67, &_0);
 	zephir_check_call_status();
 	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 231);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&listeners), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
-		ZEPHIR_CALL_METHOD(NULL, &subject, "attachs", &_2, 66, &item);
+		ZEPHIR_CALL_METHOD(NULL, &subject, "attachs", &_2, 68, &item);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);

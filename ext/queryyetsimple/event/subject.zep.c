@@ -213,7 +213,7 @@ PHP_METHOD(Queryyetsimple_Event_Subject, attachs) {
 			ZVAL_STRING(&_3$$4, "Observer is invalid.");
 			ZEPHIR_CALL_FUNCTION(&_4$$4, "sprintf", NULL, 1, &_3$$4);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 26, &_4$$4);
+			ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 21, &_4$$4);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(&_2$$4, "queryyetsimple/event/subject.zep", 114 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();

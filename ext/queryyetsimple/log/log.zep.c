@@ -1015,7 +1015,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 427);
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 429);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -1069,7 +1069,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/log/log.zep", 439 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/log/log.zep", 441 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -1175,7 +1175,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 490);
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 492);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1277,7 +1277,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, formatMessage) {
 		RETVAL_ZVAL(message, 1, 0);
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Message is invalid.", "queryyetsimple/log/log.zep", 526);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Message is invalid.", "queryyetsimple/log/log.zep", 528);
 	return;
 
 }

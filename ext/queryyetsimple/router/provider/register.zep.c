@@ -83,6 +83,8 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, register) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "response", NULL, 0);
 	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookieresolver", NULL, 0);
+	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -296,6 +298,66 @@ PHP_METHOD(Queryyetsimple_Router_Provider_Register, response) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 设置 COOKIE Resolver
+ *
+ * @return void
+ */
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, cookieResolver) {
+
+	zval _3;
+	zend_class_entry *_2;
+	zval _1, _4;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zephir_fcall_cache_entry *_0 = NULL;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+
+	_2 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_INIT_VAR(&_3);
+	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_3, this_ptr);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "makeCookieResolverClosure");
+	zephir_array_fast_append(&_3, &_4);
+	ZEPHIR_CALL_CE_STATIC(&_1, _2, "fromcallable", NULL, 0, &_3);
+	zephir_check_call_status();
+	ZEPHIR_CALL_CE_STATIC(NULL, queryyetsimple_http_response_ce, "setcookieresolver", &_0, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 生成 COOKIE
+ *
+ * @return \Queryyetsimple\Cookie\ICookie
+ */
+PHP_METHOD(Queryyetsimple_Router_Provider_Register, makeCookieResolverClosure) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "cookie");
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	RETURN_MM();
 
 }
 
