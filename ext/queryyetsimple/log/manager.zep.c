@@ -70,7 +70,7 @@ PHP_METHOD(Queryyetsimple_Log_Manager, createConnect) {
 	object_init_ex(return_value, queryyetsimple_log_log_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptioncommon", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 84, connect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 92, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -109,7 +109,7 @@ PHP_METHOD(Queryyetsimple_Log_Manager, makeConnectFile) {
 	ZVAL_STRING(&_1, "file");
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 85, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 93, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -148,7 +148,7 @@ PHP_METHOD(Queryyetsimple_Log_Manager, makeConnectMonolog) {
 	ZVAL_STRING(&_1, "monolog");
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 86, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 94, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

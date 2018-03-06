@@ -13,7 +13,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_flow_icontrol_settcontrol, 0, 0, 2)
 	ZEND_ARG_INFO(0, inFlowControl)
-	ZEND_ARG_INFO(0, isFlowcontrolTrue)
+	ZEND_ARG_INFO(0, isFlowControlTrue)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_flow_icontrol_placeholdertcontrol, 0, 0, 1)

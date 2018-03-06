@@ -33,7 +33,7 @@ PHP_METHOD(queryyetsimple_22__closure, __invoke) {
 	ZEPHIR_MM_GROW();
 
 	object_init_ex(return_value, queryyetsimple_option_option_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 123);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 131);
 	zephir_check_call_status();
 	RETURN_MM();
 

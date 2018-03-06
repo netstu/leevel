@@ -52,7 +52,7 @@ class Response implements IControl, IMacro, IResponse
     public headers;
     
     /**
-     * 原生响应内容.
+     * 原生响应内容
      *
      * @var mixed
      */
@@ -197,7 +197,7 @@ class Response implements IControl, IMacro, IResponse
      *
      * @var boolean
      */
-    protected isFlowcontrolTrue = false;
+    protected isFlowControlTrue = false;
 
     /**
      * 构造函数
@@ -207,7 +207,7 @@ class Response implements IControl, IMacro, IResponse
      * @param array $headers
      * @return void
      */
-    public function __construct(string content = "", int status = 200, array headers = [])
+    public function __construct(var content = "", int status = 200, array headers = [])
     {
         let this->headers = new ResponseHeaderBag(headers);
         this->setContent(content);
@@ -223,7 +223,7 @@ class Response implements IControl, IMacro, IResponse
      * @param array $headers
      * @return static
      */
-    public static function create(string content = "", int status = 200, array headers = [])
+    public static function create(var content = "", int status = 200, array headers = [])
     {
         return new static(content, status, headers);
     }
@@ -571,7 +571,7 @@ class Response implements IControl, IMacro, IResponse
         let this->statusCode = code;
 
         if this->isInvalid() {
-            throw new InvalidArgumentException(sprintf("The HTTP status code \"%s\" is not valid.", code));
+            throw new InvalidArgumentException(sprintf("The HTTP status code %s is not valid.", code));
         }
 
         if text === null {
@@ -950,13 +950,13 @@ class Response implements IControl, IMacro, IResponse
      * 设置当前条件表达式状态
      *
      * @param boolean $inFlowControl
-     * @param boolean $isFlowcontrolTrue
+     * @param boolean $isFlowControlTrue
      * @return $this
      */
-    public function setTControl(boolean inFlowControl, boolean isFlowcontrolTrue)
+    public function setTControl(boolean inFlowControl, boolean isFlowControlTrue)
     {
         let this->inFlowControl = inFlowControl;
-        let this->isFlowcontrolTrue = isFlowcontrolTrue;
+        let this->isFlowControlTrue = isFlowControlTrue;
 
         return this;
     }
@@ -972,7 +972,7 @@ class Response implements IControl, IMacro, IResponse
     
         let tmp = [
         	this->inFlowControl, 
-        	this->isFlowcontrolTrue
+        	this->isFlowControlTrue
         ];
 
         return tmp;
@@ -985,7 +985,7 @@ class Response implements IControl, IMacro, IResponse
      */
     public function checkTControl() -> boolean
     {
-        return this->inFlowControl && ! (this->isFlowcontrolTrue);
+        return this->inFlowControl && ! (this->isFlowControlTrue);
     }
     
     /**

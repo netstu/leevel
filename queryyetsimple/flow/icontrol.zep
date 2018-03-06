@@ -29,64 +29,64 @@ namespace Queryyetsimple\Flow;
 interface IControl
 {
 
-    /**
-     * 条件语句 ifs
-     *
-     * @param boolean $value
-     * @return $this
-     */
-    public function ifs(boolean value = false);
-    
-    /**
-     * 条件语句 elseIfs
-     *
-     * @param boolean $value
-     * @return $this
-     */
-    public function elseIfs(boolean value = false);
-    
-    /**
-     * 条件语句 elses
-     *
-     * @return $this
-     */
-    public function elses();
-    
-    /**
-     * 条件语句 endIfs
-     *
-     * @return $this
-     */
-    public function endIfs();
-    
-    /**
-     * 设置当前条件表达式状态
-     *
-     * @param boolean $inFlowControl
-     * @param boolean $isFlowcontrolTrue
-     * @return $this
-     */
-    public function setTControl(boolean inFlowControl, boolean isFlowcontrolTrue);
-    
-    /**
-     * 获取当前条件表达式状态
-     *
-     * @return array
-     */
-    public function getTControl() -> array;
-    
-    /**
-     * 验证一下条件表达式是否通过
-     *
-     * @return boolean
-     */
-    public function checkTControl() -> boolean;
-    
-    /**
-     * 占位符
-     *
-     * @param string $method
-     * @return boolean
-     */
-    public function placeholderTControl(string method) -> boolean;
+	/**
+	 * 条件语句 ifs
+	 *
+	 * @param boolean $value
+	 * @return $this
+	 */
+	public function ifs(boolean value = false);
+	
+	/**
+	 * 条件语句 elseIfs
+	 *
+	 * @param boolean $value
+	 * @return $this
+	 */
+	public function elseIfs(boolean value = false);
+	
+	/**
+	 * 条件语句 elses
+	 *
+	 * @return $this
+	 */
+	public function elses();
+	
+	/**
+	 * 条件语句 endIfs
+	 *
+	 * @return $this
+	 */
+	public function endIfs();
+	
+	/**
+	 * 设置当前条件表达式状态
+	 *
+	 * @param boolean $inFlowControl
+	 * @param boolean $isFlowControlTrue
+	 * @return $this
+	 */
+	public function setTControl(boolean inFlowControl, boolean isFlowControlTrue);
+	
+	/**
+	 * 获取当前条件表达式状态
+	 *
+	 * @return array
+	 */
+	public function getTControl() -> array;
+	
+	/**
+	 * 验证一下条件表达式是否通过
+	 *
+	 * @return boolean
+	 */
+	public function checkTControl() -> boolean;
+	
+	/**
+	 * 占位符
+	 *
+	 * @param string $method
+	 * @return boolean
+	 */
+	public function placeholderTControl(string method) -> boolean;
 }

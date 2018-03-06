@@ -153,7 +153,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, import) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", NULL, 20, &package);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", NULL, 29, &package);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		RETURN_MM_NULL();
@@ -167,7 +167,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, import) {
 	if (_1) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_FUNCTION(&packagePath, "realpath", NULL, 92, &package);
+	ZEPHIR_CALL_FUNCTION(&packagePath, "realpath", NULL, 100, &package);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_3, this_ptr, "composer", NULL, 0);
 	zephir_check_call_status();
@@ -336,7 +336,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, autoload) {
 		zephir_fast_strpos(&_9$$4, &classname, &_8$$4, 0 );
 		_10$$4 = ZEPHIR_IS_LONG_IDENTICAL(&_9$$4, 0);
 		if (_10$$4) {
-			ZEPHIR_CALL_FUNCTION(&_11$$4, "is_file", &_12, 19, &sandboxPath);
+			ZEPHIR_CALL_FUNCTION(&_11$$4, "is_file", &_12, 28, &sandboxPath);
 			zephir_check_call_status();
 			_10$$4 = zephir_is_true(&_11$$4);
 		}
@@ -411,7 +411,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, shortNamespaceMap) {
 		ZEPHIR_INIT_VAR(&tmp);
 		zephir_fast_explode_str(&tmp, SL("\\"), &classname, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmp);
-		ZEPHIR_CALL_FUNCTION(&definedClass, "array_pop", NULL, 93, &tmp);
+		ZEPHIR_CALL_FUNCTION(&definedClass, "array_pop", NULL, 101, &tmp);
 		ZEPHIR_UNREF(&tmp);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&namespaces);

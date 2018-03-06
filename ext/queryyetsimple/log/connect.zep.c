@@ -397,20 +397,20 @@ PHP_METHOD(Queryyetsimple_Log_Connect, checkSize) {
 	zephir_get_strval(&filepath, filepath_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&filedir, "dirname", NULL, 18, &filepath);
+	ZEPHIR_CALL_FUNCTION(&filedir, "dirname", NULL, 27, &filepath);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 19, &filepath);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 28, &filepath);
 	zephir_check_call_status();
 	_2 = !zephir_is_true(&_0);
 	if (_2) {
-		ZEPHIR_CALL_FUNCTION(&_3, "is_dir", NULL, 20, &filedir);
+		ZEPHIR_CALL_FUNCTION(&_3, "is_dir", NULL, 29, &filedir);
 		zephir_check_call_status();
 		_2 = !zephir_is_true(&_3);
 	}
 	_4 = _2;
 	if (_4) {
 		ZVAL_LONG(&_5, 0777);
-		ZEPHIR_CALL_FUNCTION(&_6, "mkdir", NULL, 21, &filedir, &_5, &__$true);
+		ZEPHIR_CALL_FUNCTION(&_6, "mkdir", NULL, 30, &filedir, &_5, &__$true);
 		zephir_check_call_status();
 		_4 = !zephir_is_true(&_6);
 	}
@@ -427,7 +427,7 @@ PHP_METHOD(Queryyetsimple_Log_Connect, checkSize) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_10, "is_file", &_1, 19, &filepath);
+	ZEPHIR_CALL_FUNCTION(&_10, "is_file", &_1, 28, &filepath);
 	zephir_check_call_status();
 	_11 = zephir_is_true(&_10);
 	if (_11) {
@@ -435,20 +435,20 @@ PHP_METHOD(Queryyetsimple_Log_Connect, checkSize) {
 		ZVAL_STRING(&_13, "size");
 		ZEPHIR_CALL_METHOD(&_12, this_ptr, "getoption", NULL, 0, &_13);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_14, "filesize", NULL, 22, &filepath);
+		ZEPHIR_CALL_FUNCTION(&_14, "filesize", NULL, 31, &filepath);
 		zephir_check_call_status();
 		_11 = ZEPHIR_GE_LONG(&_14, zephir_floor(&_12 TSRMLS_CC));
 	}
 	if (_11) {
 		ZEPHIR_INIT_VAR(&_15$$4);
 		ZVAL_STRING(&_15$$4, "Y-m-d H.i.s");
-		ZEPHIR_CALL_FUNCTION(&_16$$4, "date", NULL, 23, &_15$$4);
+		ZEPHIR_CALL_FUNCTION(&_16$$4, "date", NULL, 32, &_15$$4);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_15$$4);
 		zephir_basename(&_15$$4, &filepath TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_17$$4);
 		ZEPHIR_CONCAT_VSVSV(&_17$$4, &filedir, "/", &_16$$4, "~@", &_15$$4);
-		ZEPHIR_CALL_FUNCTION(NULL, "rename", NULL, 24, &filepath, &_17$$4);
+		ZEPHIR_CALL_FUNCTION(NULL, "rename", NULL, 33, &filepath, &_17$$4);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -517,7 +517,7 @@ PHP_METHOD(Queryyetsimple_Log_Connect, getPath) {
 		ZVAL_STRING(&_1$$3, "name");
 		ZEPHIR_CALL_METHOD(&_6$$3, this_ptr, "getoption", &_2, 0, &_1$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_7$$3, "date", NULL, 23, &_6$$3);
+		ZEPHIR_CALL_FUNCTION(&_7$$3, "date", NULL, 32, &_6$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&filepath);
 		ZEPHIR_CONCAT_VSVVS(&filepath, &_3$$3, "/", &_4$$3, &_7$$3, ".log");

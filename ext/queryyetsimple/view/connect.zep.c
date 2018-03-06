@@ -554,21 +554,21 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDisplayFile) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 19, &file);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 28, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "parsefile", NULL, 0, &file, &ext);
 		zephir_check_call_status();
 		zephir_get_strval(&file, &_2$$3);
 	}
-	ZEPHIR_CALL_FUNCTION(&_3, "is_file", &_1, 19, &file);
+	ZEPHIR_CALL_FUNCTION(&_3, "is_file", &_1, 28, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_3))) {
 		ZEPHIR_CALL_METHOD(&_4$$4, this_ptr, "parsedefaultfile", NULL, 0, &file);
 		zephir_check_call_status();
 		zephir_get_strval(&file, &_4$$4);
 	}
-	ZEPHIR_CALL_FUNCTION(&_5, "is_file", &_1, 19, &file);
+	ZEPHIR_CALL_FUNCTION(&_5, "is_file", &_1, 28, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_5))) {
 		ZEPHIR_INIT_VAR(&_6$$5);
@@ -577,7 +577,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDisplayFile) {
 		ZVAL_STRING(&_7$$5, "Template file %s does not exist.");
 		ZEPHIR_CALL_FUNCTION(&_8$$5, "sprintf", NULL, 1, &_7$$5, &file);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", NULL, 30, &_8$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_6$$5, "__construct", NULL, 26, &_8$$5);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_6$$5, "queryyetsimple/view/connect.zep", 257 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -664,7 +664,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseFile) {
 	ZEPHIR_INIT_NVAR(&tpl);
 	zephir_fast_trim(&tpl, &_0, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 	ZVAL_LONG(&_3, 4);
-	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 31, &tpl, &_3);
+	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 39, &tpl, &_3);
 	zephir_check_call_status();
 	_5 = zephir_is_true(&_4);
 	if (!(_5)) {
@@ -749,7 +749,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseFile) {
 		ZVAL_STRING(&_23$$4, "theme_path");
 		ZEPHIR_CALL_METHOD(&_25$$4, this_ptr, "getoption", &_13, 0, &_23$$4);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_26$$4, "dirname", NULL, 18, &_25$$4);
+		ZEPHIR_CALL_FUNCTION(&_26$$4, "dirname", NULL, 27, &_25$$4);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&result);
 		ZEPHIR_CONCAT_VS(&result, &_26$$4, "/");
@@ -878,7 +878,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDefaultFile) {
 	zephir_get_strval(&tpl, tpl_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 19, &tpl);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 28, &tpl);
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		RETURN_CTOR(&tpl);
@@ -948,7 +948,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDefaultFile) {
 	zephir_check_call_status();
 	_24 = zephir_is_true(&_23);
 	if (_24) {
-		ZEPHIR_CALL_FUNCTION(&_25, "is_file", &_1, 19, &tempTpl);
+		ZEPHIR_CALL_FUNCTION(&_25, "is_file", &_1, 28, &tempTpl);
 		zephir_check_call_status();
 		_24 = zephir_is_true(&_25);
 	}
@@ -959,7 +959,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDefaultFile) {
 	ZVAL_STRING(&_22, "theme_path");
 	ZEPHIR_CALL_METHOD(&_26, this_ptr, "getoption", &_4, 0, &_22);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_27, "dirname", NULL, 18, &_26);
+	ZEPHIR_CALL_FUNCTION(&_27, "dirname", NULL, 27, &_26);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&tempTpl);
 	ZEPHIR_CONCAT_VSV(&tempTpl, &_27, "/default/", &tpl);
@@ -969,7 +969,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseDefaultFile) {
 	zephir_check_call_status();
 	_29 = !ZEPHIR_IS_STRING(&_28, "default");
 	if (_29) {
-		ZEPHIR_CALL_FUNCTION(&_30, "is_file", &_1, 19, &tempTpl);
+		ZEPHIR_CALL_FUNCTION(&_30, "is_file", &_1, 28, &tempTpl);
 		zephir_check_call_status();
 		_29 = zephir_is_true(&_30);
 	}
