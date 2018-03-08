@@ -19,6 +19,7 @@
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/array.h"
 #include "kernel/object.h"
+#include "kernel/main.h"
 
 
 /**
@@ -215,10 +216,10 @@ PHP_METHOD(Queryyetsimple_Http_RedirectResponse, create) {
  */
 PHP_METHOD(Queryyetsimple_Http_RedirectResponse, with) {
 
-	zend_string *_2;
-	zend_ulong _1;
+	zend_string *_3;
+	zend_ulong _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *key, key_sub, *value = NULL, value_sub, __$null, k, v, tmp, *_0, _3$$3;
+	zval *key, key_sub, *value = NULL, value_sub, __$null, k, v, tmp, _0, *_1, _4$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&key_sub);
@@ -227,7 +228,8 @@ PHP_METHOD(Queryyetsimple_Http_RedirectResponse, with) {
 	ZVAL_UNDEF(&k);
 	ZVAL_UNDEF(&v);
 	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_4$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &key, &value);
@@ -238,6 +240,11 @@ PHP_METHOD(Queryyetsimple_Http_RedirectResponse, with) {
 	}
 
 
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checktcontrol", NULL, 0);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		RETURN_THIS();
+	}
 	if (Z_TYPE_P(key) == IS_ARRAY) {
 		ZEPHIR_CPY_WRT(&tmp, key);
 	} else {
@@ -245,23 +252,210 @@ PHP_METHOD(Queryyetsimple_Http_RedirectResponse, with) {
 		zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
 		zephir_array_update_zval(&tmp, key, value, PH_COPY);
 	}
-	zephir_is_iterable(&tmp, 0, "queryyetsimple/http/redirectresponse.zep", 111);
-	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&tmp), _1, _2, _0)
+	zephir_is_iterable(&tmp, 0, "queryyetsimple/http/redirectresponse.zep", 117);
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&tmp), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&k);
-		if (_2 != NULL) { 
-			ZVAL_STR_COPY(&k, _2);
+		if (_3 != NULL) { 
+			ZVAL_STR_COPY(&k, _3);
 		} else {
-			ZVAL_LONG(&k, _1);
+			ZVAL_LONG(&k, _2);
 		}
 		ZEPHIR_INIT_NVAR(&v);
-		ZVAL_COPY(&v, _0);
-		zephir_read_property(&_3$$3, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "flash", NULL, 0, &k, &v);
+		ZVAL_COPY(&v, _1);
+		zephir_read_property(&_4$$4, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(NULL, &_4$$4, "flash", NULL, 0, &k, &v);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&v);
 	ZEPHIR_INIT_NVAR(&k);
+	RETURN_THIS();
+
+}
+
+/**
+ * 闪存输入信息
+ *
+ * @param array $input
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Http_RedirectResponse, withInput) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *input_param = NULL, inputs, tmp, _0, _1, _2, _3, _4, _5;
+	zval input;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&input);
+	ZVAL_UNDEF(&inputs);
+	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &input_param);
+
+	if (!input_param) {
+		ZEPHIR_INIT_VAR(&input);
+		array_init(&input);
+	} else {
+		zephir_get_arrval(&input, input_param);
+	}
+
+
+	ZEPHIR_INIT_VAR(&inputs);
+	array_init(&inputs);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checktcontrol", NULL, 0);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		RETURN_THIS();
+	}
+	if (1 == 1) {
+		ZEPHIR_CPY_WRT(&tmp, &input);
+	} else {
+		zephir_read_property(&_1, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&tmp, &_1, "input", NULL, 0);
+		zephir_check_call_status();
+	}
+	zephir_read_property(&_2, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_3);
+	array_init(&_3);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "inputs");
+	ZEPHIR_CALL_METHOD(&inputs, &_2, "getflash", NULL, 0, &_4, &_3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_4);
+	zephir_fast_array_merge(&_4, &inputs, &tmp TSRMLS_CC);
+	ZEPHIR_CPY_WRT(&inputs, &_4);
+	zephir_read_property(&_5, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_4);
+	ZVAL_STRING(&_4, "inputs");
+	ZEPHIR_CALL_METHOD(NULL, &_5, "flash", NULL, 0, &_4, &inputs);
+	zephir_check_call_status();
+	RETURN_THIS();
+
+}
+
+/**
+ * 闪存输入信息
+ *
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Http_RedirectResponse, onlyInput) {
+
+	zval args, _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
+	if (ZEPHIR_IS_EMPTY(&args)) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method onlyInput need an args.", "queryyetsimple/http/redirectresponse.zep", 154);
+		return;
+	}
+	zephir_read_property(&_0, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "only", NULL, 0, &args);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "withinput", NULL, 0, &_1);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 闪存输入信息
+ *
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Http_RedirectResponse, exceptInput) {
+
+	zval args, _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
+	if (ZEPHIR_IS_EMPTY(&args)) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method exceptInput need an args.", "queryyetsimple/http/redirectresponse.zep", 171);
+		return;
+	}
+	zephir_read_property(&_0, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "except", NULL, 0, &args);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "withinput", NULL, 0, &_1);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 闪存错误信息
+ *
+ * @param mixed $value
+ * @param string $key
+ * @return $this
+ */
+PHP_METHOD(Queryyetsimple_Http_RedirectResponse, withErrors) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval key;
+	zval *value, value_sub, *key_param = NULL, errors, _0, _1, _2, _3, _4;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_UNDEF(&errors);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&key);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 1, &value, &key_param);
+
+	if (!key_param) {
+		ZEPHIR_INIT_VAR(&key);
+		ZVAL_STRING(&key, "default");
+	} else {
+		zephir_get_strval(&key, key_param);
+	}
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checktcontrol", NULL, 0);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		RETURN_THIS();
+	}
+	zephir_read_property(&_1, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_2);
+	array_init(&_2);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "errors");
+	ZEPHIR_CALL_METHOD(&errors, &_1, "getflash", NULL, 0, &_3, &_2);
+	zephir_check_call_status();
+	zephir_array_update_zval(&errors, &key, value, PH_COPY | PH_SEPARATE);
+	zephir_read_property(&_4, this_ptr, SL("session"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_3);
+	ZVAL_STRING(&_3, "errors");
+	ZEPHIR_CALL_METHOD(NULL, &_4, "flash", NULL, 0, &_3, &errors);
+	zephir_check_call_status();
 	RETURN_THIS();
 
 }
@@ -312,7 +506,7 @@ PHP_METHOD(Queryyetsimple_Http_RedirectResponse, setTargetUrl) {
 		RETURN_THIS();
 	}
 	if (ZEPHIR_IS_EMPTY(&url)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cannot redirect to an empty URL.", "queryyetsimple/http/redirectresponse.zep", 137);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cannot redirect to an empty URL.", "queryyetsimple/http/redirectresponse.zep", 223);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("targetUrl"), &url);

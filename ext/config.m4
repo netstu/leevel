@@ -39,6 +39,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/option/ioption.zep.c
 	queryyetsimple/pipeline/ipipeline.zep.c
 	queryyetsimple/psr4/ipsr4.zep.c
+	queryyetsimple/router/iurl.zep.c
 	queryyetsimple/session/isession.zep.c
 	queryyetsimple/view/connect.zep.c
 	queryyetsimple/view/iconnect.zep.c
@@ -98,7 +99,9 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 	queryyetsimple/request.zep.c
 	queryyetsimple/response.zep.c
 	queryyetsimple/router.zep.c
+	queryyetsimple/router/irouter.zep.c
 	queryyetsimple/router/provider/register.zep.c
+	queryyetsimple/router/url.zep.c
 	queryyetsimple/session.zep.c
 	queryyetsimple/session/manager.zep.c
 	queryyetsimple/session/middleware/session.zep.c

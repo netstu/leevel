@@ -13,6 +13,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setContent);
 PHP_METHOD(Queryyetsimple_Http_Response, appendContent);
 PHP_METHOD(Queryyetsimple_Http_Response, setHeader);
 PHP_METHOD(Queryyetsimple_Http_Response, withHeaders);
+PHP_METHOD(Queryyetsimple_Http_Response, cookie);
 PHP_METHOD(Queryyetsimple_Http_Response, setCookie);
 PHP_METHOD(Queryyetsimple_Http_Response, withCookies);
 PHP_METHOD(Queryyetsimple_Http_Response, getData);
@@ -99,6 +100,12 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_withheaders, 0, 0, 1
 	ZEND_ARG_ARRAY_INFO(0, headers, 0)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_cookie, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcookie, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_INFO(0, value)
@@ -107,6 +114,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_withcookies, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, cookies, 0)
+	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_getdata, 0, 0, 0)
@@ -230,6 +238,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_response_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Response, appendContent, arginfo_queryyetsimple_http_response_appendcontent, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, setHeader, arginfo_queryyetsimple_http_response_setheader, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, withHeaders, arginfo_queryyetsimple_http_response_withheaders, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Response, cookie, arginfo_queryyetsimple_http_response_cookie, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, setCookie, arginfo_queryyetsimple_http_response_setcookie, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, withCookies, arginfo_queryyetsimple_http_response_withcookies, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, getData, arginfo_queryyetsimple_http_response_getdata, ZEND_ACC_PUBLIC)

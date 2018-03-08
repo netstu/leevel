@@ -666,6 +666,19 @@ class Session implements ISession, IClass
 		return session_id();
 	}
 
+	/**
+     * 重新生成 SESSION ID
+     * 
+     * @param bool $deleteOldSession
+     * @return $this
+     */
+    public function regenerateId(bool deleteOldSession = true)
+    {
+        session_regenerate_id(deleteOldSession);
+
+        return this;
+    }
+
     /**
      * 设置 save path
      *

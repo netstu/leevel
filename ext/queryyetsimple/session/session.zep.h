@@ -36,6 +36,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, setName);
 PHP_METHOD(Queryyetsimple_Session_Session, getName);
 PHP_METHOD(Queryyetsimple_Session_Session, setId);
 PHP_METHOD(Queryyetsimple_Session_Session, getId);
+PHP_METHOD(Queryyetsimple_Session_Session, regenerateId);
 PHP_METHOD(Queryyetsimple_Session_Session, setSavePath);
 PHP_METHOD(Queryyetsimple_Session_Session, getSavePath);
 PHP_METHOD(Queryyetsimple_Session_Session, setCookieDomain);
@@ -170,6 +171,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setid, 0, 0, 1)
 	ZEND_ARG_INFO(0, id)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_regenerateid, 0, 0, 0)
+	ZEND_ARG_INFO(0, deleteOldSession)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_session_setsavepath, 0, 0, 1)
 	ZEND_ARG_INFO(0, savepath)
 ZEND_END_ARG_INFO()
@@ -290,6 +295,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_session_session_method_entry) {
 	PHP_ME(Queryyetsimple_Session_Session, getName, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, setId, arginfo_queryyetsimple_session_session_setid, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, getId, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Session_Session, regenerateId, arginfo_queryyetsimple_session_session_regenerateid, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, setSavePath, arginfo_queryyetsimple_session_session_setsavepath, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, getSavePath, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Session_Session, setCookieDomain, arginfo_queryyetsimple_session_session_setcookiedomain, ZEND_ACC_PUBLIC)

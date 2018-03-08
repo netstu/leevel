@@ -101,8 +101,14 @@ class RedirectResponse extends Response
     public function with(var key, value = null)
     {
         var k, v, tmp;
+
+        if this->checkTControl() {
+            return this;
+        }
     
-        let tmp = typeof key == "array" ? key : [key : value];
+        let tmp = typeof key == "array" ? key : [
+        	key : value
+        ];
 
         for k, v in tmp {
             this->session->flash(k, v);
@@ -110,7 +116,87 @@ class RedirectResponse extends Response
 
         return this;
     }
-    
+
+    /**
+     * 闪存输入信息
+     *
+     * @param array $input
+     * @return $this
+     */
+    public function withInput(array input = null)
+    {
+    	var inputs = [], tmp;
+
+    	if this->checkTControl() {
+            return this;
+        }
+
+    	let tmp = typeof input == "array" ? input : this->request->input();
+    	let inputs = this->session->getFlash("inputs", []);
+    	let inputs = array_merge(inputs, tmp);
+
+        this->session->flash("inputs", inputs);
+
+        return this;
+    }
+
+    /**
+     * 闪存输入信息
+     *
+     * @return $this
+     */
+    public function onlyInput()
+    {
+    	var args;
+
+    	let args = func_get_args();
+    	if empty args{
+    		throw new InvalidArgumentException("Method onlyInput need an args.");
+    	}
+
+        return this->withInput(this->request->only(args));
+    }
+
+    /**
+     * 闪存输入信息
+     *
+     * @return $this
+     */
+    public function exceptInput()
+    {
+    	var args;
+
+    	let args = func_get_args();
+    	if empty args{
+    		throw new InvalidArgumentException("Method exceptInput need an args.");
+    	}
+
+        return this->withInput(this->request->except(args));
+    }
+
+    /**
+     * 闪存错误信息
+     *
+     * @param mixed $value
+     * @param string $key
+     * @return $this
+     */
+    public function withErrors(var value, string key = "default")
+    {
+    	var errors;
+
+        if this->checkTControl() {
+            return this;
+        }
+
+        let errors = this->session->getFlash("errors", []);
+        let errors[key] = value;
+
+        this->session->flash("errors", errors);
+
+        return this;
+    }
+
     /**
      * 获取目标 URL 地址
      *

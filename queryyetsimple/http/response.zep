@@ -395,6 +395,19 @@ class Response implements IControl, IMacro, IResponse
 
         return this;
     }
+
+    /**
+     * 设置 COOKIE 别名
+     *
+     * @param string $name
+     * @param string $value
+     * @param array $option
+     * @return $this
+     */
+    public function cookie(string name, string value = "", array option = [])
+    {
+        return this->setCookie(name, value, option);
+    }
     
     /**
      * 设置 COOKIE
@@ -426,19 +439,19 @@ class Response implements IControl, IMacro, IResponse
      * 批量设置 COOKIE
      *
      * @param array $cookies
+     * @param array $option
      * @return $this
      */
-    public function withCookies(array cookies)
+    public function withCookies(array cookies, array option = [])
     {
-        var value, tmp;
+        var value, key;
     
         if this->checkTControl() {
             return this;
         }
 
-        for value in cookies {
-            let tmp = [this, "setCookie"];
-            call_user_func_array(tmp, value);
+        for key, value in cookies {
+            this->setCookie(key, value, option);
         }
 
         return this;

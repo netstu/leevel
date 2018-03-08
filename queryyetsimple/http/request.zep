@@ -1137,6 +1137,10 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     public function getEnter() -> string
     {
         var scriptName;
+
+        if this->isCli() {
+            return "";
+        }
     
         let scriptName = this->getScriptName();
 
@@ -1316,7 +1320,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         // 服务器重写
         if this->query->get(self::PATHINFO_URL) {
             let pathInfo = this->parsePathInfo(this->query->get(self::PATHINFO_URL));
-            this->query->remove(self::PATHINFO_URL);
             let this->pathInfo = pathInfo;
             return this->pathInfo;
         }
