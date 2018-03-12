@@ -505,7 +505,7 @@ class Url implements IUrl, IClass
     {
         if this->getOption("make_subdomain_on") !== true || 
         	! this->getOption("router_domain_top") || 
-        	! empty domain {
+        	empty domain {
             return url;
         }
 

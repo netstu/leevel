@@ -76,17 +76,9 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_isession_nowflash, 0, 0, 2
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_isession_keepflash, 0, 0, 1)
-	ZEND_ARG_INFO(0, keys)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_isession_getflash, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, defaults)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_isession_deleteflash, 0, 0, 1)
-	ZEND_ARG_INFO(0, keys)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_session_isession_setprevurl, 0, 0, 1)
@@ -139,9 +131,9 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_session_isession_method_entry) {
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, flashs, arginfo_queryyetsimple_session_isession_flashs)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, nowFlash, arginfo_queryyetsimple_session_isession_nowflash)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, rebuildFlash, NULL)
-	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, keepFlash, arginfo_queryyetsimple_session_isession_keepflash)
+	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, keepFlash, NULL)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, getFlash, arginfo_queryyetsimple_session_isession_getflash)
-	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, deleteFlash, arginfo_queryyetsimple_session_isession_deleteflash)
+	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, deleteFlash, NULL)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, clearFlash, NULL)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, unregisterFlash, NULL)
 	PHP_ABSTRACT_ME(Queryyetsimple_Session_ISession, prevUrl, NULL)

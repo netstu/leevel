@@ -456,12 +456,20 @@ class Session implements ISession, IClass
     /**
      * 保持闪存数据
      *
-     * @param mixed $keys
      * @return void
      */
-    public function keepFlash(var keys)
+    public function keepFlash()
     {
-        let keys = typeof keys == "array" ? keys : func_get_args();
+    	var keys, args = [];
+
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? keys : args;
+
         this->mergeNewFlash(keys);
         this->popOldFlash(keys);
     }
@@ -485,13 +493,19 @@ class Session implements ISession, IClass
     /**
      * 删除闪存数据
      *
-     * @param mixed $keys
      * @return void
      */
-    public function deleteFlash(var keys)
+    public function deleteFlash()
     {
-        var item;
-        let keys = typeof keys == "array" ? keys : func_get_args();
+        var item, keys, args = [];
+
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? keys : args;
 
         for item in keys {
             this->delete(this->flashDataKey(item));
@@ -513,7 +527,7 @@ class Session implements ISession, IClass
         let newKey = this->get(this->flashNewKey(), []);
 
         for item, _ in newKey {
-            this->deleteFlash(item);
+            call_user_func([this, "deleteFlash"], item);
         }
     }
 
@@ -992,7 +1006,7 @@ class Session implements ISession, IClass
      * @param string $type
      * @return mixed
      */
-    protected function getPartData(string key, var defaults = null, string type = null)
+    protected function getPartData(var key, var defaults = null, var type = null)
     {
         var name, value, parts, part, tempkeys, tempkey;
 

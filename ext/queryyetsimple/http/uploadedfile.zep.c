@@ -14,8 +14,8 @@
 #include "kernel/main.h"
 #include "kernel/object.h"
 #include "kernel/memory.h"
-#include "kernel/fcall.h"
 #include "kernel/operators.h"
+#include "kernel/fcall.h"
 #include "kernel/exception.h"
 #include "kernel/string.h"
 #include "kernel/array.h"
@@ -81,26 +81,22 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, __construct) {
 
 	zephir_fcall_cache_entry *_2 = NULL;
 	zend_long error, ZEPHIR_LAST_CALL_STATUS;
-	zval *path_param = NULL, *originalName_param = NULL, *mimeType_param = NULL, *error_param = NULL, _0, _1;
-	zval path, originalName, mimeType;
+	zval *path, path_sub, *originalName, originalName_sub, *mimeType = NULL, mimeType_sub, *error_param = NULL, __$null, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path);
-	ZVAL_UNDEF(&originalName);
-	ZVAL_UNDEF(&mimeType);
+	ZVAL_UNDEF(&path_sub);
+	ZVAL_UNDEF(&originalName_sub);
+	ZVAL_UNDEF(&mimeType_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 2, &path_param, &originalName_param, &mimeType_param, &error_param);
+	zephir_fetch_params(1, 2, 2, &path, &originalName, &mimeType, &error_param);
 
-	zephir_get_strval(&path, path_param);
-	zephir_get_strval(&originalName, originalName_param);
-	if (!mimeType_param) {
-		ZEPHIR_INIT_VAR(&mimeType);
-		ZVAL_STRING(&mimeType, "");
-	} else {
-		zephir_get_strval(&mimeType, mimeType_param);
+	if (!mimeType) {
+		mimeType = &mimeType_sub;
+		mimeType = &__$null;
 	}
 	if (!error_param) {
 		error = 0;
@@ -109,10 +105,10 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, __construct) {
 	}
 
 
-	zephir_update_property_zval(this_ptr, SL("originalName"), &originalName);
+	zephir_update_property_zval(this_ptr, SL("originalName"), originalName);
 	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&mimeType) == IS_UNDEF) && Z_STRLEN_P(&mimeType)) {
-		ZEPHIR_CPY_WRT(&_0, &mimeType);
+	if (zephir_is_true(mimeType)) {
+		ZEPHIR_CPY_WRT(&_0, mimeType);
 	} else {
 		ZEPHIR_INIT_NVAR(&_0);
 		ZVAL_STRING(&_0, "application/octet-stream");
@@ -127,7 +123,7 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, __construct) {
 		ZVAL_LONG(&_1, 0);
 	}
 	zephir_update_property_zval(this_ptr, SL("error"), &_1);
-	ZEPHIR_CALL_PARENT(NULL, queryyetsimple_http_uploadedfile_ce, getThis(), "__construct", &_2, 0, &path);
+	ZEPHIR_CALL_PARENT(NULL, queryyetsimple_http_uploadedfile_ce, getThis(), "__construct", &_2, 0, path);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -222,7 +218,7 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, isValid) {
 	if (_1) {
 		ZEPHIR_CALL_METHOD(&_2, this_ptr, "getpathname", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_3, "is_uploaded_file", NULL, 90, &_2);
+		ZEPHIR_CALL_FUNCTION(&_3, "is_uploaded_file", NULL, 91, &_2);
 		zephir_check_call_status();
 		_1 = zephir_is_true(&_3);
 	}
@@ -318,7 +314,7 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, getMaxFilesize) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "upload_max_filesize");
-	ZEPHIR_CALL_FUNCTION(&_1, "ini_get", NULL, 91, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "ini_get", NULL, 92, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&iniMax);
 	zephir_fast_strtolower(&iniMax, &_1);
@@ -340,12 +336,12 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, getMaxFilesize) {
 	zephir_fast_strpos(&_5, &max, &_4, 0 );
 	if (ZEPHIR_IS_LONG_IDENTICAL(&_3, 0)) {
 		ZVAL_LONG(&_6$$4, 16);
-		ZEPHIR_CALL_FUNCTION(&_7$$4, "intval", &_8, 92, &max, &_6$$4);
+		ZEPHIR_CALL_FUNCTION(&_7$$4, "intval", &_8, 93, &max, &_6$$4);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&max, &_7$$4);
 	} else if (ZEPHIR_IS_LONG_IDENTICAL(&_5, 0)) {
 		ZVAL_LONG(&_9$$5, 8);
-		ZEPHIR_CALL_FUNCTION(&_10$$5, "intval", &_8, 92, &max, &_9$$5);
+		ZEPHIR_CALL_FUNCTION(&_10$$5, "intval", &_8, 93, &max, &_9$$5);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&max, &_10$$5);
 	} else {

@@ -215,9 +215,7 @@ class Option implements IOption, ArrayAccess
 		if typeof namespaces == "array" {
 			let this->option = namespaces;
 		} elseif typeof namespaces == "string" {
-			if isset this->option[namespaces] {
-				let this->option[namespaces] = [];
-			}
+			let this->option[namespaces] = [];
 		} else {
 			let this->option = [];
 		}

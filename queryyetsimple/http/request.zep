@@ -21,6 +21,7 @@ namespace Queryyetsimple\Http;
 use ArrayAccess;
 use SplFileObject;
 use RuntimeException;
+use BadMethodCallException;
 use Queryyetsimple\Option\IClass;
 use Queryyetsimple\Support\IMacro;
 use Queryyetsimple\Support\IArray;
@@ -64,7 +65,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      *
      * @var \Queryyetsimple\Http\Bag
      */
-    public cookie;
+    public cookies;
     
     /**
      * FILE Bag
@@ -100,6 +101,13 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @var string
      */
     protected baseUrl;
+
+    /**
+     * 基础路径
+     * 
+     * @var string
+     */
+    protected basePath;
     
     /**
      * 请求 url
@@ -196,16 +204,16 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param array $query
      * @param array $request
      * @param array $params
-     * @param array $cookie
+     * @param array $cookies
      * @param array $files
      * @param array $server
      * @param string $content
      * @param array $option
      * @return void
      */
-    public function __construct(array query = [], array request = [], array params = [], array cookie = [], array files = [], array server = [], string content = null, array option = []) -> void
+    public function __construct(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null, array option = []) -> void
     {
-        this->reset(query, request, params, cookie, files, server, content);
+        this->reset(query, request, params, cookies, files, server, content);
         this->options(option);
     }
     
@@ -215,19 +223,19 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param array $query
      * @param array $request
      * @param array $params
-     * @param array $cookie
+     * @param array $cookies
      * @param array $files
      * @param array $server
      * @param string $content
      * @param array $option
      * @return void
      */
-    public function reset(array query = [], array request = [], array params = [], array cookie = [], array files = [], array server = [], string content = null) -> void
+    public function reset(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null) -> void
     {
         let this->query = new Bag(query);
         let this->request = new Bag(request);
         let this->params = new Bag(params);
-        let this->cookie = new Bag(cookie);
+        let this->cookies = new Bag(cookies);
         let this->files = new FileBag(files);
         let this->server = new ServerBag(server);
         let this->headers = new HeaderBag(this->server->getHeaders());
@@ -268,7 +276,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public static function normalizeRequestFromContent(<Request> request) -> <Request>
     {
-        var tmp, data;
+        var tmp, data, contentType, method;
     
         let tmp = [
         	self::METHOD_PUT, 
@@ -276,8 +284,11 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         	self::METHOD_PATCH
         ];
 
-        if 0 === strpos(request->headers->get("CONTENT_TYPE"), "application/x-www-form-urlencoded") && 
-        	in_array(strtoupper(request->server->get("REQUEST_METHOD", self::METHOD_GET)), tmp) {
+        let contentType = request->headers->get("CONTENT_TYPE");
+        let method = strtoupper(request->server->get("REQUEST_METHOD", self::METHOD_GET));
+
+        if contentType && 0 === strpos(contentType, "application/x-www-form-urlencoded") && 
+        	in_array(method, tmp) {
             parse_str(request->getContent(), data);
             let request->request = new Bag(data);
         }
@@ -313,9 +324,15 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public function exists(var key) -> boolean
     {
-        var keys, input, value;
-    
-        let keys = is_array(key) ? key : func_get_args();
+        var keys, input, value, args = [];
+
+        let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? args[0] : args;
         let input = this->all();
 
         for value in keys {
@@ -330,14 +347,19 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     /**
      * 请求是否包含非空
      *
-     * @param string|array $key
      * @return bool
      */
-    public function has(var key) -> boolean
+    public function has() -> boolean
     {
-        var keys, value;
-    
-        let keys = is_array(key) ? key : func_get_args();
+        var keys, value, args = [];
+
+        let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? args[0] : args;
 
         for value in keys {
             if this->isEmptyString(value) {
@@ -351,14 +373,19 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     /**
      * 取得给定的 key 数据
      *
-     * @param array|mixed $keys
      * @return array
      */
-    public function only(var keys) -> array
+    public function only() -> array
     {
-        var results, input, key;
-    
-        let keys = is_array(keys) ? keys : func_get_args();
+        var results, input, key, args = [], keys;
+
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? args[0] : args;
         let results = [];
         let input = this->all();
 
@@ -372,14 +399,19 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     /**
      * 取得排除给定的 key 数据
      *
-     * @param array|mixed $keys
      * @return array
      */
-    public function except(var keys) -> array
+    public function except() -> array
     {
-        var results, key;
-    
-        let keys = is_array(keys) ? keys : func_get_args();
+        var results, key, args = [], keys;
+
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+        let keys = typeof args[0] === "array" ? args[0] : args;
         let results = this->all();
 
         for key in keys {
@@ -408,7 +440,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string|array|null $defaults
      * @return mixed
      */
-    public function input(string key = null, var defaults = null)
+    public function input(var key = null, var defaults = null)
     {
         var input;
     
@@ -418,7 +450,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
             return input;
         }
 
-        return  isset input[key] ? input[key] : defaults;
+        return isset input[key] ? input[key] : defaults;
     }
     
     /**
@@ -428,7 +460,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string|array|null $defaults
      * @return string|array
      */
-    public function query(string key = null, var defaults = null)
+    public function query(var key = null, var defaults = null)
     {
         return this->getItem("query", key, defaults);
     }
@@ -451,7 +483,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string|array|null $defaults
      * @return string|array
      */
-    public function cookie(string key = null, var defaults = null)
+    public function cookie(var key = null, var defaults = null)
     {
         return this->getItem("cookies", key, defaults);
     }
@@ -474,7 +506,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param mixed $defaults
      * @return \Queryyetsimple\Http\UploadedFile|array|null
      */
-    public function file(string key = null, var defaults = null)
+    public function file(var key = null, var defaults = null)
     {
         if strpos(key, "\\") === false {
             return this->getItem("files", key, defaults);
@@ -527,7 +559,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string|array|null $defaults
      * @return string|array
      */
-    public function header(string key = null, var defaults = null)
+    public function header(var key = null, var defaults = null)
     {
         return this->getItem("headers", key, defaults);
     }
@@ -539,7 +571,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param string|array|null $defaults
      * @return string|array
      */
-    public function server(string key = null, var defaults = null)
+    public function server(var key = null, var defaults = null)
     {
         return this->getItem("server", key, defaults);
     }
@@ -646,7 +678,17 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public function isRealAjax() -> boolean
     {
-        return this->headers->get("X_REQUESTED_WITH") === "xmlhttprequest";
+        return this->isXmlHttpRequest();
+    }
+
+    /**
+     * 是否为 Ajax 请求行为真实
+     *
+     * @return boolean
+     */
+    public function isXmlHttpRequest()
+    {
+        return this->headers->get("X_REQUESTED_WITH") === "XMLHttpRequest";
     }
     
     /**
@@ -964,6 +1006,17 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     {
         return strtoupper(this->server->get("REQUEST_METHOD", "GET"));
     }
+
+    /**
+     * 验证是否为指定的方法
+     *
+     * @param string $method
+     * @return bool
+     */
+    public function isMethod(string method)
+    {
+        return this->getMethod() === strtoupper(method);
+    }
     
     /**
      * 取回应用名
@@ -1050,6 +1103,16 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @return string|null
      */
     public function language()
+    {
+        return this->language;
+    }
+
+    /**
+     * 返回当前的语言
+     *
+     * @return string|null
+     */
+    public function getLanguage()
     {
         return this->language;
     }
@@ -1212,7 +1275,20 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public function getHost() -> string
     {
-        return this->headers->get("X_FORWARDED_HOST", this->headers->get("HOST", ""));
+    	var host, tmp;
+
+        let host = this->headers->get("X_FORWARDED_HOST", this->headers->get("HOST", ""));
+
+        if ! host {
+            let host = this->server->get("SERVER_NAME", this->server->get("SERVER_ADDR", ""));
+        }
+
+        if strpos(host, ":") !== false {
+        	let tmp = explode(":", host);
+            let host = tmp[0];
+        }
+
+        return host;
     }
     
     /**
@@ -1222,7 +1298,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public function getSchemeAndHttpHost() -> string
     {
-        return this->getScheme() . "://" . this->getHost();
+        return this->getScheme() . "://" . this->getHttpHost();
     }
     
     /**
@@ -1320,6 +1396,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         // 服务器重写
         if this->query->get(self::PATHINFO_URL) {
             let pathInfo = this->parsePathInfo(this->query->get(self::PATHINFO_URL));
+            this->query->remove(self::PATHINFO_URL);
             let this->pathInfo = pathInfo;
             return this->pathInfo;
         }
@@ -1335,7 +1412,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         }
 
         let pos = strpos(requestUri, "?");
-        if pos > 0 {
+        if pos > -1 {
             let requestUri = substr(requestUri, 0, pos);
         }
 
@@ -1350,6 +1427,41 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
 
         return this->pathInfo;
     }
+
+    /**
+     * 获取基础路径
+     *
+     * @return string
+     */
+    public function getBasePath() -> string
+    {
+        var baseUrl, filename, basePath;
+    
+        if this->basePath !== null {
+            return this->basePath;
+        }
+
+        let baseUrl = this->getBaseUrl();
+        if empty baseUrl {
+            return "";
+        }
+
+        let filename = basename(this->server->get("SCRIPT_FILENAME"));
+
+        if basename(baseUrl) === filename {
+            let basePath = dirname(baseUrl);
+        } else {
+            let basePath = baseUrl;
+        }
+
+        if DIRECTORY_SEPARATOR === "\\" {
+            let basePath = str_replace("\\", "/", basePath);
+        }
+
+        let this->basePath = rtrim(basePath, "/");
+
+        return this->basePath;
+    }
     
     /**
      * 分析基础 url
@@ -1358,7 +1470,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     public function getBaseUrl() -> string
     {
-        var fileName, url, path, segs, index, maxCount, pos, seg, requestUri;
+        var fileName, url, path, segs, index, maxCount, pos, seg, requestUri, prefix, basename;
     
         if ! (is_null(this->baseUrl)) {
             return this->baseUrl;
@@ -1391,25 +1503,39 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         // 比对请求
         let requestUri = this->getRequestUri();
 
-        if 0 === strpos(requestUri, url) {
-            let this->baseUrl = url;
-            return this->baseUrl;
+        if "" !== requestUri && "/" !== substr(requestUri, 0, 1) {
+            let requestUri = "/" . requestUri;
         }
 
-        if 0 === strpos(requestUri, dirname(url)) {
-            let this->baseUrl = rtrim(dirname(url), "/");
-            return this->baseUrl;
-        }
+        if (url) {
+        	let prefix = this->getUrlencodedPrefix(requestUri, url);
 
-        if ! (strpos(requestUri, basename(url))) {
+	        if false !== prefix {
+	            let this->baseUrl = prefix;
+	            return this->baseUrl;
+	        }
+
+	        let prefix = this->getUrlencodedPrefix(requestUri, dirname(url));
+
+		    if false !== prefix {
+	            let this->baseUrl = rtrim(prefix, "/");
+	            return this->baseUrl;
+	        }
+        }
+        
+		let basename = basename(url);
+        if empty basename || strpos(rawurldecode(requestUri), basename) {
             return "";
         }
 
-        let pos = strpos(requestUri, url);
-        if strlen(requestUri) >= strlen(url) && (pos !== false && pos !== 0) {
-            let url = substr(requestUri, 0, pos + strlen(url));
-        }
+        if strlen(requestUri) >= strlen(url) {
+        	let pos = strpos(requestUri, url);
 
+	       	if pos !== false && pos !== 0 {
+	            let url = substr(requestUri, 0, pos + strlen(url));
+	        }
+        }
+        
         let this->baseUrl = rtrim(url, "/");
 
         return this->baseUrl;
@@ -1499,12 +1625,12 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * 获取单个配置
      *
      * @param string $name
-     * @param mixed $defaultss
+     * @param mixed $defaults
      * @return mixed
      */
-    public function getOption(string name, var defaultss = null)
+    public function getOption(string name, var defaults = null)
     {
-        return isset(this->option[name]) ? this->option[name] : defaultss;
+        return isset(this->option[name]) ? this->option[name] : defaults;
     }
 
     /**
@@ -1674,7 +1800,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
 
         let parts = [];
         for item in explode("&", queryString) {
-            if strpos(item, self::PATHINFO_URL . "=") === 0 {
+            if item === "" || strpos(item, self::PATHINFO_URL . "=") === 0 {
                 continue;
             }
 
@@ -1691,7 +1817,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     protected function getInputSource()
     {
-        return  this->getMethod() == self::METHOD_GET ? this->query : this->request;
+        return this->getMethod() == self::METHOD_GET ? this->query : this->request;
     }
     
     /**
@@ -1707,6 +1833,31 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         let value = this->input(key);
 
         return is_string(value) && trim(value) === "";
+    }
+
+    /**
+     * URL 前缀编码
+     * 
+     * @param string $string
+     * @param string $prefix
+     * @return string|boolean
+     */
+    protected function getUrlencodedPrefix(string strings, string prefix)
+    {
+        var len, matches;
+    
+        if 0 !== strpos(rawurldecode(strings), prefix) {
+            return false;
+        }
+
+        let len = strlen(prefix);
+        let matches = null;
+
+        if preg_match(sprintf("#^(%%[[:xdigit:]]{2}|.){%d}#", len), strings, matches) {
+            return matches[0];
+        }
+
+        return false;
     }
     
     /**

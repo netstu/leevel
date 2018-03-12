@@ -69,7 +69,7 @@ class FileResponse extends Response
      * @param bool $autoLastModified
      * @return void
      */
-    public function __construct(var file, int status = 200, array headers = [], string contentDisposition = null, boolean autoEtag = false, boolean autoLastModified = true)
+    public function __construct(var file, int status = 200, array headers = [], var contentDisposition = null, boolean autoEtag = false, boolean autoLastModified = true)
     {
         parent::__construct(null, status, headers);
 
@@ -101,7 +101,7 @@ class FileResponse extends Response
      * @param bool $autoLastModified
      * @return $this
      */
-    public function setFile(var file, string contentDisposition = null, boolean autoEtag = false, boolean autoLastModified = true)
+    public function setFile(var file, var contentDisposition = null, boolean autoEtag = false, boolean autoLastModified = true)
     {
     	var files;
 

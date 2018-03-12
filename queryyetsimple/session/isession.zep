@@ -179,10 +179,9 @@ interface ISession
     /**
      * 保持闪存数据
      *
-     * @param mixed $keys
      * @return void
      */
-    public function keepFlash(var keys);
+    public function keepFlash();
 
     /**
      * 返回闪存数据
@@ -196,10 +195,9 @@ interface ISession
     /**
      * 删除闪存数据
      *
-     * @param mixed $keys
      * @return void
      */
-    public function deleteFlash(var keys);
+    public function deleteFlash();
 
     /**
      * 清理所有闪存数据

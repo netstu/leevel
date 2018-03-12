@@ -20,6 +20,7 @@ namespace Queryyetsimple\Pipeline;
 
 use Closure;
 use Generator;
+use BadMethodCallException;
 use InvalidArgumentException;
 use Queryyetsimple\Di\IContainer;
 use Queryyetsimple\Pipeline\IPipeline;
@@ -78,14 +79,20 @@ class Pipeline implements IPipeline
 	/**
 	 * 将传输对象传入管道
 	 *
-	 * @param mixed $passed
 	 * @return $this
 	 */
-	public function send(var passed)
+	public function send()
 	{
-		var item;
+		var item, args = [], passed;
 
-		let passed = typeof passed == "array" ? passed : func_get_args();
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+		let passed = typeof args[0] === "array" ? args[0] : args;
+
 		for item in passed {
 			let this->passed[] = item;
 		}
@@ -96,14 +103,20 @@ class Pipeline implements IPipeline
 	/**
 	 * 设置管道中的执行工序
 	 *
-	 * @param dynamic|array $stage
 	 * @return $this
 	 */
-	public function through(var stage)
+	public function through()
 	{
-		var item;
+		var item, stage, args = [];
 
-		let stage = typeof stage == "array" ? stage : func_get_args();
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+		let stage = typeof args[0] === "array" ? args[0] : args;
+
 		for item in stage {
 			let this->stage[] = item;
 		}
@@ -123,12 +136,14 @@ class Pipeline implements IPipeline
 		var stage;
 
 		let stage = this->stage;
+
 		if (end) {
 			if ! is_callable(end) {
 				throw new InvalidArgumentException("Pipeline then must be a callable.");
 			}
 			let stage[] = end;
-		} 
+		}
+
 		let this->generator = this->stageGenerator(stage);
 
 		return call_user_func_array([this, "traverseGenerator"], this->passed);
@@ -154,6 +169,7 @@ class Pipeline implements IPipeline
 		array_unshift(args, next);
 
 		let current = this->generator->current();
+		
 		return call_user_func_array(current, args);
 	}
 
@@ -216,7 +232,7 @@ class Pipeline implements IPipeline
 				let method = "handle";
 			}
 
-			let stage = this->container->make(stage);
+			let stage = this->container->make(stage, params);
 			if (stage === false) {
 				throw new InvalidArgumentException("Stage is invalid.");
 			}

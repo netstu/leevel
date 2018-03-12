@@ -53,6 +53,7 @@ class FileBag extends Bag
     public function __construct(array elements = [])
     {
         let elements = this->normalizeArray(elements);
+
         this->add(elements);
     }
     
@@ -62,6 +63,9 @@ class FileBag extends Bag
     public function replace(array elements = []) -> void
     {
         let this->elements = [];
+        
+        let elements = this->normalizeArray(elements);
+
         this->add(elements);
     }
     
@@ -108,7 +112,7 @@ class FileBag extends Bag
             }
         }
 
-        return  files ? files: defaults;
+        return files ? files: defaults;
     }
     
     /**

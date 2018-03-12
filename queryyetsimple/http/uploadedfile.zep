@@ -84,7 +84,7 @@ class UploadedFile extends File
      * @param int|null $error
      * @return void
      */
-    public function __construct(string path, string originalName, string mimeType = null, int error = null)
+    public function __construct(var path, var originalName, var mimeType = null, int error = null)
     {
         let this->originalName = originalName;
         let this->mimeType = mimeType ? mimeType : "application/octet-stream";

@@ -29,6 +29,19 @@ namespace Queryyetsimple\Http;
 class ApiResponse extends JsonResponse
 {
 
+	/**
+     * 创建一个 API 响应
+     * 
+     * @param string $data
+     * @param integer $status
+     * @param array $headers
+     * @return static
+     */
+    public static function create(var data = "", int status = 200, array headers = [])
+    {
+        return new static(data, status, headers);
+    }
+
     /**
      * 请求成功
      * 一般用于GET与POST请求： 200
@@ -37,7 +50,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function ok(var content = "", string text = null)
+    public function ok(var content = "", var text = null)
     {
         if this->checkTControl() {
             return this;
@@ -119,7 +132,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function unprocessableEntity(array errors = null, string message = null, string text = null)
+    public function unprocessableEntity(array errors = null, var message = null, var text = null)
     {
         var tmp, tmpArr;
     
@@ -152,7 +165,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function error(string message, var statusCode, string text = null)
+    public function error(string message, var statusCode, var text = null)
     {
         if this->checkTControl() {
             return this;
@@ -171,7 +184,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function badRequest(string message = null, string text = null)
+    public function badRequest(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_BAD_REQUEST, text);
     }
@@ -184,7 +197,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function unauthorized(string message = null, string text = null)
+    public function unauthorized(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_UNAUTHORIZED, text);
     }
@@ -197,7 +210,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function forbidden(string message = null, string text = null)
+    public function forbidden(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_FORBIDDEN, text);
     }
@@ -210,7 +223,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function notFound(string message = null, string text = null)
+    public function notFound(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_NOT_FOUND, text);
     }
@@ -223,7 +236,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function methodNotAllowed(string message = null, string text = null)
+    public function methodNotAllowed(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_METHOD_NOT_ALLOWED, text);
     }
@@ -236,7 +249,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function tooManyRequests(string message = null, string text = null)
+    public function tooManyRequests(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_TOO_MANY_REQUESTS, text);
     }
@@ -249,7 +262,7 @@ class ApiResponse extends JsonResponse
      * @param string $text
      * @return $this
      */
-    public function internalServerError(string message = null, string text = null)
+    public function internalServerError(var message = null, var text = null)
     {
         return this->error(message, self::HTTP_INTERNAL_SERVER_ERROR, text);
     }
@@ -260,7 +273,7 @@ class ApiResponse extends JsonResponse
      * @param string $message
      * @return $this
      */
-    protected function normalizeErrorMessage(string message = null, var text = null)
+    protected function normalizeErrorMessage(var message = null, var text = null)
     {
         var tmp;
     

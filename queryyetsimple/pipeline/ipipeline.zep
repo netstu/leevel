@@ -32,18 +32,16 @@ interface IPipeline
 	/**
 	 * 将传输对象传入管道
 	 *
-	 * @param mixed $passed
 	 * @return $this
 	 */
-	public function send(var passed);
+	public function send();
 
 	/**
 	 * 设置管道中的执行工序
 	 *
-	 * @param dynamic|array $stage
 	 * @return $this
 	 */
-	public function through(var stage);
+	public function through();
 
 	/**
 	 * 执行管道工序响应结果

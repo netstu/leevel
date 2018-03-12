@@ -181,7 +181,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      */
     public function offsetGet(string offset)
     {
-        return  isset this->elements[offset] ? this->elements[offset] : null;
+        return isset this->elements[offset] ? this->elements[offset] : null;
     }
     
     /**

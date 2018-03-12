@@ -19,6 +19,7 @@
 namespace Queryyetsimple\View;
 
 use RuntimeException;
+use BadMethodCallException;
 use InvalidArgumentException;
 use Queryyetsimple\Option\IClass;
 
@@ -91,14 +92,19 @@ abstract class Connect implements IClass
 	/**
 	 * 删除变量值
 	 *
-	 * @param mixed $name
 	 * @return $this
 	 */
-	public function deleteVar(var name)
+	public function deleteVar()
 	{
-		var item;
+		var item, name, args = [];
 
-		let name = is_array(name) ? name : func_get_args();
+		let args = func_get_args();
+
+		if empty args {
+			throw new BadMethodCallException("Wrong number of parameters");
+		}
+
+		let name = typeof args[0] === "array" ? args[0] : args;
 
 		for item in name {
 			if isset this->vars[item] {

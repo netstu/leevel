@@ -139,7 +139,7 @@ abstract class Controller implements IController
      * @param string $ext
 	 * @return string
 	 */
-	public function display(string file = null, array! vars = [], string ext = null)
+	public function display(var file = null, array! vars = [], var ext = null)
 	{
 		this->checkView();
 		return this->view->display(file, vars, ext);

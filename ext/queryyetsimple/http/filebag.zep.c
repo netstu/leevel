@@ -88,12 +88,13 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, __construct) {
 PHP_METHOD(Queryyetsimple_Http_FileBag, replace) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *elements_param = NULL, _0;
+	zval *elements_param = NULL, _0, _1;
 	zval elements;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&elements);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &elements_param);
@@ -109,6 +110,9 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, replace) {
 	ZEPHIR_INIT_VAR(&_0);
 	array_init(&_0);
 	zephir_update_property_zval(this_ptr, SL("elements"), &_0);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizearray", NULL, 0, &elements);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(&elements, &_1);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "add", NULL, 0, &elements);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -144,7 +148,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, set) {
 		_0 = !(_1);
 	}
 	if (_0) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "An uploaded file must be an array or an instance of UploadedFile.", "queryyetsimple/http/filebag.zep", 74);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "An uploaded file must be an array or an instance of UploadedFile.", "queryyetsimple/http/filebag.zep", 78);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&_3, this_ptr, "convertfile", NULL, 0, value);
@@ -183,7 +187,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, add) {
 	}
 
 
-	zephir_is_iterable(&files, 0, "queryyetsimple/http/filebag.zep", 90);
+	zephir_is_iterable(&files, 0, "queryyetsimple/http/filebag.zep", 94);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&files), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -242,7 +246,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, getArr) {
 	ZEPHIR_INIT_VAR(&files);
 	array_init(&files);
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_0, 0, "queryyetsimple/http/filebag.zep", 111);
+	zephir_is_iterable(&_0, 0, "queryyetsimple/http/filebag.zep", 115);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&k);
@@ -256,7 +260,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, getArr) {
 		ZEPHIR_INIT_NVAR(&_4$$3);
 		zephir_fast_strpos(&_4$$3, &k, &key, 0 );
 		if (ZEPHIR_IS_LONG_IDENTICAL(&_4$$3, 0)) {
-			zephir_array_append(&files, &value, PH_SEPARATE, "queryyetsimple/http/filebag.zep", 107);
+			zephir_array_append(&files, &value, PH_SEPARATE, "queryyetsimple/http/filebag.zep", 111);
 		}
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&value);
@@ -310,16 +314,16 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, convertFile) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizefile", NULL, 0, file);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(file, &_1);
-	zephir_array_fetch_string(&_2, file, SL("error"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 130 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, file, SL("error"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 134 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&result);
 	if (ZEPHIR_IS_LONG(&_2, 4)) {
 		ZVAL_NULL(&result);
 	} else {
 		object_init_ex(&result, queryyetsimple_http_uploadedfile_ce);
-		zephir_array_fetch_string(&_3$$5, file, SL("tmp_name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 133 TSRMLS_CC);
-		zephir_array_fetch_string(&_4$$5, file, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 133 TSRMLS_CC);
-		zephir_array_fetch_string(&_5$$5, file, SL("type"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 133 TSRMLS_CC);
-		zephir_array_fetch_string(&_6$$5, file, SL("error"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 133 TSRMLS_CC);
+		zephir_array_fetch_string(&_3$$5, file, SL("tmp_name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 137 TSRMLS_CC);
+		zephir_array_fetch_string(&_4$$5, file, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 137 TSRMLS_CC);
+		zephir_array_fetch_string(&_5$$5, file, SL("type"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 137 TSRMLS_CC);
+		zephir_array_fetch_string(&_6$$5, file, SL("error"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 137 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(NULL, &result, "__construct", NULL, 69, &_3$$5, &_4$$5, &_5$$5, &_6$$5);
 		zephir_check_call_status();
 	}
@@ -363,7 +367,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeFile) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	zephir_is_iterable(&data, 0, "queryyetsimple/http/filebag.zep", 156);
+	zephir_is_iterable(&data, 0, "queryyetsimple/http/filebag.zep", 160);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&data), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -396,7 +400,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeFile) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_5$$5, "__construct", NULL, 21, &_9$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_5$$5, "queryyetsimple/http/filebag.zep", 158 TSRMLS_CC);
+		zephir_throw_exception_debug(&_5$$5, "queryyetsimple/http/filebag.zep", 162 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -449,7 +453,7 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeArray) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	zephir_is_iterable(&elements, 0, "queryyetsimple/http/filebag.zep", 198);
+	zephir_is_iterable(&elements, 0, "queryyetsimple/http/filebag.zep", 202);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&elements), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -460,13 +464,13 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeArray) {
 		}
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _0);
-		zephir_array_fetch_string(&_3$$3, &value, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 179 TSRMLS_CC);
+		zephir_array_fetch_string(&_3$$3, &value, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 183 TSRMLS_CC);
 		if (!(zephir_array_isset_string(&value, SL("name")))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "An uploaded file must be contain key name.", "queryyetsimple/http/filebag.zep", 178);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "An uploaded file must be contain key name.", "queryyetsimple/http/filebag.zep", 182);
 			return;
 		} else if (Z_TYPE_P(&_3$$3) == IS_ARRAY) {
-			zephir_array_fetch_string(&_4$$5, &value, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 180 TSRMLS_CC);
-			zephir_is_iterable(&_4$$5, 0, "queryyetsimple/http/filebag.zep", 193);
+			zephir_array_fetch_string(&_4$$5, &value, SL("name"), PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 184 TSRMLS_CC);
+			zephir_is_iterable(&_4$$5, 0, "queryyetsimple/http/filebag.zep", 197);
 			ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_4$$5), _6$$5, _7$$5, _5$$5)
 			{
 				ZEPHIR_INIT_NVAR(&index);
@@ -480,12 +484,12 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeArray) {
 				ZEPHIR_INIT_NVAR(&element);
 				array_init(&element);
 				zephir_read_static_property_ce(&_8$$6, queryyetsimple_http_filebag_ce, SL("fileKeys"), PH_NOISY_CC | PH_READONLY);
-				zephir_is_iterable(&_8$$6, 0, "queryyetsimple/http/filebag.zep", 190);
+				zephir_is_iterable(&_8$$6, 0, "queryyetsimple/http/filebag.zep", 194);
 				ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_8$$6), _9$$6)
 				{
 					ZEPHIR_INIT_NVAR(&fileKey);
 					ZVAL_COPY(&fileKey, _9$$6);
-					zephir_array_fetch(&_10$$7, &value, &fileKey, PH_READONLY, "queryyetsimple/http/filebag.zep", 184 TSRMLS_CC);
+					zephir_array_fetch(&_10$$7, &value, &fileKey, PH_READONLY, "queryyetsimple/http/filebag.zep", 188 TSRMLS_CC);
 					if (!(zephir_array_isset(&_10$$7, &index))) {
 						ZEPHIR_INIT_NVAR(&_11$$8);
 						object_init_ex(&_11$$8, spl_ce_InvalidArgumentException);
@@ -495,16 +499,16 @@ PHP_METHOD(Queryyetsimple_Http_FileBag, normalizeArray) {
 						zephir_check_call_status();
 						ZEPHIR_CALL_METHOD(NULL, &_11$$8, "__construct", &_15, 21, &_13$$8);
 						zephir_check_call_status();
-						zephir_throw_exception_debug(&_11$$8, "queryyetsimple/http/filebag.zep", 185 TSRMLS_CC);
+						zephir_throw_exception_debug(&_11$$8, "queryyetsimple/http/filebag.zep", 189 TSRMLS_CC);
 						ZEPHIR_MM_RESTORE();
 						return;
 					}
 					ZEPHIR_INIT_LNVAR(_16$$7);
-					zephir_array_fetch(&_17$$7, &value, &fileKey, PH_READONLY, "queryyetsimple/http/filebag.zep", 187 TSRMLS_CC);
+					zephir_array_fetch(&_17$$7, &value, &fileKey, PH_READONLY, "queryyetsimple/http/filebag.zep", 191 TSRMLS_CC);
 					if (zephir_array_isset(&_17$$7, &index)) {
-						zephir_array_fetch(&_18$$7, &value, &fileKey, PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 187 TSRMLS_CC);
+						zephir_array_fetch(&_18$$7, &value, &fileKey, PH_NOISY | PH_READONLY, "queryyetsimple/http/filebag.zep", 191 TSRMLS_CC);
 						ZEPHIR_OBS_NVAR(&_16$$7);
-						zephir_array_fetch(&_16$$7, &_18$$7, &index, PH_NOISY, "queryyetsimple/http/filebag.zep", 187 TSRMLS_CC);
+						zephir_array_fetch(&_16$$7, &_18$$7, &index, PH_NOISY, "queryyetsimple/http/filebag.zep", 191 TSRMLS_CC);
 					} else {
 						ZEPHIR_INIT_NVAR(&_16$$7);
 						ZVAL_STRING(&_16$$7, "");

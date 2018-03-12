@@ -3,6 +3,7 @@ extern zend_class_entry *queryyetsimple_http_apiresponse_ce;
 
 ZEPHIR_INIT_CLASS(Queryyetsimple_Http_ApiResponse);
 
+PHP_METHOD(Queryyetsimple_Http_ApiResponse, create);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, ok);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, created);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, accepted);
@@ -18,6 +19,12 @@ PHP_METHOD(Queryyetsimple_Http_ApiResponse, tooManyRequests);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, internalServerError);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, normalizeErrorMessage);
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, parseErrorMessage);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_apiresponse_create, 0, 0, 0)
+	ZEND_ARG_INFO(0, data)
+	ZEND_ARG_INFO(0, status)
+	ZEND_ARG_ARRAY_INFO(0, headers, 1)
+ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_apiresponse_ok, 0, 0, 0)
 	ZEND_ARG_INFO(0, content)
@@ -91,6 +98,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_apiresponse_parseerrormessage
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_http_apiresponse_method_entry) {
+	PHP_ME(Queryyetsimple_Http_ApiResponse, create, arginfo_queryyetsimple_http_apiresponse_create, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Queryyetsimple_Http_ApiResponse, ok, arginfo_queryyetsimple_http_apiresponse_ok, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_ApiResponse, created, arginfo_queryyetsimple_http_apiresponse_created, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_ApiResponse, accepted, arginfo_queryyetsimple_http_apiresponse_accepted, ZEND_ACC_PUBLIC)

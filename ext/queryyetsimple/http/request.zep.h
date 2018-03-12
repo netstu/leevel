@@ -31,6 +31,7 @@ PHP_METHOD(Queryyetsimple_Http_Request, isRealCli);
 PHP_METHOD(Queryyetsimple_Http_Request, isCgi);
 PHP_METHOD(Queryyetsimple_Http_Request, isAjax);
 PHP_METHOD(Queryyetsimple_Http_Request, isRealAjax);
+PHP_METHOD(Queryyetsimple_Http_Request, isXmlHttpRequest);
 PHP_METHOD(Queryyetsimple_Http_Request, isPjax);
 PHP_METHOD(Queryyetsimple_Http_Request, isRealPjax);
 PHP_METHOD(Queryyetsimple_Http_Request, isMobile);
@@ -47,6 +48,7 @@ PHP_METHOD(Queryyetsimple_Http_Request, getClientIp);
 PHP_METHOD(Queryyetsimple_Http_Request, getMethod);
 PHP_METHOD(Queryyetsimple_Http_Request, setMethod);
 PHP_METHOD(Queryyetsimple_Http_Request, getRealMethod);
+PHP_METHOD(Queryyetsimple_Http_Request, isMethod);
 PHP_METHOD(Queryyetsimple_Http_Request, app);
 PHP_METHOD(Queryyetsimple_Http_Request, controller);
 PHP_METHOD(Queryyetsimple_Http_Request, action);
@@ -55,6 +57,7 @@ PHP_METHOD(Queryyetsimple_Http_Request, setApp);
 PHP_METHOD(Queryyetsimple_Http_Request, setController);
 PHP_METHOD(Queryyetsimple_Http_Request, setAction);
 PHP_METHOD(Queryyetsimple_Http_Request, language);
+PHP_METHOD(Queryyetsimple_Http_Request, getLanguage);
 PHP_METHOD(Queryyetsimple_Http_Request, setLanguage);
 PHP_METHOD(Queryyetsimple_Http_Request, getContent);
 PHP_METHOD(Queryyetsimple_Http_Request, getPublicUrl);
@@ -72,6 +75,7 @@ PHP_METHOD(Queryyetsimple_Http_Request, getScheme);
 PHP_METHOD(Queryyetsimple_Http_Request, getQueryString);
 PHP_METHOD(Queryyetsimple_Http_Request, setPathInfo);
 PHP_METHOD(Queryyetsimple_Http_Request, getPathInfo);
+PHP_METHOD(Queryyetsimple_Http_Request, getBasePath);
 PHP_METHOD(Queryyetsimple_Http_Request, getBaseUrl);
 PHP_METHOD(Queryyetsimple_Http_Request, getRequestUri);
 PHP_METHOD(Queryyetsimple_Http_Request, option);
@@ -90,6 +94,7 @@ PHP_METHOD(Queryyetsimple_Http_Request, parsePathInfo);
 PHP_METHOD(Queryyetsimple_Http_Request, normalizeQueryString);
 PHP_METHOD(Queryyetsimple_Http_Request, getInputSource);
 PHP_METHOD(Queryyetsimple_Http_Request, isEmptyString);
+PHP_METHOD(Queryyetsimple_Http_Request, getUrlencodedPrefix);
 PHP_METHOD(Queryyetsimple_Http_Request, toArray);
 PHP_METHOD(Queryyetsimple_Http_Request, offsetExists);
 PHP_METHOD(Queryyetsimple_Http_Request, offsetGet);
@@ -106,7 +111,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request___construct, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, query, 1)
 	ZEND_ARG_ARRAY_INFO(0, request, 1)
 	ZEND_ARG_ARRAY_INFO(0, params, 1)
-	ZEND_ARG_ARRAY_INFO(0, cookie, 1)
+	ZEND_ARG_ARRAY_INFO(0, cookies, 1)
 	ZEND_ARG_ARRAY_INFO(0, files, 1)
 	ZEND_ARG_ARRAY_INFO(0, server, 1)
 	ZEND_ARG_INFO(0, content)
@@ -117,7 +122,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_reset, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, query, 1)
 	ZEND_ARG_ARRAY_INFO(0, request, 1)
 	ZEND_ARG_ARRAY_INFO(0, params, 1)
-	ZEND_ARG_ARRAY_INFO(0, cookie, 1)
+	ZEND_ARG_ARRAY_INFO(0, cookies, 1)
 	ZEND_ARG_ARRAY_INFO(0, files, 1)
 	ZEND_ARG_ARRAY_INFO(0, server, 1)
 	ZEND_ARG_INFO(0, content)
@@ -138,18 +143,6 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_exists, 0, 0, 1)
 	ZEND_ARG_INFO(0, key)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_has, 0, 0, 1)
-	ZEND_ARG_INFO(0, key)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_only, 0, 0, 1)
-	ZEND_ARG_INFO(0, keys)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_except, 0, 0, 1)
-	ZEND_ARG_INFO(0, keys)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_input, 0, 0, 0)
@@ -212,6 +205,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_setmethod, 0, 0, 1)
 	ZEND_ARG_INFO(0, method)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_ismethod, 0, 0, 1)
+	ZEND_ARG_INFO(0, method)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_setapp, 0, 0, 1)
 	ZEND_ARG_INFO(0, app)
 ZEND_END_ARG_INFO()
@@ -252,7 +249,7 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_getoption, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, defaultss)
+	ZEND_ARG_INFO(0, defaults)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_getoptions, 0, 0, 0)
@@ -302,6 +299,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_isemptystring, 0, 0, 
 	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_geturlencodedprefix, 0, 0, 2)
+	ZEND_ARG_INFO(0, strings)
+	ZEND_ARG_INFO(0, prefix)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_request_offsetexists, 0, 0, 1)
 	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
@@ -344,9 +346,9 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, normalizeRequestFromContent, arginfo_queryyetsimple_http_request_normalizerequestfromcontent, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Queryyetsimple_Http_Request, get, arginfo_queryyetsimple_http_request_get, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, exists, arginfo_queryyetsimple_http_request_exists, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Http_Request, has, arginfo_queryyetsimple_http_request_has, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Http_Request, only, arginfo_queryyetsimple_http_request_only, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Http_Request, except, arginfo_queryyetsimple_http_request_except, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, has, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, only, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, except, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, all, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, input, arginfo_queryyetsimple_http_request_input, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, query, arginfo_queryyetsimple_http_request_query, ZEND_ACC_PUBLIC)
@@ -366,6 +368,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, isCgi, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, isAjax, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, isRealAjax, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, isXmlHttpRequest, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, isPjax, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, isRealPjax, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, isMobile, NULL, ZEND_ACC_PUBLIC)
@@ -382,6 +385,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, getMethod, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, setMethod, arginfo_queryyetsimple_http_request_setmethod, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getRealMethod, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, isMethod, arginfo_queryyetsimple_http_request_ismethod, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, app, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, controller, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, action, NULL, ZEND_ACC_PUBLIC)
@@ -390,6 +394,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, setController, arginfo_queryyetsimple_http_request_setcontroller, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, setAction, arginfo_queryyetsimple_http_request_setaction, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, language, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, getLanguage, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, setLanguage, arginfo_queryyetsimple_http_request_setlanguage, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getContent, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getPublicUrl, NULL, ZEND_ACC_PUBLIC)
@@ -407,6 +412,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, getQueryString, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, setPathInfo, arginfo_queryyetsimple_http_request_setpathinfo, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getPathInfo, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Request, getBasePath, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getBaseUrl, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, getRequestUri, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, option, arginfo_queryyetsimple_http_request_option, ZEND_ACC_PUBLIC)
@@ -425,6 +431,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_request_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Request, normalizeQueryString, arginfo_queryyetsimple_http_request_normalizequerystring, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Http_Request, getInputSource, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Http_Request, isEmptyString, arginfo_queryyetsimple_http_request_isemptystring, ZEND_ACC_PROTECTED)
+	PHP_ME(Queryyetsimple_Http_Request, getUrlencodedPrefix, arginfo_queryyetsimple_http_request_geturlencodedprefix, ZEND_ACC_PROTECTED)
 	PHP_ME(Queryyetsimple_Http_Request, toArray, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, offsetExists, arginfo_queryyetsimple_http_request_offsetexists, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Request, offsetGet, arginfo_queryyetsimple_http_request_offsetget, ZEND_ACC_PUBLIC)

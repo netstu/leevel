@@ -59,10 +59,9 @@ interface IConnect
 	/**
 	 * 删除变量值
 	 *
-	 * @param mixed $name
 	 * @return $this
 	 */
-	public function deleteVar(var name);
+	public function deleteVar();
 
 	/**
 	 * 清空变量值

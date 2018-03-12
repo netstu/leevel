@@ -274,23 +274,21 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval vars;
-	zval *file_param = NULL, *vars_param = NULL, *ext_param = NULL, _0;
-	zval file, ext;
+	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&file);
-	ZVAL_UNDEF(&ext);
+	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&ext_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 3, &file_param, &vars_param, &ext_param);
+	zephir_fetch_params(1, 0, 3, &file, &vars_param, &ext);
 
-	if (!file_param) {
-		ZEPHIR_INIT_VAR(&file);
-		ZVAL_STRING(&file, "");
-	} else {
-		zephir_get_strval(&file, file_param);
+	if (!file) {
+		file = &file_sub;
+		file = &__$null;
 	}
 	if (!vars_param) {
 		ZEPHIR_INIT_VAR(&vars);
@@ -298,18 +296,16 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, display) {
 	} else {
 	ZEPHIR_OBS_COPY_OR_DUP(&vars, vars_param);
 	}
-	if (!ext_param) {
-		ZEPHIR_INIT_VAR(&ext);
-		ZVAL_STRING(&ext, "");
-	} else {
-		zephir_get_strval(&ext, ext_param);
+	if (!ext) {
+		ext = &ext_sub;
+		ext = &__$null;
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, &file, &vars, &ext);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, file, &vars, ext);
 	zephir_check_call_status();
 	RETURN_MM();
 

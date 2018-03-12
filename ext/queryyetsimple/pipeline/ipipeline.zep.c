@@ -31,7 +31,6 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Pipeline_IPipeline) {
 /**
  * 将传输对象传入管道
  *
- * @param mixed $passed
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, send);
@@ -39,7 +38,6 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, send);
 /**
  * 设置管道中的执行工序
  *
- * @param dynamic|array $stage
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Pipeline_IPipeline, through);

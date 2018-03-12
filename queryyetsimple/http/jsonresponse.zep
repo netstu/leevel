@@ -90,6 +90,19 @@ class JsonResponse extends Response
 
         let this->isJson = true;
     }
+
+    /**
+     * 创建一个 JSON 响应
+     * 
+     * @param string $data
+     * @param integer $status
+     * @param array $headers
+     * @return static
+     */
+    public static function create(var data = "", int status = 200, array headers = [])
+    {
+        return new static(data, status, headers);
+    }
     
     /**
      * 从 JSON 字符串创建响应对象  

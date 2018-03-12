@@ -94,34 +94,38 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, __construct) {
 /**
  * 将传输对象传入管道
  *
- * @param mixed $passed
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, send) {
 
-	zval *passed = NULL, passed_sub, item, _0, *_1;
+	zval item, args, passed, _0, *_1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&passed_sub);
 	ZVAL_UNDEF(&item);
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&passed);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &passed);
 
-	ZEPHIR_SEPARATE_PARAM(passed);
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	if (Z_TYPE_P(passed) == IS_ARRAY) {
-		ZEPHIR_CPY_WRT(&_0, passed);
-	} else {
-		ZEPHIR_INIT_NVAR(&_0);
-		zephir_get_args(&_0);
+	ZEPHIR_INIT_VAR(&args);
+	array_init(&args);
+	ZEPHIR_INIT_NVAR(&args);
+	zephir_get_args(&args);
+	if (ZEPHIR_IS_EMPTY(&args)) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_BadMethodCallException, "Wrong number of parameters", "queryyetsimple/pipeline/pipeline.zep", 91);
+		return;
 	}
-	ZEPHIR_CPY_WRT(passed, &_0);
-	zephir_is_iterable(passed, 0, "queryyetsimple/pipeline/pipeline.zep", 93);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(passed), _1)
+	ZEPHIR_OBS_VAR(&_0);
+	zephir_array_fetch_long(&_0, &args, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 94 TSRMLS_CC);
+	if (Z_TYPE_P(&_0) == IS_ARRAY) {
+		ZEPHIR_OBS_VAR(&passed);
+		zephir_array_fetch_long(&passed, &args, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 94 TSRMLS_CC);
+	} else {
+		ZEPHIR_CPY_WRT(&passed, &args);
+	}
+	zephir_is_iterable(&passed, 0, "queryyetsimple/pipeline/pipeline.zep", 100);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&passed), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
@@ -135,34 +139,38 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, send) {
 /**
  * 设置管道中的执行工序
  *
- * @param dynamic|array $stage
  * @return $this
  */
 PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, through) {
 
-	zval *stage = NULL, stage_sub, item, _0, *_1;
+	zval item, stage, args, _0, *_1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&stage_sub);
 	ZVAL_UNDEF(&item);
+	ZVAL_UNDEF(&stage);
+	ZVAL_UNDEF(&args);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &stage);
 
-	ZEPHIR_SEPARATE_PARAM(stage);
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	if (Z_TYPE_P(stage) == IS_ARRAY) {
-		ZEPHIR_CPY_WRT(&_0, stage);
-	} else {
-		ZEPHIR_INIT_NVAR(&_0);
-		zephir_get_args(&_0);
+	ZEPHIR_INIT_VAR(&args);
+	array_init(&args);
+	ZEPHIR_INIT_NVAR(&args);
+	zephir_get_args(&args);
+	if (ZEPHIR_IS_EMPTY(&args)) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_BadMethodCallException, "Wrong number of parameters", "queryyetsimple/pipeline/pipeline.zep", 115);
+		return;
 	}
-	ZEPHIR_CPY_WRT(stage, &_0);
-	zephir_is_iterable(stage, 0, "queryyetsimple/pipeline/pipeline.zep", 111);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(stage), _1)
+	ZEPHIR_OBS_VAR(&_0);
+	zephir_array_fetch_long(&_0, &args, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 118 TSRMLS_CC);
+	if (Z_TYPE_P(&_0) == IS_ARRAY) {
+		ZEPHIR_OBS_VAR(&stage);
+		zephir_array_fetch_long(&stage, &args, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 118 TSRMLS_CC);
+	} else {
+		ZEPHIR_CPY_WRT(&stage, &args);
+	}
+	zephir_is_iterable(&stage, 0, "queryyetsimple/pipeline/pipeline.zep", 124);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&stage), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
@@ -208,10 +216,10 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, then) {
 	ZEPHIR_CPY_WRT(&stage, &_0);
 	if (zephir_is_true(end)) {
 		if (!(zephir_is_callable(end TSRMLS_CC))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Pipeline then must be a callable.", "queryyetsimple/pipeline/pipeline.zep", 128);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Pipeline then must be a callable.", "queryyetsimple/pipeline/pipeline.zep", 142);
 			return;
 		}
-		zephir_array_append(&stage, end, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 130);
+		zephir_array_append(&stage, end, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 144);
 	}
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "stagegenerator", NULL, 0, &stage);
 	zephir_check_call_status();
@@ -370,14 +378,14 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageGenerator) {
 	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 57, &stage, &_0);
 	ZEPHIR_UNREF(&stage);
 	zephir_check_call_status();
-	zephir_is_iterable(&stage, 0, "queryyetsimple/pipeline/pipeline.zep", 187);
+	zephir_is_iterable(&stage, 0, "queryyetsimple/pipeline/pipeline.zep", 203);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&stage), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
 		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "stagecallback", &_3, 0, &item);
 		zephir_check_call_status();
-		zephir_array_append(&temp, &_2$$3, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 184);
+		zephir_array_append(&temp, &_2$$3, PH_SEPARATE, "queryyetsimple/pipeline/pipeline.zep", 200);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, queryyetsimple_collection_collection_ce);
@@ -424,9 +432,9 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 		ZEPHIR_CALL_METHOD(&temp, this_ptr, "parse", NULL, 0, stages);
 		zephir_check_call_status();
 		ZEPHIR_OBS_VAR(&stage);
-		zephir_array_fetch_long(&stage, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 208 TSRMLS_CC);
+		zephir_array_fetch_long(&stage, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 224 TSRMLS_CC);
 		ZEPHIR_OBS_VAR(&params);
-		zephir_array_fetch_long(&params, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 209 TSRMLS_CC);
+		zephir_array_fetch_long(&params, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 225 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_0$$5);
 		ZVAL_STRING(&_0$$5, "@");
 		ZEPHIR_INIT_VAR(&_1$$5);
@@ -435,19 +443,19 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, stageCallback) {
 			ZEPHIR_INIT_NVAR(&temp);
 			zephir_fast_explode_str(&temp, SL("@"), &stage, LONG_MAX TSRMLS_CC);
 			ZEPHIR_OBS_NVAR(&stage);
-			zephir_array_fetch_long(&stage, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 213 TSRMLS_CC);
+			zephir_array_fetch_long(&stage, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 229 TSRMLS_CC);
 			ZEPHIR_OBS_VAR(&method);
-			zephir_array_fetch_long(&method, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 214 TSRMLS_CC);
+			zephir_array_fetch_long(&method, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 230 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&method);
 			ZVAL_STRING(&method, "handle");
 		}
 		zephir_read_property(&_2$$5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(&_3$$5, &_2$$5, "make", NULL, 0, &stage);
+		ZEPHIR_CALL_METHOD(&_3$$5, &_2$$5, "make", NULL, 0, &stage, &params);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&stage, &_3$$5);
 		if (ZEPHIR_IS_FALSE_IDENTICAL(&stage)) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Stage is invalid.", "queryyetsimple/pipeline/pipeline.zep", 221);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Stage is invalid.", "queryyetsimple/pipeline/pipeline.zep", 237);
 			return;
 		}
 		zephir_create_array(return_value, 2, 0 TSRMLS_CC);
@@ -492,12 +500,12 @@ PHP_METHOD(Queryyetsimple_Pipeline_Pipeline, parse) {
 	ZEPHIR_INIT_VAR(&_1);
 	array_init(&_1);
 	ZVAL_LONG(&_2, 2);
-	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 101, &_0, &_2, &_1);
+	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 102, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&name);
-	zephir_array_fetch_long(&name, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 242 TSRMLS_CC);
+	zephir_array_fetch_long(&name, &temp, 0, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 258 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&args);
-	zephir_array_fetch_long(&args, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 243 TSRMLS_CC);
+	zephir_array_fetch_long(&args, &temp, 1, PH_NOISY, "queryyetsimple/pipeline/pipeline.zep", 259 TSRMLS_CC);
 	if (Z_TYPE_P(&args) == IS_STRING) {
 		ZEPHIR_INIT_VAR(&_3$$3);
 		zephir_fast_explode_str(&_3$$3, SL(","), &args, LONG_MAX TSRMLS_CC);

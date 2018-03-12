@@ -59,7 +59,6 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, getVar);
 /**
  * 删除变量值
  *
- * @param mixed $name
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_View_IConnect, deleteVar);

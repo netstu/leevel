@@ -90,7 +90,7 @@ PHP_METHOD(queryyetsimple_25__closure, __invoke) {
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, queryyetsimple_router_url_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 134, &request, &options);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 135, &request, &options);
 	zephir_check_call_status();
 	RETURN_MM();
 

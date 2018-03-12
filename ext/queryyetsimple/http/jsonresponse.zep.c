@@ -149,6 +149,54 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, __construct) {
 }
 
 /**
+ * 创建一个 JSON 响应
+ * 
+ * @param string $data
+ * @param integer $status
+ * @param array $headers
+ * @return static
+ */
+PHP_METHOD(Queryyetsimple_Http_JsonResponse, create) {
+
+	zval headers;
+	zend_long status, ZEPHIR_LAST_CALL_STATUS;
+	zval *data = NULL, data_sub, *status_param = NULL, *headers_param = NULL, _0;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&data_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&headers);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 3, &data, &status_param, &headers_param);
+
+	if (!data) {
+		data = &data_sub;
+		ZEPHIR_INIT_VAR(data);
+		ZVAL_STRING(data, "");
+	}
+	if (!status_param) {
+		status = 200;
+	} else {
+		status = zephir_get_intval(status_param);
+	}
+	if (!headers_param) {
+		ZEPHIR_INIT_VAR(&headers);
+		array_init(&headers);
+	} else {
+		zephir_get_arrval(&headers, headers_param);
+	}
+
+
+	object_init_ex(return_value, queryyetsimple_http_jsonresponse_ce);
+	ZVAL_LONG(&_0, status);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 40, data, &_0, &headers);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
  * 从 JSON 字符串创建响应对象  
  * 
  * @param string $data
@@ -266,7 +314,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setJson) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "isjsondata", NULL, 0, &json);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The method setJson need a json data.", "queryyetsimple/http/jsonresponse.zep", 137);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The method setJson need a json data.", "queryyetsimple/http/jsonresponse.zep", 150);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("data"), &json);
@@ -378,7 +426,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setData) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_16$$9, "__construct", NULL, 21, &_17$$9);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_16$$9, "queryyetsimple/http/jsonresponse.zep", 173 TSRMLS_CC);
+		zephir_throw_exception_debug(&_16$$9, "queryyetsimple/http/jsonresponse.zep", 186 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

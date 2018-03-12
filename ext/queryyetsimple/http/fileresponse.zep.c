@@ -78,20 +78,20 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, __construct) {
 
 	zephir_fcall_cache_entry *_0 = NULL;
 	zend_bool autoEtag, autoLastModified;
-	zval contentDisposition;
 	zval headers;
 	zend_long status, ZEPHIR_LAST_CALL_STATUS;
-	zval *file, file_sub, *status_param = NULL, *headers_param = NULL, *contentDisposition_param = NULL, *autoEtag_param = NULL, *autoLastModified_param = NULL, _1, _2;
+	zval *file, file_sub, *status_param = NULL, *headers_param = NULL, *contentDisposition = NULL, contentDisposition_sub, *autoEtag_param = NULL, *autoLastModified_param = NULL, __$null, _1, _2;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&contentDisposition_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&headers);
-	ZVAL_UNDEF(&contentDisposition);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 5, &file, &status_param, &headers_param, &contentDisposition_param, &autoEtag_param, &autoLastModified_param);
+	zephir_fetch_params(1, 1, 5, &file, &status_param, &headers_param, &contentDisposition, &autoEtag_param, &autoLastModified_param);
 
 	if (!status_param) {
 		status = 200;
@@ -104,11 +104,9 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, __construct) {
 	} else {
 		zephir_get_arrval(&headers, headers_param);
 	}
-	if (!contentDisposition_param) {
-		ZEPHIR_INIT_VAR(&contentDisposition);
-		ZVAL_STRING(&contentDisposition, "");
-	} else {
-		zephir_get_strval(&contentDisposition, contentDisposition_param);
+	if (!contentDisposition) {
+		contentDisposition = &contentDisposition_sub;
+		contentDisposition = &__$null;
 	}
 	if (!autoEtag_param) {
 		autoEtag = 0;
@@ -136,7 +134,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, __construct) {
 	} else {
 		ZVAL_BOOL(&_2, 0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setfile", NULL, 0, file, &contentDisposition, &_1, &_2);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setfile", NULL, 0, file, contentDisposition, &_1, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -232,29 +230,28 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, create) {
  */
 PHP_METHOD(Queryyetsimple_Http_FileResponse, setFile) {
 
+	zval _6$$6;
 	zephir_fcall_cache_entry *_5 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool autoEtag, autoLastModified, _1, _2$$4, _3$$4;
-	zval contentDisposition, _6$$6;
-	zval *file, file_sub, *contentDisposition_param = NULL, *autoEtag_param = NULL, *autoLastModified_param = NULL, files, _0, _7, _4$$5;
+	zval *file, file_sub, *contentDisposition = NULL, contentDisposition_sub, *autoEtag_param = NULL, *autoLastModified_param = NULL, __$null, files, _0, _7, _4$$5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&contentDisposition_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&files);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_4$$5);
-	ZVAL_UNDEF(&contentDisposition);
 	ZVAL_UNDEF(&_6$$6);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 3, &file, &contentDisposition_param, &autoEtag_param, &autoLastModified_param);
+	zephir_fetch_params(1, 1, 3, &file, &contentDisposition, &autoEtag_param, &autoLastModified_param);
 
-	if (!contentDisposition_param) {
-		ZEPHIR_INIT_VAR(&contentDisposition);
-		ZVAL_STRING(&contentDisposition, "");
-	} else {
-		zephir_get_strval(&contentDisposition, contentDisposition_param);
+	if (!contentDisposition) {
+		contentDisposition = &contentDisposition_sub;
+		contentDisposition = &__$null;
 	}
 	if (!autoEtag_param) {
 		autoEtag = 0;
@@ -315,8 +312,8 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setFile) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setautolastmodified", NULL, 0);
 		zephir_check_call_status();
 	}
-	if (!(Z_TYPE_P(&contentDisposition) == IS_UNDEF) && Z_STRLEN_P(&contentDisposition)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcontentdisposition", NULL, 0, &contentDisposition);
+	if (zephir_is_true(contentDisposition)) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setcontentdisposition", NULL, 0, contentDisposition);
 		zephir_check_call_status();
 	}
 	RETURN_THIS();

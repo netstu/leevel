@@ -178,7 +178,6 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, rebuildFlash);
 /**
  * 保持闪存数据
  *
- * @param mixed $keys
  * @return void
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, keepFlash);
@@ -195,7 +194,6 @@ ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, getFlash);
 /**
  * 删除闪存数据
  *
- * @param mixed $keys
  * @return void
  */
 ZEPHIR_DOC_METHOD(Queryyetsimple_Session_ISession, deleteFlash);

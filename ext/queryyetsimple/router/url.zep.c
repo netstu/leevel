@@ -207,7 +207,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, make) {
 		if (zephir_is_true(&_8$$3)) {
 			zephir_read_property(&_9$$6, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
 			zephir_array_fetch_string(&_10$$6, &_9$$6, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 135 TSRMLS_CC);
-			ZEPHIR_CALL_FUNCTION(&_11$$6, "http_build_query", NULL, 104, &_10$$6);
+			ZEPHIR_CALL_FUNCTION(&_11$$6, "http_build_query", NULL, 105, &_10$$6);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_12$$6);
 			ZEPHIR_CONCAT_SV(&_12$$6, "?", &_11$$6);
@@ -700,7 +700,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, customUrl) {
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_5$$3);
 		ZVAL_STRING(&_5$$3, "/{(.+?)}/");
-		ZEPHIR_CALL_FUNCTION(&result, "preg_replace_callback", NULL, 105, &_5$$3, &_2$$3, &url);
+		ZEPHIR_CALL_FUNCTION(&result, "preg_replace_callback", NULL, 106, &_5$$3, &_2$$3, &url);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&result, &url);
@@ -906,7 +906,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, normalUrl) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_22);
 	if (zephir_is_true(&querys)) {
-		ZEPHIR_CALL_FUNCTION(&_23, "http_build_query", NULL, 104, &querys);
+		ZEPHIR_CALL_FUNCTION(&_23, "http_build_query", NULL, 105, &querys);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_22);
 		ZEPHIR_CONCAT_SV(&_22, "?", &_23);
@@ -1021,7 +1021,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 			ZEPHIR_CONCAT_VSV(&_5$$5, &_4$$5, "://", &url);
 			zephir_get_strval(&url, &_5$$5);
 		}
-		ZEPHIR_CALL_FUNCTION(&parse, "parse_url", NULL, 106, &url);
+		ZEPHIR_CALL_FUNCTION(&parse, "parse_url", NULL, 107, &url);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_INIT_NVAR(&parse);
@@ -1141,7 +1141,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 		ZEPHIR_INIT_VAR(&tmpAction);
 		zephir_fast_explode_str(&tmpAction, SL("/"), &_32$$16, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpAction);
-		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 103, &tmpAction);
+		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 104, &tmpAction);
 		ZEPHIR_UNREF(&tmpAction);
 		zephir_check_call_status();
 		zephir_array_update_string(&result, SL("action"), &_33$$16, PH_COPY | PH_SEPARATE);
@@ -1232,7 +1232,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, urlWithDomain) {
 	}
 	_5 = _3;
 	if (!(_5)) {
-		_5 = !(ZEPHIR_IS_EMPTY(&domain));
+		_5 = ZEPHIR_IS_EMPTY(&domain);
 	}
 	if (_5) {
 		RETURN_CTOR(&url);

@@ -158,7 +158,7 @@ class View implements IView
      * @param string $ext
 	 * @return string
 	 */
-	public function display(string file = null, array! vars = [], string ext = null)
+	public function display(var file = null, array! vars = [], var ext = null)
 	{
 		var result;
 

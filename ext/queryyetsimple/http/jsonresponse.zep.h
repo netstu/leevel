@@ -4,6 +4,7 @@ extern zend_class_entry *queryyetsimple_http_jsonresponse_ce;
 ZEPHIR_INIT_CLASS(Queryyetsimple_Http_JsonResponse);
 
 PHP_METHOD(Queryyetsimple_Http_JsonResponse, __construct);
+PHP_METHOD(Queryyetsimple_Http_JsonResponse, create);
 PHP_METHOD(Queryyetsimple_Http_JsonResponse, fromJsonString);
 PHP_METHOD(Queryyetsimple_Http_JsonResponse, setCallback);
 PHP_METHOD(Queryyetsimple_Http_JsonResponse, setJson);
@@ -19,6 +20,12 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_jsonresponse___construct, 0, 
 	ZEND_ARG_INFO(0, status)
 	ZEND_ARG_ARRAY_INFO(0, headers, 1)
 	ZEND_ARG_INFO(0, json)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_jsonresponse_create, 0, 0, 0)
+	ZEND_ARG_INFO(0, data)
+	ZEND_ARG_INFO(0, status)
+	ZEND_ARG_ARRAY_INFO(0, headers, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_jsonresponse_fromjsonstring, 0, 0, 0)
@@ -55,6 +62,7 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(queryyetsimple_http_jsonresponse_method_entry) {
 	PHP_ME(Queryyetsimple_Http_JsonResponse, __construct, arginfo_queryyetsimple_http_jsonresponse___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(Queryyetsimple_Http_JsonResponse, create, arginfo_queryyetsimple_http_jsonresponse_create, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Queryyetsimple_Http_JsonResponse, fromJsonString, arginfo_queryyetsimple_http_jsonresponse_fromjsonstring, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Queryyetsimple_Http_JsonResponse, setCallback, arginfo_queryyetsimple_http_jsonresponse_setcallback, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_JsonResponse, setJson, arginfo_queryyetsimple_http_jsonresponse_setjson, ZEND_ACC_PUBLIC)
