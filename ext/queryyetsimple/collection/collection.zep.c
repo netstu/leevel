@@ -1119,35 +1119,33 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, is) {
  * JQuery.slice
  *
  * @param int $selector
- * @param string $length
+ * @param int $length
  * @return array
  */
 PHP_METHOD(Queryyetsimple_Collection_Collection, slice) {
 
-	zval length;
-	zval *selector_param = NULL, *length_param = NULL, _0, _1;
+	zval *selector_param = NULL, *length = NULL, length_sub, __$null, _0, _1;
 	zend_long selector, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&length_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&length);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &selector_param, &length_param);
+	zephir_fetch_params(1, 1, 1, &selector_param, &length);
 
 	selector = zephir_get_intval(selector_param);
-	if (!length_param) {
-		ZEPHIR_INIT_VAR(&length);
-		ZVAL_STRING(&length, "");
-	} else {
-		zephir_get_strval(&length, length_param);
+	if (!length) {
+		length = &length_sub;
+		length = &__$null;
 	}
 
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_LONG(&_1, selector);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_slice", NULL, 51, &_0, &_1, &length);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_slice", NULL, 51, &_0, &_1, length);
 	zephir_check_call_status();
 	RETURN_MM();
 

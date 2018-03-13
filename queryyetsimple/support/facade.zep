@@ -40,7 +40,7 @@ abstract class Facade
 	 *
 	 * @var \Queryyetsimple\Di\IContainer
 	 */
-	protected static container = null;
+	protected static container;
 
 	/**
 	 * 注入容器实例

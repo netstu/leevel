@@ -103,7 +103,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $type
      * @return void
      */
-    public static function make(elements = [], type = null)
+    public static function make(elements = [], var type = null)
     {
         return new self(elements, type);
     }
@@ -342,7 +342,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $key
      * @return array
      */
-    public function siblings(key = null) -> array
+    public function siblings(var key = null) -> array
     {
         var result, k, value;
     
@@ -365,7 +365,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $key
      * @return array
      */
-    public function nextAll(key = null) -> array
+    public function nextAll(var key = null) -> array
     {
         var result, current, k, value;
     
@@ -393,7 +393,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $key
      * @return array
      */
-    public function prevAll(key = null) -> array
+    public function prevAll(var key = null) -> array
     {
         var result, current, k, value;
     
@@ -420,7 +420,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $value
      * @return void|mixed
      */
-    public function attr(string key, value = null)
+    public function attr(string key, var value = null)
     {
         if value === null {
             return this->offsetGet(key);
@@ -521,10 +521,10 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * JQuery.slice
      *
      * @param int $selector
-     * @param string $length
+     * @param int $length
      * @return array
      */
-    public function slice(int selector, string length = null) -> array
+    public function slice(int selector, var length = null) -> array
     {
         return array_slice(this->elements, selector, length);
     }
@@ -578,7 +578,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $value
      * @return array
      */
-    public function map(key, value = null) -> array
+    public function map(var key, var value = null) -> array
     {
         return array_column(this->elements, key, value);
     }
@@ -703,7 +703,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param mixed $key
      * @return mixed
      */
-    protected function parseKey(key = null)
+    protected function parseKey(var key = null)
     {
         if is_null(key) {
             let key = this->key();

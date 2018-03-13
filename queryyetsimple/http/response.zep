@@ -234,7 +234,7 @@ class Response implements IControl, IMacro, IResponse
      * @param \Closure $cookieResolver
      * @return void
      */
-    public static function setCookieResolver(<Closure> cookieResolver)
+    public static function setCookieResolver(<Closure> cookieResolver = null)
     {
         let self::cookieResolver = cookieResolver;
     }
@@ -621,6 +621,17 @@ class Response implements IControl, IMacro, IResponse
     {
         return this->statusCode;
     }
+
+    /**
+     * 编码设置
+     *
+     * @param string $charset
+     * @return $this
+     */
+    public function setCharset(string charset)
+    {
+        return this->charset(charset);
+    }
     
     /**
      * 编码设置
@@ -644,7 +655,7 @@ class Response implements IControl, IMacro, IResponse
      *
      * @return string
      */
-    public function getrCharset() -> string
+    public function getCharset()
     {
         return this->charset;
     }
@@ -655,9 +666,14 @@ class Response implements IControl, IMacro, IResponse
      * @param \DateTime $datetime
      * @return $this
      */
-    public function setExpires(<DateTime> datetime)
+    public function setExpires(<DateTime> datetime = null)
     {
         if this->checkTControl() {
+            return this;
+        }
+
+        if is_null(datetime) {
+            this->headers->remove("Expires");
             return this;
         }
 
@@ -672,9 +688,14 @@ class Response implements IControl, IMacro, IResponse
      * @param \DateTime $datetime
      * @return $this
      */
-    public function setLastModified(<DateTime> datetime)
+    public function setLastModified(<DateTime> datetime = null)
     {
         if this->checkTControl() {
+            return this;
+        }
+
+        if is_null(datetime) {
+            this->headers->remove("Last-Modified");
             return this;
         }
 
@@ -729,10 +750,14 @@ class Response implements IControl, IMacro, IResponse
      * @param string $charset
      * @return $this
      */
-    public function setContentType(string contentType, string charset = null)
+    public function setContentType(string contentType, var charset = null)
     {
         if this->checkTControl() {
             return this;
+        }
+
+        if charset === null {
+            let charset = this->getCharset();
         }
 
         if charset === null {

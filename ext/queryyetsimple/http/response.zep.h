@@ -26,8 +26,9 @@ PHP_METHOD(Queryyetsimple_Http_Response, getProtocolVersion);
 PHP_METHOD(Queryyetsimple_Http_Response, setStatusCode);
 PHP_METHOD(Queryyetsimple_Http_Response, status);
 PHP_METHOD(Queryyetsimple_Http_Response, getStatusCode);
+PHP_METHOD(Queryyetsimple_Http_Response, setCharset);
 PHP_METHOD(Queryyetsimple_Http_Response, charset);
-PHP_METHOD(Queryyetsimple_Http_Response, getrCharset);
+PHP_METHOD(Queryyetsimple_Http_Response, getCharset);
 PHP_METHOD(Queryyetsimple_Http_Response, setExpires);
 PHP_METHOD(Queryyetsimple_Http_Response, setLastModified);
 PHP_METHOD(Queryyetsimple_Http_Response, setCache);
@@ -136,16 +137,20 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setstatuscode, 0, 0,
 	ZEND_ARG_INFO(0, text)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcharset, 0, 0, 1)
+	ZEND_ARG_INFO(0, charset)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_charset, 0, 0, 1)
 	ZEND_ARG_INFO(0, charset)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setexpires, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, datetime, DateTime, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setexpires, 0, 0, 0)
+	ZEND_ARG_OBJ_INFO(0, datetime, DateTime, 1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setlastmodified, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, datetime, DateTime, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setlastmodified, 0, 0, 0)
+	ZEND_ARG_OBJ_INFO(0, datetime, DateTime, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcache, 0, 0, 1)
@@ -251,8 +256,9 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_response_method_entry) {
 	PHP_ME(Queryyetsimple_Http_Response, setStatusCode, arginfo_queryyetsimple_http_response_setstatuscode, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, status, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, getStatusCode, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Response, setCharset, arginfo_queryyetsimple_http_response_setcharset, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, charset, arginfo_queryyetsimple_http_response_charset, ZEND_ACC_PUBLIC)
-	PHP_ME(Queryyetsimple_Http_Response, getrCharset, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_Response, getCharset, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, setExpires, arginfo_queryyetsimple_http_response_setexpires, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, setLastModified, arginfo_queryyetsimple_http_response_setlastmodified, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_Response, setCache, arginfo_queryyetsimple_http_response_setcache, ZEND_ACC_PUBLIC)
