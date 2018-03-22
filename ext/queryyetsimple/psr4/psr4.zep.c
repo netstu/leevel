@@ -429,7 +429,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, shortNamespaceMap) {
 		ZEPHIR_CALL_FUNCTION(&evals, "sprintf", NULL, 1, &_6$$3, &namespaces, &_5$$3, &definedClass, &parentClass);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_6$$3);
-		zephir_eval_php(&evals, &_6$$3, "/mnt/hgfs/newphp/queryyetsimple/queryyetsimple/psr4/psr4.zep:199" TSRMLS_CC);
+		zephir_eval_php(&evals, &_6$$3, "/data/codes/queryyetsimple/queryyetsimple/psr4/psr4.zep:199" TSRMLS_CC);
 	}
 	ZEPHIR_MM_RESTORE();
 

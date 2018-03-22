@@ -160,10 +160,11 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, create) {
 
 	zval headers;
 	zend_long status, ZEPHIR_LAST_CALL_STATUS;
-	zval *data = NULL, data_sub, *status_param = NULL, *headers_param = NULL, _0;
+	zval *data = NULL, data_sub, *status_param = NULL, *headers_param = NULL, __$null, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&headers);
 
@@ -172,8 +173,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, create) {
 
 	if (!data) {
 		data = &data_sub;
-		ZEPHIR_INIT_VAR(data);
-		ZVAL_STRING(data, "");
+		data = &__$null;
 	}
 	if (!status_param) {
 		status = 200;

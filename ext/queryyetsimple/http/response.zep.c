@@ -255,13 +255,18 @@ PHP_METHOD(Queryyetsimple_Http_Response, create) {
  */
 PHP_METHOD(Queryyetsimple_Http_Response, setCookieResolver) {
 
-	zval *cookieResolver, cookieResolver_sub;
+	zval *cookieResolver = NULL, cookieResolver_sub, __$null;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&cookieResolver_sub);
+	ZVAL_NULL(&__$null);
 
-	zephir_fetch_params(0, 1, 0, &cookieResolver);
+	zephir_fetch_params(0, 0, 1, &cookieResolver);
 
+	if (!cookieResolver) {
+		cookieResolver = &cookieResolver_sub;
+		cookieResolver = &__$null;
+	}
 
 
 	zend_update_static_property(queryyetsimple_http_response_ce, ZEND_STRL("cookieResolver"), cookieResolver);

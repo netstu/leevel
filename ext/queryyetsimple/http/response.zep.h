@@ -79,8 +79,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_create, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, headers, 1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcookieresolver, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, cookieResolver, Closure, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcookieresolver, 0, 0, 0)
+	ZEND_ARG_OBJ_INFO(0, cookieResolver, Closure, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_response_setcontent, 0, 0, 1)
