@@ -329,7 +329,7 @@ class Log implements ILog, IClass
      * @param string $level
      * @return int
      */
-    public function clear(string level = null)
+    public function clear(var level = null)
     {
         var count;
 
@@ -350,7 +350,7 @@ class Log implements ILog, IClass
      * @param string $level
      * @return array
      */
-    public function get(string level = null)
+    public function get(var level = null)
     {
         if level && isset this->logs[level] {
             return this->logs[level];
@@ -365,7 +365,7 @@ class Log implements ILog, IClass
      * @param string $level
      * @return int
      */
-    public function count(string level = null)
+    public function count(var level = null)
     {
         if level && isset this->logs[level] {
             return count(this->logs[level]);

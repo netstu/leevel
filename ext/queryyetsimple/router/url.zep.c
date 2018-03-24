@@ -187,7 +187,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, make) {
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "parsemvc", NULL, 0, &url, &params, &custom);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("parseMvc"), &_2);
-	zephir_array_fetch_string(&_4, &option, SL("normal"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 125 TSRMLS_CC);
+	zephir_array_fetch_string(&_4, &option, SL("normal"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 122 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&_3, this_ptr, "isnotnormal", NULL, 0, &_4, &custom);
 	zephir_check_call_status();
 	if (zephir_is_true(&_3)) {
@@ -198,15 +198,15 @@ PHP_METHOD(Queryyetsimple_Router_Url, make) {
 			ZEPHIR_CALL_METHOD(&result, this_ptr, "customurl", NULL, 0, &url);
 			zephir_check_call_status();
 		}
-		zephir_array_fetch_string(&_6$$3, &option, SL("suffix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 132 TSRMLS_CC);
+		zephir_array_fetch_string(&_6$$3, &option, SL("suffix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 129 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_5$$3, this_ptr, "withsuffix", NULL, 0, &result, &_6$$3);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&result, &_5$$3);
 		zephir_read_property(&_7$$3, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_8$$3, &_7$$3, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 134 TSRMLS_CC);
+		zephir_array_fetch_string(&_8$$3, &_7$$3, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 131 TSRMLS_CC);
 		if (zephir_is_true(&_8$$3)) {
 			zephir_read_property(&_9$$6, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch_string(&_10$$6, &_9$$6, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 135 TSRMLS_CC);
+			zephir_array_fetch_string(&_10$$6, &_9$$6, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 132 TSRMLS_CC);
 			ZEPHIR_CALL_FUNCTION(&_11$$6, "http_build_query", NULL, 105, &_10$$6);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_12$$6);
@@ -214,11 +214,11 @@ PHP_METHOD(Queryyetsimple_Router_Url, make) {
 			zephir_concat_self(&result, &_12$$6 TSRMLS_CC);
 		}
 	} else {
-		zephir_array_fetch_string(&_13$$7, &option, SL("normal"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 138 TSRMLS_CC);
+		zephir_array_fetch_string(&_13$$7, &option, SL("normal"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 135 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&result, this_ptr, "normalurl", NULL, 0, &_13$$7);
 		zephir_check_call_status();
 	}
-	zephir_array_fetch_string(&_15, &option, SL("subdomain"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 141 TSRMLS_CC);
+	zephir_array_fetch_string(&_15, &option, SL("subdomain"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 138 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&_14, this_ptr, "urlwithdomain", NULL, 0, &result, &_15);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&result, &_14);
@@ -278,7 +278,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, option) {
 			ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 0, &_2$$3);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/router/url.zep", 166 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/router/url.zep", 163 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -359,7 +359,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/router/url.zep", 205);
+	zephir_is_iterable(&option, 0, "queryyetsimple/router/url.zep", 202);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -413,7 +413,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/router/url.zep", 217 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/router/url.zep", 214 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaultss);
 	}
@@ -519,7 +519,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/router/url.zep", 268);
+	zephir_is_iterable(&option, 0, "queryyetsimple/router/url.zep", 265);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -583,7 +583,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, pathinfoUrl) {
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
 		zephir_read_property(&_5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_6, &_5, SL("app"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 280 TSRMLS_CC);
+		zephir_array_fetch_string(&_6, &_5, SL("app"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 277 TSRMLS_CC);
 		ZEPHIR_INIT_NVAR(&_1);
 		ZEPHIR_CONCAT_SVS(&_1, "/", &_6, "/");
 	} else {
@@ -593,18 +593,18 @@ PHP_METHOD(Queryyetsimple_Router_Url, pathinfoUrl) {
 	ZEPHIR_INIT_VAR(&url);
 	ZEPHIR_CONCAT_VV(&url, &_0, &_1);
 	zephir_read_property(&_7, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_8, &_7, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 282 TSRMLS_CC);
+	zephir_array_fetch_string(&_8, &_7, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 279 TSRMLS_CC);
 	if (zephir_is_true(&_8)) {
 		ZEPHIR_INIT_VAR(&_9$$3);
 		zephir_read_property(&_10$$3, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_11$$3, &_10$$3, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 283 TSRMLS_CC);
+		zephir_array_fetch_string(&_11$$3, &_10$$3, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 280 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_12$$3);
 		ZVAL_STRING(&_12$$3, "\\");
 		ZEPHIR_INIT_VAR(&_13$$3);
 		ZVAL_STRING(&_13$$3, "/");
 		zephir_fast_str_replace(&_9$$3, &_12$$3, &_13$$3, &_11$$3 TSRMLS_CC);
 		zephir_read_property(&_14$$3, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_15$$3, &_14$$3, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 283 TSRMLS_CC);
+		zephir_array_fetch_string(&_15$$3, &_14$$3, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 280 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_16$$3);
 		ZEPHIR_CONCAT_VSV(&_16$$3, &_9$$3, "/", &_15$$3);
 		ZEPHIR_INIT_VAR(&_17$$3);
@@ -625,7 +625,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, pathinfoUrl) {
 	}
 	if (_19) {
 		zephir_read_property(&_21$$4, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_22$$4, &_21$$4, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 287 TSRMLS_CC);
+		zephir_array_fetch_string(&_22$$4, &_21$$4, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 284 TSRMLS_CC);
 		zephir_concat_self(&url, &_22$$4 TSRMLS_CC);
 	}
 	ZEPHIR_INIT_NVAR(&_3);
@@ -634,7 +634,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, pathinfoUrl) {
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_23))) {
 		zephir_read_property(&_24$$5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_25$$5, &_24$$5, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 291 TSRMLS_CC);
+		zephir_array_fetch_string(&_25$$5, &_24$$5, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 288 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_26$$5);
 		ZEPHIR_CONCAT_SV(&_26$$5, "/", &_25$$5);
 		zephir_concat_self(&url, &_26$$5 TSRMLS_CC);
@@ -713,17 +713,17 @@ PHP_METHOD(Queryyetsimple_Router_Url, customUrl) {
 		ZEPHIR_INIT_VAR(&tmp);
 		zephir_fast_explode_str(&tmp, SL("?"), &result, LONG_MAX TSRMLS_CC);
 		ZEPHIR_OBS_NVAR(&result);
-		zephir_array_fetch_long(&result, &tmp, 0, PH_NOISY, "queryyetsimple/router/url.zep", 315 TSRMLS_CC);
+		zephir_array_fetch_long(&result, &tmp, 0, PH_NOISY, "queryyetsimple/router/url.zep", 312 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&tmpQuery);
 		array_init(&tmpQuery);
-		zephir_array_fetch_long(&_8$$5, &tmp, 1, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 318 TSRMLS_CC);
+		zephir_array_fetch_long(&_8$$5, &tmp, 1, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 315 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
 		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_8$$5, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
 		zephir_read_property(&_9$$5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_10$$5, &_9$$5, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 320 TSRMLS_CC);
-		zephir_is_iterable(&_10$$5, 0, "queryyetsimple/router/url.zep", 324);
+		zephir_array_fetch_string(&_10$$5, &_9$$5, SL("params"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 317 TSRMLS_CC);
+		zephir_is_iterable(&_10$$5, 0, "queryyetsimple/router/url.zep", 321);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_10$$5), _12$$5, _13$$5, _11$$5)
 		{
 			ZEPHIR_INIT_NVAR(&k);
@@ -774,16 +774,16 @@ PHP_METHOD(Queryyetsimple_Router_Url, matchVar) {
 	array_init(&params);
 	zephir_read_property(&_0, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_NVAR(&params);
-	zephir_array_fetch_string(&params, &_0, SL("params"), PH_NOISY, "queryyetsimple/router/url.zep", 339 TSRMLS_CC);
-	zephir_array_fetch_long(&key, matchs, 1, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 340 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, matchs, 1, PH_READONLY, "queryyetsimple/router/url.zep", 342 TSRMLS_CC);
+	zephir_array_fetch_string(&params, &_0, SL("params"), PH_NOISY, "queryyetsimple/router/url.zep", 336 TSRMLS_CC);
+	zephir_array_fetch_long(&key, matchs, 1, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 337 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, matchs, 1, PH_READONLY, "queryyetsimple/router/url.zep", 339 TSRMLS_CC);
 	if (zephir_array_isset(&params, &_1)) {
 		ZEPHIR_OBS_VAR(&result);
-		zephir_array_fetch(&result, &params, &key, PH_NOISY, "queryyetsimple/router/url.zep", 343 TSRMLS_CC);
+		zephir_array_fetch(&result, &params, &key, PH_NOISY, "queryyetsimple/router/url.zep", 340 TSRMLS_CC);
 		zephir_array_unset(&params, &key, PH_SEPARATE);
 	} else {
 		ZEPHIR_OBS_NVAR(&result);
-		zephir_array_fetch_long(&result, matchs, 0, PH_NOISY, "queryyetsimple/router/url.zep", 346 TSRMLS_CC);
+		zephir_array_fetch_long(&result, matchs, 0, PH_NOISY, "queryyetsimple/router/url.zep", 343 TSRMLS_CC);
 	}
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "params");
@@ -851,7 +851,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, normalUrl) {
 	}
 	if (_0) {
 		zephir_read_property(&_4$$3, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_5$$3, &_4$$3, SL("app"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 367 TSRMLS_CC);
+		zephir_array_fetch_string(&_5$$3, &_4$$3, SL("app"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 364 TSRMLS_CC);
 		zephir_array_update_string(&querys, SL("_app"), &_5$$3, PH_COPY | PH_SEPARATE);
 	}
 	ZEPHIR_INIT_NVAR(&_2);
@@ -860,7 +860,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, normalUrl) {
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_6))) {
 		zephir_read_property(&_7$$4, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_8$$4, &_7$$4, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 371 TSRMLS_CC);
+		zephir_array_fetch_string(&_8$$4, &_7$$4, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 368 TSRMLS_CC);
 		zephir_array_update_string(&querys, SL("_c"), &_8$$4, PH_COPY | PH_SEPARATE);
 	}
 	ZEPHIR_INIT_NVAR(&_2);
@@ -869,20 +869,20 @@ PHP_METHOD(Queryyetsimple_Router_Url, normalUrl) {
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_9))) {
 		zephir_read_property(&_10$$5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_11$$5, &_10$$5, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 375 TSRMLS_CC);
+		zephir_array_fetch_string(&_11$$5, &_10$$5, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 372 TSRMLS_CC);
 		zephir_array_update_string(&querys, SL("_a"), &_11$$5, PH_COPY | PH_SEPARATE);
 	}
 	zephir_read_property(&_12, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_13, &_12, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 378 TSRMLS_CC);
+	zephir_array_fetch_string(&_13, &_12, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 375 TSRMLS_CC);
 	if (zephir_is_true(&_13)) {
 		zephir_read_property(&_14$$6, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_15$$6, &_14$$6, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 379 TSRMLS_CC);
+		zephir_array_fetch_string(&_15$$6, &_14$$6, SL("prefix"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 376 TSRMLS_CC);
 		zephir_array_update_string(&querys, SL("_prefix"), &_15$$6, PH_COPY | PH_SEPARATE);
 	}
 	zephir_read_property(&_16, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&params);
-	zephir_array_fetch_string(&params, &_16, SL("params"), PH_NOISY, "queryyetsimple/router/url.zep", 382 TSRMLS_CC);
-	zephir_is_iterable(&params, 0, "queryyetsimple/router/url.zep", 388);
+	zephir_array_fetch_string(&params, &_16, SL("params"), PH_NOISY, "queryyetsimple/router/url.zep", 379 TSRMLS_CC);
+	zephir_is_iterable(&params, 0, "queryyetsimple/router/url.zep", 385);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&params), _18, _19, _17)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1056,7 +1056,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 	ZEPHIR_INIT_VAR(&_11);
 	if (zephir_array_isset_string(&parse, SL("scheme"))) {
 		ZEPHIR_OBS_NVAR(&_11);
-		zephir_array_fetch_string(&_11, &parse, SL("scheme"), PH_NOISY, "queryyetsimple/router/url.zep", 442 TSRMLS_CC);
+		zephir_array_fetch_string(&_11, &parse, SL("scheme"), PH_NOISY, "queryyetsimple/router/url.zep", 439 TSRMLS_CC);
 	} else {
 		zephir_read_property(&_12, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_CALL_METHOD(&_11, &_12, "app", NULL, 0);
@@ -1068,7 +1068,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 	add_assoc_stringl_ex(&mvc, SL("_app"), SL("app"));
 	add_assoc_stringl_ex(&mvc, SL("_c"), SL("controller"));
 	add_assoc_stringl_ex(&mvc, SL("_a"), SL("action"));
-	zephir_is_iterable(&mvc, 0, "queryyetsimple/router/url.zep", 457);
+	zephir_is_iterable(&mvc, 0, "queryyetsimple/router/url.zep", 454);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&mvc), _14, _15, _13)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1080,7 +1080,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _13);
 		if (zephir_array_isset(&params, &key)) {
-			zephir_array_fetch(&_16$$9, &params, &key, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 452 TSRMLS_CC);
+			zephir_array_fetch(&_16$$9, &params, &key, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 449 TSRMLS_CC);
 			zephir_array_update_zval(&result, &item, &_16$$9, PH_COPY | PH_SEPARATE);
 			zephir_array_unset(&params, &key, PH_SEPARATE);
 		}
@@ -1088,12 +1088,12 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 	ZEPHIR_INIT_NVAR(&item);
 	ZEPHIR_INIT_NVAR(&key);
 	if (zephir_array_isset_string(&parse, SL("path"))) {
-		zephir_array_fetch_string(&_17$$10, &result, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 458 TSRMLS_CC);
+		zephir_array_fetch_string(&_17$$10, &result, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 455 TSRMLS_CC);
 		if (!(zephir_is_true(&_17$$10))) {
 			ZEPHIR_INIT_VAR(&_18$$11);
 			if (zephir_array_isset_string(&parse, SL("host"))) {
 				ZEPHIR_OBS_NVAR(&_18$$11);
-				zephir_array_fetch_string(&_18$$11, &parse, SL("host"), PH_NOISY, "queryyetsimple/router/url.zep", 459 TSRMLS_CC);
+				zephir_array_fetch_string(&_18$$11, &parse, SL("host"), PH_NOISY, "queryyetsimple/router/url.zep", 456 TSRMLS_CC);
 			} else {
 				zephir_read_property(&_19$$11, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
 				ZEPHIR_CALL_METHOD(&_18$$11, &_19$$11, "controller", NULL, 0);
@@ -1101,21 +1101,21 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 			}
 			zephir_array_update_string(&result, SL("controller"), &_18$$11, PH_COPY | PH_SEPARATE);
 		}
-		zephir_array_fetch_string(&_20$$10, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 462 TSRMLS_CC);
+		zephir_array_fetch_string(&_20$$10, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 459 TSRMLS_CC);
 		if (!(zephir_is_true(&_20$$10))) {
-			zephir_array_fetch_string(&_21$$12, &parse, SL("path"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 463 TSRMLS_CC);
+			zephir_array_fetch_string(&_21$$12, &parse, SL("path"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 460 TSRMLS_CC);
 			ZVAL_LONG(&_22$$12, 1);
 			ZEPHIR_INIT_VAR(&_23$$12);
 			zephir_substr(&_23$$12, &_21$$12, 1 , 0, ZEPHIR_SUBSTR_NO_LENGTH);
 			zephir_array_update_string(&result, SL("action"), &_23$$12, PH_COPY | PH_SEPARATE);
 		}
 	} else {
-		zephir_array_fetch_string(&_24$$13, &result, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 466 TSRMLS_CC);
+		zephir_array_fetch_string(&_24$$13, &result, SL("controller"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 463 TSRMLS_CC);
 		if (!(zephir_is_true(&_24$$13))) {
 			ZEPHIR_INIT_VAR(&_25$$14);
 			if (zephir_array_isset_string(&parse, SL("host"))) {
 				ZEPHIR_OBS_NVAR(&_25$$14);
-				zephir_array_fetch_string(&_25$$14, &parse, SL("host"), PH_NOISY, "queryyetsimple/router/url.zep", 467 TSRMLS_CC);
+				zephir_array_fetch_string(&_25$$14, &parse, SL("host"), PH_NOISY, "queryyetsimple/router/url.zep", 464 TSRMLS_CC);
 			} else {
 				zephir_read_property(&_26$$14, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
 				ZEPHIR_CALL_METHOD(&_25$$14, &_26$$14, "controller", NULL, 0);
@@ -1123,7 +1123,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 			}
 			zephir_array_update_string(&result, SL("controller"), &_25$$14, PH_COPY | PH_SEPARATE);
 		}
-		zephir_array_fetch_string(&_27$$13, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 470 TSRMLS_CC);
+		zephir_array_fetch_string(&_27$$13, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 467 TSRMLS_CC);
 		if (!(zephir_is_true(&_27$$13))) {
 			zephir_read_property(&_28$$15, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_CALL_METHOD(&_29$$15, &_28$$15, "action", NULL, 0);
@@ -1131,13 +1131,13 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 			zephir_array_update_string(&result, SL("action"), &_29$$15, PH_COPY | PH_SEPARATE);
 		}
 	}
-	zephir_array_fetch_string(&_30, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 475 TSRMLS_CC);
+	zephir_array_fetch_string(&_30, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 472 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "/");
 	ZEPHIR_INIT_VAR(&_31);
 	zephir_fast_strpos(&_31, &_30, &_0, 0 );
 	if (!ZEPHIR_IS_FALSE_IDENTICAL(&_31)) {
-		zephir_array_fetch_string(&_32$$16, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 476 TSRMLS_CC);
+		zephir_array_fetch_string(&_32$$16, &result, SL("action"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 473 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&tmpAction);
 		zephir_fast_explode_str(&tmpAction, SL("/"), &_32$$16, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpAction);
@@ -1152,12 +1152,12 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 	if (zephir_array_isset_string(&parse, SL("query"))) {
 		ZEPHIR_INIT_VAR(&tmpQuery);
 		array_init(&tmpQuery);
-		zephir_array_fetch_string(&_35$$17, &parse, SL("query"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 483 TSRMLS_CC);
+		zephir_array_fetch_string(&_35$$17, &parse, SL("query"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 480 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
 		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_35$$17, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
-		zephir_is_iterable(&params, 0, "queryyetsimple/router/url.zep", 489);
+		zephir_is_iterable(&params, 0, "queryyetsimple/router/url.zep", 486);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&params), _37$$17, _38$$17, _36$$17)
 		{
 			ZEPHIR_INIT_NVAR(&k);
@@ -1418,7 +1418,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, equalDefault) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1);
 	zephir_check_call_status();
 	zephir_read_property(&_2, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_3, &_2, &type, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 569 TSRMLS_CC);
+	zephir_array_fetch(&_3, &_2, &type, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 566 TSRMLS_CC);
 	RETURN_MM_BOOL(ZEPHIR_IS_IDENTICAL(&_0, &_3));
 
 }

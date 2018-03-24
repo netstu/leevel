@@ -168,28 +168,26 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, assign) {
 PHP_METHOD(Queryyetsimple_Mvc_Controller, getAssign) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, _0;
-	zval name;
+	zval *name = NULL, name_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &name_param);
+	zephir_fetch_params(1, 0, 1, &name);
 
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
 	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "getassign", NULL, 0, &name);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "getassign", NULL, 0, name);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -326,7 +324,7 @@ PHP_METHOD(Queryyetsimple_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 156);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "queryyetsimple/mvc/controller.zep", 153);
 		return;
 	}
 

@@ -92,7 +92,7 @@ abstract class Controller implements IController
 	 * @param string|null $name
 	 * @return mixed
 	 */
-	public function getAssign(string name = null)
+	public function getAssign(var name = null)
 	{
 		this->checkView();
 		return this->view->getAssign(name);

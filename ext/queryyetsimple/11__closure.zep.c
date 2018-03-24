@@ -45,9 +45,9 @@ PHP_METHOD(queryyetsimple_11__closure, __invoke) {
 	ZEPHIR_INIT_VAR(&args);
 	zephir_get_args(&args);
 	ZEPHIR_OBS_VAR(&container);
-	zephir_array_fetch_long(&container, &args, 0, PH_NOISY, "queryyetsimple/di/container.zep", 168 TSRMLS_CC);
+	zephir_array_fetch_long(&container, &args, 0, PH_NOISY, "queryyetsimple/di/container.zep", 165 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&closures);
-	zephir_array_fetch_long(&closures, &args, 1, PH_NOISY, "queryyetsimple/di/container.zep", 169 TSRMLS_CC);
+	zephir_array_fetch_long(&closures, &args, 1, PH_NOISY, "queryyetsimple/di/container.zep", 166 TSRMLS_CC);
 	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 130, &closures);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&obj);

@@ -79,29 +79,29 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Http_UploadedFile) {
  */
 PHP_METHOD(Queryyetsimple_Http_UploadedFile, __construct) {
 
+	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_2 = NULL;
-	zend_long error, ZEPHIR_LAST_CALL_STATUS;
-	zval *path, path_sub, *originalName, originalName_sub, *mimeType = NULL, mimeType_sub, *error_param = NULL, __$null, _0, _1;
+	zval *path, path_sub, *originalName, originalName_sub, *mimeType = NULL, mimeType_sub, *error = NULL, error_sub, __$null, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&path_sub);
 	ZVAL_UNDEF(&originalName_sub);
 	ZVAL_UNDEF(&mimeType_sub);
+	ZVAL_UNDEF(&error_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 2, &path, &originalName, &mimeType, &error_param);
+	zephir_fetch_params(1, 2, 2, &path, &originalName, &mimeType, &error);
 
 	if (!mimeType) {
 		mimeType = &mimeType_sub;
 		mimeType = &__$null;
 	}
-	if (!error_param) {
-		error = 0;
-	} else {
-		error = zephir_get_intval(error_param);
+	if (!error) {
+		error = &error_sub;
+		error = &__$null;
 	}
 
 
@@ -115,9 +115,8 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, __construct) {
 	}
 	zephir_update_property_zval(this_ptr, SL("mimeType"), &_0);
 	ZEPHIR_INIT_VAR(&_1);
-	if (error) {
-		ZEPHIR_INIT_NVAR(&_1);
-		ZVAL_LONG(&_1, error);
+	if (zephir_is_true(error)) {
+		ZEPHIR_CPY_WRT(&_1, error);
 	} else {
 		ZEPHIR_INIT_NVAR(&_1);
 		ZVAL_LONG(&_1, 0);
@@ -273,7 +272,7 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, move) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_4);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "queryyetsimple/http/uploadedfile.zep", 160 TSRMLS_CC);
+	zephir_throw_exception_debug(&_3, "queryyetsimple/http/uploadedfile.zep", 157 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -416,7 +415,7 @@ PHP_METHOD(Queryyetsimple_Http_UploadedFile, getErrorMessage) {
 	if (zephir_array_isset(&_1, &errorCode)) {
 		zephir_read_static_property_ce(&_2, queryyetsimple_http_uploadedfile_ce, SL("errors"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&message);
-		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "queryyetsimple/http/uploadedfile.zep", 212 TSRMLS_CC);
+		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "queryyetsimple/http/uploadedfile.zep", 209 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&message);
 		ZVAL_STRING(&message, "The file %s was not uploaded due to an unknown error.");

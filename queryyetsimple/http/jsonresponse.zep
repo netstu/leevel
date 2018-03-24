@@ -159,7 +159,7 @@ class JsonResponse extends Response
      * @param int $encodingOptions
      * @return $this
      */
-    public function setData(var data = [], int encodingOptions = null)
+    public function setData(var data = [], var encodingOptions = null)
     {
         if this->checkTControl() {
             return this;
@@ -176,6 +176,7 @@ class JsonResponse extends Response
         } elseif is_object(data) && data instanceof JsonSerializable {
             let this->data = json_encode(data->jsonSerialize(), this->encodingOptions);
         } else {
+            // json_encode("\xB1\x31") 会引发 PHP 内核提示 Segmentation fault (core dumped)
             let this->data = json_encode(data, this->encodingOptions);
         }
 

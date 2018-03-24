@@ -107,21 +107,21 @@ PHP_METHOD(Queryyetsimple_I18n_I18n, getText) {
 
 	ZEPHIR_INIT_VAR(&arr);
 	zephir_get_args(&arr);
-	zephir_array_fetch_long(&_0, &arr, 0, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 71 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, &arr, 0, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 68 TSRMLS_CC);
 	if (ZEPHIR_IS_EMPTY(&_0)) {
 		RETURN_MM_STRING("");
 	}
 	ZEPHIR_CALL_METHOD(&i18n, this_ptr, "geti18n", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_1, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_2, &_1, &i18n, PH_READONLY, "queryyetsimple/i18n/i18n.zep", 76 TSRMLS_CC);
-	zephir_array_fetch_long(&_3, &arr, 0, PH_READONLY, "queryyetsimple/i18n/i18n.zep", 76 TSRMLS_CC);
+	zephir_array_fetch(&_2, &_1, &i18n, PH_READONLY, "queryyetsimple/i18n/i18n.zep", 73 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, &arr, 0, PH_READONLY, "queryyetsimple/i18n/i18n.zep", 73 TSRMLS_CC);
 	if (zephir_array_isset(&_2, &_3)) {
 		zephir_read_property(&_4$$4, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_5$$4, &_4$$4, &i18n, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 77 TSRMLS_CC);
+		zephir_array_fetch(&_5$$4, &_4$$4, &i18n, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 74 TSRMLS_CC);
 		ZEPHIR_OBS_VAR(&_7$$4);
-		zephir_array_fetch_long(&_7$$4, &arr, 0, PH_NOISY, "queryyetsimple/i18n/i18n.zep", 77 TSRMLS_CC);
-		zephir_array_fetch(&_6$$4, &_5$$4, &_7$$4, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 77 TSRMLS_CC);
+		zephir_array_fetch_long(&_7$$4, &arr, 0, PH_NOISY, "queryyetsimple/i18n/i18n.zep", 74 TSRMLS_CC);
+		zephir_array_fetch(&_6$$4, &_5$$4, &_7$$4, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 74 TSRMLS_CC);
 		zephir_array_update_long(&arr, 0, &_6$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
 	if (zephir_fast_count_int(&arr TSRMLS_CC) > 1) {
@@ -132,7 +132,7 @@ PHP_METHOD(Queryyetsimple_I18n_I18n, getText) {
 		zephir_check_call_status();
 		zephir_array_update_long(&arr, 0, &_8$$5, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
-	zephir_array_fetch_long(&_10, &arr, 0, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 84 TSRMLS_CC);
+	zephir_array_fetch_long(&_10, &arr, 0, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 81 TSRMLS_CC);
 	RETURN_CTOR(&_10);
 
 }
@@ -206,7 +206,7 @@ PHP_METHOD(Queryyetsimple_I18n_I18n, addText) {
 	if (zephir_array_key_exists(&_0, &i18n TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		zephir_read_property(&_2$$3, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &i18n, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 109 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, &i18n, PH_NOISY | PH_READONLY, "queryyetsimple/i18n/i18n.zep", 106 TSRMLS_CC);
 		zephir_fast_array_merge(&_1$$3, &_3$$3, &data TSRMLS_CC);
 		zephir_update_property_array(this_ptr, SL("text"), &i18n, &_1$$3 TSRMLS_CC);
 	} else {

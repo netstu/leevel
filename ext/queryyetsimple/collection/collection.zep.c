@@ -127,7 +127,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, __construct) {
 	ZEPHIR_CPY_WRT(elements, &_0);
 	zephir_read_property(&_1, this_ptr, SL("type"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
-		zephir_is_iterable(elements, 0, "queryyetsimple/collection/collection.zep", 94);
+		zephir_is_iterable(elements, 0, "queryyetsimple/collection/collection.zep", 91);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(elements), _3$$4, _4$$4, _2$$4)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -362,7 +362,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, offsetGet) {
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &offset)) {
 		zephir_read_property(&_2, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &offset, PH_NOISY, "queryyetsimple/collection/collection.zep", 184 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &offset, PH_NOISY, "queryyetsimple/collection/collection.zep", 181 TSRMLS_CC);
 	} else {
 		ZVAL_NULL(&_0);
 	}
@@ -593,11 +593,11 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, each) {
 
 
 	if (!(zephir_is_callable(callback TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Each need a callback.", "queryyetsimple/collection/collection.zep", 297);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Each need a callback.", "queryyetsimple/collection/collection.zep", 294);
 		return;
 	}
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_0, 0, "queryyetsimple/collection/collection.zep", 306);
+	zephir_is_iterable(&_0, 0, "queryyetsimple/collection/collection.zep", 303);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -723,7 +723,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, siblings) {
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(key, &_0);
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 359);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 356);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_1), _3, _4, _2)
 	{
 		ZEPHIR_INIT_NVAR(&k);
@@ -786,7 +786,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, nextAll) {
 	ZEPHIR_CPY_WRT(key, &_0);
 	current = 0;
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 387);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 384);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_1), _3, _4, _2)
 	{
 		ZEPHIR_INIT_NVAR(&k);
@@ -852,7 +852,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, prevAll) {
 	ZEPHIR_CPY_WRT(key, &_0);
 	current = 0;
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 413);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/collection/collection.zep", 410);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_1), _3, _4, _2)
 	{
 		ZEPHIR_INIT_NVAR(&k);
@@ -1369,7 +1369,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, callStaticMacro) {
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, queryyetsimple_collection_collection_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 622 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 619 TSRMLS_CC);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_2$$3, &args);
 		zephir_check_call_status();
 		RETURN_MM();
@@ -1382,7 +1382,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, callStaticMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_5);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "queryyetsimple/collection/collection.zep", 625 TSRMLS_CC);
+	zephir_throw_exception_debug(&_3, "queryyetsimple/collection/collection.zep", 622 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1432,10 +1432,10 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, callMacro) {
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, queryyetsimple_collection_collection_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_2$$3);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "queryyetsimple/collection/collection.zep", 641 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "queryyetsimple/collection/collection.zep", 638 TSRMLS_CC);
 		if (zephir_instance_of_ev(&_2$$3, zend_ce_closure TSRMLS_CC)) {
 			zephir_read_static_property_ce(&_3$$4, queryyetsimple_collection_collection_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 642 TSRMLS_CC);
+			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 639 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&_5$$4, &_4$$4, "bindto", NULL, 0, this_ptr);
 			zephir_check_call_status();
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_5$$4, &args);
@@ -1443,7 +1443,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, callMacro) {
 			RETURN_MM();
 		} else {
 			zephir_read_static_property_ce(&_6$$5, queryyetsimple_collection_collection_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 644 TSRMLS_CC);
+			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "queryyetsimple/collection/collection.zep", 641 TSRMLS_CC);
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_7$$5, &args);
 			zephir_check_call_status();
 			RETURN_MM();
@@ -1457,7 +1457,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, callMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 3, &_10);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_8, "queryyetsimple/collection/collection.zep", 648 TSRMLS_CC);
+	zephir_throw_exception_debug(&_8, "queryyetsimple/collection/collection.zep", 645 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1512,7 +1512,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, checkType) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_4, "__construct", NULL, 21, &_8);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_4, "queryyetsimple/collection/collection.zep", 667 TSRMLS_CC);
+	zephir_throw_exception_debug(&_4, "queryyetsimple/collection/collection.zep", 664 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1565,7 +1565,7 @@ PHP_METHOD(Queryyetsimple_Collection_Collection, getArrayElements) {
 		RETURN_MM();
 	}
 	if (Z_TYPE_P(elements) != IS_ARRAY) {
-		zephir_array_append(&temp, elements, PH_SEPARATE, "queryyetsimple/collection/collection.zep", 693);
+		zephir_array_append(&temp, elements, PH_SEPARATE, "queryyetsimple/collection/collection.zep", 690);
 		ZEPHIR_CPY_WRT(elements, &temp);
 	}
 	RETVAL_ZVAL(elements, 1, 0);

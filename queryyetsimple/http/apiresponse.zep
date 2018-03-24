@@ -287,7 +287,7 @@ class ApiResponse extends JsonResponse
      * @param string $message
      * @return string
      */
-    protected function parseErrorMessage(string message = null) -> string
+    protected function parseErrorMessage(var message = null) -> string
     {
         return message ? message : this->statusText;
     }

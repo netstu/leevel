@@ -163,7 +163,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, run) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_2$$5, "__construct", NULL, 2, &_4$$5);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_2$$5, "queryyetsimple/event/dispatch.zep", 94 TSRMLS_CC);
+			zephir_throw_exception_debug(&_2$$5, "queryyetsimple/event/dispatch.zep", 91 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -183,7 +183,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, run) {
 	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 66, &listeners);
 	ZEPHIR_UNREF(&listeners);
 	zephir_check_call_status();
-	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 111);
+	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 108);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&listeners), _6)
 	{
 		ZEPHIR_INIT_NVAR(&items);
@@ -242,12 +242,12 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, listeners) {
 	ZEPHIR_INIT_VAR(&temp);
 	array_init(&temp);
 	if (Z_TYPE_P(event) != IS_ARRAY) {
-		zephir_array_append(&temp, event, PH_SEPARATE, "queryyetsimple/event/dispatch.zep", 126);
+		zephir_array_append(&temp, event, PH_SEPARATE, "queryyetsimple/event/dispatch.zep", 123);
 		ZEPHIR_CPY_WRT(event, &temp);
 	}
 	ZVAL_LONG(&_0, priority);
 	priority = zephir_get_intval(&_0);
-	zephir_is_iterable(event, 0, "queryyetsimple/event/dispatch.zep", 138);
+	zephir_is_iterable(event, 0, "queryyetsimple/event/dispatch.zep", 135);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(event), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -315,11 +315,11 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, getListeners) {
 	zephir_read_property(&_0, this_ptr, SL("listeners"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_0, &event)) {
 		zephir_read_property(&_1$$3, this_ptr, SL("listeners"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &event, PH_NOISY | PH_READONLY, "queryyetsimple/event/dispatch.zep", 153 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &event, PH_NOISY | PH_READONLY, "queryyetsimple/event/dispatch.zep", 150 TSRMLS_CC);
 		ZEPHIR_CPY_WRT(&listeners, &_2$$3);
 	}
 	zephir_read_property(&_3, this_ptr, SL("wildcards"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_3, 0, "queryyetsimple/event/dispatch.zep", 172);
+	zephir_is_iterable(&_3, 0, "queryyetsimple/event/dispatch.zep", 169);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_3), _5, _6, _4)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -346,7 +346,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, getListeners) {
 		ZEPHIR_INIT_NVAR(&_13$$4);
 		zephir_preg_match(&_13$$4, &key, &event, &res, 0, 0 , 0  TSRMLS_CC);
 		if (zephir_is_true(&_13$$4)) {
-			zephir_is_iterable(&item, 0, "queryyetsimple/event/dispatch.zep", 169);
+			zephir_is_iterable(&item, 0, "queryyetsimple/event/dispatch.zep", 166);
 			ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&item), _15$$5, _16$$5, _14$$5)
 			{
 				ZEPHIR_INIT_NVAR(&priority);
@@ -363,7 +363,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, getListeners) {
 					zephir_array_update_zval(&listeners, &priority, &_17$$7, PH_COPY | PH_SEPARATE);
 				}
 				ZEPHIR_INIT_NVAR(&_18$$6);
-				zephir_array_fetch(&_19$$6, &listeners, &priority, PH_NOISY | PH_READONLY, "queryyetsimple/event/dispatch.zep", 167 TSRMLS_CC);
+				zephir_array_fetch(&_19$$6, &listeners, &priority, PH_NOISY | PH_READONLY, "queryyetsimple/event/dispatch.zep", 164 TSRMLS_CC);
 				zephir_fast_array_merge(&_18$$6, &_19$$6, &value TSRMLS_CC);
 				zephir_array_update_zval(&listeners, &priority, &_18$$6, PH_COPY | PH_SEPARATE);
 			} ZEND_HASH_FOREACH_END();
@@ -507,7 +507,7 @@ PHP_METHOD(Queryyetsimple_Event_Dispatch, makeSubject) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(NULL, &subject, "__construct", NULL, 67, &_0);
 	zephir_check_call_status();
-	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 231);
+	zephir_is_iterable(&listeners, 0, "queryyetsimple/event/dispatch.zep", 228);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&listeners), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);

@@ -159,12 +159,12 @@ PHP_METHOD(Queryyetsimple_Support_ClosureUse, invoke) {
 	zephir_read_property(&_0, this_ptr, SL("args"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_0)) {
 		zephir_read_property(&_1$$3, this_ptr, SL("args"), PH_NOISY_CC | PH_READONLY);
-		zephir_is_iterable(&_1$$3, 0, "queryyetsimple/support/closureuse.zep", 89);
+		zephir_is_iterable(&_1$$3, 0, "queryyetsimple/support/closureuse.zep", 86);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1$$3), _2$$3)
 		{
 			ZEPHIR_INIT_NVAR(&item);
 			ZVAL_COPY(&item, _2$$3);
-			zephir_array_append(&args, &item, PH_SEPARATE, "queryyetsimple/support/closureuse.zep", 87);
+			zephir_array_append(&args, &item, PH_SEPARATE, "queryyetsimple/support/closureuse.zep", 84);
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&item);
 	}

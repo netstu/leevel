@@ -52,7 +52,7 @@ class File extends SplFileObject
      * @param string $name
      * @return \Queryyetsimple\Http\File
      */
-    public function move(string directory, string name = null) -> <File>
+    public function move(string directory, var name = null) -> <File>
     {
         var target;
     
@@ -69,7 +69,7 @@ class File extends SplFileObject
      * @param string $name
      * @return string
      */
-    protected function getTargetFile(string directory, string name = null) -> string
+    protected function getTargetFile(string directory, var name = null) -> string
     {
         var target;
     

@@ -35,7 +35,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_redirectresponse_with, 0, 0, 
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_redirectresponse_withinput, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, input, 1)
+	ZEND_ARG_INFO(0, input)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_redirectresponse_witherrors, 0, 0, 1)

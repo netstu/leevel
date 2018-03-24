@@ -133,7 +133,7 @@ PHP_METHOD(Queryyetsimple_View_Html, display) {
 	zephir_read_property(&_1, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
 	if (!(ZEPHIR_IS_EMPTY(&_1))) {
 		zephir_read_property(&_2$$4, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
-		zephir_is_iterable(&_2$$4, 0, "queryyetsimple/view/html.zep", 95);
+		zephir_is_iterable(&_2$$4, 0, "queryyetsimple/view/html.zep", 92);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_2$$4), _4$$4, _5$$4, _3$$4)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -220,7 +220,7 @@ PHP_METHOD(Queryyetsimple_View_Html, resolverParser) {
 
 	zephir_read_property(&_0, this_ptr, SL("parserResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Html theme not set parser resolver", "queryyetsimple/view/html.zep", 135);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Html theme not set parser resolver", "queryyetsimple/view/html.zep", 132);
 		return;
 	}
 	zephir_read_property(&_1, this_ptr, SL("parserResolver"), PH_NOISY_CC | PH_READONLY);
@@ -298,7 +298,7 @@ PHP_METHOD(Queryyetsimple_View_Html, getCachePath) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme cache path must be set", "queryyetsimple/view/html.zep", 164);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme cache path must be set", "queryyetsimple/view/html.zep", 161);
 		return;
 	}
 	ZEPHIR_INIT_NVAR(&_1);

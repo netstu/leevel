@@ -120,7 +120,7 @@ class RedirectResponse extends Response
      * @param array $input
      * @return $this
      */
-    public function withInput(array input = null)
+    public function withInput(var input = null)
     {
     	var inputs = [], tmp;
 

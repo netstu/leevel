@@ -344,7 +344,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, sendHeaders) {
 	zephir_read_property(&_2, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_3, &_2, "all", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&_3, 0, "queryyetsimple/http/response.zep", 281);
+	zephir_is_iterable(&_3, 0, "queryyetsimple/http/response.zep", 279);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_3), _5, _6, _4)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -489,7 +489,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setContent) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 18, &_11$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_8$$5, "queryyetsimple/http/response.zep", 332 TSRMLS_CC);
+		zephir_throw_exception_debug(&_8$$5, "queryyetsimple/http/response.zep", 330 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -508,23 +508,21 @@ PHP_METHOD(Queryyetsimple_Http_Response, setContent) {
 PHP_METHOD(Queryyetsimple_Http_Response, appendContent) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *content_param = NULL, _0, _1, _2;
-	zval content;
+	zval *content = NULL, content_sub, __$null, _0, _1, _2;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&content);
+	ZVAL_UNDEF(&content_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &content_param);
+	zephir_fetch_params(1, 0, 1, &content);
 
-	if (!content_param) {
-		ZEPHIR_INIT_VAR(&content);
-		ZVAL_STRING(&content, "");
-	} else {
-		zephir_get_strval(&content, content_param);
+	if (!content) {
+		content = &content_sub;
+		content = &__$null;
 	}
 
 
@@ -536,7 +534,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, appendContent) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getcontent", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_2);
-	ZEPHIR_CONCAT_VV(&_2, &_1, &content);
+	ZEPHIR_CONCAT_VV(&_2, &_1, content);
 	zephir_update_property_zval(this_ptr, SL("content"), &_2);
 	RETURN_THIS();
 
@@ -630,7 +628,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, withHeaders) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&headers, 0, "queryyetsimple/http/response.zep", 396);
+	zephir_is_iterable(&headers, 0, "queryyetsimple/http/response.zep", 394);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&headers), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -744,7 +742,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setCookie) {
 	}
 	zephir_read_static_property_ce(&_1, queryyetsimple_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cookie resolver is not set.", "queryyetsimple/http/response.zep", 429);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cookie resolver is not set.", "queryyetsimple/http/response.zep", 427);
 		return;
 	}
 	zephir_read_static_property_ce(&_2, queryyetsimple_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
@@ -797,7 +795,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, withCookies) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&cookies, 0, "queryyetsimple/http/response.zep", 457);
+	zephir_is_iterable(&cookies, 0, "queryyetsimple/http/response.zep", 455);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&cookies), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -871,29 +869,27 @@ PHP_METHOD(Queryyetsimple_Http_Response, getData) {
  */
 PHP_METHOD(Queryyetsimple_Http_Response, setData) {
 
-	zval _15;
+	zval _11;
 	zend_bool _1, _2, _3;
-	zend_long encodingOptions, ZEPHIR_LAST_CALL_STATUS;
-	zval *data = NULL, data_sub, *encodingOptions_param = NULL, _0, _12, _4$$5, _5$$5, _6$$6, _7$$6, _8$$7, _9$$7, _10$$8, _11$$8, _13$$9, _14$$9;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *data = NULL, data_sub, *encodingOptions = NULL, encodingOptions_sub, __$null, _0, _8, _4$$5, _5$$6, _6$$7, _7$$8, _9$$9, _10$$9;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
+	ZVAL_UNDEF(&encodingOptions_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_12);
+	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_4$$5);
-	ZVAL_UNDEF(&_5$$5);
-	ZVAL_UNDEF(&_6$$6);
-	ZVAL_UNDEF(&_7$$6);
-	ZVAL_UNDEF(&_8$$7);
-	ZVAL_UNDEF(&_9$$7);
-	ZVAL_UNDEF(&_10$$8);
-	ZVAL_UNDEF(&_11$$8);
-	ZVAL_UNDEF(&_13$$9);
-	ZVAL_UNDEF(&_14$$9);
-	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&_5$$6);
+	ZVAL_UNDEF(&_6$$7);
+	ZVAL_UNDEF(&_7$$8);
+	ZVAL_UNDEF(&_9$$9);
+	ZVAL_UNDEF(&_10$$9);
+	ZVAL_UNDEF(&_11);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &data, &encodingOptions_param);
+	zephir_fetch_params(1, 0, 2, &data, &encodingOptions);
 
 	if (!data) {
 		data = &data_sub;
@@ -902,10 +898,11 @@ PHP_METHOD(Queryyetsimple_Http_Response, setData) {
 	} else {
 		ZEPHIR_SEPARATE_PARAM(data);
 	}
-	if (!encodingOptions_param) {
-		encodingOptions = 0;
+	if (!encodingOptions) {
+		encodingOptions = &encodingOptions_sub;
+		ZEPHIR_CPY_WRT(encodingOptions, &__$null);
 	} else {
-		encodingOptions = zephir_get_intval(encodingOptions_param);
+		ZEPHIR_SEPARATE_PARAM(encodingOptions);
 	}
 
 
@@ -915,8 +912,9 @@ PHP_METHOD(Queryyetsimple_Http_Response, setData) {
 		RETURN_THIS();
 	}
 	zephir_update_property_zval(this_ptr, SL("original"), data);
-	if (1 == 0) {
-		encodingOptions = 256;
+	if (Z_TYPE_P(encodingOptions) == IS_NULL) {
+		ZEPHIR_INIT_NVAR(encodingOptions);
+		ZVAL_LONG(encodingOptions, 256);
 	}
 	_1 = Z_TYPE_P(data) == IS_OBJECT;
 	if (_1) {
@@ -933,41 +931,37 @@ PHP_METHOD(Queryyetsimple_Http_Response, setData) {
 	if (_1) {
 		ZEPHIR_CALL_METHOD(&_4$$5, data, "toarray", NULL, 0);
 		zephir_check_call_status();
-		ZVAL_LONG(&_5$$5, encodingOptions);
 		ZEPHIR_INIT_NVAR(data);
-		zephir_json_encode(data, &_4$$5, zephir_get_intval(&_5$$5) );
+		zephir_json_encode(data, &_4$$5, zephir_get_intval(encodingOptions) );
 	} else if (_2) {
-		ZVAL_LONG(&_7$$6, encodingOptions);
-		ZEPHIR_CALL_METHOD(&_6$$6, data, "tojson", NULL, 0, &_7$$6);
+		ZEPHIR_CALL_METHOD(&_5$$6, data, "tojson", NULL, 0, encodingOptions);
 		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(data, &_6$$6);
+		ZEPHIR_CPY_WRT(data, &_5$$6);
 	} else if (_3) {
-		ZEPHIR_CALL_METHOD(&_8$$7, data, "jsonserialize", NULL, 0);
+		ZEPHIR_CALL_METHOD(&_6$$7, data, "jsonserialize", NULL, 0);
 		zephir_check_call_status();
-		ZVAL_LONG(&_9$$7, encodingOptions);
 		ZEPHIR_INIT_NVAR(data);
-		zephir_json_encode(data, &_8$$7, zephir_get_intval(&_9$$7) );
+		zephir_json_encode(data, &_6$$7, zephir_get_intval(encodingOptions) );
 	} else {
-		ZEPHIR_INIT_VAR(&_10$$8);
-		ZVAL_LONG(&_11$$8, encodingOptions);
-		zephir_json_encode(&_10$$8, data, zephir_get_intval(&_11$$8) );
-		ZEPHIR_CPY_WRT(data, &_10$$8);
+		ZEPHIR_INIT_VAR(&_7$$8);
+		zephir_json_encode(&_7$$8, data, zephir_get_intval(encodingOptions) );
+		ZEPHIR_CPY_WRT(data, &_7$$8);
 	}
-	ZEPHIR_CALL_FUNCTION(&_12, "json_last_error", NULL, 19);
+	ZEPHIR_CALL_FUNCTION(&_8, "json_last_error", NULL, 19);
 	zephir_check_call_status();
-	if (!ZEPHIR_IS_LONG_IDENTICAL(&_12, 0)) {
-		ZEPHIR_INIT_VAR(&_13$$9);
-		object_init_ex(&_13$$9, spl_ce_InvalidArgumentException);
-		ZEPHIR_CALL_FUNCTION(&_14$$9, "json_last_error_msg", NULL, 20);
+	if (!ZEPHIR_IS_LONG_IDENTICAL(&_8, 0)) {
+		ZEPHIR_INIT_VAR(&_9$$9);
+		object_init_ex(&_9$$9, spl_ce_InvalidArgumentException);
+		ZEPHIR_CALL_FUNCTION(&_10$$9, "json_last_error_msg", NULL, 20);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_13$$9, "__construct", NULL, 21, &_14$$9);
+		ZEPHIR_CALL_METHOD(NULL, &_9$$9, "__construct", NULL, 21, &_10$$9);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_13$$9, "queryyetsimple/http/response.zep", 506 TSRMLS_CC);
+		zephir_throw_exception_debug(&_9$$9, "queryyetsimple/http/response.zep", 505 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	zephir_get_strval(&_15, data);
-	zephir_update_property_zval(this_ptr, SL("content"), &_15);
+	zephir_get_strval(&_11, data);
+	zephir_update_property_zval(this_ptr, SL("content"), &_11);
 	RETURN_THIS();
 
 }
@@ -1122,7 +1116,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setStatusCode) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 21, &_6$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$4, "queryyetsimple/http/response.zep", 587 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$4, "queryyetsimple/http/response.zep", 586 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1132,7 +1126,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setStatusCode) {
 		if (zephir_array_isset_long(&_8$$5, code)) {
 			zephir_read_static_property_ce(&_9$$5, queryyetsimple_http_response_ce, SL("statusTexts"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&_7$$5);
-			zephir_array_fetch_long(&_7$$5, &_9$$5, code, PH_NOISY, "queryyetsimple/http/response.zep", 591 TSRMLS_CC);
+			zephir_array_fetch_long(&_7$$5, &_9$$5, code, PH_NOISY, "queryyetsimple/http/response.zep", 590 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&_7$$5);
 			ZVAL_STRING(&_7$$5, "unknown status");
@@ -1442,7 +1436,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, setNotModified) {
 		RETURN_THIS();
 	}
 	zephir_read_static_property_ce(&_1, queryyetsimple_http_response_ce, SL("statusTexts"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_long(&_2, &_1, 304, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 741 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, &_1, 304, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 740 TSRMLS_CC);
 	ZVAL_LONG(&_3, 304);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setstatuscode", NULL, 0, &_3, &_2);
 	zephir_check_call_status();
@@ -1810,11 +1804,11 @@ PHP_METHOD(Queryyetsimple_Http_Response, isRedirect) {
 
 	zend_bool _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *location_param = NULL, tmp, _0, _1, _3, _4, _5;
-	zval location;
+	zval *location = NULL, location_sub, __$null, tmp, _0, _1, _3, _4, _5;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&location);
+	ZVAL_UNDEF(&location_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
@@ -1823,13 +1817,11 @@ PHP_METHOD(Queryyetsimple_Http_Response, isRedirect) {
 	ZVAL_UNDEF(&_5);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &location_param);
+	zephir_fetch_params(1, 0, 1, &location);
 
-	if (!location_param) {
-		ZEPHIR_INIT_VAR(&location);
-		ZVAL_STRING(&location, "");
-	} else {
-		zephir_get_strval(&location, location_param);
+	if (!location) {
+		location = &location_sub;
+		location = &__$null;
 	}
 
 
@@ -1857,9 +1849,9 @@ PHP_METHOD(Queryyetsimple_Http_Response, isRedirect) {
 	_2 = zephir_fast_in_array(&_1, &tmp TSRMLS_CC);
 	if (_2) {
 		ZEPHIR_INIT_VAR(&_3);
-		if (ZEPHIR_IS_STRING_IDENTICAL(&location, "")) {
+		if (Z_TYPE_P(location) == IS_NULL) {
 			ZEPHIR_INIT_NVAR(&_3);
-			ZVAL_BOOL(&_3, ZEPHIR_IS_STRING_IDENTICAL(&location, ""));
+			ZVAL_BOOL(&_3, Z_TYPE_P(location) == IS_NULL);
 		} else {
 			zephir_read_property(&_4, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_INIT_NVAR(&_0);
@@ -1867,7 +1859,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, isRedirect) {
 			ZEPHIR_CALL_METHOD(&_5, &_4, "get", NULL, 0, &_0);
 			zephir_check_call_status();
 			ZEPHIR_INIT_NVAR(&_3);
-			ZVAL_BOOL(&_3, ZEPHIR_IS_EQUAL(&location, &_5));
+			ZVAL_BOOL(&_3, ZEPHIR_IS_EQUAL(location, &_5));
 		}
 		_2 = zephir_is_true(&_3);
 	}
@@ -2001,7 +1993,7 @@ PHP_METHOD(Queryyetsimple_Http_Response, elses) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "gettcontrol", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&_1);
-	zephir_array_fetch_long(&_1, &_0, 1, PH_NOISY, "queryyetsimple/http/response.zep", 974 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, &_0, 1, PH_NOISY, "queryyetsimple/http/response.zep", 973 TSRMLS_CC);
 	ZVAL_BOOL(&_2, 1);
 	ZVAL_BOOL(&_3, !zephir_is_true(&_1));
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_2, &_3);
@@ -2223,18 +2215,17 @@ PHP_METHOD(Queryyetsimple_Http_Response, hasMacro) {
  */
 PHP_METHOD(Queryyetsimple_Http_Response, callStaticMacro) {
 
-	zend_class_entry *_4 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval args;
-	zval *method_param = NULL, *args_param = NULL, _0, _3, _5, _6, _1$$3, _2$$3;
+	zval *method_param = NULL, *args_param = NULL, _0, _3, _4, _5, _1$$3, _2$$3;
 	zval method;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&method);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&args);
@@ -2250,25 +2241,20 @@ PHP_METHOD(Queryyetsimple_Http_Response, callStaticMacro) {
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, queryyetsimple_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1083 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1082 TSRMLS_CC);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_2$$3, &args);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
 	ZEPHIR_INIT_VAR(&_3);
-	if (!_4) {
-	_4 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\BadMethodCallException"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(&_3, _4);
-	if (zephir_has_constructor(&_3 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_5);
-		ZVAL_STRING(&_5, "Method %s is not exits.");
-		ZEPHIR_CALL_FUNCTION(&_6, "sprintf", NULL, 1, &_5, &method);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 0, &_6);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(&_3, "queryyetsimple/http/response.zep", 1086 TSRMLS_CC);
+	object_init_ex(&_3, spl_ce_BadMethodCallException);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "Method %s is not exits.");
+	ZEPHIR_CALL_FUNCTION(&_5, "sprintf", NULL, 1, &_4, &method);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_5);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_3, "queryyetsimple/http/response.zep", 1085 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -2286,18 +2272,17 @@ PHP_METHOD(Queryyetsimple_Http_Response, callStaticMacro) {
  */
 PHP_METHOD(Queryyetsimple_Http_Response, callMacro) {
 
-	zend_class_entry *_9 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval args;
-	zval *method_param = NULL, *args_param = NULL, _0, _8, _10, _11, _1$$3, _2$$3, _3$$4, _4$$4, _5$$4, _6$$5, _7$$5;
+	zval *method_param = NULL, *args_param = NULL, _0, _8, _9, _10, _1$$3, _2$$3, _3$$4, _4$$4, _5$$4, _6$$5, _7$$5;
 	zval method;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&method);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_9);
 	ZVAL_UNDEF(&_10);
-	ZVAL_UNDEF(&_11);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$4);
@@ -2319,10 +2304,10 @@ PHP_METHOD(Queryyetsimple_Http_Response, callMacro) {
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, queryyetsimple_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_2$$3);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "queryyetsimple/http/response.zep", 1102 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "queryyetsimple/http/response.zep", 1101 TSRMLS_CC);
 		if (zephir_instance_of_ev(&_2$$3, zend_ce_closure TSRMLS_CC)) {
 			zephir_read_static_property_ce(&_3$$4, queryyetsimple_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1103 TSRMLS_CC);
+			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1102 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&_5$$4, &_4$$4, "bindto", NULL, 0, this_ptr);
 			zephir_check_call_status();
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_5$$4, &args);
@@ -2330,26 +2315,21 @@ PHP_METHOD(Queryyetsimple_Http_Response, callMacro) {
 			RETURN_MM();
 		} else {
 			zephir_read_static_property_ce(&_6$$5, queryyetsimple_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1105 TSRMLS_CC);
+			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "queryyetsimple/http/response.zep", 1104 TSRMLS_CC);
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_7$$5, &args);
 			zephir_check_call_status();
 			RETURN_MM();
 		}
 	}
 	ZEPHIR_INIT_VAR(&_8);
-	if (!_9) {
-	_9 = zephir_fetch_class_str_ex(SL("Queryyetsimple\\Http\\BadMethodCallException"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(&_8, _9);
-	if (zephir_has_constructor(&_8 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_10);
-		ZVAL_STRING(&_10, "Method %s is not exits.");
-		ZEPHIR_CALL_FUNCTION(&_11, "sprintf", NULL, 1, &_10, &method);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 0, &_11);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(&_8, "queryyetsimple/http/response.zep", 1109 TSRMLS_CC);
+	object_init_ex(&_8, spl_ce_BadMethodCallException);
+	ZEPHIR_INIT_VAR(&_9);
+	ZVAL_STRING(&_9, "Method %s is not exits.");
+	ZEPHIR_CALL_FUNCTION(&_10, "sprintf", NULL, 1, &_9, &method);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 3, &_10);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_8, "queryyetsimple/http/response.zep", 1108 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

@@ -478,7 +478,7 @@ PHP_METHOD(Queryyetsimple_Di_Provider, loadCommandNamespace) {
 	ZVAL_STRING(&_4, "console.load");
 	ZEPHIR_CALL_METHOD(&load, &_5, "make", NULL, 0, &_4);
 	zephir_check_call_status();
-	zephir_is_iterable(namespaces, 0, "queryyetsimple/di/provider.zep", 232);
+	zephir_is_iterable(namespaces, 0, "queryyetsimple/di/provider.zep", 229);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(namespaces), _6)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -533,7 +533,7 @@ PHP_METHOD(Queryyetsimple_Di_Provider, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "queryyetsimple/di/provider.zep", 247 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "queryyetsimple/di/provider.zep", 244 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

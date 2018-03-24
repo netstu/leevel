@@ -162,7 +162,7 @@ PHP_METHOD(Queryyetsimple_Event_Subject, notify) {
 	zephir_get_args(&_0);
 	zephir_update_property_zval(this_ptr, SL("notifyArgs"), &_0);
 	zephir_read_property(&_1, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/event/subject.zep", 100);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/event/subject.zep", 97);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&observer);
@@ -215,7 +215,7 @@ PHP_METHOD(Queryyetsimple_Event_Subject, attachs) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 21, &_4$$4);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_2$$4, "queryyetsimple/event/subject.zep", 114 TSRMLS_CC);
+			zephir_throw_exception_debug(&_2$$4, "queryyetsimple/event/subject.zep", 111 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -225,7 +225,7 @@ PHP_METHOD(Queryyetsimple_Event_Subject, attachs) {
 		ZEPHIR_CALL_METHOD(NULL, &_5$$5, "attach", NULL, 0, observer);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "queryyetsimple/event/subject.zep", 121);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "queryyetsimple/event/subject.zep", 118);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();

@@ -213,14 +213,14 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, namespaces) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&prefix, &_0, "getprefixespsr4", NULL, 0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_1, &temp, 0, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 127 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, &temp, 0, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 124 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&path);
 	ZEPHIR_CONCAT_VS(&path, &_1, "\\");
 	if (!(zephir_array_isset(&prefix, &path))) {
 		RETURN_MM_NULL();
 	}
-	zephir_array_fetch(&_2, &prefix, &path, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 132 TSRMLS_CC);
-	zephir_array_fetch_long(&_3, &_2, 0, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 132 TSRMLS_CC);
+	zephir_array_fetch(&_2, &prefix, &path, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 129 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, &_2, 0, PH_NOISY | PH_READONLY, "queryyetsimple/psr4/psr4.zep", 129 TSRMLS_CC);
 	zephir_array_update_long(&temp, 0, &_3, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	zephir_fast_join_str(return_value, SL("/"), &temp TSRMLS_CC);
 	RETURN_MM();
@@ -316,7 +316,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, autoload) {
 	ZEPHIR_OBS_NVAR(&_2);
 	zephir_read_property(&_2, this_ptr, SL("shortNamespace"), PH_NOISY_CC);
 	zephir_array_fast_append(&namespaces, &_2);
-	zephir_is_iterable(&namespaces, 0, "queryyetsimple/psr4/psr4.zep", 177);
+	zephir_is_iterable(&namespaces, 0, "queryyetsimple/psr4/psr4.zep", 174);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&namespaces), _3)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -429,7 +429,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, shortNamespaceMap) {
 		ZEPHIR_CALL_FUNCTION(&evals, "sprintf", NULL, 1, &_6$$3, &namespaces, &_5$$3, &definedClass, &parentClass);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_6$$3);
-		zephir_eval_php(&evals, &_6$$3, "/data/codes/queryyetsimple/queryyetsimple/psr4/psr4.zep:199" TSRMLS_CC);
+		zephir_eval_php(&evals, &_6$$3, "/data/codes/queryyetsimple/queryyetsimple/psr4/psr4.zep:196" TSRMLS_CC);
 	}
 	ZEPHIR_MM_RESTORE();
 

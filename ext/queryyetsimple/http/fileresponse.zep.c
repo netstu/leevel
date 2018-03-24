@@ -300,7 +300,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setFile) {
 	ZEPHIR_CALL_METHOD(&_7, &files, "isreadable", NULL, 73);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_7))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(queryyetsimple_http_fileexception_ce, "File must be readable.", "queryyetsimple/http/fileresponse.zep", 121);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(queryyetsimple_http_fileexception_ce, "File must be readable.", "queryyetsimple/http/fileresponse.zep", 118);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("file"), &files);
@@ -437,7 +437,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setContent) {
 		RETURN_THIS();
 	}
 	if (Z_TYPE_P(content) != IS_NULL) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_LogicException, "The content cannot be set on a FileResponse instance.", "queryyetsimple/http/fileresponse.zep", 196);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_LogicException, "The content cannot be set on a FileResponse instance.", "queryyetsimple/http/fileresponse.zep", 193);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();
@@ -512,7 +512,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setContentDisposition) {
 	ZVAL_STRING(&_2, "inline");
 	zephir_array_fast_append(&tmp, &_2);
 	if (!(zephir_fast_in_array(&disposition, &tmp TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "queryyetsimple/http/fileresponse.zep", 233);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "queryyetsimple/http/fileresponse.zep", 230);
 		return;
 	}
 	zephir_read_property(&_3, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);

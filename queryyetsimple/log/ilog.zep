@@ -131,7 +131,7 @@ interface ILog /* extends LoggerInterface */
      * @param string $level
      * @return int
      */
-    public function clear(string level = null);
+    public function clear(var level = null);
 
     /**
      * 获取日志记录
@@ -139,7 +139,7 @@ interface ILog /* extends LoggerInterface */
      * @param string $level
      * @return array
      */
-    public function get(string level = null);
+    public function get(var level = null);
 
     /**
      * 获取日志记录数量
@@ -147,5 +147,5 @@ interface ILog /* extends LoggerInterface */
      * @param string $level
      * @return int
      */
-    public function count(string level = null);
+    public function count(var level = null);
 }

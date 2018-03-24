@@ -20,6 +20,7 @@ use DateTime;
 use ArrayObject;
 use DateTimeZone;
 use JsonSerializable;
+use BadMethodCallException;
 use InvalidArgumentException;
 use UnexpectedValueException;
 use Queryyetsimple\Support\IJson;
@@ -340,7 +341,7 @@ class Response implements IControl, IMacro, IResponse
      * @param string $content
      * @return $this
      */
-    public function appendContent(string content = null)
+    public function appendContent(var content = null)
     {
         if this->checkTControl() {
             return this;
@@ -477,7 +478,7 @@ class Response implements IControl, IMacro, IResponse
      * @param int $encodingOptions
      * @return $this
      */
-    public function setData(var data = [], int encodingOptions = null)
+    public function setData(var data = [], var encodingOptions = null)
     {
         if this->checkTControl() {
             return this;
@@ -496,6 +497,7 @@ class Response implements IControl, IMacro, IResponse
         } elseif is_object(data) && data instanceof JsonSerializable {
             let data = json_encode(data->jsonSerialize(), encodingOptions);
         } else {
+            // json_encode("\xB1\x31") 会引发 PHP 内核提示 Segmentation fault (core dumped)
             let data = json_encode(data, encodingOptions);
         }
 
@@ -905,7 +907,7 @@ class Response implements IControl, IMacro, IResponse
      *
      * @return bool
      */
-    public function isRedirect(string location = null) -> boolean
+    public function isRedirect(var location = null) -> boolean
     {
         var tmp;
     

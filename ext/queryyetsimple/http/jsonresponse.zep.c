@@ -314,7 +314,7 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setJson) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "isjsondata", NULL, 0, &json);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The method setJson need a json data.", "queryyetsimple/http/jsonresponse.zep", 150);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The method setJson need a json data.", "queryyetsimple/http/jsonresponse.zep", 147);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("data"), &json);
@@ -333,40 +333,40 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setJson) {
  */
 PHP_METHOD(Queryyetsimple_Http_JsonResponse, setData) {
 
-	zend_bool _2, _3, _4;
-	zend_long encodingOptions, ZEPHIR_LAST_CALL_STATUS;
-	zval *data = NULL, data_sub, *encodingOptions_param = NULL, _0, _15, _1$$4, _5$$5, _6$$5, _7$$5, _8$$6, _9$$6, _10$$7, _11$$7, _12$$7, _13$$8, _14$$8, _16$$9, _17$$9;
+	zend_bool _1, _2, _3;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *data = NULL, data_sub, *encodingOptions = NULL, encodingOptions_sub, __$null, _0, _14, _4$$5, _5$$5, _6$$5, _7$$6, _8$$6, _9$$7, _10$$7, _11$$7, _12$$8, _13$$8, _15$$9, _16$$9;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
+	ZVAL_UNDEF(&encodingOptions_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_15);
-	ZVAL_UNDEF(&_1$$4);
+	ZVAL_UNDEF(&_14);
+	ZVAL_UNDEF(&_4$$5);
 	ZVAL_UNDEF(&_5$$5);
 	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_7$$5);
+	ZVAL_UNDEF(&_7$$6);
 	ZVAL_UNDEF(&_8$$6);
-	ZVAL_UNDEF(&_9$$6);
+	ZVAL_UNDEF(&_9$$7);
 	ZVAL_UNDEF(&_10$$7);
 	ZVAL_UNDEF(&_11$$7);
-	ZVAL_UNDEF(&_12$$7);
+	ZVAL_UNDEF(&_12$$8);
 	ZVAL_UNDEF(&_13$$8);
-	ZVAL_UNDEF(&_14$$8);
+	ZVAL_UNDEF(&_15$$9);
 	ZVAL_UNDEF(&_16$$9);
-	ZVAL_UNDEF(&_17$$9);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 2, &data, &encodingOptions_param);
+	zephir_fetch_params(1, 0, 2, &data, &encodingOptions);
 
 	if (!data) {
 		data = &data_sub;
 		ZEPHIR_INIT_VAR(data);
 		array_init(data);
 	}
-	if (!encodingOptions_param) {
-		encodingOptions = 0;
-	} else {
-		encodingOptions = zephir_get_intval(encodingOptions_param);
+	if (!encodingOptions) {
+		encodingOptions = &encodingOptions_sub;
+		encodingOptions = &__$null;
 	}
 
 
@@ -375,58 +375,56 @@ PHP_METHOD(Queryyetsimple_Http_JsonResponse, setData) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	if (1 != 0) {
-		ZEPHIR_INIT_ZVAL_NREF(_1$$4);
-		ZVAL_LONG(&_1$$4, encodingOptions);
-		zephir_update_property_zval(this_ptr, SL("encodingOptions"), &_1$$4);
+	if (Z_TYPE_P(encodingOptions) != IS_NULL) {
+		zephir_update_property_zval(this_ptr, SL("encodingOptions"), encodingOptions);
+	}
+	_1 = Z_TYPE_P(data) == IS_OBJECT;
+	if (_1) {
+		_1 = zephir_instance_of_ev(data, queryyetsimple_support_iarray_ce TSRMLS_CC);
 	}
 	_2 = Z_TYPE_P(data) == IS_OBJECT;
 	if (_2) {
-		_2 = zephir_instance_of_ev(data, queryyetsimple_support_iarray_ce TSRMLS_CC);
+		_2 = zephir_instance_of_ev(data, queryyetsimple_support_ijson_ce TSRMLS_CC);
 	}
 	_3 = Z_TYPE_P(data) == IS_OBJECT;
 	if (_3) {
-		_3 = zephir_instance_of_ev(data, queryyetsimple_support_ijson_ce TSRMLS_CC);
+		_3 = zephir_is_instance_of(data, SL("JsonSerializable") TSRMLS_CC);
 	}
-	_4 = Z_TYPE_P(data) == IS_OBJECT;
-	if (_4) {
-		_4 = zephir_is_instance_of(data, SL("JsonSerializable") TSRMLS_CC);
-	}
-	if (_2) {
-		ZEPHIR_INIT_VAR(&_5$$5);
-		ZEPHIR_CALL_METHOD(&_6$$5, data, "toarray", NULL, 0);
+	if (_1) {
+		ZEPHIR_INIT_VAR(&_4$$5);
+		ZEPHIR_CALL_METHOD(&_5$$5, data, "toarray", NULL, 0);
 		zephir_check_call_status();
-		zephir_read_property(&_7$$5, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
-		zephir_json_encode(&_5$$5, &_6$$5, zephir_get_intval(&_7$$5) );
-		zephir_update_property_zval(this_ptr, SL("data"), &_5$$5);
+		zephir_read_property(&_6$$5, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
+		zephir_json_encode(&_4$$5, &_5$$5, zephir_get_intval(&_6$$5) );
+		zephir_update_property_zval(this_ptr, SL("data"), &_4$$5);
+	} else if (_2) {
+		zephir_read_property(&_8$$6, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&_7$$6, data, "tojson", NULL, 0, &_8$$6);
+		zephir_check_call_status();
+		zephir_update_property_zval(this_ptr, SL("data"), &_7$$6);
 	} else if (_3) {
-		zephir_read_property(&_9$$6, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(&_8$$6, data, "tojson", NULL, 0, &_9$$6);
+		ZEPHIR_INIT_VAR(&_9$$7);
+		ZEPHIR_CALL_METHOD(&_10$$7, data, "jsonserialize", NULL, 0);
 		zephir_check_call_status();
-		zephir_update_property_zval(this_ptr, SL("data"), &_8$$6);
-	} else if (_4) {
-		ZEPHIR_INIT_VAR(&_10$$7);
-		ZEPHIR_CALL_METHOD(&_11$$7, data, "jsonserialize", NULL, 0);
-		zephir_check_call_status();
-		zephir_read_property(&_12$$7, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
-		zephir_json_encode(&_10$$7, &_11$$7, zephir_get_intval(&_12$$7) );
-		zephir_update_property_zval(this_ptr, SL("data"), &_10$$7);
+		zephir_read_property(&_11$$7, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
+		zephir_json_encode(&_9$$7, &_10$$7, zephir_get_intval(&_11$$7) );
+		zephir_update_property_zval(this_ptr, SL("data"), &_9$$7);
 	} else {
-		ZEPHIR_INIT_VAR(&_13$$8);
-		zephir_read_property(&_14$$8, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
-		zephir_json_encode(&_13$$8, data, zephir_get_intval(&_14$$8) );
-		zephir_update_property_zval(this_ptr, SL("data"), &_13$$8);
+		ZEPHIR_INIT_VAR(&_12$$8);
+		zephir_read_property(&_13$$8, this_ptr, SL("encodingOptions"), PH_NOISY_CC | PH_READONLY);
+		zephir_json_encode(&_12$$8, data, zephir_get_intval(&_13$$8) );
+		zephir_update_property_zval(this_ptr, SL("data"), &_12$$8);
 	}
-	ZEPHIR_CALL_FUNCTION(&_15, "json_last_error", NULL, 19);
+	ZEPHIR_CALL_FUNCTION(&_14, "json_last_error", NULL, 19);
 	zephir_check_call_status();
-	if (!ZEPHIR_IS_LONG_IDENTICAL(&_15, 0)) {
-		ZEPHIR_INIT_VAR(&_16$$9);
-		object_init_ex(&_16$$9, spl_ce_InvalidArgumentException);
-		ZEPHIR_CALL_FUNCTION(&_17$$9, "json_last_error_msg", NULL, 20);
+	if (!ZEPHIR_IS_LONG_IDENTICAL(&_14, 0)) {
+		ZEPHIR_INIT_VAR(&_15$$9);
+		object_init_ex(&_15$$9, spl_ce_InvalidArgumentException);
+		ZEPHIR_CALL_FUNCTION(&_16$$9, "json_last_error_msg", NULL, 20);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_16$$9, "__construct", NULL, 21, &_17$$9);
+		ZEPHIR_CALL_METHOD(NULL, &_15$$9, "__construct", NULL, 21, &_16$$9);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_16$$9, "queryyetsimple/http/jsonresponse.zep", 186 TSRMLS_CC);
+		zephir_throw_exception_debug(&_15$$9, "queryyetsimple/http/jsonresponse.zep", 184 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

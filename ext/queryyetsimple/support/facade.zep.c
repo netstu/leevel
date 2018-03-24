@@ -92,7 +92,7 @@ PHP_METHOD(Queryyetsimple_Support_Facade, facades) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 2, &_4$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_2$$4, "queryyetsimple/support/facade.zep", 69 TSRMLS_CC);
+		zephir_throw_exception_debug(&_2$$4, "queryyetsimple/support/facade.zep", 66 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -186,7 +186,7 @@ PHP_METHOD(Queryyetsimple_Support_Facade, __callStatic) {
 	ZEPHIR_CALL_SELF(&instance, "facades", NULL, 0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&instance))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Can not find instance from container.", "queryyetsimple/support/facade.zep", 118);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Can not find instance from container.", "queryyetsimple/support/facade.zep", 115);
 		return;
 	}
 	ZEPHIR_INIT_VAR(&callback);
@@ -202,7 +202,7 @@ PHP_METHOD(Queryyetsimple_Support_Facade, __callStatic) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$4, "__construct", NULL, 3, &_2$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$4, "queryyetsimple/support/facade.zep", 126 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$4, "queryyetsimple/support/facade.zep", 123 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

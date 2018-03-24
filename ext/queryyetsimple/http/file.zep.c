@@ -70,7 +70,7 @@ PHP_METHOD(Queryyetsimple_Http_File, __construct) {
 		object_init_ex(&_1$$3, queryyetsimple_http_filenotfoundexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &path);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/http/file.zep", 45 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/http/file.zep", 42 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -90,28 +90,27 @@ PHP_METHOD(Queryyetsimple_Http_File, __construct) {
 PHP_METHOD(Queryyetsimple_Http_File, move) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *directory_param = NULL, *name_param = NULL, target, _0;
-	zval directory, name;
+	zval *directory_param = NULL, *name = NULL, name_sub, __$null, target, _0;
+	zval directory;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&directory);
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&target);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &directory_param, &name_param);
+	zephir_fetch_params(1, 1, 1, &directory_param, &name);
 
 	zephir_get_strval(&directory, directory_param);
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
 	}
 
 
-	ZEPHIR_CALL_METHOD(&target, this_ptr, "gettargetfile", NULL, 0, &directory, &name);
+	ZEPHIR_CALL_METHOD(&target, this_ptr, "gettargetfile", NULL, 0, &directory, name);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getpathname", NULL, 0);
 	zephir_check_call_status();
@@ -136,13 +135,14 @@ PHP_METHOD(Queryyetsimple_Http_File, getTargetFile) {
 	zend_bool _5$$3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_1 = NULL;
-	zval *directory_param = NULL, *name_param = NULL, __$true, target, _0, _2, _13, _14, _15, _3$$3, _4$$3, _6$$3, _7$$4, _8$$4, _9$$4, _10$$5, _11$$5, _12$$5;
-	zval directory, name;
+	zval *directory_param = NULL, *name = NULL, name_sub, __$true, __$null, target, _0, _2, _13, _14, _15, _3$$3, _4$$3, _6$$3, _7$$4, _8$$4, _9$$4, _10$$5, _11$$5, _12$$5;
+	zval directory;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&directory);
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&name_sub);
 	ZVAL_BOOL(&__$true, 1);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&target);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
@@ -160,14 +160,12 @@ PHP_METHOD(Queryyetsimple_Http_File, getTargetFile) {
 	ZVAL_UNDEF(&_12$$5);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &directory_param, &name_param);
+	zephir_fetch_params(1, 1, 1, &directory_param, &name);
 
 	zephir_get_strval(&directory, directory_param);
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
 	}
 
 
@@ -194,7 +192,7 @@ PHP_METHOD(Queryyetsimple_Http_File, getTargetFile) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_7$$4, "__construct", NULL, 2, &_9$$4);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_7$$4, "queryyetsimple/http/file.zep", 81 TSRMLS_CC);
+			zephir_throw_exception_debug(&_7$$4, "queryyetsimple/http/file.zep", 78 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -207,7 +205,7 @@ PHP_METHOD(Queryyetsimple_Http_File, getTargetFile) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_10$$5, "__construct", NULL, 2, &_12$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_10$$5, "queryyetsimple/http/file.zep", 84 TSRMLS_CC);
+		zephir_throw_exception_debug(&_10$$5, "queryyetsimple/http/file.zep", 81 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -216,11 +214,11 @@ PHP_METHOD(Queryyetsimple_Http_File, getTargetFile) {
 	ZVAL_STRING(&_14, "/\\");
 	zephir_fast_trim(&_13, &directory, &_14, ZEPHIR_TRIM_RIGHT TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_15);
-	if (ZEPHIR_IS_STRING_IDENTICAL(&name, "")) {
+	if (Z_TYPE_P(name) == IS_NULL) {
 		ZEPHIR_CALL_METHOD(&_15, this_ptr, "getbasename", NULL, 0);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_CPY_WRT(&_15, &name);
+		ZEPHIR_CPY_WRT(&_15, name);
 	}
 	ZEPHIR_INIT_VAR(&target);
 	ZEPHIR_CONCAT_VSV(&target, &_13, "/", &_15);
@@ -266,7 +264,7 @@ PHP_METHOD(Queryyetsimple_Http_File, moveToTarget) {
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_1$$3);
 		object_init_ex(&_1$$3, queryyetsimple_http_fileexception_ce);
-		zephir_array_fetch_string(&_2$$3, &error, SL("message"), PH_NOISY | PH_READONLY, "queryyetsimple/http/file.zep", 105 TSRMLS_CC);
+		zephir_array_fetch_string(&_2$$3, &error, SL("message"), PH_NOISY | PH_READONLY, "queryyetsimple/http/file.zep", 102 TSRMLS_CC);
 		ZEPHIR_CALL_FUNCTION(&_3$$3, "strip_tags", NULL, 38, &_2$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_4$$3);
@@ -275,7 +273,7 @@ PHP_METHOD(Queryyetsimple_Http_File, moveToTarget) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_5$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/http/file.zep", 105 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/http/file.zep", 102 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

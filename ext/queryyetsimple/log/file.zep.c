@@ -79,19 +79,19 @@ PHP_METHOD(Queryyetsimple_Log_File, save) {
 	zephir_get_arrval(&datas, datas_param);
 
 
-	zephir_array_fetch_long(&_0, &datas, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, &_0, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 58 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, &datas, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 55 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, &_0, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 55 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&filepath, this_ptr, "getpath", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checksize", NULL, 0, &filepath);
 	zephir_check_call_status();
-	zephir_is_iterable(&datas, 0, "queryyetsimple/log/file.zep", 65);
+	zephir_is_iterable(&datas, 0, "queryyetsimple/log/file.zep", 62);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&datas), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _2);
-		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 63 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 60 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/file.zep", 60 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "formatmessage", &_6, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_7$$3);

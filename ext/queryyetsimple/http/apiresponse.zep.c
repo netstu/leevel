@@ -708,27 +708,25 @@ PHP_METHOD(Queryyetsimple_Http_ApiResponse, normalizeErrorMessage) {
  */
 PHP_METHOD(Queryyetsimple_Http_ApiResponse, parseErrorMessage) {
 
-	zval *message_param = NULL, _0;
-	zval message;
+	zval *message = NULL, message_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message);
+	ZVAL_UNDEF(&message_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &message_param);
+	zephir_fetch_params(1, 0, 1, &message);
 
-	if (!message_param) {
-		ZEPHIR_INIT_VAR(&message);
-		ZVAL_STRING(&message, "");
-	} else {
-		zephir_get_strval(&message, message_param);
+	if (!message) {
+		message = &message_sub;
+		message = &__$null;
 	}
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	if (!(Z_TYPE_P(&message) == IS_UNDEF) && Z_STRLEN_P(&message)) {
-		ZEPHIR_CPY_WRT(&_0, &message);
+	if (zephir_is_true(message)) {
+		ZEPHIR_CPY_WRT(&_0, message);
 	} else {
 		zephir_read_property(&_0, this_ptr, SL("statusText"), PH_NOISY_CC);
 	}

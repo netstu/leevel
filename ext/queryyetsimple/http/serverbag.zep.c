@@ -79,7 +79,7 @@ PHP_METHOD(Queryyetsimple_Http_ServerBag, getHeaders) {
 	ZVAL_STRING(&_0, "CONTENT_TYPE");
 	zephir_array_fast_append(&contentHeaders, &_0);
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/http/serverbag.zep", 56);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/http/serverbag.zep", 53);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_1), _3, _4, _2)
 	{
 		ZEPHIR_INIT_NVAR(&key);

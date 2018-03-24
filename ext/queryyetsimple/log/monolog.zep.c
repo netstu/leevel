@@ -117,7 +117,7 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, __construct) {
 	ZVAL_STRING(&_4, "type");
 	ZEPHIR_CALL_METHOD(&_5, this_ptr, "getoption", NULL, 0, &_4);
 	zephir_check_call_status();
-	zephir_is_iterable(&_5, 0, "queryyetsimple/log/monolog.zep", 107);
+	zephir_is_iterable(&_5, 0, "queryyetsimple/log/monolog.zep", 104);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_5), _6)
 	{
 		ZEPHIR_INIT_NVAR(&type);
@@ -453,22 +453,22 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, save) {
 	zephir_read_property(&_0, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&level);
 	zephir_array_keys(&level, &_0 TSRMLS_CC);
-	zephir_is_iterable(&data, 0, "queryyetsimple/log/monolog.zep", 217);
+	zephir_is_iterable(&data, 0, "queryyetsimple/log/monolog.zep", 214);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&data), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
-		zephir_array_fetch_long(&_2$$3, &item, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 209 TSRMLS_CC);
+		zephir_array_fetch_long(&_2$$3, &item, 0, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 206 TSRMLS_CC);
 		if (!(zephir_fast_in_array(&_2$$3, &level TSRMLS_CC))) {
 			ZEPHIR_INIT_NVAR(&level);
 			ZVAL_STRING(&level, "debug");
 		} else {
 			ZEPHIR_OBS_NVAR(&level);
-			zephir_array_fetch_long(&level, &item, 0, PH_NOISY, "queryyetsimple/log/monolog.zep", 212 TSRMLS_CC);
+			zephir_array_fetch_long(&level, &item, 0, PH_NOISY, "queryyetsimple/log/monolog.zep", 209 TSRMLS_CC);
 		}
 		zephir_read_property(&_3$$3, this_ptr, SL("monolog"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 215 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 215 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 212 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 212 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD_ZVAL(NULL, &_3$$3, &level, NULL, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
@@ -692,11 +692,11 @@ PHP_METHOD(Queryyetsimple_Log_Monolog, parseMonologLevel) {
 	zephir_read_property(&_0, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_0, &level)) {
 		zephir_read_property(&_1$$3, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &level, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 301 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &level, PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 298 TSRMLS_CC);
 		RETURN_CTOR(&_2$$3);
 	}
 	zephir_read_property(&_3, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 303 TSRMLS_CC);
+	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "queryyetsimple/log/monolog.zep", 300 TSRMLS_CC);
 	RETURN_CTOR(&_4);
 
 }

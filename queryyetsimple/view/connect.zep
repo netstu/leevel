@@ -78,11 +78,12 @@ abstract class Connect implements IClass
 	 * @param string|null $name
 	 * @return mixed
 	 */
-	public function getVar(string name = null)
+	public function getVar(var name = null)
 	{
 		if typeof name == "null" {
 			return this->vars;
 		}
+        
 		return isset(this->vars[name]) ? this->vars[name] : null;
 	}
 

@@ -137,12 +137,12 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, connect) {
 	zephir_read_property(&_1, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &unique)) {
 		zephir_read_property(&_2$$3, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 86 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 83 TSRMLS_CC);
 		RETURN_CTOR(&_3$$3);
 	}
 	if (zephir_array_isset_string(options, SL("driver"))) {
 		ZEPHIR_OBS_VAR(&driver);
-		zephir_array_fetch_string(&driver, options, SL("driver"), PH_NOISY, "queryyetsimple/manager/manager.zep", 89 TSRMLS_CC);
+		zephir_array_fetch_string(&driver, options, SL("driver"), PH_NOISY, "queryyetsimple/manager/manager.zep", 86 TSRMLS_CC);
 	} else {
 		ZEPHIR_CALL_METHOD(&driver, this_ptr, "getdefaultdriver", NULL, 0);
 		zephir_check_call_status();
@@ -151,7 +151,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, connect) {
 	zephir_check_call_status();
 	zephir_update_property_array(this_ptr, SL("connects"), &unique, &_4 TSRMLS_CC);
 	zephir_read_property(&_5, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_6, &_5, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 93 TSRMLS_CC);
+	zephir_array_fetch(&_6, &_5, &unique, PH_NOISY | PH_READONLY, "queryyetsimple/manager/manager.zep", 90 TSRMLS_CC);
 	RETURN_CTOR(&_6);
 
 }
@@ -345,27 +345,25 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, createConnect) {
 PHP_METHOD(Queryyetsimple_Manager_Manager, getOptionName) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, _0;
-	zval name;
+	zval *name = NULL, name_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &name_param);
+	zephir_fetch_params(1, 0, 1, &name);
 
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
 	}
 
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptionnamespace", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CONCAT_VSV(return_value, &_0, "\\", &name);
+	ZEPHIR_CONCAT_VSV(return_value, &_0, "\\", name);
 	RETURN_MM();
 
 }
@@ -425,7 +423,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, makeConnect) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 22, &_5$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$3, "queryyetsimple/manager/manager.zep", 200 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$3, "queryyetsimple/manager/manager.zep", 197 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -702,7 +700,7 @@ PHP_METHOD(Queryyetsimple_Manager_Manager, filterOptionCommon) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "filteroptioncommonitem", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&_0, 0, "queryyetsimple/manager/manager.zep", 315);
+	zephir_is_iterable(&_0, 0, "queryyetsimple/manager/manager.zep", 312);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);

@@ -84,7 +84,7 @@ PHP_METHOD(Queryyetsimple_Support_Type, vars) {
 	array_init(&tmp1);
 	ZEPHIR_INIT_NVAR(&tmp);
 	zephir_fast_explode_str(&tmp, SL(":"), &type, LONG_MAX TSRMLS_CC);
-	zephir_array_fetch_long(&_0, &tmp, 0, PH_NOISY | PH_READONLY, "queryyetsimple/support/type.zep", 55 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, &tmp, 0, PH_NOISY | PH_READONLY, "queryyetsimple/support/type.zep", 52 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&type);
 	zephir_fast_strtolower(&type, &_0);
 	do {
@@ -114,7 +114,7 @@ PHP_METHOD(Queryyetsimple_Support_Type, vars) {
 		}
 		if (ZEPHIR_IS_STRING(&type, "arr") || ZEPHIR_IS_STRING(&type, "array")) {
 			if (zephir_array_isset_long(&tmp, 1)) {
-				zephir_array_fetch_long(&_1$$12, &tmp, 1, PH_NOISY | PH_READONLY, "queryyetsimple/support/type.zep", 102 TSRMLS_CC);
+				zephir_array_fetch_long(&_1$$12, &tmp, 1, PH_NOISY | PH_READONLY, "queryyetsimple/support/type.zep", 99 TSRMLS_CC);
 				ZEPHIR_INIT_NVAR(&tmp1);
 				zephir_fast_explode_str(&tmp1, SL(","), &_1$$12, LONG_MAX TSRMLS_CC);
 				ZEPHIR_RETURN_CALL_SELF("arr", NULL, 0, value, &tmp1);
@@ -141,7 +141,7 @@ PHP_METHOD(Queryyetsimple_Support_Type, vars) {
 			ZEPHIR_INIT_VAR(&_4$$18);
 			ZEPHIR_INIT_VAR(&_5$$18);
 			ZVAL_STRING(&_5$$18, "if (! function_exists('zephir_instanceof')) {\n\t\t\t\t\t\tfunction zephir_instanceof($value, $type) {\n\t\t\t\t\t\t\treturn $value instanceof $type;\n\t\t\t\t\t\t}\n\t\t\t\t\t}");
-			zephir_eval_php(&_5$$18, &_4$$18, "/data/codes/queryyetsimple/queryyetsimple/support/type.zep:123" TSRMLS_CC);
+			zephir_eval_php(&_5$$18, &_4$$18, "/data/codes/queryyetsimple/queryyetsimple/support/type.zep:120" TSRMLS_CC);
 			zend_update_static_property(queryyetsimple_support_type_ce, ZEND_STRL("zephirInstanceof"), &__$true);
 		}
 		ZEPHIR_RETURN_CALL_FUNCTION("zephir_instanceof", NULL, 0, value, &type);
@@ -271,14 +271,14 @@ PHP_METHOD(Queryyetsimple_Support_Type, these) {
 		_2 = !zephir_is_true(&_3);
 	}
 	if (_2) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The parameter must be string or an array of string elements.", "queryyetsimple/support/type.zep", 175);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The parameter must be string or an array of string elements.", "queryyetsimple/support/type.zep", 172);
 		return;
 	}
 	if (Z_TYPE_P(types) == IS_STRING) {
 		zephir_get_arrval(&_4$$4, types);
 		ZEPHIR_CPY_WRT(types, &_4$$4);
 	}
-	zephir_is_iterable(types, 0, "queryyetsimple/support/type.zep", 189);
+	zephir_is_iterable(types, 0, "queryyetsimple/support/type.zep", 186);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(types), _5)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -326,13 +326,13 @@ PHP_METHOD(Queryyetsimple_Support_Type, arr) {
 	if (!(Z_TYPE_P(&arr) == IS_ARRAY)) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_is_iterable(&arr, 0, "queryyetsimple/support/type.zep", 224);
+	zephir_is_iterable(&arr, 0, "queryyetsimple/support/type.zep", 221);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arr), _0)
 	{
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _0);
 		ret = 0;
-		zephir_is_iterable(&types, 0, "queryyetsimple/support/type.zep", 219);
+		zephir_is_iterable(&types, 0, "queryyetsimple/support/type.zep", 216);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&types), _1$$4)
 		{
 			ZEPHIR_INIT_NVAR(&item);

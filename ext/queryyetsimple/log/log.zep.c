@@ -699,7 +699,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, save) {
 		RETURN_MM_NULL();
 	}
 	zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "queryyetsimple/log/log.zep", 298);
+	zephir_is_iterable(&_1, 0, "queryyetsimple/log/log.zep", 295);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&data);
@@ -732,7 +732,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, registerFilter) {
 
 
 	if (!(zephir_is_callable(filter TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Filter must be callable.", "queryyetsimple/log/log.zep", 310);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Filter must be callable.", "queryyetsimple/log/log.zep", 307);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("filter"), filter);
@@ -757,7 +757,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, registerProcessor) {
 
 
 	if (!(zephir_is_callable(processor TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Processor must be callable.", "queryyetsimple/log/log.zep", 324);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Processor must be callable.", "queryyetsimple/log/log.zep", 321);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("processor"), processor);
@@ -773,11 +773,11 @@ PHP_METHOD(Queryyetsimple_Log_Log, registerProcessor) {
 PHP_METHOD(Queryyetsimple_Log_Log, clear) {
 
 	zend_bool _0;
-	zval *level_param = NULL, count, _1, _2$$3, _3$$3, _4$$3, _5$$4, _6$$4;
-	zval level;
+	zval *level = NULL, level_sub, __$null, count, _1, _2$$3, _3$$3, _4$$3, _5$$4, _6$$4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&level);
+	ZVAL_UNDEF(&level_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&count);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2$$3);
@@ -787,29 +787,27 @@ PHP_METHOD(Queryyetsimple_Log_Log, clear) {
 	ZVAL_UNDEF(&_6$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &level_param);
+	zephir_fetch_params(1, 0, 1, &level);
 
-	if (!level_param) {
-		ZEPHIR_INIT_VAR(&level);
-		ZVAL_STRING(&level, "");
-	} else {
-		zephir_get_strval(&level, level_param);
+	if (!level) {
+		level = &level_sub;
+		level = &__$null;
 	}
 
 
-	_0 = zephir_is_true(&level);
+	_0 = zephir_is_true(level);
 	if (_0) {
 		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, &level);
+		_0 = zephir_array_isset(&_1, level);
 	}
 	if (_0) {
 		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 340 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 337 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&count);
 		ZVAL_LONG(&count, zephir_fast_count_int(&_3$$3 TSRMLS_CC));
 		ZEPHIR_INIT_VAR(&_4$$3);
 		array_init(&_4$$3);
-		zephir_update_property_array(this_ptr, SL("logs"), &level, &_4$$3 TSRMLS_CC);
+		zephir_update_property_array(this_ptr, SL("logs"), level, &_4$$3 TSRMLS_CC);
 	} else {
 		zephir_read_property(&_5$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_INIT_NVAR(&count);
@@ -831,37 +829,34 @@ PHP_METHOD(Queryyetsimple_Log_Log, clear) {
 PHP_METHOD(Queryyetsimple_Log_Log, get) {
 
 	zend_bool _0;
-	zval *level_param = NULL, _1, _2$$3, _3$$3;
-	zval level;
+	zval *level = NULL, level_sub, __$null, _1, _2$$3, _3$$3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&level);
+	ZVAL_UNDEF(&level_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
 
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &level_param);
+	zephir_fetch_params(0, 0, 1, &level);
 
-	if (!level_param) {
-		ZEPHIR_INIT_VAR(&level);
-		ZVAL_STRING(&level, "");
-	} else {
-		zephir_get_strval(&level, level_param);
+	if (!level) {
+		level = &level_sub;
+		level = &__$null;
 	}
 
 
-	_0 = zephir_is_true(&level);
+	_0 = zephir_is_true(level);
 	if (_0) {
 		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, &level);
+		_0 = zephir_array_isset(&_1, level);
 	}
 	if (_0) {
 		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 359 TSRMLS_CC);
-		RETURN_CTOR(&_3$$3);
+		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 356 TSRMLS_CC);
+		RETURN_CTORW(&_3$$3);
 	} else {
-		RETURN_MM_MEMBER(getThis(), "logs");
+		RETURN_MEMBER(getThis(), "logs");
 	}
 
 }
@@ -875,39 +870,36 @@ PHP_METHOD(Queryyetsimple_Log_Log, get) {
 PHP_METHOD(Queryyetsimple_Log_Log, count) {
 
 	zend_bool _0;
-	zval *level_param = NULL, _1, _2$$3, _3$$3, _4$$4;
-	zval level;
+	zval *level = NULL, level_sub, __$null, _1, _2$$3, _3$$3, _4$$4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&level);
+	ZVAL_UNDEF(&level_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
 	ZVAL_UNDEF(&_4$$4);
 
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &level_param);
+	zephir_fetch_params(0, 0, 1, &level);
 
-	if (!level_param) {
-		ZEPHIR_INIT_VAR(&level);
-		ZVAL_STRING(&level, "");
-	} else {
-		zephir_get_strval(&level, level_param);
+	if (!level) {
+		level = &level_sub;
+		level = &__$null;
 	}
 
 
-	_0 = zephir_is_true(&level);
+	_0 = zephir_is_true(level);
 	if (_0) {
 		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, &level);
+		_0 = zephir_array_isset(&_1, level);
 	}
 	if (_0) {
 		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 374 TSRMLS_CC);
-		RETURN_MM_LONG(zephir_fast_count_int(&_3$$3 TSRMLS_CC));
+		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "queryyetsimple/log/log.zep", 371 TSRMLS_CC);
+		RETURN_LONG(zephir_fast_count_int(&_3$$3 TSRMLS_CC));
 	} else {
 		zephir_read_property(&_4$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		RETURN_MM_LONG(zephir_fast_count_int(&_4$$4 TSRMLS_CC));
+		RETURN_LONG(zephir_fast_count_int(&_4$$4 TSRMLS_CC));
 	}
 
 }
@@ -935,7 +927,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, option) {
 
 
 	if (!(Z_TYPE_P(&name) == IS_STRING)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "queryyetsimple/log/log.zep", 390);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "queryyetsimple/log/log.zep", 387);
 		return;
 	}
 	zephir_update_property_array(this_ptr, SL("option"), &name, value TSRMLS_CC);
@@ -1015,7 +1007,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 429);
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 426);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -1069,7 +1061,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/log/log.zep", 441 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "queryyetsimple/log/log.zep", 438 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -1175,7 +1167,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 492);
+	zephir_is_iterable(&option, 0, "queryyetsimple/log/log.zep", 489);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1277,7 +1269,7 @@ PHP_METHOD(Queryyetsimple_Log_Log, formatMessage) {
 		RETVAL_ZVAL(message, 1, 0);
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Message is invalid.", "queryyetsimple/log/log.zep", 528);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Message is invalid.", "queryyetsimple/log/log.zep", 525);
 	return;
 
 }

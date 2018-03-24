@@ -177,7 +177,7 @@ abstract class Manager
 	 * @param string $name
 	 * @return string
 	 */
-	protected function getOptionName(string name = null)
+	protected function getOptionName(var name = null)
 	{
 		return this->getOptionNamespace() . "\\" . name;
 	}

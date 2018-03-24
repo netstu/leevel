@@ -128,7 +128,7 @@ PHP_METHOD(Queryyetsimple_Http_HeaderBag, add) {
 	}
 
 
-	zephir_is_iterable(&elements, 0, "queryyetsimple/http/headerbag.zep", 62);
+	zephir_is_iterable(&elements, 0, "queryyetsimple/http/headerbag.zep", 59);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&elements), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);

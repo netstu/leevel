@@ -106,7 +106,7 @@ PHP_METHOD(Queryyetsimple_Event_Observer, update) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/event/observer.zep", 65 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "queryyetsimple/event/observer.zep", 62 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

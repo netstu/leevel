@@ -308,7 +308,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, alias) {
 
 
 	if (Z_TYPE_P(alias) == IS_ARRAY) {
-		zephir_is_iterable(alias, 0, "queryyetsimple/di/container.zep", 201);
+		zephir_is_iterable(alias, 0, "queryyetsimple/di/container.zep", 198);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(alias), _1$$3, _2$$3, _0$$3)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -330,7 +330,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, alias) {
 	} else {
 		zephir_get_arrval(&_4$$6, value);
 		ZEPHIR_CPY_WRT(value, &_4$$6);
-		zephir_is_iterable(value, 0, "queryyetsimple/di/container.zep", 206);
+		zephir_is_iterable(value, 0, "queryyetsimple/di/container.zep", 203);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(value), _5$$6)
 		{
 			ZEPHIR_INIT_NVAR(&item);
@@ -422,10 +422,10 @@ PHP_METHOD(Queryyetsimple_Di_Container, groupMake) {
 	array_init(&result);
 	zephir_read_property(&_1, this_ptr, SL("groups"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_2);
-	zephir_array_fetch(&_2, &_1, group, PH_NOISY, "queryyetsimple/di/container.zep", 244 TSRMLS_CC);
+	zephir_array_fetch(&_2, &_1, group, PH_NOISY, "queryyetsimple/di/container.zep", 241 TSRMLS_CC);
 	zephir_get_arrval(&_3, &_2);
 	ZEPHIR_CPY_WRT(&instance, &_3);
-	zephir_is_iterable(&instance, 0, "queryyetsimple/di/container.zep", 249);
+	zephir_is_iterable(&instance, 0, "queryyetsimple/di/container.zep", 246);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&instance), _4)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -496,7 +496,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, make) {
 	zephir_read_property(&_1, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2$$3, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 268 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 265 TSRMLS_CC);
 		RETURN_CTOR(&_3$$3);
 	}
 	zephir_read_property(&_4, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
@@ -507,11 +507,11 @@ PHP_METHOD(Queryyetsimple_Di_Container, make) {
 	}
 	zephir_read_property(&_6, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_7);
-	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "queryyetsimple/di/container.zep", 276 TSRMLS_CC);
+	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "queryyetsimple/di/container.zep", 273 TSRMLS_CC);
 	_8 = Z_TYPE_P(&_7) != IS_STRING;
 	if (_8) {
 		zephir_read_property(&_9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 276 TSRMLS_CC);
+		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 273 TSRMLS_CC);
 		_8 = zephir_is_callable(&_10 TSRMLS_CC);
 	}
 	if (_8) {
@@ -524,30 +524,30 @@ PHP_METHOD(Queryyetsimple_Di_Container, make) {
 		ZEPHIR_UNREF(&args);
 		zephir_check_call_status();
 		zephir_read_property(&_11$$5, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 282 TSRMLS_CC);
+		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 279 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&instance);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(&instance, &_12$$5, &args);
 		zephir_check_call_status();
 	} else {
 		zephir_read_property(&_13$$7, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_14$$7);
-		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "queryyetsimple/di/container.zep", 284 TSRMLS_CC);
+		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "queryyetsimple/di/container.zep", 281 TSRMLS_CC);
 		if (Z_TYPE_P(&_14$$7) == IS_STRING) {
 			zephir_read_property(&_15$$8, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 285 TSRMLS_CC);
+			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 282 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&instance, this_ptr, "getinjectionobject", &_5, 0, &_16$$8, &args);
 			zephir_check_call_status();
 		} else {
 			zephir_read_property(&_17$$9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&instance);
-			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "queryyetsimple/di/container.zep", 287 TSRMLS_CC);
+			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "queryyetsimple/di/container.zep", 284 TSRMLS_CC);
 		}
 	}
 	zephir_read_property(&_18, this_ptr, SL("singletons"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_fast_in_array(name, &_18 TSRMLS_CC)) {
 		zephir_update_property_array(this_ptr, SL("instances"), name, &instance TSRMLS_CC);
 		zephir_read_property(&_19$$10, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 294 TSRMLS_CC);
+		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 291 TSRMLS_CC);
 		RETURN_CTOR(&_20$$10);
 	} else {
 		RETURN_CCTOR(&instance);
@@ -649,7 +649,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, getAlias) {
 	zephir_read_property(&_1, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "queryyetsimple/di/container.zep", 342 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "queryyetsimple/di/container.zep", 339 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, name);
 	}
@@ -738,7 +738,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseInjection) {
 	array_init(&result);
 	ZEPHIR_CALL_METHOD(&param, this_ptr, "parsereflection", NULL, 0, injection);
 	zephir_check_call_status();
-	zephir_is_iterable(&param, 0, "queryyetsimple/di/container.zep", 401);
+	zephir_is_iterable(&param, 0, "queryyetsimple/di/container.zep", 398);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&param), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -779,7 +779,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseInjection) {
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, &_6$$8, "__construct", &_8, 21, &_7$$8);
 				zephir_check_call_status();
-				zephir_throw_exception_debug(&_6$$8, "queryyetsimple/di/container.zep", 397 TSRMLS_CC);
+				zephir_throw_exception_debug(&_6$$8, "queryyetsimple/di/container.zep", 394 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
 				return;
 			}
@@ -873,7 +873,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassInstance) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 21, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 442 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 439 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -929,7 +929,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassFromContainer) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_1$$6, "__construct", NULL, 21, &_3$$6);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_1$$6, "queryyetsimple/di/container.zep", 469 TSRMLS_CC);
+			zephir_throw_exception_debug(&_1$$6, "queryyetsimple/di/container.zep", 466 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -943,7 +943,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassFromContainer) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_5, "__construct", NULL, 21, &_7);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_5, "queryyetsimple/di/container.zep", 475 TSRMLS_CC);
+	zephir_throw_exception_debug(&_5, "queryyetsimple/di/container.zep", 472 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -988,7 +988,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassNotExists) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$4, "__construct", NULL, 21, &_2$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$4, "queryyetsimple/di/container.zep", 494 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$4, "queryyetsimple/di/container.zep", 491 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1037,7 +1037,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseReflection) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "queryyetsimple/di/container.zep", 516);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "queryyetsimple/di/container.zep", 513);
 	return;
 
 }
@@ -1102,8 +1102,8 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseMethodReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionmethod")));
-	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 548 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 548 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 545 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "queryyetsimple/di/container.zep", 545 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 60, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 61);
@@ -1159,7 +1159,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseClassReflection) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 21, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/di/container.zep", 569 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "queryyetsimple/di/container.zep", 566 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1362,7 +1362,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, offsetUnset) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "singletons");
 	zephir_array_fast_append(&prop, &_1);
-	zephir_is_iterable(&prop, 0, "queryyetsimple/di/container.zep", 667);
+	zephir_is_iterable(&prop, 0, "queryyetsimple/di/container.zep", 664);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&prop), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1468,7 +1468,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 702 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "queryyetsimple/di/container.zep", 699 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
