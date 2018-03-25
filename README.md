@@ -18,7 +18,9 @@ version_compare(PHP_VERSION, '7.1.0', '<') && die('PHP 7.1.0 OR Higher');
 
 ### Windows
 
-### Compile QueryYet in Linux 
+Need to tests.
+
+### Linux 
 
 You can download the source code.
 
