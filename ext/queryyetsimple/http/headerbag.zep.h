@@ -6,6 +6,7 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Http_HeaderBag);
 PHP_METHOD(Queryyetsimple_Http_HeaderBag, __construct);
 PHP_METHOD(Queryyetsimple_Http_HeaderBag, replace);
 PHP_METHOD(Queryyetsimple_Http_HeaderBag, add);
+PHP_METHOD(Queryyetsimple_Http_HeaderBag, __toString);
 PHP_METHOD(Queryyetsimple_Http_HeaderBag, normalize);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_queryyetsimple_http_headerbag___construct, 0, 0, 0)
@@ -28,6 +29,7 @@ ZEPHIR_INIT_FUNCS(queryyetsimple_http_headerbag_method_entry) {
 	PHP_ME(Queryyetsimple_Http_HeaderBag, __construct, arginfo_queryyetsimple_http_headerbag___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Queryyetsimple_Http_HeaderBag, replace, arginfo_queryyetsimple_http_headerbag_replace, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_HeaderBag, add, arginfo_queryyetsimple_http_headerbag_add, ZEND_ACC_PUBLIC)
+	PHP_ME(Queryyetsimple_Http_HeaderBag, __toString, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Queryyetsimple_Http_HeaderBag, normalize, arginfo_queryyetsimple_http_headerbag_normalize, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

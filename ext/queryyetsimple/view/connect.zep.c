@@ -666,7 +666,7 @@ PHP_METHOD(Queryyetsimple_View_Connect, parseFile) {
 	ZEPHIR_INIT_NVAR(&tpl);
 	zephir_fast_trim(&tpl, &_0, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 	ZVAL_LONG(&_3, 4);
-	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 41, &tpl, &_3);
+	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 42, &tpl, &_3);
 	zephir_check_call_status();
 	_5 = zephir_is_true(&_4);
 	if (!(_5)) {

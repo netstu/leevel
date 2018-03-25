@@ -495,7 +495,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, merge) {
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "get", NULL, 0, &key, &_2);
 	zephir_check_call_status();
 	zephir_fast_array_merge(&_0, &_1, &value TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 54, &_0);
+	ZEPHIR_CALL_FUNCTION(&_3, "array_unique", NULL, 55, &_0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_3);
 	zephir_check_call_status();
@@ -535,7 +535,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, pop) {
 	array_init(&_1);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, 0, &key, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 55, &_0, &value);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_diff", NULL, 56, &_0, &value);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "set", NULL, 0, &key, &_2);
 	zephir_check_call_status();
@@ -1465,7 +1465,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, destroy) {
 		ZVAL_LONG(&_3$$3, (zephir_get_numberval(&_1$$3) - 42000));
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "/");
-		ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 53, &name, &_2$$3, &_3$$3, &_4$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 54, &name, &_2$$3, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_FUNCTION(NULL, "session_destroy", NULL, 113);

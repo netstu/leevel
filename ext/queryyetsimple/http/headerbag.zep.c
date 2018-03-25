@@ -16,6 +16,7 @@
 #include "kernel/memory.h"
 #include "kernel/operators.h"
 #include "kernel/object.h"
+#include "kernel/concat.h"
 #include "kernel/string.h"
 
 
@@ -145,6 +146,67 @@ PHP_METHOD(Queryyetsimple_Http_HeaderBag, add) {
 	ZEPHIR_INIT_NVAR(&value);
 	ZEPHIR_INIT_NVAR(&key);
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 格式化 header 字符串 
+ * 
+ * @return string
+ */
+PHP_METHOD(Queryyetsimple_Http_HeaderBag, __toString) {
+
+	zend_string *_2;
+	zend_ulong _1;
+	zval headers, content, name, value, *_0, _3$$4, _4$$4, _6$$4;
+	zephir_fcall_cache_entry *_5 = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&headers);
+	ZVAL_UNDEF(&content);
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&value);
+	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_6$$4);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_METHOD(&headers, this_ptr, "all", NULL, 0);
+	zephir_check_call_status();
+	if (!(zephir_is_true(&headers))) {
+		RETURN_MM_STRING("");
+	}
+	ZEPHIR_MAKE_REF(&headers);
+	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 39, &headers);
+	ZEPHIR_UNREF(&headers);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&content);
+	ZVAL_STRING(&content, "");
+	zephir_is_iterable(&headers, 0, "queryyetsimple/http/headerbag.zep", 84);
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&headers), _1, _2, _0)
+	{
+		ZEPHIR_INIT_NVAR(&name);
+		if (_2 != NULL) { 
+			ZVAL_STR_COPY(&name, _2);
+		} else {
+			ZVAL_LONG(&name, _1);
+		}
+		ZEPHIR_INIT_NVAR(&value);
+		ZVAL_COPY(&value, _0);
+		ZEPHIR_INIT_NVAR(&_3$$4);
+		ZVAL_STRING(&_3$$4, "-");
+		ZEPHIR_CALL_FUNCTION(&_4$$4, "ucwords", &_5, 23, &name, &_3$$4);
+		zephir_check_call_status();
+		ZEPHIR_CPY_WRT(&name, &_4$$4);
+		ZEPHIR_INIT_LNVAR(_6$$4);
+		ZEPHIR_CONCAT_VSVS(&_6$$4, &name, ": ", &value, "\r\n");
+		zephir_concat_self(&content, &_6$$4 TSRMLS_CC);
+	} ZEND_HASH_FOREACH_END();
+	ZEPHIR_INIT_NVAR(&value);
+	ZEPHIR_INIT_NVAR(&name);
+	RETURN_CCTOR(&content);
 
 }
 

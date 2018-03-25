@@ -57,6 +57,32 @@ class HeaderBag extends Bag
             this->set(key, value);
         }
     }
+
+    /**
+     * 格式化 header 字符串 
+     * 
+     * @return string
+     */
+    public function __toString() -> string
+    {
+        var headers, content, name, value;
+    
+        let headers = this->all();
+        if ! (headers) {
+            return "";
+        }
+
+        ksort(headers);
+
+        let content = "";
+
+        for name, value in headers {
+            let name = ucwords(name, "-");
+            let content .= name . ": " . value . "\r\n";
+        }
+
+        return content;
+    }
     
     /**
      * {@inheritdoc}
