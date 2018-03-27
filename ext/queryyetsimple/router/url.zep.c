@@ -718,7 +718,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, customUrl) {
 		array_init(&tmpQuery);
 		zephir_array_fetch_long(&_8$$5, &tmp, 1, PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 315 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
-		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_8$$5, &tmpQuery);
+		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 84, &_8$$5, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
 		zephir_read_property(&_9$$5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
@@ -1141,7 +1141,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 		ZEPHIR_INIT_VAR(&tmpAction);
 		zephir_fast_explode_str(&tmpAction, SL("/"), &_32$$16, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpAction);
-		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 104, &tmpAction);
+		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 70, &tmpAction);
 		ZEPHIR_UNREF(&tmpAction);
 		zephir_check_call_status();
 		zephir_array_update_string(&result, SL("action"), &_33$$16, PH_COPY | PH_SEPARATE);
@@ -1154,7 +1154,7 @@ PHP_METHOD(Queryyetsimple_Router_Url, parseMvc) {
 		array_init(&tmpQuery);
 		zephir_array_fetch_string(&_35$$17, &parse, SL("query"), PH_NOISY | PH_READONLY, "queryyetsimple/router/url.zep", 480 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
-		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_35$$17, &tmpQuery);
+		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 84, &_35$$17, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
 		zephir_is_iterable(&params, 0, "queryyetsimple/router/url.zep", 486);

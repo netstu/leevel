@@ -167,7 +167,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, import) {
 	if (_1) {
 		RETURN_MM_NULL();
 	}
-	ZEPHIR_CALL_FUNCTION(&packagePath, "realpath", NULL, 103, &package);
+	ZEPHIR_CALL_FUNCTION(&packagePath, "realpath", NULL, 104, &package);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_3, this_ptr, "composer", NULL, 0);
 	zephir_check_call_status();
@@ -411,7 +411,7 @@ PHP_METHOD(Queryyetsimple_Psr4_Psr4, shortNamespaceMap) {
 		ZEPHIR_INIT_VAR(&tmp);
 		zephir_fast_explode_str(&tmp, SL("\\"), &classname, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmp);
-		ZEPHIR_CALL_FUNCTION(&definedClass, "array_pop", NULL, 104, &tmp);
+		ZEPHIR_CALL_FUNCTION(&definedClass, "array_pop", NULL, 70, &tmp);
 		ZEPHIR_UNREF(&tmp);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&namespaces);

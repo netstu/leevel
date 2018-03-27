@@ -30,7 +30,7 @@ cd ext
 ```
 
 
-The compile it.
+Then compile it.
 
 ```
 $/path/to/phpize

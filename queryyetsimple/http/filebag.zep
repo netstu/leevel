@@ -95,21 +95,21 @@ class FileBag extends Bag
      * 数组文件请在末尾加上反斜杆访问
      *
      * @param string $key
-     * @param mixed $defaults
+     * @param array $defaults
      * @return mixed
      */
-    public function getArr(string key, var defaults = null)
+    public function getArr(string key, array defaults = [])
     {
         var files, k, value;
     
         let files = [];
         for k, value in this->elements {
-            if strpos(k, key) === 0 {
+            if strpos(k, key) === 0 && typeof value !== "null" {
                 let files[] = value;
             }
         }
 
-        return files ? files: defaults;
+        return files ? files : defaults;
     }
     
     /**
@@ -175,21 +175,25 @@ class FileBag extends Bag
         let result = [];
 
         for key, value in elements {
-            if ! (isset value["name"]) {
-                throw new InvalidArgumentException("An uploaded file must be contain key name.");
-            } elseif is_array(value["name"]) {
-                for index, item in value["name"] {
-                    let element = [];
+            if typeof value == "array" {
+                if array_key_exists("name", value) === false {
+                    throw new InvalidArgumentException("An uploaded file must be contain key name.");
+                } elseif isset value["name"] && is_array(value["name"]) {
+                    for index, item in value["name"] {
+                        let element = [];
 
-                    for fileKey in self::fileKeys {
-                        if ! isset value[fileKey][index] {
-                            throw new InvalidArgumentException(sprintf("An uploaded file must be contain key %s.", fileKey));
+                        for fileKey in self::fileKeys {
+                            if ! array_key_exists(index, value[fileKey]) {
+                                throw new InvalidArgumentException(sprintf("An uploaded file must be contain key %s.", fileKey));
+                            }
+                            let element[fileKey] = isset value[fileKey][index] ? value[fileKey][index] : "";
                         }
-                        let element[fileKey] = isset value[fileKey][index] ? value[fileKey][index] : "";
-                    }
 
-                    let result[key . "\\" . index] = element;
-                    let result = this->normalizeArray(result);
+                        let result[key . "\\" . index] = element;
+                        let result = this->normalizeArray(result);
+                    }
+                } else {
+                    let result[key] = value;
                 }
             } else {
                 let result[key] = value;

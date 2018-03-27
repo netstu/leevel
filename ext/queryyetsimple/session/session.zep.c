@@ -1736,7 +1736,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getCookieDomain) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.cookie_domain");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 92, &_0);
+	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 93, &_0);
 	zephir_check_call_status();
 	RETURN_CCTOR(&result);
 
@@ -1918,7 +1918,7 @@ PHP_METHOD(Queryyetsimple_Session_Session, getGcProbability) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.gc_probability");
-	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 92, &_0);
+	ZEPHIR_CALL_FUNCTION(&result, "ini_get", NULL, 93, &_0);
 	zephir_check_call_status();
 	RETURN_CCTOR(&result);
 
