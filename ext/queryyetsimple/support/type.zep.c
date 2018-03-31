@@ -232,27 +232,25 @@ PHP_METHOD(Queryyetsimple_Support_Type, ints) {
  */
 PHP_METHOD(Queryyetsimple_Support_Type, these) {
 
-	zval _4$$4;
 	zend_bool _2;
-	zephir_fcall_cache_entry *_7 = NULL;
+	zephir_fcall_cache_entry *_6 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *value, value_sub, *types = NULL, types_sub, tmp, item, _0, _1, _3, *_5, _6$$5;
+	zval *value, value_sub, *types, types_sub, tmp, item, tmps, _0, _1, _3, *_4, _5$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
 	ZVAL_UNDEF(&types_sub);
 	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&item);
+	ZVAL_UNDEF(&tmps);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &value, &types);
 
-	ZEPHIR_SEPARATE_PARAM(types);
 
 
 	ZEPHIR_INIT_VAR(&tmp);
@@ -275,17 +273,20 @@ PHP_METHOD(Queryyetsimple_Support_Type, these) {
 		return;
 	}
 	if (Z_TYPE_P(types) == IS_STRING) {
-		zephir_get_arrval(&_4$$4, types);
-		ZEPHIR_CPY_WRT(types, &_4$$4);
+		ZEPHIR_INIT_VAR(&tmps);
+		zephir_create_array(&tmps, 1, 0 TSRMLS_CC);
+		zephir_array_fast_append(&tmps, types);
+	} else {
+		ZEPHIR_CPY_WRT(&tmps, types);
 	}
-	zephir_is_iterable(types, 0, "queryyetsimple/support/type.zep", 186);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(types), _5)
+	zephir_is_iterable(&tmps, 0, "queryyetsimple/support/type.zep", 188);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmps), _4)
 	{
 		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _5);
-		ZEPHIR_CALL_SELF(&_6$$5, "vars", &_7, 0, value, &item);
+		ZVAL_COPY(&item, _4);
+		ZEPHIR_CALL_SELF(&_5$$6, "vars", &_6, 0, value, &item);
 		zephir_check_call_status();
-		if (zephir_is_true(&_6$$5)) {
+		if (zephir_is_true(&_5$$6)) {
 			RETURN_MM_BOOL(1);
 		}
 	} ZEND_HASH_FOREACH_END();
@@ -326,13 +327,13 @@ PHP_METHOD(Queryyetsimple_Support_Type, arr) {
 	if (!(Z_TYPE_P(&arr) == IS_ARRAY)) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_is_iterable(&arr, 0, "queryyetsimple/support/type.zep", 221);
+	zephir_is_iterable(&arr, 0, "queryyetsimple/support/type.zep", 223);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arr), _0)
 	{
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _0);
 		ret = 0;
-		zephir_is_iterable(&types, 0, "queryyetsimple/support/type.zep", 216);
+		zephir_is_iterable(&types, 0, "queryyetsimple/support/type.zep", 218);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&types), _1$$4)
 		{
 			ZEPHIR_INIT_NVAR(&item);

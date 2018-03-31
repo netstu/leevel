@@ -26,6 +26,20 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Http_ResponseHeaderBag) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Queryyetsimple\\Http, ResponseHeaderBag, queryyetsimple, http_responseheaderbag, queryyetsimple_http_headerbag_ce, NULL, 0);
 
+	/**
+	 * 下载附件
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(queryyetsimple_http_responseheaderbag_ce, SL("DISPOSITION_ATTACHMENT"), "attachment");
+
+	/**
+	 * 文件直接读取
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(queryyetsimple_http_responseheaderbag_ce, SL("DISPOSITION_INLINE"), "inline");
+
 	return SUCCESS;
 
 }

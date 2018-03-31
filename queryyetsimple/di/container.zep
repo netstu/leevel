@@ -384,7 +384,7 @@ class Container implements IContainer, ArrayAccess {
 				if (argsclass) {
 					let data = this->parseClassInstance(argsclass);
 				} elseif (item->isDefaultValueAvailable()) {
-					let data = this->parseClassInstance(argsclass);
+					let data = item->getDefaultValue();
 				} else {
 					let data = null;
 				}

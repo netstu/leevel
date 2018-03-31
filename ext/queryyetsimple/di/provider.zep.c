@@ -363,26 +363,24 @@ PHP_METHOD(Queryyetsimple_Di_Provider, alias) {
  */
 PHP_METHOD(Queryyetsimple_Di_Provider, loadI18nDir) {
 
-	zval _5$$5;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *dir = NULL, dir_sub, option, load, _0, _1, _2, _3, _4, _6;
+	zval *dir, dir_sub, option, load, tmp, _0, _1, _2, _3, _4, _5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&dir_sub);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&load);
+	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_5$$5);
+	ZVAL_UNDEF(&_5);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &dir);
 
-	ZEPHIR_SEPARATE_PARAM(dir);
 
 
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
@@ -409,15 +407,18 @@ PHP_METHOD(Queryyetsimple_Di_Provider, loadI18nDir) {
 		RETURN_MM_NULL();
 	}
 	if (!(Z_TYPE_P(dir) == IS_ARRAY)) {
-		zephir_get_arrval(&_5$$5, dir);
-		ZEPHIR_CPY_WRT(dir, &_5$$5);
+		ZEPHIR_INIT_VAR(&tmp);
+		zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
+		zephir_array_fast_append(&tmp, dir);
+	} else {
+		ZEPHIR_CPY_WRT(&tmp, dir);
 	}
-	zephir_read_property(&_6, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "i18n.load");
-	ZEPHIR_CALL_METHOD(&load, &_6, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&load, &_5, "make", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &load, "adddir", NULL, 0, dir);
+	ZEPHIR_CALL_METHOD(NULL, &load, "adddir", NULL, 0, &tmp);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -431,10 +432,9 @@ PHP_METHOD(Queryyetsimple_Di_Provider, loadI18nDir) {
  */
 PHP_METHOD(Queryyetsimple_Di_Provider, loadCommandNamespace) {
 
-	zval _2$$4;
-	zephir_fcall_cache_entry *_8 = NULL;
+	zephir_fcall_cache_entry *_7 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *namespaces = NULL, namespaces_sub, result, item, psr4, load, _0, _1, _3, _4, _5, *_6, _7$$5;
+	zval *namespaces, namespaces_sub, result, item, psr4, load, tmp, _0, _1, _2, _3, _4, *_5, _6$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&namespaces_sub);
@@ -442,18 +442,17 @@ PHP_METHOD(Queryyetsimple_Di_Provider, loadCommandNamespace) {
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&psr4);
 	ZVAL_UNDEF(&load);
+	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_7$$5);
-	ZVAL_UNDEF(&_2$$4);
+	ZVAL_UNDEF(&_6$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &namespaces);
 
-	ZEPHIR_SEPARATE_PARAM(namespaces);
 
 
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
@@ -465,27 +464,30 @@ PHP_METHOD(Queryyetsimple_Di_Provider, loadCommandNamespace) {
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
 	if (!(Z_TYPE_P(namespaces) == IS_ARRAY)) {
-		zephir_get_arrval(&_2$$4, namespaces);
-		ZEPHIR_CPY_WRT(namespaces, &_2$$4);
+		ZEPHIR_INIT_VAR(&tmp);
+		zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
+		zephir_array_fast_append(&tmp, namespaces);
+	} else {
+		ZEPHIR_CPY_WRT(&tmp, namespaces);
 	}
-	zephir_read_property(&_3, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_4);
-	ZVAL_STRING(&_4, "psr4");
-	ZEPHIR_CALL_METHOD(&psr4, &_3, "make", NULL, 0, &_4);
+	zephir_read_property(&_2, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "psr4");
+	ZEPHIR_CALL_METHOD(&psr4, &_2, "make", NULL, 0, &_3);
 	zephir_check_call_status();
-	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_4);
-	ZVAL_STRING(&_4, "console.load");
-	ZEPHIR_CALL_METHOD(&load, &_5, "make", NULL, 0, &_4);
+	zephir_read_property(&_4, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_3);
+	ZVAL_STRING(&_3, "console.load");
+	ZEPHIR_CALL_METHOD(&load, &_4, "make", NULL, 0, &_3);
 	zephir_check_call_status();
-	zephir_is_iterable(namespaces, 0, "queryyetsimple/di/provider.zep", 229);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(namespaces), _6)
+	zephir_is_iterable(&tmp, 0, "queryyetsimple/di/provider.zep", 233);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _5)
 	{
 		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _6);
-		ZEPHIR_CALL_METHOD(&_7$$5, &psr4, "namespaces", &_8, 0, &item);
+		ZVAL_COPY(&item, _5);
+		ZEPHIR_CALL_METHOD(&_6$$6, &psr4, "namespaces", &_7, 0, &item);
 		zephir_check_call_status();
-		zephir_array_update_zval(&result, &item, &_7$$5, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&result, &item, &_6$$6, PH_COPY | PH_SEPARATE);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	ZEPHIR_CALL_METHOD(NULL, &load, "addnamespace", NULL, 0, &result);
@@ -533,7 +535,7 @@ PHP_METHOD(Queryyetsimple_Di_Provider, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "queryyetsimple/di/provider.zep", 244 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "queryyetsimple/di/provider.zep", 248 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

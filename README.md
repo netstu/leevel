@@ -1,8 +1,17 @@
 ![](queryyetsimple.png)
 
+<p align="center">
+  <a href="https://github.com/hunzhiwange/queryphp/releases">
+    <img alt="Latest Version" src="https://img.shields.io/packagist/vpre/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+  <a href="https://travis-ci.org/hunzhiwange/queryphp">
+    <img alt="Build Status" src="https://img.shields.io/travis/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+  <a href="https://secure.php.net/">
+    <img alt="Php Version" src="https://img.shields.io/packagist/php-v/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+  <a href="https://github.com/hunzhiwange/queryphp/blob/master/LICENSE">
+    <img alt="QueryPHP License" src="https://img.shields.io/packagist/l/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+</p>
+
 # The QueryYetSimple Framework To Rebuild QueryPHP
-
-
 
 QueryYetSimple is an open source web framework delivered as a C extension and supplement for the QueryPHP framework providing high performance and lower resource consumption.
 

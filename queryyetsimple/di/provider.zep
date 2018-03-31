@@ -180,7 +180,7 @@ abstract class Provider
      */
     protected function loadI18nDir(dir)
     {
-        var option, load;
+        var option, load, tmp;
 
         let option = this->container->make("option");
 
@@ -193,11 +193,13 @@ abstract class Provider
         }
 
         if ! (is_array(dir)) {
-            let dir = (array) dir;
+            let tmp = [dir];
+        } else {
+            let tmp = dir;
         }
 
         let load = this->container->make("i18n.load");
-        load->addDir(dir);
+        load->addDir(tmp);
     }
     
     /**
@@ -208,7 +210,7 @@ abstract class Provider
      */
     protected function loadCommandNamespace(namespaces)
     {
-        var result, item, psr4, load;
+        var result, item, psr4, load, tmp;
     
         if ! (this->container->console()) {
             return;
@@ -216,13 +218,15 @@ abstract class Provider
 
         let result = [];
         if ! (is_array(namespaces)) {
-            let namespaces = (array) namespaces;
+            let tmp = [namespaces];
+        } else {
+            let tmp = namespaces;
         }
 
         let psr4 = this->container->make("psr4");
         let load = this->container->make("console.load");
 
-        for item in namespaces {
+        for item in tmp {
             let result[item] = psr4->namespaces(item);
         }
 

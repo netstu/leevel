@@ -20,7 +20,7 @@
 #include "kernel/exception.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/array.h"
-#include "kernel/concat.h"
+#include "kernel/string.h"
 #include "kernel/file.h"
 
 
@@ -44,20 +44,6 @@ ZEPHIR_INIT_CLASS(Queryyetsimple_Http_FileResponse) {
 	 * @var \Queryyetsimple\Http\File
 	 */
 	zend_declare_property_null(queryyetsimple_http_fileresponse_ce, SL("file"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * 下载附件
-	 *
-	 * @var string
-	 */
-	zephir_declare_class_constant_string(queryyetsimple_http_fileresponse_ce, SL("DISPOSITION_ATTACHMENT"), "attachment");
-
-	/**
-	 * 文件直接读取
-	 *
-	 * @var string
-	 */
-	zephir_declare_class_constant_string(queryyetsimple_http_fileresponse_ce, SL("DISPOSITION_INLINE"), "inline");
 
 	return SUCCESS;
 
@@ -213,7 +199,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, create) {
 	} else {
 		ZVAL_BOOL(&_2, 0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 73, file, &_0, &headers, contentDisposition, &_1, &_2);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 72, file, &_0, &headers, contentDisposition, &_1, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -297,10 +283,10 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setFile) {
 			zephir_check_call_status();
 		}
 	}
-	ZEPHIR_CALL_METHOD(&_7, &files, "isreadable", NULL, 74);
+	ZEPHIR_CALL_METHOD(&_7, &files, "isreadable", NULL, 73);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_7))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(queryyetsimple_http_fileexception_ce, "File must be readable.", "queryyetsimple/http/fileresponse.zep", 118);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(queryyetsimple_http_fileexception_ce, "File must be readable.", "queryyetsimple/http/fileresponse.zep", 104);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("file"), &files);
@@ -404,9 +390,9 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setAutoEtag) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	ZVAL_STRING(&_3, "sha256");
-	ZEPHIR_CALL_FUNCTION(&_4, "hash_file", NULL, 75, &_3, &_2, &__$true);
+	ZEPHIR_CALL_FUNCTION(&_4, "hash_file", NULL, 74, &_3, &_2, &__$true);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&etag, "base64_encode", NULL, 76, &_4);
+	ZEPHIR_CALL_FUNCTION(&etag, "base64_encode", NULL, 75, &_4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setetag", NULL, 0, &etag);
 	zephir_check_call_status();
@@ -437,7 +423,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setContent) {
 		RETURN_THIS();
 	}
 	if (Z_TYPE_P(content) != IS_NULL) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_LogicException, "The content cannot be set on a FileResponse instance.", "queryyetsimple/http/fileresponse.zep", 193);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_LogicException, "The content cannot be set on a FileResponse instance.", "queryyetsimple/http/fileresponse.zep", 179);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();
@@ -466,7 +452,7 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, getContent) {
 PHP_METHOD(Queryyetsimple_Http_FileResponse, setContentDisposition) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *disposition_param = NULL, *filename = NULL, filename_sub, tmp, _0, _2, _3, _4, _5, _1$$4;
+	zval *disposition_param = NULL, *filename = NULL, filename_sub, tmp, _0, _2, _3, _4, _5, _6, _7, _8, _1$$4;
 	zval disposition;
 	zval *this_ptr = getThis();
 
@@ -478,6 +464,9 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setContentDisposition) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_1$$4);
 
 	ZEPHIR_MM_GROW();
@@ -512,17 +501,25 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, setContentDisposition) {
 	ZVAL_STRING(&_2, "inline");
 	zephir_array_fast_append(&tmp, &_2);
 	if (!(zephir_fast_in_array(&disposition, &tmp TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "queryyetsimple/http/fileresponse.zep", 230);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "queryyetsimple/http/fileresponse.zep", 216);
 		return;
 	}
 	zephir_read_property(&_3, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_NVAR(&_2);
-	zephir_basename(&_2, filename TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_4);
-	ZEPHIR_CONCAT_VSV(&_4, &disposition, ";filename=", &_2);
+	zephir_basename(&_4, filename TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_5);
-	ZVAL_STRING(&_5, "Content-Disposition");
-	ZEPHIR_CALL_METHOD(NULL, &_3, "set", NULL, 0, &_5, &_4);
+	ZVAL_STRING(&_5, "\"");
+	ZEPHIR_INIT_VAR(&_6);
+	ZVAL_STRING(&_6, "\\\"");
+	zephir_fast_str_replace(&_2, &_5, &_6, &_4 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_7);
+	ZVAL_STRING(&_7, "%s; filename=\"%s\"");
+	ZEPHIR_CALL_FUNCTION(&_8, "sprintf", NULL, 1, &_7, &disposition, &_2);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_7);
+	ZVAL_STRING(&_7, "Content-Disposition");
+	ZEPHIR_CALL_METHOD(NULL, &_3, "set", NULL, 0, &_7, &_8);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -565,16 +562,16 @@ PHP_METHOD(Queryyetsimple_Http_FileResponse, sendContent) {
 	ZVAL_STRING(&_3, "php://output");
 	ZEPHIR_INIT_VAR(&_4);
 	ZVAL_STRING(&_4, "wb");
-	ZEPHIR_CALL_FUNCTION(&out, "fopen", &_5, 77, &_3, &_4);
+	ZEPHIR_CALL_FUNCTION(&out, "fopen", &_5, 76, &_3, &_4);
 	zephir_check_call_status();
 	zephir_read_property(&_6, this_ptr, SL("file"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_7, &_6, "getpathname", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_STRING(&_3, "rb");
-	ZEPHIR_CALL_FUNCTION(&file, "fopen", &_5, 77, &_7, &_3);
+	ZEPHIR_CALL_FUNCTION(&file, "fopen", &_5, 76, &_7, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "stream_copy_to_stream", NULL, 78, &file, &out);
+	ZEPHIR_CALL_FUNCTION(NULL, "stream_copy_to_stream", NULL, 77, &file, &out);
 	zephir_check_call_status();
 	zephir_fclose(&out TSRMLS_CC);
 	zephir_fclose(&file TSRMLS_CC);

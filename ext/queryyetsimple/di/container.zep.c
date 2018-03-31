@@ -754,7 +754,7 @@ PHP_METHOD(Queryyetsimple_Di_Container, parseInjection) {
 				ZEPHIR_CALL_METHOD(&data, this_ptr, "parseclassinstance", &_3, 0, &argsclass);
 				zephir_check_call_status_or_jump(try_end_1);
 			} else if (zephir_is_true(&_2$$4)) {
-				ZEPHIR_CALL_METHOD(&data, this_ptr, "parseclassinstance", &_3, 0, &argsclass);
+				ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
 				zephir_check_call_status_or_jump(try_end_1);
 			} else {
 				ZEPHIR_INIT_NVAR(&data);

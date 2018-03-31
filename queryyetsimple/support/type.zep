@@ -169,7 +169,7 @@ class Type
      */
     public static function these(value, types) -> boolean
     {
-        var tmp, item;
+        var tmp, item, tmps;
     
         let tmp = ["string"];
         if ! (self::vars(types, "string")) && ! (self::arr(types, tmp)) {
@@ -177,11 +177,13 @@ class Type
         }
 
         if is_string(types) {
-            let types = (array) types;
+            let tmps = [types];
+        } else {
+            let tmps = types;
         }
 
         // 类型检查
-        for item in types {
+        for item in tmps {
             if self::vars(value, item) {
                 return true;
             }

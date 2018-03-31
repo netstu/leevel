@@ -40,20 +40,6 @@ class FileResponse extends Response
      * @var \Queryyetsimple\Http\File
      */
     protected file;
-    
-    /**
-     * 下载附件
-     *
-     * @var string
-     */
-    const DISPOSITION_ATTACHMENT = "attachment";
-
-    /**
-     * 文件直接读取
-     *
-     * @var string
-     */
-    const DISPOSITION_INLINE = "inline";
 
     /**
      * 构造函数
@@ -222,15 +208,15 @@ class FileResponse extends Response
         }
 
         let tmp = [
-        	self::DISPOSITION_ATTACHMENT, 
-        	self::DISPOSITION_INLINE
+        	ResponseHeaderBag::DISPOSITION_ATTACHMENT, 
+        	ResponseHeaderBag::DISPOSITION_INLINE
         ];
         
         if ! (in_array(disposition, tmp)) {
             throw new InvalidArgumentException("The disposition type is invalid.");
         }
 
-        this->headers->set("Content-Disposition", disposition . ";filename=" . basename(filename));
+        this->headers->set("Content-Disposition", sprintf("%s; filename=\"%s\"", disposition, str_replace("\"", "\\\"", basename(filename))));
 
         return this;
     }

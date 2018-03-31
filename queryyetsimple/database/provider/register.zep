@@ -82,6 +82,7 @@ class Register extends Provider
         		"Qys\\Database\\IDatabase"
         	]
         ];
+        
         return tmp;
     }
     
