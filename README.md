@@ -7,7 +7,7 @@
     <img alt="Build Status" src="https://img.shields.io/travis/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
   <a href="https://secure.php.net/">
     <img alt="Php Version" src="https://img.shields.io/packagist/php-v/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
-  <a href="https://github.com/hunzhiwange/queryphp/blob/master/LICENSE">
+  <a href="http://opensource.org/licenses/MIT">
     <img alt="QueryPHP License" src="https://img.shields.io/packagist/l/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
 </p>
 
@@ -20,7 +20,7 @@ QueryYetSimple is called QueryYet for short.
 ## Requirement
 
 ```
-version_compare(PHP_VERSION, '7.1.0', '<') && die('PHP 7.1.0 OR Higher');
+version_compare(PHP_VERSION, '7.1.3', '<') && die('PHP 7.1.3 OR Higher');
 ```
 
 ## How to install
