@@ -16,5 +16,5 @@ fi
 
 ${phpize_bin} --silent
 
-./configure --silent --enable-queryyetsimple
+./configure --silent --enable-leevel
 make -s && sudo make -s install

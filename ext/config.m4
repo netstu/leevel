@@ -1,165 +1,165 @@
-PHP_ARG_ENABLE(queryyetsimple, whether to enable queryyetsimple, [ --enable-queryyetsimple   Enable Queryyetsimple])
+PHP_ARG_ENABLE(leevel, whether to enable leevel, [ --enable-leevel   Enable Leevel])
 
-if test "$PHP_QUERYYETSIMPLE" = "yes"; then
+if test "$PHP_LEEVEL" = "yes"; then
 
 	
 
 	if ! test "x" = "x"; then
-		PHP_EVAL_LIBLINE(, QUERYYETSIMPLE_SHARED_LIBADD)
+		PHP_EVAL_LIBLINE(, LEEVEL_SHARED_LIBADD)
 	fi
 
-	AC_DEFINE(HAVE_QUERYYETSIMPLE, 1, [Whether you have Queryyetsimple])
-	queryyetsimple_sources="queryyetsimple.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c queryyetsimple/support/facade.zep.c
-	queryyetsimple/di/provider.zep.c
-	queryyetsimple/option/iclass.zep.c
-	queryyetsimple/support/iarray.zep.c
-	queryyetsimple/support/imacro.zep.c
-	queryyetsimple/support/ijson.zep.c
-	queryyetsimple/flow/icontrol.zep.c
-	queryyetsimple/http/iresponse.zep.c
-	queryyetsimple/http/bag.zep.c
-	queryyetsimple/http/response.zep.c
-	queryyetsimple/manager/manager.zep.c
-	queryyetsimple/mvc/iview.zep.c
-	queryyetsimple/log/connect.zep.c
-	queryyetsimple/log/iconnect.zep.c
-	queryyetsimple/cookie/icookie.zep.c
-	queryyetsimple/di/icontainer.zep.c
-	queryyetsimple/event/idispatch.zep.c
-	queryyetsimple/event/isubject.zep.c
-	queryyetsimple/http/file.zep.c
-	queryyetsimple/http/fileexception.zep.c
-	queryyetsimple/http/headerbag.zep.c
-	queryyetsimple/http/irequest.zep.c
-	queryyetsimple/http/jsonresponse.zep.c
-	queryyetsimple/i18n/ii18n.zep.c
-	queryyetsimple/log/ilog.zep.c
-	queryyetsimple/mvc/icontroller.zep.c
-	queryyetsimple/mvc/ientity.zep.c
-	queryyetsimple/option/ioption.zep.c
-	queryyetsimple/pipeline/ipipeline.zep.c
-	queryyetsimple/psr4/ipsr4.zep.c
-	queryyetsimple/router/iurl.zep.c
-	queryyetsimple/session/isession.zep.c
-	queryyetsimple/view/connect.zep.c
-	queryyetsimple/view/iconnect.zep.c
-	queryyetsimple/view/iview.zep.c
-	queryyetsimple/auth.zep.c
-	queryyetsimple/auth/provider/register.zep.c
-	queryyetsimple/cache.zep.c
-	queryyetsimple/cache/provider/register.zep.c
-	queryyetsimple/collection/collection.zep.c
-	queryyetsimple/cookie.zep.c
-	queryyetsimple/cookie/cookie.zep.c
-	queryyetsimple/cookie/provider/register.zep.c
-	queryyetsimple/database.zep.c
-	queryyetsimple/database/provider/register.zep.c
-	queryyetsimple/db.zep.c
-	queryyetsimple/di/container.zep.c
-	queryyetsimple/encryption.zep.c
-	queryyetsimple/encryption/provider/register.zep.c
-	queryyetsimple/event.zep.c
-	queryyetsimple/event/dispatch.zep.c
-	queryyetsimple/event/eventprovider.zep.c
-	queryyetsimple/event/observer.zep.c
-	queryyetsimple/event/provider/register.zep.c
-	queryyetsimple/event/subject.zep.c
-	queryyetsimple/filesystem.zep.c
-	queryyetsimple/filesystem/provider/register.zep.c
-	queryyetsimple/http/apiresponse.zep.c
-	queryyetsimple/http/filebag.zep.c
-	queryyetsimple/http/filenotfoundexception.zep.c
-	queryyetsimple/http/fileresponse.zep.c
-	queryyetsimple/http/redirectresponse.zep.c
-	queryyetsimple/http/request.zep.c
-	queryyetsimple/http/responseheaderbag.zep.c
-	queryyetsimple/http/serverbag.zep.c
-	queryyetsimple/http/uploadedfile.zep.c
-	queryyetsimple/i18n.zep.c
-	queryyetsimple/i18n/i18n.zep.c
-	queryyetsimple/i18n/provider/register.zep.c
-	queryyetsimple/log.zep.c
-	queryyetsimple/log/file.zep.c
-	queryyetsimple/log/log.zep.c
-	queryyetsimple/log/manager.zep.c
-	queryyetsimple/log/middleware/log.zep.c
-	queryyetsimple/log/monolog.zep.c
-	queryyetsimple/log/provider/register.zep.c
-	queryyetsimple/mail.zep.c
-	queryyetsimple/mail/provider/register.zep.c
-	queryyetsimple/mvc/controller.zep.c
-	queryyetsimple/mvc/imodel.zep.c
-	queryyetsimple/mvc/view.zep.c
-	queryyetsimple/option.zep.c
-	queryyetsimple/option/option.zep.c
-	queryyetsimple/option/provider/register.zep.c
-	queryyetsimple/pipeline/pipeline.zep.c
-	queryyetsimple/psr4.zep.c
-	queryyetsimple/psr4/psr4.zep.c
-	queryyetsimple/request.zep.c
-	queryyetsimple/response.zep.c
-	queryyetsimple/router.zep.c
-	queryyetsimple/router/irouter.zep.c
-	queryyetsimple/router/provider/register.zep.c
-	queryyetsimple/router/url.zep.c
-	queryyetsimple/session.zep.c
-	queryyetsimple/session/manager.zep.c
-	queryyetsimple/session/middleware/session.zep.c
-	queryyetsimple/session/provider/register.zep.c
-	queryyetsimple/session/session.zep.c
-	queryyetsimple/support/closureuse.zep.c
-	queryyetsimple/support/ihtml.zep.c
-	queryyetsimple/support/type.zep.c
-	queryyetsimple/throttler.zep.c
-	queryyetsimple/throttler/provider/register.zep.c
-	queryyetsimple/url.zep.c
-	queryyetsimple/validate.zep.c
-	queryyetsimple/validate/provider/register.zep.c
-	queryyetsimple/view.zep.c
-	queryyetsimple/view/html.zep.c
-	queryyetsimple/view/manager.zep.c
-	queryyetsimple/view/provider/register.zep.c
-	queryyetsimple/view/view.zep.c
-	queryyetsimple/0__closure.zep.c
-	queryyetsimple/1__closure.zep.c
-	queryyetsimple/2__closure.zep.c
-	queryyetsimple/3__closure.zep.c
-	queryyetsimple/4__closure.zep.c
-	queryyetsimple/5__closure.zep.c
-	queryyetsimple/6__closure.zep.c
-	queryyetsimple/7__closure.zep.c
-	queryyetsimple/8__closure.zep.c
-	queryyetsimple/9__closure.zep.c
-	queryyetsimple/10__closure.zep.c
-	queryyetsimple/11__closure.zep.c
-	queryyetsimple/12__closure.zep.c
-	queryyetsimple/13__closure.zep.c
-	queryyetsimple/14__closure.zep.c
-	queryyetsimple/15__closure.zep.c
-	queryyetsimple/16__closure.zep.c
-	queryyetsimple/17__closure.zep.c
-	queryyetsimple/18__closure.zep.c
-	queryyetsimple/19__closure.zep.c
-	queryyetsimple/20__closure.zep.c
-	queryyetsimple/21__closure.zep.c
-	queryyetsimple/22__closure.zep.c
-	queryyetsimple/23__closure.zep.c
-	queryyetsimple/24__closure.zep.c
-	queryyetsimple/25__closure.zep.c
-	queryyetsimple/26__closure.zep.c
-	queryyetsimple/27__closure.zep.c
-	queryyetsimple/28__closure.zep.c
-	queryyetsimple/29__closure.zep.c
-	queryyetsimple/30__closure.zep.c
-	queryyetsimple/31__closure.zep.c
-	queryyetsimple/32__closure.zep.c
-	queryyetsimple/33__closure.zep.c
-	queryyetsimple/34__closure.zep.c
-	queryyetsimple/35__closure.zep.c
-	queryyetsimple/36__closure.zep.c
-	queryyetsimple/37__closure.zep.c "
-	PHP_NEW_EXTENSION(queryyetsimple, $queryyetsimple_sources, $ext_shared,, )
-	PHP_SUBST(QUERYYETSIMPLE_SHARED_LIBADD)
+	AC_DEFINE(HAVE_LEEVEL, 1, [Whether you have Leevel])
+	leevel_sources="leevel.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c leevel/support/facade.zep.c
+	leevel/di/provider.zep.c
+	leevel/option/iclass.zep.c
+	leevel/support/iarray.zep.c
+	leevel/support/imacro.zep.c
+	leevel/support/ijson.zep.c
+	leevel/flow/icontrol.zep.c
+	leevel/http/iresponse.zep.c
+	leevel/http/bag.zep.c
+	leevel/http/response.zep.c
+	leevel/manager/manager.zep.c
+	leevel/mvc/iview.zep.c
+	leevel/log/connect.zep.c
+	leevel/log/iconnect.zep.c
+	leevel/cookie/icookie.zep.c
+	leevel/di/icontainer.zep.c
+	leevel/event/idispatch.zep.c
+	leevel/event/isubject.zep.c
+	leevel/http/file.zep.c
+	leevel/http/fileexception.zep.c
+	leevel/http/headerbag.zep.c
+	leevel/http/irequest.zep.c
+	leevel/http/jsonresponse.zep.c
+	leevel/i18n/ii18n.zep.c
+	leevel/log/ilog.zep.c
+	leevel/mvc/icontroller.zep.c
+	leevel/mvc/ientity.zep.c
+	leevel/option/ioption.zep.c
+	leevel/pipeline/ipipeline.zep.c
+	leevel/psr4/ipsr4.zep.c
+	leevel/router/iurl.zep.c
+	leevel/session/isession.zep.c
+	leevel/view/connect.zep.c
+	leevel/view/iconnect.zep.c
+	leevel/view/iview.zep.c
+	leevel/auth.zep.c
+	leevel/auth/provider/register.zep.c
+	leevel/cache.zep.c
+	leevel/cache/provider/register.zep.c
+	leevel/collection/collection.zep.c
+	leevel/cookie.zep.c
+	leevel/cookie/cookie.zep.c
+	leevel/cookie/provider/register.zep.c
+	leevel/database.zep.c
+	leevel/database/provider/register.zep.c
+	leevel/db.zep.c
+	leevel/di/container.zep.c
+	leevel/encryption.zep.c
+	leevel/encryption/provider/register.zep.c
+	leevel/event.zep.c
+	leevel/event/dispatch.zep.c
+	leevel/event/eventprovider.zep.c
+	leevel/event/observer.zep.c
+	leevel/event/provider/register.zep.c
+	leevel/event/subject.zep.c
+	leevel/filesystem.zep.c
+	leevel/filesystem/provider/register.zep.c
+	leevel/http/apiresponse.zep.c
+	leevel/http/filebag.zep.c
+	leevel/http/filenotfoundexception.zep.c
+	leevel/http/fileresponse.zep.c
+	leevel/http/redirectresponse.zep.c
+	leevel/http/request.zep.c
+	leevel/http/responseheaderbag.zep.c
+	leevel/http/serverbag.zep.c
+	leevel/http/uploadedfile.zep.c
+	leevel/i18n.zep.c
+	leevel/i18n/i18n.zep.c
+	leevel/i18n/provider/register.zep.c
+	leevel/log.zep.c
+	leevel/log/file.zep.c
+	leevel/log/log.zep.c
+	leevel/log/manager.zep.c
+	leevel/log/middleware/log.zep.c
+	leevel/log/monolog.zep.c
+	leevel/log/provider/register.zep.c
+	leevel/mail.zep.c
+	leevel/mail/provider/register.zep.c
+	leevel/mvc/controller.zep.c
+	leevel/mvc/imodel.zep.c
+	leevel/mvc/view.zep.c
+	leevel/option.zep.c
+	leevel/option/option.zep.c
+	leevel/option/provider/register.zep.c
+	leevel/pipeline/pipeline.zep.c
+	leevel/psr4.zep.c
+	leevel/psr4/psr4.zep.c
+	leevel/request.zep.c
+	leevel/response.zep.c
+	leevel/router.zep.c
+	leevel/router/irouter.zep.c
+	leevel/router/provider/register.zep.c
+	leevel/router/url.zep.c
+	leevel/session.zep.c
+	leevel/session/manager.zep.c
+	leevel/session/middleware/session.zep.c
+	leevel/session/provider/register.zep.c
+	leevel/session/session.zep.c
+	leevel/support/closureuse.zep.c
+	leevel/support/ihtml.zep.c
+	leevel/support/type.zep.c
+	leevel/throttler.zep.c
+	leevel/throttler/provider/register.zep.c
+	leevel/url.zep.c
+	leevel/validate.zep.c
+	leevel/validate/provider/register.zep.c
+	leevel/view.zep.c
+	leevel/view/html.zep.c
+	leevel/view/manager.zep.c
+	leevel/view/provider/register.zep.c
+	leevel/view/view.zep.c
+	leevel/0__closure.zep.c
+	leevel/1__closure.zep.c
+	leevel/2__closure.zep.c
+	leevel/3__closure.zep.c
+	leevel/4__closure.zep.c
+	leevel/5__closure.zep.c
+	leevel/6__closure.zep.c
+	leevel/7__closure.zep.c
+	leevel/8__closure.zep.c
+	leevel/9__closure.zep.c
+	leevel/10__closure.zep.c
+	leevel/11__closure.zep.c
+	leevel/12__closure.zep.c
+	leevel/13__closure.zep.c
+	leevel/14__closure.zep.c
+	leevel/15__closure.zep.c
+	leevel/16__closure.zep.c
+	leevel/17__closure.zep.c
+	leevel/18__closure.zep.c
+	leevel/19__closure.zep.c
+	leevel/20__closure.zep.c
+	leevel/21__closure.zep.c
+	leevel/22__closure.zep.c
+	leevel/23__closure.zep.c
+	leevel/24__closure.zep.c
+	leevel/25__closure.zep.c
+	leevel/26__closure.zep.c
+	leevel/27__closure.zep.c
+	leevel/28__closure.zep.c
+	leevel/29__closure.zep.c
+	leevel/30__closure.zep.c
+	leevel/31__closure.zep.c
+	leevel/32__closure.zep.c
+	leevel/33__closure.zep.c
+	leevel/34__closure.zep.c
+	leevel/35__closure.zep.c
+	leevel/36__closure.zep.c
+	leevel/37__closure.zep.c "
+	PHP_NEW_EXTENSION(leevel, $leevel_sources, $ext_shared,, )
+	PHP_SUBST(LEEVEL_SHARED_LIBADD)
 
 	old_CPPFLAGS=$CPPFLAGS
 	CPPFLAGS="$CPPFLAGS $INCLUDES"
@@ -170,7 +170,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 			AC_CHECK_HEADERS(
 				[ext/pcre/php_pcre.h],
 				[
-					PHP_ADD_EXTENSION_DEP([queryyetsimple], [pcre])
+					PHP_ADD_EXTENSION_DEP([leevel], [pcre])
 					AC_DEFINE([ZEPHIR_USE_PHP_PCRE], [1], [Whether PHP pcre extension is present at compile time])
 				],
 				,
@@ -187,7 +187,7 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 			AC_CHECK_HEADERS(
 				[ext/json/php_json.h],
 				[
-					PHP_ADD_EXTENSION_DEP([queryyetsimple], [json])
+					PHP_ADD_EXTENSION_DEP([leevel], [json])
 					AC_DEFINE([ZEPHIR_USE_PHP_JSON], [1], [Whether PHP json extension is present at compile time])
 				],
 				,
@@ -200,6 +200,6 @@ if test "$PHP_QUERYYETSIMPLE" = "yes"; then
 
 	CPPFLAGS=$old_CPPFLAGS
 
-	PHP_INSTALL_HEADERS([ext/queryyetsimple], [php_QUERYYETSIMPLE.h])
+	PHP_INSTALL_HEADERS([ext/leevel], [php_LEEVEL.h])
 
 fi

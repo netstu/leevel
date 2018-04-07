@@ -11,11 +11,9 @@
     <img alt="QueryPHP License" src="https://img.shields.io/packagist/l/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
 </p>
 
-# The QueryYetSimple Framework To Rebuild QueryPHP
+# The Leevel Framework To Rebuild QueryPHP
 
-QueryYetSimple is an open source web framework delivered as a C extension and supplement for the QueryPHP framework providing high performance and lower resource consumption.
-
-QueryYetSimple is called QueryYet for short.
+Leevel is an open source web framework delivered as a C extension and supplement for the QueryPHP framework providing high performance and lower resource consumption.
 
 ## Requirement
 
@@ -34,7 +32,7 @@ Need to tests.
 You can download the source code.
 
 ```
-git clone git@github.com:hunzhiwange/queryyetsimple.git
+git clone git@github.com:hunzhiwange/leevel.git
 cd ext
 ```
 
@@ -50,7 +48,7 @@ $make && make install
 Then add extension to your php.ini,you can see if installation is successful by command php -m.
 
 ```
-extension = queryyetsimple.so
+extension = leevel.so
 ```
 
 ## Official Documentation
@@ -59,4 +57,4 @@ Documentation for the framework can be found on the [QueryYetSimple website](htt
 
 ## License
 
-The QueryYetSimple framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Leevel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

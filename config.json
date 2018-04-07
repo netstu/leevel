@@ -52,8 +52,8 @@
         "check-invalid-reads": false,
         "internal-call-transformation": false
     },
-    "namespace": "queryyetsimple",
-    "name": "queryyetsimple",
+    "namespace": "leevel",
+    "name": "leevel",
     "description": "",
     "author": "Xiangmin Liu <635750556@qq.com>",
     "version": "1.0.0",
