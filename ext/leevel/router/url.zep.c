@@ -852,7 +852,7 @@ PHP_METHOD(Leevel_Router_Url, normalUrl) {
 	if (_0) {
 		zephir_read_property(&_4$$3, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
 		zephir_array_fetch_string(&_5$$3, &_4$$3, SL("app"), PH_NOISY | PH_READONLY, "leevel/router/url.zep", 364 TSRMLS_CC);
-		zephir_array_update_string(&querys, SL("_app"), &_5$$3, PH_COPY | PH_SEPARATE);
+		zephir_array_update_string(&querys, SL("_app2222333"), &_5$$3, PH_COPY | PH_SEPARATE);
 	}
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "controller");
@@ -1065,7 +1065,7 @@ PHP_METHOD(Leevel_Router_Url, parseMvc) {
 	zephir_array_update_string(&result, SL("app"), &_11, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(&mvc);
 	zephir_create_array(&mvc, 3, 0 TSRMLS_CC);
-	add_assoc_stringl_ex(&mvc, SL("_app"), SL("app"));
+	add_assoc_stringl_ex(&mvc, SL("_app2222333"), SL("app"));
 	add_assoc_stringl_ex(&mvc, SL("_c"), SL("controller"));
 	add_assoc_stringl_ex(&mvc, SL("_a"), SL("action"));
 	zephir_is_iterable(&mvc, 0, "leevel/router/url.zep", 454);

@@ -29,7 +29,7 @@ ZEPHIR_INIT_CLASS(Leevel_Router_IRouter) {
 	 *
 	 * @var string
 	 */
-	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("APP"), "_app");
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("APP"), "_app2222333");
 
 	/**
 	 * 控制器参数名
@@ -53,11 +53,32 @@ ZEPHIR_INIT_CLASS(Leevel_Router_IRouter) {
 	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("PARAMS"), "_params");
 
 	/**
+	 * 解析变量名
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("VARS"), "_vars");
+
+	/**
+	 * 解析中间件名
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("MIDDLEWARES"), "_middlewares");
+
+	/**
 	 * 控制器前缀
 	 *
 	 * @var string
 	 */
 	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("PREFIX"), "_prefix");
+
+	/**
+	 * 匹配基础路径
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("BASEPATH"), "_basepath");
 
 	/**
 	 * restful show
@@ -86,6 +107,41 @@ ZEPHIR_INIT_CLASS(Leevel_Router_IRouter) {
 	 * @var string
 	 */
 	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("RESTFUL_DESTROY"), "destroy");
+
+	/**
+	 * 默认应用
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("DEFAULT_APP"), "app");
+
+	/**
+	 * 默认首页控制器
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("DEFAULT_HOME_CONTROLLER"), "home");
+
+	/**
+	 * 默认首页方法
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("DEFAULT_HOME_ACTION"), "handle");
+
+	/**
+	 * 默认替换参数[字符串]
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_router_irouter_ce, SL("DEFAULT_REGEX"), "\\S+");
+
+	/**
+	 * 默认严格匹配模式
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_bool(leevel_router_irouter_ce, SL("DEFAULT_STRICT"), 1);
 
 	return SUCCESS;
 

@@ -31,7 +31,7 @@ interface IRouter
      *
      * @var string
      */
-    const APP = "_app";
+    const APP = "_app2222333";
 
     /**
      * 控制器参数名
@@ -55,11 +55,32 @@ interface IRouter
     const PARAMS = "_params";
 
     /**
+     * 解析变量名
+     *
+     * @var string
+     */
+    const VARS = "_vars";
+
+    /**
+     * 解析中间件名
+     *
+     * @var string
+     */
+    const MIDDLEWARES = "_middlewares";
+
+    /**
      * 控制器前缀
      *
      * @var string
      */
     const PREFIX = "_prefix";
+
+    /**
+     * 匹配基础路径
+     *
+     * @var string
+     */
+    const BASEPATH = "_basepath";
 
     /**
      * restful show
@@ -88,4 +109,39 @@ interface IRouter
      * @var string
      */
     const RESTFUL_DESTROY = "destroy";
+
+    /**
+     * 默认应用
+     *
+     * @var string
+     */
+    const DEFAULT_APP = "app";
+
+    /**
+     * 默认首页控制器
+     *
+     * @var string
+     */
+    const DEFAULT_HOME_CONTROLLER = "home";
+
+    /**
+     * 默认首页方法
+     *
+     * @var string
+     */
+    const DEFAULT_HOME_ACTION = "handle";
+
+    /**
+     * 默认替换参数[字符串]
+     *
+     * @var string
+     */
+    const DEFAULT_REGEX = "\\S+";
+
+    /**
+     * 默认严格匹配模式
+     *
+     * @var string
+     */
+    const DEFAULT_STRICT = true;
 }
