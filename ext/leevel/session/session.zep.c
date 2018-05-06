@@ -200,7 +200,7 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	ZVAL_STRING(&_5, "session.auto_start");
 	ZEPHIR_INIT_VAR(&_6);
 	ZVAL_STRING(&_6, "0");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_5, &_6);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 104, &_5, &_6);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "id");
@@ -292,7 +292,7 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	_30 = zephir_is_true(&_29);
 	if (_30) {
 		zephir_read_property(&_31, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(&_32, "session_set_save_handler", NULL, 109, &_31);
+		ZEPHIR_CALL_FUNCTION(&_32, "session_set_save_handler", NULL, 105, &_31);
 		zephir_check_call_status();
 		_30 = !zephir_is_true(&_32);
 	}
@@ -312,7 +312,7 @@ PHP_METHOD(Leevel_Session_Session, start) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_38, "session_start", NULL, 110);
+	ZEPHIR_CALL_FUNCTION(&_38, "session_start", NULL, 106);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_38))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session start failed", "leevel/session/session.zep", 159);
@@ -1421,7 +1421,7 @@ PHP_METHOD(Leevel_Session_Session, pause) {
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkstart", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "session_write_close", NULL, 111);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_write_close", NULL, 107);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1470,7 +1470,7 @@ PHP_METHOD(Leevel_Session_Session, destroy) {
 		ZEPHIR_CALL_FUNCTION(NULL, "setcookie", NULL, 54, &name, &_2$$3, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
-	ZEPHIR_CALL_FUNCTION(NULL, "session_destroy", NULL, 112);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_destroy", NULL, 108);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1505,7 +1505,7 @@ PHP_METHOD(Leevel_Session_Session, status) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&status, "session_status", NULL, 113);
+	ZEPHIR_CALL_FUNCTION(&status, "session_status", NULL, 109);
 	zephir_check_call_status();
 	do {
 		if (ZEPHIR_IS_LONG(&status, 0)) {
@@ -1541,7 +1541,7 @@ PHP_METHOD(Leevel_Session_Session, setName) {
 	zephir_get_strval(&name, name_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "session_name", NULL, 114, &name);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_name", NULL, 110, &name);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1560,7 +1560,7 @@ PHP_METHOD(Leevel_Session_Session, getName) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_RETURN_CALL_FUNCTION("session_name", NULL, 114);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_name", NULL, 110);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1587,7 +1587,7 @@ PHP_METHOD(Leevel_Session_Session, setId) {
 	zephir_get_strval(&id, id_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "session_id", NULL, 115, &id);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_id", NULL, 111, &id);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1606,7 +1606,7 @@ PHP_METHOD(Leevel_Session_Session, getId) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_RETURN_CALL_FUNCTION("session_id", NULL, 115);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_id", NULL, 111);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1638,7 +1638,7 @@ PHP_METHOD(Leevel_Session_Session, regenerateId) {
 
 
 	ZVAL_BOOL(&_0, (deleteOldSession ? 1 : 0));
-	ZEPHIR_CALL_FUNCTION(NULL, "session_regenerate_id", NULL, 116, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_regenerate_id", NULL, 112, &_0);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -1665,7 +1665,7 @@ PHP_METHOD(Leevel_Session_Session, setSavePath) {
 	zephir_get_strval(&savepath, savepath_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "session_save_path", NULL, 117, &savepath);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_save_path", NULL, 113, &savepath);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1684,7 +1684,7 @@ PHP_METHOD(Leevel_Session_Session, getSavePath) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_RETURN_CALL_FUNCTION("session_save_path", NULL, 117);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_save_path", NULL, 113);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1714,7 +1714,7 @@ PHP_METHOD(Leevel_Session_Session, setCookieDomain) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.cookie_domain");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_0, &domain);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 104, &_0, &domain);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1774,12 +1774,12 @@ PHP_METHOD(Leevel_Session_Session, setCacheExpire) {
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "session.gc_maxlifetime");
 	ZVAL_LONG(&_0, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_2, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 104, &_2, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "session.cookie_lifetime");
 	ZVAL_LONG(&_0, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_2, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 104, &_2, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1806,13 +1806,13 @@ PHP_METHOD(Leevel_Session_Session, setUseCookies) {
 	ZVAL_STRING(&_0, "session.use_cookies");
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "1");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 108, &_0, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 104, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "session.use_trans_sid");
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "0");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 108, &_0, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 104, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1839,7 +1839,7 @@ PHP_METHOD(Leevel_Session_Session, setCacheLimiter) {
 	zephir_get_strval(&limiter, limiter_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "session_cache_limiter", NULL, 118, &limiter);
+	ZEPHIR_CALL_FUNCTION(NULL, "session_cache_limiter", NULL, 114, &limiter);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1858,7 +1858,7 @@ PHP_METHOD(Leevel_Session_Session, getCacheLimiter) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_RETURN_CALL_FUNCTION("session_cache_limiter", NULL, 118);
+	ZEPHIR_RETURN_CALL_FUNCTION("session_cache_limiter", NULL, 114);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1901,7 +1901,7 @@ PHP_METHOD(Leevel_Session_Session, setGcProbability) {
 		ZEPHIR_INIT_VAR(&_3$$3);
 		ZVAL_STRING(&_3$$3, "session.gc_probability");
 		ZVAL_LONG(&_4$$3, probability);
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_3$$3, &_4$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 104, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

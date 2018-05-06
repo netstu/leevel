@@ -38,7 +38,7 @@ PHP_METHOD(leevel_16__closure, __invoke) {
 
 
 	object_init_ex(return_value, leevel_log_manager_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 131, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 127, project);
 	zephir_check_call_status();
 	RETURN_MM();
 

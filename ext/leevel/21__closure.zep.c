@@ -15,6 +15,7 @@
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
 #include "kernel/array.h"
+#include "kernel/object.h"
 
 
 ZEPHIR_INIT_CLASS(leevel_21__closure) {
@@ -27,6 +28,7 @@ ZEPHIR_INIT_CLASS(leevel_21__closure) {
 
 PHP_METHOD(leevel_21__closure, __invoke) {
 
+	zend_class_entry *_4 = NULL;
 	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *project, project_sub, option, request, options, item, tmp, _0, *_1, _2$$3;
@@ -89,9 +91,14 @@ PHP_METHOD(leevel_21__closure, __invoke) {
 		zephir_array_update_zval(&options, &item, &_2$$3, PH_COPY | PH_SEPARATE);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	object_init_ex(return_value, leevel_router_url_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 132, &request, &options);
-	zephir_check_call_status();
+	if (!_4) {
+	_4 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\Url"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(return_value, _4);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &request, &options);
+		zephir_check_call_status();
+	}
 	RETURN_MM();
 
 }

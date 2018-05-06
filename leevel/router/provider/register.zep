@@ -91,7 +91,7 @@ class Register extends Provider
     protected function router()
     {
         this->container->singleton("router", function (project) {
-            return new \Leevel\Router\Router(project, project->make("request"));
+            return new \Leevel\Router\Router(project);
         });
     }
 
