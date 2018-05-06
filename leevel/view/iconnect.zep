@@ -34,7 +34,7 @@ interface IConnect
 	 * @param boolean $display 是否显示
 	 * @return string
 	 */
-	public function display(string file, array! vars = [], string ext = "", boolean display = true);
+	public function display(var file = null, array! vars = [], var ext = null, boolean display = true);
 
 	/**
 	 * 设置模板变量

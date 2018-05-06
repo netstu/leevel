@@ -153,21 +153,23 @@ PHP_METHOD(Leevel_View_Provider_Register, providers) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewViews) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_33__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "view.views");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_28__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "view.views");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -180,21 +182,23 @@ PHP_METHOD(Leevel_View_Provider_Register, viewViews) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewView) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_34__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "view.view");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_29__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "view.view");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -207,21 +211,23 @@ PHP_METHOD(Leevel_View_Provider_Register, viewView) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewCompiler) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_35__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "view.compiler");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_30__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "view.compiler");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -234,21 +240,23 @@ PHP_METHOD(Leevel_View_Provider_Register, viewCompiler) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewParser) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_36__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "view.parser");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_31__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "view.parser");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -261,21 +269,23 @@ PHP_METHOD(Leevel_View_Provider_Register, viewParser) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewTwigParser) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_37__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "view.twig.parser");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_32__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "view.twig.parser");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

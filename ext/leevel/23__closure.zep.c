@@ -12,9 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/object.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/object.h"
 
 
 ZEPHIR_INIT_CLASS(leevel_23__closure) {
@@ -27,21 +27,59 @@ ZEPHIR_INIT_CLASS(leevel_23__closure) {
 
 PHP_METHOD(leevel_23__closure, __invoke) {
 
-	zend_class_entry *_0 = NULL;
+	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *project, project_sub, option, response, _0, _2, _3, _4, _5, _6;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&response);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &project);
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Option\\Load"), ZEND_FETCH_CLASS_AUTO);
+
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZVAL_STRING(&_0, "option");
+	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&response);
+	if (!_1) {
+	_1 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\ResponseFactory"), ZEND_FETCH_CLASS_AUTO);
 	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0);
+	object_init_ex(&response, _1);
+	if (zephir_has_constructor(&response TSRMLS_CC)) {
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "view");
+		ZEPHIR_CALL_METHOD(&_2, project, "make", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "redirect");
+		ZEPHIR_CALL_METHOD(&_3, project, "make", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, &response, "__construct", NULL, 0, &_2, &_3);
 		zephir_check_call_status();
 	}
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "view\\action_success");
+	ZEPHIR_CALL_METHOD(&_5, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(&_4, &response, "setviewsuccesstemplate", NULL, 0, &_5);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "view\\action_fail");
+	ZEPHIR_CALL_METHOD(&_6, &option, "get", NULL, 0, &_0);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(&_4, "setviewfailtemplate", NULL, 0, &_6);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

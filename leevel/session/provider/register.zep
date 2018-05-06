@@ -81,7 +81,7 @@ class Register extends Provider
      */
     protected function sessions()
     {
-        this->singleton("sessions", function (project) {
+        this->container->singleton("sessions", function (project) {
             return new \Leevel\Session\Manager(project);
         });
     }
@@ -93,7 +93,7 @@ class Register extends Provider
      */
     protected function session()
     {
-        this->singleton("session", function (project) {
+        this->container->singleton("session", function (project) {
             var sessions;
 
         	let sessions = project->make("sessions");
@@ -108,6 +108,6 @@ class Register extends Provider
      */
     protected function middleware()
     {
-        this->singleton("Leevel\\Session\\Middleware\\Session");
+        this->container->singleton("Leevel\\Session\\Middleware\\Session");
     }
 }

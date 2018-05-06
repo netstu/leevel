@@ -19,13 +19,12 @@ use ArrayAccess;
 use SplFileObject;
 use RuntimeException;
 use BadMethodCallException;
-use Leevel\Option\IClass;
 use Leevel\Support\IMacro;
 use Leevel\Support\IArray;
 
 /**
  * HTTP 请求
- * This class borrows heavily from the Symfony2 Framework and is part of the symfony package
+ * This class borrows heavily from the Symfony4 Framework and is part of the symfony package
  * 
  * @author Xiangmin Liu <635750556@qq.com>
  * @package $$
@@ -33,7 +32,7 @@ use Leevel\Support\IArray;
  * @version 1.0
  * @see Symfony\Component\HttpFoundation (https://github.com/symfony/symfony)
  */
-class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
+class Request implements IMacro, IRequest, IArray, ArrayAccess
 {
 
     /**
@@ -121,13 +120,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     protected method;
     
     /**
-     * public URL
-     *
-     * @var string
-     */
-    protected publicUrl;
-    
-    /**
      * pathInfo
      *
      * @var string
@@ -168,32 +160,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @var array
      */
     protected static macro = [];
-
-    /**
-     * 配置
-     *
-     * @var array
-     */
-    protected option = [
-    	"var_method" : "_method", 
-    	"var_ajax" : "_ajax", 
-    	"var_pjax" : "_pjax", 
-    	"html_suffix" : ".html", 
-    	"rewrite" : false, 
-    	"public" : "http://public.foo.bar"
-    ];
-
-    /**
-     * 服务器 url 重写支持 pathInfo
-     *
-     * Nginx
-     * location @rewrite {
-     *     rewrite ^/(.*)$ /index.php?_url=/$1;
-     * }
-     *
-     * @var string
-     */
-    const PATHINFO_URL = "_url";
     
     /**
      * 构造函数
@@ -205,13 +171,11 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param array $files
      * @param array $server
      * @param string $content
-     * @param array $option
      * @return void
      */
-    public function __construct(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null, array option = []) -> void
+    public function __construct(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null) -> void
     {
         this->reset(query, request, params, cookies, files, server, content);
-        this->options(option);
     }
     
     /**
@@ -224,7 +188,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      * @param array $files
      * @param array $server
      * @param string $content
-     * @param array $option
      * @return void
      */
     public function reset(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null) -> void
@@ -241,7 +204,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         let this->baseUrl = null;
         let this->requestUri = null;
         let this->method = null;
-        let this->publicUrl = null;
         let this->pathInfo = null;
         let this->app = null;
         let this->controller = null;
@@ -252,14 +214,13 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     /**
      * 全局变量创建一个 Request
      *
-     * @param array $options
      * @return static
      */
-    public static function createFromGlobals(array option = [])
+    public static function createFromGlobals()
     {
         var request;
     
-        let request = new static(_GET, _POST, [], _COOKIE, _FILES, _SERVER, null, option);
+        let request = new static(_GET, _POST, [], _COOKIE, _FILES, _SERVER, null);
         let request = self::normalizeRequestFromContent(request);
 
         return request;
@@ -659,7 +620,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     {
         var field;
     
-        let field = this->getOption("var_ajax");
+        let field = self::VAR_AJAX;
 
         if this->request->has(field) || this->query->has(field) {
             return true;
@@ -697,7 +658,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     {
         var field;
     
-        let field = this->getOption("var_pjax");
+        let field = self::VAR_PJAX;
 
         if this->request->has(field) || this->query->has(field) {
             return true;
@@ -714,6 +675,120 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     public function isRealPjax() -> boolean
     {
         return ! (is_null(this->headers->get("X_PJAX")));
+    }
+
+    /**
+     * 是否为 json 请求行为
+     *
+     * @return bool
+     */
+    public function isJson() -> boolean
+    {
+        var field;
+
+        let field = self::VAR_JSON;
+
+        if this->request->has(field) || this->query->has(field) {
+            return true;
+        }
+
+        return this->isRealJson();
+    }
+
+    /**
+     * 是否为 json 请求行为真实
+     *
+     * @return boolean
+     */
+    public function isRealJson() -> boolean
+    {
+        var contentType, jsons, item;
+
+        let contentType = this->headers->get("CONTENT_TYPE");
+
+        if ! contentType {
+            return false;
+        }
+
+        let jsons = ["/json", "+json"];
+
+        for item in jsons {
+            if strpos(contentType, item) !== false {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 是否为接受 json 请求
+     *
+     * @return bool
+     */
+    public function isAcceptJson() -> boolean
+    {
+        var field;
+
+        let field = self::VAR_ACCEPT_JSON;
+
+        if this->request->has(field) || this->query->has(field) {
+            return true;
+        }
+
+        if this->isAjax() && ! this->isPjax() && this->isAcceptAny() {
+            return true;
+        }
+
+        return this->isRealAcceptJson();
+    }
+
+    /**
+     * 是否为接受 json 请求真实
+     *
+     * @return boolean
+     */
+    public function isRealAcceptJson() -> boolean
+    {
+        var accept, jsons, item;
+
+        let accept = this->headers->get("ACCEPT");
+
+        if ! accept {
+            return false;
+        }
+
+        let jsons = ["/json", "+json"];
+
+        for item in jsons {
+            if strpos(accept, item) !== false {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * 是否为接受任何请求
+     *
+     * @return boolean
+     */
+    public function isAcceptAny() -> boolean
+    {
+        var accept;
+
+        let accept = this->headers->get("ACCEPT");
+
+        if ! accept {
+            return true;
+        }
+
+        if strpos(accept, "*") !== false {
+            return true;
+        }
+
+        return false;
     }
     
     /**
@@ -971,7 +1046,7 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
             if method {
                 let this->method = strtoupper(method);
             } else {
-                let field = this->getOption("var_method");
+                let field = self::VAR_METHOD;
                 let this->method = strtoupper(this->request->get(field, this->query->get(field, "POST")));
             }
         }
@@ -1151,35 +1226,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     }
     
     /**
-     * 返回网站公共文件目录
-     *
-     * @return string
-     */
-    public function getPublicUrl() -> string
-    {
-        if ! (is_null(this->publicUrl)) {
-            return this->publicUrl;
-        }
-
-        let this->publicUrl = this->getOption("public");
-
-        return this->publicUrl;
-    }
-    
-    /**
-     * 设置网站公共文件目录
-     *
-     * @param string $publicUrl
-     * @return $this
-     */
-    public function setPublicUrl(string publicUrl)
-    {
-        let this->publicUrl = publicUrl;
-
-        return this;
-    }
-    
-    /**
      * 返回 root URL
      *
      * @return string
@@ -1203,10 +1249,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
         }
     
         let scriptName = this->getScriptName();
-
-        if this->getOption("rewrite") !== true {
-            return scriptName;
-        }
 
         let scriptName = dirname(scriptName);
         if scriptName == "\\" {
@@ -1567,121 +1609,6 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
     }
 
     /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function option(string name, var value)
-    {
-        if ! is_string(name) {
-            throw new InvalidArgumentException("Option set name must be a string.");
-        }
-        
-        let this->option[name] = value;
-
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
-        return this;
-    }
-
-    /**
      * 注册一个扩展
      *
      * @param string $name
@@ -1769,11 +1696,14 @@ class Request implements IClass, IMacro, IRequest, IArray, ArrayAccess
      */
     protected function parsePathInfo(string pathInfo) -> string
     {
-        var suffix;
-    
-        if pathInfo && this->getOption("html_suffix") {
-            let suffix = substr(this->getOption("html_suffix"), 1);
-            let pathInfo = preg_replace("/\\." . suffix . "$/", "", pathInfo);
+        var ext;
+
+        // 自动清除后缀
+        if pathInfo {
+            let ext = pathinfo(pathInfo, PATHINFO_EXTENSION);
+            if ext {
+                let pathInfo = substr(pathInfo, 0, -(strlen(ext)+1));
+            }
         }
 
         let pathInfo = empty(pathInfo) ? "/" : pathInfo;

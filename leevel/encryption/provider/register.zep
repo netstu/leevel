@@ -54,7 +54,7 @@ class Register extends Provider
      */
     public function register()
     {
-        this->singleton("encryption", function (project) {
+        this->container->singleton("encryption", function (project) {
         	var option;
 
         	let option = project->make("option");

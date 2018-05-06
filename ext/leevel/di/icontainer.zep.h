@@ -28,16 +28,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_icontainer_alias, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_icontainer_group, 0, 0, 2)
-	ZEND_ARG_INFO(0, group)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_icontainer_groupmake, 0, 0, 1)
-	ZEND_ARG_INFO(0, group)
-	ZEND_ARG_ARRAY_INFO(0, args, 1)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_icontainer_make, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_ARRAY_INFO(0, args, 1)
@@ -54,8 +44,6 @@ ZEPHIR_INIT_FUNCS(leevel_di_icontainer_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Di_IContainer, singleton, arginfo_leevel_di_icontainer_singleton)
 	PHP_ABSTRACT_ME(Leevel_Di_IContainer, share, arginfo_leevel_di_icontainer_share)
 	PHP_ABSTRACT_ME(Leevel_Di_IContainer, alias, arginfo_leevel_di_icontainer_alias)
-	PHP_ABSTRACT_ME(Leevel_Di_IContainer, group, arginfo_leevel_di_icontainer_group)
-	PHP_ABSTRACT_ME(Leevel_Di_IContainer, groupMake, arginfo_leevel_di_icontainer_groupmake)
 	PHP_ABSTRACT_ME(Leevel_Di_IContainer, make, arginfo_leevel_di_icontainer_make)
 	PHP_ABSTRACT_ME(Leevel_Di_IContainer, call, arginfo_leevel_di_icontainer_call)
 	PHP_FE_END

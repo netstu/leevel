@@ -74,24 +74,6 @@ ZEPHIR_DOC_METHOD(Leevel_Di_IContainer, share);
 ZEPHIR_DOC_METHOD(Leevel_Di_IContainer, alias);
 
 /**
- * 分组注册
- *
- * @param string $group
- * @param mixed $data
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Di_IContainer, group);
-
-/**
- * 分组制造
- *
- * @param string $group
- * @param array $args
- * @return array
- */
-ZEPHIR_DOC_METHOD(Leevel_Di_IContainer, groupMake);
-
-/**
  * 服务容器返回对象
  *
  * @param string $name

@@ -91,7 +91,7 @@ class Register extends Provider
      */
     protected function viewViews()
     {
-        this->singleton("view.views", function (project) {
+        this->container->singleton("view.views", function (project) {
             return new \Leevel\View\Manager(project);
         });
     }
@@ -103,7 +103,7 @@ class Register extends Provider
      */
     protected function viewView()
     {
-        this->singleton("view.view", function (project) {
+        this->container->singleton("view.view", function (project) {
             return project->make("view.views")->connect();
         });
     }
@@ -115,7 +115,7 @@ class Register extends Provider
      */
     protected function viewCompiler()
     {
-        this->singleton("view.compiler", function (project) {
+        this->container->singleton("view.compiler", function (project) {
             return new \Leevel\View\Compiler();
         });
     }
@@ -127,7 +127,7 @@ class Register extends Provider
      */
     protected function viewParser()
     {
-        this->singleton("view.parser", function (project) {
+        this->container->singleton("view.parser", function (project) {
             var parser;
 
             let parser = new \Leevel\View\Parser(project->make("view.compiler"));
@@ -142,7 +142,7 @@ class Register extends Provider
      */
     protected function viewTwigParser()
     {
-        this->singleton("view.twig.parser", function (project) {
+        this->container->singleton("view.twig.parser", function (project) {
             var tmp;
         
             let tmp = [

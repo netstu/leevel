@@ -79,8 +79,6 @@ PHP_METHOD(Leevel_Router_Provider_Register, register) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "redirect", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "request", NULL, 0);
-	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "response", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookieresolver", NULL, 0);
@@ -107,7 +105,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 5, 0 TSRMLS_CC);
+	zephir_create_array(&tmp, 4, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
@@ -126,12 +124,6 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 	ZVAL_STRING(&_1, "Leevel\\Router\\Redirect");
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(&tmp, SL("redirect"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "Leevel\\Http\\Request");
-	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("request"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -152,21 +144,23 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, router) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_24__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "router");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_20__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "router");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -179,21 +173,23 @@ PHP_METHOD(Leevel_Router_Provider_Register, router) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, url) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_25__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "url");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_21__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "url");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -206,51 +202,28 @@ PHP_METHOD(Leevel_Router_Provider_Register, url) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, redirect) {
 
-	zval _0, _1, _2;
+	zval _0, _1, _2, _3, _4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_1);
-	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_26__closure_ce, SL("__invoke"));
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "share", NULL, 0, &_1);
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_1, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_3);
+	ZEPHIR_INIT_NVAR(&_3);
+	zephir_create_closure_ex(&_3, NULL, leevel_22__closure_ce, SL("__invoke"));
+	ZEPHIR_CALL_METHOD(&_2, &_1, "share", NULL, 0, &_3);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "redirect");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "bind", NULL, 0, &_2, &_0);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * 注册 request 服务
- *
- * @return void
- */
-PHP_METHOD(Leevel_Router_Provider_Register, request) {
-
-	zval _0, _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_27__closure_ce, SL("__invoke"));
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "redirect");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "bind", NULL, 0, &_4, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -263,21 +236,23 @@ PHP_METHOD(Leevel_Router_Provider_Register, request) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, response) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_28__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "response");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_23__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "response");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

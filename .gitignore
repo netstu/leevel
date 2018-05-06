@@ -50,3 +50,5 @@ build/gccarch
 *.phc
 
 ide/
+
+.DS_Store

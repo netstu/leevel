@@ -52,16 +52,6 @@ class Register extends Provider
     }
     
     /**
-     * 载入命令包
-     *
-     * @return void
-     */
-    public function bootstrap()
-    {
-        this->loadCommandNamespace("Leevel\\Database\\Console");
-    }
-    
-    /**
      * 可用服务提供者
      *
      * @return array
@@ -90,7 +80,7 @@ class Register extends Provider
      */
     protected function databases()
     {
-        this->singleton("databases", function (project) {
+        this->container->singleton("databases", function (project) {
         	return new \Leevel\Database\Manager(project);
         });
     }
@@ -102,7 +92,7 @@ class Register extends Provider
      */
     protected function database()
     {
-        this->singleton("database", function (project) {
+        this->container->singleton("database", function (project) {
         	return project->make("databases")->connect();
         });
     }

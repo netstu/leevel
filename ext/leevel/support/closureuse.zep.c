@@ -118,7 +118,7 @@ PHP_METHOD(Leevel_Support_ClosureUse, make) {
 
 	ZEPHIR_INIT_VAR(&newclosure);
 	object_init_ex(&newclosure, leevel_support_closureuse_ce);
-	ZEPHIR_CALL_METHOD(NULL, &newclosure, "__construct", NULL, 120, closures, &args);
+	ZEPHIR_CALL_METHOD(NULL, &newclosure, "__construct", NULL, 119, closures, &args);
 	zephir_check_call_status();
 	_0 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
 	ZEPHIR_INIT_VAR(&_1);

@@ -71,7 +71,7 @@ abstract class Provider
     public function registerAlias()
     {
         if ! (static::isDeferred()) && static::providers() {
-            this->alias(static::providers());
+            this->container->alias(static::providers());
         }
     }
     
@@ -106,131 +106,6 @@ abstract class Provider
     public function container()
     {
         return this->container;
-    }
-    
-    /**
-     * 注册到容器
-     *
-     * @param mixed $name
-     * @param mixed $service
-     * @param boolean $share
-     * @return $this
-     */
-    public function bind(name, service = null, boolean share = false)
-    {
-        this->container->bind(name, service, share);
-        return this;
-    }
-    
-    /**
-     * 注册为实例
-     *
-     * @param mixed $name
-     * @param mixed $service
-     * @return $this
-     */
-    public function instance(name, service = null)
-    {
-        this->container->instance(name, service);
-        return this;
-    }
-    
-    /**
-     * 注册单一实例
-     *
-     * @param scalar|array $name
-     * @param mixed $service
-     * @return $this
-     */
-    public function singleton(name, service = null)
-    {
-        this->container->singleton(name, service);
-        return this;
-    }
-    
-    /**
-     * 创建共享的闭包
-     *
-     * @param \Closure $closures
-     * @return \Closure
-     */
-    public function share(<Closure> closures) -> <Closure>
-    {
-        return this->container->share(closures);
-    }
-    
-    /**
-     * 设置别名
-     *
-     * @param array|string $alias
-     * @param string|null|array $value
-     * @return $this
-     */
-    public function alias(alias, value = null)
-    {
-        this->container->alias(alias, value);
-        return this;
-    }
-    
-    /**
-     * 添加语言包目录
-     *
-     * @param mixed $dir
-     * @return void
-     */
-    protected function loadI18nDir(dir)
-    {
-        var option, load, tmp;
-
-        let option = this->container->make("option");
-
-        if ! (option->get("i18n\\on")) {
-            return;
-        }
-
-        if option->get("i18n\\develop") == option->get("i18n\\default") {
-            return;
-        }
-
-        if ! (is_array(dir)) {
-            let tmp = [dir];
-        } else {
-            let tmp = dir;
-        }
-
-        let load = this->container->make("i18n.load");
-        load->addDir(tmp);
-    }
-    
-    /**
-     * 添加命令包命名空间
-     *
-     * @param mixed $namespaces
-     * @return void
-     */
-    protected function loadCommandNamespace(namespaces)
-    {
-        var result, item, psr4, load, tmp;
-    
-        if ! (this->container->console()) {
-            return;
-        }
-
-        let result = [];
-        if ! (is_array(namespaces)) {
-            let tmp = [namespaces];
-        } else {
-            let tmp = namespaces;
-        }
-
-        let psr4 = this->container->make("psr4");
-        let load = this->container->make("console.load");
-
-        for item in tmp {
-            let result[item] = psr4->namespaces(item);
-        }
-
-        load->addNamespace(result);
     }
     
     /**

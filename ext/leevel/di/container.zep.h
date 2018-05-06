@@ -8,8 +8,6 @@ PHP_METHOD(Leevel_Di_Container, instance);
 PHP_METHOD(Leevel_Di_Container, singleton);
 PHP_METHOD(Leevel_Di_Container, share);
 PHP_METHOD(Leevel_Di_Container, alias);
-PHP_METHOD(Leevel_Di_Container, group);
-PHP_METHOD(Leevel_Di_Container, groupMake);
 PHP_METHOD(Leevel_Di_Container, make);
 PHP_METHOD(Leevel_Di_Container, call);
 PHP_METHOD(Leevel_Di_Container, normalize);
@@ -59,16 +57,6 @@ ZEND_END_ARG_INFO()
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_alias, 0, 0, 1)
 	ZEND_ARG_INFO(0, alias)
 	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_group, 0, 0, 2)
-	ZEND_ARG_INFO(0, group)
-	ZEND_ARG_INFO(0, data)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_groupmake, 0, 0, 1)
-	ZEND_ARG_INFO(0, group)
-	ZEND_ARG_ARRAY_INFO(0, args, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_make, 0, 0, 1)
@@ -176,8 +164,6 @@ ZEPHIR_INIT_FUNCS(leevel_di_container_method_entry) {
 	PHP_ME(Leevel_Di_Container, singleton, arginfo_leevel_di_container_singleton, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, share, arginfo_leevel_di_container_share, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, alias, arginfo_leevel_di_container_alias, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Di_Container, group, arginfo_leevel_di_container_group, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Di_Container, groupMake, arginfo_leevel_di_container_groupmake, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, make, arginfo_leevel_di_container_make, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, call, arginfo_leevel_di_container_call, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, normalize, arginfo_leevel_di_container_normalize, ZEND_ACC_PROTECTED)

@@ -49,7 +49,7 @@ ZEPHIR_INIT_CLASS(Leevel_Event_Subject) {
 	zend_declare_property_null(leevel_event_subject_ce, SL("observers"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 通知附件参数
+	 * 通知附加参数
 	 *
 	 * @var array
 	 */

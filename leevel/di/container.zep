@@ -65,13 +65,6 @@ class Container implements IContainer, ArrayAccess {
 	protected alias = [];
 
 	/**
-	 * 分组
-	 *
-	 * @var array
-	 */
-	protected groups = [];
-
-	/**
 	 * share 静态变量值
 	 *
 	 * @var array
@@ -196,54 +189,13 @@ class Container implements IContainer, ArrayAccess {
 				this->alias(key, item);
 			}
 		} else {
-			let value = ( array ) value;
+			let value = (array) value;
 			for item in value {
 				let this->alias[item] = alias;
 			}
 		}
 
 		return this;
-	}
-
-	/**
-	 * 分组注册
-	 *
-	 * @param string $group
-	 * @param mixed $data
-	 * @return $this
-	 */
-	public function group(var group, var data)
-	{
-		if ! isset this->groups[group] {
-			let this->groups[group] = [];
-		}
-		let this->groups[group] = data;
-
-		return this;
-	}
-
-	/**
-	 * 分组制造
-	 *
-	 * @param string $group
-	 * @param array $args
-	 * @return array
-	 */
-	public function groupMake(var group, array args = [])
-	{
-		var result, instance, item;
-
-		if ! isset this->groups[group] {
-			return [];
-		}
-
-		let result = [];
-		let instance = ( array ) this->groups[group];
-		for item in instance {
-			let result[item] = this->make(item, args);
-		}
-
-		return result;
 	}
 
 	/**
@@ -587,7 +539,11 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	protected function newInstanceArgs(var classname, var args)
 	{
-		return (new ReflectionClass(classname))->newInstanceArgs(args);
+		try {
+            return (new ReflectionClass(classname))->newInstanceArgs(args);
+        } catch ReflectionException {
+            return (new ReflectionClass(classname))->newInstanceWithoutConstructor();
+        }
 	}
 
 	/**

@@ -60,5 +60,15 @@
     "verbose": false,
     "requires": {
         "extensions": []
-    }
+    },
+    "info": [
+    {
+        "header": ["Leevel Support", "Enabled"],
+        "rows": [
+            ["QQ Group", "288751294"],
+            ["Office Site", "https://www.queryphp.com"],
+            ["Github", "https://github.com/hunzhiwange/leevel"],
+            ["Issues", "https://github.com/hunzhiwange/leevel/issues"]
+        ]
+    }]
 }

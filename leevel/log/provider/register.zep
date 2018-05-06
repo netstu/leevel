@@ -81,7 +81,7 @@ class Register extends Provider
      */
     protected function logs()
     {
-        this->singleton("logs", function (project) {
+        this->container->singleton("logs", function (project) {
             return new \Leevel\Log\Manager(project);
         });
     }
@@ -93,7 +93,7 @@ class Register extends Provider
      */
     protected function log()
     {
-        this->singleton("log", function (project) {
+        this->container->singleton("log", function (project) {
             return project->make("logs")->connect();
         });
     }
@@ -105,6 +105,6 @@ class Register extends Provider
      */
     protected function middleware()
     {
-        this->singleton("Leevel\\Log\\Middleware\\Log");
+        this->container->singleton("Leevel\\Log\\Middleware\\Log");
     }
 }

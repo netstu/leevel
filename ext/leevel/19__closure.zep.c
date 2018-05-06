@@ -40,7 +40,7 @@ PHP_METHOD(leevel_19__closure, __invoke) {
 
 
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "logs");
+	ZVAL_STRING(&_1, "mails");
 	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);

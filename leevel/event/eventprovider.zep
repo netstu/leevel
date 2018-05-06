@@ -25,7 +25,7 @@ use Leevel\Di\Provider;
  * @since 2018.02.01
  * @version 1.0
  */
-class EventProvider extends Provider
+abstract class EventProvider extends Provider
 {
 
     /**

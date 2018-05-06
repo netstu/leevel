@@ -18,6 +18,7 @@
 #include "kernel/object.h"
 #include "kernel/operators.h"
 #include "kernel/concat.h"
+#include "kernel/string.h"
 
 
 /**
@@ -70,7 +71,7 @@ PHP_METHOD(Leevel_View_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_view_view_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 126, connect);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 125, connect);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -131,9 +132,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&html);
 	object_init_ex(&html, leevel_view_html_ce);
-	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 127, &options);
+	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 126, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 128, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 127, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&html);
 
@@ -379,10 +380,12 @@ PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 	ZVAL_STRING(&_1, "theme");
 	ZEPHIR_CALL_METHOD(&_10, &_9, "pathapplicationcache", NULL, 0, &_1);
 	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_1);
 	ZEPHIR_CALL_METHOD(&_11, &request, "app", NULL, 0);
 	zephir_check_call_status();
+	zephir_fast_strtolower(&_1, &_11);
 	ZEPHIR_INIT_LNVAR(_8);
-	ZEPHIR_CONCAT_VSV(&_8, &_10, "/", &_11);
+	ZEPHIR_CONCAT_VSV(&_8, &_10, "/", &_1);
 	zephir_array_update_string(&options, SL("theme_cache_path"), &_8, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&options);
 

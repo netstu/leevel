@@ -28,7 +28,7 @@
  */
 ZEPHIR_INIT_CLASS(Leevel_Event_EventProvider) {
 
-	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Event, EventProvider, leevel, event_eventprovider, leevel_di_provider_ce, leevel_event_eventprovider_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Event, EventProvider, leevel, event_eventprovider, leevel_di_provider_ce, leevel_event_eventprovider_method_entry, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
 
 	/**
 	 * 监听器列表

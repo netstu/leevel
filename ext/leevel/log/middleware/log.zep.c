@@ -26,9 +26,9 @@
  * @since 2018.01.28
  * @version 1.0
  */
-ZEPHIR_INIT_CLASS(Leevel_Log_middleware_Log) {
+ZEPHIR_INIT_CLASS(Leevel_Log_Middleware_Log) {
 
-	ZEPHIR_REGISTER_CLASS(Leevel\\Log\\middleware, Log, leevel, log_middleware_log, leevel_log_middleware_log_method_entry, 0);
+	ZEPHIR_REGISTER_CLASS(Leevel\\Log\\Middleware, Log, leevel, log_middleware_log, leevel_log_middleware_log_method_entry, 0);
 
 	/**
 	 * log 管理
@@ -47,7 +47,7 @@ ZEPHIR_INIT_CLASS(Leevel_Log_middleware_Log) {
  * @param \Leevel\Log\Manager $manager
  * @return void
  */
-PHP_METHOD(Leevel_Log_middleware_Log, __construct) {
+PHP_METHOD(Leevel_Log_Middleware_Log, __construct) {
 
 	zval *manager, manager_sub;
 	zval *this_ptr = getThis();
@@ -70,7 +70,7 @@ PHP_METHOD(Leevel_Log_middleware_Log, __construct) {
  * @param \Leevel\Http\Response $response
  * @return void
  */
-PHP_METHOD(Leevel_Log_middleware_Log, terminate) {
+PHP_METHOD(Leevel_Log_Middleware_Log, terminate) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *next, next_sub, *request, request_sub, *response, response_sub;
@@ -98,7 +98,7 @@ PHP_METHOD(Leevel_Log_middleware_Log, terminate) {
  *
  * @return void
  */
-PHP_METHOD(Leevel_Log_middleware_Log, saveLog) {
+PHP_METHOD(Leevel_Log_Middleware_Log, saveLog) {
 
 	zval container, enabled, _0, _1, _2, _3$$3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;

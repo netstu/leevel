@@ -141,21 +141,23 @@ PHP_METHOD(Leevel_Cache_Provider_Register, providers) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, caches) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_3__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "caches");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_3__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "caches");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -168,21 +170,23 @@ PHP_METHOD(Leevel_Cache_Provider_Register, caches) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, cache) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_4__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "cache");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_4__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "cache");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -195,21 +199,23 @@ PHP_METHOD(Leevel_Cache_Provider_Register, cache) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, cacheLoad) {
 
-	zval _0, _1;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_5__closure_ce, SL("__invoke"));
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "cache.load");
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "singleton", NULL, 0, &_1, &_0);
+	ZEPHIR_INIT_NVAR(&_1);
+	zephir_create_closure_ex(&_1, NULL, leevel_5__closure_ce, SL("__invoke"));
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "cache.load");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

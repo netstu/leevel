@@ -34,6 +34,11 @@ PHP_METHOD(Leevel_Http_Request, isRealAjax);
 PHP_METHOD(Leevel_Http_Request, isXmlHttpRequest);
 PHP_METHOD(Leevel_Http_Request, isPjax);
 PHP_METHOD(Leevel_Http_Request, isRealPjax);
+PHP_METHOD(Leevel_Http_Request, isJson);
+PHP_METHOD(Leevel_Http_Request, isRealJson);
+PHP_METHOD(Leevel_Http_Request, isAcceptJson);
+PHP_METHOD(Leevel_Http_Request, isRealAcceptJson);
+PHP_METHOD(Leevel_Http_Request, isAcceptAny);
 PHP_METHOD(Leevel_Http_Request, isMobile);
 PHP_METHOD(Leevel_Http_Request, isHead);
 PHP_METHOD(Leevel_Http_Request, isGet);
@@ -60,8 +65,6 @@ PHP_METHOD(Leevel_Http_Request, language);
 PHP_METHOD(Leevel_Http_Request, getLanguage);
 PHP_METHOD(Leevel_Http_Request, setLanguage);
 PHP_METHOD(Leevel_Http_Request, getContent);
-PHP_METHOD(Leevel_Http_Request, getPublicUrl);
-PHP_METHOD(Leevel_Http_Request, setPublicUrl);
 PHP_METHOD(Leevel_Http_Request, getRoot);
 PHP_METHOD(Leevel_Http_Request, getEnter);
 PHP_METHOD(Leevel_Http_Request, getScriptName);
@@ -78,13 +81,6 @@ PHP_METHOD(Leevel_Http_Request, getPathInfo);
 PHP_METHOD(Leevel_Http_Request, getBasePath);
 PHP_METHOD(Leevel_Http_Request, getBaseUrl);
 PHP_METHOD(Leevel_Http_Request, getRequestUri);
-PHP_METHOD(Leevel_Http_Request, option);
-PHP_METHOD(Leevel_Http_Request, optionArray);
-PHP_METHOD(Leevel_Http_Request, options);
-PHP_METHOD(Leevel_Http_Request, getOption);
-PHP_METHOD(Leevel_Http_Request, getOptions);
-PHP_METHOD(Leevel_Http_Request, deleteOption);
-PHP_METHOD(Leevel_Http_Request, deleteOptions);
 PHP_METHOD(Leevel_Http_Request, macro);
 PHP_METHOD(Leevel_Http_Request, hasMacro);
 PHP_METHOD(Leevel_Http_Request, callStaticMacro);
@@ -105,7 +101,6 @@ PHP_METHOD(Leevel_Http_Request, __get);
 PHP_METHOD(Leevel_Http_Request, __callStatic);
 PHP_METHOD(Leevel_Http_Request, __call);
 void zephir_init_static_properties_Leevel_Http_Request(TSRMLS_D);
-zend_object *zephir_init_properties_Leevel_Http_Request(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request___construct, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, query, 1)
@@ -115,7 +110,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request___construct, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, files, 1)
 	ZEND_ARG_ARRAY_INFO(0, server, 1)
 	ZEND_ARG_INFO(0, content)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_reset, 0, 0, 0)
@@ -126,10 +120,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_reset, 0, 0, 0)
 	ZEND_ARG_ARRAY_INFO(0, files, 1)
 	ZEND_ARG_ARRAY_INFO(0, server, 1)
 	ZEND_ARG_INFO(0, content)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_createfromglobals, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_normalizerequestfromcontent, 0, 0, 1)
@@ -225,43 +215,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_setlanguage, 0, 0, 1)
 	ZEND_ARG_INFO(0, language)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_setpublicurl, 0, 0, 1)
-	ZEND_ARG_INFO(0, publicUrl)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_setpathinfo, 0, 0, 1)
 	ZEND_ARG_INFO(0, pathInfo)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_option, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_optionarray, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_ARRAY_INFO(0, value, 0)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_options, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_getoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, defaults)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_getoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_deleteoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_deleteoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_request_macro, 0, 0, 2)
@@ -342,7 +297,7 @@ ZEND_END_ARG_INFO()
 ZEPHIR_INIT_FUNCS(leevel_http_request_method_entry) {
 	PHP_ME(Leevel_Http_Request, __construct, arginfo_leevel_http_request___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Leevel_Http_Request, reset, arginfo_leevel_http_request_reset, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, createFromGlobals, arginfo_leevel_http_request_createfromglobals, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Leevel_Http_Request, createFromGlobals, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Http_Request, normalizeRequestFromContent, arginfo_leevel_http_request_normalizerequestfromcontent, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Http_Request, get, arginfo_leevel_http_request_get, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, exists, arginfo_leevel_http_request_exists, ZEND_ACC_PUBLIC)
@@ -371,6 +326,11 @@ ZEPHIR_INIT_FUNCS(leevel_http_request_method_entry) {
 	PHP_ME(Leevel_Http_Request, isXmlHttpRequest, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, isPjax, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, isRealPjax, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Request, isJson, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Request, isRealJson, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Request, isAcceptJson, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Request, isRealAcceptJson, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Request, isAcceptAny, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, isMobile, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, isHead, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, isGet, NULL, ZEND_ACC_PUBLIC)
@@ -397,8 +357,6 @@ ZEPHIR_INIT_FUNCS(leevel_http_request_method_entry) {
 	PHP_ME(Leevel_Http_Request, getLanguage, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, setLanguage, arginfo_leevel_http_request_setlanguage, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getContent, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, getPublicUrl, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, setPublicUrl, arginfo_leevel_http_request_setpublicurl, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getRoot, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getEnter, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getScriptName, NULL, ZEND_ACC_PUBLIC)
@@ -415,13 +373,6 @@ ZEPHIR_INIT_FUNCS(leevel_http_request_method_entry) {
 	PHP_ME(Leevel_Http_Request, getBasePath, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getBaseUrl, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, getRequestUri, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, option, arginfo_leevel_http_request_option, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, optionArray, arginfo_leevel_http_request_optionarray, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, options, arginfo_leevel_http_request_options, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, getOption, arginfo_leevel_http_request_getoption, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, getOptions, arginfo_leevel_http_request_getoptions, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, deleteOption, arginfo_leevel_http_request_deleteoption, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Request, deleteOptions, arginfo_leevel_http_request_deleteoptions, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Request, macro, arginfo_leevel_http_request_macro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Http_Request, hasMacro, arginfo_leevel_http_request_hasmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Http_Request, callStaticMacro, arginfo_leevel_http_request_callstaticmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)

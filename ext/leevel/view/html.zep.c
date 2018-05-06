@@ -82,39 +82,41 @@ PHP_METHOD(Leevel_View_Html, display) {
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool display;
 	zval vars;
-	zval *file_param = NULL, *vars_param = NULL, *ext_param = NULL, *display_param = NULL, cachepath, result, key, value, _0, _1, _7, _2$$4, *_3$$4, _6$$5, _8$$6;
-	zval file, ext;
+	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, *display_param = NULL, __$null, cachepath, result, key, value, _0, _1, _2$$4, *_3$$4, _6$$5, _7$$6;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&file);
-	ZVAL_UNDEF(&ext);
+	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&ext_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&cachepath);
 	ZVAL_UNDEF(&result);
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_8$$6);
+	ZVAL_UNDEF(&_7$$6);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 3, &file_param, &vars_param, &ext_param, &display_param);
+	zephir_fetch_params(1, 0, 4, &file, &vars_param, &ext, &display_param);
 
-	zephir_get_strval(&file, file_param);
+	if (!file) {
+		file = &file_sub;
+		ZEPHIR_CPY_WRT(file, &__$null);
+	} else {
+		ZEPHIR_SEPARATE_PARAM(file);
+	}
 	if (!vars_param) {
 		ZEPHIR_INIT_VAR(&vars);
 		array_init(&vars);
 	} else {
 	ZEPHIR_OBS_COPY_OR_DUP(&vars, vars_param);
 	}
-	if (!ext_param) {
-		ZEPHIR_INIT_VAR(&ext);
-		ZVAL_STRING(&ext, "");
-	} else {
-		zephir_get_strval(&ext, ext_param);
+	if (!ext) {
+		ext = &ext_sub;
+		ext = &__$null;
 	}
 	if (!display_param) {
 		display = 1;
@@ -123,9 +125,9 @@ PHP_METHOD(Leevel_View_Html, display) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parsedisplayfile", NULL, 0, &file, &ext);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parsedisplayfile", NULL, 0, file, ext);
 	zephir_check_call_status();
-	zephir_get_strval(&file, &_0);
+	ZEPHIR_CPY_WRT(file, &_0);
 	if (1 == 1) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setvar", NULL, 0, &vars);
 		zephir_check_call_status();
@@ -152,25 +154,25 @@ PHP_METHOD(Leevel_View_Html, display) {
 		ZEPHIR_INIT_NVAR(&value);
 		ZEPHIR_INIT_NVAR(&key);
 	}
-	ZEPHIR_CALL_METHOD(&cachepath, this_ptr, "getcachepath", NULL, 0, &file);
+	ZEPHIR_CALL_METHOD(&cachepath, this_ptr, "getcachepath", NULL, 0, file);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_7, this_ptr, "iscacheexpired", NULL, 0, &file, &cachepath);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "iscacheexpired", NULL, 0, file, &cachepath);
 	zephir_check_call_status();
-	if (zephir_is_true(&_7)) {
-		ZEPHIR_CALL_METHOD(&_8$$6, this_ptr, "parser", NULL, 0);
+	if (zephir_is_true(&_0)) {
+		ZEPHIR_CALL_METHOD(&_7$$6, this_ptr, "parser", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_8$$6, "docombile", NULL, 0, &file, &cachepath);
+		ZEPHIR_CALL_METHOD(NULL, &_7$$6, "docombile", NULL, 0, file, &cachepath);
 		zephir_check_call_status();
 	}
 	if (display == 0) {
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 122);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 121);
 		zephir_check_call_status();
 		if (zephir_require_zval(&cachepath TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_CALL_FUNCTION(&result, "ob_get_contents", NULL, 123);
+		ZEPHIR_CALL_FUNCTION(&result, "ob_get_contents", NULL, 122);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 124);
+		ZEPHIR_CALL_FUNCTION(NULL, "ob_end_clean", NULL, 123);
 		zephir_check_call_status();
 		RETURN_CCTOR(&result);
 	} else {
@@ -318,7 +320,7 @@ PHP_METHOD(Leevel_View_Html, getCachePath) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_8);
 	ZEPHIR_CONCAT_SV(&_8, ".", &_7);
-	ZEPHIR_CALL_FUNCTION(&_9, "basename", NULL, 125, &file, &_8);
+	ZEPHIR_CALL_FUNCTION(&_9, "basename", NULL, 124, &file, &_8);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_10);
 	zephir_md5(&_10, &file);

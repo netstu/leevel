@@ -207,7 +207,7 @@ PHP_METHOD(Leevel_Router_Url, make) {
 		if (zephir_is_true(&_8$$3)) {
 			zephir_read_property(&_9$$6, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
 			zephir_array_fetch_string(&_10$$6, &_9$$6, SL("params"), PH_NOISY | PH_READONLY, "leevel/router/url.zep", 132 TSRMLS_CC);
-			ZEPHIR_CALL_FUNCTION(&_11$$6, "http_build_query", NULL, 105, &_10$$6);
+			ZEPHIR_CALL_FUNCTION(&_11$$6, "http_build_query", NULL, 103, &_10$$6);
 			zephir_check_call_status();
 			ZEPHIR_INIT_VAR(&_12$$6);
 			ZEPHIR_CONCAT_SV(&_12$$6, "?", &_11$$6);
@@ -700,7 +700,7 @@ PHP_METHOD(Leevel_Router_Url, customUrl) {
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_5$$3);
 		ZVAL_STRING(&_5$$3, "/{(.+?)}/");
-		ZEPHIR_CALL_FUNCTION(&result, "preg_replace_callback", NULL, 106, &_5$$3, &_2$$3, &url);
+		ZEPHIR_CALL_FUNCTION(&result, "preg_replace_callback", NULL, 104, &_5$$3, &_2$$3, &url);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&result, &url);
@@ -718,7 +718,7 @@ PHP_METHOD(Leevel_Router_Url, customUrl) {
 		array_init(&tmpQuery);
 		zephir_array_fetch_long(&_8$$5, &tmp, 1, PH_NOISY | PH_READONLY, "leevel/router/url.zep", 315 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
-		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_8$$5, &tmpQuery);
+		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 84, &_8$$5, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
 		zephir_read_property(&_9$$5, this_ptr, SL("parseMvc"), PH_NOISY_CC | PH_READONLY);
@@ -906,7 +906,7 @@ PHP_METHOD(Leevel_Router_Url, normalUrl) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_22);
 	if (zephir_is_true(&querys)) {
-		ZEPHIR_CALL_FUNCTION(&_23, "http_build_query", NULL, 105, &querys);
+		ZEPHIR_CALL_FUNCTION(&_23, "http_build_query", NULL, 103, &querys);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_22);
 		ZEPHIR_CONCAT_SV(&_22, "?", &_23);
@@ -1021,7 +1021,7 @@ PHP_METHOD(Leevel_Router_Url, parseMvc) {
 			ZEPHIR_CONCAT_VSV(&_5$$5, &_4$$5, "://", &url);
 			zephir_get_strval(&url, &_5$$5);
 		}
-		ZEPHIR_CALL_FUNCTION(&parse, "parse_url", NULL, 107, &url);
+		ZEPHIR_CALL_FUNCTION(&parse, "parse_url", NULL, 105, &url);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_INIT_NVAR(&parse);
@@ -1141,7 +1141,7 @@ PHP_METHOD(Leevel_Router_Url, parseMvc) {
 		ZEPHIR_INIT_VAR(&tmpAction);
 		zephir_fast_explode_str(&tmpAction, SL("/"), &_32$$16, LONG_MAX TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpAction);
-		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 104, &tmpAction);
+		ZEPHIR_CALL_FUNCTION(&_33$$16, "array_pop", NULL, 106, &tmpAction);
 		ZEPHIR_UNREF(&tmpAction);
 		zephir_check_call_status();
 		zephir_array_update_string(&result, SL("action"), &_33$$16, PH_COPY | PH_SEPARATE);
@@ -1154,7 +1154,7 @@ PHP_METHOD(Leevel_Router_Url, parseMvc) {
 		array_init(&tmpQuery);
 		zephir_array_fetch_string(&_35$$17, &parse, SL("query"), PH_NOISY | PH_READONLY, "leevel/router/url.zep", 480 TSRMLS_CC);
 		ZEPHIR_MAKE_REF(&tmpQuery);
-		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 83, &_35$$17, &tmpQuery);
+		ZEPHIR_CALL_FUNCTION(NULL, "parse_str", NULL, 84, &_35$$17, &tmpQuery);
 		ZEPHIR_UNREF(&tmpQuery);
 		zephir_check_call_status();
 		zephir_is_iterable(&params, 0, "leevel/router/url.zep", 486);

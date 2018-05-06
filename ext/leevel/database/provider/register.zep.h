@@ -5,7 +5,6 @@ ZEPHIR_INIT_CLASS(Leevel_Database_Provider_Register);
 
 PHP_METHOD(Leevel_Database_Provider_Register, __construct);
 PHP_METHOD(Leevel_Database_Provider_Register, register);
-PHP_METHOD(Leevel_Database_Provider_Register, bootstrap);
 PHP_METHOD(Leevel_Database_Provider_Register, providers);
 PHP_METHOD(Leevel_Database_Provider_Register, databases);
 PHP_METHOD(Leevel_Database_Provider_Register, database);
@@ -17,7 +16,6 @@ ZEND_END_ARG_INFO()
 ZEPHIR_INIT_FUNCS(leevel_database_provider_register_method_entry) {
 	PHP_ME(Leevel_Database_Provider_Register, __construct, arginfo_leevel_database_provider_register___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Leevel_Database_Provider_Register, register, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Database_Provider_Register, bootstrap, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Database_Provider_Register, providers, NULL, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Database_Provider_Register, databases, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Database_Provider_Register, database, NULL, ZEND_ACC_PROTECTED)

@@ -47,7 +47,7 @@ class Register extends Provider
      */
     public function register()
     {
-        this->singleton("cookie", function (project) {
+        this->container->singleton("cookie", function (project) {
         	var option;
 
         	let option = project->make("option");

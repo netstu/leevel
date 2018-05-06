@@ -84,7 +84,7 @@ class Register extends Provider
      */
     protected function throttler()
     {
-        this->singleton("throttler", function (project) {
+        this->container->singleton("throttler", function (project) {
             var throttler, cache;
 
             let cache = project->make("cache")->connect(project->make("option")->get("throttler\\driver"));
@@ -102,6 +102,6 @@ class Register extends Provider
      */
     protected function middleware()
     {
-        this->singleton("Leevel\\Throttler\\Middleware\\Throttler");
+        this->container->singleton("Leevel\\Throttler\\Middleware\\Throttler");
     }
 }

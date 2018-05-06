@@ -86,7 +86,7 @@ class Register extends Provider
      */
     protected function filesystems()
     {
-        this->singleton("filesystems", function (project) {
+        this->container->singleton("filesystems", function (project) {
             return new \Leevel\Filesystem\Manager(project);
         });
     }
@@ -98,7 +98,7 @@ class Register extends Provider
      */
     protected function filesystem()
     {
-        this->singleton("filesystem", function (project) {
+        this->container->singleton("filesystem", function (project) {
             return project->make("filesystems")->connect();
         });
     }

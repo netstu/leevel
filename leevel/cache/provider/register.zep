@@ -90,7 +90,7 @@ class Register extends Provider
      */
     protected function caches()
     {
-        this->singleton("caches", function (project) {
+        this->container->singleton("caches", function (project) {
             return new \Leevel\Cache\Manager(project);
         });
     }
@@ -102,7 +102,7 @@ class Register extends Provider
      */
     protected function cache()
     {
-        this->singleton("cache", function (project) {
+        this->container->singleton("cache", function (project) {
         	var caches;
 
         	let caches = project->make("caches");
@@ -117,7 +117,7 @@ class Register extends Provider
      */
     protected function cacheLoad()
     {
-        this->singleton("cache.load", function (project) {
+        this->container->singleton("cache.load", function (project) {
         	var cache;
 
         	let cache = project->make("cache");

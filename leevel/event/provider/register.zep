@@ -47,11 +47,8 @@ class Register extends Provider
      */
     public function register()
     {
-        this->singleton("event", function (project) {
-        	var option = [];
-
-        	let option = project->appOption();
-            return new \Leevel\Event\Dispatch(project, option["event_strict"]);
+        this->container->singleton("event", function (project) {
+            return new \Leevel\Event\Dispatch(project);
         });
     }
     

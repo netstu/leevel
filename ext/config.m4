@@ -38,7 +38,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/mvc/ientity.zep.c
 	leevel/option/ioption.zep.c
 	leevel/pipeline/ipipeline.zep.c
-	leevel/psr4/ipsr4.zep.c
 	leevel/router/iurl.zep.c
 	leevel/session/isession.zep.c
 	leevel/view/connect.zep.c
@@ -77,7 +76,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/http/uploadedfile.zep.c
 	leevel/i18n.zep.c
 	leevel/i18n/i18n.zep.c
-	leevel/i18n/provider/register.zep.c
 	leevel/log.zep.c
 	leevel/log/file.zep.c
 	leevel/log/log.zep.c
@@ -92,10 +90,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/mvc/view.zep.c
 	leevel/option.zep.c
 	leevel/option/option.zep.c
-	leevel/option/provider/register.zep.c
 	leevel/pipeline/pipeline.zep.c
-	leevel/psr4.zep.c
-	leevel/psr4/psr4.zep.c
 	leevel/request.zep.c
 	leevel/response.zep.c
 	leevel/router.zep.c
@@ -152,12 +147,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/29__closure.zep.c
 	leevel/30__closure.zep.c
 	leevel/31__closure.zep.c
-	leevel/32__closure.zep.c
-	leevel/33__closure.zep.c
-	leevel/34__closure.zep.c
-	leevel/35__closure.zep.c
-	leevel/36__closure.zep.c
-	leevel/37__closure.zep.c "
+	leevel/32__closure.zep.c "
 	PHP_NEW_EXTENSION(leevel, $leevel_sources, $ext_shared,, )
 	PHP_SUBST(LEEVEL_SHARED_LIBADD)
 

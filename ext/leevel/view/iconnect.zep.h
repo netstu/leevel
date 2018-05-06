@@ -3,7 +3,7 @@ extern zend_class_entry *leevel_view_iconnect_ce;
 
 ZEPHIR_INIT_CLASS(Leevel_View_IConnect);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_iconnect_display, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_iconnect_display, 0, 0, 0)
 	ZEND_ARG_INFO(0, file)
 	ZEND_ARG_ARRAY_INFO(0, vars, 1)
 	ZEND_ARG_INFO(0, ext)
