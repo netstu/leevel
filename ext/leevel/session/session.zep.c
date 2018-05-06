@@ -133,8 +133,8 @@ PHP_METHOD(Leevel_Session_Session, __construct) {
  */
 PHP_METHOD(Leevel_Session_Session, start) {
 
-	zend_bool _1, _3, _29;
-	zval __$true, __$false, _0, _2, _4, _5, _6, _7, _11, _14, _17, _20, _23, _26, _30, _31, _37, _9$$4, _10$$4, _12$$5, _13$$5, _15$$6, _16$$6, _18$$7, _19$$7, _21$$8, _22$$8, _24$$9, _25$$9, _27$$10, _28$$10, _32$$11, _33$$11, _34$$11, _35$$11, _36$$11;
+	zend_bool _1, _3, _30;
+	zval __$true, __$false, _0, _2, _4, _5, _6, _7, _11, _14, _17, _20, _23, _26, _29, _31, _32, _38, _9$$4, _10$$4, _12$$5, _13$$5, _15$$6, _16$$6, _18$$7, _19$$7, _21$$8, _22$$8, _24$$9, _25$$9, _27$$10, _28$$10, _33$$11, _34$$11, _35$$11, _36$$11, _37$$11;
 	zephir_fcall_cache_entry *_8 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -153,9 +153,10 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	ZVAL_UNDEF(&_20);
 	ZVAL_UNDEF(&_23);
 	ZVAL_UNDEF(&_26);
-	ZVAL_UNDEF(&_30);
+	ZVAL_UNDEF(&_29);
 	ZVAL_UNDEF(&_31);
-	ZVAL_UNDEF(&_37);
+	ZVAL_UNDEF(&_32);
+	ZVAL_UNDEF(&_38);
 	ZVAL_UNDEF(&_9$$4);
 	ZVAL_UNDEF(&_10$$4);
 	ZVAL_UNDEF(&_12$$5);
@@ -170,11 +171,11 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	ZVAL_UNDEF(&_25$$9);
 	ZVAL_UNDEF(&_27$$10);
 	ZVAL_UNDEF(&_28$$10);
-	ZVAL_UNDEF(&_32$$11);
 	ZVAL_UNDEF(&_33$$11);
 	ZVAL_UNDEF(&_34$$11);
 	ZVAL_UNDEF(&_35$$11);
 	ZVAL_UNDEF(&_36$$11);
+	ZVAL_UNDEF(&_37$$11);
 
 	ZEPHIR_MM_GROW();
 
@@ -197,7 +198,8 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	}
 	ZEPHIR_INIT_VAR(&_5);
 	ZVAL_STRING(&_5, "session.auto_start");
-	ZVAL_LONG(&_6, 0);
+	ZEPHIR_INIT_VAR(&_6);
+	ZVAL_STRING(&_6, "0");
 	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_5, &_6);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_5);
@@ -286,33 +288,33 @@ PHP_METHOD(Leevel_Session_Session, start) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setgcprobability", NULL, 0, &_27$$10);
 		zephir_check_call_status();
 	}
-	zephir_read_property(&_6, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-	_29 = zephir_is_true(&_6);
-	if (_29) {
-		zephir_read_property(&_30, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_FUNCTION(&_31, "session_set_save_handler", NULL, 109, &_30);
+	zephir_read_property(&_29, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+	_30 = zephir_is_true(&_29);
+	if (_30) {
+		zephir_read_property(&_31, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_FUNCTION(&_32, "session_set_save_handler", NULL, 109, &_31);
 		zephir_check_call_status();
-		_29 = !zephir_is_true(&_31);
+		_30 = !zephir_is_true(&_32);
 	}
-	if (_29) {
-		ZEPHIR_INIT_VAR(&_32$$11);
-		object_init_ex(&_32$$11, spl_ce_RuntimeException);
+	if (_30) {
 		ZEPHIR_INIT_VAR(&_33$$11);
-		zephir_read_property(&_34$$11, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-		zephir_get_class(&_33$$11, &_34$$11, 0 TSRMLS_CC);
-		ZEPHIR_INIT_VAR(&_35$$11);
-		ZVAL_STRING(&_35$$11, "Session drive %s settings failed.");
-		ZEPHIR_CALL_FUNCTION(&_36$$11, "sprintf", NULL, 1, &_35$$11, &_33$$11);
+		object_init_ex(&_33$$11, spl_ce_RuntimeException);
+		ZEPHIR_INIT_VAR(&_34$$11);
+		zephir_read_property(&_35$$11, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+		zephir_get_class(&_34$$11, &_35$$11, 0 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&_36$$11);
+		ZVAL_STRING(&_36$$11, "Session drive %s settings failed.");
+		ZEPHIR_CALL_FUNCTION(&_37$$11, "sprintf", NULL, 1, &_36$$11, &_34$$11);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_32$$11, "__construct", NULL, 2, &_36$$11);
+		ZEPHIR_CALL_METHOD(NULL, &_33$$11, "__construct", NULL, 2, &_37$$11);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_32$$11, "leevel/session/session.zep", 154 TSRMLS_CC);
+		zephir_throw_exception_debug(&_33$$11, "leevel/session/session.zep", 154 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_37, "session_start", NULL, 110);
+	ZEPHIR_CALL_FUNCTION(&_38, "session_start", NULL, 110);
 	zephir_check_call_status();
-	if (!(zephir_is_true(&_37))) {
+	if (!(zephir_is_true(&_38))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Session start failed", "leevel/session/session.zep", 159);
 		return;
 	}
@@ -1766,16 +1768,18 @@ PHP_METHOD(Leevel_Session_Session, setCacheExpire) {
 
 
 	ZVAL_LONG(&_0, second);
-	second = zephir_get_intval(&_0);
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "session.gc_maxlifetime");
-	ZVAL_LONG(&_2, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_1, &_2);
+	ZEPHIR_CALL_FUNCTION(&_1, "strval", NULL, 11, &_0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "session.cookie_lifetime");
-	ZVAL_LONG(&_2, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_1, &_2);
+	second = zephir_get_numberval(&_1);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "session.gc_maxlifetime");
+	ZVAL_LONG(&_0, second);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_2, &_0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_2);
+	ZVAL_STRING(&_2, "session.cookie_lifetime");
+	ZVAL_LONG(&_0, second);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 108, &_2, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1800,12 +1804,14 @@ PHP_METHOD(Leevel_Session_Session, setUseCookies) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.use_cookies");
-	ZVAL_LONG(&_1, 1);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "1");
 	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 108, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "session.use_trans_sid");
-	ZVAL_LONG(&_1, 0);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "0");
 	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 108, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -1867,14 +1873,15 @@ PHP_METHOD(Leevel_Session_Session, getCacheLimiter) {
  */
 PHP_METHOD(Leevel_Session_Session, setGcProbability) {
 
-	zend_bool _1;
-	zval *probability_param = NULL, _0, _2$$3, _3$$3;
+	zend_bool _2;
+	zval *probability_param = NULL, _0, _1, _3$$3, _4$$3;
 	zend_long probability, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &probability_param);
@@ -1883,16 +1890,18 @@ PHP_METHOD(Leevel_Session_Session, setGcProbability) {
 
 
 	ZVAL_LONG(&_0, probability);
-	probability = zephir_get_intval(&_0);
-	_1 = probability >= 1;
-	if (_1) {
-		_1 = probability <= 100;
+	ZEPHIR_CALL_FUNCTION(&_1, "strval", NULL, 11, &_0);
+	zephir_check_call_status();
+	probability = zephir_get_numberval(&_1);
+	_2 = probability >= 1;
+	if (_2) {
+		_2 = probability <= 100;
 	}
-	if (_1) {
-		ZEPHIR_INIT_VAR(&_2$$3);
-		ZVAL_STRING(&_2$$3, "session.gc_probability");
-		ZVAL_LONG(&_3$$3, probability);
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_2$$3, &_3$$3);
+	if (_2) {
+		ZEPHIR_INIT_VAR(&_3$$3);
+		ZVAL_STRING(&_3$$3, "session.gc_probability");
+		ZVAL_LONG(&_4$$3, probability);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 108, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

@@ -53,7 +53,7 @@ extension = leevel.so
 
 ## Official Documentation
 
-Documentation for the framework can be found on the [QueryYetSimple website](http://www.queryphp.com).
+Documentation for the framework can be found on the [Leevel website](http://www.queryphp.com).
 
 ## License
 

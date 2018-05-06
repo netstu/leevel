@@ -109,7 +109,7 @@ class Session implements ISession, IClass
         }
 
         // 设置 session 不自动启动
-        ini_set("session.auto_start", 0);
+        ini_set("session.auto_start", "0");
 
         // 设置 session id
         if this->getOption("id") {
@@ -744,7 +744,7 @@ class Session implements ISession, IClass
      */
     public function setCacheExpire(int second)
     {
-    	let second = intval(second);
+    	let second = strval(second);
 
 		ini_set("session.gc_maxlifetime", second);
         ini_set("session.cookie_lifetime", second);
@@ -757,8 +757,8 @@ class Session implements ISession, IClass
      */
     public function setUseCookies()
     {
-        ini_set("session.use_cookies", 1);
-	    ini_set("session.use_trans_sid", 0);
+        ini_set("session.use_cookies", "1");
+	    ini_set("session.use_trans_sid", "0");
     }
 
     /**
@@ -791,7 +791,7 @@ class Session implements ISession, IClass
      */
     public function setGcProbability(int probability)
     {
-    	let probability = intval(probability);
+    	let probability = strval(probability);
 
         if probability >= 1 && probability <= 100 {
             ini_set("session.gc_probability", probability);
