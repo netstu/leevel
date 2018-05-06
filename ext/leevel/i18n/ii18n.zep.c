@@ -66,3 +66,10 @@ ZEPHIR_DOC_METHOD(Leevel_I18n_II18n, setI18n);
  */
 ZEPHIR_DOC_METHOD(Leevel_I18n_II18n, getI18n);
 
+/**
+ * 返回所有语言包
+ *
+ * @return array
+ */
+ZEPHIR_DOC_METHOD(Leevel_I18n_II18n, all);
+

@@ -18,5 +18,6 @@ ZEPHIR_INIT_FUNCS(leevel_i18n_ii18n_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_I18n_II18n, addText, arginfo_leevel_i18n_ii18n_addtext)
 	PHP_ABSTRACT_ME(Leevel_I18n_II18n, setI18n, arginfo_leevel_i18n_ii18n_seti18n)
 	PHP_ABSTRACT_ME(Leevel_I18n_II18n, getI18n, NULL)
+	PHP_ABSTRACT_ME(Leevel_I18n_II18n, all, NULL)
 	PHP_FE_END
 };

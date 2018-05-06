@@ -255,6 +255,20 @@ PHP_METHOD(Leevel_I18n_I18n, getI18n) {
 
 }
 
+/**
+ * 返回所有语言包
+ *
+ * @return array
+ */
+PHP_METHOD(Leevel_I18n_I18n, all) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_MEMBER(getThis(), "text");
+
+}
+
 zend_object *zephir_init_properties_Leevel_I18n_I18n(zend_class_entry *class_type TSRMLS_DC) {
 
 		zval _0, _1$$3;
