@@ -216,11 +216,10 @@ PHP_METHOD(Leevel_Http_FileResponse, create) {
  */
 PHP_METHOD(Leevel_Http_FileResponse, setFile) {
 
-	zval _6$$6;
 	zephir_fcall_cache_entry *_5 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool autoEtag, autoLastModified, _1, _2$$4, _3$$4;
-	zval *file, file_sub, *contentDisposition = NULL, contentDisposition_sub, *autoEtag_param = NULL, *autoLastModified_param = NULL, __$null, files, _0, _7, _4$$5;
+	zval *file, file_sub, *contentDisposition = NULL, contentDisposition_sub, *autoEtag_param = NULL, *autoLastModified_param = NULL, __$null, files, _0, _7, _4$$5, _6$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&file_sub);
@@ -278,7 +277,8 @@ PHP_METHOD(Leevel_Http_FileResponse, setFile) {
 			zephir_check_call_status();
 		} else {
 			object_init_ex(&files, leevel_http_file_ce);
-			zephir_get_strval(&_6$$6, file);
+			ZEPHIR_CALL_FUNCTION(&_6$$6, "strval", NULL, 11, file);
+			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &files, "__construct", &_5, 34, &_6$$6);
 			zephir_check_call_status();
 		}
@@ -328,7 +328,7 @@ PHP_METHOD(Leevel_Http_FileResponse, getFile) {
 PHP_METHOD(Leevel_Http_FileResponse, setAutoLastModified) {
 
 	zend_class_entry *_2;
-	zval _0, _1, _3, _4, _5;
+	zval _0, _1, _3, _4, _5, _6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -337,6 +337,7 @@ PHP_METHOD(Leevel_Http_FileResponse, setAutoLastModified) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
 
@@ -349,9 +350,11 @@ PHP_METHOD(Leevel_Http_FileResponse, setAutoLastModified) {
 	zephir_read_property(&_3, this_ptr, SL("file"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_4, &_3, "getmtime", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_5);
-	ZVAL_STRING(&_5, "U");
-	ZEPHIR_CALL_CE_STATIC(&_1, _2, "createfromformat", NULL, 0, &_5, &_4);
+	ZEPHIR_CALL_FUNCTION(&_5, "strval", NULL, 11, &_4);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&_6);
+	ZVAL_STRING(&_6, "U");
+	ZEPHIR_CALL_CE_STATIC(&_1, _2, "createfromformat", NULL, 0, &_6, &_5);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setlastmodified", NULL, 0, &_1);
 	zephir_check_call_status();

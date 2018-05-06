@@ -496,13 +496,14 @@ PHP_METHOD(Leevel_Http_JsonResponse, getEncodingOptions) {
  */
 PHP_METHOD(Leevel_Http_JsonResponse, setEncodingOptions) {
 
-	zval *encodingOptions_param = NULL, _0, _1, _2;
+	zval *encodingOptions_param = NULL, _0, _1, _2, _3;
 	zend_long encodingOptions, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &encodingOptions_param);
@@ -515,13 +516,13 @@ PHP_METHOD(Leevel_Http_JsonResponse, setEncodingOptions) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	ZEPHIR_INIT_ZVAL_NREF(_1);
 	ZVAL_LONG(&_1, encodingOptions);
-	zephir_update_property_zval(this_ptr, SL("encodingOptions"), &_1);
-	zephir_read_property(&_1, this_ptr, SL("data"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_2, this_ptr, "getdata", NULL, 0, &_1);
+	ZEPHIR_INIT_ZVAL_NREF(_2);
+	ZVAL_LONG(&_2, zephir_get_intval(&_1));
+	zephir_update_property_zval(this_ptr, SL("encodingOptions"), &_2);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "getdata", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "setdata", NULL, 0, &_2);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "setdata", NULL, 0, &_3);
 	zephir_check_call_status();
 	RETURN_MM();
 

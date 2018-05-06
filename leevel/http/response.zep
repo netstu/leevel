@@ -330,7 +330,7 @@ class Response implements IControl, IMacro, IResponse
             throw new UnexpectedValueException(sprintf("The Response content must be a scalar or object implementing __toString(), %s given.", gettype(content)));
         }
 
-        let this->content = (string) content;
+        let this->content = strval(content);
 
         return this;
     }
@@ -505,7 +505,7 @@ class Response implements IControl, IMacro, IResponse
             throw new InvalidArgumentException(json_last_error_msg());
         }
 
-        let this->content = (string) data;
+        let this->content = strval(data);
 
         return this;
     }
@@ -571,7 +571,7 @@ class Response implements IControl, IMacro, IResponse
      * 设置相应状态码
      * 
      * @param int $code
-     * @param string $text
+     * @param mixed $text
      * @return $this
      */
     public function setStatusCode(int code, var text = null)

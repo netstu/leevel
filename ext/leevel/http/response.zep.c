@@ -412,10 +412,9 @@ PHP_METHOD(Leevel_Http_Response, sendContent) {
  */
 PHP_METHOD(Leevel_Http_Response, setContent) {
 
-	zval _12;
 	zend_bool _6, _7;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *content = NULL, content_sub, __$true, __$false, tmp, _0, _1, _5, _2$$4, _3$$4, _4$$4, _8$$5, _9$$5, _10$$5, _11$$5;
+	zval *content = NULL, content_sub, __$true, __$false, tmp, _0, _1, _5, _12, _2$$4, _3$$4, _4$$4, _8$$5, _9$$5, _10$$5, _11$$5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&content_sub);
@@ -425,6 +424,7 @@ PHP_METHOD(Leevel_Http_Response, setContent) {
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_12);
 	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_3$$4);
 	ZVAL_UNDEF(&_4$$4);
@@ -432,7 +432,6 @@ PHP_METHOD(Leevel_Http_Response, setContent) {
 	ZVAL_UNDEF(&_9$$5);
 	ZVAL_UNDEF(&_10$$5);
 	ZVAL_UNDEF(&_11$$5);
-	ZVAL_UNDEF(&_12);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &content);
@@ -493,7 +492,8 @@ PHP_METHOD(Leevel_Http_Response, setContent) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	zephir_get_strval(&_12, content);
+	ZEPHIR_CALL_FUNCTION(&_12, "strval", NULL, 11, content);
+	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("content"), &_12);
 	RETURN_THIS();
 
@@ -869,10 +869,9 @@ PHP_METHOD(Leevel_Http_Response, getData) {
  */
 PHP_METHOD(Leevel_Http_Response, setData) {
 
-	zval _11;
 	zend_bool _1, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *data = NULL, data_sub, *encodingOptions = NULL, encodingOptions_sub, __$null, _0, _8, _4$$5, _5$$6, _6$$7, _7$$8, _9$$9, _10$$9;
+	zval *data = NULL, data_sub, *encodingOptions = NULL, encodingOptions_sub, __$null, _0, _8, _11, _4$$5, _5$$6, _6$$7, _7$$8, _9$$9, _10$$9;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
@@ -880,13 +879,13 @@ PHP_METHOD(Leevel_Http_Response, setData) {
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_11);
 	ZVAL_UNDEF(&_4$$5);
 	ZVAL_UNDEF(&_5$$6);
 	ZVAL_UNDEF(&_6$$7);
 	ZVAL_UNDEF(&_7$$8);
 	ZVAL_UNDEF(&_9$$9);
 	ZVAL_UNDEF(&_10$$9);
-	ZVAL_UNDEF(&_11);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 2, &data, &encodingOptions);
@@ -960,7 +959,8 @@ PHP_METHOD(Leevel_Http_Response, setData) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	zephir_get_strval(&_11, data);
+	ZEPHIR_CALL_FUNCTION(&_11, "strval", NULL, 11, data);
+	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("content"), &_11);
 	RETURN_THIS();
 
@@ -1063,7 +1063,7 @@ PHP_METHOD(Leevel_Http_Response, getProtocolVersion) {
  * 设置相应状态码
  * 
  * @param int $code
- * @param string $text
+ * @param mixed $text
  * @return $this
  */
 PHP_METHOD(Leevel_Http_Response, setStatusCode) {

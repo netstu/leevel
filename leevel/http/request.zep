@@ -1395,7 +1395,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     {
         var queryString;
     
-        let queryString = this->normalizeQueryString(this->server->get("QUERY_STRING"));
+        let queryString = this->normalizeQueryString(this->server->get("QUERY_STRING", ""));
 
         return queryString === "" ? null : queryString;
     }
@@ -1516,13 +1516,13 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         }
 
         // 兼容分析
-        let fileName = basename(this->server->get("SCRIPT_FILENAME"));
+        let fileName = basename(this->server->get("SCRIPT_FILENAME", ""));
 
-        if basename(this->server->get("SCRIPT_NAME")) === fileName {
+        if basename(this->server->get("SCRIPT_NAME", "")) === fileName {
             let url = this->server->get("SCRIPT_NAME");
-        } elseif basename(this->server->get("PHP_SELF")) === fileName {
+        } elseif basename(this->server->get("PHP_SELF", "")) === fileName {
             let url = this->server->get("PHP_SELF");
-        } elseif basename(this->server->get("ORIG_SCRIPT_NAME")) === fileName {
+        } elseif basename(this->server->get("ORIG_SCRIPT_NAME", "")) === fileName {
             let url = this->server->get("ORIG_SCRIPT_NAME");
         } else {
             let path = this->server->get("PHP_SELF");
@@ -1541,6 +1541,9 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
 
         // 比对请求
         let requestUri = this->getRequestUri();
+
+        let requestUri = strval(requestUri);
+        let url = strval(url);
 
         if "" !== requestUri && "/" !== substr(requestUri, 0, 1) {
             let requestUri = "/" . requestUri;

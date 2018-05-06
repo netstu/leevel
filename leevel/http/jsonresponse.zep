@@ -221,9 +221,9 @@ class JsonResponse extends Response
             return this;
         }
 
-        let this->encodingOptions = (int) encodingOptions;
+        let this->encodingOptions = intval(encodingOptions);
 
-        return this->setData(this->getData(this->data));
+        return this->setData(this->getData());
     }
     
     /**

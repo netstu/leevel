@@ -96,7 +96,7 @@ class FileResponse extends Response
             if is_object(file) && (file instanceof SplFileInfo || file instanceof SplFileObject) {
                 let files = new File(file->getPathname());
             } else {
-                let files = new File((string) file);
+                let files = new File(strval(file));
             }
         }
 
@@ -142,7 +142,7 @@ class FileResponse extends Response
             return this;
         }
 
-        this->setLastModified(DateTime::createFromFormat("U", this->file->getMTime()));
+        this->setLastModified(DateTime::createFromFormat("U", strval(this->file->getMTime())));
 
         return this;
     }
