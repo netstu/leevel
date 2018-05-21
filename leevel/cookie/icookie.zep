@@ -123,4 +123,11 @@ interface ICookie
      * @return void
      */
     public function clear(boolean deletePrefix = true, array option = []);
+
+    /**
+     * 返回所有 cookie
+     *
+     * @return array
+     */
+    public function all()-> array;
 }

@@ -21,6 +21,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, getOption);
 PHP_METHOD(Leevel_Cookie_Cookie, getOptions);
 PHP_METHOD(Leevel_Cookie_Cookie, deleteOption);
 PHP_METHOD(Leevel_Cookie_Cookie, deleteOptions);
+PHP_METHOD(Leevel_Cookie_Cookie, all);
 PHP_METHOD(Leevel_Cookie_Cookie, isJson);
 zend_object *zephir_init_properties_Leevel_Cookie_Cookie(zend_class_entry *class_type TSRMLS_DC);
 
@@ -141,6 +142,7 @@ ZEPHIR_INIT_FUNCS(leevel_cookie_cookie_method_entry) {
 	PHP_ME(Leevel_Cookie_Cookie, getOptions, arginfo_leevel_cookie_cookie_getoptions, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, deleteOption, arginfo_leevel_cookie_cookie_deleteoption, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, deleteOptions, arginfo_leevel_cookie_cookie_deleteoptions, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Cookie_Cookie, all, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, isJson, arginfo_leevel_cookie_cookie_isjson, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

@@ -18,7 +18,6 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_view_switchview, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, theme, Leevel\\View\\IView, 0)
-	ZEND_ARG_INFO(0, foreverSwitch)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_view_assign, 0, 0, 1)

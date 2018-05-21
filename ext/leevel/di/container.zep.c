@@ -315,7 +315,7 @@ PHP_METHOD(Leevel_Di_Container, alias) {
 			if (Z_TYPE_P(&key) == IS_LONG) {
 				continue;
 			}
-			ZEPHIR_CALL_METHOD(NULL, this_ptr, "alias", &_3, 57, &key, &item);
+			ZEPHIR_CALL_METHOD(NULL, this_ptr, "alias", &_3, 56, &key, &item);
 			zephir_check_call_status();
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&item);
@@ -417,7 +417,7 @@ PHP_METHOD(Leevel_Di_Container, make) {
 			array_init(&args);
 		}
 		ZEPHIR_MAKE_REF(&args);
-		ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 58, &args, this_ptr);
+		ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 57, &args, this_ptr);
 		ZEPHIR_UNREF(&args);
 		zephir_check_call_status();
 		zephir_read_property(&_11$$5, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
@@ -962,9 +962,9 @@ PHP_METHOD(Leevel_Di_Container, parseClosureReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionfunction")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 59, injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 58, injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 60);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 59);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1001,9 +1001,9 @@ PHP_METHOD(Leevel_Di_Container, parseMethodReflection) {
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionmethod")));
 	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 497 TSRMLS_CC);
 	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 497 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 61, &_0, &_1);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 60, &_0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 62);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 61);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1043,9 +1043,9 @@ PHP_METHOD(Leevel_Di_Container, parseClassReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionclass")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 63, &injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 62, &injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 64);
+	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 63);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -1060,7 +1060,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassReflection) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 65);
+	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 64);
 	zephir_check_call_status();
 	if (zephir_is_true(&constructor)) {
 		ZEPHIR_CALL_METHOD(&param, &constructor, "getparameters", NULL, 0);
@@ -1104,9 +1104,9 @@ PHP_METHOD(Leevel_Di_Container, newInstanceArgs) {
 
 		ZEPHIR_INIT_VAR(&_0$$3);
 		object_init_ex(&_0$$3, zephir_get_internal_ce(SL("reflectionclass")));
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 63, classname);
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 62, classname);
 		zephir_check_call_status_or_jump(try_end_1);
-		ZEPHIR_RETURN_CALL_METHOD(&_0$$3, "newinstanceargs", NULL, 66, args);
+		ZEPHIR_RETURN_CALL_METHOD(&_0$$3, "newinstanceargs", NULL, 65, args);
 		zephir_check_call_status_or_jump(try_end_1);
 		RETURN_MM();
 
@@ -1122,9 +1122,9 @@ PHP_METHOD(Leevel_Di_Container, newInstanceArgs) {
 			ZEPHIR_CPY_WRT(&_2, &_1);
 			ZEPHIR_INIT_VAR(&_3$$4);
 			object_init_ex(&_3$$4, zephir_get_internal_ce(SL("reflectionclass")));
-			ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 63, classname);
+			ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 62, classname);
 			zephir_check_call_status();
-			ZEPHIR_RETURN_CALL_METHOD(&_3$$4, "newinstancewithoutconstructor", NULL, 67);
+			ZEPHIR_RETURN_CALL_METHOD(&_3$$4, "newinstancewithoutconstructor", NULL, 66);
 			zephir_check_call_status();
 			RETURN_MM();
 		}

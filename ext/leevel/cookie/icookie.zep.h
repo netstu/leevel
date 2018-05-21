@@ -73,5 +73,6 @@ ZEPHIR_INIT_FUNCS(leevel_cookie_icookie_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, get, arginfo_leevel_cookie_icookie_get)
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, delete, arginfo_leevel_cookie_icookie_delete)
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, clear, arginfo_leevel_cookie_icookie_clear)
+	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, all, NULL)
 	PHP_FE_END
 };

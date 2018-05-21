@@ -32,7 +32,6 @@ ZEPHIR_INIT_CLASS(Leevel_Mvc_IView) {
  * 切换视图
  *
  * @param \Leevel\View\IView $theme
- * @param boolean $forever
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Mvc_IView, switchView);

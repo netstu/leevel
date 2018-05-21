@@ -152,7 +152,8 @@ class Pipeline implements IPipeline
 	 * @since 2018.01.03
 	 * @return mixed
 	 */
-	public function traverseGenerator() {
+	public function traverseGenerator()
+	{
 		var args, current, next;
 
 		if ! this->generator->valid() || this->generator->next() || ! this->generator->valid() {
@@ -176,7 +177,8 @@ class Pipeline implements IPipeline
 	 * @since 2018.01.12
 	 * @return mixed
 	 */
-	protected function makeNextClosure() {
+	protected function makeNextClosure()
+	{
 		return call_user_func_array([this, "traverseGenerator"], func_get_args());
 	}
 
@@ -188,7 +190,8 @@ class Pipeline implements IPipeline
 	 * @param array $stage
 	 * @return \Leevel\Collection\Collection
 	 */
-	protected function stageGenerator(array stage) {
+	protected function stageGenerator(array stage)
+	{
 		var item;
 
 		array temp = [];

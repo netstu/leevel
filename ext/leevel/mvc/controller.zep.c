@@ -15,11 +15,11 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
 #include "kernel/array.h"
 #include "kernel/main.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
+#include "kernel/operators.h"
 
 
 /**
@@ -85,39 +85,26 @@ PHP_METHOD(Leevel_Mvc_Controller, setView) {
  * 切换视图
  *
  * @param \Leevel\View\IView $theme
- * @param boolean $forever
  * @return $this
  */
 PHP_METHOD(Leevel_Mvc_Controller, switchView) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool forever;
-	zval *theme, theme_sub, *forever_param = NULL, _0, _1;
+	zval *theme, theme_sub, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&theme_sub);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &theme, &forever_param);
+	zephir_fetch_params(1, 1, 0, &theme);
 
-	if (!forever_param) {
-		forever = 0;
-	} else {
-		forever = zephir_get_boolval(forever_param);
-	}
 
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
-	if (forever) {
-		ZVAL_BOOL(&_1, 1);
-	} else {
-		ZVAL_BOOL(&_1, 0);
-	}
-	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, theme, &_1);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "switchview", NULL, 0, theme);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -324,7 +311,7 @@ PHP_METHOD(Leevel_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "leevel/mvc/controller.zep", 153);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "leevel/mvc/controller.zep", 152);
 		return;
 	}
 

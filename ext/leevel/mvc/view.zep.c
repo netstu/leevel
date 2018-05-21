@@ -15,11 +15,11 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
 #include "kernel/main.h"
 #include "kernel/array.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
+#include "kernel/operators.h"
 
 
 /**
@@ -40,20 +40,6 @@ ZEPHIR_INIT_CLASS(Leevel_Mvc_View) {
 	 * @var \Queryyessimple\View\IView
 	 */
 	zend_declare_property_null(leevel_mvc_view_ce, SL("theme"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * 备份视图模板
-	 *
-	 * @var \Queryyessimple\View\IView
-	 */
-	zend_declare_property_null(leevel_mvc_view_ce, SL("backupTheme"), ZEND_ACC_PROTECTED TSRMLS_CC);
-
-	/**
-	 * 是否永久切换
-	 *
-	 * @var boolean
-	 */
-	zend_declare_property_bool(leevel_mvc_view_ce, SL("foreverSwitch"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	zend_class_implements(leevel_mvc_view_ce TSRMLS_CC, 1, leevel_mvc_iview_ce);
 	return SUCCESS;
@@ -85,43 +71,24 @@ PHP_METHOD(Leevel_Mvc_View, __construct) {
  * 切换视图
  *
  * @param \Leevel\View\IView $theme
- * @param boolean $foreverSwitch
  * @return $this
  */
 PHP_METHOD(Leevel_Mvc_View, switchView) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool foreverSwitch;
-	zval *theme, theme_sub, *foreverSwitch_param = NULL, __$true, __$false, assign, _0$$3;
+	zval *theme, theme_sub, assign;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&theme_sub);
-	ZVAL_BOOL(&__$true, 1);
-	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&assign);
-	ZVAL_UNDEF(&_0$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &theme, &foreverSwitch_param);
+	zephir_fetch_params(1, 1, 0, &theme);
 
-	if (!foreverSwitch_param) {
-		foreverSwitch = 0;
-	} else {
-		foreverSwitch = zephir_get_boolval(foreverSwitch_param);
-	}
 
 
 	ZEPHIR_CALL_METHOD(&assign, this_ptr, "getassign", NULL, 0);
 	zephir_check_call_status();
-	if (foreverSwitch == 0) {
-		zephir_read_property(&_0$$3, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
-		zephir_update_property_zval(this_ptr, SL("backupTheme"), &_0$$3);
-	}
-	if (foreverSwitch) {
-		zephir_update_property_zval(this_ptr, SL("foreverSwitch"), &__$true);
-	} else {
-		zephir_update_property_zval(this_ptr, SL("foreverSwitch"), &__$false);
-	}
 	zephir_update_property_zval(this_ptr, SL("theme"), theme);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "assign", NULL, 0, &assign);
 	zephir_check_call_status();
@@ -280,18 +247,14 @@ PHP_METHOD(Leevel_Mvc_View, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval vars;
-	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, __$true, __$false, __$null, result, _0, _1, _2$$3;
+	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, __$null, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&file_sub);
 	ZVAL_UNDEF(&ext_sub);
-	ZVAL_BOOL(&__$true, 1);
-	ZVAL_BOOL(&__$false, 0);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&result);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
@@ -317,19 +280,9 @@ PHP_METHOD(Leevel_Mvc_View, display) {
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_BOOL(&_1, 0);
-	ZEPHIR_CALL_METHOD(&result, &_0, "display", NULL, 0, file, &vars, ext, &_1);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, file, &vars, ext, &_1);
 	zephir_check_call_status();
-	zephir_read_property(&_1, this_ptr, SL("foreverSwitch"), PH_NOISY_CC | PH_READONLY);
-	if (ZEPHIR_IS_FALSE_IDENTICAL(&_1)) {
-		zephir_read_property(&_2$$3, this_ptr, SL("backupTheme"), PH_NOISY_CC | PH_READONLY);
-		zephir_update_property_zval(this_ptr, SL("theme"), &_2$$3);
-	}
-	if (0) {
-		zephir_update_property_zval(this_ptr, SL("foreverSwitch"), &__$true);
-	} else {
-		zephir_update_property_zval(this_ptr, SL("foreverSwitch"), &__$false);
-	}
-	RETURN_CCTOR(&result);
+	RETURN_MM();
 
 }
 
@@ -348,7 +301,7 @@ PHP_METHOD(Leevel_Mvc_View, checkTheme) {
 
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "leevel/mvc/view.zep", 182);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "leevel/mvc/view.zep", 152);
 		return;
 	}
 

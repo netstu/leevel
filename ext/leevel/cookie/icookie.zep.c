@@ -126,3 +126,10 @@ ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, delete);
  */
 ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, clear);
 
+/**
+ * 返回所有 cookie
+ *
+ * @return array
+ */
+ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, all);
+

@@ -45,6 +45,7 @@ zend_class_entry *leevel_pipeline_ipipeline_ce;
 zend_class_entry *leevel_session_isession_ce;
 zend_class_entry *leevel_view_iconnect_ce;
 zend_class_entry *leevel_view_iview_ce;
+zend_class_entry *leevel_kernel_ikernel_ce;
 zend_class_entry *leevel_mvc_imodel_ce;
 zend_class_entry *leevel_support_ihtml_ce;
 zend_class_entry *leevel_support_facade_ce;
@@ -192,6 +193,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Session_ISession);
 	ZEPHIR_INIT(Leevel_View_IConnect);
 	ZEPHIR_INIT(Leevel_View_IView);
+	ZEPHIR_INIT(Leevel_Kernel_IKernel);
 	ZEPHIR_INIT(Leevel_Mvc_IModel);
 	ZEPHIR_INIT(Leevel_Support_IHtml);
 	ZEPHIR_INIT(Leevel_Support_Facade);

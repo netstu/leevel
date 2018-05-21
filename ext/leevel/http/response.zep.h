@@ -16,6 +16,7 @@ PHP_METHOD(Leevel_Http_Response, withHeaders);
 PHP_METHOD(Leevel_Http_Response, cookie);
 PHP_METHOD(Leevel_Http_Response, setCookie);
 PHP_METHOD(Leevel_Http_Response, withCookies);
+PHP_METHOD(Leevel_Http_Response, getCookies);
 PHP_METHOD(Leevel_Http_Response, getData);
 PHP_METHOD(Leevel_Http_Response, setData);
 PHP_METHOD(Leevel_Http_Response, getContent);
@@ -246,6 +247,7 @@ ZEPHIR_INIT_FUNCS(leevel_http_response_method_entry) {
 	PHP_ME(Leevel_Http_Response, cookie, arginfo_leevel_http_response_cookie, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, setCookie, arginfo_leevel_http_response_setcookie, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, withCookies, arginfo_leevel_http_response_withcookies, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Http_Response, getCookies, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, getData, arginfo_leevel_http_response_getdata, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, setData, arginfo_leevel_http_response_setdata, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, getContent, NULL, ZEND_ACC_PUBLIC)

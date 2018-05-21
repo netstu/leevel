@@ -108,13 +108,9 @@ class Register extends Provider
             let option = project->make("option");
             let request = project->make("request");
             let tmp = [
-                "default_app", 
-                "default_controller", 
-                "default_action", 
-                "model",
 				"html_suffix",
-				"router_domain_top",
-				"make_subdomain_on"
+				"domain_top",
+				"subdomain_on"
             ];
 
             for item in tmp {

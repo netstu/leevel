@@ -45,6 +45,13 @@ class Cookie implements ICookie, IClass
     ];
 
     /**
+     * Cookie 设置数据
+     *
+     * @var array
+     */
+    protected cookies = []; 
+
+    /**
      * 构造函数
      *
      * @param array $option
@@ -79,14 +86,6 @@ class Cookie implements ICookie, IClass
 
         let name = option["prefix"] . name;
 
-        if typeof value == "null" || option["expire"] < 0 {
-            if isset _COOKIE[name] {
-                unset _COOKIE[name];
-            }
-        } else {
-            let _COOKIE[name] = value;
-        }
-
         if option["expire"] > 0 {
         	let option["expire"] = time() + option["expire"];
         } elseif option["expire"] < 0 {
@@ -98,8 +97,17 @@ class Cookie implements ICookie, IClass
         if isset _SERVER["HTTPS"] && strtoupper(_SERVER["HTTPS"]) === "ON" {
         	let isHttpSecure = true;
         }
-       
-     	setcookie(name, value, option["expire"], option["path"], option["domain"], isHttpSecure, option["httponly"]);
+
+        // 对应 setcookie 的参数
+        let this->cookies[name] = [
+            name,
+            value,
+            option["expire"],
+            option["path"],
+            option["domain"],
+            isHttpSecure,
+            option["httponly"]
+        ];
     }
 
     /**
@@ -233,11 +241,11 @@ class Cookie implements ICookie, IClass
         let option = this->getOptions(option);
         let name = option["prefix"] . name;
 
-        if isset _COOKIE[name] {
-            if this->isJson(_COOKIE[name]) {
-                return json_decode(_COOKIE[name], true);
+        if isset this->cookies[name] {
+            if this->isJson(this->cookies[name]) {
+                return json_decode(this->cookies[name], true);
             }
-            return _COOKIE[name];
+            return this->cookies[name];
         } else {
             return defaults;
         }
@@ -269,7 +277,7 @@ class Cookie implements ICookie, IClass
         let prefix = option["prefix"];
         let option["prefix"] = "";
 
-        for key, _ in _COOKIE {
+        for key, _ in this->cookies {
             if deletePrefix === true && prefix {
                 if strpos(key, prefix) === 0 {
                     this->delete(key, option);
@@ -394,6 +402,16 @@ class Cookie implements ICookie, IClass
 
         return this;
     }
+
+    /**
+     * 返回所有 cookie
+     *
+     * @return array
+     */
+    public function all()-> array
+    {
+        return this->cookies;
+    } 
 
     /**
      * 验证是否为正常的 JSON 字符串

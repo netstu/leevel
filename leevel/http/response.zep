@@ -27,7 +27,6 @@ use Leevel\Support\IJson;
 use Leevel\Flow\IControl;
 use Leevel\Support\IArray;
 use Leevel\Support\IMacro;
-use Leevel\Cookie\ICookie;
 
 /**
  * HTTP 响应
@@ -261,7 +260,7 @@ class Response implements IControl, IMacro, IResponse
      */
     public function sendHeaders()
     {
-        var name, value;
+        var name, value, cookie, item;
     
         if this->checkTControl() {
             return this;
@@ -277,6 +276,13 @@ class Response implements IControl, IMacro, IResponse
 
         // 状态码
         header(sprintf("HTTP/%s %s %s", this->protocolVersion, this->statusCode, this->statusText), true, this->statusCode);
+
+        // cookie
+        let cookie = call_user_func(self::cookieResolver);
+
+        for item in cookie->all() {
+            call_user_func_array("setcookie", item);;
+        }
         
         return this;
     }
@@ -453,6 +459,17 @@ class Response implements IControl, IMacro, IResponse
         }
 
         return this;
+    }
+
+    /**
+     * 获取 COOKIE
+     *
+     * @return array
+     */
+    public function getCookies()
+    {
+        var cookie = call_user_func(self::cookieResolver);
+        return cookie->all();
     }
     
     /**

@@ -38,20 +38,6 @@ class View implements IView
 	protected theme;
 
 	/**
-     * 备份视图模板
-     *
-     * @var \Queryyessimple\View\IView
-     */
-    protected backupTheme;
-
-    /**
-     * 是否永久切换
-     *
-     * @var boolean
-     */
-    protected foreverSwitch = false;
-
-	/**
 	 * 构造函数
 	 *
 	 * @param \Leevel\View\IView $theme
@@ -66,20 +52,13 @@ class View implements IView
      * 切换视图
      *
      * @param \Leevel\View\IView $theme
-     * @param boolean $foreverSwitch
      * @return $this
      */
-    public function switchView(<ViewIView> theme, boolean foreverSwitch = false)
+    public function switchView(<ViewIView> theme)
     {
     	var assign;
 
         let assign = this->getAssign();
-
-        if foreverSwitch === false {
-            let this->backupTheme = this->theme;
-        }
-        
-        let this->foreverSwitch = foreverSwitch;
         let this->theme = theme;
         this->assign(assign);
 
@@ -157,18 +136,9 @@ class View implements IView
 	 */
 	public function display(var file = null, array! vars = [], var ext = null)
 	{
-		var result;
-
 		this->checkTheme();
 
-		let result = this->theme->display(file, vars, ext, false);
-
-		if this->foreverSwitch === false {
-            let this->theme = this->backupTheme;
-        }
-        let this->foreverSwitch = false;
-
-		return result;
+		return this->theme->display(file, vars, ext, false);
 	}
 
 	/**

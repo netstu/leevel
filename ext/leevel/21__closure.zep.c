@@ -59,29 +59,17 @@ PHP_METHOD(leevel_21__closure, __invoke) {
 	ZEPHIR_CALL_METHOD(&request, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 7, 0 TSRMLS_CC);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "default_app");
-	zephir_array_fast_append(&tmp, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "default_controller");
-	zephir_array_fast_append(&tmp, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "default_action");
-	zephir_array_fast_append(&tmp, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "model");
-	zephir_array_fast_append(&tmp, &_0);
+	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "html_suffix");
 	zephir_array_fast_append(&tmp, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "router_domain_top");
+	ZVAL_STRING(&_0, "domain_top");
 	zephir_array_fast_append(&tmp, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "make_subdomain_on");
+	ZVAL_STRING(&_0, "subdomain_on");
 	zephir_array_fast_append(&tmp, &_0);
-	zephir_is_iterable(&tmp, 0, "leevel/router/provider/register.zep", 124);
+	zephir_is_iterable(&tmp, 0, "leevel/router/provider/register.zep", 120);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
