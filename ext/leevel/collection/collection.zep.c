@@ -182,7 +182,7 @@ PHP_METHOD(Leevel_Collection_Collection, make) {
 
 
 	object_init_ex(return_value, leevel_collection_collection_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 50, elements, type);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 56, elements, type);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -204,7 +204,7 @@ PHP_METHOD(Leevel_Collection_Collection, current) {
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("current", NULL, 51, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("current", NULL, 57, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -226,7 +226,7 @@ PHP_METHOD(Leevel_Collection_Collection, key) {
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("key", NULL, 52, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("key", NULL, 58, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -252,7 +252,7 @@ PHP_METHOD(Leevel_Collection_Collection, next) {
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_MAKE_REF(&_0);
-	ZEPHIR_CALL_FUNCTION(&next, "next", NULL, 53, &_0);
+	ZEPHIR_CALL_FUNCTION(&next, "next", NULL, 59, &_0);
 	ZEPHIR_UNREF(&_0);
 	zephir_check_call_status();
 	if (!ZEPHIR_IS_FALSE_IDENTICAL(&next)) {
@@ -283,7 +283,7 @@ PHP_METHOD(Leevel_Collection_Collection, rewind) {
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_MAKE_REF(&_0);
-	ZEPHIR_CALL_FUNCTION(NULL, "reset", NULL, 54, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "reset", NULL, 60, &_0);
 	ZEPHIR_UNREF(&_0);
 	zephir_check_call_status();
 	if (1) {
@@ -483,7 +483,7 @@ PHP_METHOD(Leevel_Collection_Collection, toArray) {
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_closure_ex(&_0, NULL, leevel_6__closure_ce, SL("__invoke"));
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 55, &_0, &_1);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 61, &_0, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -509,7 +509,7 @@ PHP_METHOD(Leevel_Collection_Collection, jsonSerialize) {
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_closure_ex(&_0, NULL, leevel_7__closure_ce, SL("__invoke"));
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 55, &_0, &_1);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 61, &_0, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -640,7 +640,7 @@ PHP_METHOD(Leevel_Collection_Collection, prev) {
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_MAKE_REF(&_0);
-	ZEPHIR_CALL_FUNCTION(&prev, "prev", NULL, 56, &_0);
+	ZEPHIR_CALL_FUNCTION(&prev, "prev", NULL, 62, &_0);
 	ZEPHIR_UNREF(&_0);
 	zephir_check_call_status();
 	if (1) {
@@ -672,7 +672,7 @@ PHP_METHOD(Leevel_Collection_Collection, end) {
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_MAKE_REF(&_0);
-	ZEPHIR_CALL_FUNCTION(&end, "end", NULL, 57, &_0);
+	ZEPHIR_CALL_FUNCTION(&end, "end", NULL, 63, &_0);
 	ZEPHIR_UNREF(&_0);
 	zephir_check_call_status();
 	if (0) {
@@ -1010,7 +1010,7 @@ PHP_METHOD(Leevel_Collection_Collection, index) {
 	} else {
 		zephir_read_property(&_0$$4, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 		ZVAL_BOOL(&_1$$4, (strict ? 1 : 0));
-		ZEPHIR_CALL_FUNCTION(&key, "array_search", NULL, 58, value, &_0$$4, &_1$$4);
+		ZEPHIR_CALL_FUNCTION(&key, "array_search", NULL, 64, value, &_0$$4, &_1$$4);
 		zephir_check_call_status();
 		if (ZEPHIR_IS_FALSE_IDENTICAL(&key)) {
 			RETURN_MM_NULL();
@@ -1145,7 +1145,7 @@ PHP_METHOD(Leevel_Collection_Collection, slice) {
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_LONG(&_1, selector);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_slice", NULL, 59, &_0, &_1, length);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_slice", NULL, 65, &_0, &_1, length);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1272,7 +1272,7 @@ PHP_METHOD(Leevel_Collection_Collection, map) {
 
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("array_column", NULL, 60, &_0, key, value);
+	ZEPHIR_RETURN_CALL_FUNCTION("array_column", NULL, 66, &_0, key, value);
 	zephir_check_call_status();
 	RETURN_MM();
 

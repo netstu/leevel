@@ -1,0 +1,438 @@
+
+#ifdef HAVE_CONFIG_H
+#include "../../../ext_config.h"
+#endif
+
+#include <php.h>
+#include "../../../php_ext.h"
+#include "../../../ext.h"
+
+#include <Zend/zend_operators.h>
+#include <Zend/zend_exceptions.h>
+#include <Zend/zend_interfaces.h>
+
+#include "kernel/main.h"
+#include "kernel/object.h"
+#include "kernel/fcall.h"
+#include "kernel/memory.h"
+#include "kernel/array.h"
+#include "kernel/operators.h"
+#include "kernel/exception.h"
+
+
+/**
+ * 注册运行时异常
+ *
+ * @author Xiangmin Liu <635750556@qq.com>
+ * @package $$
+ * @since 2018.04.25
+ * @version 1.0
+ */
+ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Bootstrap_RegisterRuntime) {
+
+	ZEPHIR_REGISTER_CLASS(Leevel\\Bootstrap\\Bootstrap, RegisterRuntime, leevel, bootstrap_bootstrap_registerruntime, leevel_bootstrap_bootstrap_registerruntime_method_entry, 0);
+
+	/**
+	 * 容器
+	 *
+	 * @var \Leevel\Di\IProject
+	 */
+	zend_declare_property_null(leevel_bootstrap_bootstrap_registerruntime_ce, SL("project"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	return SUCCESS;
+
+}
+
+/**
+ * 响应
+ * 
+ * @param \Leevel\Kernel\IProject $project
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *project, project_sub, tmp1, tmp2, tmp3, _0, _1, _2, _3$$3, _4$$3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&tmp1);
+	ZVAL_UNDEF(&tmp2);
+	ZVAL_UNDEF(&tmp3);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &project);
+
+
+
+	zephir_update_property_zval(this_ptr, SL("project"), project);
+	ZVAL_LONG(&_0, 32767);
+	ZEPHIR_CALL_FUNCTION(NULL, "error_reporting", NULL, 50, &_0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&tmp1);
+	zephir_create_array(&tmp1, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&tmp1, this_ptr);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "setErrorHandle");
+	zephir_array_fast_append(&tmp1, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 51, &tmp1);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&tmp2);
+	zephir_create_array(&tmp2, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&tmp2, this_ptr);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "setExceptionHandler");
+	zephir_array_fast_append(&tmp2, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_exception_handler", NULL, 52, &tmp2);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&tmp3);
+	zephir_create_array(&tmp3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&tmp3, this_ptr);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "registerShutdownFunction");
+	zephir_array_fast_append(&tmp3, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "register_shutdown_function", NULL, 53, &tmp3);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(&_2, project, "environment", NULL, 0);
+	zephir_check_call_status();
+	if (ZEPHIR_IS_STRING_IDENTICAL(&_2, "production")) {
+		ZEPHIR_INIT_VAR(&_3$$3);
+		ZVAL_STRING(&_3$$3, "display_errors");
+		ZEPHIR_INIT_VAR(&_4$$3);
+		ZVAL_STRING(&_4$$3, "Off");
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 54, &_3$$3, &_4$$3);
+		zephir_check_call_status();
+	}
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 设置错误句柄
+ * 
+ * @param integer $code
+ * @param string $description
+ * @param string $file
+ * @param interger $line
+ * @param mixed $context
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setErrorHandle) {
+
+	zval description;
+	zval *code_param = NULL, *description_param = NULL, *file = NULL, file_sub, *line = NULL, line_sub, *context = NULL, context_sub, __$null, _0, _1, _2, _3;
+	zend_long code, ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&line_sub);
+	ZVAL_UNDEF(&context_sub);
+	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&description);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 3, &code_param, &description_param, &file, &line, &context);
+
+	code = zephir_get_intval(code_param);
+	zephir_get_strval(&description, description_param);
+	if (!file) {
+		file = &file_sub;
+		file = &__$null;
+	}
+	if (!line) {
+		line = &line_sub;
+		line = &__$null;
+	}
+	if (!context) {
+		context = &context_sub;
+		context = &__$null;
+	}
+
+
+	ZEPHIR_CALL_FUNCTION(&_0, "error_reporting", NULL, 50);
+	zephir_check_call_status();
+	if (!(((int) (zephir_get_numberval(&_0)) & code))) {
+		RETURN_MM_NULL();
+	}
+	ZEPHIR_INIT_VAR(&_1);
+	object_init_ex(&_1, zephir_get_internal_ce(SL("errorexception")));
+	ZVAL_LONG(&_2, 0);
+	ZVAL_LONG(&_3, code);
+	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 55, &description, &_2, &_3, file, line);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_1, "leevel/bootstrap/bootstrap/registerruntime.zep", 88 TSRMLS_CC);
+	ZEPHIR_MM_RESTORE();
+	return;
+
+}
+
+/**
+ * 设置退出句柄
+ *
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, registerShutdownFunction) {
+
+	zend_bool _0;
+	zval error, _1, _2$$3;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&error);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2$$3);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 37);
+	zephir_check_call_status();
+	_0 = zephir_is_true(&error);
+	if (_0) {
+		zephir_array_fetch_string(&_1, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 102 TSRMLS_CC);
+		_0 = !(ZEPHIR_IS_EMPTY(&_1));
+	}
+	if (_0) {
+		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "formatfatalexception", NULL, 0, &error);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setexceptionhandler", NULL, 0, &_2$$3);
+		zephir_check_call_status();
+	}
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 响应异常
+ *
+ * @param \Throwable $e
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setExceptionHandler) {
+
+	zend_class_entry *_1$$3 = NULL;
+	zend_bool _0;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *e = NULL, e_sub, _3, _4, _5, _6, _2$$4;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&e_sub);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_2$$4);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &e);
+
+	ZEPHIR_SEPARATE_PARAM(e);
+
+
+	_0 = Z_TYPE_P(e) == IS_OBJECT;
+	if (_0) {
+		_0 = zephir_instance_of_ev(e, zend_exception_get_default(TSRMLS_C) TSRMLS_CC);
+	}
+	if (!(_0)) {
+		ZEPHIR_INIT_NVAR(e);
+		if (!_1$$3) {
+		_1$$3 = zephir_fetch_class_str_ex(SL("Leevel\\Kernel\\Exception\\FatalThrowableError"), ZEND_FETCH_CLASS_AUTO);
+		}
+		object_init_ex(e, _1$$3);
+		if (zephir_has_constructor(e TSRMLS_CC)) {
+			ZEPHIR_CALL_METHOD(NULL, e, "__construct", NULL, 0, e);
+			zephir_check_call_status();
+		}
+	}
+
+	/* try_start_1: */
+
+		ZEPHIR_CALL_METHOD(&_2$$4, this_ptr, "getruntime", NULL, 0);
+		zephir_check_call_status_or_jump(try_end_1);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "report", NULL, 0, e);
+		zephir_check_call_status_or_jump(try_end_1);
+
+	try_end_1:
+
+	if (EG(exception)) {
+		ZEPHIR_INIT_VAR(&_3);
+		ZVAL_OBJ(&_3, EG(exception));
+		Z_ADDREF_P(&_3);
+		ZEPHIR_INIT_VAR(&_4);
+		if (zephir_instance_of_ev(&_3, zend_exception_get_default(TSRMLS_C) TSRMLS_CC)) {
+			zend_clear_exception(TSRMLS_C);
+			ZEPHIR_CPY_WRT(&_4, &_3);
+		}
+	}
+	zephir_read_property(&_5, this_ptr, SL("project"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(&_6, &_5, "console", NULL, 0);
+	zephir_check_call_status();
+	if (zephir_is_true(&_6)) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "renderconsoleresponse", NULL, 0, e);
+		zephir_check_call_status();
+	} else {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "renderhttpresponse", NULL, 0, e);
+		zephir_check_call_status();
+	}
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 渲染命令行异常并输出
+ *
+ * @param \Exception $e
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderConsoleResponse) {
+
+	zend_class_entry *_2 = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *e, e_sub, _0, _1;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&e_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &e);
+
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getruntime", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&_1);
+	if (!_2) {
+	_2 = zephir_fetch_class_str_ex(SL("Symfony\\Component\\Console\\Output\\ConsoleOutput"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(&_1, _2);
+	if (zephir_has_constructor(&_1 TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0);
+		zephir_check_call_status();
+	}
+	ZEPHIR_CALL_METHOD(NULL, &_0, "renderforconsole", NULL, 0, &_1, e);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 渲染 HTTP 异常并输出
+ *
+ * @param \Exception $e
+ * @return void
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *e, e_sub, _0, _1, _2, _3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&e_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &e);
+
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getruntime", NULL, 0);
+	zephir_check_call_status();
+	zephir_read_property(&_2, this_ptr, SL("project"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch_string(&_3, &_2, SL("request"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 150 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "render", NULL, 0, &_3, e);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_1, "send", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 格式化致命错误信息
+ *
+ * @param array $error
+ * @param int|null $traceOffset
+ * @return \Leevel\Kernel\Exception\FatalErrorException
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, formatFatalException) {
+
+	zend_class_entry *_0 = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *error_param = NULL, *traceOffset = NULL, traceOffset_sub, __$null, _1, _2, _3, _4, _5;
+	zval error;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&error);
+	ZVAL_UNDEF(&traceOffset_sub);
+	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 1, &error_param, &traceOffset);
+
+	zephir_get_arrval(&error, error_param);
+	if (!traceOffset) {
+		traceOffset = &traceOffset_sub;
+		traceOffset = &__$null;
+	}
+
+
+	if (!_0) {
+	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Kernel\\Exception\\FatalErrorException"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(return_value, _0);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		zephir_array_fetch_string(&_1, &error, SL("message"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 162 TSRMLS_CC);
+		zephir_array_fetch_string(&_2, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 162 TSRMLS_CC);
+		zephir_array_fetch_string(&_3, &error, SL("file"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 162 TSRMLS_CC);
+		zephir_array_fetch_string(&_4, &error, SL("line"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 162 TSRMLS_CC);
+		ZVAL_LONG(&_5, 0);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_2, &_5, &_3, &_4, traceOffset);
+		zephir_check_call_status();
+	}
+	RETURN_MM();
+
+}
+
+/**
+ * 返回运行处理器
+ * 
+ * @return \Leevel\Kernel\Exception\IRuntime
+ */
+PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, getRuntime) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	zephir_read_property(&_0, this_ptr, SL("project"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Kernel\\Runtime\\IRuntime");
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
