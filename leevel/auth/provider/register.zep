@@ -15,6 +15,7 @@
  */
 namespace Leevel\Auth\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
 
@@ -79,9 +80,18 @@ class Register extends Provider
      */
     protected function auths()
     {
-        this->container->singleton("auths", function (project) {
-            return new \Leevel\Auth\Manager(project);
-        });
+        this->container->singleton("auths", Closure::fromCallable([this, "authsClosure"]));
+    }
+
+    /**
+     * 创建 auths 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Kernel\Manager
+     */
+    protected function authsClosure(var project)
+    {
+        return new \Leevel\Auth\Manager(project);
     }
     
     /**
@@ -91,8 +101,17 @@ class Register extends Provider
      */
     protected function auth()
     {
-        this->container->singleton("auth", function (project) {
-            return project->make("auths")->connect();
-        });
+        this->container->singleton("auth", Closure::fromCallable([this, "authClosure"]));
+    }
+
+    /**
+     * 创建 auth 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return object
+     */
+    protected function authClosure(var project)
+    {
+        return project->make("auths")->connect();
     }
 }

@@ -166,7 +166,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewViews) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_28__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_26__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "view.views");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -195,7 +195,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewView) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_29__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_27__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "view.view");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -224,7 +224,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewCompiler) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_30__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_28__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "view.compiler");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -253,7 +253,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewParser) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_31__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_29__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "view.parser");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -282,7 +282,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParser) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_32__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_30__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "view.twig.parser");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);

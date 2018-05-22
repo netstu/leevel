@@ -146,7 +146,7 @@ PHP_METHOD(Leevel_Filesystem_Provider_Register, filesystems) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_14__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_12__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "filesystems");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -175,7 +175,7 @@ PHP_METHOD(Leevel_Filesystem_Provider_Register, filesystem) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_15__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_13__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "filesystem");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);

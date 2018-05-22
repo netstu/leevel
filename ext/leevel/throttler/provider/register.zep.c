@@ -143,7 +143,7 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttler) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_26__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_24__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "throttler");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);

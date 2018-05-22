@@ -154,7 +154,7 @@ PHP_METHOD(Leevel_Cache_Provider_Register, caches) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_3__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_1__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "caches");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -183,7 +183,7 @@ PHP_METHOD(Leevel_Cache_Provider_Register, cache) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_4__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_2__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "cache");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
@@ -212,7 +212,7 @@ PHP_METHOD(Leevel_Cache_Provider_Register, cacheLoad) {
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_1);
 	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_5__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_1, NULL, leevel_3__closure_ce, SL("__invoke"));
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "cache.load");
 	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);

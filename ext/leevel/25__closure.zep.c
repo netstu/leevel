@@ -12,8 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/object.h"
+#include "kernel/fcall.h"
 
 
 ZEPHIR_INIT_CLASS(leevel_25__closure) {
@@ -26,12 +27,12 @@ ZEPHIR_INIT_CLASS(leevel_25__closure) {
 
 PHP_METHOD(leevel_25__closure, __invoke) {
 
+	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, sessions, _0;
+	zval *project, project_sub, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&sessions);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
@@ -40,10 +41,15 @@ PHP_METHOD(leevel_25__closure, __invoke) {
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "sessions");
-	ZEPHIR_CALL_METHOD(&sessions, project, "make", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&sessions, "connect", NULL, 0);
+	if (!_1) {
+	_1 = zephir_fetch_class_str_ex(SL("Leevel\\Validate\\Validate"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(&_0, _1);
+	if (zephir_has_constructor(&_0 TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 0);
+		zephir_check_call_status();
+	}
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "container", NULL, 0, project);
 	zephir_check_call_status();
 	RETURN_MM();
 

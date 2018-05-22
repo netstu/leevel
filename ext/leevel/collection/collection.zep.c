@@ -481,7 +481,7 @@ PHP_METHOD(Leevel_Collection_Collection, toArray) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_6__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, leevel_4__closure_ce, SL("__invoke"));
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 61, &_0, &_1);
 	zephir_check_call_status();
@@ -507,7 +507,7 @@ PHP_METHOD(Leevel_Collection_Collection, jsonSerialize) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_7__closure_ce, SL("__invoke"));
+	zephir_create_closure_ex(&_0, NULL, leevel_5__closure_ce, SL("__invoke"));
 	zephir_read_property(&_1, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_RETURN_CALL_FUNCTION("array_map", NULL, 61, &_0, &_1);
 	zephir_check_call_status();

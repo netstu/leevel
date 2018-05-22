@@ -12,9 +12,11 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/fcall.h"
-#include "kernel/memory.h"
 #include "kernel/object.h"
+#include "kernel/fcall.h"
+#include "kernel/string.h"
+#include "kernel/memory.h"
+#include "kernel/operators.h"
 
 
 ZEPHIR_INIT_CLASS(leevel_5__closure) {
@@ -27,33 +29,36 @@ ZEPHIR_INIT_CLASS(leevel_5__closure) {
 
 PHP_METHOD(leevel_5__closure, __invoke) {
 
-	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, cache, _0;
+	zval *value, value_sub, __$true, _0$$4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&cache);
-	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_UNDEF(&_0$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &value);
 
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "cache");
-	ZEPHIR_CALL_METHOD(&cache, project, "make", NULL, 0, &_0);
-	zephir_check_call_status();
-	if (!_1) {
-	_1 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Load"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _1);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, project, &cache);
+	if (zephir_is_instance_of(value, SL("JsonSerializable") TSRMLS_CC)) {
+		ZEPHIR_RETURN_CALL_METHOD(value, "jsonserialize", NULL, 0);
 		zephir_check_call_status();
+		RETURN_MM();
+	} else if (zephir_instance_of_ev(value, leevel_support_ijson_ce TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(&_0$$4, value, "tojson", NULL, 0);
+		zephir_check_call_status();
+		zephir_json_decode(return_value, &_0$$4, zephir_get_intval(&__$true) );
+		RETURN_MM();
+	} else if (zephir_instance_of_ev(value, leevel_support_iarray_ce TSRMLS_CC)) {
+		ZEPHIR_RETURN_CALL_METHOD(value, "toarray", NULL, 0);
+		zephir_check_call_status();
+		RETURN_MM();
+	} else {
+		RETVAL_ZVAL(value, 1, 0);
+		RETURN_MM();
 	}
-	RETURN_MM();
 
 }
 

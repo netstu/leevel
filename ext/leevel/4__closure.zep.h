@@ -6,7 +6,7 @@ ZEPHIR_INIT_CLASS(leevel_4__closure);
 PHP_METHOD(leevel_4__closure, __invoke);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_4__closure___invoke, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_4__closure_method_entry) {

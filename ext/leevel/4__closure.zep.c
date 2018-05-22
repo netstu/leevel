@@ -12,8 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/object.h"
+#include "kernel/fcall.h"
 
 
 ZEPHIR_INIT_CLASS(leevel_4__closure) {
@@ -27,25 +28,25 @@ ZEPHIR_INIT_CLASS(leevel_4__closure) {
 PHP_METHOD(leevel_4__closure, __invoke) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, caches, _0;
+	zval *value, value_sub, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&caches);
+	ZVAL_UNDEF(&value_sub);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &value);
 
 
 
 	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "caches");
-	ZEPHIR_CALL_METHOD(&caches, project, "make", NULL, 0, &_0);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&caches, "connect", NULL, 0);
-	zephir_check_call_status();
-	RETURN_MM();
+	if (zephir_instance_of_ev(value, leevel_support_iarray_ce TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(&_0, value, "toarray", NULL, 0);
+		zephir_check_call_status();
+	} else {
+		ZEPHIR_CPY_WRT(&_0, value);
+	}
+	RETURN_CCTOR(&_0);
 
 }
 

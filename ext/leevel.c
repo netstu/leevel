@@ -83,8 +83,6 @@ zend_class_entry *leevel_28__closure_ce;
 zend_class_entry *leevel_29__closure_ce;
 zend_class_entry *leevel_2__closure_ce;
 zend_class_entry *leevel_30__closure_ce;
-zend_class_entry *leevel_31__closure_ce;
-zend_class_entry *leevel_32__closure_ce;
 zend_class_entry *leevel_3__closure_ce;
 zend_class_entry *leevel_4__closure_ce;
 zend_class_entry *leevel_5__closure_ce;
@@ -307,8 +305,6 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(leevel_29__closure);
 	ZEPHIR_INIT(leevel_2__closure);
 	ZEPHIR_INIT(leevel_30__closure);
-	ZEPHIR_INIT(leevel_31__closure);
-	ZEPHIR_INIT(leevel_32__closure);
 	ZEPHIR_INIT(leevel_3__closure);
 	ZEPHIR_INIT(leevel_4__closure);
 	ZEPHIR_INIT(leevel_5__closure);
