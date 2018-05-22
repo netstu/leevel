@@ -40,6 +40,7 @@
 #include "leevel/auth.zep.h"
 #include "leevel/auth/provider/register.zep.h"
 #include "leevel/bootstrap/bootstrap/loadi18n.zep.h"
+#include "leevel/bootstrap/bootstrap/loadoption.zep.h"
 #include "leevel/bootstrap/bootstrap/traverseprovider.zep.h"
 #include "leevel/cache.zep.h"
 #include "leevel/cache/provider/register.zep.h"

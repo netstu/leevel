@@ -46,10 +46,10 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Bootstrap_LoadI18n) {
  */
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, handle) {
 
-	zval _7$$4;
-	zend_class_entry *_6$$4 = NULL;
+	zend_class_entry *_7$$4 = NULL;
+	zval _5$$3, _8$$4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, i18nDefault, data, load, i18n, _0, _1, _2, _3$$3, _4$$3, _5$$4, _8$$4, _9$$4;
+	zval *project, project_sub, i18nDefault, data, load, i18n, _0, _1, _2, _3$$3, _4$$3, _6$$4, _9$$4, _10$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
@@ -62,10 +62,11 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, handle) {
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3$$3);
 	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$4);
-	ZVAL_UNDEF(&_8$$4);
+	ZVAL_UNDEF(&_6$$4);
 	ZVAL_UNDEF(&_9$$4);
-	ZVAL_UNDEF(&_7$$4);
+	ZVAL_UNDEF(&_10$$4);
+	ZVAL_UNDEF(&_5$$3);
+	ZVAL_UNDEF(&_8$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
@@ -89,27 +90,28 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, handle) {
 		if (zephir_require_zval_ret(&_4$$3, &_3$$3 TSRMLS_CC) == FAILURE) {
 			RETURN_MM_NULL();
 		}
-		ZEPHIR_CPY_WRT(&data, &_4$$3);
+		zephir_get_arrval(&_5$$3, &_4$$3);
+		ZEPHIR_CPY_WRT(&data, &_5$$3);
 	} else {
-		ZEPHIR_INIT_VAR(&_5$$4);
-		if (!_6$$4) {
-		_6$$4 = zephir_fetch_class_str_ex(SL("Leevel\\I18n\\Load"), ZEND_FETCH_CLASS_AUTO);
+		ZEPHIR_INIT_VAR(&_6$$4);
+		if (!_7$$4) {
+		_7$$4 = zephir_fetch_class_str_ex(SL("Leevel\\I18n\\Load"), ZEND_FETCH_CLASS_AUTO);
 		}
-		object_init_ex(&_5$$4, _6$$4);
-		if (zephir_has_constructor(&_5$$4 TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(&_7$$4);
-			zephir_create_array(&_7$$4, 1, 0 TSRMLS_CC);
-			ZEPHIR_CALL_METHOD(&_8$$4, project, "pathi18n", NULL, 0);
+		object_init_ex(&_6$$4, _7$$4);
+		if (zephir_has_constructor(&_6$$4 TSRMLS_CC)) {
+			ZEPHIR_INIT_VAR(&_8$$4);
+			zephir_create_array(&_8$$4, 1, 0 TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&_9$$4, project, "pathi18n", NULL, 0);
 			zephir_check_call_status();
-			zephir_array_fast_append(&_7$$4, &_8$$4);
-			ZEPHIR_CALL_METHOD(NULL, &_5$$4, "__construct", NULL, 0, &_7$$4);
+			zephir_array_fast_append(&_8$$4, &_9$$4);
+			ZEPHIR_CALL_METHOD(NULL, &_6$$4, "__construct", NULL, 0, &_8$$4);
 			zephir_check_call_status();
 		}
-		ZEPHIR_CALL_METHOD(&_8$$4, &_5$$4, "seti18n", NULL, 0, &i18nDefault);
+		ZEPHIR_CALL_METHOD(&_9$$4, &_6$$4, "seti18n", NULL, 0, &i18nDefault);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_9$$4, this_ptr, "getextend", NULL, 0, project);
+		ZEPHIR_CALL_METHOD(&_10$$4, this_ptr, "getextend", NULL, 0, project);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&load, &_8$$4, "adddir", NULL, 0, &_9$$4);
+		ZEPHIR_CALL_METHOD(&load, &_9$$4, "adddir", NULL, 0, &_10$$4);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(&data, &load, "loaddata", NULL, 0);
 		zephir_check_call_status();
@@ -176,7 +178,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&path, project, "path", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&extend, 0, "leevel/bootstrap/bootstrap/loadi18n.zep", 91);
+	zephir_is_iterable(&extend, 0, "leevel/bootstrap/bootstrap/loadi18n.zep", 90);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&extend), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -199,11 +201,11 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", &_12, 22, &_10$$5);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_8$$5, "leevel/bootstrap/bootstrap/loadi18n.zep", 85 TSRMLS_CC);
+			zephir_throw_exception_debug(&_8$$5, "leevel/bootstrap/bootstrap/loadi18n.zep", 84 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
-		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/bootstrap/bootstrap/loadi18n.zep", 88);
+		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/bootstrap/bootstrap/loadi18n.zep", 87);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	RETURN_CTOR(&result);

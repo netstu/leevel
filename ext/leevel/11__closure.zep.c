@@ -48,7 +48,7 @@ PHP_METHOD(leevel_11__closure, __invoke) {
 	zephir_array_fetch_long(&container, &args, 0, PH_NOISY, "leevel/di/container.zep", 158 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&closures);
 	zephir_array_fetch_long(&closures, &args, 1, PH_NOISY, "leevel/di/container.zep", 159 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 127, &closures);
+	ZEPHIR_CALL_FUNCTION(&hash, "spl_object_hash", NULL, 131, &closures);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&obj);
 	zephir_read_static_property_ce(&_0, leevel_di_container_ce, SL("shareClosure"), PH_NOISY_CC | PH_READONLY);

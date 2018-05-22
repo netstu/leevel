@@ -45,6 +45,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/auth.zep.c
 	leevel/auth/provider/register.zep.c
 	leevel/bootstrap/bootstrap/loadi18n.zep.c
+	leevel/bootstrap/bootstrap/loadoption.zep.c
 	leevel/bootstrap/bootstrap/traverseprovider.zep.c
 	leevel/cache.zep.c
 	leevel/cache/provider/register.zep.c

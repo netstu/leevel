@@ -95,6 +95,7 @@ zend_class_entry *leevel_9__closure_ce;
 zend_class_entry *leevel_auth_ce;
 zend_class_entry *leevel_auth_provider_register_ce;
 zend_class_entry *leevel_bootstrap_bootstrap_loadi18n_ce;
+zend_class_entry *leevel_bootstrap_bootstrap_loadoption_ce;
 zend_class_entry *leevel_bootstrap_bootstrap_traverseprovider_ce;
 zend_class_entry *leevel_cache_ce;
 zend_class_entry *leevel_cache_provider_register_ce;
@@ -212,6 +213,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Auth);
 	ZEPHIR_INIT(Leevel_Auth_Provider_Register);
 	ZEPHIR_INIT(Leevel_Bootstrap_Bootstrap_LoadI18n);
+	ZEPHIR_INIT(Leevel_Bootstrap_Bootstrap_LoadOption);
 	ZEPHIR_INIT(Leevel_Bootstrap_Bootstrap_TraverseProvider);
 	ZEPHIR_INIT(Leevel_Cache);
 	ZEPHIR_INIT(Leevel_Cache_Provider_Register);

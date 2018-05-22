@@ -19,7 +19,6 @@ use Exception;
 use Leevel\I18n\I18n;
 use Leevel\I18n\Load;
 use Leevel\Kernel\IProject;
-use Leevel\Support\ClosureUse;
 
 /**
  * 读取语言包
@@ -44,7 +43,7 @@ class LoadI18n
         let i18nDefault = project->make("option")->get("i18n\\default");
 
         if project->isCachedI18n(i18nDefault) {
-            let data = require project->pathCacheI18nFile(i18nDefault);
+            let data = (array)require project->pathCacheI18nFile(i18nDefault);
         } else {
             let load = (new Load([project->pathI18n()]))->
 

@@ -49,7 +49,7 @@ PHP_METHOD(leevel_8__closure, __invoke) {
 	ZVAL_STRING(&_0, "cookie\\");
 	ZEPHIR_CALL_METHOD(&_1, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 126, &_1);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 130, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
