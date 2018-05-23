@@ -114,7 +114,5 @@
 #include "leevel/view/view.zep.h"
 #include "leevel/0__closure.zep.h"
 #include "leevel/1__closure.zep.h"
-#include "leevel/2__closure.zep.h"
-#include "leevel/3__closure.zep.h"
 
 #endif

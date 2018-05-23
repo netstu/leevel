@@ -234,9 +234,18 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      */
     public function toArray() -> array
     {
-        return array_map(function (value) {
-            return value instanceof \Leevel\Support\IArray ? value->toArray() : value;
-        }, this->elements);
+        var value;
+        array result;
+
+        for value in this->elements {
+            if is_object(value) && value instanceof IArray {
+                let result[] = value->toArray();
+            } else {
+                let result[] = value;
+            }
+        }
+
+        return result;
     }
     
     /**
@@ -246,17 +255,22 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      */
     public function jsonSerialize() -> array
     {
-        return array_map(function (value) {
-            if value instanceof \JsonSerializable {
-                return value->jsonSerialize();
-            } elseif value instanceof \Leevel\Support\IJson {
-                return json_decode(value->toJson(), true);
-            } elseif value instanceof \Leevel\Support\IArray {
-                return value->toArray();
+        var value;
+        array result;
+
+        for value in this->elements {
+            if value instanceof JsonSerializable {
+                let result[] = value->jsonSerialize();
+            } elseif value instanceof IJson {
+                let result[] = json_decode(value->toJson(), true);
+            } elseif value instanceof IArray {
+                let result[] = value->toArray();
             } else {
-                return value;
+                let result[] = value;
             }
-        }, this->elements);
+        }
+
+        return result;
     }
     
     /**

@@ -61,8 +61,6 @@ zend_class_entry *leevel_http_jsonresponse_ce;
 zend_class_entry *leevel_view_connect_ce;
 zend_class_entry *leevel_0__closure_ce;
 zend_class_entry *leevel_1__closure_ce;
-zend_class_entry *leevel_2__closure_ce;
-zend_class_entry *leevel_3__closure_ce;
 zend_class_entry *leevel_auth_ce;
 zend_class_entry *leevel_auth_provider_register_ce;
 zend_class_entry *leevel_bootstrap_bootstrap_loadi18n_ce;
@@ -256,8 +254,6 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_View_View);
 	ZEPHIR_INIT(leevel_0__closure);
 	ZEPHIR_INIT(leevel_1__closure);
-	ZEPHIR_INIT(leevel_2__closure);
-	ZEPHIR_INIT(leevel_3__closure);
 	return SUCCESS;
 }
 
