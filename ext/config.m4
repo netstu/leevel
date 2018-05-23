@@ -33,6 +33,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/http/irequest.zep.c
 	leevel/http/jsonresponse.zep.c
 	leevel/i18n/ii18n.zep.c
+	leevel/kernel/ikernel.zep.c
 	leevel/log/ilog.zep.c
 	leevel/mvc/icontroller.zep.c
 	leevel/mvc/ientity.zep.c
@@ -49,6 +50,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/bootstrap/bootstrap/loadoption.zep.c
 	leevel/bootstrap/bootstrap/registerruntime.zep.c
 	leevel/bootstrap/bootstrap/traverseprovider.zep.c
+	leevel/bootstrap/kernel.zep.c
 	leevel/cache.zep.c
 	leevel/cache/provider/register.zep.c
 	leevel/collection/collection.zep.c
@@ -80,7 +82,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/http/uploadedfile.zep.c
 	leevel/i18n.zep.c
 	leevel/i18n/i18n.zep.c
-	leevel/kernel/ikernel.zep.c
 	leevel/log.zep.c
 	leevel/log/file.zep.c
 	leevel/log/log.zep.c

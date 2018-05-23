@@ -112,19 +112,23 @@ class RegisterRuntime
      */
     public function setExceptionHandler(var e)
     {
-        if ! (is_object(e) && e instanceof Exception) {
-            let e = new FatalThrowableError(e);
+        var fatalException;
+
+        if ! (e instanceof Exception) {
+            let fatalException = new FatalThrowableError(e);
+        } else {
+            let fatalException = e;
         }
 
         try {
-            this->getRuntime()->report(e);
+            this->getRuntime()->report(fatalException);
         } catch Exception {
         }
 
         if this->project->console() {
-            this->renderConsoleResponse(e);
+            this->renderConsoleResponse(fatalException);
         } else {
-            this->renderHttpResponse(e);
+            this->renderHttpResponse(fatalException);
         }
     }
     
