@@ -112,7 +112,5 @@
 #include "leevel/view/manager.zep.h"
 #include "leevel/view/provider/register.zep.h"
 #include "leevel/view/view.zep.h"
-#include "leevel/0__closure.zep.h"
-#include "leevel/1__closure.zep.h"
 
 #endif

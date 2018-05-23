@@ -59,8 +59,6 @@ zend_class_entry *leevel_http_fileexception_ce;
 zend_class_entry *leevel_http_headerbag_ce;
 zend_class_entry *leevel_http_jsonresponse_ce;
 zend_class_entry *leevel_view_connect_ce;
-zend_class_entry *leevel_0__closure_ce;
-zend_class_entry *leevel_1__closure_ce;
 zend_class_entry *leevel_auth_ce;
 zend_class_entry *leevel_auth_provider_register_ce;
 zend_class_entry *leevel_bootstrap_bootstrap_loadi18n_ce;
@@ -252,8 +250,6 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_View_Manager);
 	ZEPHIR_INIT(Leevel_View_Provider_Register);
 	ZEPHIR_INIT(Leevel_View_View);
-	ZEPHIR_INIT(leevel_0__closure);
-	ZEPHIR_INIT(leevel_1__closure);
 	return SUCCESS;
 }
 
@@ -314,7 +310,6 @@ static PHP_RINIT_FUNCTION(leevel)
 	zephir_init_static_properties_Leevel_Support_Facade(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_Response(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Collection_Collection(TSRMLS_C);
-	zephir_init_static_properties_Leevel_Di_Container(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_FileBag(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_Request(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_UploadedFile(TSRMLS_C);

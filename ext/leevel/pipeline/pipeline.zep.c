@@ -389,7 +389,7 @@ PHP_METHOD(Leevel_Pipeline_Pipeline, stageGenerator) {
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, leevel_collection_collection_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 56, &temp);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 55, &temp);
 	zephir_check_call_status();
 	RETURN_MM();
 

@@ -594,7 +594,7 @@ PHP_METHOD(Leevel_Log_Log, log) {
 	ZVAL_STRING(&_1, "time_format");
 	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getoption", &_2, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_5, "date", NULL, 32, &_4);
+	ZEPHIR_CALL_FUNCTION(&_5, "date", NULL, 31, &_4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_6, this_ptr, "formatmessage", NULL, 0, message);
 	zephir_check_call_status();

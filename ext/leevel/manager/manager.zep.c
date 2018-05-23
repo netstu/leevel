@@ -783,13 +783,16 @@ PHP_METHOD(Leevel_Manager_Manager, getOptionConnect) {
  */
 PHP_METHOD(Leevel_Manager_Manager, optionFilterNull) {
 
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *options_param = NULL, _0;
-	zval options;
+	zend_string *_2;
+	zend_ulong _1;
+	zval *options_param = NULL, key, value, *_0;
+	zval options, result;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&options);
-	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&result);
+	ZVAL_UNDEF(&key);
+	ZVAL_UNDEF(&value);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &options_param);
@@ -797,12 +800,24 @@ PHP_METHOD(Leevel_Manager_Manager, optionFilterNull) {
 	zephir_get_arrval(&options, options_param);
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	zephir_create_closure_ex(&_0, NULL, leevel_0__closure_ce, SL("__invoke"));
-	ZEPHIR_RETURN_CALL_FUNCTION("array_filter", NULL, 26, &options, &_0);
-	zephir_check_call_status();
-	RETURN_MM();
+	zephir_is_iterable(&options, 0, "leevel/manager/manager.zep", 356);
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&options), _1, _2, _0)
+	{
+		ZEPHIR_INIT_NVAR(&key);
+		if (_2 != NULL) { 
+			ZVAL_STR_COPY(&key, _2);
+		} else {
+			ZVAL_LONG(&key, _1);
+		}
+		ZEPHIR_INIT_NVAR(&value);
+		ZVAL_COPY(&value, _0);
+		if (Z_TYPE_P(&value) != IS_NULL) {
+			zephir_array_update_zval(&result, &key, &value, PH_COPY | PH_SEPARATE);
+		}
+	} ZEND_HASH_FOREACH_END();
+	ZEPHIR_INIT_NVAR(&value);
+	ZEPHIR_INIT_NVAR(&key);
+	RETURN_CTOR(&result);
 
 }
 

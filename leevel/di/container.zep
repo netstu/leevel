@@ -69,7 +69,14 @@ class Container implements IContainer, ArrayAccess {
 	 *
 	 * @var array
 	 */
-	public static shareClosure = [];
+	protected shareClosure = [];
+
+	/**
+	 * share 传递闭包参数
+	 *
+	 * @var \Closure
+	 */
+	protected shareUseClosures;
 
 	/**
 	 * 注册到容器
@@ -149,26 +156,32 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	public function share(<Closure> closures)
 	{
-		// 动态参数不能定义 container，否则 zephir 编译后报错提示
-		// Wrong number of parameters
-		return ClosureUse::make(function () {
-			var args, closures, obj, hash, container;
+		let this->shareUseClosures = closures;
 
-			let args = func_get_args();
-			let container = args[0];
-			let closures = args[1];
-			let hash = spl_object_hash(closures);
-
-			if fetch obj, \Leevel\Di\Container::shareClosure[hash] {
-				return obj;
-			}
-
-			let obj = call_user_func(closures, container);
-			let \Leevel\Di\Container::shareClosure[hash] = obj;
-
-			return obj;
-		}, [closures]);
+		return Closure::fromCallable([this, "shareClosure"]);
 	}
+
+	/**
+     * 创建 share 闭包
+     * 
+     * @param \Leevel\Di\IContainer $container
+     * @return mixed
+     */
+    protected function shareClosure(var container)
+    {
+    	var hash, obj;
+
+    	let hash = spl_object_hash(this->shareUseClosures);
+
+		if fetch obj, this->shareClosure[hash] {
+			return obj;
+		}
+
+		let obj = call_user_func(this->shareUseClosures, container);
+		let this->shareClosure[hash] = obj;
+
+		return obj;
+    }
 
 	/**
 	 * 设置别名

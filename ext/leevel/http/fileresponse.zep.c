@@ -273,13 +273,13 @@ PHP_METHOD(Leevel_Http_FileResponse, setFile) {
 			object_init_ex(&files, leevel_http_file_ce);
 			ZEPHIR_CALL_METHOD(&_4$$5, file, "getpathname", NULL, 0);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &files, "__construct", &_5, 34, &_4$$5);
+			ZEPHIR_CALL_METHOD(NULL, &files, "__construct", &_5, 33, &_4$$5);
 			zephir_check_call_status();
 		} else {
 			object_init_ex(&files, leevel_http_file_ce);
 			ZEPHIR_CALL_FUNCTION(&_6$$6, "strval", NULL, 11, file);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &files, "__construct", &_5, 34, &_6$$6);
+			ZEPHIR_CALL_METHOD(NULL, &files, "__construct", &_5, 33, &_6$$6);
 			zephir_check_call_status();
 		}
 	}

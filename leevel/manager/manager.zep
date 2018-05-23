@@ -344,9 +344,16 @@ abstract class Manager
 	 */
 	protected function optionFilterNull(array options)
 	{
-		return array_filter(options, function (value) {
-			return typeof value !== "null";
-		});
+		array result;
+		var key, value;
+
+		for key, value in options {
+			if value !== null {
+				let result[key] = value;
+			}
+		}
+
+		return result;
 	}
 
 	/**

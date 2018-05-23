@@ -116,9 +116,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/view/html.zep.c
 	leevel/view/manager.zep.c
 	leevel/view/provider/register.zep.c
-	leevel/view/view.zep.c
-	leevel/0__closure.zep.c
-	leevel/1__closure.zep.c "
+	leevel/view/view.zep.c "
 	PHP_NEW_EXTENSION(leevel, $leevel_sources, $ext_shared,, )
 	PHP_SUBST(LEEVEL_SHARED_LIBADD)
 
