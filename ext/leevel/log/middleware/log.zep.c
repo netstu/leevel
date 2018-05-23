@@ -100,33 +100,33 @@ PHP_METHOD(Leevel_Log_Middleware_Log, terminate) {
  */
 PHP_METHOD(Leevel_Log_Middleware_Log, saveLog) {
 
-	zval container, enabled, _0, _1, _2, _3$$3;
+	zval enabled, _0, _1, _2, _3, _4$$3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&container);
 	ZVAL_UNDEF(&enabled);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4$$3);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&container, &_0, "container", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "container", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "option");
-	ZEPHIR_CALL_METHOD(&_1, &container, "make", NULL, 0, &_2);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "option");
+	ZEPHIR_CALL_METHOD(&_2, &_1, "make", NULL, 0, &_3);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_2);
-	ZVAL_STRING(&_2, "log\\enabled");
-	ZEPHIR_CALL_METHOD(&enabled, &_1, "get", NULL, 0, &_2);
+	ZEPHIR_INIT_NVAR(&_3);
+	ZVAL_STRING(&_3, "log\\enabled");
+	ZEPHIR_CALL_METHOD(&enabled, &_2, "get", NULL, 0, &_3);
 	zephir_check_call_status();
 	if (zephir_is_true(&enabled)) {
-		zephir_read_property(&_3$$3, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "save", NULL, 0);
+		zephir_read_property(&_4$$3, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "save", NULL, 0);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

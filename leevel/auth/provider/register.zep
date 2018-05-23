@@ -17,6 +17,7 @@ namespace Leevel\Auth\Provider;
 
 use Closure;
 use Leevel\Di\Provider;
+use Leevel\Auth\Manager;
 use Leevel\Di\IContainer;
 
 /**
@@ -70,6 +71,7 @@ class Register extends Provider
                 "Leevel\\Auth\\IAuth"
             ]
         ];
+        
         return tmp;
     }
     
@@ -87,11 +89,11 @@ class Register extends Provider
      * 创建 auths 闭包
      * 
      * @param \Leevel\Project\IProject $project
-     * @return \Leevel\Kernel\Manager
+     * @return \Leevel\Auth\Manager
      */
     protected function authsClosure(var project)
     {
-        return new \Leevel\Auth\Manager(project);
+        return new Manager(project);
     }
     
     /**

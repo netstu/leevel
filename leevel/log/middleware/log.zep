@@ -70,10 +70,9 @@ class Log
      */
     protected function saveLog()
     {
-        var container, enabled;
+        var enabled;
 
-        let container = this->manager->container();
-        let enabled = container->make("option")->get("log\\enabled");
+        let enabled = this->manager->container()->make("option")->get("log\\enabled");
 
         if enabled {
             this->manager->save();

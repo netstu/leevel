@@ -15,8 +15,10 @@
  */
 namespace Leevel\Session\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Session\Manager;
 
 /**
  * session 服务提供者
@@ -71,6 +73,7 @@ class Register extends Provider
         	], 
         	"Leevel\\Session\\Middleware\\Session"
         ];
+
         return tmp;
     }
     
@@ -81,11 +84,20 @@ class Register extends Provider
      */
     protected function sessions()
     {
-        this->container->singleton("sessions", function (project) {
-            return new \Leevel\Session\Manager(project);
-        });
+        this->container->singleton("sessions", Closure::fromCallable([this, "sessionsClosure"]));
     }
     
+    /**
+     * 创建 sessions 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Session\Manager
+     */
+    protected function sessionsClosure(var project)
+    {
+        return new Manager(project);
+    }
+
     /**
      * 注册 session 服务
      *
@@ -93,12 +105,18 @@ class Register extends Provider
      */
     protected function session()
     {
-        this->container->singleton("session", function (project) {
-            var sessions;
+        this->container->singleton("session", Closure::fromCallable([this, "sessionClosure"]));
+    }
 
-        	let sessions = project->make("sessions");
-            return sessions->connect();
-        });
+    /**
+     * 创建 session 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return object
+     */
+    protected function sessionClosure(var project)
+    {
+        return project->make("sessions")->connect();
     }
     
     /**

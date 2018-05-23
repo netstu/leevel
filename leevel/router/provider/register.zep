@@ -16,9 +16,13 @@
 namespace Leevel\Router\Provider;
 
 use Closure;
+use Leevel\Router\Url;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
 use Leevel\Http\Response;
+use Leevel\Router\Router;
+use Leevel\Router\Redirect;
+use Leevel\Router\ResponseFactory;
 
 /**
  * router 服务提供者
@@ -80,6 +84,7 @@ class Register extends Provider
                 "Leevel\\Router\\ResponseFactory"
             ]
         ];
+
         return tmp;
     }
 
@@ -90,9 +95,18 @@ class Register extends Provider
      */
     protected function router()
     {
-        this->container->singleton("router", function (project) {
-            return new \Leevel\Router\Router(project);
-        });
+        this->container->singleton("router", Closure::fromCallable([this, "routerClosure"]));
+    }
+
+    /**
+     * 创建 router 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Router\Router
+     */
+    protected function routerClosure(var project)
+    {
+        return new Router(project);
     }
 
     /**
@@ -102,23 +116,32 @@ class Register extends Provider
      */
     protected function url()
     {
-        this->container->singleton("url", function (project) {
-            var option, request, options = [], item, tmp;
-            
-            let option = project->make("option");
-            let request = project->make("request");
-            let tmp = [
-				"html_suffix",
-				"domain_top",
-				"subdomain_on"
-            ];
+        this->container->singleton("url", Closure::fromCallable([this, "urlClosure"]));
+    }
 
-            for item in tmp {
-                let options[item] = option->get(item);
-            }
+    /**
+     * 创建 url 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Router\Url
+     */
+    protected function urlClosure(var project)
+    {
+        var option, request, options = [], item, tmp;
+        
+        let option = project->make("option");
+        let request = project->make("request");
+        let tmp = [
+            "html_suffix",
+            "domain_top",
+            "subdomain_on"
+        ];
 
-			return new \Leevel\Router\Url(request, options);
-        });
+        for item in tmp {
+            let options[item] = option->get(item);
+        }
+
+        return new Url(request, options);
     }
 
     /**
@@ -128,18 +151,27 @@ class Register extends Provider
      */
     protected function redirect()
     {
-        this->container->bind("redirect", this->container->share(function (project) {
-        	var redirect, session;
+        this->container->bind("redirect", this->container->share(Closure::fromCallable([this, "redirectClosure"])));
+    }
 
-            let redirect = new \Leevel\Router\Redirect(project->make("url"));
-            let session = project->make("session");
+    /**
+     * 创建 redirect 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Router\Redirect
+     */
+    protected function redirectClosure(var project)
+    {
+        var redirect, session;
 
-            if (session !== false) {
-                redirect->setSession(session);
-            }
+        let redirect = new Redirect(project->make("url"));
+        let session = project->make("session");
 
-            return redirect;
-        }));
+        if (session !== false) {
+            redirect->setSession(session);
+        }
+
+        return redirect;
     }
 
     /**
@@ -149,18 +181,27 @@ class Register extends Provider
      */
     protected function response()
     {
-        this->container->singleton("response", function (project) {
-        	var option, response;
+        this->container->singleton("response", Closure::fromCallable([this, "responseClosure"]));
+    }
 
-        	let option = project->make("option");
-        	let response = new \Leevel\Router\ResponseFactory(project->make("view"), project->make("redirect"));
+    /**
+     * 创建 response 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Router\ResponseFactory
+     */
+    protected function responseClosure(var project)
+    {
+        var option, response;
 
-        	return response->
+        let option = project->make("option");
+        let response = new ResponseFactory(project->make("view"), project->make("redirect"));
 
-        	setViewSuccessTemplate(option->get("view\\action_success"))->
+        return response->
 
-            setViewFailTemplate(option->get("view\\action_fail"));
-        });
+        setViewSuccessTemplate(option->get("view\\action_success"))->
+
+        setViewFailTemplate(option->get("view\\action_fail"));
     }
 
     /**
@@ -178,7 +219,8 @@ class Register extends Provider
 	 *
 	 * @return \Leevel\Cookie\ICookie
 	 */
-	protected function makeCookieResolverClosure() {
+	protected function makeCookieResolverClosure()
+    {
 		return this->container->make("cookie");
 	}
 }

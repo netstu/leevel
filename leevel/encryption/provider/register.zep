@@ -15,8 +15,10 @@
  */
 namespace Leevel\Encryption\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Encryption\Encryption;
 
 /**
  * encryption 服务提供者
@@ -54,12 +56,22 @@ class Register extends Provider
      */
     public function register()
     {
-        this->container->singleton("encryption", function (project) {
-        	var option;
+        this->container->singleton("encryption", Closure::fromCallable([this, "encryptionClosure"]));
+    }
 
-        	let option = project->make("option");
-        	return new \Leevel\Encryption\Encryption(option->get("auth_key"), option->get("auth_expiry"));
-        });
+    /**
+     * 创建 encryption 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Encryption\Encryption
+     */
+    protected function encryptionClosure(var project)
+    {
+        var option;
+
+        let option = project->make("option");
+
+        return new Encryption(option->get("auth_key"), option->get("auth_expiry"));
     }
     
     /**
@@ -77,6 +89,7 @@ class Register extends Provider
         		"Leevel\\Encryption\\IEncryption"
         	]
         ];
+
         return tmp;
     }
 }

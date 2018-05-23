@@ -15,7 +15,9 @@
  */
 namespace Leevel\Log\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
+use Leevel\Log\Manager;
 use Leevel\Di\IContainer;
 
 /**
@@ -71,6 +73,7 @@ class Register extends Provider
             ], 
             "Leevel\\Log\\Middleware\\Log"
         ];
+
         return tmp;
     }
     
@@ -81,9 +84,18 @@ class Register extends Provider
      */
     protected function logs()
     {
-        this->container->singleton("logs", function (project) {
-            return new \Leevel\Log\Manager(project);
-        });
+        this->container->singleton("logs", Closure::fromCallable([this, "logsClosure"]));
+    }
+
+    /**
+     * 创建 logs 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Log\Manager
+     */
+    protected function logsClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -93,9 +105,18 @@ class Register extends Provider
      */
     protected function log()
     {
-        this->container->singleton("log", function (project) {
-            return project->make("logs")->connect();
-        });
+        this->container->singleton("log", Closure::fromCallable([this, "logClosure"]));
+    }
+
+    /**
+     * 创建 log 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return object
+     */
+    protected function logClosure(var project)
+    {
+        return project->make("logs")->connect();
     }
     
     /**

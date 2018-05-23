@@ -74,25 +74,82 @@ PHP_METHOD(Leevel_Encryption_Provider_Register, __construct) {
  */
 PHP_METHOD(Leevel_Encryption_Provider_Register, register) {
 
-	zval _0, _1, _2;
+	zval _3;
+	zend_class_entry *_2;
+	zval _0, _1, _4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_1);
-	ZEPHIR_INIT_NVAR(&_1);
-	zephir_create_closure_ex(&_1, NULL, leevel_10__closure_ce, SL("__invoke"));
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "encryption");
-	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_2, &_1);
+	_2 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_INIT_VAR(&_3);
+	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_3, this_ptr);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "encryptionClosure");
+	zephir_array_fast_append(&_3, &_4);
+	ZEPHIR_CALL_CE_STATIC(&_1, _2, "fromcallable", NULL, 0, &_3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_4);
+	ZVAL_STRING(&_4, "encryption");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_4, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 创建 encryption 闭包
+ * 
+ * @param \Leevel\Project\IProject $project
+ * @return \Leevel\Encryption\Encryption
+ */
+PHP_METHOD(Leevel_Encryption_Provider_Register, encryptionClosure) {
+
+	zend_class_entry *_1 = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *project, project_sub, option, _0, _2, _3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &project);
+
+
+
+	ZEPHIR_INIT_VAR(&_0);
+	ZVAL_STRING(&_0, "option");
+	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
+	zephir_check_call_status();
+	if (!_1) {
+	_1 = zephir_fetch_class_str_ex(SL("Leevel\\Encryption\\Encryption"), ZEND_FETCH_CLASS_AUTO);
+	}
+	object_init_ex(return_value, _1);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "auth_key");
+		ZEPHIR_CALL_METHOD(&_2, &option, "get", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_STRING(&_0, "auth_expiry");
+		ZEPHIR_CALL_METHOD(&_3, &option, "get", NULL, 0, &_0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_2, &_3);
+		zephir_check_call_status();
+	}
+	RETURN_MM();
 
 }
 

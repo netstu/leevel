@@ -15,8 +15,10 @@
  */
 namespace Leevel\Event\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Event\Dispatch;
 
 /**
  * event 服务提供者
@@ -47,9 +49,18 @@ class Register extends Provider
      */
     public function register()
     {
-        this->container->singleton("event", function (project) {
-            return new \Leevel\Event\Dispatch(project);
-        });
+        this->container->singleton("event", Closure::fromCallable([this, "eventClosure"]));
+    }
+
+    /**
+     * 创建 event 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Event\Dispatch
+     */
+    protected function eventClosure(var project)
+    {
+        return new Dispatch(project);
     }
     
     /**
@@ -67,6 +78,7 @@ class Register extends Provider
         		"Leevel\\Event\\IDispatch"
         	]
         ];
+
         return tmp;
     }
 }

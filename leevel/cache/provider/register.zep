@@ -15,7 +15,10 @@
  */
 namespace Leevel\Cache\Provider;
 
+use Closure;
+use Leevel\Cache\Load;
 use Leevel\Di\Provider;
+use Leevel\Cache\Manager;
 use Leevel\Di\IContainer;
 
 /**
@@ -80,6 +83,7 @@ class Register extends Provider
         		"Leevel\\Cache\\Load"
         	]
         ];
+        
         return tem;
     }
     
@@ -90,9 +94,18 @@ class Register extends Provider
      */
     protected function caches()
     {
-        this->container->singleton("caches", function (project) {
-            return new \Leevel\Cache\Manager(project);
-        });
+        this->container->singleton("caches", Closure::fromCallable([this, "cachesClosure"]));
+    }
+
+    /**
+     * 创建 auths 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Cache\Manager
+     */
+    protected function cachesClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -102,12 +115,18 @@ class Register extends Provider
      */
     protected function cache()
     {
-        this->container->singleton("cache", function (project) {
-        	var caches;
+        this->container->singleton("cache", Closure::fromCallable([this, "cacheClosure"]));
+    }
 
-        	let caches = project->make("caches");
-            return caches->connect();
-        });
+    /**
+     * 创建 cache 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return object
+     */
+    protected function cacheClosure(var project)
+    {
+        return project->make("caches")->connect();
     }
     
     /**
@@ -117,11 +136,17 @@ class Register extends Provider
      */
     protected function cacheLoad()
     {
-        this->container->singleton("cache.load", function (project) {
-        	var cache;
+        this->container->singleton("cache.load", Closure::fromCallable([this, "cacheLoadClosure"]));
+    }
 
-        	let cache = project->make("cache");
-            return new \Leevel\Cache\Load(project, cache);
-        });
+    /**
+     * 创建 cache.load 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Cache\Load
+     */
+    protected function cacheLoadClosure(var project)
+    {
+        return new Load(project, project->make("cache"));
     }
 }

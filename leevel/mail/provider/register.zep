@@ -15,7 +15,9 @@
  */
 namespace Leevel\Mail\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
+use Leevel\Mail\Manager;
 use Leevel\Di\IContainer;
 
 /**
@@ -69,6 +71,7 @@ class Register extends Provider
                 "Leevel\\Mail\\IMail"
             ]
         ];
+
         return tmp;
     }
     
@@ -79,9 +82,18 @@ class Register extends Provider
      */
     protected function mails()
     {
-        this->container->singleton("mails", function (project) {
-            return new \Leevel\Mail\Manager(project);
-        });
+        this->container->singleton("mails", Closure::fromCallable([this, "mailsClosure"]));
+    }
+
+    /**
+     * 创建 mails 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Mail\Manager
+     */
+    protected function mailsClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -91,8 +103,17 @@ class Register extends Provider
      */
     protected function mail()
     {
-        this->container->singleton("mail", function (project) {
-            return project->make("mails")->connect();
-        });
+        this->container->singleton("mail", Closure::fromCallable([this, "mailClosure"]));
+    }
+
+    /**
+     * 创建 mail 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return object
+     */
+    protected function mailClosure(var project)
+    {
+        return project->make("mails")->connect();
     }
 }

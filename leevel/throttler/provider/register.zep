@@ -15,8 +15,10 @@
  */
 namespace Leevel\Throttler\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Throttler\Throttler;
 
 /**
  * throttler 服务提供者
@@ -74,6 +76,7 @@ class Register extends Provider
             ], 
             "Leevel\\Throttler\\Middleware\\Throttler"
         ];
+
         return tmp;
     }
     
@@ -84,15 +87,26 @@ class Register extends Provider
      */
     protected function throttler()
     {
-        this->container->singleton("throttler", function (project) {
-            var throttler, cache;
+        this->container->singleton("throttler", Closure::fromCallable([this, "throttlerClosure"]));
+    }
 
-            let cache = project->make("cache")->connect(project->make("option")->get("throttler\\driver"));
-            let throttler = new \Leevel\Throttler\Throttler(cache);
-            throttler->setRequest(project->make("request"));
+    /**
+     * 创建 throttler 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return \Leevel\Throttler\Throttler
+     */
+    protected function throttlerClosure(var project)
+    {
+        var throttler;
 
-            return throttler;
-        });
+        let throttler = new Throttler(
+            project->make("cache")->connect(project->make("option")->get("throttler\\driver"))
+        );
+
+        throttler->setRequest(project->make("request"));
+
+        return throttler;
     }
     
     /**

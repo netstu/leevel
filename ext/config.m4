@@ -120,34 +120,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/0__closure.zep.c
 	leevel/1__closure.zep.c
 	leevel/2__closure.zep.c
-	leevel/3__closure.zep.c
-	leevel/4__closure.zep.c
-	leevel/5__closure.zep.c
-	leevel/6__closure.zep.c
-	leevel/7__closure.zep.c
-	leevel/8__closure.zep.c
-	leevel/9__closure.zep.c
-	leevel/10__closure.zep.c
-	leevel/11__closure.zep.c
-	leevel/12__closure.zep.c
-	leevel/13__closure.zep.c
-	leevel/14__closure.zep.c
-	leevel/15__closure.zep.c
-	leevel/16__closure.zep.c
-	leevel/17__closure.zep.c
-	leevel/18__closure.zep.c
-	leevel/19__closure.zep.c
-	leevel/20__closure.zep.c
-	leevel/21__closure.zep.c
-	leevel/22__closure.zep.c
-	leevel/23__closure.zep.c
-	leevel/24__closure.zep.c
-	leevel/25__closure.zep.c
-	leevel/26__closure.zep.c
-	leevel/27__closure.zep.c
-	leevel/28__closure.zep.c
-	leevel/29__closure.zep.c
-	leevel/30__closure.zep.c "
+	leevel/3__closure.zep.c "
 	PHP_NEW_EXTENSION(leevel, $leevel_sources, $ext_shared,, )
 	PHP_SUBST(LEEVEL_SHARED_LIBADD)
 

@@ -15,8 +15,10 @@
  */
 namespace Leevel\Validate\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Validate\Validate;
 
 /**
  * validate 服务提供者
@@ -47,9 +49,18 @@ class Register extends Provider
      */
     public function register()
     {
-        this->container->singleton("validate", function (project) {
-            return (new \Leevel\Validate\Validate())->container(project);
-        });
+        this->container->singleton("validate", Closure::fromCallable([this, "validateClosure"]));
+    }
+
+    /**
+     * 创建 validate 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return \Leevel\Validate\Validate
+     */
+    protected function validateClosure(var project)
+    {
+        return (new Validate())->container(project);
     }
     
     /**
@@ -67,6 +78,7 @@ class Register extends Provider
         		"Leevel\\Validate\\IValidate"
         	]
         ];
+
         return tmp;
     }
 }

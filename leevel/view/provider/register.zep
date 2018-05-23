@@ -15,8 +15,14 @@
  */
 namespace Leevel\View\Provider;
 
+use Closure;
+use Twig_Environment;
+use Leevel\View\Parser;
 use Leevel\Di\Provider;
+use Leevel\View\Manager;
 use Leevel\Di\IContainer;
+use Leevel\View\Compiler;
+use Twig_Loader_Filesystem;
 
 /**
  * view 服务提供者
@@ -81,6 +87,7 @@ class Register extends Provider
             ], 
             "view.twig.parser"
         ];
+
         return tmp;
     }
     
@@ -91,9 +98,18 @@ class Register extends Provider
      */
     protected function viewViews()
     {
-        this->container->singleton("view.views", function (project) {
-            return new \Leevel\View\Manager(project);
-        });
+        this->container->singleton("view.views", Closure::fromCallable([this, "viewViewsClosure"]));
+    }
+
+    /**
+     * 创建 view.views 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\View\Manager
+     */
+    protected function viewViewsClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -103,9 +119,18 @@ class Register extends Provider
      */
     protected function viewView()
     {
-        this->container->singleton("view.view", function (project) {
-            return project->make("view.views")->connect();
-        });
+        this->container->singleton("view.view", Closure::fromCallable([this, "viewViewClosure"]));
+    }
+
+    /**
+     * 创建 view.view 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return object
+     */
+    protected function viewViewClosure(var project)
+    {
+        return project->make("view.views")->connect();
     }
     
     /**
@@ -115,9 +140,18 @@ class Register extends Provider
      */
     protected function viewCompiler()
     {
-        this->container->singleton("view.compiler", function (project) {
-            return new \Leevel\View\Compiler();
-        });
+        this->container->singleton("view.compiler", Closure::fromCallable([this, "viewCompilerClosure"]));
+    }
+
+    /**
+     * 创建 view.compiler 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\View\Compiler
+     */
+    protected function viewCompilerClosure(var project)
+    {
+        return new Compiler();
     }
     
     /**
@@ -127,12 +161,22 @@ class Register extends Provider
      */
     protected function viewParser()
     {
-        this->container->singleton("view.parser", function (project) {
-            var parser;
+        this->container->singleton("view.parser", Closure::fromCallable([this, "viewParserClosure"]));
+    }
 
-            let parser = new \Leevel\View\Parser(project->make("view.compiler"));
-            return parser->registerCompilers()->registerParsers();
-        });
+    /**
+     * 创建 view.parser 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\View\Parser
+     */
+    protected function viewParserClosure(var project)
+    {
+        return (new Parser(project->make("view.compiler")))->
+
+        registerCompilers()->
+
+        registerParsers();
     }
     
     /**
@@ -142,15 +186,25 @@ class Register extends Provider
      */
     protected function viewTwigParser()
     {
-        this->container->singleton("view.twig.parser", function (project) {
-            var tmp;
-        
-            let tmp = [
-                "auto_reload" : true, 
-                "debug" : project->development(), 
-                "cache" : project->pathApplicationCache("theme") . "/" . project->make("request")->app()
-            ];
-            return new \Twig_Environment(new \Twig_Loader_Filesystem(), tmp);
-        });
+        this->container->singleton("view.twig.parser", Closure::fromCallable([this, "viewTwigParserClosure"]));
+    }
+
+    /**
+     * 创建 view.twig.parser 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Twig_Environment
+     */
+    protected function viewTwigParserClosure(var project)
+    {
+        var tmp;
+    
+        let tmp = [
+            "auto_reload" : true, 
+            "debug" : project->development(), 
+            "cache" : project->pathApplicationCache("theme") . "/" . project->make("request")->app()
+        ];
+
+        return new Twig_Environment(new Twig_Loader_Filesystem(), tmp);
     }
 }

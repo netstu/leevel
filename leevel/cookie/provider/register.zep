@@ -15,7 +15,9 @@
  */
 namespace Leevel\Cookie\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
+use Leevel\Cookie\Cookie;
 use Leevel\Di\IContainer;
 
 /**
@@ -47,12 +49,18 @@ class Register extends Provider
      */
     public function register()
     {
-        this->container->singleton("cookie", function (project) {
-        	var option;
+        this->container->singleton("cookie", Closure::fromCallable([this, "cookieClosure"]));
+    }
 
-        	let option = project->make("option");
-        	return new \Leevel\Cookie\Cookie(option->get("cookie\\"));
-        });
+    /**
+     * 创建 cookie 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Cookie\Cookie
+     */
+    protected function cookieClosure(var project)
+    {
+        return new Cookie(project->make("option")->get("cookie\\"));
     }
     
     /**
@@ -70,6 +78,7 @@ class Register extends Provider
         		"Leevel\\Cookie\\ICookie"
         	]
         ];
+        
         return tmp;
     }
 }

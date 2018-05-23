@@ -15,8 +15,10 @@
  */
 namespace Leevel\Filesystem\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Filesystem\Manager;
 
 /**
  * filesystem 服务提供者
@@ -76,6 +78,7 @@ class Register extends Provider
                 "Leevel\\Filesystem\\IFilesystem"
             ]
         ];
+
         return tmp;
     }
     
@@ -86,9 +89,18 @@ class Register extends Provider
      */
     protected function filesystems()
     {
-        this->container->singleton("filesystems", function (project) {
-            return new \Leevel\Filesystem\Manager(project);
-        });
+        this->container->singleton("filesystems", Closure::fromCallable([this, "filesystemsClosure"]));
+    }
+
+    /**
+     * 创建 filesystems 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Filesystem\Manager
+     */
+    protected function filesystemsClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -98,8 +110,17 @@ class Register extends Provider
      */
     protected function filesystem()
     {
-        this->container->singleton("filesystem", function (project) {
-            return project->make("filesystems")->connect();
-        });
+        this->container->singleton("filesystem", Closure::fromCallable([this, "filesystemClosure"]));
+    }
+
+    /**
+     * 创建 filesystem 服务闭包
+     *
+     * @param \Leevel\Kernel\IProject $project
+     * @return object
+     */
+    protected function filesystemClosure(var project)
+    {
+        return project->make("filesystems")->connect();
     }
 }

@@ -161,7 +161,7 @@ PHP_METHOD(Leevel_Auth_Provider_Register, auths) {
  * 创建 auths 闭包
  * 
  * @param \Leevel\Project\IProject $project
- * @return \Leevel\Kernel\Manager
+ * @return \Leevel\Auth\Manager
  */
 PHP_METHOD(Leevel_Auth_Provider_Register, authsClosure) {
 

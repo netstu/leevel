@@ -15,8 +15,10 @@
  */
 namespace Leevel\Database\Provider;
 
+use Closure;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
+use Leevel\Database\Manager;
 
 /**
  * database 服务提供者
@@ -80,9 +82,18 @@ class Register extends Provider
      */
     protected function databases()
     {
-        this->container->singleton("databases", function (project) {
-        	return new \Leevel\Database\Manager(project);
-        });
+        this->container->singleton("databases", Closure::fromCallable([this, "databasesClosure"]));
+    }
+
+    /**
+     * 创建 databases 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return \Leevel\Database\Manager
+     */
+    protected function databasesClosure(var project)
+    {
+        return new Manager(project);
     }
     
     /**
@@ -92,8 +103,17 @@ class Register extends Provider
      */
     protected function database()
     {
-        this->container->singleton("database", function (project) {
-        	return project->make("databases")->connect();
-        });
+        this->container->singleton("database", Closure::fromCallable([this, "databaseClosure"]));
+    }
+
+    /**
+     * 创建 database 闭包
+     * 
+     * @param \Leevel\Project\IProject $project
+     * @return object
+     */
+    protected function databaseClosure(var project)
+    {
+        return project->make("databases")->connect();
     }
 }
