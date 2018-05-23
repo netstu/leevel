@@ -10,7 +10,7 @@ if (PHP_LEEVEL != "no") {
     AC_DEFINE("ZEPHIR_USE_PHP_JSON", 1, "Whether PHP json extension is present at compile time");
   }
   
-  ADD_SOURCES(configure_module_dirname + "/leevel/support", "facade.zep.c iarray.zep.c imacro.zep.c ijson.zep.c closureuse.zep.c ihtml.zep.c type.zep.c", "leevel");
+  ADD_SOURCES(configure_module_dirname + "/leevel/support", "facade.zep.c iarray.zep.c imacro.zep.c ijson.zep.c ihtml.zep.c type.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/di", "provider.zep.c icontainer.zep.c container.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/option", "iclass.zep.c ioption.zep.c option.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/flow", "icontrol.zep.c", "leevel");
@@ -38,6 +38,7 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/log/middleware", "log.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/log/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/mail/provider", "register.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/router", "irouter.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/router/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session/middleware", "session.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session/provider", "register.zep.c", "leevel");

@@ -98,13 +98,13 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/request.zep.c
 	leevel/response.zep.c
 	leevel/router.zep.c
+	leevel/router/irouter.zep.c
 	leevel/router/provider/register.zep.c
 	leevel/session.zep.c
 	leevel/session/manager.zep.c
 	leevel/session/middleware/session.zep.c
 	leevel/session/provider/register.zep.c
 	leevel/session/session.zep.c
-	leevel/support/closureuse.zep.c
 	leevel/support/ihtml.zep.c
 	leevel/support/type.zep.c
 	leevel/throttler.zep.c
