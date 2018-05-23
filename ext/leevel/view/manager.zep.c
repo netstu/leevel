@@ -71,7 +71,7 @@ PHP_METHOD(Leevel_View_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_view_view_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 133, connect);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 134, connect);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -132,9 +132,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&html);
 	object_init_ex(&html, leevel_view_html_ce);
-	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 134, &options);
+	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 135, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 135, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 136, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&html);
 

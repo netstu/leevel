@@ -122,6 +122,7 @@ zend_class_entry *leevel_session_manager_ce;
 zend_class_entry *leevel_session_middleware_session_ce;
 zend_class_entry *leevel_session_provider_register_ce;
 zend_class_entry *leevel_session_session_ce;
+zend_class_entry *leevel_support_debug_console_ce;
 zend_class_entry *leevel_support_type_ce;
 zend_class_entry *leevel_throttler_ce;
 zend_class_entry *leevel_throttler_provider_register_ce;
@@ -243,6 +244,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Session_Middleware_Session);
 	ZEPHIR_INIT(Leevel_Session_Provider_Register);
 	ZEPHIR_INIT(Leevel_Session_Session);
+	ZEPHIR_INIT(Leevel_Support_Debug_Console);
 	ZEPHIR_INIT(Leevel_Support_Type);
 	ZEPHIR_INIT(Leevel_Throttler);
 	ZEPHIR_INIT(Leevel_Throttler_Provider_Register);

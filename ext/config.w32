@@ -43,6 +43,7 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/router/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session/middleware", "session.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session/provider", "register.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/support/debug", "console.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/throttler/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/validate/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/view/provider", "register.zep.c", "leevel");

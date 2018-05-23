@@ -107,6 +107,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/session/middleware/session.zep.c
 	leevel/session/provider/register.zep.c
 	leevel/session/session.zep.c
+	leevel/support/debug/console.zep.c
 	leevel/support/ihtml.zep.c
 	leevel/support/type.zep.c
 	leevel/throttler.zep.c

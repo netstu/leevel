@@ -102,6 +102,7 @@
 #include "leevel/session/middleware/session.zep.h"
 #include "leevel/session/provider/register.zep.h"
 #include "leevel/session/session.zep.h"
+#include "leevel/support/debug/console.zep.h"
 #include "leevel/support/ihtml.zep.h"
 #include "leevel/support/type.zep.h"
 #include "leevel/throttler.zep.h"
