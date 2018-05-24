@@ -39,7 +39,7 @@ ZEPHIR_INIT_FUNCS(leevel_pipeline_pipeline_method_entry) {
 	PHP_ME(Leevel_Pipeline_Pipeline, send, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Pipeline_Pipeline, through, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Pipeline_Pipeline, then, arginfo_leevel_pipeline_pipeline_then, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Pipeline_Pipeline, traverseGenerator, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Pipeline_Pipeline, traverseGenerator, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Pipeline_Pipeline, makeNextClosure, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Pipeline_Pipeline, stageGenerator, arginfo_leevel_pipeline_pipeline_stagegenerator, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Pipeline_Pipeline, stageCallback, arginfo_leevel_pipeline_pipeline_stagecallback, ZEND_ACC_PROTECTED)

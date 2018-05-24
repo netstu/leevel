@@ -483,6 +483,8 @@ PHP_METHOD(Leevel_Collection_Collection, toArray) {
 
 	ZEPHIR_MM_GROW();
 
+	ZEPHIR_INIT_VAR(&result);
+	array_init(&result);
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	zephir_is_iterable(&_0, 0, "leevel/collection/collection.zep", 248);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
@@ -529,6 +531,8 @@ PHP_METHOD(Leevel_Collection_Collection, jsonSerialize) {
 
 	ZEPHIR_MM_GROW();
 
+	ZEPHIR_INIT_VAR(&result);
+	array_init(&result);
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	zephir_is_iterable(&_0, 0, "leevel/collection/collection.zep", 273);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)

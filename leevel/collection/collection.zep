@@ -235,7 +235,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
     public function toArray() -> array
     {
         var value;
-        array result;
+        array result = [];
 
         for value in this->elements {
             if is_object(value) && value instanceof IArray {
@@ -256,7 +256,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
     public function jsonSerialize() -> array
     {
         var value;
-        array result;
+        array result = [];
 
         for value in this->elements {
             if value instanceof JsonSerializable {

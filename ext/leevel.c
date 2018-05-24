@@ -24,8 +24,8 @@
 
 
 zend_class_entry *leevel_option_iclass_ce;
-zend_class_entry *leevel_support_iarray_ce;
 zend_class_entry *leevel_support_imacro_ce;
+zend_class_entry *leevel_support_iarray_ce;
 zend_class_entry *leevel_support_ijson_ce;
 zend_class_entry *leevel_flow_icontrol_ce;
 zend_class_entry *leevel_http_iresponse_ce;
@@ -43,12 +43,12 @@ zend_class_entry *leevel_mvc_icontroller_ce;
 zend_class_entry *leevel_mvc_ientity_ce;
 zend_class_entry *leevel_option_ioption_ce;
 zend_class_entry *leevel_pipeline_ipipeline_ce;
+zend_class_entry *leevel_router_irouter_ce;
 zend_class_entry *leevel_router_match_imatch_ce;
 zend_class_entry *leevel_session_isession_ce;
 zend_class_entry *leevel_view_iconnect_ce;
 zend_class_entry *leevel_view_iview_ce;
 zend_class_entry *leevel_mvc_imodel_ce;
-zend_class_entry *leevel_router_irouter_ce;
 zend_class_entry *leevel_support_ihtml_ce;
 zend_class_entry *leevel_support_facade_ce;
 zend_class_entry *leevel_di_provider_ce;
@@ -118,6 +118,7 @@ zend_class_entry *leevel_response_ce;
 zend_class_entry *leevel_router_ce;
 zend_class_entry *leevel_router_match_pathinfo_ce;
 zend_class_entry *leevel_router_provider_register_ce;
+zend_class_entry *leevel_router_router_ce;
 zend_class_entry *leevel_session_ce;
 zend_class_entry *leevel_session_manager_ce;
 zend_class_entry *leevel_session_middleware_session_ce;
@@ -147,8 +148,8 @@ static PHP_MINIT_FUNCTION(leevel)
 	REGISTER_INI_ENTRIES();
 	zephir_module_init();
 	ZEPHIR_INIT(Leevel_Option_IClass);
-	ZEPHIR_INIT(Leevel_Support_IArray);
 	ZEPHIR_INIT(Leevel_Support_IMacro);
+	ZEPHIR_INIT(Leevel_Support_IArray);
 	ZEPHIR_INIT(Leevel_Support_IJson);
 	ZEPHIR_INIT(Leevel_Flow_IControl);
 	ZEPHIR_INIT(Leevel_Http_IResponse);
@@ -166,12 +167,12 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Mvc_IEntity);
 	ZEPHIR_INIT(Leevel_Option_IOption);
 	ZEPHIR_INIT(Leevel_Pipeline_IPipeline);
+	ZEPHIR_INIT(Leevel_Router_IRouter);
 	ZEPHIR_INIT(Leevel_Router_Match_IMatch);
 	ZEPHIR_INIT(Leevel_Session_ISession);
 	ZEPHIR_INIT(Leevel_View_IConnect);
 	ZEPHIR_INIT(Leevel_View_IView);
 	ZEPHIR_INIT(Leevel_Mvc_IModel);
-	ZEPHIR_INIT(Leevel_Router_IRouter);
 	ZEPHIR_INIT(Leevel_Support_IHtml);
 	ZEPHIR_INIT(Leevel_Support_Facade);
 	ZEPHIR_INIT(Leevel_Di_Provider);
@@ -241,6 +242,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Router);
 	ZEPHIR_INIT(Leevel_Router_Match_PathInfo);
 	ZEPHIR_INIT(Leevel_Router_Provider_Register);
+	ZEPHIR_INIT(Leevel_Router_Router);
 	ZEPHIR_INIT(Leevel_Session);
 	ZEPHIR_INIT(Leevel_Session_Manager);
 	ZEPHIR_INIT(Leevel_Session_Middleware_Session);
@@ -321,6 +323,7 @@ static PHP_RINIT_FUNCTION(leevel)
 	zephir_init_static_properties_Leevel_Http_FileBag(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_Request(TSRMLS_C);
 	zephir_init_static_properties_Leevel_Http_UploadedFile(TSRMLS_C);
+	zephir_init_static_properties_Leevel_Router_Router(TSRMLS_C);
 
 	return SUCCESS;
 }

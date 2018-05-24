@@ -12,8 +12,8 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel_sources="leevel.c kernel/main.c kernel/memory.c kernel/exception.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/require.c kernel/file.c kernel/operators.c kernel/math.c kernel/concat.c kernel/variables.c kernel/filter.c kernel/iterator.c kernel/time.c kernel/exit.c leevel/support/facade.zep.c
 	leevel/di/provider.zep.c
 	leevel/option/iclass.zep.c
-	leevel/support/iarray.zep.c
 	leevel/support/imacro.zep.c
+	leevel/support/iarray.zep.c
 	leevel/support/ijson.zep.c
 	leevel/flow/icontrol.zep.c
 	leevel/http/iresponse.zep.c
@@ -39,6 +39,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/mvc/ientity.zep.c
 	leevel/option/ioption.zep.c
 	leevel/pipeline/ipipeline.zep.c
+	leevel/router/irouter.zep.c
 	leevel/router/match/imatch.zep.c
 	leevel/session/isession.zep.c
 	leevel/view/connect.zep.c
@@ -100,9 +101,9 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/request.zep.c
 	leevel/response.zep.c
 	leevel/router.zep.c
-	leevel/router/irouter.zep.c
 	leevel/router/match/pathinfo.zep.c
 	leevel/router/provider/register.zep.c
+	leevel/router/router.zep.c
 	leevel/session.zep.c
 	leevel/session/manager.zep.c
 	leevel/session/middleware/session.zep.c

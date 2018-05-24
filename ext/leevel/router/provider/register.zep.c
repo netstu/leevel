@@ -184,7 +184,6 @@ PHP_METHOD(Leevel_Router_Provider_Register, router) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, routerClosure) {
 
-	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *project, project_sub;
 	zval *this_ptr = getThis();
@@ -196,14 +195,9 @@ PHP_METHOD(Leevel_Router_Provider_Register, routerClosure) {
 
 
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\Router"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, project);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_router_router_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 117, project);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

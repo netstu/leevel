@@ -45,7 +45,8 @@ ZEPHIR_DOC_METHOD(Leevel_Pipeline_IPipeline, through);
 /**
  * 执行管道工序响应结果
  *
- * @param callable $end
+ * @param callable|null $end
+ * @since 2018.01.03
  * @return mixed
  */
 ZEPHIR_DOC_METHOD(Leevel_Pipeline_IPipeline, then);

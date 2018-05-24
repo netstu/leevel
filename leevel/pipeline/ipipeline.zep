@@ -43,7 +43,8 @@ interface IPipeline
 	/**
 	 * 执行管道工序响应结果
 	 *
-	 * @param callable $end
+	 * @param callable|null $end
+	 * @since 2018.01.03
 	 * @return mixed
 	 */
 	public function then(var end = null);

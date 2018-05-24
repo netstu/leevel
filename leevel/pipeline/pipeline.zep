@@ -123,8 +123,8 @@ class Pipeline implements IPipeline
 
 	/**
 	 * 执行管道工序响应结果
-	 *
-	 * @param callable $end
+	 * 
+	 * @param callable|null $end
 	 * @since 2018.01.03
 	 * @return mixed
 	 */
@@ -134,10 +134,11 @@ class Pipeline implements IPipeline
 
 		let stage = this->stage;
 
-		if (end) {
+		if end {
 			if ! is_callable(end) {
 				throw new InvalidArgumentException("Pipeline then must be a callable.");
 			}
+			
 			let stage[] = end;
 		}
 
@@ -152,7 +153,7 @@ class Pipeline implements IPipeline
 	 * @since 2018.01.03
 	 * @return mixed
 	 */
-	public function traverseGenerator()
+	protected function traverseGenerator()
 	{
 		var args, current, next;
 
