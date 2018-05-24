@@ -324,7 +324,7 @@ PHP_METHOD(Leevel_Router_Router, throughMiddleware) {
 		ZEPHIR_INIT_VAR(&pipeline);
 		object_init_ex(&pipeline, leevel_pipeline_pipeline_ce);
 		zephir_read_property(&_6$$5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, &pipeline, "__construct", NULL, 118, &_6$$5);
+		ZEPHIR_CALL_METHOD(NULL, &pipeline, "__construct", NULL, 124, &_6$$5);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_7$$5);
 		zephir_create_array(&_7$$5, 2, 0 TSRMLS_CC);
@@ -354,7 +354,7 @@ PHP_METHOD(Leevel_Router_Router, throughMiddleware) {
 		zephir_array_fetch(&_14$$5, &_13$$5, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 250 TSRMLS_CC);
 		ZEPHIR_CALL_FUNCTION(NULL, "call_user_func", &_9, 8, &_12$$5, &_14$$5);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &pipeline, "then", NULL, 119);
+		ZEPHIR_CALL_METHOD(NULL, &pipeline, "then", NULL, 125);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -502,7 +502,7 @@ PHP_METHOD(Leevel_Router_Router, addBasepaths) {
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("basepaths"), PH_NOISY_CC | PH_READONLY);
 	zephir_fast_array_merge(&_0, &_1, &basepaths TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_2, "array_unique", NULL, 65, &_0);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_unique", NULL, 83, &_0);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("basepaths"), &_2);
 	ZEPHIR_MM_RESTORE();
@@ -575,7 +575,7 @@ PHP_METHOD(Leevel_Router_Router, addGroups) {
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("groups"), PH_NOISY_CC | PH_READONLY);
 	zephir_fast_array_merge(&_0, &_1, &groups TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_2, "array_unique", NULL, 65, &_0);
+	ZEPHIR_CALL_FUNCTION(&_2, "array_unique", NULL, 83, &_0);
 	zephir_check_call_status();
 	zephir_update_property_zval(this_ptr, SL("groups"), &_2);
 	ZEPHIR_MM_RESTORE();
@@ -852,21 +852,21 @@ PHP_METHOD(Leevel_Router_Router, matchePath) {
 	zephir_array_fetch_long(&params, &tmpListPathsParams, 1, PH_NOISY, "leevel/router/router.zep", 473 TSRMLS_CC);
 	if (zephir_fast_count_int(&paths TSRMLS_CC) == 1) {
 		ZEPHIR_MAKE_REF(&paths);
-		ZEPHIR_CALL_FUNCTION(&_20$$9, "array_pop", &_21, 120, &paths);
+		ZEPHIR_CALL_FUNCTION(&_20$$9, "array_pop", &_21, 126, &paths);
 		ZEPHIR_UNREF(&paths);
 		zephir_check_call_status();
 		zephir_array_update_string(&result, SL("_c"), &_20$$9, PH_COPY | PH_SEPARATE);
 	} else {
 		if (zephir_is_true(&paths)) {
 			ZEPHIR_MAKE_REF(&paths);
-			ZEPHIR_CALL_FUNCTION(&_22$$11, "array_pop", &_21, 120, &paths);
+			ZEPHIR_CALL_FUNCTION(&_22$$11, "array_pop", &_21, 126, &paths);
 			ZEPHIR_UNREF(&paths);
 			zephir_check_call_status();
 			zephir_array_update_string(&result, SL("_a"), &_22$$11, PH_COPY | PH_SEPARATE);
 		}
 		if (zephir_is_true(&paths)) {
 			ZEPHIR_MAKE_REF(&paths);
-			ZEPHIR_CALL_FUNCTION(&_23$$12, "array_pop", &_21, 120, &paths);
+			ZEPHIR_CALL_FUNCTION(&_23$$12, "array_pop", &_21, 126, &paths);
 			ZEPHIR_UNREF(&paths);
 			zephir_check_call_status();
 			zephir_array_update_string(&result, SL("_c"), &_23$$12, PH_COPY | PH_SEPARATE);
@@ -1798,7 +1798,7 @@ PHP_METHOD(Leevel_Router_Router, pathinfoRestful) {
  */
 PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 
-	zval app, controller, action, controllerClass, method, tmp, _0, _2, _3$$3, _4$$4, _5$$4, _6$$6, _7$$6;
+	zval app, controller, action, controllerClass, method, tmp, _0, _2, _3$$3, _4$$4, _5$$4, _6$$6, _7$$6, _8$$6;
 	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -1816,6 +1816,7 @@ PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&_6$$6);
 	ZVAL_UNDEF(&_7$$6);
+	ZVAL_UNDEF(&_8$$6);
 
 	ZEPHIR_MM_GROW();
 
@@ -1857,7 +1858,10 @@ PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 	}
 	if (zephir_instance_of_ev(&controller, leevel_mvc_icontroller_ce TSRMLS_CC)) {
 		zephir_read_property(&_6$$6, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_7$$6, &_6$$6, SL("view"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 899 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&_8$$6);
+		ZVAL_STRING(&_8$$6, "view");
+		ZEPHIR_CALL_METHOD(&_7$$6, &_6$$6, "make", NULL, 0, &_8$$6);
+		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &controller, "setview", NULL, 0, &_7$$6);
 		zephir_check_call_status();
 	}

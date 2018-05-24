@@ -17,6 +17,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/support/ijson.zep.c
 	leevel/flow/icontrol.zep.c
 	leevel/http/iresponse.zep.c
+	leevel/di/icontainer.zep.c
 	leevel/http/bag.zep.c
 	leevel/http/response.zep.c
 	leevel/manager/manager.zep.c
@@ -24,7 +25,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/log/connect.zep.c
 	leevel/log/iconnect.zep.c
 	leevel/cookie/icookie.zep.c
-	leevel/di/icontainer.zep.c
+	leevel/di/container.zep.c
 	leevel/event/idispatch.zep.c
 	leevel/event/isubject.zep.c
 	leevel/http/file.zep.c
@@ -34,6 +35,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/http/jsonresponse.zep.c
 	leevel/i18n/ii18n.zep.c
 	leevel/kernel/ikernel.zep.c
+	leevel/kernel/iproject.zep.c
 	leevel/log/ilog.zep.c
 	leevel/mvc/icontroller.zep.c
 	leevel/mvc/ientity.zep.c
@@ -52,6 +54,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/bootstrap/bootstrap/registerruntime.zep.c
 	leevel/bootstrap/bootstrap/traverseprovider.zep.c
 	leevel/bootstrap/kernel.zep.c
+	leevel/bootstrap/project.zep.c
 	leevel/cache.zep.c
 	leevel/cache/provider/register.zep.c
 	leevel/collection/collection.zep.c
@@ -61,7 +64,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/database.zep.c
 	leevel/database/provider/register.zep.c
 	leevel/db.zep.c
-	leevel/di/container.zep.c
 	leevel/encryption.zep.c
 	leevel/encryption/provider/register.zep.c
 	leevel/event.zep.c
@@ -104,6 +106,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/router/match/pathinfo.zep.c
 	leevel/router/provider/register.zep.c
 	leevel/router/router.zep.c
+	leevel/router/routerprovider.zep.c
 	leevel/session.zep.c
 	leevel/session/manager.zep.c
 	leevel/session/middleware/session.zep.c

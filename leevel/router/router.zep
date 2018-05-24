@@ -896,7 +896,7 @@ class Router implements IRouter, IMacro
         }
         
         if controller instanceof IController {
-            controller->setView(this->container["view"]);
+            controller->setView(this->container->make("view"));
         }
 
         if ! (method_exists(controller, method)) {

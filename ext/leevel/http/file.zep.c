@@ -117,7 +117,7 @@ PHP_METHOD(Leevel_Http_File, move) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "movetotarget", NULL, 0, &_0, &target);
 	zephir_check_call_status();
 	object_init_ex(return_value, leevel_http_file_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 33, &target);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 47, &target);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -171,7 +171,7 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 
 	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", &_1, 28, &directory);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "is_writable", NULL, 34, &directory);
+	ZEPHIR_CALL_FUNCTION(&_2, "is_writable", NULL, 48, &directory);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZVAL_LONG(&_3$$3, 511);
@@ -257,15 +257,15 @@ PHP_METHOD(Leevel_Http_File, moveToTarget) {
 	zephir_get_strval(&target, target_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "move_uploaded_file", NULL, 35, &sourcePath, &target);
+	ZEPHIR_CALL_FUNCTION(&_0, "move_uploaded_file", NULL, 49, &sourcePath, &target);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 36);
+		ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 50);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_1$$3);
 		object_init_ex(&_1$$3, leevel_http_fileexception_ce);
 		zephir_array_fetch_string(&_2$$3, &error, SL("message"), PH_NOISY | PH_READONLY, "leevel/http/file.zep", 102 TSRMLS_CC);
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "strip_tags", NULL, 37, &_2$$3);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "strip_tags", NULL, 51, &_2$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "Could not move the file %s to %s (%s)");
