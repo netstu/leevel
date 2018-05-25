@@ -246,10 +246,11 @@ PHP_METHOD(Leevel_Router_Provider_Register, url) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 
-	zend_class_entry *_4 = NULL;
-	zephir_fcall_cache_entry *_3 = NULL;
+	zend_class_entry *_5 = NULL;
+	zval _1;
+	zephir_fcall_cache_entry *_4 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, option, request, options, item, tmp, _0, *_1, _2$$3;
+	zval *project, project_sub, option, request, options, item, _0, *_2, _3$$3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
@@ -257,9 +258,9 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZVAL_UNDEF(&request);
 	ZVAL_UNDEF(&options);
 	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
@@ -276,31 +277,31 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZVAL_STRING(&_0, "request");
 	ZEPHIR_CALL_METHOD(&request, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_1);
+	zephir_create_array(&_1, 3, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "html_suffix");
-	zephir_array_fast_append(&tmp, &_0);
+	zephir_array_fast_append(&_1, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "domain_top");
-	zephir_array_fast_append(&tmp, &_0);
+	zephir_array_fast_append(&_1, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "subdomain_on");
-	zephir_array_fast_append(&tmp, &_0);
-	zephir_is_iterable(&tmp, 0, "leevel/router/provider/register.zep", 140);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _1)
+	zephir_array_fast_append(&_1, &_0);
+	zephir_is_iterable(&_1, 0, "leevel/router/provider/register.zep", 139);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _1);
-		ZEPHIR_CALL_METHOD(&_2$$3, &option, "get", &_3, 0, &item);
+		ZVAL_COPY(&item, _2);
+		ZEPHIR_CALL_METHOD(&_3$$3, &option, "get", &_4, 0, &item);
 		zephir_check_call_status();
-		zephir_array_update_zval(&options, &item, &_2$$3, PH_COPY | PH_SEPARATE);
+		zephir_array_update_zval(&options, &item, &_3$$3, PH_COPY | PH_SEPARATE);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	if (!_4) {
-	_4 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\Url"), ZEND_FETCH_CLASS_AUTO);
+	if (!_5) {
+	_5 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\Url"), ZEND_FETCH_CLASS_AUTO);
 	}
-	object_init_ex(return_value, _4);
+	object_init_ex(return_value, _5);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &request, &options);
 		zephir_check_call_status();

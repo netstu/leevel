@@ -232,44 +232,45 @@ PHP_METHOD(Leevel_Support_Type, ints) {
  */
 PHP_METHOD(Leevel_Support_Type, these) {
 
+	zval _4;
 	zend_bool _2;
-	zephir_fcall_cache_entry *_6 = NULL;
+	zephir_fcall_cache_entry *_7 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *value, value_sub, *types, types_sub, tmp, item, tmps, _0, _1, _3, *_4, _5$$6;
+	zval *value, value_sub, *types, types_sub, item, tmps, _0, _1, _3, *_5, _6$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
 	ZVAL_UNDEF(&types_sub);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&tmps);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_5$$6);
+	ZVAL_UNDEF(&_6$$6);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &value, &types);
 
 
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "string");
-	zephir_array_fast_append(&tmp, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "string");
-	ZEPHIR_CALL_SELF(&_1, "vars", NULL, 0, types, &_0);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "string");
+	ZEPHIR_CALL_SELF(&_0, "vars", NULL, 0, types, &_1);
 	zephir_check_call_status();
-	_2 = !zephir_is_true(&_1);
+	_2 = !zephir_is_true(&_0);
 	if (_2) {
-		ZEPHIR_CALL_SELF(&_3, "arr", NULL, 0, types, &tmp);
+		ZEPHIR_INIT_VAR(&_4);
+		zephir_create_array(&_4, 1, 0 TSRMLS_CC);
+		ZEPHIR_INIT_NVAR(&_1);
+		ZVAL_STRING(&_1, "string");
+		zephir_array_fast_append(&_4, &_1);
+		ZEPHIR_CALL_SELF(&_3, "arr", NULL, 0, types, &_4);
 		zephir_check_call_status();
 		_2 = !zephir_is_true(&_3);
 	}
 	if (_2) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The parameter must be string or an array of string elements.", "leevel/support/type.zep", 172);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The parameter must be string or an array of string elements.", "leevel/support/type.zep", 171);
 		return;
 	}
 	if (Z_TYPE_P(types) == IS_STRING) {
@@ -279,14 +280,14 @@ PHP_METHOD(Leevel_Support_Type, these) {
 	} else {
 		ZEPHIR_CPY_WRT(&tmps, types);
 	}
-	zephir_is_iterable(&tmps, 0, "leevel/support/type.zep", 188);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmps), _4)
+	zephir_is_iterable(&tmps, 0, "leevel/support/type.zep", 187);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmps), _5)
 	{
 		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _4);
-		ZEPHIR_CALL_SELF(&_5$$6, "vars", &_6, 0, value, &item);
+		ZVAL_COPY(&item, _5);
+		ZEPHIR_CALL_SELF(&_6$$6, "vars", &_7, 0, value, &item);
 		zephir_check_call_status();
-		if (zephir_is_true(&_5$$6)) {
+		if (zephir_is_true(&_6$$6)) {
 			RETURN_MM_BOOL(1);
 		}
 	} ZEND_HASH_FOREACH_END();
@@ -327,13 +328,13 @@ PHP_METHOD(Leevel_Support_Type, arr) {
 	if (!(Z_TYPE_P(&arr) == IS_ARRAY)) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_is_iterable(&arr, 0, "leevel/support/type.zep", 223);
+	zephir_is_iterable(&arr, 0, "leevel/support/type.zep", 222);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arr), _0)
 	{
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _0);
 		ret = 0;
-		zephir_is_iterable(&types, 0, "leevel/support/type.zep", 218);
+		zephir_is_iterable(&types, 0, "leevel/support/type.zep", 217);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&types), _1$$4)
 		{
 			ZEPHIR_INIT_NVAR(&item);

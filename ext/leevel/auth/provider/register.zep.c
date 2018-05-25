@@ -88,24 +88,22 @@ PHP_METHOD(Leevel_Auth_Provider_Register, register) {
  */
 PHP_METHOD(Leevel_Auth_Provider_Register, providers) {
 
+	zval _1;
 	zval _0;
-	zval tmp, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Auth\\Manager");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("auths"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("auths"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -114,8 +112,8 @@ PHP_METHOD(Leevel_Auth_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Auth\\IAuth");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("auth"), &_0, PH_COPY | PH_SEPARATE);
-	RETURN_CCTOR(&tmp);
+	zephir_array_update_string(return_value, SL("auth"), &_0, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
 
 }
 

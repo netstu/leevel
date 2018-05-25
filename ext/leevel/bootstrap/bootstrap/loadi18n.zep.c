@@ -139,24 +139,24 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, handle) {
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 
 	zval result;
-	zephir_fcall_cache_entry *_4 = NULL, *_7 = NULL, *_11 = NULL, *_12 = NULL;
+	zephir_fcall_cache_entry *_5 = NULL, *_8 = NULL, *_12 = NULL, *_13 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, extend, tmp, path, item, _0, _1, *_2, _3$$3, _6$$3, _5$$4, _8$$5, _9$$5, _10$$5;
+	zval *project, project_sub, extend, path, item, _0, _1, _2, *_3, _4$$3, _7$$3, _6$$4, _9$$5, _10$$5, _11$$5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
 	ZVAL_UNDEF(&extend);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_6$$3);
-	ZVAL_UNDEF(&_5$$4);
-	ZVAL_UNDEF(&_8$$5);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_7$$3);
+	ZVAL_UNDEF(&_6$$4);
 	ZVAL_UNDEF(&_9$$5);
 	ZVAL_UNDEF(&_10$$5);
+	ZVAL_UNDEF(&_11$$5);
 	ZVAL_UNDEF(&result);
 
 	ZEPHIR_MM_GROW();
@@ -166,46 +166,46 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	ZEPHIR_INIT_VAR(&tmp);
-	array_init(&tmp);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "option");
 	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "_composer.i18ns");
-	ZEPHIR_CALL_METHOD(&extend, &_0, "get", NULL, 0, &_1, &tmp);
+	array_init(&_1);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "_composer.i18ns");
+	ZEPHIR_CALL_METHOD(&extend, &_0, "get", NULL, 0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&path, project, "path", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&extend, 0, "leevel/bootstrap/bootstrap/loadi18n.zep", 90);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&extend), _2)
+	zephir_is_iterable(&extend, 0, "leevel/bootstrap/bootstrap/loadi18n.zep", 89);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&extend), _3)
 	{
 		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _2);
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_file", &_4, 27, &item);
+		ZVAL_COPY(&item, _3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "is_file", &_5, 27, &item);
 		zephir_check_call_status();
-		if (!(zephir_is_true(&_3$$3))) {
-			ZEPHIR_INIT_LNVAR(_5$$4);
-			ZEPHIR_CONCAT_VSV(&_5$$4, &path, "/", &item);
-			ZEPHIR_CPY_WRT(&item, &_5$$4);
+		if (!(zephir_is_true(&_4$$3))) {
+			ZEPHIR_INIT_LNVAR(_6$$4);
+			ZEPHIR_CONCAT_VSV(&_6$$4, &path, "/", &item);
+			ZEPHIR_CPY_WRT(&item, &_6$$4);
 		}
-		ZEPHIR_CALL_FUNCTION(&_6$$3, "is_dir", &_7, 28, &item);
+		ZEPHIR_CALL_FUNCTION(&_7$$3, "is_dir", &_8, 28, &item);
 		zephir_check_call_status();
-		if (!(zephir_is_true(&_6$$3))) {
-			ZEPHIR_INIT_NVAR(&_8$$5);
-			object_init_ex(&_8$$5, zend_exception_get_default(TSRMLS_C));
+		if (!(zephir_is_true(&_7$$3))) {
 			ZEPHIR_INIT_NVAR(&_9$$5);
-			ZVAL_STRING(&_9$$5, "I18n dir %s is not exist.");
-			ZEPHIR_CALL_FUNCTION(&_10$$5, "sprintf", &_11, 1, &_9$$5, &item);
+			object_init_ex(&_9$$5, zend_exception_get_default(TSRMLS_C));
+			ZEPHIR_INIT_NVAR(&_10$$5);
+			ZVAL_STRING(&_10$$5, "I18n dir %s is not exist.");
+			ZEPHIR_CALL_FUNCTION(&_11$$5, "sprintf", &_12, 1, &_10$$5, &item);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", &_12, 22, &_10$$5);
+			ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", &_13, 22, &_11$$5);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_8$$5, "leevel/bootstrap/bootstrap/loadi18n.zep", 84 TSRMLS_CC);
+			zephir_throw_exception_debug(&_9$$5, "leevel/bootstrap/bootstrap/loadi18n.zep", 83 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
-		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/bootstrap/bootstrap/loadi18n.zep", 87);
+		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/bootstrap/bootstrap/loadi18n.zep", 86);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	RETURN_CTOR(&result);

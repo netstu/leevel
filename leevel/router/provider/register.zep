@@ -123,17 +123,16 @@ class Register extends Provider
      */
     protected function urlClosure(var project)
     {
-        var option, request, options = [], item, tmp;
+        var option, request, options = [], item;
         
         let option = project->make("option");
         let request = project->make("request");
-        let tmp = [
+
+        for item in [
             "html_suffix",
             "domain_top",
             "subdomain_on"
-        ];
-
-        for item in tmp {
+        ] {
             let options[item] = option->get(item);
         }
 

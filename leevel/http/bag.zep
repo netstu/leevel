@@ -405,9 +405,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 	 */
 	protected function filterValueWithCallable(var value, string filter)
 	{
-		let value = call_user_func(filter, value);
-
-		return value;
+		return call_user_func(filter, value);
 	}
 	
 	/**
@@ -421,9 +419,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 	 */
 	protected function filterValueWithFilterVar(var value, var filter, array options)
 	{
-		let value = filter_var(value, this->parseFilterId(filter), options);
-
-		return value;
+		return filter_var(value, this->parseFilterId(filter), options);
 	}
 	
 	/**
@@ -434,9 +430,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 	 */
 	protected function parseFilterId(var filter) -> int
 	{
-		let filter = this->isInt(filter) ? filter : filter_id(filter);
-
-		return filter;
+		return this->isInt(filter) ? filter : filter_id(filter);
 	}
 	
 	/**

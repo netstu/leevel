@@ -60,9 +60,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "auths" : [
                 "Leevel\\Auth\\Manager"
             ], 
@@ -71,8 +69,6 @@ class Register extends Provider
                 "Leevel\\Auth\\IAuth"
             ]
         ];
-        
-        return tmp;
     }
     
     /**

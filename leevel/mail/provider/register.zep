@@ -60,9 +60,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "mails" : [
                 "Leevel\\Mail\\Manager"
             ], 
@@ -71,8 +69,6 @@ class Register extends Provider
                 "Leevel\\Mail\\IMail"
             ]
         ];
-
-        return tmp;
     }
     
     /**

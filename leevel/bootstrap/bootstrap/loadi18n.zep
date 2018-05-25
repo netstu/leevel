@@ -68,11 +68,10 @@ class LoadI18n
      */
     protected function getExtend(<IProject> project)-> array
     {
-        var extend, tmp, path, item;
+        var extend, path, item;
         array result = [];
     
-        let tmp = [];
-        let extend = project->make("option")->get("_composer.i18ns", tmp);
+        let extend = project->make("option")->get("_composer.i18ns", []);
         let path = project->path();
 
         for item in extend {

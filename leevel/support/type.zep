@@ -169,10 +169,9 @@ class Type
      */
     public static function these(value, types) -> boolean
     {
-        var tmp, item, tmps;
+        var item, tmps;
     
-        let tmp = ["string"];
-        if ! (self::vars(types, "string")) && ! (self::arr(types, tmp)) {
+        if ! (self::vars(types, "string")) && ! (self::arr(types, ["string"])) {
             throw new InvalidArgumentException("The parameter must be string or an array of string elements.");
         }
 

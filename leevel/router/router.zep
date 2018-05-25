@@ -1046,10 +1046,6 @@ class Router implements IRouter, IMacro
      */
     protected function matchedVars() -> array
     {
-        var tmp;
-
-        let tmp = [];
-
-        return ! is_null(this->matchedData[self::VARS]) ? this->matchedData[self::VARS] : tmp;
+        return ! is_null(this->matchedData[self::VARS]) ? this->matchedData[self::VARS] : [];
     }
 }

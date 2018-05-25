@@ -248,9 +248,7 @@ class Dispatch implements IDispatch
 	 */
 	protected function escapeRegexCharacter(string txt) -> string
 	{
-		var tmp, tmp1;
-	
-		let tmp = [
+		let txt = str_replace([
 			"$", 
 			"/", 
 			"?", 
@@ -268,9 +266,7 @@ class Dispatch implements IDispatch
 			"}", 
 			"|", 
 			"\\"
-		];
-
-		let tmp1 = [
+		], [
 			"\\$", 
 			"\\/", 
 			"\\?", 
@@ -288,9 +284,7 @@ class Dispatch implements IDispatch
 			"\\}", 
 			"\\|", 
 			"\\\\\\\\"
-		];
-
-		let txt = str_replace(tmp, tmp1, txt);
+		], txt);
 
 		return txt;
 	}

@@ -64,20 +64,21 @@ PHP_METHOD(Leevel_Event_Observer, __construct) {
  */
 PHP_METHOD(Leevel_Event_Observer, update) {
 
+	zval _0, _6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *subject, subject_sub, method, tmp, tmp1, _4, _5, _0$$3, _1$$3, _2$$3, _3$$3;
+	zval *subject, subject_sub, method, _5, _7, _1$$3, _2$$3, _3$$3, _4$$3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&subject_sub);
 	ZVAL_UNDEF(&method);
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&tmp1);
-	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &subject);
@@ -91,32 +92,32 @@ PHP_METHOD(Leevel_Event_Observer, update) {
 		ZEPHIR_INIT_NVAR(&method);
 		ZVAL_STRING(&method, "run");
 	}
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp, this_ptr);
-	zephir_array_fast_append(&tmp, &method);
-	if (!(zephir_is_callable(&tmp TSRMLS_CC))) {
-		ZEPHIR_INIT_VAR(&_0$$3);
-		object_init_ex(&_0$$3, spl_ce_RuntimeException);
+	ZEPHIR_INIT_VAR(&_0);
+	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_0, this_ptr);
+	zephir_array_fast_append(&_0, &method);
+	if (!(zephir_is_callable(&_0 TSRMLS_CC))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
-		zephir_get_class(&_1$$3, this_ptr, 0 TSRMLS_CC);
+		object_init_ex(&_1$$3, spl_ce_RuntimeException);
 		ZEPHIR_INIT_VAR(&_2$$3);
-		ZVAL_STRING(&_2$$3, "Observer %s must has run method");
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 1, &_2$$3, &_1$$3);
+		zephir_get_class(&_2$$3, this_ptr, 0 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&_3$$3);
+		ZVAL_STRING(&_3$$3, "Observer %s must has run method");
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "sprintf", NULL, 1, &_3$$3, &_2$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_3$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "leevel/event/observer.zep", 62 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/event/observer.zep", 61 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_INIT_VAR(&tmp1);
-	zephir_create_array(&tmp1, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp1, this_ptr);
-	zephir_array_fast_append(&tmp1, &method);
-	zephir_read_property(&_4, subject, SL("container"), PH_NOISY_CC | PH_READONLY);
-	zephir_read_property(&_5, subject, SL("notifyArgs"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, &_4, "call", NULL, 0, &tmp1, &_5);
+	zephir_read_property(&_5, subject, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_6);
+	zephir_create_array(&_6, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_6, this_ptr);
+	zephir_array_fast_append(&_6, &method);
+	zephir_read_property(&_7, subject, SL("notifyArgs"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(NULL, &_5, "call", NULL, 0, &_6, &_7);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

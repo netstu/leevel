@@ -53,16 +53,14 @@ class Observer implements SplObserver
      */
     public function update(<SplSubject> subject) -> void
     {
-        var method, tmp, tmp1;
+        var method;
     
         let method = method_exists(this, "handle") ? "handle" : "run";
-        let tmp = [this, method];
 
-        if ! (is_callable(tmp)) {
+        if ! (is_callable([this, method])) {
             throw new RuntimeException(sprintf("Observer %s must has run method", get_class(this)));
         }
 
-        let tmp1 = [this, method];
-        subject->container->call(tmp1, subject->notifyArgs);
+        subject->container->call([this, method], subject->notifyArgs);
     }
 }

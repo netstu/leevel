@@ -910,24 +910,20 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithCallable) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval filter;
-	zval *value = NULL, value_sub, *filter_param = NULL, _0;
+	zval *value, value_sub, *filter_param = NULL;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&filter);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &value, &filter_param);
 
-	ZEPHIR_SEPARATE_PARAM(value);
 	zephir_get_strval(&filter, filter_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "call_user_func", NULL, 8, &filter, value);
+	ZEPHIR_RETURN_CALL_FUNCTION("call_user_func", NULL, 8, &filter, value);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(value, &_0);
-	RETVAL_ZVAL(value, 1, 0);
 	RETURN_MM();
 
 }
@@ -945,28 +941,24 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFilterVar) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval options;
-	zval *value = NULL, value_sub, *filter, filter_sub, *options_param = NULL, _0, _1;
+	zval *value, value_sub, *filter, filter_sub, *options_param = NULL, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
 	ZVAL_UNDEF(&filter_sub);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&options);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 3, 0, &value, &filter, &options_param);
 
-	ZEPHIR_SEPARATE_PARAM(value);
 	zephir_get_arrval(&options, options_param);
 
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parsefilterid", NULL, 0, filter);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "filter_var", NULL, 9, value, &_0, &options);
+	ZEPHIR_RETURN_CALL_FUNCTION("filter_var", NULL, 9, value, &_0, &options);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(value, &_1);
-	RETVAL_ZVAL(value, 1, 0);
 	RETURN_MM();
 
 }
@@ -980,7 +972,7 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFilterVar) {
 PHP_METHOD(Leevel_Http_Bag, parseFilterId) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *filter = NULL, filter_sub, _0, _1;
+	zval *filter, filter_sub, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&filter_sub);
@@ -990,7 +982,6 @@ PHP_METHOD(Leevel_Http_Bag, parseFilterId) {
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &filter);
 
-	ZEPHIR_SEPARATE_PARAM(filter);
 
 
 	ZEPHIR_INIT_VAR(&_0);
@@ -1002,9 +993,7 @@ PHP_METHOD(Leevel_Http_Bag, parseFilterId) {
 		ZEPHIR_CALL_FUNCTION(&_0, "filter_id", NULL, 10, filter);
 		zephir_check_call_status();
 	}
-	ZEPHIR_CPY_WRT(filter, &_0);
-	RETVAL_ZVAL(filter, 1, 0);
-	RETURN_MM();
+	RETURN_CCTOR(&_0);
 
 }
 
@@ -1118,7 +1107,7 @@ PHP_METHOD(Leevel_Http_Bag, getPartData) {
 	ZEPHIR_CPY_WRT(&defaults, value);
 	ZEPHIR_INIT_VAR(&parts);
 	zephir_fast_explode_str(&parts, SL("."), key, LONG_MAX TSRMLS_CC);
-	zephir_is_iterable(&parts, 0, "leevel/http/bag.zep", 500);
+	zephir_is_iterable(&parts, 0, "leevel/http/bag.zep", 494);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&parts), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1130,7 +1119,7 @@ PHP_METHOD(Leevel_Http_Bag, getPartData) {
 		if (_1$$4) {
 			RETURN_CCTOR(&defaults);
 		}
-		zephir_array_fetch(&_2$$4, value, &item, PH_NOISY | PH_READONLY, "leevel/http/bag.zep", 497 TSRMLS_CC);
+		zephir_array_fetch(&_2$$4, value, &item, PH_NOISY | PH_READONLY, "leevel/http/bag.zep", 491 TSRMLS_CC);
 		ZEPHIR_CPY_WRT(value, &_2$$4);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
