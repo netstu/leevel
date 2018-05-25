@@ -268,7 +268,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 	 */
 	protected function parseKeyFilter(string key, array filter) -> array
 	{
-		var tmp, tmpArr, tmpKey;
+		var tmp, tmpKey;
 	
 		if strpos(key, "|") !== false {
 			let tmp = explode("|", key);
@@ -277,9 +277,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 			let filter = array_merge(tmp, filter);
 		}
 
-		let tmpArr = [key, filter];
-
-		return tmpArr;
+		return [key, filter];
 	}
 	
 	/**
@@ -290,11 +288,10 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
 	 */
 	protected function parseFilter(var filter = null) -> array
 	{
-		var tmp, data;
+		var data;
 
 		if typeof filter === "null" {
-			let tmp = [];
-			return tmp;
+			return [];
 		}
 
 		if typeof filter === "array" {

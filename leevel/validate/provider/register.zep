@@ -70,15 +70,11 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
         	"validate" : [
         		"Leevel\\Validate\\Validate", 
         		"Leevel\\Validate\\IValidate"
         	]
         ];
-
-        return tmp;
     }
 }

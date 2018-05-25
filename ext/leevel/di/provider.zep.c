@@ -135,16 +135,11 @@ PHP_METHOD(Leevel_Di_Provider, registerAlias) {
  */
 PHP_METHOD(Leevel_Di_Provider, providers) {
 
-	zval tmparr;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmparr);
 
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&tmparr);
-	array_init(&tmparr);
-	RETURN_CCTOR(&tmparr);
+	array_init(return_value);
+	return;
 
 }
 
@@ -219,7 +214,7 @@ PHP_METHOD(Leevel_Di_Provider, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/provider.zep", 123 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/provider.zep", 120 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

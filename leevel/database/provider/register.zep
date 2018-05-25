@@ -60,19 +60,15 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
-        	"databases" : [
-        		"Leevel\\Database\\Manager"
-        	], 
-        	"database" : [
-        		"Leevel\\Database\\Database", 
-        		"Leevel\\Database\\IDatabase"
-        	]
+        return [
+            "databases" : [
+                "Leevel\\Database\\Manager"
+            ], 
+            "database" : [
+                "Leevel\\Database\\Database", 
+                "Leevel\\Database\\IDatabase"
+            ]
         ];
-        
-        return tmp;
     }
     
     /**

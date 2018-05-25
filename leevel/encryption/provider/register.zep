@@ -81,15 +81,11 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
-        	"encryption" : [
-        		"Leevel\\Encryption\\Encryption", 
-        		"Leevel\\Encryption\\IEncryption"
-        	]
+        return [
+            "encryption" : [
+                "Leevel\\Encryption\\Encryption", 
+                "Leevel\\Encryption\\IEncryption"
+            ]
         ];
-
-        return tmp;
     }
 }

@@ -51,19 +51,20 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Bootstrap_RegisterRuntime) {
  */
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 
+	zval _1, _3, _4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, tmp1, tmp2, tmp3, _0, _1, _2, _3$$3, _4$$3;
+	zval *project, project_sub, _0, _2, _5, _6$$3, _7$$3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
-	ZVAL_UNDEF(&tmp1);
-	ZVAL_UNDEF(&tmp2);
-	ZVAL_UNDEF(&tmp3);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6$$3);
+	ZVAL_UNDEF(&_7$$3);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
@@ -74,38 +75,38 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 	ZVAL_LONG(&_0, 32767);
 	ZEPHIR_CALL_FUNCTION(NULL, "error_reporting", NULL, 63, &_0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp1);
-	zephir_create_array(&tmp1, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp1, this_ptr);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "setErrorHandle");
-	zephir_array_fast_append(&tmp1, &_1);
-	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 64, &tmp1);
+	zephir_create_array(&_1, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_1, this_ptr);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "setErrorHandle");
+	zephir_array_fast_append(&_1, &_2);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 64, &_1);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp2);
-	zephir_create_array(&tmp2, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp2, this_ptr);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "setExceptionHandler");
-	zephir_array_fast_append(&tmp2, &_1);
-	ZEPHIR_CALL_FUNCTION(NULL, "set_exception_handler", NULL, 65, &tmp2);
+	ZEPHIR_INIT_VAR(&_3);
+	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_3, this_ptr);
+	ZEPHIR_INIT_NVAR(&_2);
+	ZVAL_STRING(&_2, "setExceptionHandler");
+	zephir_array_fast_append(&_3, &_2);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_exception_handler", NULL, 65, &_3);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp3);
-	zephir_create_array(&tmp3, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp3, this_ptr);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "registerShutdownFunction");
-	zephir_array_fast_append(&tmp3, &_1);
-	ZEPHIR_CALL_FUNCTION(NULL, "register_shutdown_function", NULL, 66, &tmp3);
+	ZEPHIR_INIT_VAR(&_4);
+	zephir_create_array(&_4, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_4, this_ptr);
+	ZEPHIR_INIT_NVAR(&_2);
+	ZVAL_STRING(&_2, "registerShutdownFunction");
+	zephir_array_fast_append(&_4, &_2);
+	ZEPHIR_CALL_FUNCTION(NULL, "register_shutdown_function", NULL, 66, &_4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_2, project, "environment", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_5, project, "environment", NULL, 0);
 	zephir_check_call_status();
-	if (ZEPHIR_IS_STRING_IDENTICAL(&_2, "production")) {
-		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "display_errors");
-		ZEPHIR_INIT_VAR(&_4$$3);
-		ZVAL_STRING(&_4$$3, "Off");
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_3$$3, &_4$$3);
+	if (ZEPHIR_IS_STRING_IDENTICAL(&_5, "production")) {
+		ZEPHIR_INIT_VAR(&_6$$3);
+		ZVAL_STRING(&_6$$3, "display_errors");
+		ZEPHIR_INIT_VAR(&_7$$3);
+		ZVAL_STRING(&_7$$3, "Off");
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_6$$3, &_7$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -169,7 +170,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setErrorHandle) {
 	ZVAL_LONG(&_3, code);
 	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 68, &description, &_2, &_3, file, line);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_1, "leevel/bootstrap/bootstrap/registerruntime.zep", 88 TSRMLS_CC);
+	zephir_throw_exception_debug(&_1, "leevel/bootstrap/bootstrap/registerruntime.zep", 83 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -197,7 +198,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, registerShutdownFunction)
 	zephir_check_call_status();
 	_0 = zephir_is_true(&error);
 	if (_0) {
-		zephir_array_fetch_string(&_1, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 102 TSRMLS_CC);
+		zephir_array_fetch_string(&_1, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 97 TSRMLS_CC);
 		_0 = !(ZEPHIR_IS_EMPTY(&_1));
 	}
 	if (_0) {
@@ -348,7 +349,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getruntime", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_2, this_ptr, SL("project"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_3, &_2, SL("request"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 154 TSRMLS_CC);
+	zephir_array_fetch_string(&_3, &_2, SL("request"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 149 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&_1, &_0, "render", NULL, 0, &_3, e);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_1, "send", NULL, 0);
@@ -396,10 +397,10 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, formatFatalException) {
 	}
 	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		zephir_array_fetch_string(&_1, &error, SL("message"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 166 TSRMLS_CC);
-		zephir_array_fetch_string(&_2, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 166 TSRMLS_CC);
-		zephir_array_fetch_string(&_3, &error, SL("file"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 166 TSRMLS_CC);
-		zephir_array_fetch_string(&_4, &error, SL("line"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 166 TSRMLS_CC);
+		zephir_array_fetch_string(&_1, &error, SL("message"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 161 TSRMLS_CC);
+		zephir_array_fetch_string(&_2, &error, SL("type"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 161 TSRMLS_CC);
+		zephir_array_fetch_string(&_3, &error, SL("file"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 161 TSRMLS_CC);
+		zephir_array_fetch_string(&_4, &error, SL("line"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 161 TSRMLS_CC);
 		ZVAL_LONG(&_5, 0);
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_2, &_5, &_3, &_4, traceOffset);
 		zephir_check_call_status();

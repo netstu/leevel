@@ -82,10 +82,7 @@ abstract class Provider
      */
     public static function providers() -> array
     {
-        var tmparr;
-    
-        let tmparr = [];
-        return tmparr;
+        return [];
     }
     
     /**

@@ -48,20 +48,15 @@ class RegisterRuntime
      */
     public function handle(<IProject> project)
     {
-        var tmp1, tmp2, tmp3;
-    
         let this->project = project;
 
         error_reporting(E_ALL);
+    
+        set_error_handler([this, "setErrorHandle"]);
 
-        let tmp1 = [this, "setErrorHandle"];
-        set_error_handler(tmp1);
+        set_exception_handler([this, "setExceptionHandler"]);
 
-        let tmp2 = [this, "setExceptionHandler"];
-        set_exception_handler(tmp2);
-
-        let tmp3 = [this, "registerShutdownFunction"];
-        register_shutdown_function(tmp3);
+        register_shutdown_function([this, "registerShutdownFunction"]);
 
         if project->environment() === "production" {
             ini_set("display_errors", "Off");

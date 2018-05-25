@@ -197,8 +197,6 @@ class FileResponse extends Response
      */
     public function setContentDisposition(string disposition, var filename = "")
     {
-        var tmp;
-    
         if this->checkTControl() {
             return this;
         }
@@ -207,12 +205,10 @@ class FileResponse extends Response
             let filename = this->file->getFilename();
         }
 
-        let tmp = [
-        	ResponseHeaderBag::DISPOSITION_ATTACHMENT, 
-        	ResponseHeaderBag::DISPOSITION_INLINE
-        ];
-        
-        if ! (in_array(disposition, tmp)) {
+        if ! (in_array(disposition, [
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT, 
+            ResponseHeaderBag::DISPOSITION_INLINE
+        ])) {
             throw new InvalidArgumentException("The disposition type is invalid.");
         }
 

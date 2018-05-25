@@ -70,15 +70,11 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
-        	"cookie" : [
-        		"Leevel\\Cookie\\Cookie", 
-        		"Leevel\\Cookie\\ICookie"
-        	]
+        return [
+            "cookie" : [
+                "Leevel\\Cookie\\Cookie", 
+                "Leevel\\Cookie\\ICookie"
+            ]
         ];
-        
-        return tmp;
     }
 }

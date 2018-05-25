@@ -52,19 +52,17 @@ class PathInfo implements IMatch
      */
     public function matche(<Router> router, <Request> request) -> array
     {
-        var pathInfo, tmp;
+        var pathInfo;
     
         let pathInfo = request->getPathInfo();
         let pathInfo = trim(pathInfo, "/");
 
         // 首页
         if ! (pathInfo) {
-            let tmp = [
+            return [
                 IRouter::CONTROLLER : IRouter::DEFAULT_HOME_CONTROLLER, 
                 IRouter::ACTION : IRouter::DEFAULT_HOME_ACTION
             ];
-
-            return tmp;
         }
 
         let pathInfo = "/" . pathInfo;

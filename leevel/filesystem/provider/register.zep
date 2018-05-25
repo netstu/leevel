@@ -67,9 +67,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "filesystems" : [
                 "Leevel\\Filesystem\\Manager"
             ], 
@@ -78,8 +76,6 @@ class Register extends Provider
                 "Leevel\\Filesystem\\IFilesystem"
             ]
         ];
-
-        return tmp;
     }
     
     /**

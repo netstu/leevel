@@ -70,15 +70,11 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
         	"event" : [
         		"Leevel\\Event\\Dispatch", 
         		"Leevel\\Event\\IDispatch"
         	]
         ];
-
-        return tmp;
     }
 }

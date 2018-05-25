@@ -95,36 +95,34 @@ PHP_METHOD(Leevel_Router_Provider_Register, register) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 
+	zval _1;
 	zval _0;
-	zval tmp, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 4, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 4, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Router\\Router");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("router"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("router"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Router\\Url");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("url"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("url"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Router\\Redirect");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("redirect"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("redirect"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -133,8 +131,8 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Router\\ResponseFactory");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("response"), &_0, PH_COPY | PH_SEPARATE);
-	RETURN_CCTOR(&tmp);
+	zephir_array_update_string(return_value, SL("response"), &_0, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
 
 }
 
@@ -289,7 +287,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "subdomain_on");
 	zephir_array_fast_append(&tmp, &_0);
-	zephir_is_iterable(&tmp, 0, "leevel/router/provider/register.zep", 144);
+	zephir_is_iterable(&tmp, 0, "leevel/router/provider/register.zep", 140);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);

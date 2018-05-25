@@ -131,7 +131,7 @@ class ApiResponse extends JsonResponse
      */
     public function unprocessableEntity(array errors = null, var message = null, var text = null)
     {
-        var tmp, tmpArr;
+        var tmpArr;
     
         if this->checkTControl() {
             return this;
@@ -145,12 +145,10 @@ class ApiResponse extends JsonResponse
         	let tmpArr = [];
         }
 
-        let tmp = [
-        	"message" : this->parseErrorMessage(message), 
-        	"errors" : tmpArr
-        ];
-
-        this->setData(tmp);
+        this->setData([
+            "message" : this->parseErrorMessage(message), 
+            "errors" : tmpArr
+        ]);
     }
     
     /**
@@ -272,13 +270,9 @@ class ApiResponse extends JsonResponse
      */
     protected function normalizeErrorMessage(var message = null, var text = null)
     {
-        var tmp;
-    
-        let tmp = [
-        	"message" : this->parseErrorMessage(message)
-        ];
-
-        return this->setData(tmp);
+        return this->setData([
+            "message" : this->parseErrorMessage(message)
+        ]);
     }
     
     /**

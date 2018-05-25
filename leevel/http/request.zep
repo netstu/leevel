@@ -234,19 +234,17 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      */
     public static function normalizeRequestFromContent(<Request> request) -> <Request>
     {
-        var tmp, data, contentType, method;
+        var data, contentType, method;
     
-        let tmp = [
-        	self::METHOD_PUT, 
-        	self::METHOD_DELETE, 
-        	self::METHOD_PATCH
-        ];
-
         let contentType = request->headers->get("CONTENT_TYPE");
         let method = strtoupper(request->server->get("REQUEST_METHOD", self::METHOD_GET));
 
         if contentType && 0 === strpos(contentType, "application/x-www-form-urlencoded") && 
-        	in_array(method, tmp) {
+        	in_array(method, [
+            self::METHOD_PUT, 
+            self::METHOD_DELETE, 
+            self::METHOD_PATCH
+        ]) {
             parse_str(request->getContent(), data);
             let request->request = new Bag(data);
         }
@@ -798,7 +796,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      */
     public function isMobile() -> boolean
     {
-        var useAgent, allHttp, tmp;
+        var useAgent, allHttp;
     
         let useAgent = this->headers->get("USER_AGENT");
         let allHttp = this->server->get("ALL_HTTP");
@@ -820,96 +818,94 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
             return true;
         }
 
-        let tmp = [
-        	"w3c ", 
-        	"acs-", 
-        	"alav", 
-        	"alca", 
-        	"amoi", 
-        	"audi", 
-        	"avan", 
-        	"benq", 
-        	"bird", 
-        	"blac", 
-        	"blaz", 
-        	"brew", 
-        	"cell", 
-        	"cldc", 
-        	"cmd-", 
-        	"dang", 
-        	"doco", 
-        	"eric", 
-        	"hipt", 
-        	"inno", 
-        	"ipaq", 
-        	"java", 
-        	"jigs", 
-        	"kddi", 
-        	"keji", 
-        	"leno", 
-        	"lg-c", 
-        	"lg-d", 
-        	"lg-g", 
-        	"lge-", 
-        	"maui", 
-        	"maxo", 
-        	"midp", 
-        	"mits", 
-        	"mmef", 
-        	"mobi", 
-        	"mot-", 
-        	"moto", 
-        	"mwbp", 
-        	"nec-", 
-        	"newt", 
-        	"noki", 
-        	"oper", 
-        	"palm", 
-        	"pana", 
-        	"pant", 
-        	"phil", 
-        	"play", 
-        	"port", 
-        	"prox", 
-        	"qwap", 
-        	"sage", 
-        	"sams", 
-        	"sany", 
-        	"sch-", 
-        	"sec-", 
-        	"send", 
-        	"seri", 
-        	"sgh-", 
-        	"shar", 
-        	"sie-", 
-        	"siem", 
-        	"smal", 
-        	"smar", 
-        	"sony", 
-        	"sph-", 
-        	"symb", 
-        	"t-mo", 
-        	"teli", 
-        	"tim-", 
-        	"tosh", 
-        	"tsm-", 
-        	"upg1", 
-        	"upsi", 
-        	"vk-v", 
-        	"voda", 
-        	"wap-", 
-        	"wapa", 
-        	"wapi", 
-        	"wapp", 
-        	"wapr", 
-        	"webc", 
-        	"winw", 
-        	"winw", 
-        	"xda", 
-        	"xda-"
-        ];
-
-        if in_array(strtolower(substr(useAgent, 0, 4)), tmp) {
+        if in_array(strtolower(substr(useAgent, 0, 4)), [
+            "w3c ", 
+            "acs-", 
+            "alav", 
+            "alca", 
+            "amoi", 
+            "audi", 
+            "avan", 
+            "benq", 
+            "bird", 
+            "blac", 
+            "blaz", 
+            "brew", 
+            "cell", 
+            "cldc", 
+            "cmd-", 
+            "dang", 
+            "doco", 
+            "eric", 
+            "hipt", 
+            "inno", 
+            "ipaq", 
+            "java", 
+            "jigs", 
+            "kddi", 
+            "keji", 
+            "leno", 
+            "lg-c", 
+            "lg-d", 
+            "lg-g", 
+            "lge-", 
+            "maui", 
+            "maxo", 
+            "midp", 
+            "mits", 
+            "mmef", 
+            "mobi", 
+            "mot-", 
+            "moto", 
+            "mwbp", 
+            "nec-", 
+            "newt", 
+            "noki", 
+            "oper", 
+            "palm", 
+            "pana", 
+            "pant", 
+            "phil", 
+            "play", 
+            "port", 
+            "prox", 
+            "qwap", 
+            "sage", 
+            "sams", 
+            "sany", 
+            "sch-", 
+            "sec-", 
+            "send", 
+            "seri", 
+            "sgh-", 
+            "shar", 
+            "sie-", 
+            "siem", 
+            "smal", 
+            "smar", 
+            "sony", 
+            "sph-", 
+            "symb", 
+            "t-mo", 
+            "teli", 
+            "tim-", 
+            "tosh", 
+            "tsm-", 
+            "upg1", 
+            "upsi", 
+            "vk-v", 
+            "voda", 
+            "wap-", 
+            "wapa", 
+            "wapi", 
+            "wapp", 
+            "wapr", 
+            "webc", 
+            "winw", 
+            "winw", 
+            "xda", 
+            "xda-"
+        ]) {
             return true;
         }
 
@@ -1275,11 +1271,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      */
     public function isSecure() -> boolean
     {
-        var tmp;
-    
-        let tmp = ["1", "on"];
-
-        if in_array(this->server->get("HTTPS"), tmp) {
+        if in_array(this->server->get("HTTPS"), ["1", "on"]) {
             return true;
         } elseif this->server->get("SERVER_PORT") == "443" {
             return true;

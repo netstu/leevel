@@ -67,17 +67,13 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "throttler" : [
                 "Leevel\\Throttler\\Throttler", 
                 "Leevel\\Throttler\\IThrottler"
             ], 
             "Leevel\\Throttler\\Middleware\\Throttler"
         ];
-
-        return tmp;
     }
     
     /**

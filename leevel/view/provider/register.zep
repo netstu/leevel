@@ -67,9 +67,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "view.views" : [
                 "Leevel\\View\\Manager"
             ], 
@@ -87,8 +85,6 @@ class Register extends Provider
             ], 
             "view.twig.parser"
         ];
-
-        return tmp;
     }
     
     /**
@@ -197,14 +193,10 @@ class Register extends Provider
      */
     protected function viewTwigParserClosure(var project)
     {
-        var tmp;
-    
-        let tmp = [
+        return new Twig_Environment(new Twig_Loader_Filesystem(), [
             "auto_reload" : true, 
             "debug" : project->development(), 
             "cache" : project->pathApplicationCache("theme") . "/" . project->make("request")->app()
-        ];
-
-        return new Twig_Environment(new Twig_Loader_Filesystem(), tmp);
+        ]);
     }
 }

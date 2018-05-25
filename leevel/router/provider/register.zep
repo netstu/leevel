@@ -67,9 +67,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
             "router" : [
                 "Leevel\\Router\\Router"
             ],
@@ -84,8 +82,6 @@ class Register extends Provider
                 "Leevel\\Router\\ResponseFactory"
             ]
         ];
-
-        return tmp;
     }
 
     /**

@@ -95,24 +95,22 @@ PHP_METHOD(Leevel_View_Provider_Register, register) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, providers) {
 
+	zval _1;
 	zval _0;
-	zval tmp, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 5, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 5, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\View\\Manager");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("view.views"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("view.views"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -121,7 +119,7 @@ PHP_METHOD(Leevel_View_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\View\\IView");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("view.view"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("view.view"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -130,7 +128,7 @@ PHP_METHOD(Leevel_View_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\View\\ICompiler");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("view.compiler"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("view.compiler"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -139,11 +137,11 @@ PHP_METHOD(Leevel_View_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\View\\IParser");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tmp, SL("view.parser"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("view.parser"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "view.twig.parser");
-	zephir_array_fast_append(&tmp, &_1);
-	RETURN_CCTOR(&tmp);
+	zephir_array_fast_append(return_value, &_1);
+	RETURN_MM();
 
 }
 
@@ -479,59 +477,61 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParser) {
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewTwigParserClosure) {
 
-	zend_class_entry *_5 = NULL, *_6 = NULL;
+	zval _3;
+	zend_class_entry *_0 = NULL, *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, __$true, tmp, _0, _1, _2, _3, _4;
+	zval *project, project_sub, __$true, _1, _4, _5, _6, _7, _8;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
 	ZVAL_BOOL(&__$true, 1);
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &project);
 
 
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 3, 0 TSRMLS_CC);
-	zephir_array_update_string(&tmp, SL("auto_reload"), &__$true, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(&_0, project, "development", NULL, 0);
-	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("debug"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "theme");
-	ZEPHIR_CALL_METHOD(&_0, project, "pathapplicationcache", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(&_2, project, "make", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_3, &_2, "app", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_4);
-	ZEPHIR_CONCAT_VSV(&_4, &_0, "/", &_3);
-	zephir_array_update_string(&tmp, SL("cache"), &_4, PH_COPY | PH_SEPARATE);
-	if (!_5) {
-	_5 = zephir_fetch_class_str_ex(SL("Twig_Environment"), ZEND_FETCH_CLASS_AUTO);
+	if (!_0) {
+	_0 = zephir_fetch_class_str_ex(SL("Twig_Environment"), ZEND_FETCH_CLASS_AUTO);
 	}
-	object_init_ex(return_value, _5);
+	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_NVAR(&_1);
-		if (!_6) {
-		_6 = zephir_fetch_class_str_ex(SL("Twig_Loader_Filesystem"), ZEND_FETCH_CLASS_AUTO);
+		ZEPHIR_INIT_VAR(&_1);
+		if (!_2) {
+		_2 = zephir_fetch_class_str_ex(SL("Twig_Loader_Filesystem"), ZEND_FETCH_CLASS_AUTO);
 		}
-		object_init_ex(&_1, _6);
+		object_init_ex(&_1, _2);
 		if (zephir_has_constructor(&_1 TSRMLS_CC)) {
 			ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0);
 			zephir_check_call_status();
 		}
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &tmp);
+		ZEPHIR_INIT_VAR(&_3);
+		zephir_create_array(&_3, 3, 0 TSRMLS_CC);
+		zephir_array_update_string(&_3, SL("auto_reload"), &__$true, PH_COPY | PH_SEPARATE);
+		ZEPHIR_CALL_METHOD(&_4, project, "development", NULL, 0);
+		zephir_check_call_status();
+		zephir_array_update_string(&_3, SL("debug"), &_4, PH_COPY | PH_SEPARATE);
+		ZEPHIR_INIT_VAR(&_5);
+		ZVAL_STRING(&_5, "theme");
+		ZEPHIR_CALL_METHOD(&_4, project, "pathapplicationcache", NULL, 0, &_5);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(&_5);
+		ZVAL_STRING(&_5, "request");
+		ZEPHIR_CALL_METHOD(&_6, project, "make", NULL, 0, &_5);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(&_7, &_6, "app", NULL, 0);
+		zephir_check_call_status();
+		ZEPHIR_INIT_VAR(&_8);
+		ZEPHIR_CONCAT_VSV(&_8, &_4, "/", &_7);
+		zephir_array_update_string(&_3, SL("cache"), &_8, PH_COPY | PH_SEPARATE);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_3);
 		zephir_check_call_status();
 	}
 	RETURN_MM();

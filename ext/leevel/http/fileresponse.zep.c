@@ -454,23 +454,24 @@ PHP_METHOD(Leevel_Http_FileResponse, getContent) {
  */
 PHP_METHOD(Leevel_Http_FileResponse, setContentDisposition) {
 
+	zval _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *disposition_param = NULL, *filename = NULL, filename_sub, tmp, _0, _2, _3, _4, _5, _6, _7, _8, _1$$4;
+	zval *disposition_param = NULL, *filename = NULL, filename_sub, _0, _3, _4, _5, _6, _7, _8, _9, _1$$4;
 	zval disposition;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&disposition);
 	ZVAL_UNDEF(&filename_sub);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
 	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_9);
 	ZVAL_UNDEF(&_1$$4);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &disposition_param, &filename);
@@ -495,34 +496,34 @@ PHP_METHOD(Leevel_Http_FileResponse, setContentDisposition) {
 		ZEPHIR_CALL_METHOD(filename, &_1$$4, "getfilename", NULL, 0);
 		zephir_check_call_status();
 	}
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "attachment");
-	zephir_array_fast_append(&tmp, &_2);
-	ZEPHIR_INIT_NVAR(&_2);
-	ZVAL_STRING(&_2, "inline");
-	zephir_array_fast_append(&tmp, &_2);
-	if (!(zephir_fast_in_array(&disposition, &tmp TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "leevel/http/fileresponse.zep", 216);
+	zephir_create_array(&_2, 2, 0 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "attachment");
+	zephir_array_fast_append(&_2, &_3);
+	ZEPHIR_INIT_NVAR(&_3);
+	ZVAL_STRING(&_3, "inline");
+	zephir_array_fast_append(&_2, &_3);
+	if (!(zephir_fast_in_array(&disposition, &_2 TSRMLS_CC))) {
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The disposition type is invalid.", "leevel/http/fileresponse.zep", 212);
 		return;
 	}
-	zephir_read_property(&_3, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_2);
-	ZEPHIR_INIT_VAR(&_4);
-	zephir_basename(&_4, filename TSRMLS_CC);
+	zephir_read_property(&_4, this_ptr, SL("headers"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_NVAR(&_3);
 	ZEPHIR_INIT_VAR(&_5);
-	ZVAL_STRING(&_5, "\"");
+	zephir_basename(&_5, filename TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_6);
-	ZVAL_STRING(&_6, "\\\"");
-	zephir_fast_str_replace(&_2, &_5, &_6, &_4 TSRMLS_CC);
+	ZVAL_STRING(&_6, "\"");
 	ZEPHIR_INIT_VAR(&_7);
-	ZVAL_STRING(&_7, "%s; filename=\"%s\"");
-	ZEPHIR_CALL_FUNCTION(&_8, "sprintf", NULL, 1, &_7, &disposition, &_2);
+	ZVAL_STRING(&_7, "\\\"");
+	zephir_fast_str_replace(&_3, &_6, &_7, &_5 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_8);
+	ZVAL_STRING(&_8, "%s; filename=\"%s\"");
+	ZEPHIR_CALL_FUNCTION(&_9, "sprintf", NULL, 1, &_8, &disposition, &_3);
 	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_7);
-	ZVAL_STRING(&_7, "Content-Disposition");
-	ZEPHIR_CALL_METHOD(NULL, &_3, "set", NULL, 0, &_7, &_8);
+	ZEPHIR_INIT_NVAR(&_8);
+	ZVAL_STRING(&_8, "Content-Disposition");
+	ZEPHIR_CALL_METHOD(NULL, &_4, "set", NULL, 0, &_8, &_9);
 	zephir_check_call_status();
 	RETURN_THIS();
 

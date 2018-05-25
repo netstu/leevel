@@ -724,7 +724,7 @@ PHP_METHOD(Leevel_Router_Router, matchePath) {
 	zend_bool _14;
 	zephir_fcall_cache_entry *_21 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path = NULL, path_sub, result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams, tmp, _0, _1, _7, *_8, _12, _13, _15, _16, _26, _27, _2$$4, *_3$$4, _4$$5, _5$$5, _6$$5, _9$$6, _10$$7, _11$$7, _17$$8, _18$$8, _19$$8, _20$$9, _22$$11, _23$$12, _24$$13, _25$$13;
+	zval *path = NULL, path_sub, result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams, _0, _1, _7, *_8, _12, _13, _15, _16, _26, _27, _2$$4, *_3$$4, _4$$5, _5$$5, _6$$5, _9$$6, _10$$7, _11$$7, _17$$8, _18$$8, _19$$8, _20$$9, _22$$11, _23$$12, _24$$13, _25$$13;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&path_sub);
@@ -736,7 +736,6 @@ PHP_METHOD(Leevel_Router_Router, matchePath) {
 	ZVAL_UNDEF(&paths);
 	ZVAL_UNDEF(&params);
 	ZVAL_UNDEF(&tmpListPathsParams);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_7);
@@ -879,15 +878,14 @@ PHP_METHOD(Leevel_Router_Router, matchePath) {
 			zephir_array_update_string(&result, SL("_prefix"), &_24$$13, PH_COPY | PH_SEPARATE);
 		}
 	}
-	ZEPHIR_INIT_VAR(&tmp);
-	array_init(&tmp);
 	ZEPHIR_INIT_NVAR(&_12);
 	ZEPHIR_INIT_VAR(&_26);
 	if (zephir_array_isset_string(&result, SL("_params"))) {
 		ZEPHIR_OBS_NVAR(&_26);
-		zephir_array_fetch_string(&_26, &result, SL("_params"), PH_NOISY, "leevel/router/router.zep", 492 TSRMLS_CC);
+		zephir_array_fetch_string(&_26, &result, SL("_params"), PH_NOISY, "leevel/router/router.zep", 491 TSRMLS_CC);
 	} else {
-		ZEPHIR_CPY_WRT(&_26, &tmp);
+		ZEPHIR_INIT_NVAR(&_26);
+		array_init(&_26);
 	}
 	zephir_fast_array_merge(&_12, &_26, &params TSRMLS_CC);
 	zephir_array_update_string(&result, SL("_params"), &_12, PH_COPY | PH_SEPARATE);
@@ -994,7 +992,7 @@ PHP_METHOD(Leevel_Router_Router, callStaticMacro) {
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, leevel_router_router_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 534 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 533 TSRMLS_CC);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_2$$3, &args);
 		zephir_check_call_status();
 		RETURN_MM();
@@ -1007,7 +1005,7 @@ PHP_METHOD(Leevel_Router_Router, callStaticMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_5);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "leevel/router/router.zep", 537 TSRMLS_CC);
+	zephir_throw_exception_debug(&_3, "leevel/router/router.zep", 536 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1057,10 +1055,10 @@ PHP_METHOD(Leevel_Router_Router, callMacro) {
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, leevel_router_router_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_2$$3);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "leevel/router/router.zep", 553 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "leevel/router/router.zep", 552 TSRMLS_CC);
 		if (zephir_instance_of_ev(&_2$$3, zend_ce_closure TSRMLS_CC)) {
 			zephir_read_static_property_ce(&_3$$4, leevel_router_router_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 554 TSRMLS_CC);
+			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 553 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&_5$$4, &_4$$4, "bindto", NULL, 0, this_ptr);
 			zephir_check_call_status();
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_5$$4, &args);
@@ -1068,7 +1066,7 @@ PHP_METHOD(Leevel_Router_Router, callMacro) {
 			RETURN_MM();
 		} else {
 			zephir_read_static_property_ce(&_6$$5, leevel_router_router_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 556 TSRMLS_CC);
+			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "leevel/router/router.zep", 555 TSRMLS_CC);
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_7$$5, &args);
 			zephir_check_call_status();
 			RETURN_MM();
@@ -1082,7 +1080,7 @@ PHP_METHOD(Leevel_Router_Router, callMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 3, &_10);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_8, "leevel/router/router.zep", 560 TSRMLS_CC);
+	zephir_throw_exception_debug(&_8, "leevel/router/router.zep", 559 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1122,7 +1120,7 @@ PHP_METHOD(Leevel_Router_Router, normalizePrefix) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	zephir_is_iterable(&paths, 0, "leevel/router/router.zep", 585);
+	zephir_is_iterable(&paths, 0, "leevel/router/router.zep", 584);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&paths), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1152,7 +1150,7 @@ PHP_METHOD(Leevel_Router_Router, normalizePrefix) {
 			zephir_ucfirst(&_9$$5, &item);
 			ZEPHIR_CPY_WRT(&item, &_9$$5);
 		}
-		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/router/router.zep", 582);
+		zephir_array_append(&result, &item, PH_SEPARATE, "leevel/router/router.zep", 581);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	RETURN_CTOR(&result);
@@ -1199,7 +1197,7 @@ PHP_METHOD(Leevel_Router_Router, normalizePathsAndParams) {
 
 	zval _2$$4;
 	zend_long k = 0;
-	zval *data_param = NULL, paths, params, item, tmp, *_0, _1$$4;
+	zval *data_param = NULL, paths, params, item, *_0, _1$$4;
 	zval data;
 	zval *this_ptr = getThis();
 
@@ -1207,7 +1205,6 @@ PHP_METHOD(Leevel_Router_Router, normalizePathsAndParams) {
 	ZVAL_UNDEF(&paths);
 	ZVAL_UNDEF(&params);
 	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_1$$4);
 	ZVAL_UNDEF(&_2$$4);
 
@@ -1222,7 +1219,7 @@ PHP_METHOD(Leevel_Router_Router, normalizePathsAndParams) {
 	ZEPHIR_INIT_VAR(&params);
 	array_init(&params);
 	k = 0;
-	zephir_is_iterable(&data, 0, "leevel/router/router.zep", 622);
+	zephir_is_iterable(&data, 0, "leevel/router/router.zep", 621);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&data), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1235,15 +1232,14 @@ PHP_METHOD(Leevel_Router_Router, normalizePathsAndParams) {
 			zephir_array_update_zval(&params, &_2$$4, &item, PH_COPY | PH_SEPARATE);
 			k++;
 		} else {
-			zephir_array_append(&paths, &item, PH_SEPARATE, "leevel/router/router.zep", 618);
+			zephir_array_append(&paths, &item, PH_SEPARATE, "leevel/router/router.zep", 617);
 		}
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp, &paths);
-	zephir_array_fast_append(&tmp, &params);
-	RETURN_CCTOR(&tmp);
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(return_value, &paths);
+	zephir_array_fast_append(return_value, &params);
+	RETURN_MM();
 
 }
 
@@ -1576,7 +1572,7 @@ PHP_METHOD(Leevel_Router_Router, nodeNotFound) {
 	object_init_ex(&_1, spl_ce_InvalidArgumentException);
 	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 21, &message);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_1, "leevel/router/router.zep", 781 TSRMLS_CC);
+	zephir_throw_exception_debug(&_1, "leevel/router/router.zep", 778 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1685,7 +1681,7 @@ PHP_METHOD(Leevel_Router_Router, completeRequest) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Action");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_is_iterable(&_0, 0, "leevel/router/router.zep", 833);
+	zephir_is_iterable(&_0, 0, "leevel/router/router.zep", 830);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _2)
 	{
 		ZEPHIR_INIT_NVAR(&type);
@@ -1751,7 +1747,7 @@ PHP_METHOD(Leevel_Router_Router, pathinfoRestful) {
 		if (ZEPHIR_IS_STRING(&_2, "GET")) {
 			zephir_read_property(&_3$$4, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_VAR(&_4$$4);
-			zephir_array_fetch_string(&_4$$4, &_3$$4, SL("_params"), PH_NOISY, "leevel/router/router.zep", 850 TSRMLS_CC);
+			zephir_array_fetch_string(&_4$$4, &_3$$4, SL("_params"), PH_NOISY, "leevel/router/router.zep", 847 TSRMLS_CC);
 			if (!(ZEPHIR_IS_EMPTY(&_4$$4))) {
 				ZEPHIR_INIT_VAR(&_5$$5);
 				ZVAL_STRING(&_5$$5, "_a");
@@ -1798,7 +1794,7 @@ PHP_METHOD(Leevel_Router_Router, pathinfoRestful) {
  */
 PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 
-	zval app, controller, action, controllerClass, method, tmp, _0, _2, _3$$3, _4$$4, _5$$4, _6$$6, _7$$6, _8$$6;
+	zval app, controller, action, controllerClass, method, _0, _2, _3$$3, _4$$4, _5$$4, _6$$6, _7$$6, _8$$6;
 	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
@@ -1808,7 +1804,6 @@ PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 	ZVAL_UNDEF(&action);
 	ZVAL_UNDEF(&controllerClass);
 	ZVAL_UNDEF(&method);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3$$3);
@@ -1868,11 +1863,10 @@ PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
 	if (!((zephir_method_exists(&controller, &method TSRMLS_CC)  == SUCCESS))) {
 		RETURN_MM_BOOL(0);
 	}
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp, &controller);
-	zephir_array_fast_append(&tmp, &method);
-	RETURN_CCTOR(&tmp);
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(return_value, &controller);
+	zephir_array_fast_append(return_value, &method);
+	RETURN_MM();
 
 }
 
@@ -1884,11 +1878,10 @@ PHP_METHOD(Leevel_Router_Router, parseDefaultBind) {
  */
 PHP_METHOD(Leevel_Router_Router, parseMiddleware) {
 
-	zval tmp, matchedMiddlewares, _0, _1, _2, _3, _4, _5, _6;
+	zval matchedMiddlewares, _0, _1, _2, _3, _4, _5, _6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&matchedMiddlewares);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
@@ -1902,21 +1895,20 @@ PHP_METHOD(Leevel_Router_Router, parseMiddleware) {
 
 	ZEPHIR_CALL_METHOD(&matchedMiddlewares, this_ptr, "matchedmiddlewares", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("globalMiddlewares"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_2, &_1, SL("handle"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 924 TSRMLS_CC);
-	zephir_array_fetch_string(&_3, &matchedMiddlewares, SL("handle"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 924 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, &_1, SL("handle"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 922 TSRMLS_CC);
+	zephir_array_fetch_string(&_3, &matchedMiddlewares, SL("handle"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 922 TSRMLS_CC);
 	zephir_fast_array_merge(&_0, &_2, &_3 TSRMLS_CC);
-	zephir_array_update_string(&tmp, SL("handle"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("handle"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_read_property(&_4, this_ptr, SL("globalMiddlewares"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_5, &_4, SL("terminate"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 925 TSRMLS_CC);
-	zephir_array_fetch_string(&_6, &matchedMiddlewares, SL("terminate"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 925 TSRMLS_CC);
+	zephir_array_fetch_string(&_5, &_4, SL("terminate"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 923 TSRMLS_CC);
+	zephir_array_fetch_string(&_6, &matchedMiddlewares, SL("terminate"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 923 TSRMLS_CC);
 	zephir_fast_array_merge(&_0, &_5, &_6 TSRMLS_CC);
-	zephir_array_update_string(&tmp, SL("terminate"), &_0, PH_COPY | PH_SEPARATE);
-	RETURN_CCTOR(&tmp);
+	zephir_array_update_string(return_value, SL("terminate"), &_0, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
 
 }
 
@@ -1959,9 +1951,9 @@ PHP_METHOD(Leevel_Router_Router, matchedApp) {
 		} else {
 			zephir_read_property(&_4$$6, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&app);
-			zephir_array_fetch_string(&app, &_4$$6, SL("_app"), PH_NOISY, "leevel/router/router.zep", 948 TSRMLS_CC);
+			zephir_array_fetch_string(&app, &_4$$6, SL("_app"), PH_NOISY, "leevel/router/router.zep", 944 TSRMLS_CC);
 			zephir_read_property(&_5$$6, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch_string(&_6$$6, &_5$$6, SL("_app"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 949 TSRMLS_CC);
+			zephir_array_fetch_string(&_6$$6, &_5$$6, SL("_app"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 945 TSRMLS_CC);
 			zephir_update_property_zval(this_ptr, SL("matchedApp"), &_6$$6);
 		}
 	}
@@ -2007,7 +1999,7 @@ PHP_METHOD(Leevel_Router_Router, matchedController) {
 		} else {
 			zephir_read_property(&_4$$6, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&controller);
-			zephir_array_fetch_string(&controller, &_4$$6, SL("_c"), PH_NOISY, "leevel/router/router.zep", 973 TSRMLS_CC);
+			zephir_array_fetch_string(&controller, &_4$$6, SL("_c"), PH_NOISY, "leevel/router/router.zep", 969 TSRMLS_CC);
 		}
 	}
 	zephir_ucfirst(return_value, &controller);
@@ -2068,7 +2060,7 @@ PHP_METHOD(Leevel_Router_Router, matchedAction) {
 		} else {
 			zephir_read_property(&_4$$6, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&action);
-			zephir_array_fetch_string(&action, &_4$$6, SL("_a"), PH_NOISY, "leevel/router/router.zep", 997 TSRMLS_CC);
+			zephir_array_fetch_string(&action, &_4$$6, SL("_a"), PH_NOISY, "leevel/router/router.zep", 993 TSRMLS_CC);
 		}
 	}
 	ZEPHIR_INIT_VAR(&_5);
@@ -2130,7 +2122,7 @@ PHP_METHOD(Leevel_Router_Router, matchedPrefix) {
 
 
 	zephir_read_property(&_0, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &_0, SL("_prefix"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1020 TSRMLS_CC);
+	zephir_array_fetch_string(&_1, &_0, SL("_prefix"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1016 TSRMLS_CC);
 	RETURN_CTORW(&_1);
 
 }
@@ -2142,10 +2134,9 @@ PHP_METHOD(Leevel_Router_Router, matchedPrefix) {
  */
 PHP_METHOD(Leevel_Router_Router, matchedParams) {
 
-	zval tmp, _0, _1, _2, _3;
+	zval _0, _1, _2, _3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -2153,16 +2144,14 @@ PHP_METHOD(Leevel_Router_Router, matchedParams) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tmp);
-	array_init(&tmp);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_2, &_1, SL("_params"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1034 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, &_1, SL("_params"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1026 TSRMLS_CC);
 	if (!(Z_TYPE_P(&_2) == IS_NULL)) {
 		zephir_read_property(&_3, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_0, &_3, SL("_params"), PH_NOISY, "leevel/router/router.zep", 1034 TSRMLS_CC);
+		zephir_array_fetch_string(&_0, &_3, SL("_params"), PH_NOISY, "leevel/router/router.zep", 1026 TSRMLS_CC);
 	} else {
-		ZEPHIR_CPY_WRT(&_0, &tmp);
+		array_init(&_0);
 	}
 	RETURN_CCTOR(&_0);
 
@@ -2175,33 +2164,31 @@ PHP_METHOD(Leevel_Router_Router, matchedParams) {
  */
 PHP_METHOD(Leevel_Router_Router, matchedMiddlewares) {
 
-	zval tmp, _0, _1, _2, _3;
+	zval _0, _1, _2, _3, _4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
-	array_init(&_0);
-	zephir_array_update_string(&tmp, SL("handle"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
-	array_init(&_0);
-	zephir_array_update_string(&tmp, SL("terminate"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_INIT_NVAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_2, &_1, SL("_middlewares"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1051 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, &_1, SL("_middlewares"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1036 TSRMLS_CC);
 	if (!(Z_TYPE_P(&_2) == IS_NULL)) {
 		zephir_read_property(&_3, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_0, &_3, SL("_middlewares"), PH_NOISY, "leevel/router/router.zep", 1051 TSRMLS_CC);
+		zephir_array_fetch_string(&_0, &_3, SL("_middlewares"), PH_NOISY, "leevel/router/router.zep", 1036 TSRMLS_CC);
 	} else {
-		ZEPHIR_CPY_WRT(&_0, &tmp);
+		zephir_create_array(&_0, 2, 0 TSRMLS_CC);
+		ZEPHIR_INIT_VAR(&_4);
+		array_init(&_4);
+		zephir_array_update_string(&_0, SL("handle"), &_4, PH_COPY | PH_SEPARATE);
+		ZEPHIR_INIT_NVAR(&_4);
+		array_init(&_4);
+		zephir_array_update_string(&_0, SL("terminate"), &_4, PH_COPY | PH_SEPARATE);
 	}
 	RETURN_CCTOR(&_0);
 
@@ -2229,10 +2216,10 @@ PHP_METHOD(Leevel_Router_Router, matchedVars) {
 	array_init(&tmp);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_2, &_1, SL("_vars"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1065 TSRMLS_CC);
+	zephir_array_fetch_string(&_2, &_1, SL("_vars"), PH_NOISY | PH_READONLY, "leevel/router/router.zep", 1053 TSRMLS_CC);
 	if (!(Z_TYPE_P(&_2) == IS_NULL)) {
 		zephir_read_property(&_3, this_ptr, SL("matchedData"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_string(&_0, &_3, SL("_vars"), PH_NOISY, "leevel/router/router.zep", 1065 TSRMLS_CC);
+		zephir_array_fetch_string(&_0, &_3, SL("_vars"), PH_NOISY, "leevel/router/router.zep", 1053 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, &tmp);
 	}

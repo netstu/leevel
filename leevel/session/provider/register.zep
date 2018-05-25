@@ -61,9 +61,7 @@ class Register extends Provider
      */
     public static function providers() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
         	"sessions" : [
         		"Leevel\\Session\\Manager"
         	], 
@@ -73,8 +71,6 @@ class Register extends Provider
         	], 
         	"Leevel\\Session\\Middleware\\Session"
         ];
-
-        return tmp;
     }
     
     /**

@@ -433,7 +433,7 @@ class Router implements IRouter, IMacro
      */
     public function matchePath(var path) -> array
     {
-        var result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams, tmp;
+        var result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams;
     
         let result = [];
 
@@ -488,8 +488,7 @@ class Router implements IRouter, IMacro
             }
         }
 
-        let tmp = [];
-        let result[self::PARAMS] = array_merge(isset result[self::PARAMS] ? result[self::PARAMS] : tmp, params);
+        let result[self::PARAMS] = array_merge(isset result[self::PARAMS] ? result[self::PARAMS] : [], params);
         let result[self::PARAMS][self::BASEPATH] = basepath ? basepath : null;
 
         return result;
@@ -604,7 +603,7 @@ class Router implements IRouter, IMacro
      */
     protected function normalizePathsAndParams(array data) -> array
     {
-        var paths, params, k, item, tmp;
+        var paths, params, k, item;
     
         let paths = [];
         let params = [];
@@ -619,9 +618,7 @@ class Router implements IRouter, IMacro
             }
         }
 
-        let tmp = [paths, params];
-
-        return tmp;
+        return [paths, params];
     }
     
     /**
@@ -873,7 +870,7 @@ class Router implements IRouter, IMacro
      */
     protected function parseDefaultBind()
     {
-        var app, controller, action, controllerClass, method, tmp;
+        var app, controller, action, controllerClass, method;
     
         let app = this->matchedApp();
         let controller = this->matchedController();
@@ -903,9 +900,10 @@ class Router implements IRouter, IMacro
             return false;
         }
 
-        let tmp = [controller, method];
-
-        return tmp;
+        return [
+            controller,
+            method
+        ];
     }
     
     /**
@@ -916,16 +914,14 @@ class Router implements IRouter, IMacro
      */
     protected function parseMiddleware() -> array
     {
-        var tmp, matchedMiddlewares;
+        var matchedMiddlewares;
 
         let matchedMiddlewares = this->matchedMiddlewares();
 
-        let tmp = [
+        return [
             "handle" : array_merge(this->globalMiddlewares["handle"], matchedMiddlewares["handle"]), 
             "terminate" : array_merge(this->globalMiddlewares["terminate"], matchedMiddlewares["terminate"])
         ];
-        
-        return tmp;
     }
     
     /**
@@ -1027,11 +1023,7 @@ class Router implements IRouter, IMacro
      */
     protected function matchedParams() -> array
     {
-        var tmp;
-
-        let tmp = [];
-
-        return ! is_null(this->matchedData[self::PARAMS]) ? this->matchedData[self::PARAMS] : tmp;
+        return ! is_null(this->matchedData[self::PARAMS]) ? this->matchedData[self::PARAMS] : [];
     }
     
     /**
@@ -1041,14 +1033,10 @@ class Router implements IRouter, IMacro
      */
     protected function matchedMiddlewares() -> array
     {
-        var tmp;
-
-        let tmp = [
+        return ! is_null(this->matchedData[self::MIDDLEWARES]) ? this->matchedData[self::MIDDLEWARES] : [
             "handle" : [],
             "terminate" : []
         ];
-
-        return ! is_null(this->matchedData[self::MIDDLEWARES]) ? this->matchedData[self::MIDDLEWARES] : tmp;
     }
     
     /**

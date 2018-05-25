@@ -311,8 +311,6 @@ class Response implements IControl, IMacro, IResponse
      */
     public function setContent(var content)
     {
-        var tmp;
-    
         if this->checkTControl() {
             return this;
         }
@@ -327,12 +325,10 @@ class Response implements IControl, IMacro, IResponse
             let content = this->contentToJson(content);
         }
 
-        let tmp = [
-        	content, 
-        	"__toString"
-        ];
-
-        if content !== null && ! (is_scalar(content)) && ! (is_callable(tmp)) {
+        if content !== null && ! (is_scalar(content)) && ! (is_callable([
+            content, 
+            "__toString"
+        ])) {
             throw new UnexpectedValueException(sprintf("The Response content must be a scalar or object implementing __toString(), %s given.", gettype(content)));
         }
 
@@ -926,18 +922,14 @@ class Response implements IControl, IMacro, IResponse
      */
     public function isRedirect(var location = null) -> boolean
     {
-        var tmp;
-    
-        let tmp = [
-        	201, 
-        	301, 
-        	302, 
-        	303, 
-        	307, 
-        	308
-        ];
-
-        return in_array(this->statusCode, tmp) && 
+        return in_array(this->statusCode, [
+            201, 
+            301, 
+            302, 
+            303, 
+            307, 
+            308
+        ]) && 
         	( location === null ? location === null : location == this->headers->get("Location"));
     }
     
@@ -948,14 +940,10 @@ class Response implements IControl, IMacro, IResponse
      */
     public function isEmpty() -> boolean
     {
-        var tmp;
-    
-        let tmp = [
-        	204, 
-        	304
-        ];
-
-        return in_array(this->statusCode, tmp);
+        return in_array(this->statusCode, [
+            204, 
+            304
+        ]);
     }
 
     /**
@@ -1022,14 +1010,10 @@ class Response implements IControl, IMacro, IResponse
      */
     public function getTControl() -> array
     {
-        var tmp;
-    
-        let tmp = [
+        return [
         	this->inFlowControl, 
         	this->isFlowControlTrue
         ];
-
-        return tmp;
     }
     
     /**
@@ -1050,14 +1034,10 @@ class Response implements IControl, IMacro, IResponse
      */
     public function placeholderTControl(string method) -> boolean
     {
-        var tmp;
-    
-        let tmp = [
-        	"placeholder", 
-        	"foobar"
-        ];
-
-        return in_array(method, tmp);
+        return in_array(method, [
+            "placeholder", 
+            "foobar"
+        ]);
     }
 
     /**

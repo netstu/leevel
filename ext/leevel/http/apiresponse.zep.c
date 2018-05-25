@@ -281,19 +281,19 @@ PHP_METHOD(Leevel_Http_ApiResponse, noContent) {
 PHP_METHOD(Leevel_Http_ApiResponse, unprocessableEntity) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *errors_param = NULL, *message = NULL, message_sub, *text = NULL, text_sub, __$null, tmp, tmpArr, _0, _1, _2;
-	zval errors;
+	zval *errors_param = NULL, *message = NULL, message_sub, *text = NULL, text_sub, __$null, tmpArr, _0, _1, _3;
+	zval errors, _2;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&errors);
+	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&message_sub);
 	ZVAL_UNDEF(&text_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&tmpArr);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 3, &errors_param, &message, &text);
@@ -328,13 +328,13 @@ PHP_METHOD(Leevel_Http_ApiResponse, unprocessableEntity) {
 		ZEPHIR_INIT_NVAR(&tmpArr);
 		array_init(&tmpArr);
 	}
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 2, 0 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_2, this_ptr, "parseerrormessage", NULL, 0, message);
+	ZEPHIR_INIT_VAR(&_2);
+	zephir_create_array(&_2, 2, 0 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "parseerrormessage", NULL, 0, message);
 	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("message"), &_2, PH_COPY | PH_SEPARATE);
-	zephir_array_update_string(&tmp, SL("errors"), &tmpArr, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setdata", NULL, 0, &tmp);
+	zephir_array_update_string(&_2, SL("message"), &_3, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&_2, SL("errors"), &tmpArr, PH_COPY | PH_SEPARATE);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setdata", NULL, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -666,14 +666,15 @@ PHP_METHOD(Leevel_Http_ApiResponse, internalServerError) {
  */
 PHP_METHOD(Leevel_Http_ApiResponse, normalizeErrorMessage) {
 
+	zval _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *message = NULL, message_sub, *text = NULL, text_sub, __$null, tmp, _0;
+	zval *message = NULL, message_sub, *text = NULL, text_sub, __$null, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&message_sub);
 	ZVAL_UNDEF(&text_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
@@ -689,12 +690,12 @@ PHP_METHOD(Leevel_Http_ApiResponse, normalizeErrorMessage) {
 	}
 
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parseerrormessage", NULL, 0, message);
+	ZEPHIR_INIT_VAR(&_0);
+	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "parseerrormessage", NULL, 0, message);
 	zephir_check_call_status();
-	zephir_array_update_string(&tmp, SL("message"), &_0, PH_COPY | PH_SEPARATE);
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "setdata", NULL, 0, &tmp);
+	zephir_array_update_string(&_0, SL("message"), &_1, PH_COPY | PH_SEPARATE);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "setdata", NULL, 0, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

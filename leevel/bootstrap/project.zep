@@ -639,18 +639,14 @@ class Project extends Container implements IProject
      */
     public function callProviderBootstrap(<Provider> provider)
     {
-        var tmp;
-    
         if ! (method_exists(provider, "bootstrap")) {
             return;
         }
 
-        let tmp = [
+        this->call([
             provider,
             "bootstrap"
-        ];
-
-        this->call(tmp);
+        ]);
     }
     
     /**
@@ -740,11 +736,9 @@ class Project extends Container implements IProject
      */
     protected function registerBaseServices()
     {
-        var tmp;
-    
         this->instance("project", this);
 
-        let tmp = [
+        this->alias([
             "project" : [
                 "Leevel\\Bootstrap\\Project",
                 "Leevel\\Di\\IContainer",
@@ -763,9 +757,7 @@ class Project extends Container implements IProject
                 "Leevel\\I18n\\I18n",
                 "Leevel\\I18n\\II18n"
             ]
-        ];
-
-        this->alias(tmp);
+        ]);
     }
     
     /**
