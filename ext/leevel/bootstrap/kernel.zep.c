@@ -190,25 +190,26 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, getRuntime) {
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, terminate) {
 
+	zval _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *request, request_sub, *response, response_sub, tmp, _0;
+	zval *request, request_sub, *response, response_sub, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&request_sub);
 	ZVAL_UNDEF(&response_sub);
-	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &request, &response);
 
 
 
-	ZEPHIR_INIT_VAR(&tmp);
-	zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
-	zephir_array_fast_append(&tmp, response);
 	zephir_read_property(&_0, this_ptr, SL("router"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "throughmiddleware", NULL, 0, request, &tmp);
+	ZEPHIR_INIT_VAR(&_1);
+	zephir_create_array(&_1, 1, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_1, response);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "throughmiddleware", NULL, 0, request, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

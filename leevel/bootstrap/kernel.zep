@@ -127,10 +127,7 @@ abstract class Kernel implements IKernel
      */
     public function terminate(<Request> request, <IResponse> response)
     {
-        var tmp;
-    
-        let tmp = [response];
-        this->router->throughMiddleware(request, tmp);
+        this->router->throughMiddleware(request, [response]);
     }
     
     /**
