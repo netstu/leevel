@@ -389,7 +389,7 @@ PHP_METHOD(Leevel_Pipeline_Pipeline, stageGenerator) {
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, leevel_collection_collection_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 75, &temp);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 76, &temp);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -500,7 +500,7 @@ PHP_METHOD(Leevel_Pipeline_Pipeline, parse) {
 	ZEPHIR_INIT_VAR(&_1);
 	array_init(&_1);
 	ZVAL_LONG(&_2, 2);
-	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 122, &_0, &_2, &_1);
+	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 123, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&name);
 	zephir_array_fetch_long(&name, &temp, 0, PH_NOISY, "leevel/pipeline/pipeline.zep", 259 TSRMLS_CC);

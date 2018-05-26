@@ -800,6 +800,8 @@ PHP_METHOD(Leevel_Manager_Manager, optionFilterNull) {
 	zephir_get_arrval(&options, options_param);
 
 
+	ZEPHIR_INIT_VAR(&result);
+	array_init(&result);
 	zephir_is_iterable(&options, 0, "leevel/manager/manager.zep", 356);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&options), _1, _2, _0)
 	{

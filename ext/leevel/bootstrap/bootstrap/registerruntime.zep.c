@@ -332,7 +332,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderConsoleResponse) {
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *e, e_sub, _0, _1, _2, _3;
+	zval *e, e_sub, _0, _1, _2, _3, _4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&e_sub);
@@ -340,6 +340,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse) {
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &e);
@@ -349,7 +350,10 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getruntime", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_2, this_ptr, SL("project"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_3, &_2, SL("request"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/registerruntime.zep", 149 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "request");
+	ZEPHIR_CALL_METHOD(&_3, &_2, "make", NULL, 0, &_4);
+	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_1, &_0, "render", NULL, 0, &_3, e);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_1, "send", NULL, 0);

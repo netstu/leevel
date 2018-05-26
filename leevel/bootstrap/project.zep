@@ -113,11 +113,18 @@ class Project extends Container implements IProject
     protected deferredProviders = [];
     
     /**
-     * 服务提供者 bootstrap
+     * 服务提供者引导
      *
      * @var array
      */
     protected providerBootstraps = [];
+
+    /**
+     * 是否已经初始化引导
+     *
+     * @var bool
+     */
+    protected isBootstrap = false;
     
     /**
      * 构造函数
@@ -663,6 +670,16 @@ class Project extends Container implements IProject
             (new {value}())->handle(this);
         }
     }
+
+    /**
+     * 是否已经初始化引导
+     * 
+     * @return bool
+     */
+    public function isBootstrap()-> boolean
+    {
+        return this->isBootstrap;
+    }
     
     /**
      * 框架基础提供者 register
@@ -682,7 +699,8 @@ class Project extends Container implements IProject
         }
 
         let providers = this->make("option")->get("_composer.providers", []);
-        
+        let providers = array_values(providers);
+
         for provider in providers {
             let providerInstance = this->register(provider);
 
@@ -695,7 +713,7 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 执行框架基础提供者 bootstrap
+     * 执行框架基础提供者引导
      *
      * @return $this
      */
@@ -707,6 +725,8 @@ class Project extends Container implements IProject
             this->callProviderBootstrap(item);
         }
 
+        let this->isBootstrap = true;
+
         return this;
     }
     
@@ -716,17 +736,25 @@ class Project extends Container implements IProject
      * @param \Leevel\Di\Provider|string $provider
      * @return \Leevel\Di\Provider
      */
-    public function register(provider)
+    public function register(var provider)
     {
+        var providerInstance;
+
         if is_string(provider) {
-            let provider = this->makeProvider(provider);
+            let providerInstance = this->makeProvider(provider);
+        } else {
+            let providerInstance = provider;
         }
 
-        if method_exists(provider, "register") {
-            provider->register();
+        if method_exists(providerInstance, "register") {
+            providerInstance->register();
         }
 
-        return provider;
+        if this->isBootstrap() {
+            this->callProviderBootstrap(providerInstance);
+        }
+
+        return providerInstance;
     }
     
     /**
@@ -790,9 +818,7 @@ class Project extends Container implements IProject
 
         let providerInstance = this->register(this->deferredProviders[provider]);
 
-        if method_exists(providerInstance, "bootstrap") {
-            this->callProviderBootstrap(providerInstance);
-        }
+        this->callProviderBootstrap(providerInstance);
 
         unset this->deferredProviders[provider];
     }

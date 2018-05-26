@@ -125,5 +125,4 @@ abstract class Facade
 
 		return call_user_func_array(callback, args);
 	}
-
 }

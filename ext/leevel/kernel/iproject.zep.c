@@ -349,6 +349,13 @@ ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, callProviderBootstrap);
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, bootstrap);
 
 /**
+ * 是否已经初始化引导
+ * 
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, isBootstrap);
+
+/**
  * 框架基础提供者 register
  *
  * @return $this

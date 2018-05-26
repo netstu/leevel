@@ -114,11 +114,18 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Project) {
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("deferredProviders"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 服务提供者 bootstrap
+	 * 服务提供者引导
 	 *
 	 * @var array
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("providerBootstraps"), ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	/**
+	 * 是否已经初始化引导
+	 *
+	 * @var bool
+	 */
+	zend_declare_property_bool(leevel_bootstrap_project_ce, SL("isBootstrap"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	leevel_bootstrap_project_ce->create_object = zephir_init_properties_Leevel_Bootstrap_Project;
 
@@ -174,7 +181,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, __clone) {
 	zval *this_ptr = getThis();
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Project disallowed clone.", "leevel/bootstrap/project.zep", 147);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Project disallowed clone.", "leevel/bootstrap/project.zep", 154);
 	return;
 
 }
@@ -345,7 +352,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, setPath) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 2, &_6$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$3, "leevel/bootstrap/project.zep", 211 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$3, "leevel/bootstrap/project.zep", 218 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -918,7 +925,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationCache) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 22, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/bootstrap/project.zep", 452 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/bootstrap/project.zep", 459 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -973,7 +980,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationDir) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 22, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/bootstrap/project.zep", 474 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/bootstrap/project.zep", 481 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1147,17 +1154,17 @@ PHP_METHOD(Leevel_Bootstrap_Project, getPathByNamespace) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&prefix, &_1, "getprefixespsr4", NULL, 0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_2, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 545 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 552 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_3);
 	ZEPHIR_CONCAT_VS(&_3, &_2, "\\");
 	if (!(zephir_array_isset(&prefix, &_3))) {
 		RETURN_MM_NULL();
 	}
-	zephir_array_fetch_long(&_5, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 549 TSRMLS_CC);
+	zephir_array_fetch_long(&_5, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 556 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_6);
 	ZEPHIR_CONCAT_VS(&_6, &_5, "\\");
-	zephir_array_fetch(&_4, &prefix, &_6, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 549 TSRMLS_CC);
-	zephir_array_fetch_long(&_7, &_4, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 549 TSRMLS_CC);
+	zephir_array_fetch(&_4, &prefix, &_6, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 556 TSRMLS_CC);
+	zephir_array_fetch_long(&_7, &_4, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 556 TSRMLS_CC);
 	zephir_array_update_long(namespaces, 0, &_7, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	zephir_fast_join_str(return_value, SL("/"), namespaces TSRMLS_CC);
 	RETURN_MM();
@@ -1191,7 +1198,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, getPathByNamespaces) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	zephir_is_iterable(&namespaces, 0, "leevel/bootstrap/project.zep", 570);
+	zephir_is_iterable(&namespaces, 0, "leevel/bootstrap/project.zep", 577);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&namespaces), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1430,7 +1437,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 	zephir_get_arrval(&bootstraps, bootstraps_param);
 
 
-	zephir_is_iterable(&bootstraps, 0, "leevel/bootstrap/project.zep", 665);
+	zephir_is_iterable(&bootstraps, 0, "leevel/bootstrap/project.zep", 672);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&bootstraps), _0)
 	{
 		ZEPHIR_INIT_NVAR(&value);
@@ -1452,6 +1459,20 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 }
 
 /**
+ * 是否已经初始化引导
+ * 
+ * @return bool
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, isBootstrap) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_MEMBER(getThis(), "isBootstrap");
+
+}
+
+/**
  * 框架基础提供者 register
  *
  * @return $this
@@ -1459,8 +1480,8 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 
 	zval _2;
-	zval tmp, alias, deferredAlias, providers, provider, providerInstance, _0, _1, _3, *_4, _6, _7, *_8;
-	zephir_fcall_cache_entry *_5 = NULL, *_9 = NULL;
+	zval tmp, alias, deferredAlias, providers, provider, providerInstance, _0, _1, _3, *_4, _6, _7, _8, *_9;
+	zephir_fcall_cache_entry *_5 = NULL, *_10 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -1475,6 +1496,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
@@ -1495,11 +1517,11 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_STRING(&_1, "_deferred_providers");
 	ZEPHIR_CALL_METHOD(&tmp, &_0, "get", NULL, 0, &_1, &_2);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_3, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 677 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 694 TSRMLS_CC);
 	zephir_update_property_zval(this_ptr, SL("deferredProviders"), &_3);
 	ZEPHIR_OBS_VAR(&deferredAlias);
-	zephir_array_fetch_long(&deferredAlias, &tmp, 1, PH_NOISY, "leevel/bootstrap/project.zep", 678 TSRMLS_CC);
-	zephir_is_iterable(&deferredAlias, 0, "leevel/bootstrap/project.zep", 684);
+	zephir_array_fetch_long(&deferredAlias, &tmp, 1, PH_NOISY, "leevel/bootstrap/project.zep", 695 TSRMLS_CC);
+	zephir_is_iterable(&deferredAlias, 0, "leevel/bootstrap/project.zep", 701);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&deferredAlias), _4)
 	{
 		ZEPHIR_INIT_NVAR(&alias);
@@ -1518,12 +1540,15 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_STRING(&_7, "_composer.providers");
 	ZEPHIR_CALL_METHOD(&providers, &_6, "get", NULL, 0, &_7, &_1);
 	zephir_check_call_status();
-	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 694);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&providers), _8)
+	ZEPHIR_CALL_FUNCTION(&_8, "array_values", NULL, 72, &providers);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(&providers, &_8);
+	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 712);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&providers), _9)
 	{
 		ZEPHIR_INIT_NVAR(&provider);
-		ZVAL_COPY(&provider, _8);
-		ZEPHIR_CALL_METHOD(&providerInstance, this_ptr, "register", &_9, 0, &provider);
+		ZVAL_COPY(&provider, _9);
+		ZEPHIR_CALL_METHOD(&providerInstance, this_ptr, "register", &_10, 0, &provider);
 		zephir_check_call_status();
 		if ((zephir_method_exists_ex(&providerInstance, SL("bootstrap") TSRMLS_CC) == SUCCESS)) {
 			zephir_update_property_array_append(this_ptr, SL("providerBootstraps"), &providerInstance TSRMLS_CC);
@@ -1535,24 +1560,26 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 }
 
 /**
- * 执行框架基础提供者 bootstrap
+ * 执行框架基础提供者引导
  *
  * @return $this
  */
 PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders) {
 
-	zval item, _0, *_1;
+	zval __$true, __$false, item, _0, *_1;
 	zephir_fcall_cache_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("providerBootstraps"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_0, 0, "leevel/bootstrap/project.zep", 710);
+	zephir_is_iterable(&_0, 0, "leevel/bootstrap/project.zep", 728);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1561,6 +1588,11 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders) {
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
+	if (1) {
+		zephir_update_property_zval(this_ptr, SL("isBootstrap"), &__$true);
+	} else {
+		zephir_update_property_zval(this_ptr, SL("isBootstrap"), &__$false);
+	}
 	RETURN_THIS();
 
 }
@@ -1574,29 +1606,35 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders) {
 PHP_METHOD(Leevel_Bootstrap_Project, register) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *provider = NULL, provider_sub, _0$$3;
+	zval *provider, provider_sub, providerInstance, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&provider_sub);
-	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&providerInstance);
+	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &provider);
 
-	ZEPHIR_SEPARATE_PARAM(provider);
 
 
 	if (Z_TYPE_P(provider) == IS_STRING) {
-		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "makeprovider", NULL, 0, provider);
+		ZEPHIR_CALL_METHOD(&providerInstance, this_ptr, "makeprovider", NULL, 0, provider);
 		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(provider, &_0$$3);
+	} else {
+		ZEPHIR_CPY_WRT(&providerInstance, provider);
 	}
-	if ((zephir_method_exists_ex(provider, SL("register") TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(NULL, provider, "register", NULL, 0);
+	if ((zephir_method_exists_ex(&providerInstance, SL("register") TSRMLS_CC) == SUCCESS)) {
+		ZEPHIR_CALL_METHOD(NULL, &providerInstance, "register", NULL, 0);
 		zephir_check_call_status();
 	}
-	RETVAL_ZVAL(provider, 1, 0);
-	RETURN_MM();
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "isbootstrap", NULL, 0);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "callproviderbootstrap", NULL, 0, &providerInstance);
+		zephir_check_call_status();
+	}
+	RETURN_CCTOR(&providerInstance);
 
 }
 
@@ -1692,19 +1730,19 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerBaseProvider) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	object_init_ex(&_0, leevel_event_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 72, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 73, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_2);
 	object_init_ex(&_2, leevel_log_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 73, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 74, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	object_init_ex(&_3, leevel_router_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 74, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 75, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_3);
 	zephir_check_call_status();
@@ -1743,13 +1781,11 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerDeferredProvider) {
 		RETURN_MM_NULL();
 	}
 	zephir_read_property(&_1, this_ptr, SL("deferredProviders"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_2, &_1, &provider, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 791 TSRMLS_CC);
+	zephir_array_fetch(&_2, &_1, &provider, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 819 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&providerInstance, this_ptr, "register", NULL, 0, &_2);
 	zephir_check_call_status();
-	if ((zephir_method_exists_ex(&providerInstance, SL("bootstrap") TSRMLS_CC) == SUCCESS)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "callproviderbootstrap", NULL, 0, &providerInstance);
-		zephir_check_call_status();
-	}
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "callproviderbootstrap", NULL, 0, &providerInstance);
+	zephir_check_call_status();
 	zephir_read_property(&_3, this_ptr, SL("deferredProviders"), PH_NOISY_CC | PH_READONLY);
 	zephir_array_unset(&_3, &provider, PH_SEPARATE);
 	ZEPHIR_MM_RESTORE();

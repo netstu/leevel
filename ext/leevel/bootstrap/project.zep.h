@@ -46,6 +46,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, console);
 PHP_METHOD(Leevel_Bootstrap_Project, makeProvider);
 PHP_METHOD(Leevel_Bootstrap_Project, callProviderBootstrap);
 PHP_METHOD(Leevel_Bootstrap_Project, bootstrap);
+PHP_METHOD(Leevel_Bootstrap_Project, isBootstrap);
 PHP_METHOD(Leevel_Bootstrap_Project, registerProviders);
 PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders);
 PHP_METHOD(Leevel_Bootstrap_Project, register);
@@ -195,6 +196,7 @@ ZEPHIR_INIT_FUNCS(leevel_bootstrap_project_method_entry) {
 	PHP_ME(Leevel_Bootstrap_Project, makeProvider, arginfo_leevel_bootstrap_project_makeprovider, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, callProviderBootstrap, arginfo_leevel_bootstrap_project_callproviderbootstrap, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, bootstrap, arginfo_leevel_bootstrap_project_bootstrap, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, isBootstrap, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, registerProviders, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, bootstrapProviders, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, register, arginfo_leevel_bootstrap_project_register, ZEND_ACC_PUBLIC)

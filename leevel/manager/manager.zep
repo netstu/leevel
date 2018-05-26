@@ -344,8 +344,8 @@ abstract class Manager
 	 */
 	protected function optionFilterNull(array options)
 	{
-		array result;
 		var key, value;
+		array result = [];
 
 		for key, value in options {
 			if value !== null {

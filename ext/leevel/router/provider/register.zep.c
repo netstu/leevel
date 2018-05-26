@@ -194,7 +194,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, routerClosure) {
 
 
 	object_init_ex(return_value, leevel_router_router_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 123, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 124, project);
 	zephir_check_call_status();
 	RETURN_MM();
 

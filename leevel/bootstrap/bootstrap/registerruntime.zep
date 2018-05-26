@@ -146,7 +146,7 @@ class RegisterRuntime
      */
     protected function renderHttpResponse(<Exception> e)
     {
-        this->getRuntime()->render(this->project["request"], e)->send();
+        this->getRuntime()->render(this->project->make("request"), e)->send();
     }
     
     /**

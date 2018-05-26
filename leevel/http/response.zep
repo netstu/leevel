@@ -280,8 +280,10 @@ class Response implements IControl, IMacro, IResponse
         // cookie
         let cookie = call_user_func(self::cookieResolver);
 
-        for item in cookie->all() {
-            call_user_func_array("setcookie", item);;
+        if cookie {
+            for item in cookie->all() {
+                call_user_func_array("setcookie", item);;
+            }
         }
         
         return this;

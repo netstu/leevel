@@ -199,7 +199,7 @@ PHP_METHOD(Leevel_Http_FileResponse, create) {
 	} else {
 		ZVAL_BOOL(&_2, 0);
 	}
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 92, file, &_0, &headers, contentDisposition, &_1, &_2);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 93, file, &_0, &headers, contentDisposition, &_1, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -283,7 +283,7 @@ PHP_METHOD(Leevel_Http_FileResponse, setFile) {
 			zephir_check_call_status();
 		}
 	}
-	ZEPHIR_CALL_METHOD(&_7, &files, "isreadable", NULL, 93);
+	ZEPHIR_CALL_METHOD(&_7, &files, "isreadable", NULL, 94);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_7))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(leevel_http_fileexception_ce, "File must be readable.", "leevel/http/fileresponse.zep", 104);
@@ -393,9 +393,9 @@ PHP_METHOD(Leevel_Http_FileResponse, setAutoEtag) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	ZVAL_STRING(&_3, "sha256");
-	ZEPHIR_CALL_FUNCTION(&_4, "hash_file", NULL, 94, &_3, &_2, &__$true);
+	ZEPHIR_CALL_FUNCTION(&_4, "hash_file", NULL, 95, &_3, &_2, &__$true);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&etag, "base64_encode", NULL, 95, &_4);
+	ZEPHIR_CALL_FUNCTION(&etag, "base64_encode", NULL, 96, &_4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setetag", NULL, 0, &etag);
 	zephir_check_call_status();
@@ -566,16 +566,16 @@ PHP_METHOD(Leevel_Http_FileResponse, sendContent) {
 	ZVAL_STRING(&_3, "php://output");
 	ZEPHIR_INIT_VAR(&_4);
 	ZVAL_STRING(&_4, "wb");
-	ZEPHIR_CALL_FUNCTION(&out, "fopen", &_5, 96, &_3, &_4);
+	ZEPHIR_CALL_FUNCTION(&out, "fopen", &_5, 97, &_3, &_4);
 	zephir_check_call_status();
 	zephir_read_property(&_6, this_ptr, SL("file"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_7, &_6, "getpathname", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_3);
 	ZVAL_STRING(&_3, "rb");
-	ZEPHIR_CALL_FUNCTION(&file, "fopen", &_5, 96, &_7, &_3);
+	ZEPHIR_CALL_FUNCTION(&file, "fopen", &_5, 97, &_7, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "stream_copy_to_stream", NULL, 97, &file, &out);
+	ZEPHIR_CALL_FUNCTION(NULL, "stream_copy_to_stream", NULL, 98, &file, &out);
 	zephir_check_call_status();
 	zephir_fclose(&out TSRMLS_CC);
 	zephir_fclose(&file TSRMLS_CC);

@@ -127,8 +127,8 @@ console.log( '%cThe PHP Framework For Code Poem As Free As Wind %c(http://www.qu
      */
     protected function formatMessages(array messages) -> array
     {
-        array result;
         var item;
+        array result = [];
 
         for item in messages {
             let result[] = self::formatMessage(item);

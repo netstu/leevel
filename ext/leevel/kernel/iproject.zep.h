@@ -134,6 +134,7 @@ ZEPHIR_INIT_FUNCS(leevel_kernel_iproject_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, makeProvider, arginfo_leevel_kernel_iproject_makeprovider)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, callProviderBootstrap, arginfo_leevel_kernel_iproject_callproviderbootstrap)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, bootstrap, arginfo_leevel_kernel_iproject_bootstrap)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, isBootstrap, NULL)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, registerProviders, NULL)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, bootstrapProviders, NULL)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, register, arginfo_leevel_kernel_iproject_register)

@@ -347,6 +347,13 @@ interface IProject extends IContainer
      * @return void
      */
     public function bootstrap(array bootstraps);
+
+    /**
+     * 是否已经初始化引导
+     * 
+     * @return bool
+     */
+    public function isBootstrap()-> boolean;
     
     /**
      * 框架基础提供者 register
