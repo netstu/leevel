@@ -129,6 +129,7 @@ class Register extends Provider
         let request = project->make("request");
 
         for item in [
+            "with_suffix",
             "html_suffix",
             "domain_top",
             "subdomain_on"

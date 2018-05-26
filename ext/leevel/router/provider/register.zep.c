@@ -278,7 +278,10 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZEPHIR_CALL_METHOD(&request, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
-	zephir_create_array(&_1, 3, 0 TSRMLS_CC);
+	zephir_create_array(&_1, 4, 0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(&_0);
+	ZVAL_STRING(&_0, "with_suffix");
+	zephir_array_fast_append(&_1, &_0);
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "html_suffix");
 	zephir_array_fast_append(&_1, &_0);
@@ -288,7 +291,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "subdomain_on");
 	zephir_array_fast_append(&_1, &_0);
-	zephir_is_iterable(&_1, 0, "leevel/router/provider/register.zep", 139);
+	zephir_is_iterable(&_1, 0, "leevel/router/provider/register.zep", 140);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
