@@ -246,7 +246,6 @@ PHP_METHOD(Leevel_Router_Provider_Register, url) {
  */
 PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 
-	zend_class_entry *_5 = NULL;
 	zval _1;
 	zephir_fcall_cache_entry *_4 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -301,14 +300,9 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 		zephir_array_update_zval(&options, &item, &_3$$3, PH_COPY | PH_SEPARATE);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	if (!_5) {
-	_5 = zephir_fetch_class_str_ex(SL("Leevel\\Router\\Url"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _5);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &request, &options);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_router_url_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 125, &request, &options);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

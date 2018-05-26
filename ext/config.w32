@@ -23,7 +23,7 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/i18n", "ii18n.zep.c i18n.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/kernel", "ikernel.zep.c iproject.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/pipeline", "ipipeline.zep.c pipeline.zep.c", "leevel");
-	ADD_SOURCES(configure_module_dirname + "/leevel/router", "irouter.zep.c router.zep.c routerprovider.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/router", "irouter.zep.c iurl.zep.c router.zep.c routerprovider.zep.c url.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/router/match", "imatch.zep.c pathinfo.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session", "isession.zep.c manager.zep.c session.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/view", "connect.zep.c iconnect.zep.c iview.zep.c html.zep.c manager.zep.c view.zep.c", "leevel");
