@@ -41,6 +41,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/mvc/ientity.zep.c
 	leevel/option/ioption.zep.c
 	leevel/pipeline/ipipeline.zep.c
+	leevel/router/iresponsefactory.zep.c
 	leevel/router/irouter.zep.c
 	leevel/router/iurl.zep.c
 	leevel/router/match/imatch.zep.c
@@ -106,6 +107,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/router.zep.c
 	leevel/router/match/pathinfo.zep.c
 	leevel/router/provider/register.zep.c
+	leevel/router/responsefactory.zep.c
 	leevel/router/router.zep.c
 	leevel/router/routerprovider.zep.c
 	leevel/router/url.zep.c
