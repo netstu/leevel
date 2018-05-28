@@ -82,6 +82,7 @@ zend_class_entry *leevel_cookie_provider_register_ce;
 zend_class_entry *leevel_database_ce;
 zend_class_entry *leevel_database_provider_register_ce;
 zend_class_entry *leevel_db_ce;
+zend_class_entry *leevel_di_normalizeexception_ce;
 zend_class_entry *leevel_encryption_ce;
 zend_class_entry *leevel_encryption_provider_register_ce;
 zend_class_entry *leevel_event_ce;
@@ -213,6 +214,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Database);
 	ZEPHIR_INIT(Leevel_Database_Provider_Register);
 	ZEPHIR_INIT(Leevel_Db);
+	ZEPHIR_INIT(Leevel_Di_NormalizeException);
 	ZEPHIR_INIT(Leevel_Encryption);
 	ZEPHIR_INIT(Leevel_Encryption_Provider_Register);
 	ZEPHIR_INIT(Leevel_Event);

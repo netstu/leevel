@@ -323,12 +323,11 @@ PHP_METHOD(Leevel_Di_Container, shareClosure) {
  */
 PHP_METHOD(Leevel_Di_Container, alias) {
 
-	zval _4$$6;
 	zend_string *_2$$3;
 	zend_ulong _1$$3;
 	zephir_fcall_cache_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *alias, alias_sub, *value = NULL, value_sub, __$null, key, item, *_0$$3, *_5$$6;
+	zval *alias, alias_sub, *value = NULL, value_sub, __$null, key, item, tmp, *_0$$3, *_4$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&alias_sub);
@@ -336,21 +335,19 @@ PHP_METHOD(Leevel_Di_Container, alias) {
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&_4$$6);
+	ZVAL_UNDEF(&tmp);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &alias, &value);
 
 	if (!value) {
 		value = &value_sub;
-		ZEPHIR_CPY_WRT(value, &__$null);
-	} else {
-		ZEPHIR_SEPARATE_PARAM(value);
+		value = &__$null;
 	}
 
 
 	if (Z_TYPE_P(alias) == IS_ARRAY) {
-		zephir_is_iterable(alias, 0, "leevel/di/container.zep", 204);
+		zephir_is_iterable(alias, 0, "leevel/di/container.zep", 205);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(alias), _1$$3, _2$$3, _0$$3)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -370,13 +367,18 @@ PHP_METHOD(Leevel_Di_Container, alias) {
 		ZEPHIR_INIT_NVAR(&item);
 		ZEPHIR_INIT_NVAR(&key);
 	} else {
-		zephir_get_arrval(&_4$$6, value);
-		ZEPHIR_CPY_WRT(value, &_4$$6);
-		zephir_is_iterable(value, 0, "leevel/di/container.zep", 209);
-		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(value), _5$$6)
+		if (Z_TYPE_P(value) == IS_ARRAY) {
+			ZEPHIR_CPY_WRT(&tmp, value);
+		} else {
+			ZEPHIR_INIT_NVAR(&tmp);
+			zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
+			zephir_array_fast_append(&tmp, value);
+		}
+		zephir_is_iterable(&tmp, 0, "leevel/di/container.zep", 211);
+		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _4$$6)
 		{
 			ZEPHIR_INIT_NVAR(&item);
-			ZVAL_COPY(&item, _5$$6);
+			ZVAL_COPY(&item, _4$$6);
 			zephir_update_property_array(this_ptr, SL("alias"), &item, alias TSRMLS_CC);
 		} ZEND_HASH_FOREACH_END();
 		ZEPHIR_INIT_NVAR(&item);
@@ -442,7 +444,7 @@ PHP_METHOD(Leevel_Di_Container, make) {
 	zephir_read_property(&_1, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2$$3, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 230 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 232 TSRMLS_CC);
 		RETURN_CTOR(&_3$$3);
 	}
 	zephir_read_property(&_4, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
@@ -453,11 +455,11 @@ PHP_METHOD(Leevel_Di_Container, make) {
 	}
 	zephir_read_property(&_6, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_7);
-	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "leevel/di/container.zep", 238 TSRMLS_CC);
+	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "leevel/di/container.zep", 240 TSRMLS_CC);
 	_8 = Z_TYPE_P(&_7) != IS_STRING;
 	if (_8) {
 		zephir_read_property(&_9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 238 TSRMLS_CC);
+		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 240 TSRMLS_CC);
 		_8 = zephir_is_callable(&_10 TSRMLS_CC);
 	}
 	if (_8) {
@@ -470,30 +472,30 @@ PHP_METHOD(Leevel_Di_Container, make) {
 		ZEPHIR_UNREF(&args);
 		zephir_check_call_status();
 		zephir_read_property(&_11$$5, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 244 TSRMLS_CC);
+		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 246 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&instance);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(&instance, &_12$$5, &args);
 		zephir_check_call_status();
 	} else {
 		zephir_read_property(&_13$$7, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_14$$7);
-		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "leevel/di/container.zep", 246 TSRMLS_CC);
+		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "leevel/di/container.zep", 248 TSRMLS_CC);
 		if (Z_TYPE_P(&_14$$7) == IS_STRING) {
 			zephir_read_property(&_15$$8, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 247 TSRMLS_CC);
+			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 249 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&instance, this_ptr, "getinjectionobject", &_5, 0, &_16$$8, &args);
 			zephir_check_call_status();
 		} else {
 			zephir_read_property(&_17$$9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&instance);
-			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "leevel/di/container.zep", 249 TSRMLS_CC);
+			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "leevel/di/container.zep", 251 TSRMLS_CC);
 		}
 	}
 	zephir_read_property(&_18, this_ptr, SL("singletons"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_fast_in_array(name, &_18 TSRMLS_CC)) {
 		zephir_update_property_array(this_ptr, SL("instances"), name, &instance TSRMLS_CC);
 		zephir_read_property(&_19$$10, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 256 TSRMLS_CC);
+		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 258 TSRMLS_CC);
 		RETURN_CTOR(&_20$$10);
 	} else {
 		RETURN_CCTOR(&instance);
@@ -504,24 +506,39 @@ PHP_METHOD(Leevel_Di_Container, make) {
 /**
  * 实例回调自动注入
  *
- * @param callable $callback
+ * @param callable|array|string $callback
  * @param array $args
  * @return mixed
  */
 PHP_METHOD(Leevel_Di_Container, call) {
 
+	zend_bool isStatic, _6, _11$$6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval args;
-	zval *callback, callback_sub, *args_param = NULL, temp;
+	zval *callback = NULL, callback_sub, *args_param = NULL, _15, _0$$3, _1$$3, _2$$3, _3$$3, _4$$4, _5$$5, _7$$6, _12$$6, _8$$7, _9$$7, _10$$7, _13$$9, _14$$9;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&callback_sub);
-	ZVAL_UNDEF(&temp);
+	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$5);
+	ZVAL_UNDEF(&_7$$6);
+	ZVAL_UNDEF(&_12$$6);
+	ZVAL_UNDEF(&_8$$7);
+	ZVAL_UNDEF(&_9$$7);
+	ZVAL_UNDEF(&_10$$7);
+	ZVAL_UNDEF(&_13$$9);
+	ZVAL_UNDEF(&_14$$9);
 	ZVAL_UNDEF(&args);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &callback, &args_param);
 
+	ZEPHIR_SEPARATE_PARAM(callback);
 	if (!args_param) {
 		ZEPHIR_INIT_VAR(&args);
 		array_init(&args);
@@ -530,17 +547,156 @@ PHP_METHOD(Leevel_Di_Container, call) {
 	}
 
 
-	ZEPHIR_INIT_VAR(&temp);
-	array_init(&temp);
-	if (ZEPHIR_IS_EMPTY(&args)) {
-		ZEPHIR_CALL_METHOD(&temp, this_ptr, "parseinjection", NULL, 0, callback);
-		zephir_check_call_status();
-	} else {
-		ZEPHIR_CPY_WRT(&temp, &args);
+	isStatic = 0;
+	if (Z_TYPE_P(callback) == IS_STRING) {
+		ZEPHIR_INIT_VAR(&_0$$3);
+		ZVAL_STRING(&_0$$3, "@");
+		ZEPHIR_INIT_VAR(&_1$$3);
+		zephir_fast_strpos(&_1$$3, callback, &_0$$3, 0 );
+		ZEPHIR_INIT_VAR(&_2$$3);
+		ZVAL_STRING(&_2$$3, "::");
+		ZEPHIR_INIT_VAR(&_3$$3);
+		zephir_fast_strpos(&_3$$3, callback, &_2$$3, 0 );
+		if (!ZEPHIR_IS_FALSE_IDENTICAL(&_1$$3)) {
+			ZEPHIR_INIT_VAR(&_4$$4);
+			zephir_fast_explode_str(&_4$$4, SL("@"), callback, LONG_MAX TSRMLS_CC);
+			ZEPHIR_CPY_WRT(callback, &_4$$4);
+		} else if (!ZEPHIR_IS_FALSE_IDENTICAL(&_3$$3)) {
+			ZEPHIR_INIT_VAR(&_5$$5);
+			zephir_fast_explode_str(&_5$$5, SL("::"), callback, LONG_MAX TSRMLS_CC);
+			ZEPHIR_CPY_WRT(callback, &_5$$5);
+			isStatic = 1;
+		}
 	}
-	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, callback, &temp);
+	_6 = isStatic == 0;
+	if (_6) {
+		_6 = Z_TYPE_P(callback) == IS_ARRAY;
+	}
+	if (_6) {
+		zephir_array_fetch_long(&_7$$6, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 288 TSRMLS_CC);
+		if (!(Z_TYPE_P(&_7$$6) == IS_OBJECT)) {
+			zephir_array_fetch_long(&_8$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 289 TSRMLS_CC);
+			if (!(Z_TYPE_P(&_8$$7) == IS_STRING)) {
+				ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The classname must be string.", "leevel/di/container.zep", 290);
+				return;
+			}
+			zephir_array_fetch_long(&_10$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 293 TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&_9$$7, this_ptr, "getinjectionobject", NULL, 0, &_10$$7);
+			zephir_check_call_status();
+			zephir_array_update_long(callback, 0, &_9$$7, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+		}
+		_11$$6 = !(zephir_array_isset_long(callback, 1));
+		if (!(_11$$6)) {
+			zephir_array_fetch_long(&_12$$6, callback, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 296 TSRMLS_CC);
+			_11$$6 = ZEPHIR_IS_EMPTY(&_12$$6);
+		}
+		if (_11$$6) {
+			ZEPHIR_INIT_VAR(&_13$$9);
+			zephir_array_fetch_long(&_14$$9, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 297 TSRMLS_CC);
+			if ((zephir_method_exists_ex(&_14$$9, SL("handle") TSRMLS_CC) == SUCCESS)) {
+				ZEPHIR_INIT_NVAR(&_13$$9);
+				ZVAL_STRING(&_13$$9, "handle");
+			} else {
+				ZEPHIR_INIT_NVAR(&_13$$9);
+				ZVAL_STRING(&_13$$9, "run");
+			}
+			zephir_array_update_long(callback, 1, &_13$$9, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+		}
+	}
+	ZEPHIR_CALL_METHOD(&_15, this_ptr, "normalizeinjectionargs", NULL, 0, callback, &args);
+	zephir_check_call_status();
+	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, callback, &_15);
 	zephir_check_call_status();
 	RETURN_MM();
+
+}
+
+/**
+ * 删除服务和实例
+ *
+ * @param string $name
+ * @return void
+ */
+PHP_METHOD(Leevel_Di_Container, remove) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *name = NULL, name_sub, _0, _1, _3, _5, _2$$3, _4$$4, _6$$5;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_6$$5);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &name);
+
+	ZEPHIR_SEPARATE_PARAM(name);
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalize", NULL, 0, name);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(name, &_0);
+	zephir_read_property(&_1, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_1, name)) {
+		zephir_read_property(&_2$$3, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_unset(&_2$$3, name, PH_SEPARATE);
+	}
+	zephir_read_property(&_3, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_3, name)) {
+		zephir_read_property(&_4$$4, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_unset(&_4$$4, name, PH_SEPARATE);
+	}
+	zephir_read_property(&_5, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_5, name)) {
+		zephir_read_property(&_6$$5, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_unset(&_6$$5, name, PH_SEPARATE);
+	}
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 服务或者实例是否存在
+ *
+ * @param string $name
+ * @return bool
+ */
+PHP_METHOD(Leevel_Di_Container, exists) {
+
+	zend_bool _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *name = NULL, name_sub, _0, _1, _3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &name);
+
+	ZEPHIR_SEPARATE_PARAM(name);
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalize", NULL, 0, name);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(name, &_0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getalias", NULL, 0, name);
+	zephir_check_call_status();
+	ZEPHIR_CPY_WRT(name, &_0);
+	zephir_read_property(&_1, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
+	_2 = zephir_array_isset(&_1, name);
+	if (!(_2)) {
+		zephir_read_property(&_3, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
+		_2 = zephir_array_isset(&_3, name);
+	}
+	RETURN_MM_BOOL(_2);
 
 }
 
@@ -595,7 +751,7 @@ PHP_METHOD(Leevel_Di_Container, getAlias) {
 	zephir_read_property(&_1, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "leevel/di/container.zep", 304 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "leevel/di/container.zep", 361 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, name);
 	}
@@ -614,11 +770,14 @@ PHP_METHOD(Leevel_Di_Container, getInjectionObject) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval args;
-	zval *classname, classname_sub, *args_param = NULL, temp;
+	zval *classname, classname_sub, *args_param = NULL, _0$$3, _1$$3, _2$$3, _3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&classname_sub);
-	ZVAL_UNDEF(&temp);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&args);
 
 	ZEPHIR_MM_GROW();
@@ -632,20 +791,82 @@ PHP_METHOD(Leevel_Di_Container, getInjectionObject) {
 	}
 
 
-	ZEPHIR_INIT_VAR(&temp);
-	array_init(&temp);
-	if (!(zephir_class_exists(classname, 1 TSRMLS_CC))) {
-		RETURN_MM_BOOL(0);
-	}
-	if (ZEPHIR_IS_EMPTY(&args)) {
-		ZEPHIR_CALL_METHOD(&temp, this_ptr, "parseinjection", NULL, 0, classname);
+	if (zephir_interface_exists(classname, 1  TSRMLS_CC)) {
+		ZEPHIR_INIT_VAR(&_0$$3);
+		object_init_ex(&_0$$3, leevel_di_normalizeexception_ce);
+		ZEPHIR_INIT_VAR(&_1$$3);
+		ZVAL_STRING(&_1$$3, "Interface %s can not be normalize because not binded.");
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", NULL, 1, &_1$$3, classname);
 		zephir_check_call_status();
-	} else {
-		ZEPHIR_CPY_WRT(&temp, &args);
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_2$$3);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 374 TSRMLS_CC);
+		ZEPHIR_MM_RESTORE();
+		return;
 	}
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "newinstanceargs", NULL, 0, classname, &temp);
+	if (!(zephir_class_exists(classname, 1 TSRMLS_CC))) {
+		RETVAL_ZVAL(classname, 1, 0);
+		RETURN_MM();
+	}
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizeinjectionargs", NULL, 0, classname, &args);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "newinstanceargs", NULL, 0, classname, &_3);
 	zephir_check_call_status();
 	RETURN_MM();
+
+}
+
+/**
+ * 格式化依赖参数
+ *
+ * @param mixed $value
+ * @param array $args
+ * @return array|void
+ */
+PHP_METHOD(Leevel_Di_Container, normalizeInjectionArgs) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval args;
+	zval *value, value_sub, *args_param = NULL, tmp, required, tmpArgs, _0$$3, _1$$3, _2$$3, _3$$3;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&required);
+	ZVAL_UNDEF(&tmpArgs);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&args);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &value, &args_param);
+
+	zephir_get_arrval(&args, args_param);
+
+
+	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "parseinjection", NULL, 0, value, &args);
+	zephir_check_call_status();
+	ZEPHIR_OBS_VAR(&tmpArgs);
+	zephir_array_fetch_long(&tmpArgs, &tmp, 0, PH_NOISY, "leevel/di/container.zep", 396 TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&required);
+	zephir_array_fetch_long(&required, &tmp, 1, PH_NOISY, "leevel/di/container.zep", 397 TSRMLS_CC);
+	if (ZEPHIR_GT_LONG(&required, zephir_fast_count_int(&tmpArgs TSRMLS_CC))) {
+		ZEPHIR_INIT_VAR(&_0$$3);
+		object_init_ex(&_0$$3, leevel_di_normalizeexception_ce);
+		ZEPHIR_INIT_VAR(&_1$$3);
+		ZVAL_STRING(&_1$$3, "There are %d required args,but %d gived.");
+		ZVAL_LONG(&_2$$3, zephir_fast_count_int(&tmpArgs TSRMLS_CC));
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 1, &_1$$3, &required, &_2$$3);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_3$$3);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 400 TSRMLS_CC);
+		ZEPHIR_MM_RESTORE();
+		return;
+	}
+	RETURN_CCTOR(&tmpArgs);
 
 }
 
@@ -653,13 +874,18 @@ PHP_METHOD(Leevel_Di_Container, getInjectionObject) {
  * 分析自动依赖注入
  *
  * @param mixed $injection
+ * @param array $args
  * @return array
  */
 PHP_METHOD(Leevel_Di_Container, parseInjection) {
 
-	zephir_fcall_cache_entry *_1 = NULL, *_3 = NULL, *_8 = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *injection, injection_sub, result, param, item, argsclass, data, e, *_0, _2$$4, _4$$4, _5$$3, _6$$8, _7$$8;
+	zend_string *_17$$15;
+	zend_ulong _16$$15;
+	zend_bool isRequireBad = 0;
+	zephir_fcall_cache_entry *_1 = NULL, *_4 = NULL, *_13 = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS, required;
+	zval args;
+	zval *injection, injection_sub, *args_param = NULL, result, param, item, argsclass, data, e, k, value, *_0, _18, _2$$4, _3$$5, _5$$9, _6$$9, _7$$10, _8$$11, _9$$13, _10$$3, _11$$14, _12$$14, _14$$15, *_15$$15;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&injection_sub);
@@ -669,22 +895,39 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 	ZVAL_UNDEF(&argsclass);
 	ZVAL_UNDEF(&data);
 	ZVAL_UNDEF(&e);
+	ZVAL_UNDEF(&k);
+	ZVAL_UNDEF(&value);
+	ZVAL_UNDEF(&_18);
 	ZVAL_UNDEF(&_2$$4);
-	ZVAL_UNDEF(&_4$$4);
-	ZVAL_UNDEF(&_5$$3);
-	ZVAL_UNDEF(&_6$$8);
-	ZVAL_UNDEF(&_7$$8);
+	ZVAL_UNDEF(&_3$$5);
+	ZVAL_UNDEF(&_5$$9);
+	ZVAL_UNDEF(&_6$$9);
+	ZVAL_UNDEF(&_7$$10);
+	ZVAL_UNDEF(&_8$$11);
+	ZVAL_UNDEF(&_9$$13);
+	ZVAL_UNDEF(&_10$$3);
+	ZVAL_UNDEF(&_11$$14);
+	ZVAL_UNDEF(&_12$$14);
+	ZVAL_UNDEF(&_14$$15);
+	ZVAL_UNDEF(&args);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &injection);
+	zephir_fetch_params(1, 1, 1, &injection, &args_param);
+
+	if (!args_param) {
+		ZEPHIR_INIT_VAR(&args);
+		array_init(&args);
+	} else {
+		zephir_get_arrval(&args, args_param);
+	}
 
 
-
+	required = 0;
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
 	ZEPHIR_CALL_METHOD(&param, this_ptr, "parsereflection", NULL, 0, injection);
 	zephir_check_call_status();
-	zephir_is_iterable(&param, 0, "leevel/di/container.zep", 363);
+	zephir_is_iterable(&param, 0, "leevel/di/container.zep", 455);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&param), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -692,47 +935,103 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 
 		/* try_start_1: */
 
+			isRequireBad = 0;
 			ZEPHIR_CALL_METHOD(&argsclass, this_ptr, "parseparameterclass", &_1, 0, &item);
 			zephir_check_call_status_or_jump(try_end_1);
 			ZEPHIR_CALL_METHOD(&_2$$4, &item, "isdefaultvalueavailable", NULL, 0);
 			zephir_check_call_status_or_jump(try_end_1);
 			if (zephir_is_true(&argsclass)) {
-				ZEPHIR_CALL_METHOD(&data, this_ptr, "parseclassinstance", &_3, 0, &argsclass);
+				ZEPHIR_CALL_METHOD(&_3$$5, &item, "isdefaultvalueavailable", NULL, 0);
 				zephir_check_call_status_or_jump(try_end_1);
+				if (zephir_array_key_exists(&args, &argsclass TSRMLS_CC)) {
+					ZEPHIR_OBS_NVAR(&data);
+					zephir_array_fetch(&data, &args, &argsclass, PH_NOISY, "leevel/di/container.zep", 430 TSRMLS_CC);
+				} else if (zephir_is_true(&_3$$5)) {
+					ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
+					zephir_check_call_status_or_jump(try_end_1);
+				} else {
+					ZEPHIR_CALL_METHOD(&data, this_ptr, "parseclassinstance", &_4, 0, &argsclass);
+					zephir_check_call_status_or_jump(try_end_1);
+				}
 			} else if (zephir_is_true(&_2$$4)) {
-				ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
-				zephir_check_call_status_or_jump(try_end_1);
+				zephir_read_property(&_5$$9, &item, SL("name"), PH_NOISY_CC | PH_READONLY);
+				if (zephir_array_key_exists(&args, &_5$$9 TSRMLS_CC)) {
+					ZEPHIR_OBS_NVAR(&data);
+					ZEPHIR_OBS_NVAR(&_6$$9);
+					zephir_read_property(&_6$$9, &item, SL("name"), PH_NOISY_CC);
+					zephir_array_fetch(&data, &args, &_6$$9, PH_NOISY, "leevel/di/container.zep", 437 TSRMLS_CC);
+				} else {
+					ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
+					zephir_check_call_status_or_jump(try_end_1);
+				}
 			} else {
-				ZEPHIR_INIT_NVAR(&data);
-				ZVAL_NULL(&data);
+				zephir_read_property(&_7$$10, &item, SL("name"), PH_NOISY_CC | PH_READONLY);
+				if (zephir_array_key_exists(&args, &_7$$10 TSRMLS_CC)) {
+					ZEPHIR_OBS_NVAR(&data);
+					ZEPHIR_OBS_NVAR(&_8$$11);
+					zephir_read_property(&_8$$11, &item, SL("name"), PH_NOISY_CC);
+					zephir_array_fetch(&data, &args, &_8$$11, PH_NOISY, "leevel/di/container.zep", 440 TSRMLS_CC);
+				} else {
+					isRequireBad = 1;
+					required++;
+				}
 			}
-			ZEPHIR_OBS_NVAR(&_4$$4);
-			zephir_read_property(&_4$$4, &item, SL("name"), PH_NOISY_CC);
-			zephir_array_update_zval(&result, &_4$$4, &data, PH_COPY | PH_SEPARATE);
+			if (isRequireBad == 0) {
+				ZEPHIR_OBS_NVAR(&_9$$13);
+				zephir_read_property(&_9$$13, &item, SL("name"), PH_NOISY_CC);
+				zephir_array_update_zval(&result, &_9$$13, &data, PH_COPY | PH_SEPARATE);
+			}
 
 		try_end_1:
 
 		if (EG(exception)) {
-			ZEPHIR_INIT_NVAR(&_5$$3);
-			ZVAL_OBJ(&_5$$3, EG(exception));
-			Z_ADDREF_P(&_5$$3);
-			if (zephir_instance_of_ev(&_5$$3, zephir_get_internal_ce(SL("reflectionexception")) TSRMLS_CC)) {
+			ZEPHIR_INIT_NVAR(&_10$$3);
+			ZVAL_OBJ(&_10$$3, EG(exception));
+			Z_ADDREF_P(&_10$$3);
+			if (zephir_instance_of_ev(&_10$$3, zephir_get_internal_ce(SL("reflectionexception")) TSRMLS_CC)) {
 				zend_clear_exception(TSRMLS_C);
-				ZEPHIR_CPY_WRT(&e, &_5$$3);
-				ZEPHIR_INIT_NVAR(&_6$$8);
-				object_init_ex(&_6$$8, spl_ce_InvalidArgumentException);
-				ZEPHIR_CALL_METHOD(&_7$$8, &e, "getmessage", NULL, 0);
+				ZEPHIR_CPY_WRT(&e, &_10$$3);
+				ZEPHIR_INIT_NVAR(&_11$$14);
+				object_init_ex(&_11$$14, spl_ce_InvalidArgumentException);
+				ZEPHIR_CALL_METHOD(&_12$$14, &e, "getmessage", NULL, 0);
 				zephir_check_call_status();
-				ZEPHIR_CALL_METHOD(NULL, &_6$$8, "__construct", &_8, 21, &_7$$8);
+				ZEPHIR_CALL_METHOD(NULL, &_11$$14, "__construct", &_13, 21, &_12$$14);
 				zephir_check_call_status();
-				zephir_throw_exception_debug(&_6$$8, "leevel/di/container.zep", 359 TSRMLS_CC);
+				zephir_throw_exception_debug(&_11$$14, "leevel/di/container.zep", 451 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
 				return;
 			}
 		}
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
-	RETURN_CCTOR(&result);
+	if (!(ZEPHIR_IS_EMPTY(&args))) {
+		ZEPHIR_CALL_FUNCTION(&_14$$15, "array_values", NULL, 36, &result);
+		zephir_check_call_status();
+		ZEPHIR_CPY_WRT(&result, &_14$$15);
+		zephir_is_iterable(&args, 0, "leevel/di/container.zep", 463);
+		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&args), _16$$15, _17$$15, _15$$15)
+		{
+			ZEPHIR_INIT_NVAR(&k);
+			if (_17$$15 != NULL) { 
+				ZVAL_STR_COPY(&k, _17$$15);
+			} else {
+				ZVAL_LONG(&k, _16$$15);
+			}
+			ZEPHIR_INIT_NVAR(&value);
+			ZVAL_COPY(&value, _15$$15);
+			if (Z_TYPE_P(&k) == IS_LONG) {
+				zephir_array_update_zval(&result, &k, &value, PH_COPY | PH_SEPARATE);
+			}
+		} ZEND_HASH_FOREACH_END();
+		ZEPHIR_INIT_NVAR(&value);
+		ZEPHIR_INIT_NVAR(&k);
+	}
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(return_value, &result);
+	ZEPHIR_INIT_VAR(&_18);
+	ZVAL_LONG(&_18, required);
+	zephir_array_fast_append(return_value, &_18);
+	RETURN_MM();
 
 }
 
@@ -819,7 +1118,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassInstance) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 21, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 404 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 509 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -875,7 +1174,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassFromContainer) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_1$$6, "__construct", NULL, 21, &_3$$6);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_1$$6, "leevel/di/container.zep", 431 TSRMLS_CC);
+			zephir_throw_exception_debug(&_1$$6, "leevel/di/container.zep", 536 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -889,7 +1188,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassFromContainer) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_5, "__construct", NULL, 21, &_7);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_5, "leevel/di/container.zep", 437 TSRMLS_CC);
+	zephir_throw_exception_debug(&_5, "leevel/di/container.zep", 542 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -934,7 +1233,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassNotExists) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$4, "__construct", NULL, 21, &_2$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$4, "leevel/di/container.zep", 456 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$4, "leevel/di/container.zep", 561 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -983,7 +1282,7 @@ PHP_METHOD(Leevel_Di_Container, parseReflection) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "leevel/di/container.zep", 478);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "leevel/di/container.zep", 583);
 	return;
 
 }
@@ -1011,9 +1310,9 @@ PHP_METHOD(Leevel_Di_Container, parseClosureReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionfunction")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 36, injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 37, injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 37);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 38);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1048,11 +1347,11 @@ PHP_METHOD(Leevel_Di_Container, parseMethodReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionmethod")));
-	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 510 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 510 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 38, &_0, &_1);
+	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 615 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 615 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 39, &_0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 39);
+	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 40);
 	zephir_check_call_status();
 	if (ZEPHIR_IS_EMPTY(&param)) {
 		ZEPHIR_INIT_NVAR(&param);
@@ -1092,9 +1391,9 @@ PHP_METHOD(Leevel_Di_Container, parseClassReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionclass")));
-	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 40, &injection);
+	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 41, &injection);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 41);
+	ZEPHIR_CALL_METHOD(&_0, &reflection, "isinstantiable", NULL, 42);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -1105,11 +1404,11 @@ PHP_METHOD(Leevel_Di_Container, parseClassReflection) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 21, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/di/container.zep", 531 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/di/container.zep", 636 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 42);
+	ZEPHIR_CALL_METHOD(&constructor, &reflection, "getconstructor", NULL, 43);
 	zephir_check_call_status();
 	if (zephir_is_true(&constructor)) {
 		ZEPHIR_CALL_METHOD(&param, &constructor, "getparameters", NULL, 0);
@@ -1153,9 +1452,9 @@ PHP_METHOD(Leevel_Di_Container, newInstanceArgs) {
 
 		ZEPHIR_INIT_VAR(&_0$$3);
 		object_init_ex(&_0$$3, zephir_get_internal_ce(SL("reflectionclass")));
-		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 40, classname);
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 41, classname);
 		zephir_check_call_status_or_jump(try_end_1);
-		ZEPHIR_RETURN_CALL_METHOD(&_0$$3, "newinstanceargs", NULL, 43, args);
+		ZEPHIR_RETURN_CALL_METHOD(&_0$$3, "newinstanceargs", NULL, 44, args);
 		zephir_check_call_status_or_jump(try_end_1);
 		RETURN_MM();
 
@@ -1171,9 +1470,9 @@ PHP_METHOD(Leevel_Di_Container, newInstanceArgs) {
 			ZEPHIR_CPY_WRT(&_2, &_1);
 			ZEPHIR_INIT_VAR(&_3$$4);
 			object_init_ex(&_3$$4, zephir_get_internal_ce(SL("reflectionclass")));
-			ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 40, classname);
+			ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 41, classname);
 			zephir_check_call_status();
-			ZEPHIR_RETURN_CALL_METHOD(&_3$$4, "newinstancewithoutconstructor", NULL, 44);
+			ZEPHIR_RETURN_CALL_METHOD(&_3$$4, "newinstancewithoutconstructor", NULL, 45);
 			zephir_check_call_status();
 			RETURN_MM();
 		}
@@ -1204,10 +1503,10 @@ PHP_METHOD(Leevel_Di_Container, parseAlias) {
 
 
 	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_0, "key", NULL, 45, &name);
+	ZEPHIR_CALL_FUNCTION(&_0, "key", NULL, 46, &name);
 	zephir_check_call_status();
 	zephir_array_fast_append(return_value, &_0);
-	ZEPHIR_CALL_FUNCTION(&_0, "current", NULL, 46, &name);
+	ZEPHIR_CALL_FUNCTION(&_0, "current", NULL, 47, &name);
 	zephir_check_call_status();
 	zephir_array_fast_append(return_value, &_0);
 	RETURN_MM();
@@ -1223,22 +1522,19 @@ PHP_METHOD(Leevel_Di_Container, parseAlias) {
 PHP_METHOD(Leevel_Di_Container, offsetExists) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *offset, offset_sub, _0, _1;
+	zval *offset, offset_sub;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&offset_sub);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &offset);
 
 
 
-	zephir_read_property(&_0, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalize", NULL, 0, offset);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "exists", NULL, 0, offset);
 	zephir_check_call_status();
-	RETURN_MM_BOOL(zephir_array_isset(&_0, &_1));
+	RETURN_MM();
 
 }
 
@@ -1270,25 +1566,25 @@ PHP_METHOD(Leevel_Di_Container, offsetGet) {
 /**
  * 实现 ArrayAccess::offsetSet
  *
- * @param string $name
+ * @param string $offset
  * @param mixed $value
  * @return void
  */
 PHP_METHOD(Leevel_Di_Container, offsetSet) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, *value, value_sub;
+	zval *offset, offset_sub, *value, value_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&offset_sub);
 	ZVAL_UNDEF(&value_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &name, &value);
+	zephir_fetch_params(1, 2, 0, &offset, &value);
 
 
 
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "bind", NULL, 0, name, value);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "bind", NULL, 0, offset, value);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1297,57 +1593,24 @@ PHP_METHOD(Leevel_Di_Container, offsetSet) {
 /**
  * 实现 ArrayAccess::offsetUnset
  *
- * @param string $name
+ * @param string $offset
  * @return void
  */
 PHP_METHOD(Leevel_Di_Container, offsetUnset) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name = NULL, name_sub, prop, item, _0, _1, *_2, _3$$3, _4$$4;
+	zval *offset, offset_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
-	ZVAL_UNDEF(&prop);
-	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&offset_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
-
-	ZEPHIR_SEPARATE_PARAM(name);
+	zephir_fetch_params(1, 1, 0, &offset);
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalize", NULL, 0, name);
+
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "remove", NULL, 0, offset);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(name, &_0);
-	ZEPHIR_INIT_VAR(&prop);
-	zephir_create_array(&prop, 3, 0 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "services");
-	zephir_array_fast_append(&prop, &_1);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "instances");
-	zephir_array_fast_append(&prop, &_1);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "singletons");
-	zephir_array_fast_append(&prop, &_1);
-	zephir_is_iterable(&prop, 0, "leevel/di/container.zep", 633);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&prop), _2)
-	{
-		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _2);
-		ZEPHIR_OBS_NVAR(&_3$$3);
-		zephir_read_property_zval(&_3$$3, this_ptr, &item, PH_NOISY_CC);
-		if (zephir_array_isset(&_3$$3, name)) {
-			ZEPHIR_OBS_NVAR(&_4$$4);
-			zephir_read_property_zval(&_4$$4, this_ptr, &item, PH_NOISY_CC);
-			zephir_array_unset(&_4$$4, name, PH_SEPARATE);
-		}
-	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&item);
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -1440,7 +1703,7 @@ PHP_METHOD(Leevel_Di_Container, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 668 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 760 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

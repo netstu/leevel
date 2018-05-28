@@ -160,7 +160,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, getOriginalExtension) {
 
 	zephir_read_property(&_0, this_ptr, SL("originalName"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_LONG(&_1, 4);
-	ZEPHIR_RETURN_CALL_FUNCTION("pathinfo", NULL, 55, &_0, &_1);
+	ZEPHIR_RETURN_CALL_FUNCTION("pathinfo", NULL, 56, &_0, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 

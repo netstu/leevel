@@ -66,6 +66,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/database.zep.c
 	leevel/database/provider/register.zep.c
 	leevel/db.zep.c
+	leevel/di/normalizeexception.zep.c
 	leevel/encryption.zep.c
 	leevel/encryption/provider/register.zep.c
 	leevel/event.zep.c

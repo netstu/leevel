@@ -180,7 +180,7 @@ PHP_METHOD(Leevel_Event_Dispatch, run) {
 	ZEPHIR_CALL_METHOD(&listeners, this_ptr, "getlisteners", NULL, 0, &event);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&listeners);
-	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 52, &listeners);
+	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 53, &listeners);
 	ZEPHIR_UNREF(&listeners);
 	zephir_check_call_status();
 	zephir_is_iterable(&listeners, 0, "leevel/event/dispatch.zep", 108);

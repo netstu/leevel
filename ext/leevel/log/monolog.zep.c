@@ -599,7 +599,7 @@ PHP_METHOD(Leevel_Log_Monolog, getDailyFilePath) {
 
 
 	ZVAL_LONG(&_0, 4);
-	ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 55, &path, &_0);
+	ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 56, &path, &_0);
 	zephir_check_call_status();
 	if (zephir_is_true(&ext)) {
 		ZEPHIR_INIT_VAR(&_1$$3);

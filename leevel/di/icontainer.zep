@@ -85,9 +85,25 @@ interface IContainer
     /**
      * 实例回调自动注入
      *
-     * @param callable $callback
+     * @param callable|array|string $callback
      * @param array $args
      * @return mixed
      */
     public function call(var callback, array args = []);
+
+    /**
+     * 删除服务和实例
+     *
+     * @param string $name
+     * @return void
+     */
+    public function remove(var name);
+
+    /**
+     * 服务或者实例是否存在
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function exists(var name);
 }

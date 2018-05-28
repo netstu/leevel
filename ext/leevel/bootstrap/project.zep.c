@@ -221,7 +221,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 	} else {
 		ZEPHIR_INIT_VAR(&_2$$4);
 		object_init_ex(&_2$$4, leevel_bootstrap_project_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 69, path);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 70, path);
 		zephir_check_call_status();
 		zend_update_static_property(leevel_bootstrap_project_ce, ZEND_STRL("project"), &_2$$4);
 		zephir_read_static_property_ce(&_3$$4, leevel_bootstrap_project_ce, SL("project"), PH_NOISY_CC | PH_READONLY);
@@ -262,7 +262,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, runWithExtension) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "leevel");
-	ZEPHIR_RETURN_CALL_FUNCTION("extension_loaded", NULL, 70, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("extension_loaded", NULL, 71, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -339,7 +339,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, setPath) {
 	zephir_update_property_zval(this_ptr, SL("path"), path);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathruntime", &_1, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "is_writeable", NULL, 71, &_0);
+	ZEPHIR_CALL_FUNCTION(&_2, "is_writeable", NULL, 72, &_0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
 		ZEPHIR_INIT_VAR(&_3$$3);
@@ -1540,7 +1540,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_STRING(&_7, "_composer.providers");
 	ZEPHIR_CALL_METHOD(&providers, &_6, "get", NULL, 0, &_7, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_8, "array_values", NULL, 72, &providers);
+	ZEPHIR_CALL_FUNCTION(&_8, "array_values", NULL, 36, &providers);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&providers, &_8);
 	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 712);

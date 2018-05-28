@@ -11,9 +11,12 @@ PHP_METHOD(Leevel_Di_Container, shareClosure);
 PHP_METHOD(Leevel_Di_Container, alias);
 PHP_METHOD(Leevel_Di_Container, make);
 PHP_METHOD(Leevel_Di_Container, call);
+PHP_METHOD(Leevel_Di_Container, remove);
+PHP_METHOD(Leevel_Di_Container, exists);
 PHP_METHOD(Leevel_Di_Container, normalize);
 PHP_METHOD(Leevel_Di_Container, getAlias);
 PHP_METHOD(Leevel_Di_Container, getInjectionObject);
+PHP_METHOD(Leevel_Di_Container, normalizeInjectionArgs);
 PHP_METHOD(Leevel_Di_Container, parseInjection);
 PHP_METHOD(Leevel_Di_Container, parseParameterClass);
 PHP_METHOD(Leevel_Di_Container, parseClassInstance);
@@ -73,6 +76,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_call, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, args, 1)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_remove, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_exists, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_normalize, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
@@ -86,8 +97,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_getinjectionobject, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, args, 1)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_normalizeinjectionargs, 0, 0, 2)
+	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_parseinjection, 0, 0, 1)
 	ZEND_ARG_INFO(0, injection)
+	ZEND_ARG_ARRAY_INFO(0, args, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_parseparameterclass, 0, 0, 1)
@@ -140,12 +157,12 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_offsetget, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_offsetset, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, offset)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container_offsetunset, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, offset)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_di_container___get, 0, 0, 1)
@@ -171,9 +188,12 @@ ZEPHIR_INIT_FUNCS(leevel_di_container_method_entry) {
 	PHP_ME(Leevel_Di_Container, alias, arginfo_leevel_di_container_alias, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, make, arginfo_leevel_di_container_make, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, call, arginfo_leevel_di_container_call, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Di_Container, remove, arginfo_leevel_di_container_remove, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Di_Container, exists, arginfo_leevel_di_container_exists, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Di_Container, normalize, arginfo_leevel_di_container_normalize, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Di_Container, getAlias, arginfo_leevel_di_container_getalias, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Di_Container, getInjectionObject, arginfo_leevel_di_container_getinjectionobject, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_Di_Container, normalizeInjectionArgs, arginfo_leevel_di_container_normalizeinjectionargs, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Di_Container, parseInjection, arginfo_leevel_di_container_parseinjection, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Di_Container, parseParameterClass, arginfo_leevel_di_container_parseparameterclass, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Di_Container, parseClassInstance, arginfo_leevel_di_container_parseclassinstance, ZEND_ACC_PROTECTED)

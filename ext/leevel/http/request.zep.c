@@ -4043,7 +4043,7 @@ PHP_METHOD(Leevel_Http_Request, parsePathInfo) {
 
 	if (!(Z_TYPE_P(&pathInfo) == IS_UNDEF) && Z_STRLEN_P(&pathInfo)) {
 		ZVAL_LONG(&_0$$3, 4);
-		ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 55, &pathInfo, &_0$$3);
+		ZEPHIR_CALL_FUNCTION(&ext, "pathinfo", NULL, 56, &pathInfo, &_0$$3);
 		zephir_check_call_status();
 		if (zephir_is_true(&ext)) {
 			ZVAL_LONG(&_1$$4, 0);

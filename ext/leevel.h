@@ -61,6 +61,7 @@
 #include "leevel/database.zep.h"
 #include "leevel/database/provider/register.zep.h"
 #include "leevel/db.zep.h"
+#include "leevel/di/normalizeexception.zep.h"
 #include "leevel/encryption.zep.h"
 #include "leevel/encryption/provider/register.zep.h"
 #include "leevel/event.zep.h"

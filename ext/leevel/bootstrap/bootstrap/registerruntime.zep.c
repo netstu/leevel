@@ -73,7 +73,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 
 	zephir_update_property_zval(this_ptr, SL("project"), project);
 	ZVAL_LONG(&_0, 32767);
-	ZEPHIR_CALL_FUNCTION(NULL, "error_reporting", NULL, 63, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "error_reporting", NULL, 64, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_1);
 	zephir_create_array(&_1, 2, 0 TSRMLS_CC);
@@ -81,7 +81,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "setErrorHandle");
 	zephir_array_fast_append(&_1, &_2);
-	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 64, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 65, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
@@ -89,7 +89,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "setExceptionHandler");
 	zephir_array_fast_append(&_3, &_2);
-	ZEPHIR_CALL_FUNCTION(NULL, "set_exception_handler", NULL, 65, &_3);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_exception_handler", NULL, 66, &_3);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_4);
 	zephir_create_array(&_4, 2, 0 TSRMLS_CC);
@@ -97,7 +97,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "registerShutdownFunction");
 	zephir_array_fast_append(&_4, &_2);
-	ZEPHIR_CALL_FUNCTION(NULL, "register_shutdown_function", NULL, 66, &_4);
+	ZEPHIR_CALL_FUNCTION(NULL, "register_shutdown_function", NULL, 67, &_4);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_5, project, "environment", NULL, 0);
 	zephir_check_call_status();
@@ -106,7 +106,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 		ZVAL_STRING(&_6$$3, "display_errors");
 		ZEPHIR_INIT_VAR(&_7$$3);
 		ZVAL_STRING(&_7$$3, "Off");
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_6$$3, &_7$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 68, &_6$$3, &_7$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();
@@ -159,7 +159,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setErrorHandle) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "error_reporting", NULL, 63);
+	ZEPHIR_CALL_FUNCTION(&_0, "error_reporting", NULL, 64);
 	zephir_check_call_status();
 	if (!(((int) (zephir_get_numberval(&_0)) & code))) {
 		RETURN_MM_NULL();
@@ -168,7 +168,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setErrorHandle) {
 	object_init_ex(&_1, zephir_get_internal_ce(SL("errorexception")));
 	ZVAL_LONG(&_2, 0);
 	ZVAL_LONG(&_3, code);
-	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 68, &description, &_2, &_3, file, line);
+	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 69, &description, &_2, &_3, file, line);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_1, "leevel/bootstrap/bootstrap/registerruntime.zep", 83 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
@@ -194,7 +194,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, registerShutdownFunction)
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 50);
+	ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 51);
 	zephir_check_call_status();
 	_0 = zephir_is_true(&error);
 	if (_0) {

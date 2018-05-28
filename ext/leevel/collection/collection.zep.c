@@ -204,7 +204,7 @@ PHP_METHOD(Leevel_Collection_Collection, current) {
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("current", NULL, 46, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("current", NULL, 47, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -226,7 +226,7 @@ PHP_METHOD(Leevel_Collection_Collection, key) {
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_FUNCTION("key", NULL, 45, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("key", NULL, 46, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

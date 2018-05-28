@@ -200,7 +200,7 @@ PHP_METHOD(Leevel_Session_Session, start) {
 	ZVAL_STRING(&_5, "session.auto_start");
 	ZEPHIR_INIT_VAR(&_6);
 	ZVAL_STRING(&_6, "0");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_5, &_6);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 68, &_5, &_6);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_5);
 	ZVAL_STRING(&_5, "id");
@@ -1714,7 +1714,7 @@ PHP_METHOD(Leevel_Session_Session, setCookieDomain) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "session.cookie_domain");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_0, &domain);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 68, &_0, &domain);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1774,12 +1774,12 @@ PHP_METHOD(Leevel_Session_Session, setCacheExpire) {
 	ZEPHIR_INIT_VAR(&_2);
 	ZVAL_STRING(&_2, "session.gc_maxlifetime");
 	ZVAL_LONG(&_0, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 67, &_2, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 68, &_2, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "session.cookie_lifetime");
 	ZVAL_LONG(&_0, second);
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 67, &_2, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_3, 68, &_2, &_0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1806,13 +1806,13 @@ PHP_METHOD(Leevel_Session_Session, setUseCookies) {
 	ZVAL_STRING(&_0, "session.use_cookies");
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "1");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 67, &_0, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 68, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "session.use_trans_sid");
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "0");
-	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 67, &_0, &_1);
+	ZEPHIR_CALL_FUNCTION(NULL, "ini_set", &_2, 68, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -1901,7 +1901,7 @@ PHP_METHOD(Leevel_Session_Session, setGcProbability) {
 		ZEPHIR_INIT_VAR(&_3$$3);
 		ZVAL_STRING(&_3$$3, "session.gc_probability");
 		ZVAL_LONG(&_4$$3, probability);
-		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 67, &_3$$3, &_4$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "ini_set", NULL, 68, &_3$$3, &_4$$3);
 		zephir_check_call_status();
 	}
 	ZEPHIR_MM_RESTORE();

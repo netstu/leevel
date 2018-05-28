@@ -131,6 +131,7 @@ class Container implements IContainer, ArrayAccess {
 		if is_null(service) {
 			let service = name;
 		}
+
 		let this->instances[name] = service;
 
 		return this;
@@ -192,7 +193,7 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	public function alias(var alias, var value = null)
 	{
-		var key, item;
+		var key, item, tmp;
 
 		if typeof alias == "array" {
 			for key,item in alias {
@@ -202,8 +203,9 @@ class Container implements IContainer, ArrayAccess {
 				this->alias(key, item);
 			}
 		} else {
-			let value = (array) value;
-			for item in value {
+			let tmp = is_array(value) ? value : [value];
+
+			for item in tmp {
 				let this->alias[item] = alias;
 			}
 		}
@@ -265,22 +267,77 @@ class Container implements IContainer, ArrayAccess {
 	/**
 	 * 实例回调自动注入
 	 *
-	 * @param callable $callback
+	 * @param callable|array|string $callback
 	 * @param array $args
 	 * @return mixed
 	 */
 	public function call(var callback, array args = [])
 	{
-		var temp = [];
+		boolean isStatic = false;
 
-		if empty args {
-			let temp = this->parseInjection(callback);
-		} else {
-			let temp = args;
+		if is_string(callback) {
+			if strpos(callback, "@") !== false {
+				let callback = explode("@", callback);
+			} elseif strpos(callback, "::") !== false {
+				let callback = explode("::", callback);
+            	let isStatic = true;
+			}
 		}
 
-		return call_user_func_array(callback, temp);
+        if isStatic === false && is_array(callback) {
+            if ! is_object(callback[0]) {
+                if ! is_string(callback[0]) {
+                    throw new InvalidArgumentException("The classname must be string.");
+                }
+
+                let callback[0] = this->getInjectionObject(callback[0]);
+            }
+
+            if ! isset callback[1] || empty callback[1] {
+                let callback[1] = method_exists(callback[0], "handle") ? "handle" : "run";
+            }
+        }
+
+		return call_user_func_array(callback, this->normalizeInjectionArgs(callback, args));
 	}
+
+	/**
+     * 删除服务和实例
+     *
+     * @param string $name
+     * @return void
+     */
+    public function remove(var name)
+    {
+		let name = this->normalize(name);
+
+		if isset this->services[name] {
+			unset this->services[name];
+		}
+
+		if isset this->instances[name] {
+			unset this->instances[name];
+		}
+
+		if isset this->instances[name] {
+			unset this->instances[name];
+		}
+    }
+
+    /**
+     * 服务或者实例是否存在
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function exists(var name)
+    {
+    	let name = this->normalize(name);
+
+		let name = this->getAlias(name);
+
+		return isset this->services[name] || isset this->instances[name];
+    }
 
 	/**
 	 * 统一去掉前面的斜杠
@@ -313,30 +370,50 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	protected function getInjectionObject(var classname, array args = [])
 	{
-		var temp = [];
+		if interface_exists(classname) {
+            throw new NormalizeException(sprintf("Interface %s can not be normalize because not binded.", classname));   
+        }
 
-		if ! class_exists(classname) {
-			return false;
-		}
+        if ! class_exists(classname) {
+            return classname;
+        }
 
-		if empty args {
-			let temp = this->parseInjection(classname);
-		} else {
-			let temp = args;
-		}
-
-		return this->newInstanceArgs(classname, temp);
+		return this->newInstanceArgs(classname, this->normalizeInjectionArgs(classname, args));
 	}
+
+	/**
+     * 格式化依赖参数
+     *
+     * @param mixed $value
+     * @param array $args
+     * @return array|void
+     */
+    protected function normalizeInjectionArgs(var value, array args)
+    {
+    	var tmp, required, tmpArgs;
+
+        let tmp = this->parseInjection(value, args);
+        let tmpArgs = tmp[0];
+        let required = tmp[1];
+
+        if count(tmpArgs) < required {
+            throw new NormalizeException(sprintf("There are %d required args,but %d gived.", required, count(tmpArgs)));
+        }
+
+        return tmpArgs;
+    }
 
 	/**
 	 * 分析自动依赖注入
 	 *
 	 * @param mixed $injection
+     * @param array $args
 	 * @return array
 	 */
-	protected function parseInjection(var injection)
+	protected function parseInjection(var injection, array args = [])
 	{
-		var result, param, item, argsclass, data, e;
+		var result, param, item, argsclass, data, e, k, value, isRequireBad;
+		int required = 0;
 
 		let result = [];
 
@@ -344,23 +421,51 @@ class Container implements IContainer, ArrayAccess {
 
 		for item in param {
 			try {
+				let isRequireBad = false;
+
 				let argsclass = this->parseParameterClass(item);
 
 				if (argsclass) {
-					let data = this->parseClassInstance(argsclass);
+					if array_key_exists(argsclass, args) {
+                        let data = args[argsclass];
+                    } elseif item->isDefaultValueAvailable() {
+                        let data = item->getDefaultValue();
+                    } else {
+                        let data = this->parseClassInstance(argsclass);
+                    }
 				} elseif (item->isDefaultValueAvailable()) {
-					let data = item->getDefaultValue();
+					let data = array_key_exists(item->name, args) ? args[item->name] : item->getDefaultValue();
 				} else {
-					let data = null;
+					if array_key_exists(item->name, args) {
+                        let data = args[item->name];
+                    } else {
+                        let isRequireBad = true;
+                        let required++;                  
+                    }
 				}
 
-				let result[item->name] = data;
+				if isRequireBad === false {
+					let result[item->name] = data;
+				}
 			} catch ReflectionException, e {
 				throw new InvalidArgumentException(e->getMessage());
 			}
 		}
 
-		return result;
+		if ! empty args {
+            let result = array_values(result);
+
+            for k, value in args {
+                if is_int(k) {
+                    let result[k] = value;
+                }
+            }
+        }
+
+		return [
+			result,
+			required
+        ];
 	}
 
 	/**
@@ -581,7 +686,7 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	public function offsetExists(var offset)
 	{
-		return isset this->services[this->normalize(offset)];
+		return this->exists(offset);
 	}
 
 	/**
@@ -595,41 +700,27 @@ class Container implements IContainer, ArrayAccess {
 		return this->make(offset);
 	}
 
-	/**
-	 * 实现 ArrayAccess::offsetSet
-	 *
-	 * @param string $name
-	 * @param mixed $value
-	 * @return void
-	 */
-	public function offsetSet(var name, var value)
+    /**
+     * 实现 ArrayAccess::offsetSet
+     *
+     * @param string $offset
+     * @param mixed $value
+     * @return void
+     */
+    public function offsetSet(var offset, var value)
 	{
-		return this->bind(name, value);
+		return this->bind(offset, value);
 	}
 
-	/**
-	 * 实现 ArrayAccess::offsetUnset
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function offsetUnset(var name)
+    /**
+     * 实现 ArrayAccess::offsetUnset
+     *
+     * @param string $offset
+     * @return void
+     */
+    public function offsetUnset(var offset)
 	{
-		var prop, item;
-
-		let name = this->normalize(name);
-
-		let prop = [
-			"services",
-			"instances",
-			"singletons"
-		];
-
-		for item in prop {
-			if isset this->{item}[name] {
-				unset this->{item}[name];
-			}
-		}
+		this->remove(offset);
 	}
 
 	/**
@@ -653,6 +744,7 @@ class Container implements IContainer, ArrayAccess {
 	public function __set(var key, var service)
 	{
 		this->offsetSet(key, service);
+
 		return this;
 	}
 
