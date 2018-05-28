@@ -69,11 +69,3 @@ ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, hasListeners);
  */
 ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, deleteListeners);
 
-/**
- * 设置是否严格匹配事件
- *
- * @param bool $event
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, strict);
-

@@ -148,13 +148,17 @@ PHP_METHOD(Leevel_Event_Subject, detach) {
  */
 PHP_METHOD(Leevel_Event_Subject, notify) {
 
-	zval observer, _0, _1, *_2;
+	zval _0, _1, _2, _3, _4$$3, _5$$3, _6$$3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&observer);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_5$$3);
+	ZVAL_UNDEF(&_6$$3);
 
 	ZEPHIR_MM_GROW();
 
@@ -162,15 +166,24 @@ PHP_METHOD(Leevel_Event_Subject, notify) {
 	zephir_get_args(&_0);
 	zephir_update_property_zval(this_ptr, SL("notifyArgs"), &_0);
 	zephir_read_property(&_1, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "leevel/event/subject.zep", 97);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
-	{
-		ZEPHIR_INIT_NVAR(&observer);
-		ZVAL_COPY(&observer, _2);
-		ZEPHIR_CALL_METHOD(NULL, &observer, "update", NULL, 0, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_1, "rewind", NULL, 0);
+	zephir_check_call_status();
+	while (1) {
+		zephir_read_property(&_2, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&_3, &_2, "valid", NULL, 0);
 		zephir_check_call_status();
-	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&observer);
+		if (!(zephir_is_true(&_3))) {
+			break;
+		}
+		zephir_read_property(&_4$$3, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(&_5$$3, &_4$$3, "current", NULL, 0);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, &_5$$3, "update", NULL, 0, this_ptr);
+		zephir_check_call_status();
+		zephir_read_property(&_6$$3, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_METHOD(NULL, &_6$$3, "next", NULL, 0);
+		zephir_check_call_status();
+	}
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -206,7 +219,7 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 		ZEPHIR_CALL_METHOD(&_1$$3, &_0$$3, "make", NULL, 0, observer);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(observer, &_1$$3);
-		if (ZEPHIR_IS_FALSE_IDENTICAL(observer)) {
+		if (Z_TYPE_P(observer) == IS_STRING) {
 			ZEPHIR_INIT_VAR(&_2$$4);
 			object_init_ex(&_2$$4, spl_ce_InvalidArgumentException);
 			ZEPHIR_INIT_VAR(&_3$$4);
@@ -215,7 +228,7 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 21, &_4$$4);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_2$$4, "leevel/event/subject.zep", 111 TSRMLS_CC);
+			zephir_throw_exception_debug(&_2$$4, "leevel/event/subject.zep", 112 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -225,7 +238,7 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 		ZEPHIR_CALL_METHOD(NULL, &_5$$5, "attach", NULL, 0, observer);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "leevel/event/subject.zep", 118);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "leevel/event/subject.zep", 119);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();

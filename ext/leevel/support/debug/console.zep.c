@@ -103,7 +103,7 @@ PHP_METHOD(Leevel_Support_Debug_Console, trace) {
 	}
 	ZEPHIR_CALL_SELF(&trace, "normalizelog", NULL, 0, &log);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&include, "get_included_files", NULL, 146);
+	ZEPHIR_CALL_FUNCTION(&include, "get_included_files", NULL, 147);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_8);
 	zephir_fast_join_str(&_8, SL("\\n"), &include TSRMLS_CC);
@@ -147,7 +147,7 @@ PHP_METHOD(Leevel_Support_Debug_Console, jsonTrace) {
 
 	ZEPHIR_CALL_SELF(&trace, "normalizelog", NULL, 0, &log);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&include, "get_included_files", NULL, 146);
+	ZEPHIR_CALL_FUNCTION(&include, "get_included_files", NULL, 147);
 	zephir_check_call_status();
 	ZEPHIR_SINIT_VAR(_0);
 	ZVAL_LONG(&_0, zephir_fast_count_int(&include TSRMLS_CC));

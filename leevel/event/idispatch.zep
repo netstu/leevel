@@ -66,12 +66,4 @@ interface IDispatch
      * @return void
      */
     public function deleteListeners(string event);
-    
-    /**
-     * 设置是否严格匹配事件
-     *
-     * @param bool $event
-     * @return $this
-     */
-    public function strict(boolean strict);
 }

@@ -87,12 +87,13 @@ class Subject implements ISubject, SplSubject
      */
     public function notify() -> void
     {
-        var observer;
-    
         let this->notifyArgs = func_get_args();
 
-        for observer in this->observers {
-            observer->update(this);
+        this->observers->rewind();
+        
+        while this->observers->valid() {
+            this->observers->current()->update(this);
+            this->observers->next();
         }
     }
     
@@ -107,7 +108,7 @@ class Subject implements ISubject, SplSubject
         if is_string(observer) {
             let observer = this->container->make(observer);
             
-            if observer === false {
+            if is_string(observer) {
                 throw new InvalidArgumentException(sprintf("Observer is invalid."));
             }
         }

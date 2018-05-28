@@ -51,23 +51,14 @@ class Dispatch implements IDispatch
 	protected wildcards = [];
 	
 	/**
-	 * 通配符是否严格匹配
-	 *
-	 * @var boolean
-	 */
-	protected strict = false;
-	
-	/**
 	 * 创建一个事件解析器
 	 *
 	 * @param \Leevel\Di\IContainer $container
-	 * @param bool $event
 	 * @return void
 	 */
-	public function __construct(<IContainer> container, boolean strict = false)
+	public function __construct(<IContainer> container)
 	{
 		let this->container = container;
-		let this->strict = strict;
 	}
 	
 	/**
@@ -87,6 +78,7 @@ class Dispatch implements IDispatch
 			let event = get_class(event);
 		} else {
 			let objects = this->container->make(event);
+
 			if ! (is_object(objects)) {
 				throw new RuntimeException(sprintf("Event %s is invalid.", event));
 			}
@@ -151,10 +143,10 @@ class Dispatch implements IDispatch
 		}
 
 		for key, item in this->wildcards {
-			let key = this->prepareRegexForWildcard(key, this->strict);
-			let event = str_replace("\\", "\\\\", event);
+			let key = this->prepareRegexForWildcard(key);
 
 			let res = null;
+
 			if preg_match(key, event, res) {
 				for priority, value in item {
 					if ! (isset listeners[priority]) {
@@ -175,7 +167,7 @@ class Dispatch implements IDispatch
 	 * @param string $event
 	 * @return bool
 	 */
-	public function hasListeners(string event) -> bool
+	public function hasListeners(string event) -> boolean
 	{
 		return isset this->listeners[event] || isset this->wildcards[event];
 	}
@@ -196,19 +188,7 @@ class Dispatch implements IDispatch
 			unset this->wildcards[event];
 		}
 	}
-	
-	/**
-	 * 设置是否严格匹配事件
-	 *
-	 * @param bool $event
-	 * @return $this
-	 */
-	public function strict(boolean strict)
-	{
-		let this->strict = strict;
-		return this;
-	}
-	
+
 	/**
 	 * 创建监听器观察者角色主体
 	 *
@@ -231,61 +211,14 @@ class Dispatch implements IDispatch
 	/**
 	 * 通配符正则
 	 *
-	 * @param string $strFoo
-	 * @param bool $strict
+	 * @param string $regex
 	 * @return string
 	 */
-	protected function prepareRegexForWildcard(regex, boolean strict = true) -> string
+	protected function prepareRegexForWildcard(var regex) -> string
 	{
-		return "/^" . str_replace("6084fef57e91a6ecb13fff498f9275a7", "(\\S+)", this->escapeRegexCharacter(str_replace("*", "6084fef57e91a6ecb13fff498f9275a7", regex))) . ( strict ? "$" : "") . "/";
-	}
-	
-	/**
-	 * 转义正则表达式特殊字符
-	 *
-	 * @param string $txt
-	 * @return string
-	 */
-	protected function escapeRegexCharacter(string txt) -> string
-	{
-		let txt = str_replace([
-			"$", 
-			"/", 
-			"?", 
-			"*", 
-			".", 
-			"!", 
-			"-", 
-			"+", 
-			"(", 
-			")", 
-			"[", 
-			"]", 
-			",", 
-			"{", 
-			"}", 
-			"|", 
-			"\\"
-		], [
-			"\\$", 
-			"\\/", 
-			"\\?", 
-			"\\*", 
-			"\\.", 
-			"\\!", 
-			"\\-", 
-			"\\+", 
-			"\\(", 
-			"\\)", 
-			"\\[", 
-			"\\]", 
-			"\\,", 
-			"\\{", 
-			"\\}", 
-			"\\|", 
-			"\\\\\\\\"
-		], txt);
+		let regex = preg_quote(regex, "/");
+        let regex = "/^" . str_replace("\\*", "(\\S+)", regex) . "$/";
 
-		return txt;
+        return regex;
 	}
 }
