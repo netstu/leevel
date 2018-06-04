@@ -17,6 +17,7 @@ namespace Leevel\Bootstrap;
 
 use Exception;
 use Throwable;
+use ErrorException;
 use Leevel\Http\Request;
 use Leevel\Router\Router;
 use Leevel\Kernel\IKernel;
@@ -26,7 +27,6 @@ use Leevel\Http\ApiResponse;
 use Leevel\Http\JsonResponse;
 use Leevel\Http\RedirectResponse;
 use Leevel\Support\Debug\Console;
-use Leevel\Kernel\Exception\FatalThrowableError;
 
 /**
  * 内核执行
@@ -98,7 +98,14 @@ abstract class Kernel implements IKernel
 
             let response = this->renderException(request, e);
         } catch Throwable, e {
-            let fatalException = new FatalThrowableError(e);
+            let fatalException = new ErrorException(     
+                e->getMessage(),
+                e->getCode(),
+                E_ERROR,
+                e->getFile(),
+                e->getLine(),
+                e->getPrevious()
+            );
 
             this->reportException(fatalException);
 
