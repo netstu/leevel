@@ -54,7 +54,7 @@
     },
     "namespace": "leevel",
     "name": "leevel",
-    "description": "",
+    "description": "The Leevel Framework To Rebuild QueryPHP",
     "author": "Xiangmin Liu <635750556@qq.com>",
     "version": "1.0.0",
     "verbose": false,
