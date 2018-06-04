@@ -9,6 +9,7 @@ PHP_METHOD(Leevel_Event_Dispatch, listeners);
 PHP_METHOD(Leevel_Event_Dispatch, getListeners);
 PHP_METHOD(Leevel_Event_Dispatch, hasListeners);
 PHP_METHOD(Leevel_Event_Dispatch, deleteListeners);
+PHP_METHOD(Leevel_Event_Dispatch, normalizeEvent);
 PHP_METHOD(Leevel_Event_Dispatch, makeSubject);
 PHP_METHOD(Leevel_Event_Dispatch, prepareRegexForWildcard);
 zend_object *zephir_init_properties_Leevel_Event_Dispatch(zend_class_entry *class_type TSRMLS_DC);
@@ -35,6 +36,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_deletelisteners, 0, 0, 1)
 	ZEND_ARG_INFO(0, event)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_normalizeevent, 0, 0, 1)
+	ZEND_ARG_INFO(0, event)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_makesubject, 0, 0, 1)
 	ZEND_ARG_ARRAY_INFO(0, listeners, 0)
 ZEND_END_ARG_INFO()
@@ -50,6 +55,7 @@ ZEPHIR_INIT_FUNCS(leevel_event_dispatch_method_entry) {
 	PHP_ME(Leevel_Event_Dispatch, getListeners, arginfo_leevel_event_dispatch_getlisteners, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Event_Dispatch, hasListeners, arginfo_leevel_event_dispatch_haslisteners, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Event_Dispatch, deleteListeners, arginfo_leevel_event_dispatch_deletelisteners, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Event_Dispatch, normalizeEvent, arginfo_leevel_event_dispatch_normalizeevent, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Event_Dispatch, makeSubject, arginfo_leevel_event_dispatch_makesubject, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Event_Dispatch, prepareRegexForWildcard, arginfo_leevel_event_dispatch_prepareregexforwildcard, ZEND_ACC_PROTECTED)
 	PHP_FE_END

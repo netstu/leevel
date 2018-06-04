@@ -68,29 +68,27 @@ class Dispatch implements IDispatch
 	 */
 	public function run()
 	{
-		var event, objects, listeners, items, params = [];
+		var event, listeners, items, params = [], name;
 
 		let params = func_get_args();
 		let event = array_shift(params);
 	
 		if is_object(event) {
-			let objects = event;
-			let event = get_class(event);
+			let name = get_class($event);
 		} else {
-			let objects = this->container->make(event);
+			let name = event;
 
-			if ! (is_object(objects)) {
-				throw new RuntimeException(sprintf("Event %s is invalid.", event));
-			}
+			// This may return object or string
+            let event = this->container->make(event);
 		}
 
-		array_unshift(params, objects);
+		array_unshift(params, event);
 
-		if ! (this->hasListeners(event)) {
+		if ! (this->hasListeners(name)) {
 			return;
 		}
 
-		let listeners = this->getListeners(event);
+		let listeners = this->getListeners(name);
 		ksort(listeners);
 
 		for items in listeners {
@@ -102,7 +100,7 @@ class Dispatch implements IDispatch
 	/**
 	 * 注册监听器
 	 *
-	 * @param string|array $event
+	 * @param string|array|object $event
 	 * @param mixed $listener
 	 * @param int $priority
 	 * @return void
@@ -115,9 +113,12 @@ class Dispatch implements IDispatch
 			let temp[] = event;
 			let event = temp;
 		}
+
 		let priority = intval(priority);
 
 		for item in event {
+			let item = this->normalizeEvent(item);
+
 			if strpos(item, "*") !== false {
 				let this->wildcards[item][priority][] = listener;
 			} else {
@@ -129,14 +130,16 @@ class Dispatch implements IDispatch
 	/**
 	 * 获取一个事件监听器
 	 *
-	 * @param string $event
+	 * @param string|object $event
 	 * @return array
 	 */
-	public function getListeners(string event) -> array
+	public function getListeners(var event) -> array
 	{
 		var listeners, key, item, priority, value, res;
 	
 		let listeners = [];
+
+		let event = this->normalizeEvent(event);
 
 		if isset this->listeners[event] {
 			let listeners = this->listeners[event];
@@ -164,22 +167,26 @@ class Dispatch implements IDispatch
 	/**
 	 * 判断事件监听器是否存在
 	 *
-	 * @param string $event
+	 * @param string|object $event
 	 * @return bool
 	 */
-	public function hasListeners(string event) -> boolean
+	public function hasListeners(var event) -> boolean
 	{
+		let event = this->normalizeEvent(event);
+
 		return isset this->listeners[event] || isset this->wildcards[event];
 	}
 	
 	/**
 	 * 删除一个事件所有监听器
 	 *
-	 * @param string $event
+	 * @param string|object $event
 	 * @return void
 	 */
-	public function deleteListeners(string event)
+	public function deleteListeners(var event)
 	{
+		let event = this->normalizeEvent(event);
+
 		if isset this->listeners[event] {
 			unset this->listeners[event];
 		}
@@ -188,6 +195,17 @@ class Dispatch implements IDispatch
 			unset this->wildcards[event];
 		}
 	}
+
+	/**
+     * 格式化事件名字
+     *
+     * @param string|object $event
+     * @return void
+     */
+    protected function normalizeEvent(var event)
+    {
+        return is_object(event) ? get_class(event) : event;
+    }
 
 	/**
 	 * 创建监听器观察者角色主体
@@ -217,7 +235,7 @@ class Dispatch implements IDispatch
 	protected function prepareRegexForWildcard(var regex) -> string
 	{
 		let regex = preg_quote(regex, "/");
-        let regex = "/^" . str_replace("\\*", "(\\S+)", regex) . "$/";
+        let regex = "/^" . str_replace("\\*", "(\\S)", regex) . "$/";
 
         return regex;
 	}
