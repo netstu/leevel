@@ -52,6 +52,8 @@ class I18n implements II18n
     public function __construct(string i18n)
     {
         let this->i18n =  i18n;
+
+        let this->text[i18n] = [];
     }
 
     /**
@@ -61,7 +63,7 @@ class I18n implements II18n
      */
     public function getText()
     {
- 		var arr, i18n;
+ 		var arr;
 
   		let arr = func_get_args(); 
 
@@ -69,9 +71,8 @@ class I18n implements II18n
             return "";
         }
       
-        let i18n = this->getI18n();
-        if isset this->text[i18n][arr[0]] {
-        	let arr[0] = this->text[i18n][arr[0]];
+        if isset this->text[this->i18n][arr[0]] {
+        	let arr[0] = this->text[this->i18n][arr[0]];
         }
 
         if count(arr) > 1 {
