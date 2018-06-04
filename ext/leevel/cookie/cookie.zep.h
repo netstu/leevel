@@ -9,8 +9,8 @@ PHP_METHOD(Leevel_Cookie_Cookie, put);
 PHP_METHOD(Leevel_Cookie_Cookie, push);
 PHP_METHOD(Leevel_Cookie_Cookie, merge);
 PHP_METHOD(Leevel_Cookie_Cookie, pop);
-PHP_METHOD(Leevel_Cookie_Cookie, arrays);
-PHP_METHOD(Leevel_Cookie_Cookie, arraysDelete);
+PHP_METHOD(Leevel_Cookie_Cookie, arr);
+PHP_METHOD(Leevel_Cookie_Cookie, arrDelete);
 PHP_METHOD(Leevel_Cookie_Cookie, get);
 PHP_METHOD(Leevel_Cookie_Cookie, delete);
 PHP_METHOD(Leevel_Cookie_Cookie, clear);
@@ -59,14 +59,14 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_pop, 0, 0, 2)
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_arrays, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_arr, 0, 0, 2)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, keys)
 	ZEND_ARG_INFO(0, value)
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_arraysdelete, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_arrdelete, 0, 0, 2)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, keys)
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
@@ -130,8 +130,8 @@ ZEPHIR_INIT_FUNCS(leevel_cookie_cookie_method_entry) {
 	PHP_ME(Leevel_Cookie_Cookie, push, arginfo_leevel_cookie_cookie_push, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, merge, arginfo_leevel_cookie_cookie_merge, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, pop, arginfo_leevel_cookie_cookie_pop, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Cookie_Cookie, arrays, arginfo_leevel_cookie_cookie_arrays, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Cookie_Cookie, arraysDelete, arginfo_leevel_cookie_cookie_arraysdelete, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Cookie_Cookie, arr, arginfo_leevel_cookie_cookie_arr, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Cookie_Cookie, arrDelete, arginfo_leevel_cookie_cookie_arrdelete, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, get, arginfo_leevel_cookie_cookie_get, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, delete, arginfo_leevel_cookie_cookie_delete, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Cookie_Cookie, clear, arginfo_leevel_cookie_cookie_clear, ZEND_ACC_PUBLIC)

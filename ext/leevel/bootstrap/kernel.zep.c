@@ -91,9 +91,8 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, __construct) {
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, handle) {
 
-	zend_class_entry *_2$$6 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *request, request_sub, response, e, fatalException, _1, _0$$3;
+	zval *request, request_sub, response, e, fatalException, _1, _0$$3, _2$$6, _3$$6, _4$$6, _5$$6, _6$$6, _7$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&request_sub);
@@ -102,6 +101,12 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, handle) {
 	ZVAL_UNDEF(&fatalException);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_2$$6);
+	ZVAL_UNDEF(&_3$$6);
+	ZVAL_UNDEF(&_4$$6);
+	ZVAL_UNDEF(&_5$$6);
+	ZVAL_UNDEF(&_6$$6);
+	ZVAL_UNDEF(&_7$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &request);
@@ -137,14 +142,20 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, handle) {
 				zend_clear_exception(TSRMLS_C);
 				ZEPHIR_CPY_WRT(&e, &_1);
 				ZEPHIR_INIT_VAR(&fatalException);
-				if (!_2$$6) {
-				_2$$6 = zephir_fetch_class_str_ex(SL("Leevel\\Kernel\\Exception\\FatalThrowableError"), ZEND_FETCH_CLASS_AUTO);
-				}
-				object_init_ex(&fatalException, _2$$6);
-				if (zephir_has_constructor(&fatalException TSRMLS_CC)) {
-					ZEPHIR_CALL_METHOD(NULL, &fatalException, "__construct", NULL, 0, &e);
-					zephir_check_call_status();
-				}
+				object_init_ex(&fatalException, zephir_get_internal_ce(SL("errorexception")));
+				ZEPHIR_CALL_METHOD(&_2$$6, &e, "getmessage", NULL, 0);
+				zephir_check_call_status();
+				ZEPHIR_CALL_METHOD(&_3$$6, &e, "getcode", NULL, 0);
+				zephir_check_call_status();
+				ZEPHIR_CALL_METHOD(&_4$$6, &e, "getfile", NULL, 0);
+				zephir_check_call_status();
+				ZEPHIR_CALL_METHOD(&_5$$6, &e, "getline", NULL, 0);
+				zephir_check_call_status();
+				ZEPHIR_CALL_METHOD(&_6$$6, &e, "getprevious", NULL, 0);
+				zephir_check_call_status();
+				ZVAL_LONG(&_7$$6, 1);
+				ZEPHIR_CALL_METHOD(NULL, &fatalException, "__construct", NULL, 69, &_2$$6, &_3$$6, &_7$$6, &_4$$6, &_5$$6, &_6$$6);
+				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, this_ptr, "reportexception", NULL, 0, &fatalException);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(&response, this_ptr, "renderexception", NULL, 0, request, &fatalException);

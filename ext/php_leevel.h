@@ -15,7 +15,7 @@
 #define PHP_LEEVEL_EXTNAME     "leevel"
 #define PHP_LEEVEL_AUTHOR      "Xiangmin Liu <635750556@qq.com>"
 #define PHP_LEEVEL_ZEPVERSION  "0.10.7-8059e66568"
-#define PHP_LEEVEL_DESCRIPTION ""
+#define PHP_LEEVEL_DESCRIPTION "The Leevel Framework To Rebuild QueryPHP"
 
 
 

@@ -87,7 +87,7 @@ ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, pop);
  * @param array $option
  * @return void
  */
-ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, arrays);
+ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, arr);
 
 /**
  * 数组键值删除数据
@@ -96,7 +96,7 @@ ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, arrays);
  * @param mixed $keys
  * @return void
  */
-ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, arraysDelete);
+ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, arrDelete);
 
 /**
  * 获取 cookie

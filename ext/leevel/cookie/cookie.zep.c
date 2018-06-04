@@ -447,7 +447,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, pop) {
  * @param array $option
  * @return void
  */
-PHP_METHOD(Leevel_Cookie_Cookie, arrays) {
+PHP_METHOD(Leevel_Cookie_Cookie, arr) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval option;
@@ -504,7 +504,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, arrays) {
  * @param mixed $keys
  * @return void
  */
-PHP_METHOD(Leevel_Cookie_Cookie, arraysDelete) {
+PHP_METHOD(Leevel_Cookie_Cookie, arrDelete) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval option;
@@ -628,7 +628,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, get) {
 			RETURN_MM();
 		}
 		zephir_read_property(&_9$$3, this_ptr, SL("cookies"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_10$$3, &_9$$3, &name, PH_NOISY | PH_READONLY, "leevel/cookie/cookie.zep", 248 TSRMLS_CC);
+		zephir_array_fetch(&_10$$3, &_9$$3, &name, PH_NOISY | PH_READONLY, "leevel/cookie/cookie.zep", 249 TSRMLS_CC);
 		RETURN_CTOR(&_10$$3);
 	} else {
 		RETVAL_ZVAL(defaults, 1, 0);
@@ -722,13 +722,13 @@ PHP_METHOD(Leevel_Cookie_Cookie, clear) {
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&option, &_0);
 	ZEPHIR_OBS_VAR(&prefix);
-	zephir_array_fetch_string(&prefix, &option, SL("prefix"), PH_NOISY, "leevel/cookie/cookie.zep", 277 TSRMLS_CC);
+	zephir_array_fetch_string(&prefix, &option, SL("prefix"), PH_NOISY, "leevel/cookie/cookie.zep", 278 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "");
 	zephir_array_update_string(&option, SL("prefix"), &_1, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_2, this_ptr, SL("cookies"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&_3);
-	zephir_is_iterable(&_2, 0, "leevel/cookie/cookie.zep", 289);
+	zephir_is_iterable(&_2, 0, "leevel/cookie/cookie.zep", 290);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_2), _5, _6, _4)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -784,7 +784,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, option) {
 
 
 	if (!(Z_TYPE_P(&name) == IS_STRING)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "leevel/cookie/cookie.zep", 301);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "leevel/cookie/cookie.zep", 302);
 		return;
 	}
 	zephir_update_property_array(this_ptr, SL("option"), &name, value TSRMLS_CC);
@@ -864,7 +864,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "leevel/cookie/cookie.zep", 340);
+	zephir_is_iterable(&option, 0, "leevel/cookie/cookie.zep", 341);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -918,7 +918,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "leevel/cookie/cookie.zep", 352 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "leevel/cookie/cookie.zep", 353 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -1024,7 +1024,7 @@ PHP_METHOD(Leevel_Cookie_Cookie, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "leevel/cookie/cookie.zep", 403);
+	zephir_is_iterable(&option, 0, "leevel/cookie/cookie.zep", 404);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);

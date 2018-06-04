@@ -214,7 +214,7 @@ PHP_METHOD(Leevel_Di_Provider, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/provider.zep", 120 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/provider.zep", 122 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
