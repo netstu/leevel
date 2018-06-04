@@ -183,7 +183,7 @@ class Cookie implements ICookie, IClass
      * @param array $option
      * @return void
      */
-    public function arrays(string key, var keys, var value = null, array option = [])
+    public function arr(string key, var keys, var value = null, array option = [])
     {
         var arr;
 
@@ -205,7 +205,7 @@ class Cookie implements ICookie, IClass
      * @param mixed $keys
      * @return void
      */
-    public function arraysDelete(string key, var keys, array option = [])
+    public function arrDelete(string key, var keys, array option = [])
     {
         var arr, tempKey, arrDeleteKey;
 
@@ -245,6 +245,7 @@ class Cookie implements ICookie, IClass
             if this->isJson(this->cookies[name]) {
                 return json_decode(this->cookies[name], true);
             }
+            
             return this->cookies[name];
         } else {
             return defaults;
