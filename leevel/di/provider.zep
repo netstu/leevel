@@ -51,6 +51,7 @@ abstract class Provider
     public function __construct(<IContainer> container)
     {
         let this->container = container;
+        
         if ! (static::isDeferred()) {
             this->registerAlias();
         }
@@ -117,6 +118,7 @@ abstract class Provider
         if method == "bootstrap" {
             return;
         }
+        
         throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
     }
 

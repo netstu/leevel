@@ -24,7 +24,6 @@ use ReflectionException;
 use ReflectionParameter;
 use BadMethodCallException;
 use InvalidArgumentException;
-use Leevel\Support\ClosureUse;
 
 /**
  * IOC 容器
