@@ -320,7 +320,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
  */
 PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 
-	zval options, request, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11;
+	zval options, request, _0, _1, _2, _3, _4, _5, _6, _7;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -334,10 +334,6 @@ PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_8);
-	ZVAL_UNDEF(&_9);
-	ZVAL_UNDEF(&_10);
-	ZVAL_UNDEF(&_11);
 
 	ZEPHIR_MM_GROW();
 
@@ -359,34 +355,21 @@ PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 	zephir_check_call_status();
 	zephir_array_update_string(&options, SL("action_name"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_4, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "theme");
-	ZEPHIR_CALL_METHOD(&_3, &_4, "pathapplicationdir", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_3, &_4, "pathapplicationtheme", NULL, 0);
 	zephir_check_call_status();
+	zephir_array_update_string(&options, SL("theme_path"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "option");
-	ZEPHIR_CALL_METHOD(&_6, &_5, "make", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "view\\theme_name");
-	ZEPHIR_CALL_METHOD(&_7, &_6, "get", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_8);
-	ZEPHIR_CONCAT_VSV(&_8, &_3, "/", &_7);
-	zephir_array_update_string(&options, SL("theme_path"), &_8, PH_COPY | PH_SEPARATE);
-	zephir_read_property(&_9, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "theme");
-	ZEPHIR_CALL_METHOD(&_10, &_9, "pathapplicationcache", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_3, &_5, "pathapplicationcache", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_1);
-	ZEPHIR_CALL_METHOD(&_11, &request, "app", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_6, &request, "app", NULL, 0);
 	zephir_check_call_status();
-	zephir_fast_strtolower(&_1, &_11);
-	ZEPHIR_INIT_LNVAR(_8);
-	ZEPHIR_CONCAT_VSV(&_8, &_10, "/", &_1);
-	zephir_array_update_string(&options, SL("theme_cache_path"), &_8, PH_COPY | PH_SEPARATE);
+	zephir_fast_strtolower(&_1, &_6);
+	ZEPHIR_INIT_VAR(&_7);
+	ZEPHIR_CONCAT_VSV(&_7, &_3, "/", &_1);
+	zephir_array_update_string(&options, SL("theme_cache_path"), &_7, PH_COPY | PH_SEPARATE);
 	RETURN_CCTOR(&options);
 
 }

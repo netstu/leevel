@@ -229,12 +229,12 @@ interface IProject extends IContainer
     public function pathApplicationCache(string type) -> string;
     
     /**
-     * 取得应用目录
+     * 取得应用主题目录
      *
-     * @param string $type
+     * @param string $app
      * @return string
      */
-    public function pathApplicationDir(string type) -> string;
+    public function pathApplicationTheme(var app = null) -> string;
     
     /**
      * 返回语言包路径

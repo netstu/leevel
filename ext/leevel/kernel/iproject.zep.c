@@ -229,12 +229,12 @@ ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathAnApplication);
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplicationCache);
 
 /**
- * 取得应用目录
+ * 取得应用主题目录
  *
- * @param string $type
+ * @param string $app
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplicationDir);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplicationTheme);
 
 /**
  * 返回语言包路径

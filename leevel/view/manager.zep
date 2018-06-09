@@ -121,6 +121,7 @@ class Manager extends Managers
 	{
 		let options = this->getOption("v8", options);
 		let options = array_merge(options, this->viewOptionCommon());
+
 		return new V8s(options);
 	}
 
@@ -139,7 +140,7 @@ class Manager extends Managers
 			"development" : this->container->development(),
 			"controller_name" : request->controller(),
 			"action_name" : request->action(),
-			"theme_path" : this->container->pathApplicationDir("theme") . "/" . this->container->make("option")->get("view\\theme_name"),
+			"theme_path" : this->container->pathApplicationTheme(),
 
 			// 仅 html 模板需要缓存路径
 			"theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . strtolower(request->app())
@@ -154,7 +155,8 @@ class Manager extends Managers
 	 * @since 2018.01.12
 	 * @return void
 	 */
-	protected function makeParserClosure() {
+	protected function makeParserClosure()
+    {
 		return this->container->make("view.parser");
 	}
 
@@ -164,7 +166,8 @@ class Manager extends Managers
 	 * @since 2018.01.15
 	 * @return void
 	 */
-	protected function makeTwigParserClosure() {
+	protected function makeTwigParserClosure()
+    {
 		return this->container->make("view.twig.parser");
 	}
 }

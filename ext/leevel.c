@@ -23,9 +23,9 @@
 
 
 
-zend_class_entry *leevel_option_iclass_ce;
 zend_class_entry *leevel_support_imacro_ce;
 zend_class_entry *leevel_support_iarray_ce;
+zend_class_entry *leevel_option_iclass_ce;
 zend_class_entry *leevel_support_ijson_ce;
 zend_class_entry *leevel_flow_icontrol_ce;
 zend_class_entry *leevel_http_iresponse_ce;
@@ -155,9 +155,9 @@ static PHP_MINIT_FUNCTION(leevel)
 {
 	REGISTER_INI_ENTRIES();
 	zephir_module_init();
-	ZEPHIR_INIT(Leevel_Option_IClass);
 	ZEPHIR_INIT(Leevel_Support_IMacro);
 	ZEPHIR_INIT(Leevel_Support_IArray);
+	ZEPHIR_INIT(Leevel_Option_IClass);
 	ZEPHIR_INIT(Leevel_Support_IJson);
 	ZEPHIR_INIT(Leevel_Flow_IControl);
 	ZEPHIR_INIT(Leevel_Http_IResponse);

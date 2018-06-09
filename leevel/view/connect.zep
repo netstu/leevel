@@ -18,7 +18,6 @@ namespace Leevel\View;
 use RuntimeException;
 use BadMethodCallException;
 use InvalidArgumentException;
-use Leevel\Option\IClass;
 
 /**
  * 模板处理抽象类
@@ -28,7 +27,7 @@ use Leevel\Option\IClass;
  * @since 2018.01.02
  * @version 1.0
  */
-abstract class Connect implements IClass
+abstract class Connect
 {
 
 	/**
@@ -53,8 +52,20 @@ abstract class Connect implements IClass
 	 */
 	public function __construct(array option = [])
 	{
-		this->options(option);
+        let this->option = array_merge(this->option, option);
 	}
+
+    /**
+     * 设置配置
+     * 
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function setOption(string name, var value)
+    {
+        let this->option[name] = value;
+    }
 
 	/**
 	 * 设置模板变量
@@ -125,121 +136,6 @@ abstract class Connect implements IClass
 		return this;
 	}
 
-    /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function option(string name, var value)
-    {
-        if ! is_string(name) {
-            throw new InvalidArgumentException("Option set name must be a string.");
-        }
-
-        let this->option[name] = value;
-
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
-        return this;
-    }
-
 	/**
 	 * 分析展示的视图文件
 	 *
@@ -260,7 +156,9 @@ abstract class Connect implements IClass
 		}
 
 		if ! is_file(file) {
-			throw new InvalidArgumentException(sprintf("Template file %s does not exist.", file));
+			throw new InvalidArgumentException(
+				sprintf("Template file %s does not exist.", file)
+			);
 		}
 
 		return file;
@@ -283,16 +181,19 @@ abstract class Connect implements IClass
 		if pathinfo(tpl, PATHINFO_EXTENSION) || strpos(tpl, "$") === 0 || strpos(tpl, "(") !== false {
 			return this->formatFile(tpl);
 		} else {
-			if ! this->getOption("theme_path") {
+			if ! this->option["theme_path"] {
 				throw new RuntimeException("Theme path must be set");
 			}
 
 			// 空取默认控制器和方法
 			if tpl == "" {
-				let tpl = this->getOption("controller_name") . this->getOption("controlleraction_depr") . this->getOption("action_name");
+				let tpl = this->option["controller_name"] .
+					this->option["controlleraction_depr"] .
+					this->option["action_name"];
 			}
 
-			if strpos(tpl, "@") !== false { // 分析主题
+			// 分析主题
+			if strpos(tpl, "@") !== false {
 				let arr = explode("@", tpl);
 				let tempTheme = array_shift(arr);
 				let theme = tempTheme;
@@ -303,13 +204,13 @@ abstract class Connect implements IClass
 			let tpl = str_replace([
 				"+",
 				":"
-			], this->getOption("controlleraction_depr"), tpl);
+			], this->option["controlleraction_depr"], tpl);
 
-			let result = dirname(this->getOption("theme_path")) . "/";
+			let result = dirname(this->option["theme_path"]) . "/";
 			if theme {
 				let result .= theme . "/";
 			} else {
-				let result .= this->getOption("theme_name") . "/";
+				let result .= this->option["theme_name"] . "/";
 			}
 
 			let result .= tpl;
@@ -317,7 +218,7 @@ abstract class Connect implements IClass
 			if ! empty ext {
 				let result .= ext;
 			} else {
-				let result .= this->getOption("suffix");
+				let result .= this->option["suffix"];
 			}
 
 			return result;
@@ -349,35 +250,47 @@ abstract class Connect implements IClass
 	 */
 	protected function parseDefaultFile(string tpl)
 	{
-		var bak, tempTpl;
+		var source, tempTpl;
 
 		if is_file(tpl) {
 			return tpl;
 		}
 
-		if ! $this->getOption("theme_path") {
+		if ! $this->option["theme_path"] {
 			throw new RuntimeException("Theme path must be set");
 		}
 
-		let bak = tpl;
+		let source = tpl;
 
 		// 物理路径
-		if strpos(tpl, ":") !== false || strpos(tpl, "/") === 0 || strpos(tpl, "\\") === 0 {
-			let tpl = str_replace(str_replace("\\", "/", this->getOption("theme_path") . "/"), "", str_replace("\\", "/", tpl));
+		if strpos(tpl, ":") !== false ||
+			strpos(tpl, "/") === 0 ||
+			strpos(tpl, "\\") === 0 {
+			let tpl = str_replace(
+				str_replace(
+					"\\",
+					"/",
+					this->option["theme_path"] . "/"
+				),
+				"",
+				str_replace("\\", "/", tpl)
+			);
 		}
 
 		// 备用地址
-		let tempTpl = this->getOption("theme_path_default") . "/" . tpl;
-		if this->getOption("theme_path_default") && is_file(tempTpl) {
+		let tempTpl = this->option["theme_path_default"] . "/" . tpl;
+
+		if this->option["theme_path_default"] && is_file(tempTpl) {
 			return tempTpl;
 		}
 
 		// default 主题
-		let tempTpl = dirname(this->getOption("theme_path")) . "/default/" . tpl;
-		if this->getOption("theme_name") != "default" && is_file(tempTpl) {
+		let tempTpl = dirname(this->option["theme_path"]) . "/default/" . tpl;
+		
+		if this->option["theme_name"] != "default" && is_file(tempTpl) {
 			return tempTpl;
 		}
 
-		return bak;
+		return source;
 	}
 }

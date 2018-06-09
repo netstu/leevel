@@ -65,9 +65,7 @@ class Url implements IUrl
     {
         let this->request = request;
 
-        if ! empty option {
-            let this->option = array_merge(this->option, option);
-        }
+        let this->option = array_merge(this->option, option);
     }
     
     /**

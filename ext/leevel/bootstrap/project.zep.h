@@ -30,7 +30,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, envFile);
 PHP_METHOD(Leevel_Bootstrap_Project, fullEnvPath);
 PHP_METHOD(Leevel_Bootstrap_Project, pathAnApplication);
 PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationCache);
-PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationDir);
+PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationTheme);
 PHP_METHOD(Leevel_Bootstrap_Project, pathCacheI18nFile);
 PHP_METHOD(Leevel_Bootstrap_Project, isCachedI18n);
 PHP_METHOD(Leevel_Bootstrap_Project, pathCacheOptionFile);
@@ -112,8 +112,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_pathapplicationcache, 0,
 	ZEND_ARG_INFO(0, type)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_pathapplicationdir, 0, 0, 1)
-	ZEND_ARG_INFO(0, type)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_pathapplicationtheme, 0, 0, 0)
+	ZEND_ARG_INFO(0, app)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_pathcachei18nfile, 0, 0, 1)
@@ -180,7 +180,7 @@ ZEPHIR_INIT_FUNCS(leevel_bootstrap_project_method_entry) {
 	PHP_ME(Leevel_Bootstrap_Project, fullEnvPath, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, pathAnApplication, arginfo_leevel_bootstrap_project_pathanapplication, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, pathApplicationCache, arginfo_leevel_bootstrap_project_pathapplicationcache, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Bootstrap_Project, pathApplicationDir, arginfo_leevel_bootstrap_project_pathapplicationdir, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, pathApplicationTheme, arginfo_leevel_bootstrap_project_pathapplicationtheme, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, pathCacheI18nFile, arginfo_leevel_bootstrap_project_pathcachei18nfile, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, isCachedI18n, arginfo_leevel_bootstrap_project_iscachedi18n, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, pathCacheOptionFile, NULL, ZEND_ACC_PUBLIC)

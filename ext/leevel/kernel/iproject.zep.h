@@ -56,8 +56,8 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_pathapplicationcache, 0, 0
 	ZEND_ARG_INFO(0, type)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_pathapplicationdir, 0, 0, 1)
-	ZEND_ARG_INFO(0, type)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_pathapplicationtheme, 0, 0, 0)
+	ZEND_ARG_INFO(0, app)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_pathcachei18nfile, 0, 0, 1)
@@ -118,7 +118,7 @@ ZEPHIR_INIT_FUNCS(leevel_kernel_iproject_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, fullEnvPath, NULL)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathAnApplication, arginfo_leevel_kernel_iproject_pathanapplication)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathApplicationCache, arginfo_leevel_kernel_iproject_pathapplicationcache)
-	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathApplicationDir, arginfo_leevel_kernel_iproject_pathapplicationdir)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathApplicationTheme, arginfo_leevel_kernel_iproject_pathapplicationtheme)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathCacheI18nFile, arginfo_leevel_kernel_iproject_pathcachei18nfile)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, isCachedI18n, arginfo_leevel_kernel_iproject_iscachedi18n)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, pathCacheOptionFile, NULL)
