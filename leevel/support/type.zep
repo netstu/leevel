@@ -97,6 +97,7 @@ class Type
             case "array":
                 if isset tmp[1] {
                     let tmp1 = explode(",", tmp[1]);
+                    
                     return self::arr(value, tmp1);
                 } else {
                     return is_array(value);
@@ -135,7 +136,7 @@ class Type
     /**
      * 判断字符串是否为数字
      *
-     * @param string $strSearch
+     * @param string $value
      * @since bool
      */
     public static function num(value)
@@ -149,7 +150,7 @@ class Type
     /**
      * 判断字符串是否为整数
      *
-     * @param string $strSearch
+     * @param string $value
      * @since bool
      */
     public static function ints(value)

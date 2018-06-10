@@ -113,8 +113,14 @@ class Monolog extends Connect implements IConnect
 	public function file(string path, string level = ilog::DEBUG)
 	{
 		var handler;
-		let handler = new StreamHandler(path, this->parseMonologLevel(level));
+
+		let handler = new StreamHandler(
+			path,
+			this->parseMonologLevel(level)
+		);
+
 		this->monolog->pushHandler(handler);
+
 		handler->setFormatter(this->getDefaultFormatter());
 	}
 
@@ -129,8 +135,15 @@ class Monolog extends Connect implements IConnect
 	public function dailyFile(string path, int days = 0, string level = ilog::DEBUG)
 	{
 		var handler;
-		let handler = new RotatingFileHandler(path, days, this->parseMonologLevel(level));
+
+		let handler = new RotatingFileHandler(
+			path,
+			days,
+			this->parseMonologLevel(level)
+		);
+
 		this->monolog->pushHandler(handler);
+
 		handler->setFormatter(this->getDefaultFormatter());
 	}
 
@@ -144,7 +157,13 @@ class Monolog extends Connect implements IConnect
 	public function syslog(string name = "queryphp", string level = ilog::DEBUG)
 	{
 		var handler;
-		let handler = new SyslogHandler(name, LOG_USER, level);
+
+		let handler = new SyslogHandler(
+			name,
+			LOG_USER,
+			level
+		);
+
 		return this->monolog->pushHandler(handler);
 	}
 
@@ -158,8 +177,14 @@ class Monolog extends Connect implements IConnect
 	public function errorLog(string level = ilog::DEBUG, int messageType = 0/* ErrorLogHandler::OPERATING_SYSTEM */)
 	{
 		var handler;
-		let handler = new ErrorLogHandler(messageType, this->parseMonologLevel(level));
+
+		let handler = new ErrorLogHandler(
+			messageType,
+			this->parseMonologLevel(level)
+		);
+
 		this->monolog->pushHandler(handler);
+
 		handler->setFormatter(this->getDefaultFormatter());
 	}
 
@@ -221,7 +246,9 @@ class Monolog extends Connect implements IConnect
 	protected function makeFileHandler()
 	{
 		var path;
+
 		let path = this->getPath();
+
 		this->checkSize(path);
 		this->file(path);
 	}
@@ -234,7 +261,9 @@ class Monolog extends Connect implements IConnect
 	protected function makeDailyFileHandler()
 	{
 		var path;
+
 		let path = this->getPath();
+
 		this->checkSize(this->getDailyFilePath(path));
 		this->dailyFile(path);
 	}
@@ -268,10 +297,13 @@ class Monolog extends Connect implements IConnect
 	protected function getDailyFilePath(string path)
 	{
 		var ext;
+
 		let ext = pathinfo(path, PATHINFO_EXTENSION);
+
 		if ext {
 			let path = substr(path, 0, strrpos(path, "." . ext));
 		}
+
 		return path . date("-Y-m-d") . (ext ? "." . ext : "");
 	}
 
@@ -297,6 +329,7 @@ class Monolog extends Connect implements IConnect
 		if isset(this->supportLevel[level]) {
 			return this->supportLevel[level];
 		}
+
 		return this->supportLevel[ilog::DEBUG];
 	}
 
@@ -310,6 +343,7 @@ class Monolog extends Connect implements IConnect
 	protected function camelize(string value, string separator = "_")
 	{
 		let value = separator . str_replace(separator, " ", strtolower(value));
+		
 		return ltrim(str_replace(" ", "", ucwords(value)), separator);
 	}
 }

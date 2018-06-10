@@ -85,13 +85,13 @@ PHP_METHOD(Leevel_Log_File, save) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checksize", NULL, 0, &filepath);
 	zephir_check_call_status();
-	zephir_is_iterable(&datas, 0, "leevel/log/file.zep", 62);
+	zephir_is_iterable(&datas, 0, "leevel/log/file.zep", 66);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&datas), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _2);
-		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "leevel/log/file.zep", 60 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "leevel/log/file.zep", 60 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "leevel/log/file.zep", 61 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "leevel/log/file.zep", 61 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "formatmessage", &_6, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_7$$3);

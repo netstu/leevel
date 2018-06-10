@@ -105,7 +105,7 @@ PHP_METHOD(Leevel_Log_Connect, option) {
 
 
 	if (!(Z_TYPE_P(&name) == IS_STRING)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "leevel/log/connect.zep", 61);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Option set name must be a string.", "leevel/log/connect.zep", 63);
 		return;
 	}
 	zephir_update_property_array(this_ptr, SL("option"), &name, value TSRMLS_CC);
@@ -185,7 +185,7 @@ PHP_METHOD(Leevel_Log_Connect, options) {
 	if (ZEPHIR_IS_EMPTY(&option)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "leevel/log/connect.zep", 100);
+	zephir_is_iterable(&option, 0, "leevel/log/connect.zep", 102);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&option), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -239,7 +239,7 @@ PHP_METHOD(Leevel_Log_Connect, getOption) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, &name)) {
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "leevel/log/connect.zep", 112 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, &name, PH_NOISY, "leevel/log/connect.zep", 114 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, defaults);
 	}
@@ -345,7 +345,7 @@ PHP_METHOD(Leevel_Log_Connect, deleteOptions) {
 	if (!(ZEPHIR_IS_EMPTY(&option))) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&option, 0, "leevel/log/connect.zep", 163);
+	zephir_is_iterable(&option, 0, "leevel/log/connect.zep", 165);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&option), _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -423,7 +423,7 @@ PHP_METHOD(Leevel_Log_Connect, checkSize) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_7$$3, "__construct", NULL, 2, &_9$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_7$$3, "leevel/log/connect.zep", 180 TSRMLS_CC);
+		zephir_throw_exception_debug(&_7$$3, "leevel/log/connect.zep", 186 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -447,7 +447,7 @@ PHP_METHOD(Leevel_Log_Connect, checkSize) {
 		ZEPHIR_INIT_NVAR(&_15$$4);
 		zephir_basename(&_15$$4, &filepath TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_17$$4);
-		ZEPHIR_CONCAT_VSVSV(&_17$$4, &filedir, "/", &_16$$4, "~@", &_15$$4);
+		ZEPHIR_CONCAT_VSVSV(&_17$$4, &filedir, "/", &_16$$4, "_", &_15$$4);
 		ZEPHIR_CALL_FUNCTION(NULL, "rename", NULL, 32, &filepath, &_17$$4);
 		zephir_check_call_status();
 	}
@@ -497,7 +497,7 @@ PHP_METHOD(Leevel_Log_Connect, getPath) {
 		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "getoption", &_2, 0, &_1$$3);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_0$$3))) {
-			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Default path for log has not specified.", "leevel/log/connect.zep", 203);
+			ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Default path for log has not specified.", "leevel/log/connect.zep", 216);
 			return;
 		}
 		ZEPHIR_INIT_NVAR(&_1$$3);
