@@ -389,14 +389,21 @@ class Container implements IContainer, ArrayAccess {
      */
     protected function normalizeInjectionArgs(var value, array args)
     {
-    	var tmp, required, tmpArgs;
+    	var tmp, required, tmpArgs, validArgs;
 
         let tmp = this->parseInjection(value, args);
         let tmpArgs = tmp[0];
         let required = tmp[1];
+        let validArgs = tmp[2];
 
-        if count(tmpArgs) < required {
-            throw new NormalizeException(sprintf("There are %d required args,but %d gived.", required, count(tmpArgs)));
+        if validArgs < required {
+            throw new NormalizeException(
+            	sprintf(
+            		"There are %d required args,but %d gived.",
+            		required,
+            		validArgs
+            	)
+            );
         }
 
         return tmpArgs;
@@ -411,17 +418,16 @@ class Container implements IContainer, ArrayAccess {
 	 */
 	protected function parseInjection(var injection, array args = [])
 	{
-		var result, param, item, argsclass, data, e, k, value, isRequireBad;
+		var result, param, item, argsclass, data, e, k, value, validArgs;
 		int required = 0;
 
 		let result = [];
 
 		let param = this->parseReflection(injection);
+		let validArgs = count(param);
 
 		for item in param {
 			try {
-				let isRequireBad = false;
-
 				let argsclass = this->parseParameterClass(item);
 
 				if (argsclass) {
@@ -432,20 +438,24 @@ class Container implements IContainer, ArrayAccess {
                     } else {
                         let data = this->parseClassInstance(argsclass);
                     }
+
+                    let required++;
+                    let validArgs++;
 				} elseif (item->isDefaultValueAvailable()) {
 					let data = array_key_exists(item->name, args) ? args[item->name] : item->getDefaultValue();
 				} else {
+					let required++;
+
 					if array_key_exists(item->name, args) {
                         let data = args[item->name];
+                        let validArgs++;
                     } else {
-                        let isRequireBad = true;
-                        let required++;                  
+                        let validArgs--;
+                        let data = null;
                     }
 				}
 
-				if isRequireBad === false {
-					let result[item->name] = data;
-				}
+				let result[item->name] = data;
 			} catch ReflectionException, e {
 				throw new InvalidArgumentException(e->getMessage());
 			}
@@ -457,13 +467,15 @@ class Container implements IContainer, ArrayAccess {
             for k, value in args {
                 if is_int(k) {
                     let result[k] = value;
+                    let validArgs++;
                 }
             }
         }
 
 		return [
 			result,
-			required
+			required,
+			validArgs
         ];
 	}
 
