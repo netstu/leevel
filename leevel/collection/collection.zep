@@ -478,7 +478,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
         } else {
             let key = array_search(value, this->elements, strict);
             if key === false {
-                return null;
+                return;
             }
 
             return key;

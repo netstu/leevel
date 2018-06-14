@@ -541,7 +541,7 @@ class Project extends Container implements IProject
         let prefix = this->composer()->getPrefixesPsr4();
 
         if ! (isset prefix[namespaces[0] . "\\"]) {
-            return null;
+            return;
         }
 
         let namespaces[0] = prefix[namespaces[0] . "\\"][0];

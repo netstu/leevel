@@ -55,6 +55,18 @@ extension = leevel.so
 
 Documentation for the framework can be found on the [Leevel website](http://www.queryphp.com).
 
+## Run Tests
+
+```
+$cd /data/codes/leevel      
+$composer install
+$php vendor/bin/phpunit tests
+```
+
+## Travis CI Supported
+
+Let code poem.
+
 ## License
 
 The Leevel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

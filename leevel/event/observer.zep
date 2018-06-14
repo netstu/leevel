@@ -58,7 +58,9 @@ class Observer implements SplObserver
         let method = method_exists(this, "handle") ? "handle" : "run";
 
         if ! (is_callable([this, method])) {
-            throw new RuntimeException(sprintf("Observer %s must has run method", get_class(this)));
+            throw new RuntimeException(
+                sprintf("Observer %s must has run method", get_class(this))
+            );
         }
 
         subject->container->call([this, method], subject->notifyArgs);
