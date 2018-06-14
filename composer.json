@@ -22,7 +22,7 @@
         "fzaninotto/faker": "^1.6",
         "phpunit/phpunit": "~7.0",
         "nunomaduro/collision": "~2.0",
-        "phalcon/zephir": "^0.10"
+        "phalcon/zephir": "^0.10.10"
     },
     "suggest": {
         "ext-swoole": "Required to use swoole.",

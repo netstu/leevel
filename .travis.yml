@@ -110,25 +110,8 @@ script:
           --offline \
           --show-diff \
           --set-timeout 120
-  # Run code style tests
-  - vendor/bin/phpcs
-  # Legacy unit tests
-  # We'll drop or rewrite them for Phalcon 4.x
-  - |
-      if [ "${PHP_MAJOR}.${PHP_MINOR}" != "7.2" ] && [ "${PHP_MAJOR}.${PHP_MINOR}" != "7.3" ]; then
-          vendor/bin/phpunit --bootstrap tests/_ci/phpunit.php --debug unit-tests/
-      fi
-  - vendor/bin/codecept build
-  # TODO: Add `cli' suite and refactor current cli-tests
-  - vendor/bin/codecept run -v -n tests/integration/
-  - vendor/bin/codecept run -v -n tests/unit/
-  # Legacy tests (PHP 5.x) only.
-  # We'll drop them for Phalcon 4.x
-  - |
-      if [ "$PHP_MAJOR" == 5 ]; then
-          phpenv config-rm xdebug.ini || true;
-          vendor/bin/codecept run -v -n tests/unit5x/;
-      fi
+  # Run tests
+  - vendor/bin/phpunit
 
 # Uncomment for debug purposes
 # after_failure:
