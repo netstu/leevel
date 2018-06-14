@@ -51,17 +51,14 @@ before_install:
   - if [[ ! -z "${GH_TOKEN}" ]]; then composer config github-oauth.github.com ${GH_TOKEN}; echo "Configured Github token"; fi;
   - export PHP_MAJOR="$(`phpenv which php` -r 'echo phpversion();' | cut -d '.' -f 1)"
   - export PHP_MINOR="$(`phpenv which php` -r 'echo phpversion();' | cut -d '.' -f 2)"
-  - bash tests/_ci/pear_setup.sh
-  # Setting up test the environment
-  - source $TRAVIS_BUILD_DIR/tests/_ci/environment
-  - export $(cut -d= -f1 $TRAVIS_BUILD_DIR/tests/_ci/environment)
+  - bash ci/pear_setup.sh
 
 install:
   - composer install -q -n --no-ansi --no-progress --dev --prefer-dist --no-suggest #--ignore-platform-reqs
   # We'll do this in future for the all 7.x series
-  - bash tests/_ci/install-re2c $RE2C_VERSION
-  - bash tests/_ci/install_zephir_parser.sh
-  - bash tests/_ci/install_zephir.sh
+  - bash ci/install-re2c $RE2C_VERSION
+  - bash ci/install_zephir_parser.sh
+  - bash ci/install_zephir.sh
   # We still need this until end of support of PHP 5.x
   - |
     zephir generate --backend=ZendEngine3
@@ -81,9 +78,9 @@ install:
   - ./configure --silent --with-php-config=$(phpenv which php-config) --enable-leevel &> /dev/null
   - make --silent -j"$(getconf _NPROCESSORS_ONLN)" &> /dev/null
   - make --silent install
-  - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/leevel.ini
+  - phpenv config-add $TRAVIS_BUILD_DIR/ci/leevel.ini
   # We use this file as our custom PHP config
-  - phpenv config-add $TRAVIS_BUILD_DIR/tests/_ci/ci.ini
+  - phpenv config-add $TRAVIS_BUILD_DIR/ci/ci.ini
   # Some debug info is located here
   - ls -al `$(phpenv which php-config) --extension-dir`
   - $(phpenv which php) -v
@@ -115,7 +112,7 @@ script:
 
 # Uncomment for debug purposes
 # after_failure:
-#  - bash tests/_ci/after_failure.sh
+#  - bash ci/after_failure.sh
 
 notifications:
     # Stop spam me. I already live on Travis CI and GitHub
