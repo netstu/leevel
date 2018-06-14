@@ -102,7 +102,6 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectCookie) {
 	}
 
 
-	RETURN_MM_NULL();
 
 }
 

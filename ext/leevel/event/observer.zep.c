@@ -107,7 +107,7 @@ PHP_METHOD(Leevel_Event_Observer, update) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/event/observer.zep", 61 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/event/observer.zep", 63 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

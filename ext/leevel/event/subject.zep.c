@@ -228,7 +228,7 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 21, &_4$$4);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_2$$4, "leevel/event/subject.zep", 112 TSRMLS_CC);
+			zephir_throw_exception_debug(&_2$$4, "leevel/event/subject.zep", 114 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -238,7 +238,7 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 		ZEPHIR_CALL_METHOD(NULL, &_5$$5, "attach", NULL, 0, observer);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "leevel/event/subject.zep", 119);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "leevel/event/subject.zep", 123);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();

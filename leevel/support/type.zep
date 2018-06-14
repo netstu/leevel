@@ -90,7 +90,7 @@ class Type
 
             // 闭包
             case "closure":
-                return value instanceof Closure;
+                return is_object(value) && value instanceof Closure;
 
             // 数组
             case "arr":

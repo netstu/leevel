@@ -55,9 +55,10 @@ ZEPHIR_INIT_CLASS(Leevel_Support_Type) {
  */
 PHP_METHOD(Leevel_Support_Type, vars) {
 
+	zend_bool _1$$10;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval type;
-	zval *value, value_sub, *type_param = NULL, __$true, tmp, tmp1, _0, _1$$12, _2$$16, _3$$17, _4$$18, _5$$18;
+	zval *value, value_sub, *type_param = NULL, __$true, tmp, tmp1, _0, _2$$12, _3$$16, _4$$17, _5$$18, _6$$18;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
@@ -65,11 +66,11 @@ PHP_METHOD(Leevel_Support_Type, vars) {
 	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&tmp1);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1$$12);
-	ZVAL_UNDEF(&_2$$16);
-	ZVAL_UNDEF(&_3$$17);
-	ZVAL_UNDEF(&_4$$18);
+	ZVAL_UNDEF(&_2$$12);
+	ZVAL_UNDEF(&_3$$16);
+	ZVAL_UNDEF(&_4$$17);
 	ZVAL_UNDEF(&_5$$18);
+	ZVAL_UNDEF(&_6$$18);
 	ZVAL_UNDEF(&type);
 
 	ZEPHIR_MM_GROW();
@@ -110,13 +111,17 @@ PHP_METHOD(Leevel_Support_Type, vars) {
 			RETURN_MM_BOOL(Z_TYPE_P(value) == IS_RESOURCE);
 		}
 		if (ZEPHIR_IS_STRING(&type, "closure")) {
-			RETURN_MM_BOOL(zephir_instance_of_ev(value, zend_ce_closure TSRMLS_CC));
+			_1$$10 = Z_TYPE_P(value) == IS_OBJECT;
+			if (_1$$10) {
+				_1$$10 = zephir_instance_of_ev(value, zend_ce_closure TSRMLS_CC);
+			}
+			RETURN_MM_BOOL(_1$$10);
 		}
 		if (ZEPHIR_IS_STRING(&type, "arr") || ZEPHIR_IS_STRING(&type, "array")) {
 			if (zephir_array_isset_long(&tmp, 1)) {
-				zephir_array_fetch_long(&_1$$12, &tmp, 1, PH_NOISY | PH_READONLY, "leevel/support/type.zep", 99 TSRMLS_CC);
+				zephir_array_fetch_long(&_2$$12, &tmp, 1, PH_NOISY | PH_READONLY, "leevel/support/type.zep", 99 TSRMLS_CC);
 				ZEPHIR_INIT_NVAR(&tmp1);
-				zephir_fast_explode_str(&tmp1, SL(","), &_1$$12, LONG_MAX TSRMLS_CC);
+				zephir_fast_explode_str(&tmp1, SL(","), &_2$$12, LONG_MAX TSRMLS_CC);
 				ZEPHIR_RETURN_CALL_SELF("arr", NULL, 0, value, &tmp1);
 				zephir_check_call_status();
 				RETURN_MM();
@@ -131,17 +136,17 @@ PHP_METHOD(Leevel_Support_Type, vars) {
 			RETURN_MM_BOOL(Z_TYPE_P(value) == IS_NULL);
 		}
 		if (ZEPHIR_IS_STRING(&type, "callback")) {
-			ZVAL_BOOL(&_2$$16, 0);
-			ZEPHIR_RETURN_CALL_FUNCTION("is_callable", NULL, 148, value, &_2$$16);
+			ZVAL_BOOL(&_3$$16, 0);
+			ZEPHIR_RETURN_CALL_FUNCTION("is_callable", NULL, 148, value, &_3$$16);
 			zephir_check_call_status();
 			RETURN_MM();
 		}
-		zephir_read_static_property_ce(&_3$$17, leevel_support_type_ce, SL("zephirInstanceof"), PH_NOISY_CC | PH_READONLY);
-		if (!zephir_is_true(&_3$$17)) {
-			ZEPHIR_INIT_VAR(&_4$$18);
+		zephir_read_static_property_ce(&_4$$17, leevel_support_type_ce, SL("zephirInstanceof"), PH_NOISY_CC | PH_READONLY);
+		if (!zephir_is_true(&_4$$17)) {
 			ZEPHIR_INIT_VAR(&_5$$18);
-			ZVAL_STRING(&_5$$18, "if (! function_exists('zephir_instanceof')) {\n\t\t\t\t\t\tfunction zephir_instanceof($value, $type) {\n\t\t\t\t\t\t\treturn $value instanceof $type;\n\t\t\t\t\t\t}\n\t\t\t\t\t}");
-			zephir_eval_php(&_5$$18, &_4$$18, "/data/codes/queryyetsimple/leevel/support/type.zep:121" TSRMLS_CC);
+			ZEPHIR_INIT_VAR(&_6$$18);
+			ZVAL_STRING(&_6$$18, "if (! function_exists('zephir_instanceof')) {\n\t\t\t\t\t\tfunction zephir_instanceof($value, $type) {\n\t\t\t\t\t\t\treturn $value instanceof $type;\n\t\t\t\t\t\t}\n\t\t\t\t\t}");
+			zephir_eval_php(&_6$$18, &_5$$18, "/data/codes/queryyetsimple/leevel/support/type.zep:121" TSRMLS_CC);
 			zend_update_static_property(leevel_support_type_ce, ZEND_STRL("zephirInstanceof"), &__$true);
 		}
 		ZEPHIR_RETURN_CALL_FUNCTION("zephir_instanceof", NULL, 0, value, &type);
