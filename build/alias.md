@@ -4,7 +4,7 @@ modify this file ../.git/config add alias and remote,then using git testspull an
 
 ```
 git testspull
-git testspush
+git testspush // do not allowed,see `tests/README.md`.
 ```
 
 The code below need to be add.
@@ -37,6 +37,6 @@ The code below need to be add.
         && :
 
     testspush = !git subtree split --rejoin --prefix=tests master \
-        && git subtree push --prefix=tests test master \
+        && git subtree push --prefix=tests tests master \
         && :
 ```
