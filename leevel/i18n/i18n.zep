@@ -91,7 +91,7 @@ class I18n implements II18n
     {
     	var arr;
     	let arr = func_get_args();
-        return call_user_func_arrray([this, "getText"], arr);
+        return call_user_func_array([this, "getText"], arr);
     }
 
     /**

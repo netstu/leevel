@@ -170,7 +170,7 @@ PHP_METHOD(Leevel_I18n_I18n, __) {
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "getText");
 	zephir_array_fast_append(&_0, &_1);
-	ZEPHIR_RETURN_CALL_FUNCTION("call_user_func_arrray", NULL, 0, &_0, &arr);
+	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_0, &arr);
 	zephir_check_call_status();
 	RETURN_MM();
 
