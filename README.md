@@ -1,14 +1,13 @@
 ![](leevel.png)
 
 <p align="center">
-  <a href="https://github.com/hunzhiwange/queryphp/releases">
-    <img alt="Latest Version" src="https://img.shields.io/packagist/vpre/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
-  <a href="https://travis-ci.org/hunzhiwange/queryphp">
-    <img alt="Build Status" src="https://img.shields.io/travis/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
-  <a href="https://secure.php.net/">
-    <img alt="Php Version" src="https://img.shields.io/packagist/php-v/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+  <a href="https://github.styleci.io/repos/115134497"><img src="https://github.styleci.io/repos/115134497/shield?branch=master" alt="StyleCI"></a>
+  <a href="https://travis-ci.org/hunzhiwange/leevel">
+    <img alt="Build Status" src="https://img.shields.io/travis/hunzhiwange/leevel.svg" /></a>
+  <a href="https://github.com/hunzhiwange/leevel/releases">
+    <img alt="Latest Version" src="https://poser.pugx.org/hunzhiwange/leevel/version" /></a>
   <a href="http://opensource.org/licenses/MIT">
-    <img alt="QueryPHP License" src="https://img.shields.io/packagist/l/hunzhiwange/queryphp.svg?style=for-the-badge" /></a>
+    <img alt="Leevel License" src="https://poser.pugx.org/hunzhiwange/leevel/license.svg" /></a>
 </p>
 
 # The Leevel Framework To Rebuild QueryPHP
