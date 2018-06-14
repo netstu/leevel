@@ -199,7 +199,7 @@ class Type
      * @param array $types
      * @return boolean
      */
-    public static function arr(array arr, array types) -> boolean
+    public static function arr(var arr, array types) -> boolean
     {
         var value, ret, item;
     

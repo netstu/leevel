@@ -28,7 +28,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_type_these, 0, 0, 2)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_type_arr, 0, 0, 2)
-	ZEND_ARG_ARRAY_INFO(0, arr, 0)
+	ZEND_ARG_INFO(0, arr)
 	ZEND_ARG_ARRAY_INFO(0, types, 0)
 ZEND_END_ARG_INFO()
 

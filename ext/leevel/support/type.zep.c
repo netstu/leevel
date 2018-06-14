@@ -313,28 +313,27 @@ PHP_METHOD(Leevel_Support_Type, arr) {
 	zend_bool ret = 0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_3 = NULL;
-	zval *arr_param = NULL, *types_param = NULL, value, item, *_0, *_1$$4, _2$$5;
-	zval arr, types;
+	zval types;
+	zval *arr, arr_sub, *types_param = NULL, value, item, *_0, *_1$$4, _2$$5;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&arr);
-	ZVAL_UNDEF(&types);
+	ZVAL_UNDEF(&arr_sub);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_2$$5);
+	ZVAL_UNDEF(&types);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &arr_param, &types_param);
+	zephir_fetch_params(1, 2, 0, &arr, &types_param);
 
-	zephir_get_arrval(&arr, arr_param);
 	zephir_get_arrval(&types, types_param);
 
 
-	if (!(Z_TYPE_P(&arr) == IS_ARRAY)) {
+	if (!(Z_TYPE_P(arr) == IS_ARRAY)) {
 		RETURN_MM_BOOL(0);
 	}
-	zephir_is_iterable(&arr, 0, "leevel/support/type.zep", 223);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&arr), _0)
+	zephir_is_iterable(arr, 0, "leevel/support/type.zep", 223);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(arr), _0)
 	{
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _0);
