@@ -104,6 +104,7 @@ class Type
                 }
 
             // 对象
+            case "obj":
             case "object":
                 return is_object(value);
 
