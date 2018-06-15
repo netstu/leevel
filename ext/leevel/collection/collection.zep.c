@@ -470,15 +470,18 @@ PHP_METHOD(Leevel_Collection_Collection, all) {
  */
 PHP_METHOD(Leevel_Collection_Collection, toArray) {
 
-	zend_bool _2$$3;
+	zend_bool _4$$3;
+	zend_string *_3;
+	zend_ulong _2;
 	zval result;
-	zval value, _0, *_1, _3$$4;
+	zval key, value, _0, *_1, _5$$4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&result);
 
 	ZEPHIR_MM_GROW();
@@ -487,23 +490,30 @@ PHP_METHOD(Leevel_Collection_Collection, toArray) {
 	array_init(&result);
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	zephir_is_iterable(&_0, 0, "leevel/collection/collection.zep", 248);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
+		ZEPHIR_INIT_NVAR(&key);
+		if (_3 != NULL) { 
+			ZVAL_STR_COPY(&key, _3);
+		} else {
+			ZVAL_LONG(&key, _2);
+		}
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _1);
-		_2$$3 = Z_TYPE_P(&value) == IS_OBJECT;
-		if (_2$$3) {
-			_2$$3 = zephir_instance_of_ev(&value, leevel_support_iarray_ce TSRMLS_CC);
+		_4$$3 = Z_TYPE_P(&value) == IS_OBJECT;
+		if (_4$$3) {
+			_4$$3 = zephir_instance_of_ev(&value, leevel_support_iarray_ce TSRMLS_CC);
 		}
-		if (_2$$3) {
-			ZEPHIR_CALL_METHOD(&_3$$4, &value, "toarray", NULL, 0);
+		if (_4$$3) {
+			ZEPHIR_CALL_METHOD(&_5$$4, &value, "toarray", NULL, 0);
 			zephir_check_call_status();
-			zephir_array_append(&result, &_3$$4, PH_SEPARATE, "leevel/collection/collection.zep", 242);
+			zephir_array_update_zval(&result, &key, &_5$$4, PH_COPY | PH_SEPARATE);
 		} else {
-			zephir_array_append(&result, &value, PH_SEPARATE, "leevel/collection/collection.zep", 244);
+			zephir_array_update_zval(&result, &key, &value, PH_COPY | PH_SEPARATE);
 		}
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&value);
+	ZEPHIR_INIT_NVAR(&key);
 	RETURN_CTOR(&result);
 
 }
@@ -515,18 +525,21 @@ PHP_METHOD(Leevel_Collection_Collection, toArray) {
  */
 PHP_METHOD(Leevel_Collection_Collection, jsonSerialize) {
 
+	zend_string *_3;
+	zend_ulong _2;
 	zval result;
-	zval __$true, value, _0, *_1, _2$$4, _3$$5, _4$$5, _5$$6;
+	zval __$true, key, value, _0, *_1, _4$$4, _5$$5, _6$$5, _7$$6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_BOOL(&__$true, 1);
+	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2$$4);
-	ZVAL_UNDEF(&_3$$5);
-	ZVAL_UNDEF(&_4$$5);
-	ZVAL_UNDEF(&_5$$6);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$5);
+	ZVAL_UNDEF(&_6$$5);
+	ZVAL_UNDEF(&_7$$6);
 	ZVAL_UNDEF(&result);
 
 	ZEPHIR_MM_GROW();
@@ -535,29 +548,36 @@ PHP_METHOD(Leevel_Collection_Collection, jsonSerialize) {
 	array_init(&result);
 	zephir_read_property(&_0, this_ptr, SL("elements"), PH_NOISY_CC | PH_READONLY);
 	zephir_is_iterable(&_0, 0, "leevel/collection/collection.zep", 273);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
+		ZEPHIR_INIT_NVAR(&key);
+		if (_3 != NULL) { 
+			ZVAL_STR_COPY(&key, _3);
+		} else {
+			ZVAL_LONG(&key, _2);
+		}
 		ZEPHIR_INIT_NVAR(&value);
 		ZVAL_COPY(&value, _1);
 		if (zephir_is_instance_of(&value, SL("JsonSerializable") TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(&_2$$4, &value, "jsonserialize", NULL, 0);
+			ZEPHIR_CALL_METHOD(&_4$$4, &value, "jsonserialize", NULL, 0);
 			zephir_check_call_status();
-			zephir_array_append(&result, &_2$$4, PH_SEPARATE, "leevel/collection/collection.zep", 263);
+			zephir_array_update_zval(&result, &key, &_4$$4, PH_COPY | PH_SEPARATE);
 		} else if (zephir_instance_of_ev(&value, leevel_support_ijson_ce TSRMLS_CC)) {
-			ZEPHIR_INIT_NVAR(&_3$$5);
-			ZEPHIR_CALL_METHOD(&_4$$5, &value, "tojson", NULL, 0);
+			ZEPHIR_INIT_NVAR(&_5$$5);
+			ZEPHIR_CALL_METHOD(&_6$$5, &value, "tojson", NULL, 0);
 			zephir_check_call_status();
-			zephir_json_decode(&_3$$5, &_4$$5, zephir_get_intval(&__$true) );
-			zephir_array_append(&result, &_3$$5, PH_SEPARATE, "leevel/collection/collection.zep", 265);
+			zephir_json_decode(&_5$$5, &_6$$5, zephir_get_intval(&__$true) );
+			zephir_array_update_zval(&result, &key, &_5$$5, PH_COPY | PH_SEPARATE);
 		} else if (zephir_instance_of_ev(&value, leevel_support_iarray_ce TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(&_5$$6, &value, "toarray", NULL, 0);
+			ZEPHIR_CALL_METHOD(&_7$$6, &value, "toarray", NULL, 0);
 			zephir_check_call_status();
-			zephir_array_append(&result, &_5$$6, PH_SEPARATE, "leevel/collection/collection.zep", 267);
+			zephir_array_update_zval(&result, &key, &_7$$6, PH_COPY | PH_SEPARATE);
 		} else {
-			zephir_array_append(&result, &value, PH_SEPARATE, "leevel/collection/collection.zep", 269);
+			zephir_array_update_zval(&result, &key, &value, PH_COPY | PH_SEPARATE);
 		}
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&value);
+	ZEPHIR_INIT_NVAR(&key);
 	RETURN_CTOR(&result);
 
 }
