@@ -192,12 +192,9 @@ class Option implements IOption, ArrayAccess
 
 		if ! strpos(name, ".") {
 			if isset this->option[namespaces][name] {
-				//dd(name);
-				//dd(this->option[namespaces]);
 				let tmpDelete = this->option[namespaces];
 				unset(tmpDelete[name]);
-				//unset this->option[namespaces][name];
-				dd(tmpDelete);
+				let this->option[namespaces] = tmpDelete;
 			}
 		} else {
 			let parts = explode(".", name);
@@ -314,7 +311,7 @@ class Option implements IOption, ArrayAccess
             let result[item] = this->deleteRecursion(part, result[item]);
         } else {
         	if isset result[item] {
-				unset(result[item]);
+				unset esult[item];
         	}
         }
 
