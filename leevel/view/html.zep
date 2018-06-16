@@ -94,7 +94,7 @@ class Html extends Connect implements IConnect
 		let cachepath = this->getCachePath(file); // 编译文件路径
 
 		if this->isCacheExpired(file, cachepath) { // 重新编译
-			this->parser()->doCombile(file, cachepath);
+			this->parser()->doCompile(file, cachepath);
 		}
 
 		// 返回类型
@@ -182,7 +182,7 @@ class Html extends Connect implements IConnect
 	protected function isCacheExpired(string file, string cachepath)
 	{
 		// 开启调试
-		if this->option["app_development"] {
+		if this->option["development"] {
 			return true;
 		}
 

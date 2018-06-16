@@ -161,7 +161,7 @@ PHP_METHOD(Leevel_View_Html, display) {
 	if (zephir_is_true(&_0)) {
 		ZEPHIR_CALL_METHOD(&_7$$6, this_ptr, "parser", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_7$$6, "docombile", NULL, 0, file, &cachepath);
+		ZEPHIR_CALL_METHOD(NULL, &_7$$6, "docompile", NULL, 0, file, &cachepath);
 		zephir_check_call_status();
 	}
 	if (display == 0) {
@@ -368,7 +368,7 @@ PHP_METHOD(Leevel_View_Html, isCacheExpired) {
 
 
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &_0, SL("app_development"), PH_NOISY | PH_READONLY, "leevel/view/html.zep", 185 TSRMLS_CC);
+	zephir_array_fetch_string(&_1, &_0, SL("development"), PH_NOISY | PH_READONLY, "leevel/view/html.zep", 185 TSRMLS_CC);
 	if (zephir_is_true(&_1)) {
 		RETURN_MM_BOOL(1);
 	}
