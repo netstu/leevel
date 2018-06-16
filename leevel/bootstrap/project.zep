@@ -656,6 +656,10 @@ class Project extends Container implements IProject
     public function bootstrap(array bootstraps)
     {
         var value;
+
+        if (this->isBootstrap) {
+            return;
+        }
     
         for value in bootstraps {
             (new {value}())->handle(this);
@@ -680,7 +684,11 @@ class Project extends Container implements IProject
     public function registerProviders()
     {
         var tmp, alias, deferredAlias, providers, provider, providerInstance;
-    
+
+        if (this->isBootstrap) {
+            return;
+        }
+
         let tmp = this->make("option")->get("_deferred_providers", [[], []]);
         let this->deferredProviders = tmp[0];
         let deferredAlias = tmp[1];
@@ -711,7 +719,11 @@ class Project extends Container implements IProject
     public function bootstrapProviders()
     {
         var item;
-    
+
+        if (this->isBootstrap) {
+            return;
+        }
+
         for item in this->providerBootstraps {
             this->callProviderBootstrap(item);
         }

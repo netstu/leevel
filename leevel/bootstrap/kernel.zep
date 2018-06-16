@@ -75,6 +75,8 @@ abstract class Kernel implements IKernel
     {
         let this->project = project;
         let this->router = router;
+
+        this->bootstrap();
     }
     
     /**
@@ -166,8 +168,6 @@ abstract class Kernel implements IKernel
      */
     protected function getResponseWithRequest(<Request> request)
     {
-        this->bootstrap();
-
         return this->dispatchRouter(request);
     }
     
