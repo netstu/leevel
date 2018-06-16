@@ -2880,13 +2880,14 @@ PHP_METHOD(Leevel_Http_Request, getRoot) {
  */
 PHP_METHOD(Leevel_Http_Request, getEnter) {
 
-	zval scriptName, _0, _1;
+	zval scriptName, _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&scriptName);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 
@@ -2900,7 +2901,9 @@ PHP_METHOD(Leevel_Http_Request, getEnter) {
 	ZEPHIR_CALL_FUNCTION(&_1, "dirname", NULL, 26, &scriptName);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&scriptName, &_1);
-	if (ZEPHIR_IS_STRING(&scriptName, "\\")) {
+	ZEPHIR_SINIT_VAR(_2);
+	ZVAL_STRING(&_2, "\\");
+	if (ZEPHIR_IS_IDENTICAL(&_2, &scriptName)) {
 		ZEPHIR_INIT_NVAR(&scriptName);
 		ZVAL_STRING(&scriptName, "/");
 	}
@@ -3239,7 +3242,8 @@ PHP_METHOD(Leevel_Http_Request, getScheme) {
  */
 PHP_METHOD(Leevel_Http_Request, getQueryString) {
 
-	zval queryString, _0, _1, _2, _3;
+	zend_bool _5;
+	zval queryString, _0, _1, _2, _3, _4, _6;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -3248,6 +3252,8 @@ PHP_METHOD(Leevel_Http_Request, getQueryString) {
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
 
@@ -3261,7 +3267,15 @@ PHP_METHOD(Leevel_Http_Request, getQueryString) {
 	ZEPHIR_CALL_METHOD(&queryString, this_ptr, "normalizequerystring", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_2);
-	if (ZEPHIR_IS_STRING_IDENTICAL(&queryString, "")) {
+	ZEPHIR_SINIT_VAR(_4);
+	ZVAL_STRING(&_4, "");
+	_5 = ZEPHIR_IS_IDENTICAL(&_4, &queryString);
+	if (_5) {
+		ZEPHIR_SINIT_VAR(_6);
+		ZVAL_STRING(&_6, "0");
+		_5 = !ZEPHIR_IS_IDENTICAL(&_6, &queryString);
+	}
+	if (_5) {
 		ZVAL_NULL(&_2);
 	} else {
 		ZEPHIR_CPY_WRT(&_2, &queryString);
@@ -3461,8 +3475,8 @@ PHP_METHOD(Leevel_Http_Request, getBasePath) {
 		ZEPHIR_CPY_WRT(&basePath, &baseUrl);
 	}
 	ZEPHIR_SINIT_VAR(_4);
-	ZVAL_STRING(&_4, "/");
-	if (ZEPHIR_IS_STRING_IDENTICAL(&_4, "\\")) {
+	ZVAL_STRING(&_4, "\\");
+	if (ZEPHIR_IS_STRING_IDENTICAL(&_4, "/")) {
 		ZEPHIR_INIT_VAR(&_5$$7);
 		ZEPHIR_INIT_VAR(&_6$$7);
 		ZVAL_STRING(&_6$$7, "\\");
@@ -4073,17 +4087,19 @@ PHP_METHOD(Leevel_Http_Request, parsePathInfo) {
  */
 PHP_METHOD(Leevel_Http_Request, normalizeQueryString) {
 
-	zend_bool _2$$4;
-	zval *queryString_param = NULL, parts, item, _0, *_1, _4$$4;
-	zval queryString, _3$$4;
+	zend_bool _3$$4, _5$$4;
+	zval *queryString_param = NULL, parts, item, _0, *_1, _2$$4, _4$$4, _7$$4;
+	zval queryString, _6$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&queryString);
-	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_6$$4);
 	ZVAL_UNDEF(&parts);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_7$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &queryString_param);
@@ -4103,15 +4119,23 @@ PHP_METHOD(Leevel_Http_Request, normalizeQueryString) {
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
-		_2$$4 = ZEPHIR_IS_STRING_IDENTICAL(&item, "");
-		if (!(_2$$4)) {
-			ZEPHIR_INIT_LNVAR(_3$$4);
-			ZEPHIR_CONCAT_SS(&_3$$4, "_url", "=");
-			ZEPHIR_INIT_NVAR(&_4$$4);
-			zephir_fast_strpos(&_4$$4, &item, &_3$$4, 0 );
-			_2$$4 = ZEPHIR_IS_LONG_IDENTICAL(&_4$$4, 0);
+		ZEPHIR_SINIT_NVAR(_2$$4);
+		ZVAL_STRING(&_2$$4, "");
+		_3$$4 = ZEPHIR_IS_IDENTICAL(&_2$$4, &item);
+		if (_3$$4) {
+			ZEPHIR_SINIT_NVAR(_4$$4);
+			ZVAL_STRING(&_4$$4, "0");
+			_3$$4 = !ZEPHIR_IS_IDENTICAL(&_4$$4, &item);
 		}
-		if (_2$$4) {
+		_5$$4 = _3$$4;
+		if (!(_5$$4)) {
+			ZEPHIR_INIT_LNVAR(_6$$4);
+			ZEPHIR_CONCAT_SS(&_6$$4, "_url", "=");
+			ZEPHIR_INIT_NVAR(&_7$$4);
+			zephir_fast_strpos(&_7$$4, &item, &_6$$4, 0 );
+			_5$$4 = ZEPHIR_IS_LONG_IDENTICAL(&_7$$4, 0);
+		}
+		if (_5$$4) {
 			continue;
 		}
 		zephir_array_append(&parts, &item, PH_SEPARATE, "leevel/http/request.zep", 1729);
@@ -4158,15 +4182,17 @@ PHP_METHOD(Leevel_Http_Request, getInputSource) {
  */
 PHP_METHOD(Leevel_Http_Request, isEmptyString) {
 
-	zend_bool _0;
+	zend_bool _0, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *key_param = NULL, value, _1;
+	zval *key_param = NULL, value, _1, _2, _4;
 	zval key;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &key_param);
@@ -4180,9 +4206,17 @@ PHP_METHOD(Leevel_Http_Request, isEmptyString) {
 	if (_0) {
 		ZEPHIR_INIT_VAR(&_1);
 		zephir_fast_trim(&_1, &value, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
-		_0 = ZEPHIR_IS_STRING_IDENTICAL(&_1, "");
+		ZEPHIR_SINIT_VAR(_2);
+		ZVAL_STRING(&_2, "");
+		_0 = ZEPHIR_IS_IDENTICAL(&_2, &_1);
 	}
-	RETURN_MM_BOOL(_0);
+	_3 = _0;
+	if (_3) {
+		ZEPHIR_SINIT_VAR(_4);
+		ZVAL_STRING(&_4, "0");
+		_3 = !ZEPHIR_IS_IDENTICAL(&_4, &value);
+	}
+	RETURN_MM_BOOL(_3);
 
 }
 

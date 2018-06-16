@@ -1247,7 +1247,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         let scriptName = this->getScriptName();
 
         let scriptName = dirname(scriptName);
-        if scriptName == "\\" {
+        if "\\" === scriptName {
             let scriptName = "/";
         }
 
@@ -1389,7 +1389,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     
         let queryString = this->normalizeQueryString(this->server->get("QUERY_STRING", ""));
 
-        return queryString === "" ? null : queryString;
+        return "" === queryString  && "0" !== queryString ? null : queryString;
     }
     
     /**
@@ -1485,7 +1485,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
             let basePath = baseUrl;
         }
 
-        if DIRECTORY_SEPARATOR === "\\" {
+        if "\\" === DIRECTORY_SEPARATOR {
             let basePath = str_replace("\\", "/", basePath);
         }
 
@@ -1722,7 +1722,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
 
         let parts = [];
         for item in explode("&", queryString) {
-            if item === "" || strpos(item, self::PATHINFO_URL . "=") === 0 {
+            if ("" === item && "0" !== item) || 0 === strpos(item, self::PATHINFO_URL . "=") {
                 continue;
             }
 
@@ -1754,7 +1754,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     
         let value = this->input(key);
 
-        return is_string(value) && trim(value) === "";
+        return is_string(value) && "" === trim(value) && "0" !== value;
     }
 
     /**
