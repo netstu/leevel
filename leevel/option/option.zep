@@ -178,7 +178,7 @@ class Option implements IOption, ArrayAccess
 	 */
 	public function delete(string name)
 	{
-		var tempname, name, names, namespaces, parts, option;
+		var tempname, name, names, namespaces, parts, option, tmpDelete;
 
 		let names = this->parseNamespace(name);
 		let namespaces = names[0];
@@ -194,8 +194,10 @@ class Option implements IOption, ArrayAccess
 			if isset this->option[namespaces][name] {
 				//dd(name);
 				//dd(this->option[namespaces]);
-				unset this->option[namespaces][name];
-				dd(this->option[namespaces]);
+				let tmpDelete = this->option[namespaces];
+				unset(tmpDelete[name]);
+				//unset this->option[namespaces][name];
+				dd(tmpDelete);
 			}
 		} else {
 			let parts = explode(".", name);
