@@ -192,12 +192,12 @@ class Option implements IOption, ArrayAccess
 
 		if ! strpos(name, ".") {
 			if isset this->option[namespaces][name] {
-				unset(this->option[namespaces][name]);
+				unset this->option[namespaces][name];
 			}
 		} else {
 			let parts = explode(".", name);
 			let option = this->deleteRecursion(parts, this->option[namespaces]);
-			let this->option[namespaces] = option;		
+			let this->option[namespaces] = option;
 		}
 	}
 
