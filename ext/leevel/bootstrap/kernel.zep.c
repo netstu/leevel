@@ -13,8 +13,8 @@
 
 #include "kernel/main.h"
 #include "kernel/object.h"
-#include "kernel/memory.h"
 #include "kernel/fcall.h"
+#include "kernel/memory.h"
 #include "kernel/array.h"
 #include "kernel/operators.h"
 
@@ -68,18 +68,23 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Kernel) {
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, __construct) {
 
+	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *project, project_sub, *router, router_sub;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
 	ZVAL_UNDEF(&router_sub);
 
-	zephir_fetch_params(0, 2, 0, &project, &router);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &project, &router);
 
 
 
 	zephir_update_property_zval(this_ptr, SL("project"), project);
 	zephir_update_property_zval(this_ptr, SL("router"), router);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "bootstrap", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -289,8 +294,6 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, getResponseWithRequest) {
 
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "bootstrap", NULL, 0);
-	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "dispatchrouter", NULL, 0, request);
 	zephir_check_call_status();
 	RETURN_MM();
