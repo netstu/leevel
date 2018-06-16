@@ -311,7 +311,7 @@ class Option implements IOption, ArrayAccess
             let result[item] = this->deleteRecursion(part, result[item]);
         } else {
         	if isset result[item] {
-				unset esult[item];
+				unset result[item];
         	}
         }
 

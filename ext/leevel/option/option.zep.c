@@ -382,7 +382,7 @@ PHP_METHOD(Leevel_Option_Option, set) {
 PHP_METHOD(Leevel_Option_Option, delete) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval name, *name_param = NULL, tempname, names, namespaces, parts, option, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$5, _7$$6, _8$$6;
+	zval name, *name_param = NULL, tempname, names, namespaces, parts, option, tmpDelete, _1, _2, _0$$3, _3$$4, _4$$4, _5$$5, _6$$6, _7$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&name);
@@ -391,15 +391,15 @@ PHP_METHOD(Leevel_Option_Option, delete) {
 	ZVAL_UNDEF(&namespaces);
 	ZVAL_UNDEF(&parts);
 	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&tmpDelete);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_0$$3);
 	ZVAL_UNDEF(&_3$$4);
 	ZVAL_UNDEF(&_4$$4);
 	ZVAL_UNDEF(&_5$$5);
-	ZVAL_UNDEF(&_6$$5);
+	ZVAL_UNDEF(&_6$$6);
 	ZVAL_UNDEF(&_7$$6);
-	ZVAL_UNDEF(&_8$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &name_param);
@@ -429,15 +429,17 @@ PHP_METHOD(Leevel_Option_Option, delete) {
 		zephir_array_fetch(&_4$$4, &_3$$4, &namespaces, PH_READONLY, "leevel/option/option.zep", 194 TSRMLS_CC);
 		if (zephir_array_isset(&_4$$4, &name)) {
 			zephir_read_property(&_5$$5, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_6$$5, &_5$$5, &namespaces, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 195 TSRMLS_CC);
-			zephir_array_unset(&_6$$5, &name, PH_SEPARATE);
+			ZEPHIR_OBS_VAR(&tmpDelete);
+			zephir_array_fetch(&tmpDelete, &_5$$5, &namespaces, PH_NOISY, "leevel/option/option.zep", 195 TSRMLS_CC);
+			zephir_array_unset(&tmpDelete, &name, PH_SEPARATE);
+			zephir_update_property_array(this_ptr, SL("option"), &namespaces, &tmpDelete TSRMLS_CC);
 		}
 	} else {
 		ZEPHIR_INIT_VAR(&parts);
 		zephir_fast_explode_str(&parts, SL("."), &name, LONG_MAX TSRMLS_CC);
-		zephir_read_property(&_7$$6, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_8$$6, &_7$$6, &namespaces, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 199 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(&option, this_ptr, "deleterecursion", NULL, 0, &parts, &_8$$6);
+		zephir_read_property(&_6$$6, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_7$$6, &_6$$6, &namespaces, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 201 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(&option, this_ptr, "deleterecursion", NULL, 0, &parts, &_7$$6);
 		zephir_check_call_status();
 		zephir_update_property_array(this_ptr, SL("option"), &namespaces, &option TSRMLS_CC);
 	}
@@ -683,7 +685,7 @@ PHP_METHOD(Leevel_Option_Option, deleteRecursion) {
 		RETURN_CTOR(&result);
 	}
 	if (!(ZEPHIR_IS_EMPTY(&part))) {
-		zephir_array_fetch(&_1$$4, &result, &item, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 309 TSRMLS_CC);
+		zephir_array_fetch(&_1$$4, &result, &item, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 311 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(&_0$$4, this_ptr, "deleterecursion", NULL, 123, &part, &_1$$4);
 		zephir_check_call_status();
 		zephir_array_update_zval(&result, &item, &_0$$4, PH_COPY | PH_SEPARATE);
@@ -732,16 +734,16 @@ PHP_METHOD(Leevel_Option_Option, parseNamespace) {
 	if (zephir_is_true(&_1)) {
 		ZEPHIR_INIT_VAR(&names);
 		zephir_fast_explode_str(&names, SL("\\"), &name, LONG_MAX TSRMLS_CC);
-		zephir_array_fetch_long(&_2$$3, &names, 1, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 331 TSRMLS_CC);
+		zephir_array_fetch_long(&_2$$3, &names, 1, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 333 TSRMLS_CC);
 		if (ZEPHIR_IS_EMPTY(&_2$$3)) {
 			ZEPHIR_INIT_VAR(&_3$$4);
 			ZVAL_STRING(&_3$$4, "*");
 			zephir_array_update_long(&names, 1, &_3$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 		}
-		zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 334 TSRMLS_CC);
+		zephir_array_fetch_long(&tempname, &names, 1, PH_NOISY | PH_READONLY, "leevel/option/option.zep", 336 TSRMLS_CC);
 		zephir_get_strval(&name, &tempname);
 		ZEPHIR_OBS_VAR(&namespaces);
-		zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "leevel/option/option.zep", 336 TSRMLS_CC);
+		zephir_array_fetch_long(&namespaces, &names, 0, PH_NOISY, "leevel/option/option.zep", 338 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&namespaces);
 		ZVAL_STRING(&namespaces, "app");
