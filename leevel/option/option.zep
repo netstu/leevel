@@ -192,7 +192,10 @@ class Option implements IOption, ArrayAccess
 
 		if ! strpos(name, ".") {
 			if isset this->option[namespaces][name] {
+				dd(name);
+				dd(this->option[namespaces]);
 				unset this->option[namespaces][name];
+				dd(this->option[namespaces]);
 			}
 		} else {
 			let parts = explode(".", name);
