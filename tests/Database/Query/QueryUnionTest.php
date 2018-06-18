@@ -23,16 +23,16 @@ namespace Tests\Database\Query;
 use Tests\TestCase;
 
 /**
- * table test.
+ * union test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.10
+ * @since 2018.06.18
  *
  * @version 1.0
  * @coversNothing
  */
-class QueryTableTest extends TestCase
+class QueryUnionTest extends TestCase
 {
     use Query;
 
@@ -42,7 +42,10 @@ class QueryTableTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `posts`.* FROM `posts`',
+  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` 
+UNION SELECT `yyyyy`.`yid` AS `id`,`yyyyy`.`name` AS `value` FROM `yyyyy` WHERE `yyyyy`.`first_name` = \'222\'
+UNION SELECT id,value FROM test2
+UNION SELECT `yyyyy`.`yid` AS `id`,`yyyyy`.`name` AS `value` FROM `yyyyy` WHERE `yyyyy`.`first_name` = \'222\'',
   1 => 
   array (
   ),
@@ -55,60 +58,31 @@ array (
 )
 eot;
 
+        $union1 = $connect->table('yyyyy', 'yid as id,name as value')->where('first_name', '=', '222');
+        $union2 = 'SELECT id,value FROM test2';
+
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('posts')->
+                $connect->table('test', 'tid as id,tname as value')->
+
+                union($union1)->
+
+                union($union2)->
+
+                union($union1)->
 
                 getAll(true),
                 __METHOD__
             )
         );
 
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `posts`.* FROM `mydb`.`posts`',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('mydb.posts')->
+                $connect->table('test', 'tid as id,tname as value')->
 
-                getAll(true),
-                __METHOD__
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `p`.* FROM `mydb`.`posts` `p`',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table(['p' => 'mydb.posts'])->
+                union([$union1, $union2, $union1])->
 
                 getAll(true),
                 __METHOD__
@@ -116,13 +90,14 @@ eot;
         );
     }
 
-    public function testField()
+    public function testUnionAll()
     {
         $connect = $this->createConnect();
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `posts`.`title`,`posts`.`body` FROM `posts`',
+  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` 
+UNION ALL SELECT id,value FROM test2',
   1 => 
   array (
   ),
@@ -135,38 +110,14 @@ array (
 )
 eot;
 
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('posts', 'title,body')->
-
-                getAll(true),
-                __METHOD__
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `posts`.`title` AS `t`,`posts`.`name`,`posts`.`remark`,`posts`.`value` FROM `mydb`.`posts`',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
+        $union1 = 'SELECT id,value FROM test2';
 
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table(
-                    'mydb.posts', [
-                        't' => 'title', 'name', 'remark,value',
-                    ])->
+                $connect->table('test', 'tid as id,tname as value')->
+
+                unionAll($union1)->
 
                 getAll(true),
                 __METHOD__

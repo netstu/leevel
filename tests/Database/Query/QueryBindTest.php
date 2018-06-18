@@ -20,19 +20,20 @@ declare(strict_types=1);
 
 namespace Tests\Database\Query;
 
+use PDO;
 use Tests\TestCase;
 
 /**
- * table test.
+ * bind test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.10
+ * @since 2018.06.17
  *
  * @version 1.0
  * @coversNothing
  */
-class QueryTableTest extends TestCase
+class QueryBindTest extends TestCase
 {
     use Query;
 
@@ -42,9 +43,14 @@ class QueryTableTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `posts`.* FROM `posts`',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
   1 => 
   array (
+    'id' => 
+    array (
+      0 => 1,
+      1 => 2,
+    ),
   ),
   2 => false,
   3 => NULL,
@@ -58,7 +64,11 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('posts')->
+                $connect->table('test')->
+
+                bind('id', 1)->
+
+                where('id', '=', '[:id]')->
 
                 getAll(true),
                 __METHOD__
@@ -67,9 +77,14 @@ eot;
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `posts`.* FROM `mydb`.`posts`',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
   1 => 
   array (
+    'id' => 
+    array (
+      0 => 1,
+      1 => 1,
+    ),
   ),
   2 => false,
   3 => NULL,
@@ -83,7 +98,11 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('mydb.posts')->
+                $connect->table('test')->
+
+                bind('id', 1, PDO::PARAM_INT)->
+
+                where('id', '=', '[:id]')->
 
                 getAll(true),
                 __METHOD__
@@ -92,9 +111,14 @@ eot;
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `p`.* FROM `mydb`.`posts` `p`',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id',
   1 => 
   array (
+    'id' => 
+    array (
+      0 => 1,
+      1 => 1,
+    ),
   ),
   2 => false,
   3 => NULL,
@@ -108,37 +132,11 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table(['p' => 'mydb.posts'])->
+                $connect->table('test')->
 
-                getAll(true),
-                __METHOD__
-            )
-        );
-    }
+                bind('id', [1, PDO::PARAM_INT])->
 
-    public function testField()
-    {
-        $connect = $this->createConnect();
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `posts`.`title`,`posts`.`body` FROM `posts`',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('posts', 'title,body')->
+                where('id', '=', '[:id]')->
 
                 getAll(true),
                 __METHOD__
@@ -147,9 +145,19 @@ eot;
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `posts`.`title` AS `t`,`posts`.`name`,`posts`.`remark`,`posts`.`value` FROM `mydb`.`posts`',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = :id AND `test`.`hello` LIKE :name',
   1 => 
   array (
+    'id' => 
+    array (
+      0 => 1,
+      1 => 1,
+    ),
+    'name' => 
+    array (
+      0 => '小鸭子',
+      1 => 2,
+    ),
   ),
   2 => false,
   3 => NULL,
@@ -163,10 +171,54 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table(
-                    'mydb.posts', [
-                        't' => 'title', 'name', 'remark,value',
-                    ])->
+                $connect->table('test')->
+
+                bind(['id' => [1, PDO::PARAM_INT], 'name'=>'小鸭子'])->
+
+                where('id', '=', '[:id]')->
+
+                where('hello', 'like', '[:name]')->
+
+                getAll(true),
+                __METHOD__
+            )
+        );
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`id` = ? AND `test`.`hello` LIKE ?',
+  1 => 
+  array (
+    0 => 
+    array (
+      0 => 5,
+      1 => 1,
+    ),
+    1 => 
+    array (
+      0 => '小鸭子',
+      1 => 2,
+    ),
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->table('test')->
+
+                bind([[5, PDO::PARAM_INT], '小鸭子'])->
+
+                where('id', '=', '[?]')->
+
+                where('hello', 'like', '[?]')->
 
                 getAll(true),
                 __METHOD__
