@@ -1,10 +1,9 @@
 # Leevel Framework Alias
 
-modify this file ../.git/config add alias and remote,then using git testspull and testspush to manager your subtree repository.
+modify this file ../.git/config add alias and remote,then using git testspull manager your subtree repository.
 
 ```
 git testspull
-git testspush // do not allowed,see `tests/README.md`.
 ```
 
 The code below need to be add.
@@ -34,9 +33,5 @@ The code below need to be add.
 
 [alias]      
     testspull = !git subtree pull --prefix=tests tests master \
-        && :
-
-    testspush = !git subtree split --rejoin --prefix=tests master \
-        && git subtree push --prefix=tests tests master \
         && :
 ```
