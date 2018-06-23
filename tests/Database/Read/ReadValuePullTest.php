@@ -18,21 +18,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Database\Query;
+namespace Tests\Database\Read;
 
+use Tests\Database\Query\Query;
 use Tests\TestCase;
 
 /**
- * distinct test.
+ * read valuepull test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.18
+ * @since 2018.06.23
  *
  * @version 1.0
  * @coversNothing
  */
-class QueryDistinctTest extends TestCase
+class ReadValuePullTest extends TestCase
 {
     use Query;
 
@@ -42,7 +43,7 @@ class QueryDistinctTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT DISTINCT `test`.* FROM `test`',
+  0 => 'SELECT `test`.`id` FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -58,39 +59,22 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                distinct()->
+                table('test')->
 
-                getAll(true)
+                value('id')
             )
         );
 
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.* FROM `test`',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                distinct()->
+                table('test')->
 
-                distinct(false)->
-
-                getAll(true)
+                pull('id')
             )
         );
     }

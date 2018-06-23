@@ -18,21 +18,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Database\Query;
+namespace Tests\Database\Read;
 
+use Tests\Database\Query\Query;
 use Tests\TestCase;
 
 /**
- * limit test.
+ * read getdynamics test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.18
+ * @since 2018.06.22
  *
  * @version 1.0
  * @coversNothing
  */
-class QueryLimitTest extends TestCase
+class ReadGetDynamicsTest extends TestCase
 {
     use Query;
 
@@ -42,7 +43,7 @@ class QueryLimitTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` LIMIT 5,10',
+  0 => 'SELECT `test`.* FROM `test` LIMIT 3,10',
   1 => 
   array (
   ),
@@ -58,17 +59,17 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                limit(5, 10)->
+                table('test')->
 
-                get(null, true)
+                get10start3()
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` LIMIT 1',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`user_name` = \'1111\' LIMIT 1',
   1 => 
   array (
   ),
@@ -84,17 +85,17 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                one()->
+                table('test')->
 
-                get(null, true)
+                getByUserName('1111')
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test`',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`UserName` = \'1111\' LIMIT 1',
   1 => 
   array (
   ),
@@ -110,17 +111,17 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                all()->
+                table('test')->
 
-                get(null, true)
+                getByUserName_('1111')
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` LIMIT 0,15',
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`user_name` = \'1111\' AND `test`.`sex` = \'222\'',
   1 => 
   array (
   ),
@@ -136,11 +137,37 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                top(15)->
+                table('test')->
 
-                get(null, true)
+                getAllByUserNameAndSex('1111', '222')
+            )
+        );
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT `test`.* FROM `test` WHERE `test`.`UserName` = \'1111\' AND `test`.`Sex` = \'222\'',
+  1 => 
+  array (
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                getAllByUserNameAndSex_('1111', '222')
             )
         );
     }

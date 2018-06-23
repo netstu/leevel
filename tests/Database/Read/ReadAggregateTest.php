@@ -18,31 +18,32 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Database\Query;
+namespace Tests\Database\Read;
 
+use Tests\Database\Query\Query;
 use Tests\TestCase;
 
 /**
- * orderBy test.
+ * read aggregate test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.18
+ * @since 2018.06.23
  *
  * @version 1.0
  * @coversNothing
  */
-class QueryOrderByTest extends TestCase
+class ReadAggregateTest extends TestCase
 {
     use Query;
 
-    public function testBaseUse()
+    public function testCount()
     {
         $connect = $this->createConnect();
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY `test`.`id` DESC,`test`.`name` ASC',
+  0 => 'SELECT COUNT(*) AS row_count FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -58,19 +59,30 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
+                $connect->sql()->
 
-                orderBy('id DESC')->
+                table('test')->
 
-                orderBy('name')->
+                getCount()
+            )
+        );
 
-                getAll(true)
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                count()->
+
+                get()
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY `test`.`id` DESC',
+  0 => 'SELECT COUNT(*) AS row_count2 FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -86,152 +98,22 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
+                $connect->sql()->
 
-                orderBy('test.id DESC')->
+                table('test')->
 
-                getAll(true)
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY SUM(`test`.`num`) ASC',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
-
-                orderBy('{SUM([num]) ASC}')->
-
-                getAll(true)
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY SUM(`test`.`num`) ASC',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
-
-                orderBy('{SUM([num]) ASC}')->
-
-                getAll(true)
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY `test`.`title` ASC,`test`.`id` ASC,concat(\'1234\',`test`.`id`,\'ttt\') DESC',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
-
-                orderBy("title,id,{concat('1234',[id],'ttt') desc}")->
-
-                getAll(true)
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY `test`.`title` ASC,`test`.`id` ASC,`test`.`ttt` ASC,`test`.`value` DESC',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
-
-                orderBy(['title,id,ttt', 'value desc'])->
-
-                getAll(true)
-            )
-        );
-
-        $sql = <<<'eot'
-array (
-  0 => 'SELECT `test`.`tid` AS `id`,`test`.`tname` AS `value` FROM `test` ORDER BY `test`.`title` DESC,`test`.`id` DESC,`test`.`ttt` ASC,`test`.`value` DESC',
-  1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
-  ),
-)
-eot;
-
-        $this->assertSame(
-            $sql,
-            $this->varExport(
-                $connect->table('test', 'tid as id,tname as value')->
-
-                orderBy(['title,id,ttt asc', 'value'], 'desc')->
-
-                getAll(true)
+                getCount('*', 'row_count2')
             )
         );
     }
 
-    public function testLatestOrOldest()
+    public function testAvg()
     {
         $connect = $this->createConnect();
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` ORDER BY `test`.`create_at` DESC',
+  0 => 'SELECT AVG(`test`.`num`) AS avg_value FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -247,17 +129,30 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                latest()->
+                table('test')->
 
-                getAll(true)
+                getAvg('num')
+            )
+        );
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                avg('num')->
+
+                get()
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` ORDER BY `test`.`foo` DESC',
+  0 => 'SELECT AVG(`test`.`num`) AS avg_value2 FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -273,17 +168,61 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                latest('foo')->
+                table('test')->
 
-                getAll(true)
+                getAvg('num', 'avg_value2')
+            )
+        );
+    }
+
+    public function testMax()
+    {
+        $connect = $this->createConnect();
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT MAX(`test`.`num`) AS max_value FROM `test` LIMIT 1',
+  1 => 
+  array (
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                getMax('num')
+            )
+        );
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                max('num')->
+
+                get()
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` ORDER BY `test`.`create_at` ASC',
+  0 => 'SELECT MAX(`test`.`num`) AS max_value2 FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -299,17 +238,61 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                oldest()->
+                table('test')->
 
-                getAll(true)
+                getMax('num', 'max_value2')
+            )
+        );
+    }
+
+    public function testMin()
+    {
+        $connect = $this->createConnect();
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT MIN(`test`.`num`) AS min_value FROM `test` LIMIT 1',
+  1 => 
+  array (
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                getMin('num')
+            )
+        );
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                min('num')->
+
+                get()
             )
         );
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` ORDER BY `test`.`bar` ASC',
+  0 => 'SELECT MIN(`test`.`num`) AS min_value2 FROM `test` LIMIT 1',
   1 => 
   array (
   ),
@@ -325,11 +308,81 @@ eot;
         $this->assertSame(
             $sql,
             $this->varExport(
-                $connect->table('test')->
+                $connect->sql()->
 
-                oldest('bar')->
+                table('test')->
 
-                getAll(true)
+                getMin('num', 'min_value2')
+            )
+        );
+    }
+
+    public function testSum()
+    {
+        $connect = $this->createConnect();
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT SUM(`test`.`num`) AS sum_value FROM `test` LIMIT 1',
+  1 => 
+  array (
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                getSum('num')
+            )
+        );
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                sum('num')->
+
+                get()
+            )
+        );
+
+        $sql = <<<'eot'
+array (
+  0 => 'SELECT SUM(`test`.`num`) AS sum_value2 FROM `test` LIMIT 1',
+  1 => 
+  array (
+  ),
+  2 => false,
+  3 => NULL,
+  4 => NULL,
+  5 => 
+  array (
+  ),
+)
+eot;
+
+        $this->assertSame(
+            $sql,
+            $this->varExport(
+                $connect->sql()->
+
+                table('test')->
+
+                getSum('num', 'sum_value2')
             )
         );
     }
