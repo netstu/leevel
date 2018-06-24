@@ -18,21 +18,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Database\Read;
+namespace Tests\Database\Update;
 
 use Tests\Database\Query\Query;
 use Tests\TestCase;
 
 /**
- * read get test.
+ * update updatecolumn test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.21
+ * @since 2018.06.24
  *
  * @version 1.0
  */
-class ReadGetTest extends TestCase
+class UpdateUpdateColumnTest extends TestCase
 {
     use Query;
 
@@ -42,15 +42,14 @@ class ReadGetTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test`',
+  0 => 'UPDATE `test` SET `test`.`name` = :name WHERE `test`.`id` = 503',
   1 => 
   array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
+    'name' => 
+    array (
+      0 => '小小小鸟，怎么也飞不高。',
+      1 => 2,
+    ),
   ),
 )
 eot;
@@ -62,20 +61,21 @@ eot;
 
                 table('test')->
 
-                get()
+                where('id', 503)->
+
+                updateColumn('name', '小小小鸟，怎么也飞不高。')
             )
         );
+    }
+
+    public function testExpression()
+    {
+        $connect = $this->createConnect();
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` LIMIT 0,5',
+  0 => 'UPDATE `test` SET `test`.`name` = concat(`test`.`value`,`test`.`name`) WHERE `test`.`id` = 503',
   1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
   array (
   ),
 )
@@ -88,7 +88,9 @@ eot;
 
                 table('test')->
 
-                get(5)
+                where('id', 503)->
+
+                updateColumn('name', '{concat([value],[name])}')
             )
         );
     }

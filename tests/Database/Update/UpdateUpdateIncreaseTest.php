@@ -18,21 +18,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Tests\Database\Read;
+namespace Tests\Database\Update;
 
 use Tests\Database\Query\Query;
 use Tests\TestCase;
 
 /**
- * read get test.
+ * update updateincrease test.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.06.21
+ * @since 2018.06.24
  *
  * @version 1.0
  */
-class ReadGetTest extends TestCase
+class UpdateUpdateIncreaseTest extends TestCase
 {
     use Query;
 
@@ -42,14 +42,8 @@ class ReadGetTest extends TestCase
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test`',
+  0 => 'UPDATE `test` SET `test`.`num` = `test`.`num`+3 WHERE `test`.`id` = 503',
   1 => 
-  array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
   array (
   ),
 )
@@ -62,21 +56,23 @@ eot;
 
                 table('test')->
 
-                get()
+                where('id', 503)->
+
+                updateIncrease('num', 3)
             )
         );
+    }
+
+    public function testExpression()
+    {
+        $connect = $this->createConnect();
 
         $sql = <<<'eot'
 array (
-  0 => 'SELECT `test`.* FROM `test` LIMIT 0,5',
+  0 => 'UPDATE `test` SET `test`.`num` = `test`.`num`+3 WHERE `test`.`id` = ?',
   1 => 
   array (
-  ),
-  2 => false,
-  3 => NULL,
-  4 => NULL,
-  5 => 
-  array (
+    0 => 503,
   ),
 )
 eot;
@@ -88,7 +84,9 @@ eot;
 
                 table('test')->
 
-                get(5)
+                where('id', '[?]')->
+
+                updateIncrease('num', 3, [503])
             )
         );
     }
