@@ -97,7 +97,14 @@ class Router implements IRouter, IMacro
         "_middlewares" : null, 
         "_vars" : null
     ];
-    
+
+    /**
+     * 是否已经进行匹配.
+     *
+     * @var bool
+     */
+    protected isMatched;
+
     /**
      * 基础路径 
      *
@@ -215,6 +222,8 @@ class Router implements IRouter, IMacro
     public function setMatchedData(array matchedData)
     {
         let this->matchedData = array_merge(self::matcheDataInit, matchedData);
+
+        let this->isMatched = true;
     }
     
     /**
@@ -631,7 +640,7 @@ class Router implements IRouter, IMacro
     {
         var dataPathInfo, bind;
     
-        if ! (is_null(this->matchedData)) {
+        if true === this->isMatched && ! (is_null(this->matchedData)) {
             return this->tryRouterBind();
         }
 
