@@ -108,6 +108,7 @@ script:
           --show-diff \
           --set-timeout 120
   # Run tests
+  - mkdir -p logs
   - vendor/bin/phpunit
 
 # Uncomment for debug purposes
