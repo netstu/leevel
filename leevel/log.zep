@@ -28,13 +28,13 @@ use Leevel\Support\Facade;
 class Log extends Facade
 {
 
-	/**
-	 * 返回门面名字
-	 *
-	 * @return string
-	 */
-	protected static function name() -> string 
-	{
-		return "logs";
-	}
+    /**
+     * 返回门面名字
+     *
+     * @return string
+     */
+    protected static function name() -> string 
+    {
+        return "logs";
+    }
 }

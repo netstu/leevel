@@ -31,181 +31,181 @@ use Leevel\View\IConnect;
 class Html extends Connect implements IConnect
 {
 
-	/**
-	 * 视图分析器
-	 *
-	 * @var \Leevel\View\IParserr
-	 */
-	protected parser;
+    /**
+     * 视图分析器
+     *
+     * @var \Leevel\View\IParserr
+     */
+    protected parser;
 
-	/**
-	 * 解析 parser
-	 *
-	 * @var callable
-	 */
-	protected parserResolver;
+    /**
+     * 解析 parser
+     *
+     * @var callable
+     */
+    protected parserResolver;
 
-	/**
-	 * 配置
-	 *
-	 * @var array
-	 */
-	protected option = [
-		"development" : false,
-		"controller_name" : "index",
-		"action_name" : "index",
-		"controlleraction_depr" : "_",
-		"theme_name" : "default",
-		"theme_path" : "",
-		"theme_path_default" : "",
-		"suffix" : ".html",
-		"theme_cache_path" : "",
-		"cache_children" : false,
-		"cache_lifetime" : 2592000
-	];
+    /**
+     * 配置
+     *
+     * @var array
+     */
+    protected option = [
+        "development" : false,
+        "controller_name" : "index",
+        "action_name" : "index",
+        "controlleraction_depr" : "_",
+        "theme_name" : "default",
+        "theme_path" : "",
+        "theme_path_default" : "",
+        "suffix" : ".html",
+        "theme_cache_path" : "",
+        "cache_children" : false,
+        "cache_lifetime" : 2592000
+    ];
 
-	/**
-	 * 加载视图文件
-	 *
-	 * @param string $file 视图文件地址
-	 * @param array $vars
-	 * @param string $ext 后缀
-	 * @param boolean $display 是否显示
-	 * @return string
-	 */
-	public function display(var file = null, array! vars = [], var ext = null, boolean display = true)
-	{
-		var cachepath, result, key, value;
+    /**
+     * 加载视图文件
+     *
+     * @param string $file 视图文件地址
+     * @param array $vars
+     * @param string $ext 后缀
+     * @param boolean $display 是否显示
+     * @return string
+     */
+    public function display(var file = null, array! vars = [], var ext = null, boolean display = true)
+    {
+        var cachepath, result, key, value;
 
-		// 加载视图文件
-		let file = this->parseDisplayFile(file, ext);
+        // 加载视图文件
+        let file = this->parseDisplayFile(file, ext);
 
-		// 变量赋值
-		if typeof vars == "array" {
+        // 变量赋值
+        if typeof vars == "array" {
             this->setVar(vars);
         }
 
-		if ! empty this->vars {
-			for key, value in this->vars {
-				let {key} = value;
-			}
-		}
+        if ! empty this->vars {
+            for key, value in this->vars {
+                let {key} = value;
+            }
+        }
 
-		let cachepath = this->getCachePath(file); // 编译文件路径
+        let cachepath = this->getCachePath(file); // 编译文件路径
 
-		if this->isCacheExpired(file, cachepath) { // 重新编译
-			this->parser()->doCompile(file, cachepath);
-		}
+        if this->isCacheExpired(file, cachepath) { // 重新编译
+            this->parser()->doCompile(file, cachepath);
+        }
 
-		// 返回类型
-		if display === false {
-			ob_start();
-			require cachepath;
-			let result = ob_get_contents();
-			ob_end_clean();
+        // 返回类型
+        if display === false {
+            ob_start();
+            require cachepath;
+            let result = ob_get_contents();
+            ob_end_clean();
 
-			return result;
-		} else {
-			require cachepath;
-		}
-	}
+            return result;
+        } else {
+            require cachepath;
+        }
+    }
 
-	/**
-	 * 设置 parser 解析回调
-	 *
-	 * @param callable $parserResolver
-	 * @return void
-	 */
-	public function setParseResolver(parserResolver)
-	{
-		let this->parserResolver = parserResolver;
-	}
+    /**
+     * 设置 parser 解析回调
+     *
+     * @param callable $parserResolver
+     * @return void
+     */
+    public function setParseResolver(parserResolver)
+    {
+        let this->parserResolver = parserResolver;
+    }
 
-	/**
-	 * 解析 parser
-	 *
-	 * @return \Leevel\View\IParserr
-	 */
-	public function resolverParser()
-	{
-		if ! this->parserResolver {
-			throw new RuntimeException("Html theme not set parser resolver");
-		}
-		return call_user_func(this->parserResolver);
-	}
+    /**
+     * 解析 parser
+     *
+     * @return \Leevel\View\IParserr
+     */
+    public function resolverParser()
+    {
+        if ! this->parserResolver {
+            throw new RuntimeException("Html theme not set parser resolver");
+        }
+        return call_user_func(this->parserResolver);
+    }
 
-	/**
-	 * 获取分析器
-	 *
-	 * @return \Leevel\View\IParserr
-	 */
-	public function parser()
-	{
-		if typeof this->parser != "null" {
-			return this->parser;
-		}
+    /**
+     * 获取分析器
+     *
+     * @return \Leevel\View\IParserr
+     */
+    public function parser()
+    {
+        if typeof this->parser != "null" {
+            return this->parser;
+        }
 
-		let this->parser = this->resolverParser();
-		return this->parser;
-	}
+        let this->parser = this->resolverParser();
+        return this->parser;
+    }
 
-	/**
-	 * 获取编译路径
-	 *
-	 * @param string $file
-	 * @return string
-	 */
-	protected function getCachePath(string file)
-	{
-		if ! this->option["theme_cache_path"] {
-			throw new RuntimeException("Theme cache path must be set");
-		}
+    /**
+     * 获取编译路径
+     *
+     * @param string $file
+     * @return string
+     */
+    protected function getCachePath(string file)
+    {
+        if ! this->option["theme_cache_path"] {
+            throw new RuntimeException("Theme cache path must be set");
+        }
 
-		// 统一斜线
-		let file = str_replace("//", "/", str_replace("\\", "/", file));
+        // 统一斜线
+        let file = str_replace("//", "/", str_replace("\\", "/", file));
 
-		// 统一缓存文件
-		let file = basename(file, "." . pathinfo(file, PATHINFO_EXTENSION)) .
-			"." . md5(file) . ".php";
+        // 统一缓存文件
+        let file = basename(file, "." . pathinfo(file, PATHINFO_EXTENSION)) .
+            "." . md5(file) . ".php";
 
-		// 返回真实路径
-		return this->option["theme_cache_path"] . "/" . file;
-	}
+        // 返回真实路径
+        return this->option["theme_cache_path"] . "/" . file;
+    }
 
-	/**
-	 * 判断缓存是否过期
-	 *
-	 * @param string $file
-	 * @param string $cachepath
-	 * @return boolean
-	 */
-	protected function isCacheExpired(string file, string cachepath)
-	{
-		// 开启调试
-		if this->option["development"] {
-			return true;
-		}
+    /**
+     * 判断缓存是否过期
+     *
+     * @param string $file
+     * @param string $cachepath
+     * @return boolean
+     */
+    protected function isCacheExpired(string file, string cachepath)
+    {
+        // 开启调试
+        if this->option["development"] {
+            return true;
+        }
 
-		// 缓存文件不存在过期
-		if ! is_file(cachepath) {
-			return true;
-		}
+        // 缓存文件不存在过期
+        if ! is_file(cachepath) {
+            return true;
+        }
 
-		// 编译过期时间为 <= 0 表示永不过期
-		if this->option["cache_lifetime"] <= 0 {
-			return false;
-		}
+        // 编译过期时间为 <= 0 表示永不过期
+        if this->option["cache_lifetime"] <= 0 {
+            return false;
+        }
 
-		// 缓存时间到期
-		if filemtime(cachepath) + intval(this->option["cache_lifetime"]) < time() {
-			return true;
-		}
+        // 缓存时间到期
+        if filemtime(cachepath) + intval(this->option["cache_lifetime"]) < time() {
+            return true;
+        }
 
-		// 文件有更新
-		if filemtime(file) >= filemtime(cachepath) {
-			return true;
-		}
+        // 文件有更新
+        if filemtime(file) >= filemtime(cachepath) {
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 }

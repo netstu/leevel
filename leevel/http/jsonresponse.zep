@@ -80,9 +80,9 @@ class JsonResponse extends Response
         }
 
         if json {
-        	this->setJson(data);
+            this->setJson(data);
         } else {
-        	this->setData(data);
+            this->setData(data);
         }
 
         let this->isJson = true;

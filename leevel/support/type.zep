@@ -29,12 +29,12 @@ use InvalidArgumentException;
 class Type
 {
 
-	/**
-	 * zephir 不支持动态 instanceof
-	 * 
-	 * @var boolean
-	 */
-	protected static zephirInstanceof = false;
+    /**
+     * zephir 不支持动态 instanceof
+     * 
+     * @var boolean
+     */
+    protected static zephirInstanceof = false;
 
     /**
      * 验证 PHP 各种变量类型
@@ -45,7 +45,7 @@ class Type
      */
     public static function vars(value, string type) -> boolean
     {
-    	var tmp = [], tmp1 = [];
+        var tmp = [], tmp1 = [];
 
         // 整理参数，以支持 array:ini 格式
         let tmp = explode(":", type);
@@ -118,15 +118,15 @@ class Type
 
             // 类或者接口检验
             default:
-            	if (! self::zephirInstanceof) {
-					eval("if (! function_exists('zephir_instanceof')) {
-						function zephir_instanceof($value, $type) {
-							return $value instanceof $type;
-						}
-					}");
+                if (! self::zephirInstanceof) {
+                    eval("if (! function_exists('zephir_instanceof')) {
+                        function zephir_instanceof($value, $type) {
+                            return $value instanceof $type;
+                        }
+                    }");
 
-            		let self::zephirInstanceof = true;
-            	}
+                    let self::zephirInstanceof = true;
+                }
 
                 return zephir_instanceof(value, type);
         }

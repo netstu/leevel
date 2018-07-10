@@ -26,30 +26,30 @@ namespace Leevel\Http;
 class ServerBag extends Bag
 {
 
-	/**
-	 * 取回 HTTP HEADERS
-	 *
-	 * @return array
-	 */
-	public function getHeaders() -> array
-	{
-		var result, contentHeaders, key, value;
-	
-		let result = [];
-		let contentHeaders = [
-			"CONTENT_LENGTH", 
-			"CONTENT_MD5", 
-			"CONTENT_TYPE"
-		];
+    /**
+     * 取回 HTTP HEADERS
+     *
+     * @return array
+     */
+    public function getHeaders() -> array
+    {
+        var result, contentHeaders, key, value;
+    
+        let result = [];
+        let contentHeaders = [
+            "CONTENT_LENGTH", 
+            "CONTENT_MD5", 
+            "CONTENT_TYPE"
+        ];
 
-		for key, value in this->elements {
-			if 0 === strpos(key, "HTTP_") {
-			    let result[substr(key, 5)] = value;
-			} elseif in_array(key, contentHeaders, true) {
-			    let result[key] = value;
-			}
-		}
+        for key, value in this->elements {
+            if 0 === strpos(key, "HTTP_") {
+                let result[substr(key, 5)] = value;
+            } elseif in_array(key, contentHeaders, true) {
+                let result[key] = value;
+            }
+        }
 
-		return result;
-	}
+        return result;
+    }
 }

@@ -55,20 +55,13 @@ class UploadedFile extends File
      * @var array
      */
     protected static errors = [
-    	// UPLOAD_ERR_INI_SIZE : "The file %s exceeds your upload_max_filesize ini directive (limit is %d KiB).",
-    	// UPLOAD_ERR_FORM_SIZE : "The file %s exceeds the upload limit defined in your form.", 
-    	// UPLOAD_ERR_PARTIAL : "The file %s was only partially uploaded.", 
-    	// UPLOAD_ERR_NO_FILE : "No file was uploaded.", 
-    	// UPLOAD_ERR_CANT_WRITE : "The file %s could not be written on disk.", 
-    	// UPLOAD_ERR_NO_TMP_DIR : "File could not be uploaded: missing temporary directory.", 
-    	// UPLOAD_ERR_EXTENSION : "File upload was stopped by a PHP extension."
-    	1 : "The file %s exceeds your upload_max_filesize ini directive (limit is %d KiB).",
-    	2 : "The file %s exceeds the upload limit defined in your form.", 
-    	3 : "The file %s was only partially uploaded.", 
-    	4 : "No file was uploaded.", 
-    	7 : "The file %s could not be written on disk.", 
-    	5 : "File could not be uploaded: missing temporary directory.", 
-    	8 : "File upload was stopped by a PHP extension."
+        1 : "The file %s exceeds your upload_max_filesize ini directive (limit is %d KiB).",
+        2 : "The file %s exceeds the upload limit defined in your form.", 
+        3 : "The file %s was only partially uploaded.", 
+        4 : "No file was uploaded.", 
+        7 : "The file %s could not be written on disk.", 
+        5 : "File could not be uploaded: missing temporary directory.", 
+        8 : "File upload was stopped by a PHP extension."
     ];
     
     /**

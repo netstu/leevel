@@ -19,7 +19,6 @@ use RuntimeException;
 use Leevel\Log\ILog;
 use InvalidArgumentException;
 use Leevel\Log\IConnect;
-use Leevel\Option\IClass;
 use Leevel\Support\IJson;
 use Leevel\Support\IArray;
 
@@ -31,7 +30,7 @@ use Leevel\Support\IArray;
  * @since 2018.01.07
  * @version 1.0
  */
-class Log implements ILog, IClass
+class Log implements ILog
 {
 
     /**
@@ -93,7 +92,22 @@ class Log implements ILog, IClass
     public function __construct(<IConnect> connect, array option = [])
     {
         let this->connect = connect;
-        this->options(option);
+
+        let this->option = array_merge(this->option, option);
+    }
+
+    /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value)
+    {
+        let this->option[name] = value;
+        
+        return this;
     }
 
     /**
@@ -106,8 +120,9 @@ class Log implements ILog, IClass
      */
     public function emergency(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::EMERGENCY, message, context);
     }
 
@@ -121,8 +136,9 @@ class Log implements ILog, IClass
      */
     public function alert(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::ALERT, message, context);
     }
 
@@ -136,8 +152,8 @@ class Log implements ILog, IClass
      */
     public function critical(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
         return this->{action}(self::CRITICAL, message, context);
     }
 
@@ -151,8 +167,9 @@ class Log implements ILog, IClass
      */
     public function error(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::ERROR, message, context);
     }
 
@@ -166,8 +183,9 @@ class Log implements ILog, IClass
      */
     public function warning(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::WARNING, message, context);
     }
 
@@ -181,8 +199,9 @@ class Log implements ILog, IClass
      */
     public function notice(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::NOTICE, message, context);
     }
 
@@ -196,8 +215,9 @@ class Log implements ILog, IClass
      */
     public function info(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::INFO, message, context);
     }
 
@@ -211,8 +231,9 @@ class Log implements ILog, IClass
      */
     public function debug(var message, array context = [], boolean write = false)
     {
-    	var action;
-    	let action = write ? "write" : "log";
+        var action;
+        let action = write ? "write" : "log";
+
         return this->{action}(self::DEBUG, message, context);
     }
 
@@ -229,16 +250,16 @@ class Log implements ILog, IClass
         var data;
 
         // 是否开启日志
-        if ! this->getOption("enabled") {
+        if ! this->option["enabled"] {
             return;
         }
 
         // 只记录系统允许的日志级别
-        if ! in_array(level, this->getOption("level")) {
+        if ! in_array(level, this->option["level"]) {
             return;
         }
 
-        let message = date(this->getOption("time_format")) . this->formatMessage(message);
+        let message = date(this->option["time_format"]) . this->formatMessage(message);
 
         let data = [
             level,
@@ -303,9 +324,10 @@ class Log implements ILog, IClass
      */
     public function registerFilter(var filter)
     {
-    	if ! is_callable(filter) {
-    		throw new InvalidArgumentException("Filter must be callable.");
-    	}
+        if ! is_callable(filter) {
+            throw new InvalidArgumentException("Filter must be callable.");
+        }
+
         let this->filter = filter;
     }
 
@@ -317,9 +339,10 @@ class Log implements ILog, IClass
      */
     public function registerProcessor(var processor)
     {
-    	if ! is_callable(processor) {
-    		throw new InvalidArgumentException("Processor must be callable.");
-    	}
+        if ! is_callable(processor) {
+            throw new InvalidArgumentException("Processor must be callable.");
+        }
+
         let this->processor = processor;
     }
 
@@ -375,121 +398,6 @@ class Log implements ILog, IClass
     }
 
     /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function option(string name, var value)
-    {
-        if ! is_string(name) {
-            throw new InvalidArgumentException("Option set name must be a string.");
-        }
-        
-        let this->option[name] = value;
-
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
-        return this;
-    }
-
-    /**
      * 存储日志
      *
      * @param array $data
@@ -534,6 +442,6 @@ class Log implements ILog, IClass
      */
     public function __call(string method, array args)
     {
-    	return call_user_func_array([this->connect, method], args);
+        return call_user_func_array([this->connect, method], args);
     }
 }

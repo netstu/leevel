@@ -47,7 +47,7 @@ class Register extends Provider
      */
     public function __construct(<IContainer> container)
     {
-    	parent::__construct(container);
+        parent::__construct(container);
     }
     
     /**
@@ -72,16 +72,16 @@ class Register extends Provider
         var tem;
     
         let tem = [
-        	"caches" : [
-        		"Leevel\\Cache\\Manager"
-        	], 
-        	"cache" : [
-        		"Leevel\\Cache\\Cache", 
-        		"Leevel\\Cache\\ICache"
-        	], 
-        	"cache.load" : [
-        		"Leevel\\Cache\\Load"
-        	]
+            "caches" : [
+                "Leevel\\Cache\\Manager"
+            ], 
+            "cache" : [
+                "Leevel\\Cache\\Cache", 
+                "Leevel\\Cache\\ICache"
+            ], 
+            "cache.load" : [
+                "Leevel\\Cache\\Load"
+            ]
         ];
         
         return tem;

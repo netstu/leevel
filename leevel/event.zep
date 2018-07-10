@@ -28,13 +28,13 @@ use Leevel\Support\Facade;
 class Event extends Facade
 {
 
-	/**
-	 * 返回门面名字
-	 *
-	 * @return string
-	 */
-	protected static function name() -> string 
-	{
-		return "event";
-	}
+    /**
+     * 返回门面名字
+     *
+     * @return string
+     */
+    protected static function name() -> string 
+    {
+        return "event";
+    }
 }

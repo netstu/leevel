@@ -39,10 +39,10 @@ class Manager extends Managers
      *
      * @return string
      */
-	protected function getOptionNamespace()
-	{
-		return "view";
-	}
+    protected function getOptionNamespace()
+    {
+        return "view";
+    }
 
     /**
      * 创建连接对象
@@ -50,10 +50,10 @@ class Manager extends Managers
      * @param object $connect
      * @return object
      */
-	protected function createConnect(var connect)
-	{
-		return new View(connect);
-	}
+    protected function createConnect(var connect)
+    {
+        return new View(connect);
+    }
 
     /**
      * 创建 html 模板驱动
@@ -61,41 +61,41 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Html
      */
-	protected function makeConnectHtml(array options = [])
-	{
-		var parser, html;
+    protected function makeConnectHtml(array options = [])
+    {
+        var parser, html;
 
-		let options = this->getOption("html", options);
-		let options = array_merge(options, this->viewOptionCommon());
+        let options = this->getOption("html", options);
+        let options = array_merge(options, this->viewOptionCommon());
 
-		let parser = Closure::fromCallable([this, "makeParserClosure"]);
+        let parser = Closure::fromCallable([this, "makeParserClosure"]);
 
-		let html = new Html(options);
-		html->setParseResolver(parser);
+        let html = new Html(options);
+        html->setParseResolver(parser);
 
-		return html;
-	}
+        return html;
+    }
 
-	/**
+    /**
      * 创建 twig 模板驱动
      *
      * @param array $options
      * @return \Leevel\View\Twig
      */
-	protected function makeConnectTwig(array options = [])
-	{
-		var parser, twig;
+    protected function makeConnectTwig(array options = [])
+    {
+        var parser, twig;
 
-		let options = this->getOption("twig", options);
-		let options = array_merge(options, this->viewOptionCommon());
+        let options = this->getOption("twig", options);
+        let options = array_merge(options, this->viewOptionCommon());
 
-		let parser = Closure::fromCallable([this, "makeTwigParserClosure"]);
+        let parser = Closure::fromCallable([this, "makeTwigParserClosure"]);
 
-		let twig = new Twig(options);
-		twig->setParseResolver(parser);
+        let twig = new Twig(options);
+        twig->setParseResolver(parser);
 
-		return twig;
-	}
+        return twig;
+    }
 
     /**
      * 创建 phpui 模板驱动
@@ -103,13 +103,13 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Phpui
      */
-	protected function makeConnectPhpui(array options = [])
-	{
-		let options = this->getOption("phpui", options);
-		let options = array_merge(options, this->viewOptionCommon());
+    protected function makeConnectPhpui(array options = [])
+    {
+        let options = this->getOption("phpui", options);
+        let options = array_merge(options, this->viewOptionCommon());
 
-		return new Phpui(options);
-	}
+        return new Phpui(options);
+    }
 
     /**
      * 创建 v8 模板驱动
@@ -117,57 +117,57 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Vue
      */
-	protected function makeConnectV8(array options = [])
-	{
-		let options = this->getOption("v8", options);
-		let options = array_merge(options, this->viewOptionCommon());
+    protected function makeConnectV8(array options = [])
+    {
+        let options = this->getOption("v8", options);
+        let options = array_merge(options, this->viewOptionCommon());
 
-		return new V8s(options);
-	}
+        return new V8s(options);
+    }
 
     /**
      * 视图公共配置
      *
      * @return array
      */
-	protected function viewOptionCommon()
-	{
-		var options, request;
-
-		let request = this->container->make("request");
-
-		let options =  [
-			"development" : this->container->development(),
-			"controller_name" : request->controller(),
-			"action_name" : request->action(),
-			"theme_path" : this->container->pathApplicationTheme(),
-
-			// 仅 html 模板需要缓存路径
-			"theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . strtolower(request->app())
-		];
-
-		return options;
-	}
-
-	/**
-	 * 创建分析器回调
-	 *
-	 * @since 2018.01.12
-	 * @return void
-	 */
-	protected function makeParserClosure()
+    protected function viewOptionCommon()
     {
-		return this->container->make("view.parser");
-	}
+        var options, request;
 
-	/**
-	 * 创建 twig 分析器回调
-	 *
-	 * @since 2018.01.15
-	 * @return void
-	 */
-	protected function makeTwigParserClosure()
+        let request = this->container->make("request");
+
+        let options =  [
+            "development" : this->container->development(),
+            "controller_name" : request->controller(),
+            "action_name" : request->action(),
+            "theme_path" : this->container->pathApplicationTheme(),
+
+            // 仅 html 模板需要缓存路径
+            "theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . strtolower(request->app())
+        ];
+
+        return options;
+    }
+
+    /**
+     * 创建分析器回调
+     *
+     * @since 2018.01.12
+     * @return void
+     */
+    protected function makeParserClosure()
     {
-		return this->container->make("view.twig.parser");
-	}
+        return this->container->make("view.parser");
+    }
+
+    /**
+     * 创建 twig 分析器回调
+     *
+     * @since 2018.01.15
+     * @return void
+     */
+    protected function makeTwigParserClosure()
+    {
+        return this->container->make("view.twig.parser");
+    }
 }

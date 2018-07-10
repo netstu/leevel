@@ -28,13 +28,13 @@ use Leevel\Support\Facade;
 class Router extends Facade
 {
 
-	/**
-	 * 返回门面名字
-	 *
-	 * @return string
-	 */
-	protected static function name() -> string 
-	{
-		return "router";
-	}
+    /**
+     * 返回门面名字
+     *
+     * @return string
+     */
+    protected static function name() -> string 
+    {
+        return "router";
+    }
 }

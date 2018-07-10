@@ -82,13 +82,6 @@ class Router implements IRouter, IMacro
      * @var array
      */
     protected static matcheDataInit = [
-        // self::APP : self::DEFAULT_APP, 
-        // self::CONTROLLER : null, 
-        // self::ACTION : null, 
-        // self::PREFIX : null, 
-        // self::PARAMS : null, 
-        // self::MIDDLEWARES : null, 
-        // self::VARS : null
         "_app" : self::DEFAULT_APP, 
         "_c" : null, 
         "_a" : null, 

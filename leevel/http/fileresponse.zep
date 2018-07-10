@@ -86,7 +86,7 @@ class FileResponse extends Response
      */
     public function setFile(var file, var contentDisposition = null, boolean autoEtag = false, boolean autoLastModified = true)
     {
-    	var files;
+        var files;
 
         if this->checkTControl() {
             return this;

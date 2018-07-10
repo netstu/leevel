@@ -26,7 +26,7 @@ namespace Leevel\Http;
 class ApiResponse extends JsonResponse
 {
 
-	/**
+    /**
      * 创建一个 API 响应
      * 
      * @param string $data
@@ -140,9 +140,9 @@ class ApiResponse extends JsonResponse
         this->setStatusCode(self::HTTP_UNPROCESSABLE_ENTITY, text);
 
         if ! empty errors {
-        	let tmpArr = errors;
+            let tmpArr = errors;
         } else {
-        	let tmpArr = [];
+            let tmpArr = [];
         }
 
         this->setData([

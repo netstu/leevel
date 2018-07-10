@@ -25,45 +25,45 @@ namespace Leevel\View;
  */
 interface IConnect
 {
-	/**
-	 * 加载视图文件
-	 *
-	 * @param string $file 视图文件地址
-	 * @param array $vars
-	 * @param string $ext 后缀
-	 * @param boolean $display 是否显示
-	 * @return string
-	 */
-	public function display(var file = null, array! vars = [], var ext = null, boolean display = true);
+    /**
+     * 加载视图文件
+     *
+     * @param string $file 视图文件地址
+     * @param array $vars
+     * @param string $ext 后缀
+     * @param boolean $display 是否显示
+     * @return string
+     */
+    public function display(var file = null, array! vars = [], var ext = null, boolean display = true);
 
-	/**
-	 * 设置模板变量
-	 *
-	 * @param mixed $name
-	 * @param mixed $value
-	 * @return void
-	 */
-	public function setVar(var name, var value = null);
+    /**
+     * 设置模板变量
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return void
+     */
+    public function setVar(var name, var value = null);
 
-	/**
-	 * 获取变量值
-	 *
-	 * @param string|null $name
-	 * @return mixed
-	 */
-	public function getVar(var name = null);
+    /**
+     * 获取变量值
+     *
+     * @param string|null $name
+     * @return mixed
+     */
+    public function getVar(var name = null);
 
-	/**
-	 * 删除变量值
-	 *
-	 * @return $this
-	 */
-	public function deleteVar();
+    /**
+     * 删除变量值
+     *
+     * @return $this
+     */
+    public function deleteVar();
 
-	/**
-	 * 清空变量值
-	 *
-	 * @return $this
-	 */
-	public function clearVar();
+    /**
+     * 清空变量值
+     *
+     * @return $this
+     */
+    public function clearVar();
 }

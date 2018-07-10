@@ -16,8 +16,6 @@
 namespace Leevel\Log;
 
 use RuntimeException;
-use InvalidArgumentException;
-use Leevel\Option\IClass;
 
 /**
  * aconnect 驱动抽象类
@@ -27,7 +25,7 @@ use Leevel\Option\IClass;
  * @since 2018.01.07
  * @version 1.0
  */
-abstract class Connect implements IClass
+abstract class Connect
 {
 
     /**
@@ -45,7 +43,7 @@ abstract class Connect implements IClass
      */
     public function __construct(array option = [])
     {
-        this->options(option);
+        let this->option = array_merge(this->option, option);
     }
 
     /**
@@ -55,113 +53,10 @@ abstract class Connect implements IClass
      * @param mixed $value
      * @return $this
      */
-    public function option(string name, var value)
+    public function setOption(string name, var value)
     {
-        if ! is_string(name) {
-            throw new InvalidArgumentException(
-                "Option set name must be a string."
-            );
-        }
-        
         let this->option[name] = value;
-
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
+        
         return this;
     }
 
@@ -173,9 +68,9 @@ abstract class Connect implements IClass
      */
     protected function checkSize(string filepath)
     {
-    	var filedir;
+        var filedir;
 
-    	let filedir = dirname(filepath);
+        let filedir = dirname(filepath);
 
         // 如果不是文件，则创建
         if ! is_file(filepath) &&
@@ -188,7 +83,7 @@ abstract class Connect implements IClass
 
         // 检测日志文件大小，超过配置大小则备份日志文件重新生成
         if is_file(filepath) &&
-            floor(this->getOption("size")) <= filesize(filepath) {
+            floor(this->option["size"]) <= filesize(filepath) {
             rename(
                 filepath, filedir . "/" .
                 date("Y-m-d H.i.s") . "_" .
@@ -210,15 +105,15 @@ abstract class Connect implements IClass
 
         // 不存在路径，则直接使用项目默认路径
         if empty filepath {
-            if ! this->getOption("path") {
+            if ! this->option["path"] {
                 throw new RuntimeException(
                     "Default path for log has not specified."
                 );
             }
 
-            let filepath =  this->getOption("path") . "/" .
+            let filepath =  this->option["path"] . "/" .
                 (level ? level . "/" : "") .
-                date(this->getOption("name")) .
+                date(this->option["name"]) .
                 ".log";
         }
 

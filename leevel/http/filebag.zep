@@ -34,11 +34,11 @@ class FileBag extends Bag
      * @var array
      */
     protected static fileKeys = [
-    	"error", 
-    	"name", 
-    	"size", 
-    	"tmp_name", 
-    	"type"
+        "error", 
+        "name", 
+        "size", 
+        "tmp_name", 
+        "type"
     ];
     
     /**
@@ -120,7 +120,7 @@ class FileBag extends Bag
      */
     protected function convertFile(var file)
     {
-    	var result;
+        var result;
 
         if is_object(file) && file instanceof UploadedFile {
             return file;

@@ -262,34 +262,34 @@ interface ISession
     public function status();
 
     /**
-	 * 设置 SESSION 名字
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName(string name);
+     * 设置 SESSION 名字
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setName(string name);
 
-	/**
-	 * 取得 SESSION 名字
-	 *
-	 * @return string
-	 */
-	public function getName() -> string;
+    /**
+     * 取得 SESSION 名字
+     *
+     * @return string
+     */
+    public function getName() -> string;
 
-	/**
-	 * 设置 SESSION ID
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setId(string id);
+    /**
+     * 设置 SESSION ID
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setId(string id);
 
-	/**
-	 * 取得 SESSION ID
-	 *
-	 * @return string
-	 */
-	public function getId() -> string;
+    /**
+     * 取得 SESSION ID
+     *
+     * @return string
+     */
+    public function getId() -> string;
 
     /**
      * 设置 save path

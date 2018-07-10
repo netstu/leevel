@@ -28,13 +28,13 @@ use Leevel\Support\Facade;
 class Filesystem extends Facade
 {
 
-	/**
-	 * 返回门面名字
-	 *
-	 * @return string
-	 */
-	protected static function name() -> string 
-	{
-		return "filesystems";
-	}
+    /**
+     * 返回门面名字
+     *
+     * @return string
+     */
+    protected static function name() -> string 
+    {
+        return "filesystems";
+    }
 }

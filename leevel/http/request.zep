@@ -240,7 +240,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         let method = strtoupper(request->server->get("REQUEST_METHOD", self::METHOD_GET));
 
         if contentType && 0 === strpos(contentType, "application/x-www-form-urlencoded") && 
-        	in_array(method, [
+            in_array(method, [
             self::METHOD_PUT, 
             self::METHOD_DELETE, 
             self::METHOD_PATCH
@@ -284,9 +284,9 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
 
         let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? args[0] : args;
         let input = this->all();
@@ -311,9 +311,9 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
 
         let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? args[0] : args;
 
@@ -335,11 +335,11 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     {
         var results, input, key, args = [], keys;
 
-		let args = func_get_args();
+        let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? args[0] : args;
         let results = [];
@@ -361,11 +361,11 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     {
         var results, key, args = [], keys;
 
-		let args = func_get_args();
+        let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? args[0] : args;
         let results = this->all();
@@ -1306,7 +1306,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      */
     public function getHost() -> string
     {
-    	var host, tmp;
+        var host, tmp;
 
         let host = this->headers->get("X_FORWARDED_HOST", this->headers->get("HOST", ""));
 
@@ -1315,7 +1315,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         }
 
         if strpos(host, ":") !== false {
-        	let tmp = explode(":", host);
+            let tmp = explode(":", host);
             let host = tmp[0];
         }
 
@@ -1542,32 +1542,32 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         }
 
         if (url) {
-        	let prefix = this->getUrlencodedPrefix(requestUri, url);
+            let prefix = this->getUrlencodedPrefix(requestUri, url);
 
-	        if false !== prefix {
-	            let this->baseUrl = prefix;
-	            return this->baseUrl;
-	        }
+            if false !== prefix {
+                let this->baseUrl = prefix;
+                return this->baseUrl;
+            }
 
-	        let prefix = this->getUrlencodedPrefix(requestUri, dirname(url));
+            let prefix = this->getUrlencodedPrefix(requestUri, dirname(url));
 
-		    if false !== prefix {
-	            let this->baseUrl = rtrim(prefix, "/");
-	            return this->baseUrl;
-	        }
+            if false !== prefix {
+                let this->baseUrl = rtrim(prefix, "/");
+                return this->baseUrl;
+            }
         }
         
-		let basename = basename(url);
+        let basename = basename(url);
         if empty basename || strpos(rawurldecode(requestUri), basename) {
             return "";
         }
 
         if strlen(requestUri) >= strlen(url) {
-        	let pos = strpos(requestUri, url);
+            let pos = strpos(requestUri, url);
 
-	       	if pos !== false && pos !== 0 {
-	            let url = substr(requestUri, 0, pos + strlen(url));
-	        }
+               if pos !== false && pos !== 0 {
+                let url = substr(requestUri, 0, pos + strlen(url));
+            }
         }
         
         let this->baseUrl = rtrim(url, "/");
@@ -1659,7 +1659,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
     {
         if self::hasMacro(method) {
             if self::macro[method] instanceof Closure {
-            	return call_user_func_array(self::macro[method]->bindTo(this), args);
+                return call_user_func_array(self::macro[method]->bindTo(this), args);
             } else {
                 return call_user_func_array(self::macro[method], args);
             }

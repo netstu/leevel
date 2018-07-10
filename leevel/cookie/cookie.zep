@@ -84,7 +84,7 @@ class Cookie implements ICookie
      */
     public function set(string name, var value = "", array option = [])
     {
-    	boolean isHttpSecure = false;
+        boolean isHttpSecure = false;
 
         let option = this->normalizeOptions(option);
 
@@ -99,15 +99,15 @@ class Cookie implements ICookie
         let name = option["prefix"] . name;
 
         if option["expire"] > 0 {
-        	let option["expire"] = time() + option["expire"];
+            let option["expire"] = time() + option["expire"];
         } elseif option["expire"] < 0 {
-        	let option["expire"] = time() - 31536000;
+            let option["expire"] = time() - 31536000;
         } else {
-        	let option["expire"] = 0;
+            let option["expire"] = 0;
         }
 
         if isset _SERVER["HTTPS"] && strtoupper(_SERVER["HTTPS"]) === "ON" {
-        	let isHttpSecure = true;
+            let isHttpSecure = true;
         }
 
         // 对应 setcookie 的参数
@@ -228,7 +228,7 @@ class Cookie implements ICookie
                 keys
             ];
         } else {
-        	let arrDeleteKey = keys;
+            let arrDeleteKey = keys;
         }
 
         for tempKey in arrDeleteKey {

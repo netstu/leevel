@@ -29,33 +29,33 @@ use Leevel\View\IConnect;
 class View implements IView
 {
 
-	/**
-	 * 连接驱动
-	 *
-	 * @var \Leevel\View\IConnect
-	 */
-	protected connect;
+    /**
+     * 连接驱动
+     *
+     * @var \Leevel\View\IConnect
+     */
+    protected connect;
 
-	/**
-	 * 构造函数
-	 *
-	 * @param \Leevel\View\IConnect $connect
-	 * @return void
-	 */
-	public function __construct(<IConnect> connect)
-	{
-		let this->connect = connect;
-	}
+    /**
+     * 构造函数
+     *
+     * @param \Leevel\View\IConnect $connect
+     * @return void
+     */
+    public function __construct(<IConnect> connect)
+    {
+        let this->connect = connect;
+    }
 
-	/**
-	 * call 
-	 *
-	 * @param string $method
-	 * @param array $args
-	 * @return mixed
-	 */
-	public function __call(string method, array args)
-	{
-		return call_user_func_array([this->connect, method], args);
-	}
+    /**
+     * call 
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call(string method, array args)
+    {
+        return call_user_func_array([this->connect, method], args);
+    }
 }

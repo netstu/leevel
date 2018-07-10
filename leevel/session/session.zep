@@ -30,8 +30,7 @@ use Leevel\Session\ISession;
  */
 class Session implements ISession
 {
-
-	/**
+    /**
      * session handler 
      *
      * @var \SessionHandlerInterface|null
@@ -127,7 +126,7 @@ class Session implements ISession
 
         // 设置 session id
         if this->option["id"] {
-        	this->setId(this->option["id"]);
+            this->setId(this->option["id"]);
         }
 
         // session name
@@ -177,7 +176,7 @@ class Session implements ISession
 
         let this->started = true;
 
-		return this;
+        return this;
     }
 
     /**
@@ -301,7 +300,7 @@ class Session implements ISession
                 keys
             ];
         } else {
-        	let deleteKey = keys;
+            let deleteKey = keys;
         }
 
         for item in deleteKey {
@@ -337,7 +336,7 @@ class Session implements ISession
      * @return mixed
      */
     public function getPart(string name, var value = null) {
-    	return this->getPartData(name, value);
+        return this->getPartData(name, value);
     }
 
     /**
@@ -473,13 +472,13 @@ class Session implements ISession
      */
     public function keepFlash()
     {
-    	var keys, args = [];
+        var keys, args = [];
 
-		let args = func_get_args();
+        let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? keys : args;
 
@@ -512,11 +511,11 @@ class Session implements ISession
     {
         var item, keys, args = [];
 
-		let args = func_get_args();
+        let args = func_get_args();
 
-		if empty args {
-			throw new BadMethodCallException("Wrong number of parameters");
-		}
+        if empty args {
+            throw new BadMethodCallException("Wrong number of parameters");
+        }
 
         let keys = typeof args[0] === "array" ? keys : args;
 
@@ -605,7 +604,7 @@ class Session implements ISession
      */
     public function destroy()
     {
-    	var name;
+        var name;
 
         this->checkStart();
 
@@ -627,7 +626,7 @@ class Session implements ISession
      */
     public function isStart()
     {
-    	return this->started;
+        return this->started;
     }
 
     /**
@@ -636,7 +635,7 @@ class Session implements ISession
      * @return int
      */
     public function status(){
-    	var status;
+        var status;
 
         let status = session_status();
 
@@ -652,48 +651,48 @@ class Session implements ISession
     }
 
     /**
-	 * 设置 SESSION 名字
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setName(string name)
-	{
-	    session_name(name);
-	}
+     * 设置 SESSION 名字
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setName(string name)
+    {
+        session_name(name);
+    }
 
-	/**
-	 * 取得 SESSION 名字
-	 *
-	 * @return string
-	 */
-	public function getName() -> string
-	{
-	    return session_name();
-	}
+    /**
+     * 取得 SESSION 名字
+     *
+     * @return string
+     */
+    public function getName() -> string
+    {
+        return session_name();
+    }
 
-	/**
-	 * 设置 SESSION ID
-	 *
-	 * @param string $name
-	 * @return void
-	 */
-	public function setId(string id)
-	{
-		session_id(id);
-	}
+    /**
+     * 设置 SESSION ID
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setId(string id)
+    {
+        session_id(id);
+    }
 
-	/**
-	 * 取得 SESSION ID
-	 *
-	 * @return string
-	 */
-	public function getId() -> string
-	{
-		return session_id();
-	}
+    /**
+     * 取得 SESSION ID
+     *
+     * @return string
+     */
+    public function getId() -> string
+    {
+        return session_id();
+    }
 
-	/**
+    /**
      * 重新生成 SESSION ID
      * 
      * @param bool $deleteOldSession
@@ -760,9 +759,9 @@ class Session implements ISession
      */
     public function setCacheExpire(int second)
     {
-    	let second = strval(second);
+        let second = strval(second);
 
-		ini_set("session.gc_maxlifetime", second);
+        ini_set("session.gc_maxlifetime", second);
         ini_set("session.cookie_lifetime", second);
     }
 
@@ -774,7 +773,7 @@ class Session implements ISession
     public function setUseCookies()
     {
         ini_set("session.use_cookies", "1");
-	    ini_set("session.use_trans_sid", "0");
+        ini_set("session.use_trans_sid", "0");
     }
 
     /**
@@ -807,7 +806,7 @@ class Session implements ISession
      */
     public function setGcProbability(int probability)
     {
-    	let probability = strval(probability);
+        let probability = strval(probability);
 
         if probability >= 1 && probability <= 100 {
             ini_set("session.gc_probability", probability);
@@ -913,14 +912,14 @@ class Session implements ISession
         let key = tempkey;
         let name = array_shift(tempkeys);
         if type == "flash" {
-			let key = this->flashDataKey(key);
+            let key = this->flashDataKey(key);
         }
         let value = this->get(key);
         
         if typeof value == "array" {
-	        if ! strpos(name, ".") {
-				return array_key_exists(name, value) ? value[name] : defaults;
-			}
+            if ! strpos(name, ".") {
+                return array_key_exists(name, value) ? value[name] : defaults;
+            }
 
             let parts = explode(".", name);
             for part in parts {

@@ -650,7 +650,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
     {
         if self::hasMacro(method) {
             if self::macro[method] instanceof Closure {
-            	return call_user_func_array(self::macro[method]->bindTo(this), args);
+                return call_user_func_array(self::macro[method]->bindTo(this), args);
             } else {
                 return call_user_func_array(self::macro[method], args);
             }

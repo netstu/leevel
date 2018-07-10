@@ -26,26 +26,26 @@ namespace Leevel\Pipeline;
 interface IPipeline
 {
 
-	/**
-	 * 将传输对象传入管道
-	 *
-	 * @return $this
-	 */
-	public function send();
+    /**
+     * 将传输对象传入管道
+     *
+     * @return $this
+     */
+    public function send();
 
-	/**
-	 * 设置管道中的执行工序
-	 *
-	 * @return $this
-	 */
-	public function through();
+    /**
+     * 设置管道中的执行工序
+     *
+     * @return $this
+     */
+    public function through();
 
-	/**
-	 * 执行管道工序响应结果
-	 *
-	 * @param callable|null $end
-	 * @since 2018.01.03
-	 * @return mixed
-	 */
-	public function then(var end = null);
+    /**
+     * 执行管道工序响应结果
+     *
+     * @param callable|null $end
+     * @since 2018.01.03
+     * @return mixed
+     */
+    public function then(var end = null);
 }

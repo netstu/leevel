@@ -104,7 +104,7 @@ class RedirectResponse extends Response
         }
     
         let tmp = typeof key == "array" ? key : [
-        	key : value
+            key : value
         ];
 
         for k, v in tmp {
@@ -122,15 +122,15 @@ class RedirectResponse extends Response
      */
     public function withInput(var input = null)
     {
-    	var inputs = [], tmp;
+        var inputs = [], tmp;
 
-    	if this->checkTControl() {
+        if this->checkTControl() {
             return this;
         }
 
-    	let tmp = typeof input == "array" ? input : this->request->input();
-    	let inputs = this->session->getFlash("inputs", []);
-    	let inputs = array_merge(inputs, tmp);
+        let tmp = typeof input == "array" ? input : this->request->input();
+        let inputs = this->session->getFlash("inputs", []);
+        let inputs = array_merge(inputs, tmp);
 
         this->session->flash("inputs", inputs);
 
@@ -144,12 +144,12 @@ class RedirectResponse extends Response
      */
     public function onlyInput()
     {
-    	var args;
+        var args;
 
-    	let args = func_get_args();
-    	if empty args{
-    		throw new InvalidArgumentException("Method onlyInput need an args.");
-    	}
+        let args = func_get_args();
+        if empty args{
+            throw new InvalidArgumentException("Method onlyInput need an args.");
+        }
 
         return this->withInput(this->request->only(args));
     }
@@ -161,12 +161,12 @@ class RedirectResponse extends Response
      */
     public function exceptInput()
     {
-    	var args;
+        var args;
 
-    	let args = func_get_args();
-    	if empty args{
-    		throw new InvalidArgumentException("Method exceptInput need an args.");
-    	}
+        let args = func_get_args();
+        if empty args{
+            throw new InvalidArgumentException("Method exceptInput need an args.");
+        }
 
         return this->withInput(this->request->except(args));
     }
@@ -180,7 +180,7 @@ class RedirectResponse extends Response
      */
     public function withErrors(var value, string key = "default")
     {
-    	var errors;
+        var errors;
 
         if this->checkTControl() {
             return this;

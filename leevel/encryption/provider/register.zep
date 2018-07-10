@@ -38,7 +38,7 @@ class Register extends Provider
      */
     public static defer = true;
     
-	/**
+    /**
      * 创建一个服务容器提供者实例
      *
      * @param \Leevel\Di\IContainer $container
@@ -46,7 +46,7 @@ class Register extends Provider
      */
     public function __construct(<IContainer> container)
     {
-    	parent::__construct(container);
+        parent::__construct(container);
     }
 
     /**

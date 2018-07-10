@@ -211,12 +211,12 @@ class Register extends Provider
     }
 
    /**
-	 * 生成 COOKIE
-	 *
-	 * @return \Leevel\Cookie\ICookie
-	 */
-	protected function makeCookieResolverClosure()
+     * 生成 COOKIE
+     *
+     * @return \Leevel\Cookie\ICookie
+     */
+    protected function makeCookieResolverClosure()
     {
-		return this->container->make("cookie");
-	}
+        return this->container->make("cookie");
+    }
 }

@@ -63,16 +63,16 @@ class I18n implements II18n
      */
     public function getText()
     {
- 		var arr;
+         var arr;
 
-  		let arr = func_get_args(); 
+          let arr = func_get_args(); 
 
         if empty arr[0] {
             return "";
         }
       
         if isset this->text[this->i18n][arr[0]] {
-        	let arr[0] = this->text[this->i18n][arr[0]];
+            let arr[0] = this->text[this->i18n][arr[0]];
         }
 
         if count(arr) > 1 {
@@ -89,8 +89,8 @@ class I18n implements II18n
      */
     public function __()
     {
-    	var arr;
-    	let arr = func_get_args();
+        var arr;
+        let arr = func_get_args();
         return call_user_func_array([this, "getText"], arr);
     }
 

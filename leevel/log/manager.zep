@@ -31,46 +31,46 @@ use Leevel\Manager\Manager as Managers;
 class Manager extends Managers
 {
 
-	/**
-	 * 取得配置命名空间
-	 *
-	 * @return string
-	 */
-	protected function getOptionNamespace()
-	{
-		return "log";
-	}
+    /**
+     * 取得配置命名空间
+     *
+     * @return string
+     */
+    protected function getOptionNamespace()
+    {
+        return "log";
+    }
 
-	/**
-	 * 创建连接对象
-	 *
-	 * @param object $connect
-	 * @return object
-	 */
-	protected function createConnect(var connect)
-	{
-		return new Log(connect, this->getOptionCommon());
-	}
+    /**
+     * 创建连接对象
+     *
+     * @param object $connect
+     * @return object
+     */
+    protected function createConnect(var connect)
+    {
+        return new Log(connect, this->getOptionCommon());
+    }
 
-	/**
-	 * 创建 file 日志驱动
-	 *
-	 * @param array $options
-	 * @return \Leevel\Log\File
-	 */
-	protected function makeConnectFile(array options = [])
-	{
-		return new File(this->getOption("file", options));
-	}
+    /**
+     * 创建 file 日志驱动
+     *
+     * @param array $options
+     * @return \Leevel\Log\File
+     */
+    protected function makeConnectFile(array options = [])
+    {
+        return new File(this->getOption("file", options));
+    }
 
-	/**
-	 * 创建 monolog 日志驱动
-	 *
-	 * @param array $options
-	 * @return \Leevel\Log\Monolog
-	 */
-	protected function makeConnectMonolog(array options = [])
-	{
-		return new Monolog(this->getOption("monolog", options));
-	}
+    /**
+     * 创建 monolog 日志驱动
+     *
+     * @param array $options
+     * @return \Leevel\Log\Monolog
+     */
+    protected function makeConnectMonolog(array options = [])
+    {
+        return new Monolog(this->getOption("monolog", options));
+    }
 }

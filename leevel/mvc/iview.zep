@@ -28,54 +28,54 @@ use Leevel\View\IView as ViewIView;
 interface IView
 {
 
-	/**
-	 * 切换视图
-	 *
-	 * @param \Leevel\View\IView $theme
-	 * @return $this
-	 */
-	public function switchView(<ViewIView> theme);
+    /**
+     * 切换视图
+     *
+     * @param \Leevel\View\IView $theme
+     * @return $this
+     */
+    public function switchView(<ViewIView> theme);
 
-	/**
-	 * 变量赋值
-	 *
-	 * @param mixed $name
-	 * @param mixed $value
-	 * @return $this
-	 */
-	public function assign(var name, var value = null);
+    /**
+     * 变量赋值
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function assign(var name, var value = null);
 
-	/**
-	 * 获取变量赋值
-	 *
-	 * @param string|null $name
-	 * @return mixed
-	 */
-	public function getAssign(var name = null);
+    /**
+     * 获取变量赋值
+     *
+     * @param string|null $name
+     * @return mixed
+     */
+    public function getAssign(var name = null);
 
-	/**
-	 * 删除变量值
-	 *
-	 * @param mixed $name
-	 * @return $this
-	 */
-	public function deleteAssign(var name);
+    /**
+     * 删除变量值
+     *
+     * @param mixed $name
+     * @return $this
+     */
+    public function deleteAssign(var name);
 
-	/**
-	 * 清空变量值
-	 *
-	 * @param string|null $name
-	 * @return $this
-	 */
-	public function clearAssign();
+    /**
+     * 清空变量值
+     *
+     * @param string|null $name
+     * @return $this
+     */
+    public function clearAssign();
 
-	/**
-	 * 加载视图文件
-	 *
-	 * @param string $file
-	 * @param array $vars
+    /**
+     * 加载视图文件
+     *
+     * @param string $file
+     * @param array $vars
      * @param string $ext
-	 * @return string
-	 */
-	public function display(var file = null, array! vars = [], var ext = null);
+     * @return string
+     */
+    public function display(var file = null, array! vars = [], var ext = null);
 }

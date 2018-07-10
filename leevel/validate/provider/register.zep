@@ -31,7 +31,7 @@ use Leevel\Validate\Validate;
 class Register extends Provider
 {
 
-	/**
+    /**
      * 创建一个服务容器提供者实例
      *
      * @param \Leevel\Di\IContainer $container
@@ -39,7 +39,7 @@ class Register extends Provider
      */
     public function __construct(<IContainer> container)
     {
-    	parent::__construct(container);
+        parent::__construct(container);
     }
 
     /**
@@ -71,10 +71,10 @@ class Register extends Provider
     public static function providers() -> array
     {
         return [
-        	"validate" : [
-        		"Leevel\\Validate\\Validate", 
-        		"Leevel\\Validate\\IValidate"
-        	]
+            "validate" : [
+                "Leevel\\Validate\\Validate", 
+                "Leevel\\Validate\\IValidate"
+            ]
         ];
     }
 }

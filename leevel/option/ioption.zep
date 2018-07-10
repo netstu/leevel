@@ -26,52 +26,52 @@ namespace Leevel\Option;
 interface IOption
 {
 
-	/**
-	 * 是否存在配置
-	 *
-	 * @param string $name 配置键值
-	 * @return string
-	 */
-	public function has(string name = "app\\");
+    /**
+     * 是否存在配置
+     *
+     * @param string $name 配置键值
+     * @return string
+     */
+    public function has(string name = "app\\");
 
-	/**
-	 * 获取配置
-	 *
-	 * @param string $name 配置键值
-	 * @param mixed $defaults 配置默认值
-	 * @return string
-	 */
-	public function get(string name = "app\\", var defaults = null);
+    /**
+     * 获取配置
+     *
+     * @param string $name 配置键值
+     * @param mixed $defaults 配置默认值
+     * @return string
+     */
+    public function get(string name = "app\\", var defaults = null);
 
-	/**
-	 * 返回所有配置
-	 *
-	 * @return array
-	 */
-	public function all();
+    /**
+     * 返回所有配置
+     *
+     * @return array
+     */
+    public function all();
 
-	/**
-	 * 设置配置
-	 *
-	 * @param mixed $name 配置键值
-	 * @param mixed $value 配置值
-	 * @return array
-	 */
-	public function set(var name, var value = null);
+    /**
+     * 设置配置
+     *
+     * @param mixed $name 配置键值
+     * @param mixed $value 配置值
+     * @return array
+     */
+    public function set(var name, var value = null);
 
-	/**
-	 * 删除配置
-	 *
-	 * @param string $name 配置键值
-	 * @return string
-	 */
-	public function delete(string name);
+    /**
+     * 删除配置
+     *
+     * @param string $name 配置键值
+     * @return string
+     */
+    public function delete(string name);
 
-	/**
-	 * 初始化配置参数
-	 *
-	 * @param mixed $namespaces
-	 * @return boolean
-	 */
-	public function reset(var namespaces = null);
+    /**
+     * 初始化配置参数
+     *
+     * @param mixed $namespaces
+     * @return boolean
+     */
+    public function reset(var namespaces = null);
 }

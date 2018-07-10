@@ -28,11 +28,11 @@ use Leevel\Mvc\IView;
 interface IController extends IView
 {
 
-	/**
-	 * 返回父控制器
-	 *
-	 * @param \Leevel\Mvc\IView $view
-	 * @return $this
-	 */
-	public function setView(<IView> view);
+    /**
+     * 返回父控制器
+     *
+     * @param \Leevel\Mvc\IView $view
+     * @return $this
+     */
+    public function setView(<IView> view);
 }

@@ -39,7 +39,7 @@ class Register extends Provider
      */
     public function __construct(<IContainer> container)
     {
-    	parent::__construct(container);
+        parent::__construct(container);
     }
 
     /**
@@ -62,14 +62,14 @@ class Register extends Provider
     public static function providers() -> array
     {
         return [
-        	"sessions" : [
-        		"Leevel\\Session\\Manager"
-        	], 
-        	"session" : [
-        		"Leevel\\Session\\Session", 
-        		"Leevel\\Session\\ISession"
-        	], 
-        	"Leevel\\Session\\Middleware\\Session"
+            "sessions" : [
+                "Leevel\\Session\\Manager"
+            ], 
+            "session" : [
+                "Leevel\\Session\\Session", 
+                "Leevel\\Session\\ISession"
+            ], 
+            "Leevel\\Session\\Middleware\\Session"
         ];
     }
     

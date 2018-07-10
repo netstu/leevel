@@ -35,6 +35,6 @@ class View extends Facade
      */
     protected static function name() -> string 
     {
-    	return "view";
+        return "view";
     }
 }

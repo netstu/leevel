@@ -30,25 +30,25 @@ use Leevel\View\IView as ViewIView;
 class View implements IView
 {
 
-	/**
-	 * 视图模板
-	 *
-	 * @var \Queryyessimple\View\IView
-	 */
-	protected theme;
+    /**
+     * 视图模板
+     *
+     * @var \Queryyessimple\View\IView
+     */
+    protected theme;
 
-	/**
-	 * 构造函数
-	 *
-	 * @param \Leevel\View\IView $theme
-	 * @return void
-	 */
-	public function __construct(<ViewIView> theme)
-	{
-		let this->theme = theme;
-	}
+    /**
+     * 构造函数
+     *
+     * @param \Leevel\View\IView $theme
+     * @return void
+     */
+    public function __construct(<ViewIView> theme)
+    {
+        let this->theme = theme;
+    }
 
-	/**
+    /**
      * 切换视图
      *
      * @param \Leevel\View\IView $theme
@@ -56,7 +56,7 @@ class View implements IView
      */
     public function switchView(<ViewIView> theme)
     {
-    	var assign;
+        var assign;
 
         let assign = this->getAssign();
         let this->theme = theme;
@@ -65,94 +65,94 @@ class View implements IView
         return this;
     }
 
-	/**
-	 * 变量赋值
-	 *
-	 * @param mixed $name
-	 * @param mixed $value
-	 * @return $this
-	 */
-	public function assign(var name, var value = null)
-	{
-		this->checkTheme();
-		this->theme->setVar(name, value);
+    /**
+     * 变量赋值
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function assign(var name, var value = null)
+    {
+        this->checkTheme();
+        this->theme->setVar(name, value);
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * 获取变量赋值
-	 *
-	 * @param string|null $name
-	 * @return mixed
-	 */
-	public function getAssign(var name = null)
-	{
-		this->checkTheme();
+    /**
+     * 获取变量赋值
+     *
+     * @param string|null $name
+     * @return mixed
+     */
+    public function getAssign(var name = null)
+    {
+        this->checkTheme();
 
-		return this->theme->getVar(name);
-	}
+        return this->theme->getVar(name);
+    }
 
-	/**
-	 * 删除变量值
-	 *
-	 * @param mixed $name
-	 * @return $this
-	 */
-	public function deleteAssign(var name)
-	{
-		var args;
+    /**
+     * 删除变量值
+     *
+     * @param mixed $name
+     * @return $this
+     */
+    public function deleteAssign(var name)
+    {
+        var args;
 
-		this->checkTheme();
+        this->checkTheme();
 
-		let args = func_get_args();
+        let args = func_get_args();
 
-		call_user_func_array([
-			this->theme,
-			"deleteVar"
-		], args);
+        call_user_func_array([
+            this->theme,
+            "deleteVar"
+        ], args);
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * 清空变量值
-	 *
-	 * @param string|null $name
-	 * @return $this
-	 */
-	public function clearAssign()
-	{
-		this->checkTheme();
-		this->theme->clearVar();
-		
-		return this;
-	}
+    /**
+     * 清空变量值
+     *
+     * @param string|null $name
+     * @return $this
+     */
+    public function clearAssign()
+    {
+        this->checkTheme();
+        this->theme->clearVar();
+        
+        return this;
+    }
 
-	/**
-	 * 加载视图文件
-	 *
-	 * @param string $file
-	 * @param array $vars
+    /**
+     * 加载视图文件
+     *
+     * @param string $file
+     * @param array $vars
      * @param string $ext
-	 * @return string
-	 */
-	public function display(var file = null, array! vars = [], var ext = null)
-	{
-		this->checkTheme();
+     * @return string
+     */
+    public function display(var file = null, array! vars = [], var ext = null)
+    {
+        this->checkTheme();
 
-		return this->theme->display(file, vars, ext, false);
-	}
+        return this->theme->display(file, vars, ext, false);
+    }
 
-	/**
-	 * 验证 theme
-	 *
-	 * @return void
-	 */
-	protected function checkTheme()
-	{
-		if ! this->theme {
-			throw new RuntimeException("Theme is not set in view");
-		}
-	}
+    /**
+     * 验证 theme
+     *
+     * @return void
+     */
+    protected function checkTheme()
+    {
+        if ! this->theme {
+            throw new RuntimeException("Theme is not set in view");
+        }
+    }
 }

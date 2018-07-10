@@ -25,6 +25,14 @@ namespace Leevel\Log;
  */
 interface IConnect
 {
+    /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value);
 
     /**
      * 日志写入接口

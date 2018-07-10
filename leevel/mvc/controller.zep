@@ -30,34 +30,34 @@ use Leevel\View\IView as ViewIView;
 abstract class Controller implements IController
 {
 
-	/**
-	 * 视图
-	 *
-	 * @var \Leevel\Mvc\IView
-	 */
-	protected view;
+    /**
+     * 视图
+     *
+     * @var \Leevel\Mvc\IView
+     */
+    protected view;
 
-	/**
-	 * 构造函数
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-	}
+    /**
+     * 构造函数
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+    }
 
-	/**
-	 * 设置视图
-	 *
-	 * @param \Leevel\Mvc\IView $view
-	 * @return $this
-	 */
-	public function setView(<IView> view)
-	{
-		let this->view = view;
+    /**
+     * 设置视图
+     *
+     * @param \Leevel\Mvc\IView $view
+     * @return $this
+     */
+    public function setView(<IView> view)
+    {
+        let this->view = view;
 
-		return this;
-	}
+        return this;
+    }
 
     /**
      * 切换视图
@@ -73,112 +73,112 @@ abstract class Controller implements IController
         return this;
     }
 
-	/**
-	 * 变量赋值
-	 *
-	 * @param mixed $name
-	 * @param mixed $value
-	 * @return $this
-	 */
-	public function assign(var name, value = null)
-	{
-		this->checkView();
-		this->view->assign(name, value);
+    /**
+     * 变量赋值
+     *
+     * @param mixed $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function assign(var name, value = null)
+    {
+        this->checkView();
+        this->view->assign(name, value);
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * 获取变量赋值
-	 *
-	 * @param string|null $name
-	 * @return mixed
-	 */
-	public function getAssign(var name = null)
-	{
-		this->checkView();
+    /**
+     * 获取变量赋值
+     *
+     * @param string|null $name
+     * @return mixed
+     */
+    public function getAssign(var name = null)
+    {
+        this->checkView();
 
-		return this->view->getAssign(name);
-	}
+        return this->view->getAssign(name);
+    }
 
-	/**
-	 * 删除变量值
-	 *
-	 * @param mixed $name
-	 * @return $this
-	 */
-	public function deleteAssign(var name)
-	{
-		$this->checkView();
+    /**
+     * 删除变量值
+     *
+     * @param mixed $name
+     * @return $this
+     */
+    public function deleteAssign(var name)
+    {
+        $this->checkView();
 
-		call_user_func_array([
-			this->view,
-			"deleteAssign"
-		], func_get_args());
+        call_user_func_array([
+            this->view,
+            "deleteAssign"
+        ], func_get_args());
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * 清空变量值
-	 *
-	 * @return $this
-	 */
-	public function clearAssign()
-	{
-		this->checkView();
-		this->view->clearAssign();
+    /**
+     * 清空变量值
+     *
+     * @return $this
+     */
+    public function clearAssign()
+    {
+        this->checkView();
+        this->view->clearAssign();
 
-		return this;
-	}
+        return this;
+    }
 
-	/**
-	 * 加载视图文件
-	 *
-	 * @param string $file
-	 * @param array $vars
+    /**
+     * 加载视图文件
+     *
+     * @param string $file
+     * @param array $vars
      * @param string $ext
-	 * @return string
-	 */
-	public function display(var file = null, array! vars = [], var ext = null)
-	{
-		this->checkView();
-		
-		return this->view->display(file, vars, ext);
-	}
+     * @return string
+     */
+    public function display(var file = null, array! vars = [], var ext = null)
+    {
+        this->checkView();
+        
+        return this->view->display(file, vars, ext);
+    }
 
-	/**
-	 * 验证 view
-	 *
-	 * @return void
-	 */
-	protected function checkView()
-	{
-		if ! this->view {
-			throw new RuntimeException("View is not set in controller");
-		}
-	}
+    /**
+     * 验证 view
+     *
+     * @return void
+     */
+    protected function checkView()
+    {
+        if ! this->view {
+            throw new RuntimeException("View is not set in controller");
+        }
+    }
 
-	/**
-	 * 赋值
-	 *
-	 * @param mixed $key
-	 * @param mixed $value
-	 * @return void
-	 */
-	public function __set(var key, var value)
-	{
-		this->assign(key, value);
-	}
+    /**
+     * 赋值
+     *
+     * @param mixed $key
+     * @param mixed $value
+     * @return void
+     */
+    public function __set(var key, var value)
+    {
+        this->assign(key, value);
+    }
 
-	/**
-	 * 获取值
-	 *
-	 * @param string $key
-	 * @return mixed
-	 */
-	public function __get(string key)
-	{
-		return this->getAssign(key);
-	}
+    /**
+     * 获取值
+     *
+     * @param string $key
+     * @return mixed
+     */
+    public function __get(string key)
+    {
+        return this->getAssign(key);
+    }
 }

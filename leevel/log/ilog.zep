@@ -26,68 +26,77 @@ namespace Leevel\Log;
 interface ILog
 {
 
-	/**
-	 * debug
-	 *
-	 * @var string
-	 */
-	const DEBUG = "debug";
+    /**
+     * debug
+     *
+     * @var string
+     */
+    const DEBUG = "debug";
 
-	/**
-	 * info
-	 *
-	 * @var string
-	 */
-	const INFO = "info";
+    /**
+     * info
+     *
+     * @var string
+     */
+    const INFO = "info";
 
-	/**
-	 * notice
-	 *
-	 * @var string
-	 */
-	const NOTICE = "notice";
+    /**
+     * notice
+     *
+     * @var string
+     */
+    const NOTICE = "notice";
 
-	/**
-	 * warning
-	 *
-	 * @var string
-	 */
-	const WARNING = "warning";
+    /**
+     * warning
+     *
+     * @var string
+     */
+    const WARNING = "warning";
 
-	/**
-	 * error
-	 *
-	 * @var string
-	 */
-	const ERROR = "error";
+    /**
+     * error
+     *
+     * @var string
+     */
+    const ERROR = "error";
 
-	/**
-	 * critical
-	 *
-	 * @var string
-	 */
-	const CRITICAL = "critical";
+    /**
+     * critical
+     *
+     * @var string
+     */
+    const CRITICAL = "critical";
 
-	/**
-	 * alert
-	 *
-	 * @var string
-	 */
-	const ALERT = "alert";
+    /**
+     * alert
+     *
+     * @var string
+     */
+    const ALERT = "alert";
 
-	/**
-	 * emergency
-	 *
-	 * @var string
-	 */
-	const EMERGENCY = "emergency";
+    /**
+     * emergency
+     *
+     * @var string
+     */
+    const EMERGENCY = "emergency";
 
-	/**
-	 * sql
-	 *
-	 * @var string
-	 */
-	const SQL = "sql";
+    /**
+     * sql
+     *
+     * @var string
+     */
+    const SQL = "sql";
+
+    /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value);
 
     /**
      * 记录错误消息并写入

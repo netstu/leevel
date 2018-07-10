@@ -59,6 +59,7 @@ class Session
     public function handle(<Closure> next, <Request> request)
     {
         this->startSession();
+
         {next}(request);
     }
     
@@ -74,6 +75,7 @@ class Session
     {
         this->unregisterFlash();
         this->setPrevUrl(request);
+
         {next}(request, response);
     }
     
