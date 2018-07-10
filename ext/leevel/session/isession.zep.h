@@ -3,6 +3,11 @@ extern zend_class_entry *leevel_session_isession_ce;
 
 ZEPHIR_INIT_CLASS(Leevel_Session_ISession);
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_isession_setoption, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_isession_set, 0, 0, 2)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_INFO(0, value)
@@ -114,6 +119,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_isession_setgcprobability, 0, 0, 1
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_session_isession_method_entry) {
+	PHP_ABSTRACT_ME(Leevel_Session_ISession, setOption, arginfo_leevel_session_isession_setoption)
 	PHP_ABSTRACT_ME(Leevel_Session_ISession, start, NULL)
 	PHP_ABSTRACT_ME(Leevel_Session_ISession, set, arginfo_leevel_session_isession_set)
 	PHP_ABSTRACT_ME(Leevel_Session_ISession, put, arginfo_leevel_session_isession_put)

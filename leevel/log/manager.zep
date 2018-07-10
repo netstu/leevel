@@ -60,7 +60,9 @@ class Manager extends Managers
      */
     protected function makeConnectFile(array options = [])
     {
-        return new File(this->normalizeConnectOption("file", options));
+        return new File(
+            this->normalizeConnectOption("file", options)
+        );
     }
 
     /**
@@ -71,6 +73,8 @@ class Manager extends Managers
      */
     protected function makeConnectMonolog(array options = [])
     {
-        return new Monolog(this->normalizeConnectOption("monolog", options));
+        return new Monolog(
+            this->normalizeConnectOption("monolog", options)
+        );
     }
 }

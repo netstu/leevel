@@ -29,6 +29,15 @@ ZEPHIR_INIT_CLASS(Leevel_Cookie_ICookie) {
 }
 
 /**
+ * 修改单个配置
+ *
+ * @param string $name
+ * @param mixed $value
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, setOption);
+
+/**
  * 设置 COOKIE
  *
  * @param string $name

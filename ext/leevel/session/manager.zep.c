@@ -39,7 +39,7 @@ ZEPHIR_INIT_CLASS(Leevel_Session_Manager) {
  *
  * @return string
  */
-PHP_METHOD(Leevel_Session_Manager, getOptionNamespace) {
+PHP_METHOD(Leevel_Session_Manager, normalizeOptionNamespace) {
 
 	zval *this_ptr = getThis();
 
@@ -69,7 +69,7 @@ PHP_METHOD(Leevel_Session_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_session_session_ce);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptioncommon", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getcommonoption", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 135, connect, &_0);
 	zephir_check_call_status();
@@ -141,7 +141,7 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
 		ZVAL_STRING(&_2, "memcache");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &options);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizeconnectoption", NULL, 0, &_2, &options);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
 		zephir_check_call_status();
@@ -186,7 +186,7 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectRedis) {
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
 		ZVAL_STRING(&_2, "redis");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "getoption", NULL, 0, &_2, &options);
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizeconnectoption", NULL, 0, &_2, &options);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
 		zephir_check_call_status();
@@ -201,7 +201,7 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectRedis) {
  * @param string $connect
  * @return array
  */
-PHP_METHOD(Leevel_Session_Manager, getOptionConnect) {
+PHP_METHOD(Leevel_Session_Manager, getConnectOption) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_1 = NULL;
@@ -218,9 +218,9 @@ PHP_METHOD(Leevel_Session_Manager, getOptionConnect) {
 	zephir_get_strval(&connect, connect_param);
 
 
-	ZEPHIR_CALL_PARENT(&_0, leevel_session_manager_ce, getThis(), "getoptionconnect", &_1, 0, &connect);
+	ZEPHIR_CALL_PARENT(&_0, leevel_session_manager_ce, getThis(), "getconnectoption", &_1, 0, &connect);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "optionfilternull", NULL, 0, &_0);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "filternullofoption", NULL, 0, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

@@ -15,9 +15,9 @@
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
 #include "kernel/object.h"
+#include "kernel/array.h"
 #include "kernel/concat.h"
 #include "kernel/operators.h"
-#include "kernel/array.h"
 #include "kernel/string.h"
 
 
@@ -71,8 +71,8 @@ PHP_METHOD(Leevel_Log_Monolog, __construct) {
 
 	zend_class_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_0 = NULL, *_8 = NULL, *_10 = NULL;
-	zval *option_param = NULL, type, make, _1, _3, _4, _5, *_6, _7$$3, _9$$3;
+	zephir_fcall_cache_entry *_0 = NULL, *_9 = NULL, *_11 = NULL;
+	zval *option_param = NULL, type, make, _1, _3, _4, _5, _6, *_7, _8$$3, _10$$3;
 	zval option;
 	zval *this_ptr = getThis();
 
@@ -83,8 +83,9 @@ PHP_METHOD(Leevel_Log_Monolog, __construct) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_7$$3);
-	ZVAL_UNDEF(&_9$$3);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_8$$3);
+	ZVAL_UNDEF(&_10$$3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &option_param);
@@ -105,29 +106,25 @@ PHP_METHOD(Leevel_Log_Monolog, __construct) {
 	}
 	object_init_ex(&_1, _2);
 	if (zephir_has_constructor(&_1 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_4);
-		ZVAL_STRING(&_4, "channel");
-		ZEPHIR_CALL_METHOD(&_3, this_ptr, "getoption", NULL, 0, &_4);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0, &_3);
+		zephir_read_property(&_3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch_string(&_4, &_3, SL("channel"), PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 90 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0, &_4);
 		zephir_check_call_status();
 	}
 	zephir_update_property_zval(this_ptr, SL("monolog"), &_1);
-	ZEPHIR_INIT_NVAR(&_4);
-	ZVAL_STRING(&_4, "type");
-	ZEPHIR_CALL_METHOD(&_5, this_ptr, "getoption", NULL, 0, &_4);
-	zephir_check_call_status();
-	zephir_is_iterable(&_5, 0, "leevel/log/monolog.zep", 104);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_5), _6)
+	zephir_read_property(&_5, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch_string(&_6, &_5, SL("type"), PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 92 TSRMLS_CC);
+	zephir_is_iterable(&_6, 0, "leevel/log/monolog.zep", 96);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_6), _7)
 	{
 		ZEPHIR_INIT_NVAR(&type);
-		ZVAL_COPY(&type, _6);
-		ZEPHIR_CALL_METHOD(&_7$$3, this_ptr, "camelize", &_8, 0, &type);
+		ZVAL_COPY(&type, _7);
+		ZEPHIR_CALL_METHOD(&_8$$3, this_ptr, "camelize", &_9, 0, &type);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_9$$3, "ucwords", &_10, 23, &_7$$3);
+		ZEPHIR_CALL_FUNCTION(&_10$$3, "ucwords", &_11, 23, &_8$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&make);
-		ZEPHIR_CONCAT_SVS(&make, "make", &_9$$3, "Handler");
+		ZEPHIR_CONCAT_SVS(&make, "make", &_10$$3, "Handler");
 		ZEPHIR_CALL_METHOD_ZVAL(NULL, this_ptr, &make, NULL, 0);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
@@ -453,22 +450,22 @@ PHP_METHOD(Leevel_Log_Monolog, save) {
 	zephir_read_property(&_0, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_VAR(&level);
 	zephir_array_keys(&level, &_0 TSRMLS_CC);
-	zephir_is_iterable(&data, 0, "leevel/log/monolog.zep", 239);
+	zephir_is_iterable(&data, 0, "leevel/log/monolog.zep", 231);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&data), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _1);
-		zephir_array_fetch_long(&_2$$3, &item, 0, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 231 TSRMLS_CC);
+		zephir_array_fetch_long(&_2$$3, &item, 0, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 223 TSRMLS_CC);
 		if (!(zephir_fast_in_array(&_2$$3, &level TSRMLS_CC))) {
 			ZEPHIR_INIT_NVAR(&level);
 			ZVAL_STRING(&level, "debug");
 		} else {
 			ZEPHIR_OBS_NVAR(&level);
-			zephir_array_fetch_long(&level, &item, 0, PH_NOISY, "leevel/log/monolog.zep", 234 TSRMLS_CC);
+			zephir_array_fetch_long(&level, &item, 0, PH_NOISY, "leevel/log/monolog.zep", 226 TSRMLS_CC);
 		}
 		zephir_read_property(&_3$$3, this_ptr, SL("monolog"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 237 TSRMLS_CC);
-		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 237 TSRMLS_CC);
+		zephir_array_fetch_long(&_4$$3, &item, 1, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 229 TSRMLS_CC);
+		zephir_array_fetch_long(&_5$$3, &item, 2, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 229 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD_ZVAL(NULL, &_3$$3, &level, NULL, 0, &_4$$3, &_5$$3);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
@@ -692,11 +689,11 @@ PHP_METHOD(Leevel_Log_Monolog, parseMonologLevel) {
 	zephir_read_property(&_0, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_0, &level)) {
 		zephir_read_property(&_1$$3, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &level, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 330 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &level, PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 322 TSRMLS_CC);
 		RETURN_CTOR(&_2$$3);
 	}
 	zephir_read_property(&_3, this_ptr, SL("supportLevel"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 333 TSRMLS_CC);
+	zephir_array_fetch_string(&_4, &_3, SL("debug"), PH_NOISY | PH_READONLY, "leevel/log/monolog.zep", 325 TSRMLS_CC);
 	RETURN_CTOR(&_4);
 
 }

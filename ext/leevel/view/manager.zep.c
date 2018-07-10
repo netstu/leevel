@@ -42,7 +42,7 @@ ZEPHIR_INIT_CLASS(Leevel_View_Manager) {
  *
  * @return string
  */
-PHP_METHOD(Leevel_View_Manager, getOptionNamespace) {
+PHP_METHOD(Leevel_View_Manager, normalizeOptionNamespace) {
 
 	zval *this_ptr = getThis();
 
@@ -113,7 +113,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "html");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&options, &_0);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -177,7 +177,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectTwig) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "twig");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&options, &_0);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -241,7 +241,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectPhpui) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "phpui");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&options, &_0);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -293,7 +293,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "v8");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&options, &_0);
 	ZEPHIR_INIT_NVAR(&_1);

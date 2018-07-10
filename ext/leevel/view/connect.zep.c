@@ -342,7 +342,7 @@ PHP_METHOD(Leevel_View_Connect, parseDisplayFile) {
 }
 
 /**
- * 分析模板真实路径			
+ * 分析模板真实路径            
  *
  * @param string $tpl 文件地址
  * @param string $ext 扩展名

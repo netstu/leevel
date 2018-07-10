@@ -887,7 +887,7 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFunc) {
 	if (!zephir_is_true(&_20)) {
 		ZEPHIR_INIT_VAR(&_21$$12);
 		ZEPHIR_INIT_VAR(&_22$$12);
-		ZVAL_STRING(&_22$$12, "if (! function_exists('zephir_assign')) {\n\t\t\t\tfunction zephir_assign($value, $evals) {\n\t\t\t\t\teval($evals);\n\t\t\t\t\treturn $value;\n\t\t\t\t}\n\t\t\t}");
+		ZVAL_STRING(&_22$$12, "if (! function_exists('zephir_assign')) {\n                function zephir_assign($value, $evals) {\n                    eval($evals);\n                    return $value;\n                }\n            }");
 		zephir_eval_php(&_22$$12, &_21$$12, "/data/codes/queryyetsimple/leevel/http/bag.zep:384" TSRMLS_CC);
 		zend_update_static_property(leevel_http_bag_ce, ZEND_STRL("zephirAssign"), &__$true);
 	}

@@ -3,6 +3,11 @@ extern zend_class_entry *leevel_log_ilog_ce;
 
 ZEPHIR_INIT_CLASS(Leevel_Log_ILog);
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_ilog_setoption, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_ilog_write, 0, 0, 2)
 	ZEND_ARG_INFO(0, level)
 	ZEND_ARG_INFO(0, message)
@@ -30,6 +35,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_ilog_count, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_log_ilog_method_entry) {
+	PHP_ABSTRACT_ME(Leevel_Log_ILog, setOption, arginfo_leevel_log_ilog_setoption)
 	PHP_ABSTRACT_ME(Leevel_Log_ILog, write, arginfo_leevel_log_ilog_write)
 	PHP_ABSTRACT_ME(Leevel_Log_ILog, save, NULL)
 	PHP_ABSTRACT_ME(Leevel_Log_ILog, registerFilter, arginfo_leevel_log_ilog_registerfilter)

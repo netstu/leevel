@@ -320,7 +320,7 @@ class Cookie implements ICookie
      */
     protected function normalizeOptions(array option = [])
     {
-        return option ? array_merge(this->option, option) : this->option;
+        return !empty option ? array_merge(this->option, option) : this->option;
     }
 
     /**

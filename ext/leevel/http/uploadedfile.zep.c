@@ -272,7 +272,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_4);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "leevel/http/uploadedfile.zep", 157 TSRMLS_CC);
+	zephir_throw_exception_debug(&_3, "leevel/http/uploadedfile.zep", 150 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -415,7 +415,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, getErrorMessage) {
 	if (zephir_array_isset(&_1, &errorCode)) {
 		zephir_read_static_property_ce(&_2, leevel_http_uploadedfile_ce, SL("errors"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&message);
-		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 209 TSRMLS_CC);
+		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 202 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&message);
 		ZVAL_STRING(&message, "The file %s was not uploaded due to an unknown error.");

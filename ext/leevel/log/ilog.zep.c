@@ -92,6 +92,15 @@ ZEPHIR_INIT_CLASS(Leevel_Log_ILog) {
 }
 
 /**
+ * 修改单个配置
+ *
+ * @param string $name
+ * @param mixed $value
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Log_ILog, setOption);
+
+/**
  * 记录错误消息并写入
  *
  * @param string $level 日志类型

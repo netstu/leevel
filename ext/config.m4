@@ -13,7 +13,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/di/provider.zep.c
 	leevel/support/imacro.zep.c
 	leevel/support/iarray.zep.c
-	leevel/option/iclass.zep.c
 	leevel/support/ijson.zep.c
 	leevel/flow/icontrol.zep.c
 	leevel/http/iresponse.zep.c

@@ -3,7 +3,7 @@ extern zend_class_entry *leevel_log_manager_ce;
 
 ZEPHIR_INIT_CLASS(Leevel_Log_Manager);
 
-PHP_METHOD(Leevel_Log_Manager, getOptionNamespace);
+PHP_METHOD(Leevel_Log_Manager, normalizeOptionNamespace);
 PHP_METHOD(Leevel_Log_Manager, createConnect);
 PHP_METHOD(Leevel_Log_Manager, makeConnectFile);
 PHP_METHOD(Leevel_Log_Manager, makeConnectMonolog);
@@ -21,7 +21,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_manager_makeconnectmonolog, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_log_manager_method_entry) {
-	PHP_ME(Leevel_Log_Manager, getOptionNamespace, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_Log_Manager, normalizeOptionNamespace, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Log_Manager, createConnect, arginfo_leevel_log_manager_createconnect, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Log_Manager, makeConnectFile, arginfo_leevel_log_manager_makeconnectfile, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Log_Manager, makeConnectMonolog, arginfo_leevel_log_manager_makeconnectmonolog, ZEND_ACC_PROTECTED)

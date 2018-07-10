@@ -38,7 +38,7 @@ ZEPHIR_INIT_CLASS(Leevel_Log_Manager) {
  *
  * @return string
  */
-PHP_METHOD(Leevel_Log_Manager, getOptionNamespace) {
+PHP_METHOD(Leevel_Log_Manager, normalizeOptionNamespace) {
 
 	zval *this_ptr = getThis();
 
@@ -68,7 +68,7 @@ PHP_METHOD(Leevel_Log_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_log_log_ce);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoptioncommon", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getcommonoption", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 116, connect, &_0);
 	zephir_check_call_status();
@@ -107,7 +107,7 @@ PHP_METHOD(Leevel_Log_Manager, makeConnectFile) {
 	object_init_ex(return_value, leevel_log_file_ce);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "file");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 117, &_0);
 	zephir_check_call_status();
@@ -146,7 +146,7 @@ PHP_METHOD(Leevel_Log_Manager, makeConnectMonolog) {
 	object_init_ex(return_value, leevel_log_monolog_ce);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "monolog");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getoption", NULL, 0, &_1, &options);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 118, &_0);
 	zephir_check_call_status();

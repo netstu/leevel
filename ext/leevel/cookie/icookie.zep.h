@@ -3,6 +3,11 @@ extern zend_class_entry *leevel_cookie_icookie_ce;
 
 ZEPHIR_INIT_CLASS(Leevel_Cookie_ICookie);
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_icookie_setoption, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_icookie_set, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 	ZEND_ARG_INFO(0, value)
@@ -63,6 +68,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_icookie_clear, 0, 0, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_cookie_icookie_method_entry) {
+	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, setOption, arginfo_leevel_cookie_icookie_setoption)
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, set, arginfo_leevel_cookie_icookie_set)
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, put, arginfo_leevel_cookie_icookie_put)
 	PHP_ABSTRACT_ME(Leevel_Cookie_ICookie, push, arginfo_leevel_cookie_icookie_push)

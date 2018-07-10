@@ -29,6 +29,15 @@ ZEPHIR_INIT_CLASS(Leevel_Session_ISession) {
 }
 
 /**
+ * 修改单个配置
+ *
+ * @param string $name
+ * @param mixed $value
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setOption);
+
+/**
  * 启动 session
  *
  * @return $this

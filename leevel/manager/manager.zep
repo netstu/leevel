@@ -206,7 +206,7 @@ abstract class Manager
     {
         var tmp;
 
-        let tmp = "connect.".connec;
+        let tmp = "connect.".connect;
 
         if typeof this->getContainerOption(tmp) === "null" {
             throw new Exception(
@@ -262,19 +262,23 @@ abstract class Manager
      */
     protected function parseOptionParameter(var options = [])
     {
+        var tmp;
+
         if typeof options == "null" {
             return [];
         }
 
         if typeof options == "string" {
-            let option = this->getContainerOption("connect.".options);
+            let tmp = this->getContainerOption("connect.".options);
+
+            if typeof tmp != "array" {
+                return [];
+            }
+        } else {
+            let tmp = options;
         }
 
-        if typeof options != "array" {
-            let options = [];
-        }
-
-        return options;
+        return tmp;
     }
 
     /**
@@ -295,7 +299,7 @@ abstract class Manager
      * @param array $extendOption
      * @return array
      */
-    protected function getOption(string connect, array! extendOption = [])
+    protected function normalizeConnectOption(string connect, array! extendOption = [])
     {
         if typeof extendOption != "array" {
             let extendOption = [];
@@ -404,7 +408,7 @@ abstract class Manager
      * @param string $name
      * @param mixed  $value
      */
-    protected function setContainerOption(string name, var value): void
+    protected function setContainerOption(string name, var value)-> void
     {
         var tmp;
         let tmp = this->normalizeOptionName(name);

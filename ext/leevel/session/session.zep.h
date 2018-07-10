@@ -4,6 +4,7 @@ extern zend_class_entry *leevel_session_session_ce;
 ZEPHIR_INIT_CLASS(Leevel_Session_Session);
 
 PHP_METHOD(Leevel_Session_Session, __construct);
+PHP_METHOD(Leevel_Session_Session, setOption);
 PHP_METHOD(Leevel_Session_Session, start);
 PHP_METHOD(Leevel_Session_Session, set);
 PHP_METHOD(Leevel_Session_Session, put);
@@ -47,13 +48,6 @@ PHP_METHOD(Leevel_Session_Session, setCacheLimiter);
 PHP_METHOD(Leevel_Session_Session, getCacheLimiter);
 PHP_METHOD(Leevel_Session_Session, setGcProbability);
 PHP_METHOD(Leevel_Session_Session, getGcProbability);
-PHP_METHOD(Leevel_Session_Session, option);
-PHP_METHOD(Leevel_Session_Session, optionArray);
-PHP_METHOD(Leevel_Session_Session, options);
-PHP_METHOD(Leevel_Session_Session, getOption);
-PHP_METHOD(Leevel_Session_Session, getOptions);
-PHP_METHOD(Leevel_Session_Session, deleteOption);
-PHP_METHOD(Leevel_Session_Session, deleteOptions);
 PHP_METHOD(Leevel_Session_Session, getNormalizeName);
 PHP_METHOD(Leevel_Session_Session, checkStart);
 PHP_METHOD(Leevel_Session_Session, popOldFlash);
@@ -71,6 +65,11 @@ zend_object *zephir_init_properties_Leevel_Session_Session(zend_class_entry *cla
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session___construct, 0, 0, 0)
 	ZEND_ARG_OBJ_INFO(0, connect, SessionHandlerInterface, 1)
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_setoption, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_set, 0, 0, 2)
@@ -187,37 +186,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_setgcprobability, 0, 0, 1)
 	ZEND_ARG_INFO(0, probability)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_option, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_optionarray, 0, 0, 2)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_ARRAY_INFO(0, value, 0)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_options, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_getoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_INFO(0, defaults)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_getoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_deleteoption, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_deleteoptions, 0, 0, 0)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_session_session_getnormalizename, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
@@ -255,6 +223,7 @@ ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_session_session_method_entry) {
 	PHP_ME(Leevel_Session_Session, __construct, arginfo_leevel_session_session___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
+	PHP_ME(Leevel_Session_Session, setOption, arginfo_leevel_session_session_setoption, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, start, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, set, arginfo_leevel_session_session_set, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, put, arginfo_leevel_session_session_put, ZEND_ACC_PUBLIC)
@@ -298,13 +267,6 @@ ZEPHIR_INIT_FUNCS(leevel_session_session_method_entry) {
 	PHP_ME(Leevel_Session_Session, getCacheLimiter, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, setGcProbability, arginfo_leevel_session_session_setgcprobability, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, getGcProbability, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, option, arginfo_leevel_session_session_option, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, optionArray, arginfo_leevel_session_session_optionarray, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, options, arginfo_leevel_session_session_options, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, getOption, arginfo_leevel_session_session_getoption, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, getOptions, arginfo_leevel_session_session_getoptions, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, deleteOption, arginfo_leevel_session_session_deleteoption, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Session_Session, deleteOptions, arginfo_leevel_session_session_deleteoptions, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Session_Session, getNormalizeName, arginfo_leevel_session_session_getnormalizename, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Session_Session, checkStart, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Session_Session, popOldFlash, arginfo_leevel_session_session_popoldflash, ZEND_ACC_PROTECTED)
