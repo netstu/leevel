@@ -57,7 +57,7 @@ class Cookie implements ICookie
      */
     public function __construct(array option = [])
     {
-        this->options(option);
+        let this->option = array_merge(this->option, option);
     }
 
     /**

@@ -25,6 +25,14 @@ namespace Leevel\Session;
  */
 interface ISession
 {
+    /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value);
 
      /**
      * 启动 session

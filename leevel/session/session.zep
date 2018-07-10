@@ -18,7 +18,6 @@ namespace Leevel\Session;
 use RuntimeException;
 use BadMethodCallException;
 use SessionHandlerInterface;
-use Leevel\Option\IClass;
 use Leevel\Session\ISession;
 
 /**
@@ -29,7 +28,7 @@ use Leevel\Session\ISession;
  * @since 2018.01.09
  * @version 1.0
  */
-class Session implements ISession, IClass
+class Session implements ISession
 {
 
 	/**
@@ -94,7 +93,22 @@ class Session implements ISession, IClass
     public function __construct(<SessionHandlerInterface> connect = null, array option = [])
     {
         let this->connect = connect;
-        this->options(option);
+
+        let this->option = array_merge(this->option, option);
+    }
+
+    /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value)
+    {
+        let this->option[name] = value;
+        
+        return this;
     }
 
     /**
@@ -112,46 +126,48 @@ class Session implements ISession, IClass
         ini_set("session.auto_start", "0");
 
         // 设置 session id
-        if this->getOption("id") {
-        	this->setId(this->getOption("id"));
+        if this->option["id"] {
+        	this->setId(this->option["id"]);
         }
 
         // session name
-        if this->getOption("name") {
-            this->setName(this->getOption("name"));
+        if this->option["name"] {
+            this->setName(this->option["name"]);
         }
 
         // cookie set
         this->setUseCookies(); 
 
         // save path
-        if this->getOption("save_path") {
-            this->setSavePath(this->getOption("save_path"));
+        if this->option["save_path"] {
+            this->setSavePath(this->option["save_path"]);
         }
         
         // cookie domain
-        if this->getOption("cookie_domain") {
-            this->setCookieDomain(this->getOption("cookie_domain"));
+        if this->option["cookie_domain"] {
+            this->setCookieDomain(this->option["cookie_domain"]);
         }
 
         // session expire
-        if this->getOption("expire") {
-            this->setCacheExpire(this->getOption("expire"));
+        if this->option["expire"] {
+            this->setCacheExpire(this->option["expire"]);
         }
 
         // cache limiter
-        if this->getOption("cache_limiter") {
-            this->setCacheLimiter(this->getOption("cache_limiter"));
+        if this->option["cache_limiter"] {
+            this->setCacheLimiter(this->option["cache_limiter"]);
         }
 
         // gc_probability
-        if this->getOption("gc_probability") {
-            this->setGcProbability(this->getOption("gc_probability"));
+        if this->option["gc_probability"] {
+            this->setGcProbability(this->option["gc_probability"]);
         }
 
         // 驱动
         if this->connect && ! session_set_save_handler(this->connect) {
-            throw new RuntimeException(sprintf("Session drive %s settings failed.", get_class(this->connect)));
+            throw new RuntimeException(
+                sprintf("Session drive %s settings failed.", get_class(this->connect))
+            );
         }
 
         // 启动 session
@@ -373,7 +389,7 @@ class Session implements ISession, IClass
 
         this->checkStart();
 
-        let strPrefix = this->getOption("prefix");
+        let strPrefix = this->option["prefix"];
 
         for sKey, _ in _SESSION {
             if prefix === true && strPrefix && strpos(sKey, strPrefix) === 0 {
@@ -814,121 +830,6 @@ class Session implements ISession, IClass
     }
 
     /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function option(string name, var value)
-    {
-        if ! is_string(name) {
-            throw new InvalidArgumentException("Option set name must be a string.");
-        }
-
-        let this->option[name] = value;
-
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
-        return this;
-    }
-    
-    /**
      * 返回 session 名字
      *
      * @param string $name
@@ -936,7 +837,7 @@ class Session implements ISession, IClass
      */
     protected function getNormalizeName(string name)
     {
-        return this->getOption("prefix") . name;
+        return this->option["prefix"] . name;
     }
 
     /**
