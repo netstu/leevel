@@ -20,7 +20,7 @@ PHP_METHOD(Leevel_Manager_Manager, parseOptionAndUnique);
 PHP_METHOD(Leevel_Manager_Manager, parseOptionParameter);
 PHP_METHOD(Leevel_Manager_Manager, getUnique);
 PHP_METHOD(Leevel_Manager_Manager, getOption);
-PHP_METHOD(Leevel_Manager_Manager, getOptionCommon);
+PHP_METHOD(Leevel_Manager_Manager, getCommonOption);
 PHP_METHOD(Leevel_Manager_Manager, filterOptionCommon);
 PHP_METHOD(Leevel_Manager_Manager, filterOptionCommonItem);
 PHP_METHOD(Leevel_Manager_Manager, getOptionConnect);
@@ -118,7 +118,7 @@ ZEPHIR_INIT_FUNCS(leevel_manager_manager_method_entry) {
 	PHP_ME(Leevel_Manager_Manager, parseOptionParameter, arginfo_leevel_manager_manager_parseoptionparameter, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Manager_Manager, getUnique, arginfo_leevel_manager_manager_getunique, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Manager_Manager, getOption, arginfo_leevel_manager_manager_getoption, ZEND_ACC_PROTECTED)
-	PHP_ME(Leevel_Manager_Manager, getOptionCommon, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_Manager_Manager, getCommonOption, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Manager_Manager, filterOptionCommon, arginfo_leevel_manager_manager_filteroptioncommon, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Manager_Manager, filterOptionCommonItem, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Manager_Manager, getOptionConnect, arginfo_leevel_manager_manager_getoptionconnect, ZEND_ACC_PROTECTED)

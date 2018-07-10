@@ -649,7 +649,7 @@ PHP_METHOD(Leevel_Manager_Manager, getOption) {
  *
  * @return array
  */
-PHP_METHOD(Leevel_Manager_Manager, getOptionCommon) {
+PHP_METHOD(Leevel_Manager_Manager, getCommonOption) {
 
 	zval options, _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;

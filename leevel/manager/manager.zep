@@ -56,6 +56,18 @@ abstract class Manager
     }
 
     /**
+     * call 
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function __call(string method, array args)
+    {
+        return call_user_func_array([this->connect(), method], args);
+    }
+
+    /**
      * 返回 IOC 容器
      *
      * @return \Leevel\Di\IContainer
@@ -83,9 +95,13 @@ abstract class Manager
             return this->connects[unique];
         }
 
-        let driver = isset options["driver"] ? options["driver"] : this->getDefaultDriver();
+        let driver = isset options["driver"] ?
+            options["driver"] :
+            this->getDefaultDriver();
 
-        let this->connects[unique] = this->makeConnect(driver, options);
+        let this->connects[unique] = this->makeConnect(
+            driver, options
+        );
 
         return this->connects[unique];
     }
@@ -99,6 +115,7 @@ abstract class Manager
     public function reconnect(var options = [])
     {
         this->disconnect(options);
+
         return this->connect(options);
     }
 
@@ -138,9 +155,7 @@ abstract class Manager
      */
     public function getDefaultDriver()
     {
-        var strDefault;
-        let strDefault = this->getOptionName("default");
-        return this->getOptionObject()->get(strDefault);
+        return this->getContainerOption("default");
     }
 
     /**
@@ -151,9 +166,7 @@ abstract class Manager
      */
     public function setDefaultDriver(string name)
     {
-        var strDefault;
-        let strDefault = this->getOptionName("default");
-        this->getOptionObject()->set(strDefault, name);
+        this->setContainerOption("default", name);
     }
 
     /**
@@ -161,7 +174,7 @@ abstract class Manager
      *
      * @return string
      */
-    abstract protected function getOptionNamespace();
+    abstract protected function normalizeOptionNamespace();
 
     /**
      * 创建连接对象
@@ -177,9 +190,9 @@ abstract class Manager
      * @param string $name
      * @return string
      */
-    protected function getOptionName(var name = null)
+    protected function normalizeOptionName(var name = null)
     {
-        return this->getOptionNamespace() . "\\" . name;
+        return this->normalizeOptionNamespace() . "\\" . name;
     }
 
     /**
@@ -191,12 +204,21 @@ abstract class Manager
      */
     protected function makeConnect(string connect, array options = [])
     {
-        var strTemp;
-        let strTemp = this->getOptionName("connect." . connect);
-        if typeof this->getOptionObject()->get(strTemp) == "null" {
-            throw new Exception(sprintf("Connect driver %s not exits", connect));
+        var tmp;
+
+        let tmp = "connect.".connec;
+
+        if typeof this->getContainerOption(tmp) === "null" {
+            throw new Exception(
+                sprintf(
+                    "Connect driver %s not exits", connect
+                )
+            );
         }
-        return this->createConnect(this->createConnectCommon(connect, options));
+
+        return this->createConnect(
+            this->createConnectCommon(connect, options)
+        );
     }
 
     /**
@@ -224,7 +246,7 @@ abstract class Manager
         var unique;
 
         let options = this->parseOptionParameter(options);
-        let unique = this->getUnique(options);
+        let unique = this->normalizeUnique(options);
 
         return [
             options,
@@ -245,7 +267,7 @@ abstract class Manager
         }
 
         if typeof options == "string" {
-            let options = this->getOptionObject()->get(this->getOptionName("connect." . options));
+            let option = this->getContainerOption("connect.".options);
         }
 
         if typeof options != "array" {
@@ -261,7 +283,7 @@ abstract class Manager
      * @param array $options
      * @return string
      */
-    protected function getUnique(array options)
+    protected function normalizeUnique(array options)
     {
         return md5(serialize(options));
     }
@@ -278,7 +300,12 @@ abstract class Manager
         if typeof extendOption != "array" {
             let extendOption = [];
         }
-        return array_merge(this->getOptionConnect(connect), this->getOptionCommon(), extendOption);
+
+        return array_merge(
+            this->getConnectOption(connect),
+            this->getCommonOption(),
+            extendOption
+        );
     }
 
     /**
@@ -286,12 +313,11 @@ abstract class Manager
      *
      * @return array
      */
-    protected function getOptionCommon()
+    protected function getCommonOption()
     {
-        var options;
-        let options = this->getOptionObject()->get(this->getOptionName());
-        let options = this->filterOptionCommon(options);
-        return options;
+        return this->filterCommonOption(
+            this->getContainerOption()
+        );
     }
 
     /**
@@ -300,10 +326,11 @@ abstract class Manager
      * @param array $options
      * @return array
      */
-    protected function filterOptionCommon(array options)
+    protected function filterCommonOption(array options)
     {
         var item;
-        for item in this->filterOptionCommonItem() {
+
+        for item in this->defaultCommonOption() {
             if isset options[item] {
                 unset options[item];
             }
@@ -317,7 +344,7 @@ abstract class Manager
      *
      * @return array
      */
-    protected function filterOptionCommonItem()
+    protected function defaultCommonOption()
     {
         return [
             "default",
@@ -331,9 +358,9 @@ abstract class Manager
      * @param string $connect
      * @return array
      */
-    protected function getOptionConnect(string connect)
+    protected function getConnectOption(string connect)
     {
-        return this->getOptionObject()->get(this->getOptionName("connect." . connect));
+        return this->getContainerOption("connect.".connect);
     }
 
     /**
@@ -342,7 +369,7 @@ abstract class Manager
      * @param array $options
      * @return array
      */
-    protected function optionFilterNull(array options)
+    protected function filterNullOfOption(array options)
     {
         var key, value;
         array result = [];
@@ -357,24 +384,31 @@ abstract class Manager
     }
 
     /**
-     * 返回配置对象
+     * 获取容器配置值.
      *
-     * @return \Leevel\Option\Option
+     * @param string $name
+     *
+     * @return mixed
      */
-    protected function getOptionObject()
+    protected function getContainerOption(string name = null)
     {
-        return this->container->make("option");
+        var tmp;
+        let tmp = this->normalizeOptionName(name);
+
+        return this->container->make("option")->get(tmp);
     }
 
     /**
-     * call 
+     * 设置容器配置值.
      *
-     * @param string $method
-     * @param array $args
-     * @return mixed
+     * @param string $name
+     * @param mixed  $value
      */
-    public function __call(string method, array args)
+    protected function setContainerOption(string name, var value): void
     {
-        return call_user_func_array([this->connect(), method], args);
+        var tmp;
+        let tmp = this->normalizeOptionName(name);
+
+        this->container->make("option")->set(tmp, value);
     }
 }

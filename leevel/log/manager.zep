@@ -36,7 +36,7 @@ class Manager extends Managers
      *
      * @return string
      */
-    protected function getOptionNamespace()
+    protected function normalizeOptionNamespace()
     {
         return "log";
     }
@@ -49,7 +49,7 @@ class Manager extends Managers
      */
     protected function createConnect(var connect)
     {
-        return new Log(connect, this->getOptionCommon());
+        return new Log(connect, this->getCommonOption());
     }
 
     /**
@@ -60,7 +60,7 @@ class Manager extends Managers
      */
     protected function makeConnectFile(array options = [])
     {
-        return new File(this->getOption("file", options));
+        return new File(this->normalizeConnectOption("file", options));
     }
 
     /**
@@ -71,6 +71,6 @@ class Manager extends Managers
      */
     protected function makeConnectMonolog(array options = [])
     {
-        return new Monolog(this->getOption("monolog", options));
+        return new Monolog(this->normalizeConnectOption("monolog", options));
     }
 }

@@ -39,7 +39,7 @@ class Manager extends Managers
      *
      * @return string
      */
-    protected function getOptionNamespace()
+    protected function normalizeOptionNamespace()
     {
         return "view";
     }
@@ -65,7 +65,7 @@ class Manager extends Managers
     {
         var parser, html;
 
-        let options = this->getOption("html", options);
+        let options = this->normalizeConnectOption("html", options);
         let options = array_merge(options, this->viewOptionCommon());
 
         let parser = Closure::fromCallable([this, "makeParserClosure"]);
@@ -86,7 +86,7 @@ class Manager extends Managers
     {
         var parser, twig;
 
-        let options = this->getOption("twig", options);
+        let options = this->normalizeConnectOption("twig", options);
         let options = array_merge(options, this->viewOptionCommon());
 
         let parser = Closure::fromCallable([this, "makeTwigParserClosure"]);
@@ -105,7 +105,7 @@ class Manager extends Managers
      */
     protected function makeConnectPhpui(array options = [])
     {
-        let options = this->getOption("phpui", options);
+        let options = this->normalizeConnectOption("phpui", options);
         let options = array_merge(options, this->viewOptionCommon());
 
         return new Phpui(options);
@@ -119,7 +119,7 @@ class Manager extends Managers
      */
     protected function makeConnectV8(array options = [])
     {
-        let options = this->getOption("v8", options);
+        let options = this->normalizeConnectOption("v8", options);
         let options = array_merge(options, this->viewOptionCommon());
 
         return new V8s(options);
@@ -141,9 +141,8 @@ class Manager extends Managers
             "controller_name" : request->controller(),
             "action_name" : request->action(),
             "theme_path" : this->container->pathApplicationTheme(),
-
-            // 仅 html 模板需要缓存路径
-            "theme_cache_path" : this->container->pathApplicationCache("theme") . "/" . strtolower(request->app())
+            "theme_cache_path" : this->container->pathApplicationCache("theme") .
+                "/" . strtolower(request->app()) // // 仅 html 模板需要缓存路径
         ];
 
         return options;

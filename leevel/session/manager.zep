@@ -36,7 +36,7 @@ class Manager extends Managers
      *
      * @return string
      */
-    protected function getOptionNamespace()
+    protected function normalizeOptionNamespace()
     {
         return "session";
     }
@@ -49,7 +49,7 @@ class Manager extends Managers
      */
     protected function createConnect(var connect)
     {
-        return new Session(connect, this->getOptionCommon());
+        return new Session(connect, this->getCommonOption());
     }
 
     /**
@@ -70,7 +70,9 @@ class Manager extends Managers
      */
     protected function makeConnectMemcache(array options = [])
     {
-        return new Memcache(this->getOption("memcache", options));
+        return new Memcache(
+            this->normalizeConnectOption("memcache", options)
+        );
     }
 
     /**
@@ -81,7 +83,9 @@ class Manager extends Managers
      */
     protected function makeConnectRedis(array options = [])
     {
-        return new Redis(this->getOption("redis", options));
+        return new Redis(
+            this->normalizeConnectOption("redis", options)
+        );
     }
 
     /**
@@ -90,8 +94,10 @@ class Manager extends Managers
      * @param string $connect
      * @return array
      */
-    protected function getOptionConnect(string connect)
+    protected function getConnectOption(string connect)
     {
-        return this->optionFilterNull(parent::getOptionConnect(connect));
+        return this->filterNullOfOption(
+            parent::getConnectOption(connect)
+        );
     }
 }
