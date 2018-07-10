@@ -15,9 +15,6 @@
  */
 namespace Leevel\Log;
 
-// [2018.01.06]Todo: zephir 加载无法通过编译
-// use Psr\Log\LoggerInterface;
-
 /**
  * ILog 接口
  *
@@ -26,7 +23,7 @@ namespace Leevel\Log;
  * @since 2018.01.07
  * @version 1.0
  */
-interface ILog /* extends LoggerInterface */
+interface ILog
 {
 
 	/**

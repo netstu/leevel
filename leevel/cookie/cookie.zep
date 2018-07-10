@@ -16,8 +16,6 @@
 namespace Leevel\Cookie;
 
 use Exception;
-use InvalidArgumentException;
-use Leevel\Option\IClass;
 use Leevel\Cookie\ICookie;
 
 /**
@@ -28,7 +26,7 @@ use Leevel\Cookie\ICookie;
  * @since 2018.01.06
  * @version 1.0
  */
-class Cookie implements ICookie, IClass
+class Cookie implements ICookie
 {
 
     /**
@@ -63,6 +61,20 @@ class Cookie implements ICookie, IClass
     }
 
     /**
+     * 修改单个配置
+     *
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function setOption(string name, var value)
+    {
+        let this->option[name] = value;
+        
+        return this;
+    }
+
+    /**
      * 设置 COOKIE
      *
      * @param string $name
@@ -74,7 +86,7 @@ class Cookie implements ICookie, IClass
     {
     	boolean isHttpSecure = false;
 
-        let option = this->getOptions(option);
+        let option = this->normalizeOptions(option);
 
         if typeof value == "array" {
             let value = json_encode(value);
@@ -238,7 +250,7 @@ class Cookie implements ICookie, IClass
      */
     public function get(string name, var defaults = null, array option = [])
     {
-        let option = this->getOptions(option);
+        let option = this->normalizeOptions(option);
         let name = option["prefix"] . name;
 
         if isset this->cookies[name] {
@@ -274,7 +286,7 @@ class Cookie implements ICookie, IClass
     public function clear(boolean deletePrefix = true, array option = [])
     {
         var prefix, key;
-        let option = this->getOptions(option);
+        let option = this->normalizeOptions(option);
         let prefix = option["prefix"];
         let option["prefix"] = "";
 
@@ -290,121 +302,6 @@ class Cookie implements ICookie, IClass
     }
 
     /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function option(string name, var value)
-    {
-        if ! is_string(name) {
-            throw new InvalidArgumentException("Option set name must be a string.");
-        }
-
-        let this->option[name] = value;
-        
-        return this;
-    }
-
-    /**
-     * 修改数组配置
-     *
-     * @param string $name
-     * @param array $value
-     * @return $this
-     */
-    public function optionArray(string name, array value)
-    {
-        return this->option(name, array_merge(this->getOption(name), value));
-    }
-
-    /**
-     * 修改多个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function options(array option = [])
-    {
-    	var name, value;
-
-        if empty option {
-            return this;
-        }
-
-        for name, value in option {
-        	this->option(name, value);
-        }
-
-        return this;
-    }
-
-    /**
-     * 获取单个配置
-     *
-     * @param string $name
-     * @param mixed $defaults
-     * @return mixed
-     */
-    public function getOption(string name, var defaults = null)
-    {
-        return isset(this->option[name]) ? this->option[name] : defaults;
-    }
-
-    /**
-     * 获取所有配置
-     *
-     * @param array $option
-     * @return mixed
-     */
-    public function getOptions(array option = [])
-    {
-    	if ! empty option {
-    		return array_merge(this->option, option);
-    	} else {
-    		return this->option;
-    	}
-    }
-
-    /**
-     * 删除单个配置
-     *
-     * @param string $name
-     * @return $this
-     */
-    public function deleteOption(string name)
-    {
-        if isset this->option[name] {
-            unset(this->option[name]);
-        }
-
-        return this;
-    }
-
-    /**
-     * 删除多个配置
-     *
-     * @param array $option
-     * @return $this
-     */
-    public function deleteOptions(array option = [])
-    {
-    	var key;
-
-        if ! empty option {
-            return this;
-        }
-
-        for key in option {
-        	this->deleteOption(key);
-        }
-
-        return this;
-    }
-
-    /**
      * 返回所有 cookie
      *
      * @return array
@@ -412,7 +309,19 @@ class Cookie implements ICookie, IClass
     public function all()-> array
     {
         return this->cookies;
-    } 
+    }
+
+    /**
+     * 整理配置.
+     *
+     * @param array $option
+     *
+     * @return array
+     */
+    protected function normalizeOptions(array option = [])
+    {
+        return option ? array_merge(this->option, option) : this->option;
+    }
 
     /**
      * 验证是否为正常的 JSON 字符串
