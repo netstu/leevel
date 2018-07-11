@@ -370,14 +370,22 @@ class Container implements IContainer, ArrayAccess {
     protected function getInjectionObject(var classname, array args = [])
     {
         if interface_exists(classname) {
-            throw new NormalizeException(sprintf("Interface %s can not be normalize because not binded.", classname));   
+            throw new ContainerInvalidArgumentException(
+                sprintf(
+                    "Interface %s can not be normalize because not binded.",
+                    classname
+                )
+            );
         }
 
         if ! class_exists(classname) {
             return classname;
         }
 
-        return this->newInstanceArgs(classname, this->normalizeInjectionArgs(classname, args));
+        return this->newInstanceArgs(
+            classname,
+            this->normalizeInjectionArgs(classname, args)
+        );
     }
 
     /**
@@ -397,7 +405,7 @@ class Container implements IContainer, ArrayAccess {
         let validArgs = tmp[2];
 
         if validArgs < required {
-            throw new NormalizeException(
+            throw new ContainerInvalidArgumentException(
                 sprintf(
                     "There are %d required args,but %d gived.",
                     required,
