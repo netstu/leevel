@@ -15,8 +15,6 @@
  */
 namespace Leevel\Support;
 
-use Closure;
-use Exception;
 use RuntimeException;
 use BadMethodCallException;
 use Leevel\Di\IContainer;
@@ -88,7 +86,8 @@ abstract class Facade
             return instance;
         }
 
-        let instance = self::container()->make(unique);
+        let self::instances[unique] = self::container()->make(unique);
+        let instance = self::instances[unique];
 
         if typeof instance != "object" {
             throw new RuntimeException(
@@ -128,7 +127,8 @@ abstract class Facade
      *
      * @return string
      */
-    protected static function name() -> string {
+    protected static function name() -> string
+    {
         return "";
     }
 }

@@ -96,7 +96,7 @@ PHP_METHOD(Leevel_Support_Facade, __callStatic) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "leevel/support/facade.zep", 70 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "leevel/support/facade.zep", 68 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -113,7 +113,7 @@ PHP_METHOD(Leevel_Support_Facade, __callStatic) {
  */
 PHP_METHOD(Leevel_Support_Facade, facades) {
 
-	zval unique, instance, _0, _1, _2$$4, _3$$4, _4$$4;
+	zval unique, instance, _0, _1, _2, _3, _4$$4, _5$$4, _6$$4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -121,9 +121,11 @@ PHP_METHOD(Leevel_Support_Facade, facades) {
 	ZVAL_UNDEF(&instance);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$4);
-	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$4);
+	ZVAL_UNDEF(&_6$$4);
 
 	ZEPHIR_MM_GROW();
 
@@ -136,18 +138,22 @@ PHP_METHOD(Leevel_Support_Facade, facades) {
 	}
 	ZEPHIR_CALL_SELF(&_1, "container", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&instance, &_1, "make", NULL, 0, &unique);
+	ZEPHIR_CALL_METHOD(&_2, &_1, "make", NULL, 0, &unique);
 	zephir_check_call_status();
+	zephir_update_static_property_array_multi_ce(leevel_support_facade_ce, SL("instances"), &_2 TSRMLS_CC, SL("z"), 1, &unique);
+	zephir_read_static_property_ce(&_3, leevel_support_facade_ce, SL("instances"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_OBS_NVAR(&instance);
+	zephir_array_fetch(&instance, &_3, &unique, PH_NOISY, "leevel/support/facade.zep", 90 TSRMLS_CC);
 	if (Z_TYPE_P(&instance) != IS_OBJECT) {
-		ZEPHIR_INIT_VAR(&_2$$4);
-		object_init_ex(&_2$$4, spl_ce_RuntimeException);
-		ZEPHIR_INIT_VAR(&_3$$4);
-		ZVAL_STRING(&_3$$4, "Services %s was not found in the IOC container.");
-		ZEPHIR_CALL_FUNCTION(&_4$$4, "sprintf", NULL, 1, &_3$$4, &unique);
+		ZEPHIR_INIT_VAR(&_4$$4);
+		object_init_ex(&_4$$4, spl_ce_RuntimeException);
+		ZEPHIR_INIT_VAR(&_5$$4);
+		ZVAL_STRING(&_5$$4, "Services %s was not found in the IOC container.");
+		ZEPHIR_CALL_FUNCTION(&_6$$4, "sprintf", NULL, 1, &_5$$4, &unique);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 3, &_4$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_4$$4, "__construct", NULL, 3, &_6$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_2$$4, "leevel/support/facade.zep", 99 TSRMLS_CC);
+		zephir_throw_exception_debug(&_4$$4, "leevel/support/facade.zep", 98 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
