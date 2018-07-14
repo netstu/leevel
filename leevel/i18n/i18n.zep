@@ -63,14 +63,14 @@ class I18n implements II18n
      */
     public function getText()
     {
-         var arr;
+        var arr;
 
-          let arr = func_get_args(); 
+        let arr = func_get_args();
 
-        if empty arr[0] {
-            return "";
+        if !isset arr[0] {
+            return null;
         }
-      
+
         if isset this->text[this->i18n][arr[0]] {
             let arr[0] = this->text[this->i18n][arr[0]];
         }

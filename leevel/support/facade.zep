@@ -47,6 +47,33 @@ abstract class Facade
     protected static instances = [];
 
     /**
+     * call 
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public static function __callStatic(string method, array args)
+    {
+        var instance, callback;
+
+        let instance = self::facades();
+
+        let callback = [
+            instance,
+            method
+        ];
+
+        if ! is_callable(callback) {
+            throw new BadMethodCallException(
+                sprintf("Method %s is not exits.", method)
+            );
+        }
+
+        return call_user_func_array(callback, args);
+    }
+
+    /**
      * 获取注册容器的实例
      *
      * @return mixed
@@ -62,8 +89,14 @@ abstract class Facade
         }
 
         let instance = self::container()->make(unique);
+
         if typeof instance != "object" {
-            throw new RuntimeException(sprintf("Services %s was not found in the IOC container.", unique));
+            throw new RuntimeException(
+                sprintf(
+                    "Services %s was not found in the IOC container.",
+                    unique
+                )
+            );
         }
 
         return instance;
@@ -82,10 +115,10 @@ abstract class Facade
      /**
      * 设置服务容器
      *
-     * @param \Leevel\Di\IContainer $container
+     * @param null|\Leevel\Di\IContainer $container
      * @return void
      */
-    public static function setContainer(<IContainer> container) -> void
+    public static function setContainer(<IContainer> container = null) -> void
     {
         let self::container = container;
     }
@@ -97,36 +130,5 @@ abstract class Facade
      */
     protected static function name() -> string {
         return "";
-    }
-
-    /**
-     * call 
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public static function __callStatic(string method, array args)
-    {
-        var instance, callback;
-
-        let instance = self::facades();
-        if ! instance {
-            throw new RuntimeException(
-                "Can not find instance from container."
-            );
-        }
-
-        let callback = [
-            instance,
-            method
-        ];
-        if ! is_callable(callback) {
-            throw new BadMethodCallException(
-                sprintf("Method %s is not exits.", method)
-            );
-        }
-
-        return call_user_func_array(callback, args);
     }
 }

@@ -197,6 +197,7 @@ class Pipeline implements IPipeline
 
         array temp = [];
         array_unshift(stage, null);
+
         for item in stage {
             let temp[] = this->stageCallback(item);
         }
@@ -234,7 +235,8 @@ class Pipeline implements IPipeline
             }
 
             let stage = this->container->make(stage, params);
-            if (stage === false) {
+
+            if (typeof stage != "object") {
                 throw new InvalidArgumentException("Stage is invalid.");
             }
 

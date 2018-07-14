@@ -1419,6 +1419,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         }
 
         let pathInfo = this->server->get("PATH_INFO");
+
         if pathInfo {
             let this->pathInfo = this->parsePathInfo(pathInfo);
             return this->pathInfo;
@@ -1427,7 +1428,6 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
         // 服务器重写
         if this->query->get(self::PATHINFO_URL) {
             let pathInfo = this->parsePathInfo(this->query->get(self::PATHINFO_URL));
-            this->query->remove(self::PATHINFO_URL);
             let this->pathInfo = pathInfo;
             return this->pathInfo;
         }
