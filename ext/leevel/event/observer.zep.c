@@ -105,7 +105,7 @@ PHP_METHOD(Leevel_Event_Observer, update) {
 		ZVAL_STRING(&_3$$3, "Observer %s must has run method");
 		ZEPHIR_CALL_FUNCTION(&_4$$3, "sprintf", NULL, 1, &_3$$3, &_2$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_4$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_4$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_1$$3, "leevel/event/observer.zep", 63 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

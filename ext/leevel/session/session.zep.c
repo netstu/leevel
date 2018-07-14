@@ -313,7 +313,7 @@ PHP_METHOD(Leevel_Session_Session, start) {
 		ZVAL_STRING(&_42$$11, "Session drive %s settings failed.");
 		ZEPHIR_CALL_FUNCTION(&_43$$11, "sprintf", NULL, 1, &_42$$11, &_40$$11);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_39$$11, "__construct", NULL, 2, &_43$$11);
+		ZEPHIR_CALL_METHOD(NULL, &_39$$11, "__construct", NULL, 3, &_43$$11);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_39$$11, "leevel/session/session.zep", 169 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -2321,7 +2321,7 @@ PHP_METHOD(Leevel_Session_Session, __call) {
 		ZVAL_STRING(&_2$$3, "Method %s is not exits.");
 		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 1, &_2$$3, &method);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_3$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_3$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_1$$3, "leevel/session/session.zep", 989 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

@@ -13,12 +13,12 @@
 
 #include "kernel/main.h"
 #include "kernel/fcall.h"
-#include "kernel/array.h"
 #include "kernel/memory.h"
-#include "kernel/object.h"
+#include "kernel/array.h"
 #include "kernel/exception.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/operators.h"
+#include "kernel/object.h"
 
 
 /**
@@ -48,6 +48,61 @@ ZEPHIR_INIT_CLASS(Leevel_Support_Facade) {
 	zend_declare_property_null(leevel_support_facade_ce, SL("instances"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
 
 	return SUCCESS;
+
+}
+
+/**
+ * call 
+ *
+ * @param string $method
+ * @param array $args
+ * @return mixed
+ */
+PHP_METHOD(Leevel_Support_Facade, __callStatic) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval args;
+	zval *method_param = NULL, *args_param = NULL, instance, callback, _0$$3, _1$$3, _2$$3;
+	zval method;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&method);
+	ZVAL_UNDEF(&instance);
+	ZVAL_UNDEF(&callback);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&args);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
+
+	zephir_get_strval(&method, method_param);
+	zephir_get_arrval(&args, args_param);
+
+
+	ZEPHIR_CALL_SELF(&instance, "facades", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&callback);
+	zephir_create_array(&callback, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&callback, &instance);
+	zephir_array_fast_append(&callback, &method);
+	if (!(zephir_is_callable(&callback TSRMLS_CC))) {
+		ZEPHIR_INIT_VAR(&_0$$3);
+		object_init_ex(&_0$$3, spl_ce_BadMethodCallException);
+		ZEPHIR_INIT_VAR(&_1$$3);
+		ZVAL_STRING(&_1$$3, "Method %s is not exits.");
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "sprintf", NULL, 1, &_1$$3, &method);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 2, &_2$$3);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(&_0$$3, "leevel/support/facade.zep", 70 TSRMLS_CC);
+		ZEPHIR_MM_RESTORE();
+		return;
+	}
+	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &callback, &args);
+	zephir_check_call_status();
+	RETURN_MM();
 
 }
 
@@ -90,9 +145,9 @@ PHP_METHOD(Leevel_Support_Facade, facades) {
 		ZVAL_STRING(&_3$$4, "Services %s was not found in the IOC container.");
 		ZEPHIR_CALL_FUNCTION(&_4$$4, "sprintf", NULL, 1, &_3$$4, &unique);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 2, &_4$$4);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 3, &_4$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_2$$4, "leevel/support/facade.zep", 66 TSRMLS_CC);
+		zephir_throw_exception_debug(&_2$$4, "leevel/support/facade.zep", 99 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -121,18 +176,23 @@ PHP_METHOD(Leevel_Support_Facade, container) {
 /**
  * 设置服务容器
  *
- * @param \Leevel\Di\IContainer $container
+ * @param null|\Leevel\Di\IContainer $container
  * @return void
  */
 PHP_METHOD(Leevel_Support_Facade, setContainer) {
 
-	zval *container, container_sub;
+	zval *container = NULL, container_sub, __$null;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&container_sub);
+	ZVAL_NULL(&__$null);
 
-	zephir_fetch_params(0, 1, 0, &container);
+	zephir_fetch_params(0, 0, 1, &container);
 
+	if (!container) {
+		container = &container_sub;
+		container = &__$null;
+	}
 
 
 	zend_update_static_property(leevel_support_facade_ce, ZEND_STRL("container"), container);
@@ -150,65 +210,6 @@ PHP_METHOD(Leevel_Support_Facade, name) {
 
 
 	RETURN_STRING("");
-
-}
-
-/**
- * call 
- *
- * @param string $method
- * @param array $args
- * @return mixed
- */
-PHP_METHOD(Leevel_Support_Facade, __callStatic) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval args;
-	zval *method_param = NULL, *args_param = NULL, instance, callback, _0$$4, _1$$4, _2$$4;
-	zval method;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&method);
-	ZVAL_UNDEF(&instance);
-	ZVAL_UNDEF(&callback);
-	ZVAL_UNDEF(&_0$$4);
-	ZVAL_UNDEF(&_1$$4);
-	ZVAL_UNDEF(&_2$$4);
-	ZVAL_UNDEF(&args);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
-
-	zephir_get_strval(&method, method_param);
-	zephir_get_arrval(&args, args_param);
-
-
-	ZEPHIR_CALL_SELF(&instance, "facades", NULL, 0);
-	zephir_check_call_status();
-	if (!(zephir_is_true(&instance))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Can not find instance from container.", "leevel/support/facade.zep", 117);
-		return;
-	}
-	ZEPHIR_INIT_VAR(&callback);
-	zephir_create_array(&callback, 2, 0 TSRMLS_CC);
-	zephir_array_fast_append(&callback, &instance);
-	zephir_array_fast_append(&callback, &method);
-	if (!(zephir_is_callable(&callback TSRMLS_CC))) {
-		ZEPHIR_INIT_VAR(&_0$$4);
-		object_init_ex(&_0$$4, spl_ce_BadMethodCallException);
-		ZEPHIR_INIT_VAR(&_1$$4);
-		ZVAL_STRING(&_1$$4, "Method %s is not exits.");
-		ZEPHIR_CALL_FUNCTION(&_2$$4, "sprintf", NULL, 1, &_1$$4, &method);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_0$$4, "__construct", NULL, 3, &_2$$4);
-		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$4, "leevel/support/facade.zep", 127 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
-		return;
-	}
-	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &callback, &args);
-	zephir_check_call_status();
-	RETURN_MM();
 
 }
 

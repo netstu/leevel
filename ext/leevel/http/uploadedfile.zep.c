@@ -270,7 +270,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
 	object_init_ex(&_3, leevel_http_fileexception_ce);
 	ZEPHIR_CALL_METHOD(&_4, this_ptr, "geterrormessage", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_4);
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_4);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_3, "leevel/http/uploadedfile.zep", 150 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();

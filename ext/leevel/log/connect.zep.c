@@ -172,7 +172,7 @@ PHP_METHOD(Leevel_Log_Connect, checkSize) {
 		ZVAL_STRING(&_8$$3, "Unable to create log file：%s.");
 		ZEPHIR_CALL_FUNCTION(&_9$$3, "sprintf", NULL, 1, &_8$$3, &filepath);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_7$$3, "__construct", NULL, 2, &_9$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_7$$3, "__construct", NULL, 3, &_9$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_7$$3, "leevel/log/connect.zep", 81 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

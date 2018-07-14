@@ -89,7 +89,7 @@ PHP_METHOD(Leevel_I18n_I18n, __construct) {
  */
 PHP_METHOD(Leevel_I18n_I18n, getText) {
 
-	zval arr, _0, _1, _2, _3, _4, _12, _5$$4, _6$$4, _7$$4, _8$$4, _9$$4, _10$$5, _11$$5;
+	zval arr, _0, _1, _2, _3, _11, _4$$4, _5$$4, _6$$4, _7$$4, _8$$4, _9$$5, _10$$5;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
@@ -98,49 +98,47 @@ PHP_METHOD(Leevel_I18n_I18n, getText) {
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_12);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_4$$4);
 	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&_6$$4);
 	ZVAL_UNDEF(&_7$$4);
 	ZVAL_UNDEF(&_8$$4);
-	ZVAL_UNDEF(&_9$$4);
+	ZVAL_UNDEF(&_9$$5);
 	ZVAL_UNDEF(&_10$$5);
-	ZVAL_UNDEF(&_11$$5);
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(&arr);
 	zephir_get_args(&arr);
-	zephir_array_fetch_long(&_0, &arr, 0, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 70 TSRMLS_CC);
-	if (ZEPHIR_IS_EMPTY(&_0)) {
-		RETURN_MM_STRING("");
+	if (!(zephir_array_isset_long(&arr, 0))) {
+		RETURN_MM_NULL();
 	}
-	zephir_read_property(&_1, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_OBS_VAR(&_3);
-	zephir_read_property(&_3, this_ptr, SL("i18n"), PH_NOISY_CC);
-	zephir_array_fetch(&_2, &_1, &_3, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
-	zephir_array_fetch_long(&_4, &arr, 0, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
-	if (zephir_array_isset(&_2, &_4)) {
-		zephir_read_property(&_5$$4, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_OBS_VAR(&_7$$4);
-		zephir_read_property(&_7$$4, this_ptr, SL("i18n"), PH_NOISY_CC);
-		zephir_array_fetch(&_6$$4, &_5$$4, &_7$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
-		ZEPHIR_OBS_VAR(&_9$$4);
-		zephir_array_fetch_long(&_9$$4, &arr, 0, PH_NOISY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
-		zephir_array_fetch(&_8$$4, &_6$$4, &_9$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
-		zephir_array_update_long(&arr, 0, &_8$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+	zephir_read_property(&_0, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_OBS_VAR(&_2);
+	zephir_read_property(&_2, this_ptr, SL("i18n"), PH_NOISY_CC);
+	zephir_array_fetch(&_1, &_0, &_2, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, &arr, 0, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
+	if (zephir_array_isset(&_1, &_3)) {
+		zephir_read_property(&_4$$4, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_OBS_VAR(&_6$$4);
+		zephir_read_property(&_6$$4, this_ptr, SL("i18n"), PH_NOISY_CC);
+		zephir_array_fetch(&_5$$4, &_4$$4, &_6$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+		ZEPHIR_OBS_VAR(&_8$$4);
+		zephir_array_fetch_long(&_8$$4, &arr, 0, PH_NOISY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+		zephir_array_fetch(&_7$$4, &_5$$4, &_8$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+		zephir_array_update_long(&arr, 0, &_7$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
 	if (zephir_fast_count_int(&arr TSRMLS_CC) > 1) {
+		ZEPHIR_INIT_VAR(&_9$$5);
 		ZEPHIR_INIT_VAR(&_10$$5);
-		ZEPHIR_INIT_VAR(&_11$$5);
-		ZVAL_STRING(&_11$$5, "sprintf");
-		ZEPHIR_CALL_USER_FUNC_ARRAY(&_10$$5, &_11$$5, &arr);
+		ZVAL_STRING(&_10$$5, "sprintf");
+		ZEPHIR_CALL_USER_FUNC_ARRAY(&_9$$5, &_10$$5, &arr);
 		zephir_check_call_status();
-		zephir_array_update_long(&arr, 0, &_10$$5, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+		zephir_array_update_long(&arr, 0, &_9$$5, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
-	zephir_array_fetch_long(&_12, &arr, 0, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 82 TSRMLS_CC);
-	RETURN_CTOR(&_12);
+	zephir_array_fetch_long(&_11, &arr, 0, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 82 TSRMLS_CC);
+	RETURN_CTOR(&_11);
 
 }
 

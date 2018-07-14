@@ -350,7 +350,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, setPath) {
 		ZVAL_STRING(&_5$$3, "Runtime path %s is not writeable.");
 		ZEPHIR_CALL_FUNCTION(&_6$$3, "sprintf", NULL, 1, &_5$$3, &_4$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 2, &_6$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 3, &_6$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_3$$3, "leevel/bootstrap/project.zep", 218 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

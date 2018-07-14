@@ -1447,7 +1447,7 @@ PHP_METHOD(Leevel_Collection_Collection, callStaticMacro) {
 	ZVAL_STRING(&_4, "Method %s is not exits.");
 	ZEPHIR_CALL_FUNCTION(&_5, "sprintf", NULL, 1, &_4, &method);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_5);
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_5);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_3, "leevel/collection/collection.zep", 636 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
@@ -1522,7 +1522,7 @@ PHP_METHOD(Leevel_Collection_Collection, callMacro) {
 	ZVAL_STRING(&_9, "Method %s is not exits.");
 	ZEPHIR_CALL_FUNCTION(&_10, "sprintf", NULL, 1, &_9, &method);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 3, &_10);
+	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 2, &_10);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_8, "leevel/collection/collection.zep", 659 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();

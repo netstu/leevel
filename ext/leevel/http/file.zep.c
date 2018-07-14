@@ -68,7 +68,7 @@ PHP_METHOD(Leevel_Http_File, __construct) {
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		object_init_ex(&_1$$3, leevel_http_filenotfoundexception_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &path);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &path);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_1$$3, "leevel/http/file.zep", 42 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -190,7 +190,7 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 			ZVAL_STRING(&_8$$4, "Unable to create the %s directory");
 			ZEPHIR_CALL_FUNCTION(&_9$$4, "sprintf", NULL, 1, &_8$$4, &directory);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_7$$4, "__construct", NULL, 2, &_9$$4);
+			ZEPHIR_CALL_METHOD(NULL, &_7$$4, "__construct", NULL, 3, &_9$$4);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(&_7$$4, "leevel/http/file.zep", 78 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
@@ -203,7 +203,7 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 		ZVAL_STRING(&_11$$5, "Unable to write in the %s directory");
 		ZEPHIR_CALL_FUNCTION(&_12$$5, "sprintf", NULL, 1, &_11$$5, &directory);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_10$$5, "__construct", NULL, 2, &_12$$5);
+		ZEPHIR_CALL_METHOD(NULL, &_10$$5, "__construct", NULL, 3, &_12$$5);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_10$$5, "leevel/http/file.zep", 81 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
@@ -271,7 +271,7 @@ PHP_METHOD(Leevel_Http_File, moveToTarget) {
 		ZVAL_STRING(&_4$$3, "Could not move the file %s to %s (%s)");
 		ZEPHIR_CALL_FUNCTION(&_5$$3, "sprintf", NULL, 1, &_4$$3, &sourcePath, &target, &_3$$3);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 2, &_5$$3);
+		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_5$$3);
 		zephir_check_call_status();
 		zephir_throw_exception_debug(&_1$$3, "leevel/http/file.zep", 102 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();

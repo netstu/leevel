@@ -212,7 +212,7 @@ PHP_METHOD(Leevel_Di_Provider, __call) {
 	ZVAL_STRING(&_1, "Method %s is not exits.");
 	ZEPHIR_CALL_FUNCTION(&_2, "sprintf", NULL, 1, &_1, &method);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_2);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 2, &_2);
 	zephir_check_call_status();
 	zephir_throw_exception_debug(&_0, "leevel/di/provider.zep", 122 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
