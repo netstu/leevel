@@ -18,26 +18,21 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-/*
- * @SWG\Tag(
- *   name="pet",
- *   _group="pet",
- *   description="Everything about your Pets",
- *   @SWG\ExternalDocumentation(
- *     description="Find out more",
- *     url="http://swagger.io"
- *   )
- * )
- * @SWG\Tag(
- *   name="store",
- *   description="Access to Petstore orders"
- * )
- * @SWG\Tag(
- *   name="user",
- *   description="Operations about user",
- *   @SWG\ExternalDocumentation(
- *     description="Find out more about our store",
- *     url="http://swagger.io"
- *   )
- * )
+namespace Tests\Router\Controller;
+
+/**
+ * home.
+ *
+ * @author Xiangmin Liu <635750556@qq.com>
+ *
+ * @since 2018.07.19
+ *
+ * @version 1.0
  */
+class Home
+{
+    public function handle()
+    {
+        return 'hello my home';
+    }
+}
