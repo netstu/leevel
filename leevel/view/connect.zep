@@ -17,7 +17,6 @@ namespace Leevel\View;
 
 use RuntimeException;
 use BadMethodCallException;
-use InvalidArgumentException;
 
 /**
  * 模板处理抽象类
@@ -156,7 +155,7 @@ abstract class Connect
         }
 
         if ! is_file(file) {
-            throw new InvalidArgumentException(
+            throw new RuntimeException(
                 sprintf("Template file %s does not exist.", file)
             );
         }
@@ -178,7 +177,9 @@ abstract class Connect
         let tpl = trim(str_replace("->", ".", tpl));
 
         // 完整路径或者变量
-        if pathinfo(tpl, PATHINFO_EXTENSION) || strpos(tpl, "$") === 0 || strpos(tpl, "(") !== false {
+        if pathinfo(tpl, PATHINFO_EXTENSION) ||
+            strpos(tpl, "$") === 0 ||
+            strpos(tpl, "(") !== false {
             return this->formatFile(tpl);
         } else {
             if ! this->option["theme_path"] {

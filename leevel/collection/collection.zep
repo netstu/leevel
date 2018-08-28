@@ -675,7 +675,9 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
             return;
         }
 
-        throw new InvalidArgumentException(sprintf("Collection type %s validation failed", implode(",", this->type)));
+        throw new InvalidArgumentException(
+            sprintf("Collection type %s validation failed.", implode(",", this->type))
+        );
     }
     
     /**

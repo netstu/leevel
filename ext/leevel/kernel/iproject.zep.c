@@ -13,11 +13,12 @@
 
 
 /**
- * IProject 接口
+ * IProject 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.04.23
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Kernel_IProject) {
@@ -25,14 +26,14 @@ ZEPHIR_INIT_CLASS(Leevel_Kernel_IProject) {
 	ZEPHIR_REGISTER_INTERFACE(Leevel\\Kernel, IProject, leevel, kernel_iproject, leevel_kernel_iproject_method_entry);
 
 	/**
-	 * QueryPHP 版本
+	 * QueryPHP 版本.
 	 *
 	 * @var string
 	 */
 	zephir_declare_class_constant_string(leevel_kernel_iproject_ce, SL("VERSION"), "1.0.0");
 
 	/**
-	 * 默认环境变量名字
+	 * 默认环境变量名字.
 	 *
 	 * @var string
 	 */
@@ -44,26 +45,34 @@ ZEPHIR_INIT_CLASS(Leevel_Kernel_IProject) {
 }
 
 /**
- * 返回项目
+ * 返回项目.
  *
  * @param string $path
+ *
  * @return static
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, singletons);
 
 /**
- * 程序版本
+ * 程序版本.
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, version);
 
 /**
- * 是否以扩展方式运行
+ * 是否以扩展方式运行.
  *
- * @return boolean
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, runWithExtension);
+
+/**
+ * 是否为 Console.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, console);
 
 /**
  * {@inheritdoc}
@@ -71,308 +80,296 @@ ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, runWithExtension);
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, make);
 
 /**
- * 设置项目路径
+ * 设置项目路径.
  *
  * @param string $path
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPath);
 
 /**
- * 基础路径
+ * 基础路径.
+ *
+ * @param string $path
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, path);
 
 /**
- * 应用路径
+ * 设置应用路径.
+ *
+ * @param string $path
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setAppPath);
+
+/**
+ * 应用路径.
+ *
+ * @param bool|string $app
+ * @param string      $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplication);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, appPath);
 
 /**
- * 设置应用路径
+ * 取得应用主题目录.
  *
- * @param string $path
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathApplication);
-
-/**
- * 设置公共路径
- *
- * @param string $path
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathCommon);
-
-/**
- * 公共路径
+ * @param bool|string $app
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathCommon);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, themePath);
 
 /**
- * 设置运行时路径
+ * 设置公共路径.
  *
  * @param string $path
- * @return $this
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathRuntime);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setCommonPath);
 
 /**
- * 运行路径
+ * 公共路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathRuntime);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, commonPath);
 
 /**
- * 设置存储路径
+ * 设置运行时路径.
  *
  * @param string $path
- * @return $this
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathStorage);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setRuntimePath);
 
 /**
- * 附件路径
+ * 运行路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathStorage);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, runtimePath);
 
 /**
- * 设置配置路径
+ * 设置存储路径.
  *
  * @param string $path
- * @return $this
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathOption);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setStoragePath);
 
 /**
- * 配置路径
+ * 附件路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathOption);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, storagePath);
 
 /**
- * 设置语言包路径
+ * 设置配置路径.
  *
  * @param string $path
- * @return $this
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathI18n);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setOptionPath);
 
 /**
- * 语言包路径
+ * 配置路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathI18n);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, optionPath);
 
 /**
- * 环境变量路径
+ * 设置语言包路径.
+ *
+ * @param string $path
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setI18nPath);
+
+/**
+ * 语言包路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathEnv);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, i18nPath);
 
 /**
- * 设置环境变量路径
+ * 设置环境变量路径.
  *
  * @param string $path
- * @return $this
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPathEnv);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setEnvPath);
 
 /**
- * 设置环境变量文件
+ * 环境变量路径.
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, envPath);
+
+/**
+ * 设置环境变量文件.
  *
  * @param string $file
- * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setEnvFile);
 
 /**
- * 取得环境变量文件
+ * 取得环境变量文件.
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, envFile);
 
 /**
- * 取得环境变量完整路径
+ * 取得环境变量完整路径.
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, fullEnvPath);
 
 /**
- * 应用路径
- *
- * @param string $app
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathAnApplication);
-
-/**
- * 取得应用缓存目录
- *
- * @param string $type
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplicationCache);
-
-/**
- * 取得应用主题目录
- *
- * @param string $app
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathApplicationTheme);
-
-/**
- * 返回语言包路径
- * 
- * @param string $i18n
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathCacheI18nFile);
-
-/**
- * 是否缓存语言包
+ * 返回语言包缓存路径.
  *
  * @param string $i18n
- * @return boolean
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, i18nCachedPath);
+
+/**
+ * 是否存在语言包缓存.
+ *
+ * @param string $i18n
+ *
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, isCachedI18n);
 
 /**
- * 返回缓存路径
- * 
+ * 返回配置缓存路径.
+ *
  * @return string
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, pathCacheOptionFile);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, optionCachedPath);
 
 /**
- * 是否缓存配置
+ * 是否存在配置缓存.
  *
- * @return boolean
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, isCachedOption);
 
 /**
- * 取得 composer
+ * 返回路由缓存路径.
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, routerCachedPath);
+
+/**
+ * 是否存在路由缓存.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, isCachedRouter);
+
+/**
+ * 取得 composer.
  *
  * @return \Composer\Autoload\ClassLoader
+ * @codeCoverageIgnore
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, composer);
 
 /**
- * 获取命名空间路径
+ * 获取命名空间路径.
  *
  * @param string $namespaces
- * @return string|null
+ *
+ * @return null|string
+ * @codeCoverageIgnore
  */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, getPathByNamespace);
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, getPathByComposer);
 
 /**
- * 批量获取命名空间路径
+ * 是否开启 debug.
  *
- * @param array $namespaces
- * @return array
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, getPathByNamespaces);
-
-/**
- * 是否开启 debug
- *
- * @return boolean
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, debug);
 
 /**
- * 是否为开发环境
+ * 是否为开发环境.
  *
- * @return string
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, development);
 
 /**
- * 运行环境
+ * 运行环境.
  *
- * @return boolean
+ * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, environment);
 
 /**
- * 是否为 API
- *
- * @return boolean
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, api);
-
-/**
- * 是否为 Console
- *
- * @return boolean
- */
-ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, console);
-
-/**
- * 创建服务提供者
+ * 创建服务提供者.
  *
  * @param string $provider
+ *
  * @return \Leevel\Di\Provider
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, makeProvider);
 
 /**
- * 执行 bootstrap
+ * 执行 bootstrap.
  *
  * @param \Leevel\Di\Provider $provider
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, callProviderBootstrap);
 
 /**
- * 初始化项目
- * 
+ * 初始化项目.
+ *
  * @param array $bootstraps
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, bootstrap);
 
 /**
  * 是否已经初始化引导
- * 
+ *
  * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, isBootstrap);
 
 /**
- * 框架基础提供者 register
+ * 框架基础提供者 register.
  *
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, registerProviders);
 
 /**
- * 执行框架基础提供者 bootstrap
+ * 执行框架基础提供者 bootstrap.
  *
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, bootstrapProviders);
 
 /**
- * 注册服务提供者
+ * 注册服务提供者.
  *
  * @param \Leevel\Di\Provider|string $provider
+ *
  * @return \Leevel\Di\Provider
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, register);

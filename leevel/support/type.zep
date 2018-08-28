@@ -47,7 +47,7 @@ class Type
     {
         var tmp = [], tmp1 = [];
 
-        // 整理参数，以支持 array:ini 格式
+        // 整理参数，以支持 array:int 格式
         let tmp = explode(":", type);
         let type = strtolower(tmp[0]);
 

@@ -61,7 +61,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Html
      */
-    protected function makeConnectHtml(array options = [])
+    protected function makeConnectHtml(array options = []) -> <Html>
     {
         var parser, html;
 
@@ -82,7 +82,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Twig
      */
-    protected function makeConnectTwig(array options = [])
+    protected function makeConnectTwig(array options = []) -> <Twig>
     {
         var parser, twig;
 
@@ -103,7 +103,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\View\Phpui
      */
-    protected function makeConnectPhpui(array options = [])
+    protected function makeConnectPhpui(array options = []) -> <Phpui>
     {
         let options = this->normalizeConnectOption("phpui", options);
         let options = array_merge(options, this->viewOptionCommon());
@@ -115,9 +115,9 @@ class Manager extends Managers
      * 创建 v8 模板驱动
      *
      * @param array $options
-     * @return \Leevel\View\Vue
+     * @return \Leevel\View\V8
      */
-    protected function makeConnectV8(array options = [])
+    protected function makeConnectV8(array options = []) -> <V8s>
     {
         let options = this->normalizeConnectOption("v8", options);
         let options = array_merge(options, this->viewOptionCommon());

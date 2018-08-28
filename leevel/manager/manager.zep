@@ -42,7 +42,7 @@ abstract class Manager
      *
      * @var object[]
      */
-    protected connects;
+    protected connects = [];
 
     /**
      * 构造函数
@@ -211,7 +211,7 @@ abstract class Manager
         if typeof this->getContainerOption(tmp) === "null" {
             throw new Exception(
                 sprintf(
-                    "Connect driver %s not exits", connect
+                    "Connect driver %s not exits.", connect
                 )
             );
         }

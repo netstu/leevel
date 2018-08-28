@@ -140,7 +140,6 @@ class Option implements IOption, ArrayAccess
      *
      * @param mixed $name 配置键值
      * @param mixed $value 配置值
-     * @return array
      */
     public function set(var name, var value = null)
     {

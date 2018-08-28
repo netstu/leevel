@@ -58,7 +58,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\Log\File
      */
-    protected function makeConnectFile(array options = [])
+    protected function makeConnectFile(array options = []) -> <File>
     {
         return new File(
             this->normalizeConnectOption("file", options)
@@ -71,7 +71,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\Log\Monolog
      */
-    protected function makeConnectMonolog(array options = [])
+    protected function makeConnectMonolog(array options = []) -> <Monolog>
     {
         return new Monolog(
             this->normalizeConnectOption("monolog", options)

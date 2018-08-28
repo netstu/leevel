@@ -6,374 +6,372 @@
  *    __/ / /  / /_/ /  __/ /  \  / /_/ / / / / /_/ /__
  *      \_\ \_/\____/\___/_/   / / .___/_/ /_/ .___/
  *         \_\                /_/_/         /_/
- * 
+ *
  * The PHP Framework For Code Poem As Free As Wind. <Query Yet Simple>
  * (c) 2010-2018 http://queryphp.com All rights reserved.
- * 
+ *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Kernel;
 
-use Leevel\Di\Provider;
-use Leevel\Di\IContainer;
 use Composer\Autoload\ClassLoader;
+use Leevel\Di\IContainer;
+use Leevel\Di\Provider;
 
 /**
- * IProject 接口
+ * IProject 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.04.23
+ *
  * @version 1.0
  */
 interface IProject extends IContainer
 {
     /**
-     * QueryPHP 版本
+     * QueryPHP 版本.
      *
      * @var string
      */
     const VERSION = "1.0.0";
 
     /**
-     * 默认环境变量名字
+     * 默认环境变量名字.
      *
      * @var string
      */
     const DEFAULT_ENV = ".env";
 
     /**
-     * 返回项目
+     * 返回项目.
      *
      * @param string $path
+     *
      * @return static
      */
-    public static function singletons(var path = null);
+    public static function singletons(string path = null);
     
     /**
-     * 程序版本
+     * 程序版本.
      *
      * @return string
      */
     public function version() -> string;
     
     /**
-     * 是否以扩展方式运行
+     * 是否以扩展方式运行.
      *
-     * @return boolean
+     * @return bool
      */
-    public function runWithExtension() -> boolean;
+    public function runWithExtension() -> bool;
+    
+    /**
+     * 是否为 Console.
+     *
+     * @return bool
+     */
+    public function console() -> bool;
     
     /**
      * {@inheritdoc}
      */
-    public function make(var name, array args = []);
+    public function make(name, array args = null);
     
     /**
-     * 设置项目路径
+     * 设置项目路径.
      *
      * @param string $path
-     * @return void
      */
-    public function setPath(var path);
+    public function setPath(string path) -> void;
     
     /**
-     * 基础路径
+     * 基础路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function path() -> string;
+    public function path(string path = "") -> string;
     
     /**
-     * 应用路径
+     * 设置应用路径.
+     *
+     * @param string $path
+     */
+    public function setAppPath(string path);
+    
+    /**
+     * 应用路径.
+     *
+     * @param bool|string $app
+     * @param string      $path
      *
      * @return string
      */
-    public function pathApplication() -> string;
+    public function appPath(app = false, string path = "") -> string;
     
     /**
-     * 设置应用路径
+     * 取得应用主题目录.
      *
-     * @param string $path
-     * @return $this
-     */
-    public function setPathApplication(var path);
-    
-    /**
-     * 设置公共路径
-     *
-     * @param string $path
-     * @return $this
-     */
-    public function setPathCommon(var path);
-    
-    /**
-     * 公共路径
+     * @param bool|string $app
      *
      * @return string
      */
-    public function pathCommon() -> string;
+    public function themePath(app = false) -> string;
     
     /**
-     * 设置运行时路径
+     * 设置公共路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathRuntime(var path);
+    public function setCommonPath(string path);
     
     /**
-     * 运行路径
+     * 公共路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathRuntime() -> string;
+    public function commonPath(string path = "") -> string;
     
     /**
-     * 设置存储路径
+     * 设置运行时路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathStorage(var path);
+    public function setRuntimePath(string path);
     
     /**
-     * 附件路径
+     * 运行路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathStorage() -> string;
+    public function runtimePath(string path = "") -> string;
     
     /**
-     * 设置配置路径
+     * 设置存储路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathOption(var path);
+    public function setStoragePath(string path);
     
     /**
-     * 配置路径
+     * 附件路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathOption() -> string;
+    public function storagePath(string path = "") -> string;
     
     /**
-     * 设置语言包路径
+     * 设置配置路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathI18n(var path);
+    public function setOptionPath(string path);
     
     /**
-     * 语言包路径
+     * 配置路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathI18n() -> string;
+    public function optionPath(string path = "") -> string;
     
     /**
-     * 环境变量路径
+     * 设置语言包路径.
+     *
+     * @param string $path
+     */
+    public function setI18nPath(string path);
+    
+    /**
+     * 语言包路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathEnv() -> string;
+    public function i18nPath(string path = "") -> string;
     
     /**
-     * 设置环境变量路径
+     * 设置环境变量路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathEnv(var path);
+    public function setEnvPath(string path);
     
     /**
-     * 设置环境变量文件
+     * 环境变量路径.
+     *
+     * @return string
+     */
+    public function envPath() -> string;
+    
+    /**
+     * 设置环境变量文件.
      *
      * @param string $file
-     * @return $this
      */
     public function setEnvFile(string file);
     
     /**
-     * 取得环境变量文件
+     * 取得环境变量文件.
      *
      * @return string
      */
     public function envFile() -> string;
     
     /**
-     * 取得环境变量完整路径
+     * 取得环境变量完整路径.
      *
      * @return string
      */
     public function fullEnvPath() -> string;
     
     /**
-     * 应用路径
-     *
-     * @param string $app
-     * @return string
-     */
-    public function pathAnApplication(var app = null) -> string;
-    
-    /**
-     * 取得应用缓存目录
-     *
-     * @param string $type
-     * @return string
-     */
-    public function pathApplicationCache(string type) -> string;
-    
-    /**
-     * 取得应用主题目录
-     *
-     * @param string $app
-     * @return string
-     */
-    public function pathApplicationTheme(var app = null) -> string;
-    
-    /**
-     * 返回语言包路径
-     * 
-     * @param string $i18n
-     * @return string
-     */
-    public function pathCacheI18nFile(var i18n) -> string;
-    
-    /**
-     * 是否缓存语言包
+     * 返回语言包缓存路径.
      *
      * @param string $i18n
-     * @return boolean
-     */
-    public function isCachedI18n(var i18n) -> boolean;
-    
-    /**
-     * 返回缓存路径
-     * 
+     *
      * @return string
      */
-    public function pathCacheOptionFile() -> string;
+    public function i18nCachedPath(string i18n) -> string;
     
     /**
-     * 是否缓存配置
+     * 是否存在语言包缓存.
      *
-     * @return boolean
+     * @param string $i18n
+     *
+     * @return bool
      */
-    public function isCachedOption() -> boolean;
+    public function isCachedI18n(string i18n) -> bool;
     
     /**
-     * 取得 composer
+     * 返回配置缓存路径.
+     *
+     * @return string
+     */
+    public function optionCachedPath() -> string;
+    
+    /**
+     * 是否存在配置缓存.
+     *
+     * @return bool
+     */
+    public function isCachedOption() -> bool;
+    
+    /**
+     * 返回路由缓存路径.
+     *
+     * @return string
+     */
+    public function routerCachedPath() -> string;
+    
+    /**
+     * 是否存在路由缓存.
+     *
+     * @return bool
+     */
+    public function isCachedRouter() -> bool;
+    
+    /**
+     * 取得 composer.
      *
      * @return \Composer\Autoload\ClassLoader
+     * @codeCoverageIgnore
      */
     public function composer() -> <ClassLoader>;
     
     /**
-     * 获取命名空间路径
+     * 获取命名空间路径.
      *
      * @param string $namespaces
-     * @return string|null
-     */
-    public function getPathByNamespace(var namespaces);
-    
-    /**
-     * 批量获取命名空间路径
      *
-     * @param array $namespaces
-     * @return array
+     * @return null|string
+     * @codeCoverageIgnore
      */
-    public function getPathByNamespaces(array namespaces) -> array;
+    public function getPathByComposer(string namespaces);
     
     /**
-     * 是否开启 debug
+     * 是否开启 debug.
      *
-     * @return boolean
+     * @return bool
      */
-    public function debug() -> boolean;
+    public function debug() -> bool;
     
     /**
-     * 是否为开发环境
+     * 是否为开发环境.
+     *
+     * @return bool
+     */
+    public function development() -> bool;
+    
+    /**
+     * 运行环境.
      *
      * @return string
      */
-    public function development() -> string;
+    public function environment() -> string;
     
     /**
-     * 运行环境
-     *
-     * @return boolean
-     */
-    public function environment() -> boolean;
-    
-    /**
-     * 是否为 API
-     *
-     * @return boolean
-     */
-    public function api() -> boolean;
-    
-    /**
-     * 是否为 Console
-     *
-     * @return boolean
-     */
-    public function console() -> boolean;
-    
-    /**
-     * 创建服务提供者
+     * 创建服务提供者.
      *
      * @param string $provider
+     *
      * @return \Leevel\Di\Provider
      */
-    public function makeProvider(string provider);
+    public function makeProvider(string provider) -> <Provider>;
     
     /**
-     * 执行 bootstrap
+     * 执行 bootstrap.
      *
      * @param \Leevel\Di\Provider $provider
-     * @return void
      */
-    public function callProviderBootstrap(<Provider> provider);
+    public function callProviderBootstrap(<Provider> provider) -> void;
     
     /**
-     * 初始化项目
-     * 
+     * 初始化项目.
+     *
      * @param array $bootstraps
-     * @return void
      */
-    public function bootstrap(array bootstraps);
-
+    public function bootstrap(array bootstraps) -> void;
+    
     /**
      * 是否已经初始化引导
-     * 
+     *
      * @return bool
      */
-    public function isBootstrap()-> boolean;
+    public function isBootstrap() -> bool;
     
     /**
-     * 框架基础提供者 register
+     * 框架基础提供者 register.
      *
      * @return $this
      */
     public function registerProviders();
     
     /**
-     * 执行框架基础提供者 bootstrap
+     * 执行框架基础提供者 bootstrap.
      *
      * @return $this
      */
     public function bootstrapProviders();
     
     /**
-     * 注册服务提供者
+     * 注册服务提供者.
      *
      * @param \Leevel\Di\Provider|string $provider
+     *
      * @return \Leevel\Di\Provider
      */
-    public function register(var provider);
+    public function register(var provider) -> <Provider>;
 }

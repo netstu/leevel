@@ -103,6 +103,7 @@ zend_class_entry *leevel_http_serverbag_ce;
 zend_class_entry *leevel_http_uploadedfile_ce;
 zend_class_entry *leevel_i18n_ce;
 zend_class_entry *leevel_i18n_i18n_ce;
+zend_class_entry *leevel_leevel_ce;
 zend_class_entry *leevel_log_ce;
 zend_class_entry *leevel_log_file_ce;
 zend_class_entry *leevel_log_log_ce;
@@ -235,6 +236,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Http_UploadedFile);
 	ZEPHIR_INIT(Leevel_I18n);
 	ZEPHIR_INIT(Leevel_I18n_I18n);
+	ZEPHIR_INIT(Leevel_Leevel);
 	ZEPHIR_INIT(Leevel_Log);
 	ZEPHIR_INIT(Leevel_Log_File);
 	ZEPHIR_INIT(Leevel_Log_Log);

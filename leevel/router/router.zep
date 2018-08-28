@@ -28,6 +28,7 @@ use Leevel\Http\Response;
 use Leevel\Http\IResponse;
 use Leevel\Support\IMacro;
 use Leevel\Mvc\IController;
+use Leevel\Mvc\IView;
 use Leevel\Pipeline\Pipeline;
 
 /**
@@ -895,7 +896,7 @@ class Router implements IRouter, IMacro
         }
         
         if controller instanceof IController {
-            controller->setView(this->container->make("view"));
+            controller->setView(this->container->make("Leevel\\Mvc\\IView"));
         }
 
         if ! (method_exists(controller, method)) {

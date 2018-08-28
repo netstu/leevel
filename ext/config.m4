@@ -87,6 +87,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/http/uploadedfile.zep.c
 	leevel/i18n.zep.c
 	leevel/i18n/i18n.zep.c
+	leevel/leevel.zep.c
 	leevel/log.zep.c
 	leevel/log/file.zep.c
 	leevel/log/log.zep.c

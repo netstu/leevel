@@ -28,6 +28,7 @@ PHP_METHOD(Leevel_Manager_Manager, getConnectOption);
 PHP_METHOD(Leevel_Manager_Manager, filterNullOfOption);
 PHP_METHOD(Leevel_Manager_Manager, getContainerOption);
 PHP_METHOD(Leevel_Manager_Manager, setContainerOption);
+zend_object *zephir_init_properties_Leevel_Manager_Manager(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_manager_manager___construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)

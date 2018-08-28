@@ -39,6 +39,7 @@ class Cookie implements ICookie
         "expire" : 86400,
         "domain" : "",
         "path" : "/",
+        "secure" : false,
         "httponly" : false
     ];
 
@@ -84,8 +85,6 @@ class Cookie implements ICookie
      */
     public function set(string name, var value = "", array option = [])
     {
-        boolean isHttpSecure = false;
-
         let option = this->normalizeOptions(option);
 
         if typeof value == "array" {
@@ -93,21 +92,17 @@ class Cookie implements ICookie
         }
 
         if ! is_scalar(value) && ! is_null(value) {
-            throw new Exception("Cookie value must be scalar or null");
+            throw new Exception("Cookie value must be scalar or null.");
         }
 
         let name = option["prefix"] . name;
+
+        let option["expire"] = intval(option["expire"]);
 
         if option["expire"] > 0 {
             let option["expire"] = time() + option["expire"];
         } elseif option["expire"] < 0 {
             let option["expire"] = time() - 31536000;
-        } else {
-            let option["expire"] = 0;
-        }
-
-        if isset _SERVER["HTTPS"] && strtoupper(_SERVER["HTTPS"]) === "ON" {
-            let isHttpSecure = true;
         }
 
         // 对应 setcookie 的参数
@@ -117,7 +112,7 @@ class Cookie implements ICookie
             option["expire"],
             option["path"],
             option["domain"],
-            isHttpSecure,
+            option["secure"],
             option["httponly"]
         ];
     }
@@ -170,7 +165,7 @@ class Cookie implements ICookie
      */
     public function merge(string key, array value, array option = [])
     {
-        this->set(key, array_unique(array_merge(this->get(key, [], option), value)), option);
+        this->set(key, array_merge(this->get(key, [], option), value), option);
     }
 
     /**
@@ -219,21 +214,21 @@ class Cookie implements ICookie
      */
     public function arrDelete(string key, var keys, array option = [])
     {
-        var arr, tempKey, arrDeleteKey;
+        var arr, tmp, deleteKey;
 
         let arr =  this->get(key, [], option);
 
         if typeof keys != "array" {
-            let arrDeleteKey = [
+            let deleteKey = [
                 keys
             ];
         } else {
-            let arrDeleteKey = keys;
+            let deleteKey = keys;
         }
 
-        for tempKey in arrDeleteKey {
-            if isset arr[tempKey] {
-                unset arr[tempKey];
+        for tmp in deleteKey {
+            if isset arr[tmp] {
+                unset arr[tmp];
             }
         }
 
@@ -254,11 +249,11 @@ class Cookie implements ICookie
         let name = option["prefix"] . name;
 
         if isset this->cookies[name] {
-            if this->isJson(this->cookies[name]) {
-                return json_decode(this->cookies[name], true);
+            if this->isJson(this->cookies[name][1]) {
+                return json_decode(this->cookies[name][1], true);
             }
             
-            return this->cookies[name];
+            return this->cookies[name][1];
         } else {
             return defaults;
         }

@@ -82,6 +82,7 @@
 #include "leevel/http/uploadedfile.zep.h"
 #include "leevel/i18n.zep.h"
 #include "leevel/i18n/i18n.zep.h"
+#include "leevel/leevel.zep.h"
 #include "leevel/log.zep.h"
 #include "leevel/log/file.zep.h"
 #include "leevel/log/log.zep.h"

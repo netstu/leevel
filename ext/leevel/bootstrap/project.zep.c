@@ -12,24 +12,25 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/operators.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
+#include "kernel/operators.h"
 #include "kernel/exception.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/object.h"
 #include "kernel/array.h"
 #include "kernel/concat.h"
-#include "kernel/string.h"
 #include "kernel/require.h"
+#include "kernel/string.h"
 
 
 /**
- * 项目管理
+ * 项目管理.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.01.14
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Project) {
@@ -37,77 +38,77 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Project) {
 	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Bootstrap, Project, leevel, bootstrap_project, leevel_di_container_ce, leevel_bootstrap_project_method_entry, 0);
 
 	/**
-	 * 当前项目实例
+	 * 当前项目实例.
 	 *
 	 * @var static
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("project"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
 
 	/**
-	 * 项目基础路径
+	 * 项目基础路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("path"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 应用路径
+	 * 应用路径.
 	 *
 	 * @var string
 	 */
-	zend_declare_property_null(leevel_bootstrap_project_ce, SL("applicationPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
+	zend_declare_property_null(leevel_bootstrap_project_ce, SL("appPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 公共路径
+	 * 公共路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("commonPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 运行时路径
+	 * 运行时路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("runtimePath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 存储路径
+	 * 存储路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("storagePath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 配置路径
+	 * 配置路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("optionPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 语言包路径
+	 * 语言包路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("i18nPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 环境变量路径
+	 * 环境变量路径.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("envPath"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 环境变量文件
+	 * 环境变量文件.
 	 *
 	 * @var string
 	 */
 	zend_declare_property_null(leevel_bootstrap_project_ce, SL("envFile"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 延迟载入服务提供者
+	 * 延迟载入服务提供者.
 	 *
 	 * @var array
 	 */
@@ -136,31 +137,32 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Project) {
 
 /**
  * 构造函数
- * 受保护的禁止外部通过 new 实例化，只能通过 singletons 生成单一实例
+ * 项目中通过 singletons 生成单一实例.
  *
  * @param string $path
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, __construct) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path = NULL, path_sub, __$null;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
-	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&path);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &path);
+	zephir_fetch_params(1, 0, 1, &path_param);
 
-	if (!path) {
-		path = &path_sub;
-		path = &__$null;
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
 	}
 
 
-	if (zephir_is_true(path)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setpath", NULL, 0, path);
+	if (!(Z_TYPE_P(&path) == IS_UNDEF) && Z_STRLEN_P(&path)) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setpath", NULL, 0, &path);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerbaseservices", NULL, 0);
@@ -172,45 +174,47 @@ PHP_METHOD(Leevel_Bootstrap_Project, __construct) {
 }
 
 /**
- * 禁止克隆
- *
- * @return void
+ * 禁止克隆.
  */
 PHP_METHOD(Leevel_Bootstrap_Project, __clone) {
 
 	zval *this_ptr = getThis();
 
 
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Project disallowed clone.", "leevel/bootstrap/project.zep", 154);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Project disallowed clone.", "leevel/bootstrap/project.zep", 152);
 	return;
 
 }
 
 /**
- * 返回项目
+ * 返回项目.
  *
  * @param string $path
+ *
  * @return static
+ * @codeCoverageIgnore
  */
 PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path = NULL, path_sub, __$null, _0, _1$$3, _2$$4, _3$$4;
+	zval *path_param = NULL, _0, _1$$3, _2$$4, _3$$4;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
-	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_3$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &path);
+	zephir_fetch_params(1, 0, 1, &path_param);
 
-	if (!path) {
-		path = &path_sub;
-		path = &__$null;
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
 	}
 
 
@@ -221,7 +225,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 	} else {
 		ZEPHIR_INIT_VAR(&_2$$4);
 		object_init_ex(&_2$$4, leevel_bootstrap_project_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 70, path);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 69, &path);
 		zephir_check_call_status();
 		zend_update_static_property(leevel_bootstrap_project_ce, ZEND_STRL("project"), &_2$$4);
 		zephir_read_static_property_ce(&_3$$4, leevel_bootstrap_project_ce, SL("project"), PH_NOISY_CC | PH_READONLY);
@@ -232,7 +236,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 }
 
 /**
- * 程序版本
+ * 程序版本.
  *
  * @return string
  */
@@ -246,9 +250,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, version) {
 }
 
 /**
- * 是否以扩展方式运行
+ * 是否以扩展方式运行.
  *
- * @return boolean
+ * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, runWithExtension) {
 
@@ -262,7 +266,47 @@ PHP_METHOD(Leevel_Bootstrap_Project, runWithExtension) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "leevel");
-	ZEPHIR_RETURN_CALL_FUNCTION("extension_loaded", NULL, 71, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("extension_loaded", NULL, 70, &_0);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 是否为 Console.
+ *
+ * @return bool
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, console) {
+
+	zval _0, _1, _4, _2$$3, _3$$3;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$3);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "request");
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	if (!(Z_TYPE_P(&_0) == IS_OBJECT)) {
+		ZEPHIR_INIT_VAR(&_2$$3);
+		ZEPHIR_GET_CONSTANT(&_2$$3, "PHP_SAPI");
+		ZEPHIR_SINIT_VAR(_3$$3);
+		ZVAL_STRING(&_3$$3, "cli");
+		RETURN_MM_BOOL(ZEPHIR_IS_IDENTICAL(&_3$$3, &_2$$3));
+	}
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "request");
+	ZEPHIR_CALL_METHOD(&_4, this_ptr, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(&_4, "iscli", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -311,375 +355,590 @@ PHP_METHOD(Leevel_Bootstrap_Project, make) {
 }
 
 /**
- * 设置项目路径
+ * 设置项目路径.
  *
  * @param string $path
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, setPath) {
 
-	zephir_fcall_cache_entry *_1 = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path, path_sub, _0, _2, _3$$3, _4$$3, _5$$3, _6$$3;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$3);
-	ZVAL_UNDEF(&_6$$3);
+	ZVAL_UNDEF(&path);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &path);
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
 
 
-
-	zephir_update_property_zval(this_ptr, SL("path"), path);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathruntime", &_1, 0);
-	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "is_writeable", NULL, 72, &_0);
-	zephir_check_call_status();
-	if (!(zephir_is_true(&_2))) {
-		ZEPHIR_INIT_VAR(&_3$$3);
-		object_init_ex(&_3$$3, spl_ce_RuntimeException);
-		ZEPHIR_CALL_METHOD(&_4$$3, this_ptr, "pathruntime", &_1, 0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_5$$3);
-		ZVAL_STRING(&_5$$3, "Runtime path %s is not writeable.");
-		ZEPHIR_CALL_FUNCTION(&_6$$3, "sprintf", NULL, 1, &_5$$3, &_4$$3);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_3$$3, "__construct", NULL, 3, &_6$$3);
-		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$3, "leevel/bootstrap/project.zep", 218 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
-		return;
-	}
+	zephir_update_property_zval(this_ptr, SL("path"), &path);
 	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 基础路径
+ * 基础路径.
+ *
+ * @param string $path
  *
  * @return string
  */
 PHP_METHOD(Leevel_Bootstrap_Project, path) {
 
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1;
+	zval path;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&path);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
-	RETURN_MEMBER(getThis(), "path");
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
+
+	zephir_read_property(&_0, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_1);
+	RETURN_MM();
 
 }
 
 /**
- * 应用路径
+ * 设置应用路径.
+ *
+ * @param string $path
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, setAppPath) {
+
+	zval *path_param = NULL;
+	zval path;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&path);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
+
+
+	zephir_update_property_zval(this_ptr, SL("appPath"), &path);
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 应用路径.
+ *
+ * @param bool|string $app
+ * @param string      $path
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathApplication) {
+PHP_METHOD(Leevel_Bootstrap_Project, appPath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval path;
+	zval *app = NULL, app_sub, *path_param = NULL, __$false, _0, _1, _2, _3, _4, _5;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&app_sub);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&path);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 2, &app, &path_param);
+
+	if (!app) {
+		app = &app_sub;
+		app = &__$false;
+	}
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
-	zephir_read_property(&_1, this_ptr, SL("applicationPath"), PH_NOISY_CC | PH_READONLY);
+	zephir_read_property(&_1, this_ptr, SL("appPath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
-		zephir_read_property(&_0, this_ptr, SL("applicationPath"), PH_NOISY_CC);
+		ZEPHIR_OBS_NVAR(&_0);
+		zephir_read_property(&_0, this_ptr, SL("appPath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "application");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_INIT_VAR(&_3);
+	if (zephir_is_true(app)) {
+		ZEPHIR_CALL_METHOD(&_4, this_ptr, "normalizeapp", NULL, 0, app);
+		zephir_check_call_status();
+		ZEPHIR_INIT_NVAR(&_3);
+		ZEPHIR_CONCAT_SV(&_3, "/", &_4);
+	} else {
+		ZEPHIR_CPY_WRT(&_3, app);
+	}
+	ZEPHIR_CALL_METHOD(&_5, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VVV(return_value, &_0, &_3, &_5);
+	RETURN_MM();
 
 }
 
 /**
- * 设置应用路径
+ * 取得应用主题目录.
  *
- * @param string $path
- * @return $this
- */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathApplication) {
-
-	zval *path, path_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&path_sub);
-
-	zephir_fetch_params(0, 1, 0, &path);
-
-
-
-	zephir_update_property_zval(this_ptr, SL("applicationPath"), path);
-	RETURN_THISW();
-
-}
-
-/**
- * 设置公共路径
- *
- * @param string $path
- * @return $this
- */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathCommon) {
-
-	zval *path, path_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&path_sub);
-
-	zephir_fetch_params(0, 1, 0, &path);
-
-
-
-	zephir_update_property_zval(this_ptr, SL("commonPath"), path);
-	RETURN_THISW();
-
-}
-
-/**
- * 公共路径
+ * @param bool|string $app
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathCommon) {
+PHP_METHOD(Leevel_Bootstrap_Project, themePath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *app = NULL, app_sub, __$false, _0, _1, _2, _3;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&app_sub);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &app);
+
+	if (!app) {
+		app = &app_sub;
+		app = &__$false;
+	}
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "apppath", NULL, 0, app);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "option");
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "make", NULL, 0, &_2);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_2);
+	ZVAL_STRING(&_2, "view\\theme_name");
+	ZEPHIR_CALL_METHOD(&_3, &_1, "get", NULL, 0, &_2);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VSV(return_value, &_0, "/ui/theme/", &_3);
+	RETURN_MM();
+
+}
+
+/**
+ * 设置公共路径.
+ *
+ * @param string $path
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, setCommonPath) {
+
+	zval *path_param = NULL;
+	zval path;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&path);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
+
+
+	zephir_update_property_zval(this_ptr, SL("commonPath"), &path);
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 公共路径.
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, commonPath) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1, _2, _3;
+	zval path;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&path);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("commonPath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
+		ZEPHIR_OBS_NVAR(&_0);
 		zephir_read_property(&_0, this_ptr, SL("commonPath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "common");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_3);
+	RETURN_MM();
 
 }
 
 /**
- * 设置运行时路径
+ * 设置运行时路径.
  *
  * @param string $path
- * @return $this
  */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathRuntime) {
+PHP_METHOD(Leevel_Bootstrap_Project, setRuntimePath) {
 
-	zval *path, path_sub;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
+	ZVAL_UNDEF(&path);
 
-	zephir_fetch_params(0, 1, 0, &path);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
 
 
-
-	zephir_update_property_zval(this_ptr, SL("runtimePath"), path);
-	RETURN_THISW();
+	zephir_update_property_zval(this_ptr, SL("runtimePath"), &path);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 运行路径
+ * 运行路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathRuntime) {
+PHP_METHOD(Leevel_Bootstrap_Project, runtimePath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1, _2, _3;
+	zval path;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("runtimePath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
+		ZEPHIR_OBS_NVAR(&_0);
 		zephir_read_property(&_0, this_ptr, SL("runtimePath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "runtime");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_3);
+	RETURN_MM();
 
 }
 
 /**
- * 设置存储路径
+ * 设置存储路径.
  *
  * @param string $path
- * @return $this
  */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathStorage) {
+PHP_METHOD(Leevel_Bootstrap_Project, setStoragePath) {
 
-	zval *path, path_sub;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
+	ZVAL_UNDEF(&path);
 
-	zephir_fetch_params(0, 1, 0, &path);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
 
 
-
-	zephir_update_property_zval(this_ptr, SL("storagePath"), path);
-	RETURN_THISW();
+	zephir_update_property_zval(this_ptr, SL("storagePath"), &path);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 附件路径
+ * 附件路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathStorage) {
+PHP_METHOD(Leevel_Bootstrap_Project, storagePath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1, _2, _3;
+	zval path;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("storagePath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
+		ZEPHIR_OBS_NVAR(&_0);
 		zephir_read_property(&_0, this_ptr, SL("storagePath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "storage");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_3);
+	RETURN_MM();
 
 }
 
 /**
- * 设置配置路径
+ * 设置配置路径.
  *
  * @param string $path
- * @return $this
  */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathOption) {
+PHP_METHOD(Leevel_Bootstrap_Project, setOptionPath) {
 
-	zval *path, path_sub;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
+	ZVAL_UNDEF(&path);
 
-	zephir_fetch_params(0, 1, 0, &path);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
 
 
-
-	zephir_update_property_zval(this_ptr, SL("optionPath"), path);
-	RETURN_THISW();
+	zephir_update_property_zval(this_ptr, SL("optionPath"), &path);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 配置路径
+ * 配置路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathOption) {
+PHP_METHOD(Leevel_Bootstrap_Project, optionPath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1, _2, _3;
+	zval path;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("optionPath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
+		ZEPHIR_OBS_NVAR(&_0);
 		zephir_read_property(&_0, this_ptr, SL("optionPath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "option");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_3);
+	RETURN_MM();
 
 }
 
 /**
- * 设置语言包路径
+ * 设置语言包路径.
  *
  * @param string $path
- * @return $this
  */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathI18n) {
+PHP_METHOD(Leevel_Bootstrap_Project, setI18nPath) {
 
-	zval *path, path_sub;
+	zval *path_param = NULL;
+	zval path;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path_sub);
+	ZVAL_UNDEF(&path);
 
-	zephir_fetch_params(0, 1, 0, &path);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
 
 
-
-	zephir_update_property_zval(this_ptr, SL("i18nPath"), path);
-	RETURN_THISW();
+	zephir_update_property_zval(this_ptr, SL("i18nPath"), &path);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 语言包路径
+ * 语言包路径.
+ *
+ * @param string $path
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathI18n) {
+PHP_METHOD(Leevel_Bootstrap_Project, i18nPath) {
 
-	zval _0, _1, _2;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *path_param = NULL, _0, _1, _2, _3;
+	zval path;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&path);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &path_param);
+
+	if (!path_param) {
+		ZEPHIR_INIT_VAR(&path);
+		ZVAL_STRING(&path, "");
+	} else {
+		zephir_get_strval(&path, path_param);
+	}
+
 
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_read_property(&_1, this_ptr, SL("i18nPath"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_is_true(&_1)) {
+		ZEPHIR_OBS_NVAR(&_0);
 		zephir_read_property(&_0, this_ptr, SL("i18nPath"), PH_NOISY_CC);
 	} else {
 		zephir_read_property(&_2, this_ptr, SL("path"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_INIT_NVAR(&_0);
 		ZEPHIR_CONCAT_VSS(&_0, &_2, "/", "i18n");
 	}
-	RETURN_CCTOR(&_0);
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "normalizepath", NULL, 0, &path);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VV(return_value, &_0, &_3);
+	RETURN_MM();
 
 }
 
 /**
- * 环境变量路径
+ * 设置环境变量路径.
+ *
+ * @param string $path
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, setEnvPath) {
+
+	zval *path_param = NULL;
+	zval path;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&path);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
+
+
+	zephir_update_property_zval(this_ptr, SL("envPath"), &path);
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 环境变量路径.
  *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathEnv) {
+PHP_METHOD(Leevel_Bootstrap_Project, envPath) {
 
 	zval _0, _1;
 	zval *this_ptr = getThis();
@@ -701,32 +960,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, pathEnv) {
 }
 
 /**
- * 设置环境变量路径
- *
- * @param string $path
- * @return $this
- */
-PHP_METHOD(Leevel_Bootstrap_Project, setPathEnv) {
-
-	zval *path, path_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&path_sub);
-
-	zephir_fetch_params(0, 1, 0, &path);
-
-
-
-	zephir_update_property_zval(this_ptr, SL("envPath"), path);
-	RETURN_THISW();
-
-}
-
-/**
- * 设置环境变量文件
+ * 设置环境变量文件.
  *
  * @param string $file
- * @return $this
  */
 PHP_METHOD(Leevel_Bootstrap_Project, setEnvFile) {
 
@@ -743,12 +979,12 @@ PHP_METHOD(Leevel_Bootstrap_Project, setEnvFile) {
 
 
 	zephir_update_property_zval(this_ptr, SL("envFile"), &file);
-	RETURN_THIS();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 取得环境变量文件
+ * 取得环境变量文件.
  *
  * @return string
  */
@@ -774,7 +1010,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, envFile) {
 }
 
 /**
- * 取得环境变量完整路径
+ * 取得环境变量完整路径.
  *
  * @return string
  */
@@ -789,7 +1025,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, fullEnvPath) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathenv", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "envpath", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "envfile", NULL, 0);
 	zephir_check_call_status();
@@ -799,234 +1035,59 @@ PHP_METHOD(Leevel_Bootstrap_Project, fullEnvPath) {
 }
 
 /**
- * 应用路径
- *
- * @param string $app
- * @return string
- */
-PHP_METHOD(Leevel_Bootstrap_Project, pathAnApplication) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *app = NULL, app_sub, __$null, _0, _1, _2, _3, _4, _5, _6;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&app_sub);
-	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &app);
-
-	if (!app) {
-		app = &app_sub;
-		app = &__$null;
-	}
-
-
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathapplication", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_1);
-	ZEPHIR_INIT_VAR(&_2);
-	if (zephir_is_true(app)) {
-		ZEPHIR_CPY_WRT(&_2, app);
-	} else {
-		ZEPHIR_INIT_VAR(&_4);
-		ZVAL_STRING(&_4, "request");
-		ZEPHIR_CALL_METHOD(&_3, this_ptr, "make", NULL, 0, &_4);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_5, &_3, "app", NULL, 0);
-		zephir_check_call_status();
-		if (zephir_is_true(&_5)) {
-			ZEPHIR_INIT_NVAR(&_4);
-			ZVAL_STRING(&_4, "request");
-			ZEPHIR_CALL_METHOD(&_6, this_ptr, "make", NULL, 0, &_4);
-			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(&_2, &_6, "app", NULL, 0);
-			zephir_check_call_status();
-		} else {
-			ZEPHIR_INIT_NVAR(&_2);
-			ZVAL_STRING(&_2, "App");
-		}
-	}
-	zephir_fast_strtolower(&_1, &_2);
-	ZEPHIR_CONCAT_VSV(return_value, &_0, "/", &_1);
-	RETURN_MM();
-
-}
-
-/**
- * 取得应用缓存目录
- *
- * @param string $type
- * @return string
- */
-PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationCache) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *type_param = NULL, types, _0, _4, _1$$3, _2$$3, _3$$3;
-	zval type;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&type);
-	ZVAL_UNDEF(&types);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &type_param);
-
-	zephir_get_strval(&type, type_param);
-
-
-	ZEPHIR_INIT_VAR(&types);
-	zephir_create_array(&types, 9, 0 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_0);
-	ZVAL_STRING(&_0, "file");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "log");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "table");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "theme");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "option");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "i18n");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "router");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "console");
-	zephir_array_fast_append(&types, &_0);
-	ZEPHIR_INIT_NVAR(&_0);
-	ZVAL_STRING(&_0, "swoole");
-	zephir_array_fast_append(&types, &_0);
-	if (!(zephir_fast_in_array(&type, &types TSRMLS_CC))) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		object_init_ex(&_1$$3, zend_exception_get_default(TSRMLS_C));
-		ZEPHIR_INIT_VAR(&_2$$3);
-		ZVAL_STRING(&_2$$3, "Application cache type %s not support");
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "sprintf", NULL, 1, &_2$$3, &type);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 22, &_3$$3);
-		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/bootstrap/project.zep", 459 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
-		return;
-	}
-	ZEPHIR_CALL_METHOD(&_4, this_ptr, "pathruntime", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_CONCAT_VSV(return_value, &_4, "/", &type);
-	RETURN_MM();
-
-}
-
-/**
- * 取得应用主题目录
- *
- * @param string $app
- * @return string
- */
-PHP_METHOD(Leevel_Bootstrap_Project, pathApplicationTheme) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *app = NULL, app_sub, __$null, _0, _1, _2, _3;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&app_sub);
-	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &app);
-
-	if (!app) {
-		app = &app_sub;
-		app = &__$null;
-	}
-
-
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathanapplication", NULL, 0, app);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "option");
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "make", NULL, 0, &_2);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_2);
-	ZVAL_STRING(&_2, "view\\theme_name");
-	ZEPHIR_CALL_METHOD(&_3, &_1, "get", NULL, 0, &_2);
-	zephir_check_call_status();
-	ZEPHIR_CONCAT_VSV(return_value, &_0, "/ui/theme/", &_3);
-	RETURN_MM();
-
-}
-
-/**
- * 返回语言包路径
- * 
- * @param string $i18n
- * @return string
- */
-PHP_METHOD(Leevel_Bootstrap_Project, pathCacheI18nFile) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *i18n, i18n_sub, _0;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&i18n_sub);
-	ZVAL_UNDEF(&_0);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &i18n);
-
-
-
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathruntime", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_CONCAT_VSVS(return_value, &_0, "/cache/i18n/", i18n, ".php");
-	RETURN_MM();
-
-}
-
-/**
- * 是否缓存语言包
+ * 返回语言包缓存路径.
  *
  * @param string $i18n
- * @return boolean
+ *
+ * @return string
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, i18nCachedPath) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *i18n_param = NULL, _0;
+	zval i18n;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&i18n);
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &i18n_param);
+
+	zephir_get_strval(&i18n, i18n_param);
+
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "runtimepath", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VSVS(return_value, &_0, "/i18n/", &i18n, ".php");
+	RETURN_MM();
+
+}
+
+/**
+ * 是否存在语言包缓存.
+ *
+ * @param string $i18n
+ *
+ * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, isCachedI18n) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *i18n, i18n_sub, _0;
+	zval *i18n_param = NULL, _0;
+	zval i18n;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&i18n_sub);
+	ZVAL_UNDEF(&i18n);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &i18n);
+	zephir_fetch_params(1, 1, 0, &i18n_param);
+
+	zephir_get_strval(&i18n, i18n_param);
 
 
-
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathcachei18nfile", NULL, 0, i18n);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "i18ncachedpath", NULL, 0, &i18n);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 27, &_0);
 	zephir_check_call_status();
@@ -1035,11 +1096,11 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedI18n) {
 }
 
 /**
- * 返回缓存路径
- * 
+ * 返回配置缓存路径.
+ *
  * @return string
  */
-PHP_METHOD(Leevel_Bootstrap_Project, pathCacheOptionFile) {
+PHP_METHOD(Leevel_Bootstrap_Project, optionCachedPath) {
 
 	zval _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
@@ -1049,17 +1110,17 @@ PHP_METHOD(Leevel_Bootstrap_Project, pathCacheOptionFile) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathruntime", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "runtimepath", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CONCAT_VS(return_value, &_0, "/cache/option.php");
+	ZEPHIR_CONCAT_VS(return_value, &_0, "/bootstrap/option.php");
 	RETURN_MM();
 
 }
 
 /**
- * 是否缓存配置
+ * 是否存在配置缓存.
  *
- * @return boolean
+ * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, isCachedOption) {
 
@@ -1071,7 +1132,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedOption) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "pathcacheoptionfile", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "optioncachedpath", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 27, &_0);
 	zephir_check_call_status();
@@ -1080,9 +1141,55 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedOption) {
 }
 
 /**
- * 取得 composer
+ * 返回路由缓存路径.
+ *
+ * @return string
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, routerCachedPath) {
+
+	zval _0;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "runtimepath", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_CONCAT_VS(return_value, &_0, "/bootstrap/router.php");
+	RETURN_MM();
+
+}
+
+/**
+ * 是否存在路由缓存.
+ *
+ * @return bool
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, isCachedRouter) {
+
+	zval _0;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "routercachedpath", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 27, &_0);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 取得 composer.
  *
  * @return \Composer\Autoload\ClassLoader
+ * @codeCoverageIgnore
  */
 PHP_METHOD(Leevel_Bootstrap_Project, composer) {
 
@@ -1107,19 +1214,23 @@ PHP_METHOD(Leevel_Bootstrap_Project, composer) {
 }
 
 /**
- * 获取命名空间路径
+ * 获取命名空间路径.
  *
  * @param string $namespaces
- * @return string|null
+ *
+ * @return null|string
+ * @codeCoverageIgnore
  */
-PHP_METHOD(Leevel_Bootstrap_Project, getPathByNamespace) {
+PHP_METHOD(Leevel_Bootstrap_Project, getPathByComposer) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *namespaces = NULL, namespaces_sub, prefix, _0, _1, _2, _3, _4, _5, _6, _7;
+	zval *namespaces_param = NULL, prefix, tmp, _0, _1, _2, _3, _4, _5, _6;
+	zval namespaces;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&namespaces_sub);
+	ZVAL_UNDEF(&namespaces);
 	ZVAL_UNDEF(&prefix);
+	ZVAL_UNDEF(&tmp);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -1127,83 +1238,40 @@ PHP_METHOD(Leevel_Bootstrap_Project, getPathByNamespace) {
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
 	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &namespaces);
+	zephir_fetch_params(1, 1, 0, &namespaces_param);
 
-	ZEPHIR_SEPARATE_PARAM(namespaces);
+	zephir_get_strval(&namespaces, namespaces_param);
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	zephir_fast_explode_str(&_0, SL("\\"), namespaces, LONG_MAX TSRMLS_CC);
-	ZEPHIR_CPY_WRT(namespaces, &_0);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "composer", NULL, 0);
+	ZEPHIR_INIT_VAR(&tmp);
+	zephir_fast_explode_str(&tmp, SL("\\"), &namespaces, LONG_MAX TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "composer", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&prefix, &_1, "getprefixespsr4", NULL, 0);
+	ZEPHIR_CALL_METHOD(&prefix, &_0, "getprefixespsr4", NULL, 0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_2, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 543 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_3);
-	ZEPHIR_CONCAT_VS(&_3, &_2, "\\");
-	if (!(zephir_array_isset(&prefix, &_3))) {
+	zephir_array_fetch_long(&_1, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 536 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_2);
+	ZEPHIR_CONCAT_VS(&_2, &_1, "\\");
+	if (!(zephir_array_isset(&prefix, &_2))) {
 		RETURN_MM_NULL();
 	}
-	zephir_array_fetch_long(&_5, namespaces, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 547 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_6);
-	ZEPHIR_CONCAT_VS(&_6, &_5, "\\");
-	zephir_array_fetch(&_4, &prefix, &_6, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 547 TSRMLS_CC);
-	zephir_array_fetch_long(&_7, &_4, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 547 TSRMLS_CC);
-	zephir_array_update_long(namespaces, 0, &_7, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
-	zephir_fast_join_str(return_value, SL("/"), namespaces TSRMLS_CC);
+	zephir_array_fetch_long(&_4, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 540 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_5);
+	ZEPHIR_CONCAT_VS(&_5, &_4, "\\");
+	zephir_array_fetch(&_3, &prefix, &_5, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 540 TSRMLS_CC);
+	zephir_array_fetch_long(&_6, &_3, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 540 TSRMLS_CC);
+	zephir_array_update_long(&tmp, 0, &_6, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
+	zephir_fast_join_str(return_value, SL("/"), &tmp TSRMLS_CC);
 	RETURN_MM();
 
 }
 
 /**
- * 批量获取命名空间路径
+ * 是否开启 debug.
  *
- * @param array $namespaces
- * @return array
- */
-PHP_METHOD(Leevel_Bootstrap_Project, getPathByNamespaces) {
-
-	zephir_fcall_cache_entry *_2 = NULL;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *namespaces_param = NULL, result, item, *_0, _1$$3;
-	zval namespaces;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&namespaces);
-	ZVAL_UNDEF(&result);
-	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&_1$$3);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &namespaces_param);
-
-	zephir_get_arrval(&namespaces, namespaces_param);
-
-
-	ZEPHIR_INIT_VAR(&result);
-	array_init(&result);
-	zephir_is_iterable(&namespaces, 0, "leevel/bootstrap/project.zep", 568);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&namespaces), _0)
-	{
-		ZEPHIR_INIT_NVAR(&item);
-		ZVAL_COPY(&item, _0);
-		ZEPHIR_CALL_METHOD(&_1$$3, this_ptr, "getpathbynamespace", &_2, 0, &item);
-		zephir_check_call_status();
-		zephir_array_update_zval(&result, &item, &_1$$3, PH_COPY | PH_SEPARATE);
-	} ZEND_HASH_FOREACH_END();
-	ZEPHIR_INIT_NVAR(&item);
-	RETURN_CCTOR(&result);
-
-}
-
-/**
- * 是否开启 debug
- *
- * @return boolean
+ * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, debug) {
 
@@ -1229,9 +1297,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, debug) {
 }
 
 /**
- * 是否为开发环境
+ * 是否为开发环境.
  *
- * @return boolean
+ * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, development) {
 
@@ -1250,9 +1318,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, development) {
 }
 
 /**
- * 运行环境
+ * 运行环境.
  *
- * @return boolean
+ * @return string
  */
 PHP_METHOD(Leevel_Bootstrap_Project, environment) {
 
@@ -1278,61 +1346,10 @@ PHP_METHOD(Leevel_Bootstrap_Project, environment) {
 }
 
 /**
- * 是否为 API
- *
- * @return boolean
- */
-PHP_METHOD(Leevel_Bootstrap_Project, api) {
-
-	zval _0, _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "make", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "isacceptjson", NULL, 0);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
-/**
- * 是否为 Console
- *
- * @return boolean
- */
-PHP_METHOD(Leevel_Bootstrap_Project, console) {
-
-	zval _0, _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-
-	ZEPHIR_MM_GROW();
-
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "make", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "iscli", NULL, 0);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
-/**
- * 创建服务提供者
+ * 创建服务提供者.
  *
  * @param string $provider
+ *
  * @return \Leevel\Di\Provider
  */
 PHP_METHOD(Leevel_Bootstrap_Project, makeProvider) {
@@ -1364,10 +1381,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, makeProvider) {
 }
 
 /**
- * 执行 bootstrap
+ * 执行 bootstrap.
  *
  * @param \Leevel\Di\Provider $provider
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, callProviderBootstrap) {
 
@@ -1401,10 +1417,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, callProviderBootstrap) {
 }
 
 /**
- * 初始化项目
- * 
+ * 初始化项目.
+ *
  * @param array $bootstraps
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 
@@ -1430,7 +1445,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 	if (zephir_is_true(&_0)) {
 		RETURN_MM_NULL();
 	}
-	zephir_is_iterable(&bootstraps, 0, "leevel/bootstrap/project.zep", 667);
+	zephir_is_iterable(&bootstraps, 0, "leevel/bootstrap/project.zep", 620);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&bootstraps), _1)
 	{
 		ZEPHIR_INIT_NVAR(&value);
@@ -1453,7 +1468,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrap) {
 
 /**
  * 是否已经初始化引导
- * 
+ *
  * @return bool
  */
 PHP_METHOD(Leevel_Bootstrap_Project, isBootstrap) {
@@ -1466,7 +1481,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, isBootstrap) {
 }
 
 /**
- * 框架基础提供者 register
+ * 框架基础提供者 register.
  *
  * @return $this
  */
@@ -1515,11 +1530,11 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_STRING(&_2, "_deferred_providers");
 	ZEPHIR_CALL_METHOD(&tmp, &_1, "get", NULL, 0, &_2, &_3);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_4, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 693 TSRMLS_CC);
+	zephir_array_fetch_long(&_4, &tmp, 0, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 646 TSRMLS_CC);
 	zephir_update_property_zval(this_ptr, SL("deferredProviders"), &_4);
 	ZEPHIR_OBS_VAR(&deferredAlias);
-	zephir_array_fetch_long(&deferredAlias, &tmp, 1, PH_NOISY, "leevel/bootstrap/project.zep", 694 TSRMLS_CC);
-	zephir_is_iterable(&deferredAlias, 0, "leevel/bootstrap/project.zep", 700);
+	zephir_array_fetch_long(&deferredAlias, &tmp, 1, PH_NOISY, "leevel/bootstrap/project.zep", 647 TSRMLS_CC);
+	zephir_is_iterable(&deferredAlias, 0, "leevel/bootstrap/project.zep", 653);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&deferredAlias), _5)
 	{
 		ZEPHIR_INIT_NVAR(&alias);
@@ -1541,7 +1556,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZEPHIR_CALL_FUNCTION(&_9, "array_values", NULL, 36, &providers);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&providers, &_9);
-	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 711);
+	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 664);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&providers), _10)
 	{
 		ZEPHIR_INIT_NVAR(&provider);
@@ -1582,7 +1597,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders) {
 		RETURN_MM_NULL();
 	}
 	zephir_read_property(&_1, this_ptr, SL("providerBootstraps"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "leevel/bootstrap/project.zep", 731);
+	zephir_is_iterable(&_1, 0, "leevel/bootstrap/project.zep", 684);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1601,9 +1616,10 @@ PHP_METHOD(Leevel_Bootstrap_Project, bootstrapProviders) {
 }
 
 /**
- * 注册服务提供者
+ * 注册服务提供者.
  *
  * @param \Leevel\Di\Provider|string $provider
+ *
  * @return \Leevel\Di\Provider
  */
 PHP_METHOD(Leevel_Bootstrap_Project, register) {
@@ -1643,8 +1659,6 @@ PHP_METHOD(Leevel_Bootstrap_Project, register) {
 
 /**
  * 注册基础服务
- *
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, registerBaseServices) {
 
@@ -1714,9 +1728,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerBaseServices) {
 }
 
 /**
- * 注册基础服务提供者
+ * 注册基础服务提供者.
  *
- * @return void
+ * @codeCoverageIgnore
  */
 PHP_METHOD(Leevel_Bootstrap_Project, registerBaseProvider) {
 
@@ -1733,19 +1747,19 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerBaseProvider) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	object_init_ex(&_0, leevel_event_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 73, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 71, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_0);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_2);
 	object_init_ex(&_2, leevel_log_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 74, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_2, "__construct", NULL, 72, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_3);
 	object_init_ex(&_3, leevel_router_provider_register_ce);
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 75, this_ptr);
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 73, this_ptr);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "register", &_1, 0, &_3);
 	zephir_check_call_status();
@@ -1754,10 +1768,9 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerBaseProvider) {
 }
 
 /**
- * 注册延迟载入服务提供者
+ * 注册延迟载入服务提供者.
  *
  * @param string $provider
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Project, registerDeferredProvider) {
 
@@ -1784,7 +1797,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerDeferredProvider) {
 		RETURN_MM_NULL();
 	}
 	zephir_read_property(&_1, this_ptr, SL("deferredProviders"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch(&_2, &_1, &provider, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 822 TSRMLS_CC);
+	zephir_array_fetch(&_2, &_1, &provider, PH_NOISY | PH_READONLY, "leevel/bootstrap/project.zep", 773 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(&providerInstance, this_ptr, "register", NULL, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "callproviderbootstrap", NULL, 0, &providerInstance);
@@ -1792,6 +1805,93 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerDeferredProvider) {
 	zephir_read_property(&_3, this_ptr, SL("deferredProviders"), PH_NOISY_CC | PH_READONLY);
 	zephir_array_unset(&_3, &provider, PH_SEPARATE);
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 格式化应用名字.
+ *
+ * @param bool|string $app
+ *
+ * @return string
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, normalizeApp) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *app, app_sub, _0, _1, _2, _3, _4;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&app_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &app);
+
+
+
+	ZEPHIR_INIT_VAR(&_0);
+	if (ZEPHIR_IS_TRUE_IDENTICAL(app)) {
+		ZEPHIR_INIT_VAR(&_2);
+		ZVAL_STRING(&_2, "request");
+		ZEPHIR_CALL_METHOD(&_1, this_ptr, "make", NULL, 0, &_2);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(&_3, &_1, "app", NULL, 0);
+		zephir_check_call_status();
+		if (zephir_is_true(&_3)) {
+			ZEPHIR_INIT_NVAR(&_2);
+			ZVAL_STRING(&_2, "request");
+			ZEPHIR_CALL_METHOD(&_4, this_ptr, "make", NULL, 0, &_2);
+			zephir_check_call_status();
+			ZEPHIR_CALL_METHOD(&_0, &_4, "app", NULL, 0);
+			zephir_check_call_status();
+		} else {
+			ZEPHIR_INIT_NVAR(&_0);
+			ZVAL_STRING(&_0, "app");
+		}
+	} else {
+		ZEPHIR_CPY_WRT(&_0, app);
+	}
+	zephir_fast_strtolower(return_value, &_0);
+	RETURN_MM();
+
+}
+
+/**
+ * 格式化路径.
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+PHP_METHOD(Leevel_Bootstrap_Project, normalizePath) {
+
+	zval *path_param = NULL, _0;
+	zval path, _1;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&path);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &path_param);
+
+	zephir_get_strval(&path, path_param);
+
+
+	ZEPHIR_INIT_VAR(&_0);
+	if (!(Z_TYPE_P(&path) == IS_UNDEF) && Z_STRLEN_P(&path)) {
+		ZEPHIR_INIT_VAR(&_1);
+		ZEPHIR_CONCAT_SV(&_1, "/", &path);
+		ZEPHIR_CPY_WRT(&_0, &_1);
+	} else {
+		ZEPHIR_CPY_WRT(&_0, &path);
+	}
+	RETURN_CCTOR(&_0);
 
 }
 

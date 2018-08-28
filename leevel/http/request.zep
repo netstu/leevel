@@ -305,7 +305,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      *
      * @return bool
      */
-    public function has() -> boolean
+    public function has() -> bool
     {
         var keys, value, args = [];
 

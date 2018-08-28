@@ -57,7 +57,6 @@ ZEPHIR_DOC_METHOD(Leevel_Option_IOption, all);
  *
  * @param mixed $name 配置键值
  * @param mixed $value 配置值
- * @return array
  */
 ZEPHIR_DOC_METHOD(Leevel_Option_IOption, set);
 

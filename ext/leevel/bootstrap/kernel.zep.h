@@ -23,24 +23,24 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel___construct, 0, 0, 2)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_handle, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_terminate, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 	ZEND_ARG_OBJ_INFO(0, response, Leevel\\Http\\IResponse, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_registerbaseservice, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_getresponsewithrequest, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_dispatchrouter, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_reportexception, 0, 0, 1)
@@ -48,7 +48,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_reportexception, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_kernel_renderexception, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 	ZEND_ARG_OBJ_INFO(0, e, Exception, 0)
 ZEND_END_ARG_INFO()
 

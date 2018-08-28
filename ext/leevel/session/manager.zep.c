@@ -71,7 +71,7 @@ PHP_METHOD(Leevel_Session_Manager, createConnect) {
 	object_init_ex(return_value, leevel_session_session_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getcommonoption", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 135, connect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 133, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -109,7 +109,7 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectCookie) {
  * 创建 memcache 缓存
  *
  * @param array $options
- * @return \Leevel\Session\memcache
+ * @return \Leevel\Session\Memcache
  */
 PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
 
@@ -154,7 +154,7 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
  * 创建 redis 缓存
  *
  * @param array $options
- * @return \Leevel\Session\redis
+ * @return \Leevel\Session\Redis
  */
 PHP_METHOD(Leevel_Session_Manager, makeConnectRedis) {
 

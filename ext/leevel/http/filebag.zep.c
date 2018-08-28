@@ -331,7 +331,7 @@ PHP_METHOD(Leevel_Http_FileBag, convertFile) {
 		zephir_array_fetch_string(&_4$$5, file, SL("name"), PH_NOISY | PH_READONLY, "leevel/http/filebag.zep", 134 TSRMLS_CC);
 		zephir_array_fetch_string(&_5$$5, file, SL("type"), PH_NOISY | PH_READONLY, "leevel/http/filebag.zep", 134 TSRMLS_CC);
 		zephir_array_fetch_string(&_6$$5, file, SL("error"), PH_NOISY | PH_READONLY, "leevel/http/filebag.zep", 134 TSRMLS_CC);
-		ZEPHIR_CALL_METHOD(NULL, &result, "__construct", NULL, 91, &_3$$5, &_4$$5, &_5$$5, &_6$$5);
+		ZEPHIR_CALL_METHOD(NULL, &result, "__construct", NULL, 88, &_3$$5, &_4$$5, &_5$$5, &_6$$5);
 		zephir_check_call_status();
 	}
 	RETURN_CCTOR(&result);
@@ -535,7 +535,7 @@ PHP_METHOD(Leevel_Http_FileBag, normalizeArray) {
 					ZEPHIR_INIT_LNVAR(_21$$7);
 					ZEPHIR_CONCAT_VSV(&_21$$7, &key, "\\", &index);
 					zephir_array_update_zval(&result, &_21$$7, &element, PH_COPY | PH_SEPARATE);
-					ZEPHIR_CALL_METHOD(&_22$$7, this_ptr, "normalizearray", &_23, 92, &result);
+					ZEPHIR_CALL_METHOD(&_22$$7, this_ptr, "normalizearray", &_23, 89, &result);
 					zephir_check_call_status();
 					ZEPHIR_CPY_WRT(&result, &_22$$7);
 				} ZEND_HASH_FOREACH_END();
@@ -579,7 +579,7 @@ PHP_METHOD(Leevel_Http_FileBag, normalizeKey) {
 	ZEPHIR_INIT_VAR(&keys);
 	zephir_array_keys(&keys, &data TSRMLS_CC);
 	ZEPHIR_MAKE_REF(&keys);
-	ZEPHIR_CALL_FUNCTION(NULL, "sort", NULL, 93, &keys);
+	ZEPHIR_CALL_FUNCTION(NULL, "sort", NULL, 90, &keys);
 	ZEPHIR_UNREF(&keys);
 	zephir_check_call_status();
 	RETURN_CCTOR(&keys);

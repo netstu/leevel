@@ -49,6 +49,7 @@ ZEPHIR_INIT_CLASS(Leevel_Manager_Manager) {
 	 */
 	zend_declare_property_null(leevel_manager_manager_ce, SL("connects"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
+	leevel_manager_manager_ce->create_object = zephir_init_properties_Leevel_Manager_Manager;
 	return SUCCESS;
 
 }
@@ -441,7 +442,7 @@ PHP_METHOD(Leevel_Manager_Manager, makeConnect) {
 		ZEPHIR_INIT_VAR(&_2$$3);
 		object_init_ex(&_2$$3, zend_exception_get_default(TSRMLS_C));
 		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "Connect driver %s not exits");
+		ZVAL_STRING(&_3$$3, "Connect driver %s not exits.");
 		ZEPHIR_CALL_FUNCTION(&_4$$3, "sprintf", NULL, 1, &_3$$3, &connect);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_2$$3, "__construct", NULL, 22, &_4$$3);
@@ -906,6 +907,29 @@ PHP_METHOD(Leevel_Manager_Manager, setContainerOption) {
 	ZEPHIR_CALL_METHOD(NULL, &_1, "set", NULL, 0, &tmp, value);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
+
+}
+
+zend_object *zephir_init_properties_Leevel_Manager_Manager(zend_class_entry *class_type TSRMLS_DC) {
+
+		zval _0, _1$$3;
+		ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1$$3);
+
+		ZEPHIR_MM_GROW();
+	
+	{
+		zval local_this_ptr, *this_ptr = &local_this_ptr;
+		ZEPHIR_CREATE_OBJECT(this_ptr, class_type);
+		zephir_read_property(&_0, this_ptr, SL("connects"), PH_NOISY_CC | PH_READONLY);
+		if (Z_TYPE_P(&_0) == IS_NULL) {
+			ZEPHIR_INIT_VAR(&_1$$3);
+			array_init(&_1$$3);
+			zephir_update_property_zval(this_ptr, SL("connects"), &_1$$3);
+		}
+		ZEPHIR_MM_RESTORE();
+		return Z_OBJ_P(this_ptr);
+	}
 
 }
 

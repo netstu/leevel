@@ -351,13 +351,16 @@ PHP_METHOD(Leevel_Router_RouterProvider, isRouterCached) {
  */
 PHP_METHOD(Leevel_Router_RouterProvider, getRouterCachePath) {
 
+	zval _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_RETURN_CALL_FUNCTION("path_router_cache", NULL, 0);
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "pathcacherouterfile", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 

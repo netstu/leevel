@@ -66,7 +66,7 @@ class Manager extends Managers
      * 创建 memcache 缓存
      *
      * @param array $options
-     * @return \Leevel\Session\memcache
+     * @return \Leevel\Session\Memcache
      */
     protected function makeConnectMemcache(array options = [])
     {
@@ -79,7 +79,7 @@ class Manager extends Managers
      * 创建 redis 缓存
      *
      * @param array $options
-     * @return \Leevel\Session\redis
+     * @return \Leevel\Session\Redis
      */
     protected function makeConnectRedis(array options = [])
     {

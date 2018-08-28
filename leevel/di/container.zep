@@ -651,6 +651,7 @@ class Container implements IContainer, ArrayAccess {
         var reflection, constructor, param;
 
         let reflection = new ReflectionClass(injection);
+
         if ! reflection->isInstantiable() {
             throw new InvalidArgumentException(sprintf("Class %s is not instantiable.", injection));
         }
@@ -676,11 +677,7 @@ class Container implements IContainer, ArrayAccess {
      */
     protected function newInstanceArgs(var classname, var args)
     {
-        try {
-            return (new ReflectionClass(classname))->newInstanceArgs(args);
-        } catch ReflectionException {
-            return (new ReflectionClass(classname))->newInstanceWithoutConstructor();
-        }
+        return (new ReflectionClass(classname))->newInstanceArgs(args);
     }
 
     /**

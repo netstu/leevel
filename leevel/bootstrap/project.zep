@@ -13,100 +13,101 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Bootstrap;
 
-use Exception;
-use RuntimeException;
-use Leevel\Di\Provider;
-use Leevel\Di\Container;
-use Leevel\Kernel\IProject;
 use Composer\Autoload\ClassLoader;
-use Leevel\Log\Provider\Register as LogProvider;
+use Leevel\Di\Container;
+use Leevel\Di\Provider;
 use Leevel\Event\Provider\Register as EventProvider;
+use Leevel\Kernel\IProject;
+use Leevel\Log\Provider\Register as LogProvider;
 use Leevel\Router\Provider\Register as RouterProvider;
+use RuntimeException;
 
 /**
- * 项目管理
+ * 项目管理.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.01.14
+ *
  * @version 1.0
  */
 class Project extends Container implements IProject
 {
     /**
-     * 当前项目实例
+     * 当前项目实例.
      *
      * @var static
      */
     protected static project;
     
     /**
-     * 项目基础路径
+     * 项目基础路径.
      *
      * @var string
      */
     protected path;
     
     /**
-     * 应用路径
+     * 应用路径.
      *
      * @var string
      */
-    protected applicationPath;
+    protected appPath;
     
     /**
-     * 公共路径
+     * 公共路径.
      *
      * @var string
      */
     protected commonPath;
     
     /**
-     * 运行时路径
+     * 运行时路径.
      *
      * @var string
      */
     protected runtimePath;
     
     /**
-     * 存储路径
+     * 存储路径.
      *
      * @var string
      */
     protected storagePath;
     
     /**
-     * 配置路径
+     * 配置路径.
      *
      * @var string
      */
     protected optionPath;
     
     /**
-     * 语言包路径
+     * 语言包路径.
      *
      * @var string
      */
     protected i18nPath;
     
     /**
-     * 环境变量路径
+     * 环境变量路径.
      *
      * @var string
      */
     protected envPath;
     
     /**
-     * 环境变量文件
+     * 环境变量文件.
      *
      * @var string
      */
     protected envFile;
     
     /**
-     * 延迟载入服务提供者
+     * 延迟载入服务提供者.
      *
      * @var array
      */
@@ -118,7 +119,7 @@ class Project extends Container implements IProject
      * @var array
      */
     protected providerBootstraps = [];
-
+    
     /**
      * 是否已经初始化引导
      *
@@ -128,12 +129,11 @@ class Project extends Container implements IProject
     
     /**
      * 构造函数
-     * 受保护的禁止外部通过 new 实例化，只能通过 singletons 生成单一实例
+     * 项目中通过 singletons 生成单一实例.
      *
      * @param string $path
-     * @return void
      */
-    protected function __construct(var path = null)
+    public function __construct(string path = null) -> void
     {
         if path {
             this->setPath(path);
@@ -145,22 +145,22 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 禁止克隆
-     *
-     * @return void
+     * 禁止克隆.
      */
-    protected function __clone()
+    public function __clone() -> void
     {
         throw new RuntimeException("Project disallowed clone.");
     }
     
     /**
-     * 返回项目
+     * 返回项目.
      *
      * @param string $path
+     *
      * @return static
+     * @codeCoverageIgnore
      */
-    public static function singletons(var path = null)
+    public static function singletons(string path = null)
     {
         if self::project !== null {
             return self::project;
@@ -171,7 +171,7 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 程序版本
+     * 程序版本.
      *
      * @return string
      */
@@ -181,13 +181,27 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 是否以扩展方式运行
+     * 是否以扩展方式运行.
      *
-     * @return boolean
+     * @return bool
      */
-    public function runWithExtension() -> boolean
+    public function runWithExtension() -> bool
     {
         return extension_loaded("leevel");
+    }
+    
+    /**
+     * 是否为 Console.
+     *
+     * @return bool
+     */
+    public function console() -> bool
+    {
+        if ! (is_object(this->make("request"))) {
+            return "cli" === PHP_SAPI;
+        }
+
+        return this->make("request")->isCli();
     }
     
     /**
@@ -205,322 +219,299 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 设置项目路径
+     * 设置项目路径.
      *
      * @param string $path
-     * @return void
      */
-    public function setPath(var path)
+    public function setPath(string path) -> void
     {
         let this->path = path;
-
-        if ! (is_writeable(this->pathRuntime())) {
-            throw new RuntimeException(sprintf("Runtime path %s is not writeable.", this->pathRuntime()));
-        }
     }
     
     /**
-     * 基础路径
+     * 基础路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function path() -> string
+    public function path(string path = "") -> string
     {
-        return this->path;
+        return this->path . this->normalizePath(path);
     }
     
     /**
-     * 应用路径
+     * 设置应用路径.
+     *
+     * @param string $path
+     */
+    public function setAppPath(string path)
+    {
+        let this->appPath = path;
+    }
+    
+    /**
+     * 应用路径.
+     *
+     * @param bool|string $app
+     * @param string      $path
      *
      * @return string
      */
-    public function pathApplication() -> string
+    public function appPath(var app = false, string path = "") -> string
     {
-        return this->applicationPath ? this->applicationPath : this->path . DIRECTORY_SEPARATOR . "application";
+        return (this->appPath ? this->appPath: this->path . DIRECTORY_SEPARATOR . "application").
+               (app ? DIRECTORY_SEPARATOR . this->normalizeApp(app) : app).
+               this->normalizePath(path);
     }
     
     /**
-     * 设置应用路径
+     * 取得应用主题目录.
      *
-     * @param string $path
-     * @return $this
+     * @param bool|string $app
+     *
+     * @return string
      */
-    public function setPathApplication(var path)
+    public function themePath(var app = false) -> string
     {
-        let this->applicationPath = path;
-
-        return this;
+        return this->appPath(app) ."/ui/theme/" .
+            this->make("option")->get("view\\theme_name");
     }
     
     /**
-     * 设置公共路径
+     * 设置公共路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathCommon(var path)
+    public function setCommonPath(string path)
     {
         let this->commonPath = path;
-
-        return this;
     }
     
     /**
-     * 公共路径
+     * 公共路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathCommon() -> string
+    public function commonPath(string path = "") -> string
     {
-        return this->commonPath ? this->commonPath : this->path . DIRECTORY_SEPARATOR . "common";
+        return (this->commonPath ? this->commonPath: this->path . DIRECTORY_SEPARATOR . "common") .
+            this->normalizePath(path);
     }
     
     /**
-     * 设置运行时路径
+     * 设置运行时路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathRuntime(var path)
+    public function setRuntimePath(string path)
     {
         let this->runtimePath = path;
-
-        return this;
     }
     
     /**
-     * 运行路径
+     * 运行路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathRuntime() -> string
+    public function runtimePath(string path = "") -> string
     {
-        return this->runtimePath ? this->runtimePath : this->path . DIRECTORY_SEPARATOR . "runtime";
+        return (this->runtimePath ? this->runtimePath: this->path . DIRECTORY_SEPARATOR . "runtime") .
+            this->normalizePath(path);
     }
     
     /**
-     * 设置存储路径
+     * 设置存储路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathStorage(var path)
+    public function setStoragePath(string path)
     {
         let this->storagePath = path;
-
-        return this;
     }
     
     /**
-     * 附件路径
+     * 附件路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathStorage() -> string
+    public function storagePath(string path = "") -> string
     {
-        return this->storagePath ? this->storagePath : this->path . DIRECTORY_SEPARATOR . "storage";
+        return (this->storagePath ? this->storagePath: this->path . DIRECTORY_SEPARATOR . "storage") .
+            this->normalizePath(path);
     }
     
     /**
-     * 设置配置路径
+     * 设置配置路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathOption(var path)
+    public function setOptionPath(string path)
     {
         let this->optionPath = path;
-
-        return this;
     }
     
     /**
-     * 配置路径
+     * 配置路径.
+     *
+     * @param string $path
      *
      * @return string
      */
-    public function pathOption() -> string
+    public function optionPath(string path = "") -> string
     {
-        return this->optionPath ? this->optionPath : this->path . DIRECTORY_SEPARATOR . "option";
+        return (this->optionPath ? this->optionPath: this->path . DIRECTORY_SEPARATOR . "option") .
+            this->normalizePath(path);
     }
     
     /**
-     * 设置语言包路径
+     * 设置语言包路径.
      *
      * @param string $path
-     * @return $this
      */
-    public function setPathI18n(var path)
+    public function setI18nPath(string path)
     {
         let this->i18nPath = path;
-
-        return this;
     }
     
     /**
-     * 语言包路径
-     *
-     * @return string
-     */
-    public function pathI18n() -> string
-    {
-        return this->i18nPath ? this->i18nPath : this->path . DIRECTORY_SEPARATOR . "i18n";
-    }
-    
-    /**
-     * 环境变量路径
-     *
-     * @return string
-     */
-    public function pathEnv() -> string
-    {
-        return this->envPath ? this->envPath : this->path;
-    }
-    
-    /**
-     * 设置环境变量路径
+     * 语言包路径.
      *
      * @param string $path
-     * @return $this
+     *
+     * @return string
      */
-    public function setPathEnv(var path)
+    public function i18nPath(string path = "") -> string
     {
-        let this->envPath = path;
-
-        return this;
+        return (this->i18nPath ? this->i18nPath: this->path . DIRECTORY_SEPARATOR . "i18n") .
+            this->normalizePath(path);
     }
     
     /**
-     * 设置环境变量文件
+     * 设置环境变量路径.
+     *
+     * @param string $path
+     */
+    public function setEnvPath(string path)
+    {
+        let this->envPath = path;
+    }
+    
+    /**
+     * 环境变量路径.
+     *
+     * @return string
+     */
+    public function envPath() -> string
+    {
+        return this->envPath ? this->envPath: this->path;
+    }
+    
+    /**
+     * 设置环境变量文件.
      *
      * @param string $file
-     * @return $this
      */
     public function setEnvFile(string file)
     {
         let this->envFile = file;
-        return this;
     }
     
     /**
-     * 取得环境变量文件
+     * 取得环境变量文件.
      *
      * @return string
      */
     public function envFile() -> string
     {
-        return  this->envFile ? this->envFile : self::DEFAULT_ENV;
+        return this->envFile ? this->envFile: self::DEFAULT_ENV;
     }
     
     /**
-     * 取得环境变量完整路径
+     * 取得环境变量完整路径.
      *
      * @return string
      */
     public function fullEnvPath() -> string
     {
-        return this->pathEnv() . DIRECTORY_SEPARATOR . this->envFile();
+        return this->envPath() . DIRECTORY_SEPARATOR . this->envFile();
     }
     
     /**
-     * 应用路径
-     *
-     * @param string $app
-     * @return string
-     */
-    public function pathAnApplication(var app = null) -> string
-    {
-        return this->pathApplication() . "/" . strtolower(app ? app : (this->make("request")->app() ? this->make("request")->app() : "App"));
-    }
-    
-    /**
-     * 取得应用缓存目录
-     *
-     * @param string $type
-     * @return string
-     */
-    public function pathApplicationCache(string type) -> string
-    {
-        var types;
-    
-        let types = [
-            "file",
-            "log",
-            "table",
-            "theme",
-            "option",
-            "i18n",
-            "router",
-            "console",
-            "swoole"
-        ];
-
-        if ! (in_array(type, types)) {
-            throw new Exception(sprintf("Application cache type %s not support", type));
-        }
-
-        return this->pathRuntime() . "/" . type;
-    }
-    
-    /**
-     * 取得应用主题目录
-     *
-     * @param string $app
-     * @return string
-     */
-    public function pathApplicationTheme(var app = null)
-    {
-        return this->pathAnApplication(app) .
-            "/ui/theme/" .
-            this->make("option")->get("view\\theme_name");
-    }
-    
-    /**
-     * 返回语言包路径
-     * 
-     * @param string $i18n
-     * @return string
-     */
-    public function pathCacheI18nFile(var i18n) -> string
-    {
-        return this->pathRuntime() . "/cache/i18n/" . i18n . ".php";
-    }
-    
-    /**
-     * 是否缓存语言包
+     * 返回语言包缓存路径.
      *
      * @param string $i18n
-     * @return boolean
-     */
-    public function isCachedI18n(var i18n) -> boolean
-    {
-        return is_file(this->pathCacheI18nFile(i18n));
-    }
-    
-    /**
-     * 返回缓存路径
-     * 
+     *
      * @return string
      */
-    public function pathCacheOptionFile() -> string
+    public function i18nCachedPath(string i18n) -> string
     {
-        return this->pathRuntime() . "/cache/option.php";
+        return this->runtimePath() . "/i18n/" . i18n . ".php";
     }
     
     /**
-     * 是否缓存配置
+     * 是否存在语言包缓存.
      *
-     * @return boolean
+     * @param string $i18n
+     *
+     * @return bool
      */
-    public function isCachedOption() -> boolean
+    public function isCachedI18n(string i18n) -> bool
     {
-        return is_file(this->pathCacheOptionFile());
+        return is_file(this->i18nCachedPath(i18n));
     }
     
     /**
-     * 取得 composer
+     * 返回配置缓存路径.
+     *
+     * @return string
+     */
+    public function optionCachedPath() -> string
+    {
+        return this->runtimePath() . "/bootstrap/option.php";
+    }
+    
+    /**
+     * 是否存在配置缓存.
+     *
+     * @return bool
+     */
+    public function isCachedOption() -> bool
+    {
+        return is_file(this->optionCachedPath());
+    }
+    
+    /**
+     * 返回路由缓存路径.
+     *
+     * @return string
+     */
+    public function routerCachedPath() -> string
+    {
+        return this->runtimePath() . "/bootstrap/router.php";
+    }
+    
+    /**
+     * 是否存在路由缓存.
+     *
+     * @return bool
+     */
+    public function isCachedRouter() -> bool
+    {
+        return is_file(this->routerCachedPath());
+    }
+    
+    /**
+     * 取得 composer.
      *
      * @return \Composer\Autoload\ClassLoader
+     * @codeCoverageIgnore
      */
     public function composer() -> <ClassLoader>
     {
@@ -528,100 +519,64 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 获取命名空间路径
+     * 获取命名空间路径.
      *
      * @param string $namespaces
-     * @return string|null
+     *
+     * @return null|string
+     * @codeCoverageIgnore
      */
-    public function getPathByNamespace(var namespaces)
+    public function getPathByComposer(string namespaces)
     {
-        var prefix;
+        var prefix, tmp;
     
-        let namespaces = explode("\\", namespaces);
+        let tmp = explode("\\", namespaces);
         let prefix = this->composer()->getPrefixesPsr4();
 
-        if ! (isset prefix[namespaces[0] . "\\"]) {
+        if ! (isset prefix[tmp[0] . "\\"]) {
             return;
         }
 
-        let namespaces[0] = prefix[namespaces[0] . "\\"][0];
+        let tmp[0] = prefix[tmp[0] . "\\"][0];
 
-        return implode("/", namespaces);
+        return implode("/", tmp);
     }
     
     /**
-     * 批量获取命名空间路径
+     * 是否开启 debug.
      *
-     * @param array $namespaces
-     * @return array
+     * @return bool
      */
-    public function getPathByNamespaces(array namespaces) -> array
-    {
-        var result, item;
-    
-        let result = [];
-
-        for item in namespaces {
-            let result[item] = this->getPathByNamespace(item);
-        }
-
-        return result;
-    }
-    
-    /**
-     * 是否开启 debug
-     *
-     * @return boolean
-     */
-    public function debug() -> boolean
+    public function debug() -> bool
     {
         return this->make("option")->get("debug");
     }
     
     /**
-     * 是否为开发环境
+     * 是否为开发环境.
      *
-     * @return boolean
+     * @return bool
      */
-    public function development() -> boolean
+    public function development() -> bool
     {
         return this->environment() === "development";
     }
     
     /**
-     * 运行环境
+     * 运行环境.
      *
-     * @return boolean
+     * @return string
      */
-    public function environment() -> boolean
+    public function environment() -> string
     {
         return this->make("option")->get("environment");
     }
     
     /**
-     * 是否为 API
-     *
-     * @return boolean
-     */
-    public function api() -> boolean
-    {
-        return this->make("request")->isAcceptJson();
-    }
-    
-    /**
-     * 是否为 Console
-     *
-     * @return boolean
-     */
-    public function console() -> boolean
-    {
-        return this->make("request")->isCli();
-    }
-    
-    /**
-     * 创建服务提供者
+     * 创建服务提供者.
      *
      * @param string $provider
+     *
      * @return \Leevel\Di\Provider
      */
     public function makeProvider(string provider)
@@ -630,10 +585,9 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 执行 bootstrap
+     * 执行 bootstrap.
      *
      * @param \Leevel\Di\Provider $provider
-     * @return void
      */
     public function callProviderBootstrap(<Provider> provider)
     {
@@ -648,10 +602,9 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 初始化项目
-     * 
+     * 初始化项目.
+     *
      * @param array $bootstraps
-     * @return void
      */
     public function bootstrap(array bootstraps)
     {
@@ -665,19 +618,19 @@ class Project extends Container implements IProject
             (new {value}())->handle(this);
         }
     }
-
+    
     /**
      * 是否已经初始化引导
-     * 
+     *
      * @return bool
      */
-    public function isBootstrap()-> boolean
+    public function isBootstrap() -> bool
     {
         return this->isBootstrap;
     }
     
     /**
-     * 框架基础提供者 register
+     * 框架基础提供者 register.
      *
      * @return $this
      */
@@ -734,9 +687,10 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 注册服务提供者
+     * 注册服务提供者.
      *
      * @param \Leevel\Di\Provider|string $provider
+     *
      * @return \Leevel\Di\Provider
      */
     public function register(var provider)
@@ -762,10 +716,8 @@ class Project extends Container implements IProject
     
     /**
      * 注册基础服务
-     *
-     * @return void
      */
-    protected function registerBaseServices()
+    protected function registerBaseServices() -> void
     {
         this->instance("project", this);
 
@@ -792,11 +744,11 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 注册基础服务提供者
+     * 注册基础服务提供者.
      *
-     * @return void
+     * @codeCoverageIgnore
      */
-    protected function registerBaseProvider()
+    protected function registerBaseProvider() -> void
     {
         this->register(new EventProvider(this));
 
@@ -806,10 +758,9 @@ class Project extends Container implements IProject
     }
     
     /**
-     * 注册延迟载入服务提供者
+     * 注册延迟载入服务提供者.
      *
      * @param string $provider
-     * @return void
      */
     protected function registerDeferredProvider(string provider)
     {
@@ -824,5 +775,29 @@ class Project extends Container implements IProject
         this->callProviderBootstrap(providerInstance);
 
         unset this->deferredProviders[provider];
+    }
+    
+    /**
+     * 格式化应用名字.
+     *
+     * @param bool|string $app
+     *
+     * @return string
+     */
+    protected function normalizeApp(var app) -> string
+    {
+        return strtolower(app === true ? (this->make("request")->app() ? this->make("request")->app() : "app") : app);
+    }
+    
+    /**
+     * 格式化路径.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    protected function normalizePath(string path) -> string
+    {
+        return path ? DIRECTORY_SEPARATOR . path : path;
     }
 }

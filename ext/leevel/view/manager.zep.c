@@ -71,7 +71,7 @@ PHP_METHOD(Leevel_View_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_view_view_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 152, connect);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 150, connect);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -132,9 +132,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&html);
 	object_init_ex(&html, leevel_view_html_ce);
-	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 153, &options);
+	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 151, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 154, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 152, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&html);
 
@@ -265,7 +265,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectPhpui) {
  * 创建 v8 模板驱动
  *
  * @param array $options
- * @return \Leevel\View\Vue
+ * @return \Leevel\View\V8
  */
 PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
 

@@ -31,7 +31,7 @@ ZEPHIR_INIT_CLASS(Leevel_Kernel_IKernel) {
 /**
  * 响应 HTTP 请求
  *
- * @param \Leevel\Http\Request $request
+ * @param \Leevel\Http\IRequest $request
  * @return \Leevel\Http\IResponse
  */
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IKernel, handle);
@@ -39,7 +39,7 @@ ZEPHIR_DOC_METHOD(Leevel_Kernel_IKernel, handle);
 /**
  * 执行结束
  *
- * @param \Leevel\Http\Request $request
+ * @param \Leevel\Http\IRequest $request
  * @param \Leevel\Http\IResponse $response
  * @return void
  */
