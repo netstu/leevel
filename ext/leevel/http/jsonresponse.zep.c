@@ -286,24 +286,22 @@ PHP_METHOD(Leevel_Http_JsonResponse, setCallback) {
 /**
  * 设置原生 JSON 数据
  *
- * @param string $json
+ * @param mixed $json
  * @return $this
  */
 PHP_METHOD(Leevel_Http_JsonResponse, setJson) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *json_param = NULL, _0, _1;
-	zval json;
+	zval *json, json_sub, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&json);
+	ZVAL_UNDEF(&json_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &json_param);
+	zephir_fetch_params(1, 1, 0, &json);
 
-	zephir_get_strval(&json, json_param);
 
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "checktcontrol", NULL, 0);
@@ -311,13 +309,13 @@ PHP_METHOD(Leevel_Http_JsonResponse, setJson) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "isjsondata", NULL, 0, &json);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "isjsondata", NULL, 0, json);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The method setJson need a json data.", "leevel/http/jsonresponse.zep", 147);
 		return;
 	}
-	zephir_update_property_zval(this_ptr, SL("data"), &json);
+	zephir_update_property_zval(this_ptr, SL("data"), json);
 	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "updatecontent", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();

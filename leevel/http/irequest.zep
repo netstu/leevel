@@ -155,7 +155,7 @@ interface IRequest
      * @param array  $server
      * @param string $content
      */
-    public function reset(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], string content = null) -> void;
+    public function reset(array query = [], array request = [], array params = [], array cookies = [], array files = [], array server = [], var content = null) -> void;
     
     /**
      * 全局变量创建一个 Request.
@@ -181,7 +181,7 @@ interface IRequest
      *
      * @return mixed
      */
-    public function get(string key, defaults = null);
+    public function get(string key, var defaults = null);
     
     /**
      * 请求是否包含给定的 key.
@@ -228,7 +228,7 @@ interface IRequest
      *
      * @return mixed
      */
-    public function input(string key = null, defaults = null);
+    public function input(var key = null, var defaults = null);
     
     /**
      * 取回 query.
@@ -238,7 +238,7 @@ interface IRequest
      *
      * @return array|string
      */
-    public function query(string key = null, defaults = null);
+    public function query(var key = null, var defaults = null);
     
     /**
      * 请求是否存在 COOKIE.
@@ -257,7 +257,7 @@ interface IRequest
      *
      * @return array|string
      */
-    public function cookie(string key = null, defaults = null);
+    public function cookie(var key = null, var defaults = null);
     
     /**
      * 取得所有文件.
@@ -304,7 +304,7 @@ interface IRequest
      *
      * @return array|string
      */
-    public function header(string key = null, defaults = null);
+    public function header(var key = null, var defaults = null);
     
     /**
      * 取回 server.
@@ -314,7 +314,7 @@ interface IRequest
      *
      * @return array|string
      */
-    public function server(string key = null, defaults = null);
+    public function server(var key = null, var defaults = null);
     
     /**
      * 取回数据项.

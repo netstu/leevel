@@ -63,6 +63,13 @@ ZEPHIR_INIT_CLASS(Leevel_Http_UploadedFile) {
 	 */
 	zend_declare_property_null(leevel_http_uploadedfile_ce, SL("errors"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
 
+	/**
+	 * 是否为测试.
+	 *
+	 * @var bool
+	 */
+	zend_declare_property_bool(leevel_http_uploadedfile_ce, SL("test"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
+
 	return SUCCESS;
 
 }
@@ -75,25 +82,28 @@ ZEPHIR_INIT_CLASS(Leevel_Http_UploadedFile) {
  * @param string $originalName
  * @param string|null $mimeType
  * @param int|null $error
- * @return void
+ * @param bool $test
  */
 PHP_METHOD(Leevel_Http_UploadedFile, __construct) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zephir_fcall_cache_entry *_2 = NULL;
-	zval *path, path_sub, *originalName, originalName_sub, *mimeType = NULL, mimeType_sub, *error = NULL, error_sub, __$null, _0, _1;
+	zend_bool test;
+	zval *path, path_sub, *originalName, originalName_sub, *mimeType = NULL, mimeType_sub, *error = NULL, error_sub, *test_param = NULL, __$true, __$false, __$null, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&path_sub);
 	ZVAL_UNDEF(&originalName_sub);
 	ZVAL_UNDEF(&mimeType_sub);
 	ZVAL_UNDEF(&error_sub);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 2, &path, &originalName, &mimeType, &error);
+	zephir_fetch_params(1, 2, 3, &path, &originalName, &mimeType, &error, &test_param);
 
 	if (!mimeType) {
 		mimeType = &mimeType_sub;
@@ -102,6 +112,11 @@ PHP_METHOD(Leevel_Http_UploadedFile, __construct) {
 	if (!error) {
 		error = &error_sub;
 		error = &__$null;
+	}
+	if (!test_param) {
+		test = 0;
+	} else {
+		test = zephir_get_boolval(test_param);
 	}
 
 
@@ -122,6 +137,11 @@ PHP_METHOD(Leevel_Http_UploadedFile, __construct) {
 		ZVAL_LONG(&_1, 0);
 	}
 	zephir_update_property_zval(this_ptr, SL("error"), &_1);
+	if (test) {
+		zephir_update_property_zval(this_ptr, SL("test"), &__$true);
+	} else {
+		zephir_update_property_zval(this_ptr, SL("test"), &__$false);
+	}
 	ZEPHIR_CALL_PARENT(NULL, leevel_http_uploadedfile_ce, getThis(), "__construct", &_2, 0, path);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -202,24 +222,32 @@ PHP_METHOD(Leevel_Http_UploadedFile, getError) {
 PHP_METHOD(Leevel_Http_UploadedFile, isValid) {
 
 	zend_bool _1;
-	zval _0, _2, _3;
+	zval _0, _2, _3, _4;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("error"), PH_NOISY_CC | PH_READONLY);
 	_1 = ZEPHIR_IS_LONG_IDENTICAL(&_0, 0);
 	if (_1) {
-		ZEPHIR_CALL_METHOD(&_2, this_ptr, "getpathname", NULL, 0);
-		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_3, "is_uploaded_file", NULL, 110, &_2);
-		zephir_check_call_status();
-		_1 = zephir_is_true(&_3);
+		ZEPHIR_INIT_VAR(&_2);
+		zephir_read_property(&_3, this_ptr, SL("test"), PH_NOISY_CC | PH_READONLY);
+		if (zephir_is_true(&_3)) {
+			ZEPHIR_INIT_NVAR(&_2);
+			ZVAL_BOOL(&_2, 1);
+		} else {
+			ZEPHIR_CALL_METHOD(&_4, this_ptr, "getpathname", NULL, 0);
+			zephir_check_call_status();
+			ZEPHIR_CALL_FUNCTION(&_2, "is_uploaded_file", NULL, 110, &_4);
+			zephir_check_call_status();
+		}
+		_1 = zephir_is_true(&_2);
 	}
 	RETURN_MM_BOOL(_1);
 
@@ -227,12 +255,14 @@ PHP_METHOD(Leevel_Http_UploadedFile, isValid) {
 
 /**
  * {@inheritdoc}
+ *
+ * @codeCoverageIgnoreStart
  */
 PHP_METHOD(Leevel_Http_UploadedFile, move) {
 
 	zephir_fcall_cache_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *directory, directory_sub, *name = NULL, name_sub, __$null, target, _0, _3, _4, _1$$3;
+	zval *directory, directory_sub, *name = NULL, name_sub, __$null, target, _0, _5, _6, _1$$3, _3$$3, _4$$3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&directory_sub);
@@ -240,9 +270,11 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&target);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_4$$3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &directory, &name);
@@ -256,23 +288,31 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "isvalid", NULL, 0);
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
+		zephir_read_property(&_1$$3, this_ptr, SL("test"), PH_NOISY_CC | PH_READONLY);
+		if (zephir_is_true(&_1$$3)) {
+			ZEPHIR_RETURN_CALL_PARENT(leevel_http_uploadedfile_ce, getThis(), "move", &_2, 0, directory, name);
+			zephir_check_call_status();
+			RETURN_MM();
+		}
 		ZEPHIR_CALL_METHOD(&target, this_ptr, "gettargetfile", NULL, 0, directory, name);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_1$$3, this_ptr, "getpathname", NULL, 0);
+		ZEPHIR_CALL_METHOD(&_3$$3, this_ptr, "getpathname", NULL, 0);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "movetotarget", NULL, 0, &_1$$3, &target);
+		ZVAL_BOOL(&_4$$3, 1);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "movetotarget", NULL, 0, &_3$$3, &target, &_4$$3);
 		zephir_check_call_status();
-		ZEPHIR_RETURN_CALL_PARENT(leevel_http_uploadedfile_ce, getThis(), "__construct", &_2, 0, &target);
+		object_init_ex(return_value, leevel_http_file_ce);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 47, &target);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_INIT_VAR(&_3);
-	object_init_ex(&_3, leevel_http_fileexception_ce);
-	ZEPHIR_CALL_METHOD(&_4, this_ptr, "geterrormessage", NULL, 0);
+	ZEPHIR_INIT_VAR(&_5);
+	object_init_ex(&_5, leevel_http_fileexception_ce);
+	ZEPHIR_CALL_METHOD(&_6, this_ptr, "geterrormessage", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 3, &_4);
+	ZEPHIR_CALL_METHOD(NULL, &_5, "__construct", NULL, 3, &_6);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "leevel/http/uploadedfile.zep", 150 TSRMLS_CC);
+	zephir_throw_exception_debug(&_5, "leevel/http/uploadedfile.zep", 165 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -282,6 +322,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
  * 返回文件最大上传字节
  *
  * @return int
+ * @codeCoverageIgnoreStart
  */
 PHP_METHOD(Leevel_Http_UploadedFile, getMaxFilesize) {
 
@@ -415,7 +456,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, getErrorMessage) {
 	if (zephir_array_isset(&_1, &errorCode)) {
 		zephir_read_static_property_ce(&_2, leevel_http_uploadedfile_ce, SL("errors"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&message);
-		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 202 TSRMLS_CC);
+		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 218 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&message);
 		ZVAL_STRING(&message, "The file %s was not uploaded due to an unknown error.");

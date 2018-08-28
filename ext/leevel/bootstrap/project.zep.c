@@ -12,9 +12,9 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
+#include "kernel/operators.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
-#include "kernel/operators.h"
 #include "kernel/exception.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/object.h"
@@ -144,25 +144,23 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Project) {
 PHP_METHOD(Leevel_Bootstrap_Project, __construct) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path_param = NULL;
-	zval path;
+	zval *path = NULL, path_sub, __$null;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path);
+	ZVAL_UNDEF(&path_sub);
+	ZVAL_NULL(&__$null);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &path_param);
+	zephir_fetch_params(1, 0, 1, &path);
 
-	if (!path_param) {
-		ZEPHIR_INIT_VAR(&path);
-		ZVAL_STRING(&path, "");
-	} else {
-		zephir_get_strval(&path, path_param);
+	if (!path) {
+		path = &path_sub;
+		path = &__$null;
 	}
 
 
-	if (!(Z_TYPE_P(&path) == IS_UNDEF) && Z_STRLEN_P(&path)) {
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setpath", NULL, 0, &path);
+	if (zephir_is_true(path)) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setpath", NULL, 0, path);
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "registerbaseservices", NULL, 0);
@@ -197,24 +195,22 @@ PHP_METHOD(Leevel_Bootstrap_Project, __clone) {
 PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *path_param = NULL, _0, _1$$3, _2$$4, _3$$4;
-	zval path;
+	zval *path = NULL, path_sub, __$null, _0, _1$$3, _2$$4, _3$$4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&path);
+	ZVAL_UNDEF(&path_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_3$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &path_param);
+	zephir_fetch_params(1, 0, 1, &path);
 
-	if (!path_param) {
-		ZEPHIR_INIT_VAR(&path);
-		ZVAL_STRING(&path, "");
-	} else {
-		zephir_get_strval(&path, path_param);
+	if (!path) {
+		path = &path_sub;
+		path = &__$null;
 	}
 
 
@@ -225,7 +221,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, singletons) {
 	} else {
 		ZEPHIR_INIT_VAR(&_2$$4);
 		object_init_ex(&_2$$4, leevel_bootstrap_project_ce);
-		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 69, &path);
+		ZEPHIR_CALL_METHOD(NULL, &_2$$4, "__construct", NULL, 69, path);
 		zephir_check_call_status();
 		zend_update_static_property(leevel_bootstrap_project_ce, ZEND_STRL("project"), &_2$$4);
 		zephir_read_static_property_ce(&_3$$4, leevel_bootstrap_project_ce, SL("project"), PH_NOISY_CC | PH_READONLY);

@@ -63,6 +63,13 @@ class UploadedFile extends File
         5 : "File could not be uploaded: missing temporary directory.", 
         8 : "File upload was stopped by a PHP extension."
     ];
+
+    /**
+     * 是否为测试.
+     *
+     * @var bool
+     */
+    protected test = false;
     
     /**
      * 构造函数
@@ -72,13 +79,14 @@ class UploadedFile extends File
      * @param string $originalName
      * @param string|null $mimeType
      * @param int|null $error
-     * @return void
+     * @param bool $test
      */
-    public function __construct(var path, var originalName, var mimeType = null, var error = null)
+    public function __construct(var path, var originalName, var mimeType = null, var error = null, bool test = false)
     {
         let this->originalName = originalName;
         let this->mimeType = mimeType ? mimeType : "application/octet-stream";
         let this->error = error ? error : UPLOAD_ERR_OK;
+        let this->test = test;
 
         parent::__construct(path);
     }
@@ -130,21 +138,28 @@ class UploadedFile extends File
      */
     public function isValid() -> boolean
     {
-        return this->error === UPLOAD_ERR_OK && is_uploaded_file(this->getPathname());
+        return UPLOAD_ERR_OK === this->error &&
+            (this->test ? true : is_uploaded_file(this->getPathname()));
     }
     
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnoreStart
      */
     public function move(var directory, var name = null)
     {
         var target;
     
         if this->isValid() {
-            let target = this->getTargetFile(directory, name);
-            this->moveToTarget(this->getPathname(), target);
+            if (this->test) {
+                return parent::move(directory, name);
+            }
 
-            return parent::__construct(target);
+            let target = this->getTargetFile(directory, name);
+            this->moveToTarget(this->getPathname(), target, true);
+
+            return new File(target);
         }
 
         throw new FileException(this->getErrorMessage());
@@ -154,6 +169,7 @@ class UploadedFile extends File
      * 返回文件最大上传字节
      *
      * @return int
+     * @codeCoverageIgnoreStart
      */
     public static function getMaxFilesize() -> int
     {

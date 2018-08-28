@@ -136,7 +136,7 @@ PHP_METHOD(Leevel_Http_RedirectResponse, __construct) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "__construct", NULL, 21, &_7$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_4$$3, "leevel/http/redirectresponse.zep", 70 TSRMLS_CC);
+		zephir_throw_exception_debug(&_4$$3, "leevel/http/redirectresponse.zep", 72 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -252,7 +252,7 @@ PHP_METHOD(Leevel_Http_RedirectResponse, with) {
 		zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
 		zephir_array_update_zval(&tmp, key, value, PH_COPY);
 	}
-	zephir_is_iterable(&tmp, 0, "leevel/http/redirectresponse.zep", 114);
+	zephir_is_iterable(&tmp, 0, "leevel/http/redirectresponse.zep", 116);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&tmp), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&k);
@@ -358,7 +358,7 @@ PHP_METHOD(Leevel_Http_RedirectResponse, onlyInput) {
 	ZEPHIR_INIT_VAR(&args);
 	zephir_get_args(&args);
 	if (ZEPHIR_IS_EMPTY(&args)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method onlyInput need an args.", "leevel/http/redirectresponse.zep", 151);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method onlyInput need an args.", "leevel/http/redirectresponse.zep", 153);
 		return;
 	}
 	zephir_read_property(&_0, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
@@ -390,7 +390,7 @@ PHP_METHOD(Leevel_Http_RedirectResponse, exceptInput) {
 	ZEPHIR_INIT_VAR(&args);
 	zephir_get_args(&args);
 	if (ZEPHIR_IS_EMPTY(&args)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method exceptInput need an args.", "leevel/http/redirectresponse.zep", 168);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Method exceptInput need an args.", "leevel/http/redirectresponse.zep", 170);
 		return;
 	}
 	zephir_read_property(&_0, this_ptr, SL("request"), PH_NOISY_CC | PH_READONLY);
@@ -504,7 +504,7 @@ PHP_METHOD(Leevel_Http_RedirectResponse, setTargetUrl) {
 		RETURN_THIS();
 	}
 	if (ZEPHIR_IS_EMPTY(&url)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cannot redirect to an empty URL.", "leevel/http/redirectresponse.zep", 220);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cannot redirect to an empty URL.", "leevel/http/redirectresponse.zep", 222);
 		return;
 	}
 	zephir_update_property_zval(this_ptr, SL("targetUrl"), &url);

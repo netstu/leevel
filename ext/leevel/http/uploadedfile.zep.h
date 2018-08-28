@@ -19,6 +19,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_uploadedfile___construct, 0, 0, 2)
 	ZEND_ARG_INFO(0, originalName)
 	ZEND_ARG_INFO(0, mimeType)
 	ZEND_ARG_INFO(0, error)
+	ZEND_ARG_INFO(0, test)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_uploadedfile_move, 0, 0, 1)

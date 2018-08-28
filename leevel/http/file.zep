@@ -15,6 +15,7 @@
  */
 namespace Leevel\Http;
 
+use Closure;
 use SplFileObject;
 
 /**
@@ -55,7 +56,7 @@ class File extends SplFileObject
     public function move(string directory, var name = null) -> <File>
     {
         var target;
-    
+
         let target = this->getTargetFile(directory, name);
         this->moveToTarget(this->getPathname(), target);
 
@@ -74,14 +75,21 @@ class File extends SplFileObject
         var target;
     
         if ! (is_dir(directory)) {
-            if mkdir(directory, 511, true) === false && ! (is_dir(directory)) {
-                throw new FileException(sprintf("Unable to create the %s directory", directory));
+            if (!is_writable(dirname(directory))) {
+                throw new FileException(
+                    sprintf("Unable to create the %s directory.", directory)
+                );
             }
+
+            mkdir(directory, 0777, true);
         } elseif ! (is_writable(directory)) {
-            throw new FileException(sprintf("Unable to write in the %s directory", directory));
+            throw new FileException(
+                sprintf("Unable to write in the %s directory", directory)
+            );
         }
 
-        let target = rtrim(directory, "/\\") . DIRECTORY_SEPARATOR . ( name === null ? this->getBasename() : name);
+        let target = rtrim(directory, "/\\") . DIRECTORY_SEPARATOR .
+            (name === null ? this->getBasename() : name);
         
         return target;
     }
@@ -91,15 +99,30 @@ class File extends SplFileObject
      *
      * @param string $sourcePath
      * @param string $target
-     * @return void
+     * @param bool   $isUploaded
      */
-    protected function moveToTarget(string sourcePath, string target)
+    protected function moveToTarget(string sourcePath, string target, bool isUploaded = false)
     {
-        var error;
-    
-        if ! (move_uploaded_file(sourcePath, target)) {
-            let error = error_get_last();
-            throw new FileException(sprintf("Could not move the file %s to %s (%s)", sourcePath, target, strip_tags(error["message"])));
-        }
+        var method;
+
+        set_error_handler(Closure::fromCallable([this, "errorHandlerClosure"]));
+
+        let method = isUploaded ? "move_uploaded_file" : "rename";
+        call_user_func(method, sourcePath, target);
+
+        restore_error_handler();
+
+        chmod(target, 0666);
+    }
+
+    /**
+     * 创建错误句柄闭包
+     */
+    protected function errorHandlerClosure()
+    {
+        var args;
+        let args = func_get_args();
+
+        throw new FileException(args[1]);
     }
 }

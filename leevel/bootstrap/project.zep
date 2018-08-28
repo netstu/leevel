@@ -133,7 +133,7 @@ class Project extends Container implements IProject
      *
      * @param string $path
      */
-    public function __construct(string path = null) -> void
+    public function __construct(var path = null) -> void
     {
         if path {
             this->setPath(path);
@@ -160,7 +160,7 @@ class Project extends Container implements IProject
      * @return static
      * @codeCoverageIgnore
      */
-    public static function singletons(string path = null)
+    public static function singletons(var path = null)
     {
         if self::project !== null {
             return self::project;

@@ -134,10 +134,10 @@ class JsonResponse extends Response
     /**
      * 设置原生 JSON 数据
      *
-     * @param string $json
+     * @param mixed $json
      * @return $this
      */
-    public function setJson(string json)
+    public function setJson(var json)
     {
         if this->checkTControl() {
             return this;

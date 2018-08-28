@@ -469,7 +469,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param boolean $strict
      * @return mixed
      */
-    public function index(value = null, boolean strict = true)
+    public function index(var value = null, boolean strict = true)
     {
         var key;
     

@@ -522,7 +522,7 @@ interface IResponse
      *
      * @return $this
      */
-    public function appendContent(string content = null);
+    public function appendContent(var content = null);
     
     /**
      * 设置响应头.
@@ -601,7 +601,7 @@ interface IResponse
      *
      * @return $this
      */
-    public function setData(data = [], int encodingOptions = null);
+    public function setData(var data = [], int encodingOptions = null);
     
     /**
      * 获取内容.
@@ -648,7 +648,7 @@ interface IResponse
      *
      * @return $this
      */
-    public function setStatusCode(int code, text = null);
+    public function setStatusCode(int code, var text = null);
     
     /**
      * 获取状态码
@@ -731,7 +731,7 @@ interface IResponse
      *
      * @return $this
      */
-    public function setContentType(string contentType, string charset = null);
+    public function setContentType(string contentType, var charset = null);
     
     /**
      * 设置响应内容长度.
@@ -826,7 +826,7 @@ interface IResponse
      *
      * @return bool
      */
-    public function isRedirect(string location = null) -> bool;
+    public function isRedirect(var location = null) -> bool;
     
     /**
      * 是否为空响应.

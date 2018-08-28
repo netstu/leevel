@@ -78,7 +78,7 @@ class LoadOption
      * @param string|null $value
      * @return void
      */
-    protected function setEnvVar(string name, value = null)
+    protected function setEnvVar(string name, var value = null)
     {
         if is_bool(value) {
             putenv(name . "=" . (value ? "(true)" : "(false)"));

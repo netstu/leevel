@@ -19,7 +19,9 @@
 #include "kernel/exception.h"
 #include "kernel/concat.h"
 #include "kernel/string.h"
+#include "kernel/object.h"
 #include "kernel/array.h"
+#include "kernel/main.h"
 
 
 /**
@@ -70,7 +72,7 @@ PHP_METHOD(Leevel_Http_File, __construct) {
 		object_init_ex(&_1$$3, leevel_http_filenotfoundexception_ce);
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &path);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/http/file.zep", 42 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/http/file.zep", 43 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -132,10 +134,8 @@ PHP_METHOD(Leevel_Http_File, move) {
  */
 PHP_METHOD(Leevel_Http_File, getTargetFile) {
 
-	zend_bool _5$$3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zephir_fcall_cache_entry *_1 = NULL;
-	zval *directory_param = NULL, *name = NULL, name_sub, __$true, __$null, target, _0, _2, _13, _14, _15, _3$$3, _4$$3, _6$$3, _7$$4, _8$$4, _9$$4, _10$$5, _11$$5, _12$$5;
+	zval *directory_param = NULL, *name = NULL, name_sub, __$true, __$null, target, _0, _1, _11, _12, _13, _2$$3, _3$$3, _7$$3, _4$$4, _5$$4, _6$$4, _8$$5, _9$$5, _10$$5;
 	zval directory;
 	zval *this_ptr = getThis();
 
@@ -145,19 +145,19 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&target);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_12);
 	ZVAL_UNDEF(&_13);
-	ZVAL_UNDEF(&_14);
-	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&_2$$3);
 	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_6$$3);
-	ZVAL_UNDEF(&_7$$4);
-	ZVAL_UNDEF(&_8$$4);
-	ZVAL_UNDEF(&_9$$4);
+	ZVAL_UNDEF(&_7$$3);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$4);
+	ZVAL_UNDEF(&_6$$4);
+	ZVAL_UNDEF(&_8$$5);
+	ZVAL_UNDEF(&_9$$5);
 	ZVAL_UNDEF(&_10$$5);
-	ZVAL_UNDEF(&_11$$5);
-	ZVAL_UNDEF(&_12$$5);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 1, &directory_param, &name);
@@ -169,59 +169,57 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", &_1, 28, &directory);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", NULL, 28, &directory);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "is_writable", NULL, 48, &directory);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_writable", NULL, 48, &directory);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZVAL_LONG(&_3$$3, 511);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "mkdir", NULL, 29, &directory, &_3$$3, &__$true);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "dirname", NULL, 26, &directory);
 		zephir_check_call_status();
-		_5$$3 = ZEPHIR_IS_FALSE_IDENTICAL(&_4$$3);
-		if (_5$$3) {
-			ZEPHIR_CALL_FUNCTION(&_6$$3, "is_dir", &_1, 28, &directory);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_writable", NULL, 48, &_2$$3);
+		zephir_check_call_status();
+		if (!zephir_is_true(&_3$$3)) {
+			ZEPHIR_INIT_VAR(&_4$$4);
+			object_init_ex(&_4$$4, leevel_http_fileexception_ce);
+			ZEPHIR_INIT_VAR(&_5$$4);
+			ZVAL_STRING(&_5$$4, "Unable to create the %s directory.");
+			ZEPHIR_CALL_FUNCTION(&_6$$4, "sprintf", NULL, 1, &_5$$4, &directory);
 			zephir_check_call_status();
-			_5$$3 = !zephir_is_true(&_6$$3);
-		}
-		if (_5$$3) {
-			ZEPHIR_INIT_VAR(&_7$$4);
-			object_init_ex(&_7$$4, leevel_http_fileexception_ce);
-			ZEPHIR_INIT_VAR(&_8$$4);
-			ZVAL_STRING(&_8$$4, "Unable to create the %s directory");
-			ZEPHIR_CALL_FUNCTION(&_9$$4, "sprintf", NULL, 1, &_8$$4, &directory);
+			ZEPHIR_CALL_METHOD(NULL, &_4$$4, "__construct", NULL, 3, &_6$$4);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_7$$4, "__construct", NULL, 3, &_9$$4);
-			zephir_check_call_status();
-			zephir_throw_exception_debug(&_7$$4, "leevel/http/file.zep", 78 TSRMLS_CC);
+			zephir_throw_exception_debug(&_4$$4, "leevel/http/file.zep", 81 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
-	} else if (!(zephir_is_true(&_2))) {
-		ZEPHIR_INIT_VAR(&_10$$5);
-		object_init_ex(&_10$$5, leevel_http_fileexception_ce);
-		ZEPHIR_INIT_VAR(&_11$$5);
-		ZVAL_STRING(&_11$$5, "Unable to write in the %s directory");
-		ZEPHIR_CALL_FUNCTION(&_12$$5, "sprintf", NULL, 1, &_11$$5, &directory);
+		ZVAL_LONG(&_7$$3, 0777);
+		ZEPHIR_CALL_FUNCTION(NULL, "mkdir", NULL, 29, &directory, &_7$$3, &__$true);
 		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_10$$5, "__construct", NULL, 3, &_12$$5);
+	} else if (!(zephir_is_true(&_1))) {
+		ZEPHIR_INIT_VAR(&_8$$5);
+		object_init_ex(&_8$$5, leevel_http_fileexception_ce);
+		ZEPHIR_INIT_VAR(&_9$$5);
+		ZVAL_STRING(&_9$$5, "Unable to write in the %s directory");
+		ZEPHIR_CALL_FUNCTION(&_10$$5, "sprintf", NULL, 1, &_9$$5, &directory);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_10$$5, "leevel/http/file.zep", 81 TSRMLS_CC);
+		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 3, &_10$$5);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(&_8$$5, "leevel/http/file.zep", 88 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
+	ZEPHIR_INIT_VAR(&_11);
+	ZEPHIR_INIT_VAR(&_12);
+	ZVAL_STRING(&_12, "/\\");
+	zephir_fast_trim(&_11, &directory, &_12, ZEPHIR_TRIM_RIGHT TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_13);
-	ZEPHIR_INIT_VAR(&_14);
-	ZVAL_STRING(&_14, "/\\");
-	zephir_fast_trim(&_13, &directory, &_14, ZEPHIR_TRIM_RIGHT TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_15);
 	if (Z_TYPE_P(name) == IS_NULL) {
-		ZEPHIR_CALL_METHOD(&_15, this_ptr, "getbasename", NULL, 0);
+		ZEPHIR_CALL_METHOD(&_13, this_ptr, "getbasename", NULL, 0);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_CPY_WRT(&_15, name);
+		ZEPHIR_CPY_WRT(&_13, name);
 	}
 	ZEPHIR_INIT_VAR(&target);
-	ZEPHIR_CONCAT_VSV(&target, &_13, "/", &_15);
+	ZEPHIR_CONCAT_VSV(&target, &_11, "/", &_13);
 	RETURN_CCTOR(&target);
 
 }
@@ -231,53 +229,92 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
  *
  * @param string $sourcePath
  * @param string $target
- * @return void
+ * @param bool   $isUploaded
  */
 PHP_METHOD(Leevel_Http_File, moveToTarget) {
 
+	zval _2;
+	zend_class_entry *_1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *sourcePath_param = NULL, *target_param = NULL, error, _0, _1$$3, _2$$3, _3$$3, _4$$3, _5$$3;
+	zend_bool isUploaded;
+	zval *sourcePath_param = NULL, *target_param = NULL, *isUploaded_param = NULL, method, _0, _3, _4;
 	zval sourcePath, target;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&sourcePath);
 	ZVAL_UNDEF(&target);
-	ZVAL_UNDEF(&error);
+	ZVAL_UNDEF(&method);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
-	ZVAL_UNDEF(&_5$$3);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &sourcePath_param, &target_param);
+	zephir_fetch_params(1, 2, 1, &sourcePath_param, &target_param, &isUploaded_param);
 
 	zephir_get_strval(&sourcePath, sourcePath_param);
 	zephir_get_strval(&target, target_param);
-
-
-	ZEPHIR_CALL_FUNCTION(&_0, "move_uploaded_file", NULL, 49, &sourcePath, &target);
-	zephir_check_call_status();
-	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_CALL_FUNCTION(&error, "error_get_last", NULL, 50);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_1$$3);
-		object_init_ex(&_1$$3, leevel_http_fileexception_ce);
-		zephir_array_fetch_string(&_2$$3, &error, SL("message"), PH_NOISY | PH_READONLY, "leevel/http/file.zep", 102 TSRMLS_CC);
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "strip_tags", NULL, 51, &_2$$3);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_4$$3);
-		ZVAL_STRING(&_4$$3, "Could not move the file %s to %s (%s)");
-		ZEPHIR_CALL_FUNCTION(&_5$$3, "sprintf", NULL, 1, &_4$$3, &sourcePath, &target, &_3$$3);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_5$$3);
-		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/http/file.zep", 102 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
-		return;
+	if (!isUploaded_param) {
+		isUploaded = 0;
+	} else {
+		isUploaded = zephir_get_boolval(isUploaded_param);
 	}
+
+
+	_1 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_INIT_VAR(&_2);
+	zephir_create_array(&_2, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_2, this_ptr);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "errorHandlerClosure");
+	zephir_array_fast_append(&_2, &_3);
+	ZEPHIR_CALL_CE_STATIC(&_0, _1, "fromcallable", NULL, 0, &_2);
+	zephir_check_call_status();
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 49, &_0);
+	zephir_check_call_status();
+	if (isUploaded) {
+		ZEPHIR_INIT_VAR(&method);
+		ZVAL_STRING(&method, "move_uploaded_file");
+	} else {
+		ZEPHIR_INIT_NVAR(&method);
+		ZVAL_STRING(&method, "rename");
+	}
+	ZEPHIR_CALL_FUNCTION(NULL, "call_user_func", NULL, 8, &method, &sourcePath, &target);
+	zephir_check_call_status();
+	ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", NULL, 50);
+	zephir_check_call_status();
+	ZVAL_LONG(&_4, 0666);
+	ZEPHIR_CALL_FUNCTION(NULL, "chmod", NULL, 51, &target, &_4);
+	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 创建错误句柄闭包
+ */
+PHP_METHOD(Leevel_Http_File, errorHandlerClosure) {
+
+	zval args, _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
+	ZEPHIR_INIT_VAR(&_0);
+	object_init_ex(&_0, leevel_http_fileexception_ce);
+	zephir_array_fetch_long(&_1, &args, 1, PH_NOISY | PH_READONLY, "leevel/http/file.zep", 126 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 3, &_1);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_0, "leevel/http/file.zep", 126 TSRMLS_CC);
+	ZEPHIR_MM_RESTORE();
+	return;
 
 }
 
