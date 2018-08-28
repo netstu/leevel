@@ -13,6 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Auth\Provider;
 
 use Closure;
@@ -24,8 +25,9 @@ use Leevel\Di\IContainer;
  * auth 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2018.01.28
+ * 
  * @version 1.0
  */
 class Register extends Provider

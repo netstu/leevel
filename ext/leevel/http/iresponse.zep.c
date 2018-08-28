@@ -13,18 +13,19 @@
 
 
 /**
- * HTTP 响应接口
+ * HTTP 响应接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
- * @since 2018.03.04
+ *
+ * @since 2018.02.27
  * @see https://baike.baidu.com/item/HTTP%E7%8A%B6%E6%80%81%E7%A0%81/5053660?fr=aladdin
  * @see http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Http_IResponse) {
 
-	ZEPHIR_REGISTER_INTERFACE(Leevel\\Http, IResponse, leevel, http_iresponse, NULL);
+	ZEPHIR_REGISTER_INTERFACE(Leevel\\Http, IResponse, leevel, http_iresponse, leevel_http_iresponse_method_entry);
 
 	/**
 	 * HTTP_CONTINUE
@@ -463,4 +464,372 @@ ZEPHIR_INIT_CLASS(Leevel_Http_IResponse) {
 	return SUCCESS;
 
 }
+
+/**
+ * 创建一个响应.
+ *
+ * @param string $content
+ * @param int    $status
+ * @param array  $headers
+ *
+ * @return static
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, create);
+
+/**
+ * 设置 COOKIE Resolver.
+ *
+ * @param \Closure $cookieResolver
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setCookieResolver);
+
+/**
+ * 发送 HTTP 响应.
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, send);
+
+/**
+ * 发送响应头.
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, sendHeaders);
+
+/**
+ * 发送响应内容.
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, sendContent);
+
+/**
+ * 设置内容.
+ *
+ * @param mixed $content
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setContent);
+
+/**
+ * 附加内容.
+ *
+ * @param string $content
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, appendContent);
+
+/**
+ * 设置响应头.
+ *
+ * @param string $key
+ * @param string $value
+ * @param bool   $replace
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setHeader);
+
+/**
+ * 批量设置响应头.
+ *
+ * @param array $headers
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, withHeaders);
+
+/**
+ * 设置 COOKIE 别名.
+ *
+ * @param string $name
+ * @param string $value
+ * @param array  $option
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, cookie);
+
+/**
+ * 设置 COOKIE.
+ *
+ * @param string $name
+ * @param string $value
+ * @param array  $option
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setCookie);
+
+/**
+ * 批量设置 COOKIE.
+ *
+ * @param array $cookies
+ * @param array $option
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, withCookies);
+
+/**
+ * 获取 COOKIE.
+ *
+ * @return array
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getCookies);
+
+/**
+ * 取回 JSON 数据.
+ *
+ * @param bool $assoc
+ * @param int  $depth
+ *
+ * @return mixed
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getData);
+
+/**
+ * 设置 JSON 数据.
+ *
+ * @param mixed $data
+ * @param int   $encodingOptions
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setData);
+
+/**
+ * 获取内容.
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getContent);
+
+/**
+ * 获取内容.
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, content);
+
+/**
+ * 获取原始内容.
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getOriginal);
+
+/**
+ * 设置 HTTP 协议版本 (1.0 or 1.1).
+ *
+ * @param string $protocolVersion
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setProtocolVersion);
+
+/**
+ * 获取 HTTP 协议版本.
+ *
+ * @final
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getProtocolVersion);
+
+/**
+ * 设置相应状态码
+ *
+ * @param int   $code
+ * @param mixed $text
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setStatusCode);
+
+/**
+ * 获取状态码
+ *
+ * @return int
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, status);
+
+/**
+ * 获取状态码
+ *
+ * @final
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getStatusCode);
+
+/**
+ * 编码设置.
+ *
+ * @param string $charset
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setCharset);
+
+/**
+ * 编码设置.
+ *
+ * @param string $charset
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, charset);
+
+/**
+ * 获取编码
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, getCharset);
+
+/**
+ * 设置过期时间.
+ *
+ * @param \DateTime $datetime
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setExpires);
+
+/**
+ * 设置最后修改时间.
+ *
+ * @param \DateTime $datetime
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setLastModified);
+
+/**
+ * 设置缓存.
+ *
+ * @param int $minutes
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setCache);
+
+/**
+ * 设置响应未修改.
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setNotModified);
+
+/**
+ * 设置响应内容类型.
+ *
+ * @param string $contentType
+ * @param string $charset
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setContentType);
+
+/**
+ * 设置响应内容长度.
+ *
+ * @param int $contentLength
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setContentLength);
+
+/**
+ * 设置自定义标识符.
+ *
+ * @param string $etag
+ *
+ * @return $this
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, setEtag);
+
+/**
+ * 响应是否为 JSON.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isJson);
+
+/**
+ * 响应是否正确.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isInvalid);
+
+/**
+ * 是否为信息性响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isInformational);
+
+/**
+ * 是否为正确响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isSuccessful);
+
+/**
+ * 是否为重定向响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isRedirection);
+
+/**
+ * 是否为客户端错误响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isClientError);
+
+/**
+ * 是否为服务端错误响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isServerError);
+
+/**
+ * 是否为正常响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isOk);
+
+/**
+ * 是否为受限响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isForbidden);
+
+/**
+ * 是否为 404 NOT FOUND.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isNotFound);
+
+/**
+ * 是否为表单重定向响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isRedirect);
+
+/**
+ * 是否为空响应.
+ *
+ * @return bool
+ */
+ZEPHIR_DOC_METHOD(Leevel_Http_IResponse, isEmpty);
 

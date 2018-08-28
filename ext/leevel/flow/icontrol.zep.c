@@ -16,8 +16,9 @@
  * 流程控制复用
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2018.03.05
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Flow_IControl) {
@@ -29,17 +30,19 @@ ZEPHIR_INIT_CLASS(Leevel_Flow_IControl) {
 }
 
 /**
- * 条件语句 ifs
+ * 条件语句 ifs.
  *
- * @param boolean $value
+ * @param mixed $value
+ *
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, ifs);
 
 /**
- * 条件语句 elseIfs
+ * 条件语句 elseIfs.
  *
- * @param boolean $value
+ * @param mixed $value
+ *
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, elseIfs);
@@ -61,31 +64,26 @@ ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, endIfs);
 /**
  * 设置当前条件表达式状态
  *
- * @param boolean $inFlowControl
- * @param boolean $isFlowControlTrue
+ * @param bool $inFlowControl
+ * @param bool $isFlowControlTrue
+ *
  * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, setTControl);
 
 /**
- * 获取当前条件表达式状态
+ * 验证一下条件表达式是否通过.
  *
- * @return array
- */
-ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, getTControl);
-
-/**
- * 验证一下条件表达式是否通过
- *
- * @return boolean
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, checkTControl);
 
 /**
- * 占位符
+ * 占位符.
  *
  * @param string $method
- * @return boolean
+ *
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Flow_IControl, placeholderTControl);
 

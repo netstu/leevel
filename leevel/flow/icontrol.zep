@@ -13,34 +13,37 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Flow;
 
 /**
  * 流程控制复用
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2018.03.05
+ * 
  * @version 1.0
  */
 interface IControl
 {
-
     /**
-     * 条件语句 ifs
+     * 条件语句 ifs.
      *
-     * @param boolean $value
+     * @param mixed $value
+     *
      * @return $this
      */
-    public function ifs(boolean value = false);
+    public function ifs(var value = false);
     
     /**
-     * 条件语句 elseIfs
+     * 条件语句 elseIfs.
      *
-     * @param boolean $value
+     * @param mixed $value
+     *
      * @return $this
      */
-    public function elseIfs(boolean value = false);
+    public function elseIfs(var value = false);
     
     /**
      * 条件语句 elses
@@ -59,31 +62,26 @@ interface IControl
     /**
      * 设置当前条件表达式状态
      *
-     * @param boolean $inFlowControl
-     * @param boolean $isFlowControlTrue
+     * @param bool $inFlowControl
+     * @param bool $isFlowControlTrue
+     *
      * @return $this
      */
-    public function setTControl(boolean inFlowControl, boolean isFlowControlTrue);
+    public function setTControl(bool inFlowControl, bool isFlowControlTrue);
     
     /**
-     * 获取当前条件表达式状态
+     * 验证一下条件表达式是否通过.
      *
-     * @return array
+     * @return bool
      */
-    public function getTControl() -> array;
+    public function checkTControl() -> bool;
     
     /**
-     * 验证一下条件表达式是否通过
-     *
-     * @return boolean
-     */
-    public function checkTControl() -> boolean;
-    
-    /**
-     * 占位符
+     * 占位符.
      *
      * @param string $method
-     * @return boolean
+     *
+     * @return bool
      */
-    public function placeholderTControl(string method) -> boolean;
+    public function placeholderTControl(string method) -> bool;
 }

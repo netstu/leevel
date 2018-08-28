@@ -515,7 +515,7 @@ PHP_METHOD(Leevel_Http_Response, setContent) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", NULL, 18, &_12$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$5, "leevel/http/response.zep", 334 TSRMLS_CC);
+		zephir_throw_exception_debug(&_9$$5, "leevel/http/response.zep", 336 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -655,7 +655,7 @@ PHP_METHOD(Leevel_Http_Response, withHeaders) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&headers, 0, "leevel/http/response.zep", 398);
+	zephir_is_iterable(&headers, 0, "leevel/http/response.zep", 400);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&headers), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -769,7 +769,7 @@ PHP_METHOD(Leevel_Http_Response, setCookie) {
 	}
 	zephir_read_static_property_ce(&_1, leevel_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cookie resolver is not set.", "leevel/http/response.zep", 431);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Cookie resolver is not set.", "leevel/http/response.zep", 433);
 		return;
 	}
 	zephir_read_static_property_ce(&_2, leevel_http_response_ce, SL("cookieResolver"), PH_NOISY_CC | PH_READONLY);
@@ -822,7 +822,7 @@ PHP_METHOD(Leevel_Http_Response, withCookies) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	zephir_is_iterable(&cookies, 0, "leevel/http/response.zep", 459);
+	zephir_is_iterable(&cookies, 0, "leevel/http/response.zep", 461);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&cookies), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -1008,7 +1008,7 @@ PHP_METHOD(Leevel_Http_Response, setData) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_9$$9, "__construct", NULL, 21, &_10$$9);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$9, "leevel/http/response.zep", 520 TSRMLS_CC);
+		zephir_throw_exception_debug(&_9$$9, "leevel/http/response.zep", 522 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1169,7 +1169,7 @@ PHP_METHOD(Leevel_Http_Response, setStatusCode) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$4, "__construct", NULL, 21, &_6$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$4, "leevel/http/response.zep", 601 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$4, "leevel/http/response.zep", 603 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1179,7 +1179,7 @@ PHP_METHOD(Leevel_Http_Response, setStatusCode) {
 		if (zephir_array_isset_long(&_8$$5, code)) {
 			zephir_read_static_property_ce(&_9$$5, leevel_http_response_ce, SL("statusTexts"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&_7$$5);
-			zephir_array_fetch_long(&_7$$5, &_9$$5, code, PH_NOISY, "leevel/http/response.zep", 605 TSRMLS_CC);
+			zephir_array_fetch_long(&_7$$5, &_9$$5, code, PH_NOISY, "leevel/http/response.zep", 607 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&_7$$5);
 			ZVAL_STRING(&_7$$5, "unknown status");
@@ -1489,7 +1489,7 @@ PHP_METHOD(Leevel_Http_Response, setNotModified) {
 		RETURN_THIS();
 	}
 	zephir_read_static_property_ce(&_1, leevel_http_response_ce, SL("statusTexts"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_long(&_2, &_1, 304, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 755 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, &_1, 304, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 757 TSRMLS_CC);
 	ZVAL_LONG(&_3, 304);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setstatuscode", NULL, 0, &_3, &_2);
 	zephir_check_call_status();
@@ -1566,13 +1566,14 @@ PHP_METHOD(Leevel_Http_Response, setContentType) {
  */
 PHP_METHOD(Leevel_Http_Response, setContentLength) {
 
-	zval *contentLength_param = NULL, _0, _1, _2;
+	zval *contentLength_param = NULL, _0, _1, _2, _3;
 	zend_long contentLength, ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &contentLength_param);
@@ -1585,10 +1586,12 @@ PHP_METHOD(Leevel_Http_Response, setContentLength) {
 	if (zephir_is_true(&_0)) {
 		RETURN_THIS();
 	}
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "Content-Length");
-	ZVAL_LONG(&_2, contentLength);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setheader", NULL, 0, &_1, &_2);
+	ZVAL_LONG(&_1, contentLength);
+	ZEPHIR_CALL_FUNCTION(&_2, "strval", NULL, 11, &_1);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "Content-Length");
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setheader", NULL, 0, &_3, &_2);
 	zephir_check_call_status();
 	RETURN_THIS();
 
@@ -1952,76 +1955,84 @@ PHP_METHOD(Leevel_Http_Response, isEmpty) {
 }
 
 /**
- * 条件语句 ifs
+ * 条件语句 ifs.
  *
- * @param boolean $value
+ * @param mixed $value
+ *
  * @return $this
  */
 PHP_METHOD(Leevel_Http_Response, ifs) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *value_param = NULL, _0, _1;
-	zend_bool value;
+	zval *value = NULL, value_sub, __$false, _0, _1;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &value_param);
+	zephir_fetch_params(1, 0, 1, &value);
 
-	if (!value_param) {
-		value = 0;
-	} else {
-		value = zephir_get_boolval(value_param);
+	if (!value) {
+		value = &value_sub;
+		value = &__$false;
 	}
 
 
-	ZVAL_BOOL(&_0, 1);
-	if (value) {
-		ZVAL_BOOL(&_1, 1);
+	ZEPHIR_INIT_VAR(&_0);
+	if (zephir_is_true(value)) {
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_BOOL(&_0, 1);
 	} else {
-		ZVAL_BOOL(&_1, 0);
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_BOOL(&_0, 0);
 	}
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_0, &_1);
+	ZVAL_BOOL(&_1, 1);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_1, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
 }
 
 /**
- * 条件语句 elseIfs
+ * 条件语句 elseIfs.
  *
- * @param boolean $value
+ * @param mixed $value
+ *
  * @return $this
  */
 PHP_METHOD(Leevel_Http_Response, elseIfs) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *value_param = NULL, _0, _1;
-	zend_bool value;
+	zval *value = NULL, value_sub, __$false, _0, _1;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &value_param);
+	zephir_fetch_params(1, 0, 1, &value);
 
-	if (!value_param) {
-		value = 0;
-	} else {
-		value = zephir_get_boolval(value_param);
+	if (!value) {
+		value = &value_sub;
+		value = &__$false;
 	}
 
 
-	ZVAL_BOOL(&_0, 1);
-	if (value) {
-		ZVAL_BOOL(&_1, 1);
+	ZEPHIR_INIT_VAR(&_0);
+	if (zephir_is_true(value)) {
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_BOOL(&_0, 1);
 	} else {
-		ZVAL_BOOL(&_1, 0);
+		ZEPHIR_INIT_NVAR(&_0);
+		ZVAL_BOOL(&_0, 0);
 	}
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_0, &_1);
+	ZVAL_BOOL(&_1, 1);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_1, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -2034,24 +2045,21 @@ PHP_METHOD(Leevel_Http_Response, elseIfs) {
  */
 PHP_METHOD(Leevel_Http_Response, elses) {
 
-	zval _0, _1, _2, _3;
+	zval _0, _1, _2;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "gettcontrol", NULL, 0);
-	zephir_check_call_status();
-	ZEPHIR_OBS_VAR(&_1);
-	zephir_array_fetch_long(&_1, &_0, 1, PH_NOISY, "leevel/http/response.zep", 980 TSRMLS_CC);
-	ZVAL_BOOL(&_2, 1);
-	ZVAL_BOOL(&_3, !zephir_is_true(&_1));
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_2, &_3);
+	ZEPHIR_OBS_VAR(&_0);
+	zephir_read_property(&_0, this_ptr, SL("isFlowControlTrue"), PH_NOISY_CC);
+	ZVAL_BOOL(&_1, 1);
+	ZVAL_BOOL(&_2, !zephir_is_true(&_0));
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "settcontrol", NULL, 0, &_1, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -2084,8 +2092,9 @@ PHP_METHOD(Leevel_Http_Response, endIfs) {
 /**
  * 设置当前条件表达式状态
  *
- * @param boolean $inFlowControl
- * @param boolean $isFlowControlTrue
+ * @param bool $inFlowControl
+ * @param bool $isFlowControlTrue
+ *
  * @return $this
  */
 PHP_METHOD(Leevel_Http_Response, setTControl) {
@@ -2118,34 +2127,9 @@ PHP_METHOD(Leevel_Http_Response, setTControl) {
 }
 
 /**
- * 获取当前条件表达式状态
- *
- * @return array
- */
-PHP_METHOD(Leevel_Http_Response, getTControl) {
-
-	zval _0;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-
-	ZEPHIR_MM_GROW();
-
-	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&_0);
-	zephir_read_property(&_0, this_ptr, SL("inFlowControl"), PH_NOISY_CC);
-	zephir_array_fast_append(return_value, &_0);
-	ZEPHIR_OBS_NVAR(&_0);
-	zephir_read_property(&_0, this_ptr, SL("isFlowControlTrue"), PH_NOISY_CC);
-	zephir_array_fast_append(return_value, &_0);
-	RETURN_MM();
-
-}
-
-/**
  * 验证一下条件表达式是否通过
  *
- * @return boolean
+ * @return bool
  */
 PHP_METHOD(Leevel_Http_Response, checkTControl) {
 
@@ -2295,7 +2279,7 @@ PHP_METHOD(Leevel_Http_Response, callStaticMacro) {
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, leevel_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1081 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1073 TSRMLS_CC);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_2$$3, &args);
 		zephir_check_call_status();
 		RETURN_MM();
@@ -2308,7 +2292,7 @@ PHP_METHOD(Leevel_Http_Response, callStaticMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_5);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_3, "leevel/http/response.zep", 1084 TSRMLS_CC);
+	zephir_throw_exception_debug(&_3, "leevel/http/response.zep", 1076 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -2358,10 +2342,10 @@ PHP_METHOD(Leevel_Http_Response, callMacro) {
 	if (zephir_is_true(&_0)) {
 		zephir_read_static_property_ce(&_1$$3, leevel_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_2$$3);
-		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "leevel/http/response.zep", 1100 TSRMLS_CC);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "leevel/http/response.zep", 1092 TSRMLS_CC);
 		if (zephir_instance_of_ev(&_2$$3, zend_ce_closure TSRMLS_CC)) {
 			zephir_read_static_property_ce(&_3$$4, leevel_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1101 TSRMLS_CC);
+			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1093 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&_5$$4, &_4$$4, "bindto", NULL, 0, this_ptr);
 			zephir_check_call_status();
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_5$$4, &args);
@@ -2369,7 +2353,7 @@ PHP_METHOD(Leevel_Http_Response, callMacro) {
 			RETURN_MM();
 		} else {
 			zephir_read_static_property_ce(&_6$$5, leevel_http_response_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1103 TSRMLS_CC);
+			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "leevel/http/response.zep", 1095 TSRMLS_CC);
 			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_7$$5, &args);
 			zephir_check_call_status();
 			RETURN_MM();
@@ -2383,7 +2367,7 @@ PHP_METHOD(Leevel_Http_Response, callMacro) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 2, &_10);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_8, "leevel/http/response.zep", 1107 TSRMLS_CC);
+	zephir_throw_exception_debug(&_8, "leevel/http/response.zep", 1099 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -2441,17 +2425,19 @@ PHP_METHOD(Leevel_Http_Response, normalizeDateTime) {
  */
 PHP_METHOD(Leevel_Http_Response, contentToJson) {
 
-	zend_bool _0;
+	zend_bool _0, _1;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *content, content_sub, _1;
+	zval *content = NULL, content_sub, _3, _2$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&content_sub);
-	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_2$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &content);
 
+	ZEPHIR_SEPARATE_PARAM(content);
 
 
 	_0 = Z_TYPE_P(content) == IS_OBJECT;
@@ -2463,8 +2449,17 @@ PHP_METHOD(Leevel_Http_Response, contentToJson) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZVAL_LONG(&_1, 256);
-	zephir_json_encode(return_value, content, zephir_get_intval(&_1) );
+	_1 = Z_TYPE_P(content) == IS_OBJECT;
+	if (_1) {
+		_1 = zephir_instance_of_ev(content, leevel_support_iarray_ce TSRMLS_CC);
+	}
+	if (_1) {
+		ZEPHIR_CALL_METHOD(&_2$$4, content, "toarray", NULL, 0);
+		zephir_check_call_status();
+		ZEPHIR_CPY_WRT(content, &_2$$4);
+	}
+	ZVAL_LONG(&_3, 256);
+	zephir_json_encode(return_value, content, zephir_get_intval(&_3) );
 	RETURN_MM();
 
 }
@@ -2477,7 +2472,7 @@ PHP_METHOD(Leevel_Http_Response, contentToJson) {
  */
 PHP_METHOD(Leevel_Http_Response, contentShouldJson) {
 
-	zend_bool _0, _1, _2, _3, _4, _5;
+	zend_bool _0, _1, _2, _3, _4, _5, _6, _7;
 	zval *content, content_sub;
 	zval *this_ptr = getThis();
 
@@ -2495,7 +2490,7 @@ PHP_METHOD(Leevel_Http_Response, contentShouldJson) {
 	if (!(_1)) {
 		_2 = Z_TYPE_P(content) == IS_OBJECT;
 		if (_2) {
-			_2 = zephir_instance_of_ev(content, spl_ce_ArrayObject TSRMLS_CC);
+			_2 = zephir_instance_of_ev(content, leevel_support_iarray_ce TSRMLS_CC);
 		}
 		_1 = _2;
 	}
@@ -2503,15 +2498,23 @@ PHP_METHOD(Leevel_Http_Response, contentShouldJson) {
 	if (!(_3)) {
 		_4 = Z_TYPE_P(content) == IS_OBJECT;
 		if (_4) {
-			_4 = zephir_is_instance_of(content, SL("JsonSerializable") TSRMLS_CC);
+			_4 = zephir_instance_of_ev(content, spl_ce_ArrayObject TSRMLS_CC);
 		}
 		_3 = _4;
 	}
 	_5 = _3;
 	if (!(_5)) {
-		_5 = Z_TYPE_P(content) == IS_ARRAY;
+		_6 = Z_TYPE_P(content) == IS_OBJECT;
+		if (_6) {
+			_6 = zephir_is_instance_of(content, SL("JsonSerializable") TSRMLS_CC);
+		}
+		_5 = _6;
 	}
-	RETURN_BOOL(_5);
+	_7 = _5;
+	if (!(_7)) {
+		_7 = Z_TYPE_P(content) == IS_ARRAY;
+	}
+	RETURN_BOOL(_7);
 
 }
 

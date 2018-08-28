@@ -26,7 +26,6 @@ ZEPHIR_INIT_FUNCS(leevel_flow_icontrol_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Flow_IControl, elses, NULL)
 	PHP_ABSTRACT_ME(Leevel_Flow_IControl, endIfs, NULL)
 	PHP_ABSTRACT_ME(Leevel_Flow_IControl, setTControl, arginfo_leevel_flow_icontrol_settcontrol)
-	PHP_ABSTRACT_ME(Leevel_Flow_IControl, getTControl, NULL)
 	PHP_ABSTRACT_ME(Leevel_Flow_IControl, checkTControl, NULL)
 	PHP_ABSTRACT_ME(Leevel_Flow_IControl, placeholderTControl, arginfo_leevel_flow_icontrol_placeholdertcontrol)
 	PHP_FE_END

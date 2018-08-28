@@ -54,7 +54,6 @@ PHP_METHOD(Leevel_Http_Response, elseIfs);
 PHP_METHOD(Leevel_Http_Response, elses);
 PHP_METHOD(Leevel_Http_Response, endIfs);
 PHP_METHOD(Leevel_Http_Response, setTControl);
-PHP_METHOD(Leevel_Http_Response, getTControl);
 PHP_METHOD(Leevel_Http_Response, checkTControl);
 PHP_METHOD(Leevel_Http_Response, placeholderTControl);
 PHP_METHOD(Leevel_Http_Response, macro);
@@ -285,7 +284,6 @@ ZEPHIR_INIT_FUNCS(leevel_http_response_method_entry) {
 	PHP_ME(Leevel_Http_Response, elses, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, endIfs, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, setTControl, arginfo_leevel_http_response_settcontrol, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Http_Response, getTControl, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, checkTControl, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, placeholderTControl, arginfo_leevel_http_response_placeholdertcontrol, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Http_Response, macro, arginfo_leevel_http_response_macro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)

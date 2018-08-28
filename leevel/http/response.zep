@@ -331,7 +331,9 @@ class Response implements IControl, IMacro, IResponse
             content, 
             "__toString"
         ])) {
-            throw new UnexpectedValueException(sprintf("The Response content must be a scalar or object implementing __toString(), %s given.", gettype(content)));
+            throw new UnexpectedValueException(
+                sprintf("The Response content must be a scalar or object implementing __toString(), %s given.", gettype(content))
+            );
         }
 
         let this->content = strval(content);
@@ -795,7 +797,7 @@ class Response implements IControl, IMacro, IResponse
             return this;
         }
 
-        this->setHeader("Content-Length", contentLength);
+        this->setHeader("Content-Length", strval(contentLength));
 
         return this;
     }
@@ -949,25 +951,27 @@ class Response implements IControl, IMacro, IResponse
     }
 
     /**
-     * 条件语句 ifs
+     * 条件语句 ifs.
      *
-     * @param boolean $value
+     * @param mixed $value
+     *
      * @return $this
      */
-    public function ifs(boolean value = false)
+    public function ifs(var value = false)
     {
-        return this->setTControl(true, value);
+        return this->setTControl(true, value ? true : false);
     }
     
     /**
-     * 条件语句 elseIfs
+     * 条件语句 elseIfs.
      *
-     * @param boolean $value
+     * @param mixed $value
+     *
      * @return $this
      */
-    public function elseIfs(boolean value = false)
+    public function elseIfs(var value = false)
     {
-        return this->setTControl(true, value);
+        return this->setTControl(true, value ? true : false);
     }
     
     /**
@@ -977,7 +981,7 @@ class Response implements IControl, IMacro, IResponse
      */
     public function elses()
     {
-        return this->setTControl(true, ! (this->getTControl()[1]));
+        return this->setTControl(true, !this->isFlowControlTrue);
     }
     
     /**
@@ -993,11 +997,12 @@ class Response implements IControl, IMacro, IResponse
     /**
      * 设置当前条件表达式状态
      *
-     * @param boolean $inFlowControl
-     * @param boolean $isFlowControlTrue
+     * @param bool $inFlowControl
+     * @param bool $isFlowControlTrue
+     *
      * @return $this
      */
-    public function setTControl(boolean inFlowControl, boolean isFlowControlTrue)
+    public function setTControl(bool inFlowControl, bool isFlowControlTrue)
     {
         let this->inFlowControl = inFlowControl;
         let this->isFlowControlTrue = isFlowControlTrue;
@@ -1006,24 +1011,11 @@ class Response implements IControl, IMacro, IResponse
     }
     
     /**
-     * 获取当前条件表达式状态
-     *
-     * @return array
-     */
-    public function getTControl() -> array
-    {
-        return [
-            this->inFlowControl, 
-            this->isFlowControlTrue
-        ];
-    }
-    
-    /**
      * 验证一下条件表达式是否通过
      *
-     * @return boolean
+     * @return bool
      */
-    public function checkTControl() -> boolean
+    public function checkTControl() -> bool
     {
         return this->inFlowControl && ! (this->isFlowControlTrue);
     }
@@ -1135,6 +1127,10 @@ class Response implements IControl, IMacro, IResponse
             return content->toJson();
         }
 
+        if is_object(content) && content instanceof IArray {
+            let content = content->toArray();
+        }
+
         return json_encode(content, JSON_UNESCAPED_UNICODE);
     }
     
@@ -1147,6 +1143,7 @@ class Response implements IControl, IMacro, IResponse
     protected function contentShouldJson(var content) -> boolean
     {
         return (is_object(content) && content instanceof IJson) || 
+            (is_object(content) && content instanceof IArray) || 
             (is_object(content) && content instanceof ArrayObject) || 
             (is_object(content) && content instanceof JsonSerializable) || 
             is_array(content);

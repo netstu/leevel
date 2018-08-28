@@ -22,8 +22,9 @@
  * auth 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2018.01.28
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Auth_Provider_Register) {
