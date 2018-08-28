@@ -336,7 +336,7 @@ PHP_METHOD(Leevel_Http_ApiResponse, unprocessableEntity) {
 	zephir_array_update_string(&_2, SL("errors"), &tmpArr, PH_COPY | PH_SEPARATE);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setdata", NULL, 0, &_2);
 	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
+	RETURN_THIS();
 
 }
 

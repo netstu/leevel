@@ -194,7 +194,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, routerClosure) {
 
 
 	object_init_ex(return_value, leevel_router_router_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 122, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 123, project);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -301,7 +301,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, leevel_router_url_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 123, &request, &options);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 124, &request, &options);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -478,13 +478,13 @@ PHP_METHOD(Leevel_Router_Provider_Register, responseClosure) {
 	ZVAL_STRING(&_0, "redirect");
 	ZEPHIR_CALL_METHOD(&_2, project, "make", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &response, "__construct", NULL, 124, &_1, &_2);
+	ZEPHIR_CALL_METHOD(NULL, &response, "__construct", NULL, 125, &_1, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "view\\action_success");
 	ZEPHIR_CALL_METHOD(&_4, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_3, &response, "setviewsuccesstemplate", NULL, 125, &_4);
+	ZEPHIR_CALL_METHOD(&_3, &response, "setviewsuccesstemplate", NULL, 126, &_4);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "view\\action_fail");

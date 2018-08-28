@@ -27,7 +27,6 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithCallable);
 PHP_METHOD(Leevel_Http_Bag, filterValueWithFilterVar);
 PHP_METHOD(Leevel_Http_Bag, parseFilterId);
 PHP_METHOD(Leevel_Http_Bag, isInt);
-PHP_METHOD(Leevel_Http_Bag, formatOptions);
 PHP_METHOD(Leevel_Http_Bag, getPartData);
 PHP_METHOD(Leevel_Http_Bag, normalize);
 zend_object *zephir_init_properties_Leevel_Http_Bag(zend_class_entry *class_type TSRMLS_DC);
@@ -113,14 +112,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_bag_isint, 0, 0, 1)
 	ZEND_ARG_INFO(0, value)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_bag_formatoptions, 0, 0, 2)
-	ZEND_ARG_INFO(0, value)
-	ZEND_ARG_INFO(0, options)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_bag_getpartdata, 0, 0, 2)
 	ZEND_ARG_INFO(0, key)
 	ZEND_ARG_INFO(0, value)
+	ZEND_ARG_INFO(0, defaults)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_http_bag_normalize, 0, 0, 1)
@@ -152,7 +147,6 @@ ZEPHIR_INIT_FUNCS(leevel_http_bag_method_entry) {
 	PHP_ME(Leevel_Http_Bag, filterValueWithFilterVar, arginfo_leevel_http_bag_filtervaluewithfiltervar, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Http_Bag, parseFilterId, arginfo_leevel_http_bag_parsefilterid, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Http_Bag, isInt, arginfo_leevel_http_bag_isint, ZEND_ACC_PROTECTED)
-	PHP_ME(Leevel_Http_Bag, formatOptions, arginfo_leevel_http_bag_formatoptions, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Http_Bag, getPartData, arginfo_leevel_http_bag_getpartdata, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Http_Bag, normalize, arginfo_leevel_http_bag_normalize, ZEND_ACC_PROTECTED)
 	PHP_FE_END

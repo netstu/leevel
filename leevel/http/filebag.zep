@@ -72,7 +72,9 @@ class FileBag extends Bag
     public function set(var key, var value) -> void
     {
         if ! (is_array(value)) && ! (is_object(value) && value instanceof UploadedFile) {
-            throw new InvalidArgumentException("An uploaded file must be an array or an instance of UploadedFile.");
+            throw new InvalidArgumentException(
+                "An uploaded file must be an array or an instance of UploadedFile."
+            );
         }
 
         parent::set(key, this->convertFile(value));
@@ -156,7 +158,9 @@ class FileBag extends Bag
 
         let keys = this->normalizeKey(result);
         if keys !== self::fileKeys {
-            throw new InvalidArgumentException(sprintf("An array uploaded file must be contain keys %s.", implode(",", self::fileKeys)));
+            throw new InvalidArgumentException(
+                sprintf("An array uploaded file must be contain keys %s.", implode(",", self::fileKeys))
+            );
         }
 
         return result;
@@ -183,9 +187,18 @@ class FileBag extends Bag
                         let element = [];
 
                         for fileKey in self::fileKeys {
-                            if ! array_key_exists(index, value[fileKey]) {
-                                throw new InvalidArgumentException(sprintf("An uploaded file must be contain key %s.", fileKey));
+                            if !array_key_exists(fileKey, value) {
+                                throw new InvalidArgumentException(
+                                    sprintf("An uploaded file must be contain key %s.", fileKey)
+                                );
                             }
+
+                            if ! array_key_exists(index, value[fileKey]) {
+                                throw new InvalidArgumentException(
+                                    sprintf("An uploaded file must be contain %s in key %s.", index, fileKey)
+                                );
+                            }
+
                             let element[fileKey] = isset value[fileKey][index] ? value[fileKey][index] : "";
                         }
 

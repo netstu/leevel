@@ -341,7 +341,7 @@ PHP_METHOD(Leevel_Http_Bag, filter) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval options;
-	zval *key = NULL, key_sub, *defaults = NULL, defaults_sub, *filter = NULL, filter_sub, *options_param = NULL, __$null, tmp, tmpKey, result, part, _0, _1, _2, _3, _4, _5$$4, _6$$5, _7$$5;
+	zval *key = NULL, key_sub, *defaults = NULL, defaults_sub, *filter = NULL, filter_sub, *options_param = NULL, __$null, tmp, tmpKey, result, part, _0, _1, _2, _3, _4, _5$$4, _6$$5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&key_sub);
@@ -359,7 +359,6 @@ PHP_METHOD(Leevel_Http_Bag, filter) {
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_7$$5);
 	ZVAL_UNDEF(&options);
 
 	ZEPHIR_MM_GROW();
@@ -423,17 +422,14 @@ PHP_METHOD(Leevel_Http_Bag, filter) {
 		ZEPHIR_CPY_WRT(&result, defaults);
 	}
 	if (zephir_is_true(&part)) {
-		ZEPHIR_CALL_METHOD(&_5$$4, this_ptr, "getpartdata", NULL, 0, &part, &result);
+		ZEPHIR_CALL_METHOD(&_5$$4, this_ptr, "getpartdata", NULL, 0, &part, &result, defaults);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&result, &_5$$4);
 	}
 	if (zephir_is_true(filter)) {
-		ZEPHIR_CALL_METHOD(&_6$$5, this_ptr, "formatoptions", NULL, 0, &result, &options);
+		ZEPHIR_CALL_METHOD(&_6$$5, this_ptr, "filtervalue", NULL, 0, &result, defaults, filter, &options);
 		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(&options, &_6$$5);
-		ZEPHIR_CALL_METHOD(&_7$$5, this_ptr, "filtervalue", NULL, 0, &result, defaults, filter, &options);
-		zephir_check_call_status();
-		ZEPHIR_CPY_WRT(&result, &_7$$5);
+		ZEPHIR_CPY_WRT(&result, &_6$$5);
 	}
 	RETURN_CCTOR(&result);
 
@@ -668,21 +664,21 @@ PHP_METHOD(Leevel_Http_Bag, parseFilter) {
  */
 PHP_METHOD(Leevel_Http_Bag, filterValue) {
 
-	zend_bool _3$$3;
-	zephir_fcall_cache_entry *_5 = NULL, *_7 = NULL, *_9 = NULL;
+	zend_bool _1$$3, _4$$3;
+	zephir_fcall_cache_entry *_6 = NULL, *_8 = NULL, *_10 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval filters, options;
-	zval *value = NULL, value_sub, *defaults, defaults_sub, *filters_param = NULL, *options_param = NULL, item, *_0, _1$$3, _2$$3, _4$$4, _6$$5, _8$$6;
+	zval *value = NULL, value_sub, *defaults, defaults_sub, *filters_param = NULL, *options_param = NULL, item, *_0, _2$$3, _3$$3, _5$$4, _7$$5, _9$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&value_sub);
 	ZVAL_UNDEF(&defaults_sub);
 	ZVAL_UNDEF(&item);
-	ZVAL_UNDEF(&_1$$3);
 	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_4$$4);
-	ZVAL_UNDEF(&_6$$5);
-	ZVAL_UNDEF(&_8$$6);
+	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_5$$4);
+	ZVAL_UNDEF(&_7$$5);
+	ZVAL_UNDEF(&_9$$6);
 	ZVAL_UNDEF(&filters);
 	ZVAL_UNDEF(&options);
 
@@ -699,31 +695,35 @@ PHP_METHOD(Leevel_Http_Bag, filterValue) {
 	}
 
 
-	zephir_is_iterable(&filters, 0, "leevel/http/bag.zep", 334);
+	zephir_is_iterable(&filters, 0, "leevel/http/bag.zep", 332);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&filters), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _0);
-		ZEPHIR_INIT_NVAR(&_1$$3);
-		ZVAL_STRING(&_1$$3, "=");
-		ZEPHIR_INIT_NVAR(&_2$$3);
-		zephir_fast_strpos(&_2$$3, &item, &_1$$3, 0 );
-		_3$$3 = zephir_is_scalar(value);
-		if (_3$$3) {
-			_3$$3 = !(ZEPHIR_IS_EMPTY(&item));
+		_1$$3 = Z_TYPE_P(&item) == IS_STRING;
+		if (_1$$3) {
+			ZEPHIR_INIT_NVAR(&_2$$3);
+			ZVAL_STRING(&_2$$3, "=");
+			ZEPHIR_INIT_NVAR(&_3$$3);
+			zephir_fast_strpos(&_3$$3, &item, &_2$$3, 0 );
+			_1$$3 = !ZEPHIR_IS_FALSE_IDENTICAL(&_3$$3);
 		}
-		if (!ZEPHIR_IS_FALSE_IDENTICAL(&_2$$3)) {
-			ZEPHIR_CALL_METHOD(&_4$$4, this_ptr, "filtervaluewithfunc", &_5, 0, value, &item);
+		_4$$3 = zephir_is_scalar(value);
+		if (_4$$3) {
+			_4$$3 = !(ZEPHIR_IS_EMPTY(&item));
+		}
+		if (_1$$3) {
+			ZEPHIR_CALL_METHOD(&_5$$4, this_ptr, "filtervaluewithfunc", &_6, 0, value, &item);
 			zephir_check_call_status();
-			ZEPHIR_CPY_WRT(value, &_4$$4);
+			ZEPHIR_CPY_WRT(value, &_5$$4);
 		} else if (zephir_is_callable(&item TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(&_6$$5, this_ptr, "filtervaluewithcallable", &_7, 0, value, &item);
+			ZEPHIR_CALL_METHOD(&_7$$5, this_ptr, "filtervaluewithcallable", &_8, 0, value, &item);
 			zephir_check_call_status();
-			ZEPHIR_CPY_WRT(value, &_6$$5);
-		} else if (_3$$3) {
-			ZEPHIR_CALL_METHOD(&_8$$6, this_ptr, "filtervaluewithfiltervar", &_9, 0, value, &item, &options);
+			ZEPHIR_CPY_WRT(value, &_7$$5);
+		} else if (_4$$3) {
+			ZEPHIR_CALL_METHOD(&_9$$6, this_ptr, "filtervaluewithfiltervar", &_10, 0, value, &item, &options);
 			zephir_check_call_status();
-			ZEPHIR_CPY_WRT(value, &_8$$6);
+			ZEPHIR_CPY_WRT(value, &_9$$6);
 			if (ZEPHIR_IS_FALSE_IDENTICAL(value)) {
 				ZEPHIR_CPY_WRT(value, defaults);
 				break;
@@ -796,9 +796,9 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFunc) {
 	ZEPHIR_INIT_NVAR(&tmp);
 	zephir_fast_explode_str(&tmp, SL("="), filter, LONG_MAX TSRMLS_CC);
 	ZEPHIR_OBS_NVAR(filter);
-	zephir_array_fetch_long(filter, &tmp, 0, PH_NOISY, "leevel/http/bag.zep", 349 TSRMLS_CC);
+	zephir_array_fetch_long(filter, &tmp, 0, PH_NOISY, "leevel/http/bag.zep", 347 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&extend);
-	zephir_array_fetch_long(&extend, &tmp, 1, PH_NOISY, "leevel/http/bag.zep", 350 TSRMLS_CC);
+	zephir_array_fetch_long(&extend, &tmp, 1, PH_NOISY, "leevel/http/bag.zep", 348 TSRMLS_CC);
 	if (ZEPHIR_IS_STRING(filter, "default")) {
 		_0$$3 = !(zephir_is_numeric(&extend));
 		if (_0$$3) {
@@ -832,7 +832,7 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFunc) {
 		if (!ZEPHIR_IS_FALSE_IDENTICAL(&_7$$5)) {
 			ZEPHIR_INIT_NVAR(&tmpExtend);
 			zephir_fast_explode_str(&tmpExtend, SL(","), &extend, LONG_MAX TSRMLS_CC);
-			zephir_is_iterable(&tmpExtend, 0, "leevel/http/bag.zep", 372);
+			zephir_is_iterable(&tmpExtend, 0, "leevel/http/bag.zep", 370);
 			ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmpExtend), _8$$6)
 			{
 				ZEPHIR_INIT_NVAR(&v);
@@ -854,11 +854,11 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFunc) {
 					_11$$7 = zephir_is_true(&_9$$7);
 				}
 				if (_11$$7) {
-					zephir_array_append(&result, &v, PH_SEPARATE, "leevel/http/bag.zep", 366);
+					zephir_array_append(&result, &v, PH_SEPARATE, "leevel/http/bag.zep", 364);
 				} else {
 					ZEPHIR_INIT_LNVAR(_14$$9);
 					ZEPHIR_CONCAT_SVS(&_14$$9, "'", &v, "'");
-					zephir_array_append(&result, &_14$$9, PH_SEPARATE, "leevel/http/bag.zep", 368);
+					zephir_array_append(&result, &_14$$9, PH_SEPARATE, "leevel/http/bag.zep", 366);
 				}
 			} ZEND_HASH_FOREACH_END();
 			ZEPHIR_INIT_NVAR(&v);
@@ -888,7 +888,7 @@ PHP_METHOD(Leevel_Http_Bag, filterValueWithFunc) {
 		ZEPHIR_INIT_VAR(&_21$$12);
 		ZEPHIR_INIT_VAR(&_22$$12);
 		ZVAL_STRING(&_22$$12, "if (! function_exists('zephir_assign')) {\n                function zephir_assign($value, $evals) {\n                    eval($evals);\n                    return $value;\n                }\n            }");
-		zephir_eval_php(&_22$$12, &_21$$12, "/data/codes/queryyetsimple/leevel/http/bag.zep:384" TSRMLS_CC);
+		zephir_eval_php(&_22$$12, &_21$$12, "/data/codes/queryyetsimple/leevel/http/bag.zep:382" TSRMLS_CC);
 		zend_update_static_property(leevel_http_bag_ce, ZEND_STRL("zephirAssign"), &__$true);
 	}
 	ZEPHIR_CALL_FUNCTION(&_23, "zephir_assign", NULL, 0, value, &evals);
@@ -1029,85 +1029,44 @@ PHP_METHOD(Leevel_Http_Bag, isInt) {
 }
 
 /**
- * 格式化参数
- *
- * @param mixed $value
- * @param mixed $options
- * @since array
- */
-PHP_METHOD(Leevel_Http_Bag, formatOptions) {
-
-	zend_bool _0, _1;
-	zval *value, value_sub, *options = NULL, options_sub, _2$$4;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&value_sub);
-	ZVAL_UNDEF(&options_sub);
-	ZVAL_UNDEF(&_2$$4);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &value, &options);
-
-	ZEPHIR_SEPARATE_PARAM(options);
-
-
-	_0 = !(Z_TYPE_P(options) == IS_ARRAY);
-	if (_0) {
-		_0 = zephir_is_true(options);
-	}
-	if (_0) {
-		ZEPHIR_INIT_NVAR(options);
-		zephir_create_array(options, 1, 0 TSRMLS_CC);
-		zephir_array_update_string(options, SL("flags"), options, PH_COPY | PH_SEPARATE);
-	}
-	_1 = Z_TYPE_P(value) == IS_ARRAY;
-	if (_1) {
-		_1 = !(zephir_array_isset_string(options, SL("flags")));
-	}
-	if (_1) {
-		ZEPHIR_INIT_VAR(&_2$$4);
-		ZVAL_LONG(&_2$$4, 16777216);
-		zephir_array_update_string(options, SL("flags"), &_2$$4, PH_COPY | PH_SEPARATE);
-	}
-	RETVAL_ZVAL(options, 1, 0);
-	RETURN_MM();
-
-}
-
-/**
  * 返回部分数组数据
  *
  * @param string $key
  * @param mixed $value
+ * @param mixed  $defaults
  * @return mixed
  */
 PHP_METHOD(Leevel_Http_Bag, getPartData) {
 
 	zend_bool _1$$4;
-	zval *key, key_sub, *value = NULL, value_sub, defaults, parts, item, *_0, _2$$4;
+	zval *key, key_sub, *value = NULL, value_sub, *defaults = NULL, defaults_sub, __$null, parts, item, *_0, _2$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&key_sub);
 	ZVAL_UNDEF(&value_sub);
-	ZVAL_UNDEF(&defaults);
+	ZVAL_UNDEF(&defaults_sub);
+	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&parts);
 	ZVAL_UNDEF(&item);
 	ZVAL_UNDEF(&_2$$4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &key, &value);
+	zephir_fetch_params(1, 2, 1, &key, &value, &defaults);
 
 	ZEPHIR_SEPARATE_PARAM(value);
+	if (!defaults) {
+		defaults = &defaults_sub;
+		defaults = &__$null;
+	}
 
 
 	if (Z_TYPE_P(value) != IS_ARRAY) {
 		RETVAL_ZVAL(value, 1, 0);
 		RETURN_MM();
 	}
-	ZEPHIR_CPY_WRT(&defaults, value);
 	ZEPHIR_INIT_VAR(&parts);
 	zephir_fast_explode_str(&parts, SL("."), key, LONG_MAX TSRMLS_CC);
-	zephir_is_iterable(&parts, 0, "leevel/http/bag.zep", 494);
+	zephir_is_iterable(&parts, 0, "leevel/http/bag.zep", 470);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&parts), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -1117,9 +1076,10 @@ PHP_METHOD(Leevel_Http_Bag, getPartData) {
 			_1$$4 = !(zephir_array_isset(value, &item));
 		}
 		if (_1$$4) {
-			RETURN_CCTOR(&defaults);
+			RETVAL_ZVAL(defaults, 1, 0);
+			RETURN_MM();
 		}
-		zephir_array_fetch(&_2$$4, value, &item, PH_NOISY | PH_READONLY, "leevel/http/bag.zep", 491 TSRMLS_CC);
+		zephir_array_fetch(&_2$$4, value, &item, PH_NOISY | PH_READONLY, "leevel/http/bag.zep", 467 TSRMLS_CC);
 		ZEPHIR_CPY_WRT(value, &_2$$4);
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);

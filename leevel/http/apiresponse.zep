@@ -149,6 +149,8 @@ class ApiResponse extends JsonResponse
             "message" : this->parseErrorMessage(message), 
             "errors" : tmpArr
         ]);
+
+        return this;
     }
     
     /**

@@ -582,7 +582,7 @@ PHP_METHOD(Leevel_Router_ResponseFactory, download) {
 	if (!(Z_TYPE_P(&name) == IS_NULL)) {
 		ZEPHIR_INIT_VAR(&_4$$3);
 		ZVAL_STRING(&_4$$3, "attachment");
-		ZEPHIR_RETURN_CALL_METHOD(&response, "setcontentdisposition", NULL, 126, &_4$$3, &name);
+		ZEPHIR_RETURN_CALL_METHOD(&response, "setcontentdisposition", NULL, 127, &_4$$3, &name);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

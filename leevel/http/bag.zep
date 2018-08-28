@@ -186,12 +186,10 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
         let result = array_key_exists(key, this->elements) ? this->elements[key] : defaults;
 
         if part {
-            let result = this->getPartData(part, result);
+            let result = this->getPartData(part, result, defaults);
         }
 
         if filter {
-            let options = this->formatOptions(result, options);
-
             let result = this->filterValue(result, defaults, filter, options);
         }
 
@@ -317,7 +315,7 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
         var item;
     
         for item in filters {
-            if strpos(item, "=") !== false {
+            if is_string(item) && strpos(item, "=") !== false {
                 let value = this->filterValueWithFunc(value, item);
             } elseif is_callable(item) {
                 let value = this->filterValueWithCallable(value, item);
@@ -449,43 +447,21 @@ class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializab
     }
     
     /**
-     * 格式化参数
-     *
-     * @param mixed $value
-     * @param mixed $options
-     * @since array
-     */
-    protected function formatOptions(var value, var options)
-    {
-        if ! is_array(options) && options {
-            let options = [
-                "flags" : options
-            ];
-        }
-
-        if is_array(value) && ! isset options["flags"] {
-            let options["flags"] = FILTER_REQUIRE_ARRAY;
-        }
-
-        return options;
-    }
-    
-    /**
      * 返回部分数组数据
      *
      * @param string $key
      * @param mixed $value
+     * @param mixed  $defaults
      * @return mixed
      */
-    protected function getPartData(var key, var value)
+    protected function getPartData(var key, var value, var defaults = null)
     {
-        var defaults, parts, item;
+        var parts, item;
     
         if typeof value != "array" {
             return value;
         }
 
-        let defaults = value;
         let parts = explode(".", key);
 
         for item in parts {

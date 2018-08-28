@@ -96,8 +96,14 @@ class FileResponse extends Response
             if is_object(file) && (file instanceof SplFileInfo || file instanceof SplFileObject) {
                 let files = new File(file->getPathname());
             } else {
+                if (!is_readable(file)) {
+                    throw new FileException("File must be readable.");
+                }
+
                 let files = new File(strval(file));
             }
+        } else {
+            let files = file;
         }
 
         if ! (files->isReadable()) {
@@ -126,7 +132,7 @@ class FileResponse extends Response
      *
      * @return \Leevel\Http\File
      */
-    public function getFile()
+    public function getFile() -> <File>
     {
         return this->file;
     }
@@ -178,6 +184,8 @@ class FileResponse extends Response
         if content !== null {
             throw new LogicException("The content cannot be set on a FileResponse instance.");
         }
+
+        return this;
     }
     
     /**
@@ -212,7 +220,10 @@ class FileResponse extends Response
             throw new InvalidArgumentException("The disposition type is invalid.");
         }
 
-        this->headers->set("Content-Disposition", sprintf("%s; filename=\"%s\"", disposition, str_replace("\"", "\\\"", basename(filename))));
+        this->headers->set(
+            "Content-Disposition",
+            sprintf("%s; filename=\"%s\"", disposition, str_replace("\"", "\\\"", basename(filename)))
+        );
 
         return this;
     }
