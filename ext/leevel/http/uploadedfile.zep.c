@@ -456,7 +456,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, getErrorMessage) {
 	if (zephir_array_isset(&_1, &errorCode)) {
 		zephir_read_static_property_ce(&_2, leevel_http_uploadedfile_ce, SL("errors"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&message);
-		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 218 TSRMLS_CC);
+		zephir_array_fetch(&message, &_2, &errorCode, PH_NOISY, "leevel/http/uploadedfile.zep", 219 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&message);
 		ZVAL_STRING(&message, "The file %s was not uploaded due to an unknown error.");
@@ -484,7 +484,7 @@ void zephir_init_static_properties_Leevel_Http_UploadedFile(TSRMLS_D) {
 	add_index_stringl(&_0, 3, SL("The file %s was only partially uploaded."));
 	add_index_stringl(&_0, 4, SL("No file was uploaded."));
 	add_index_stringl(&_0, 7, SL("The file %s could not be written on disk."));
-	add_index_stringl(&_0, 5, SL("File could not be uploaded: missing temporary directory."));
+	add_index_stringl(&_0, 6, SL("File could not be uploaded: missing temporary directory."));
 	add_index_stringl(&_0, 8, SL("File upload was stopped by a PHP extension."));
 	zend_update_static_property(leevel_http_uploadedfile_ce, ZEND_STRL("errors"), &_0);
 	ZEPHIR_MM_RESTORE();

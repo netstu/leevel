@@ -60,7 +60,7 @@ class UploadedFile extends File
         3 : "The file %s was only partially uploaded.", 
         4 : "No file was uploaded.", 
         7 : "The file %s could not be written on disk.", 
-        5 : "File could not be uploaded: missing temporary directory.", 
+        6 : "File could not be uploaded: missing temporary directory.", 
         8 : "File upload was stopped by a PHP extension."
     ];
 
@@ -176,6 +176,7 @@ class UploadedFile extends File
         var iniMax, max;
     
         let iniMax = strtolower(ini_get("upload_max_filesize"));
+
         if iniMax === "" {
             return PHP_INT_MAX;
         }
