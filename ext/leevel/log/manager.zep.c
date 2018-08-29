@@ -70,7 +70,7 @@ PHP_METHOD(Leevel_Log_Manager, createConnect) {
 	object_init_ex(return_value, leevel_log_log_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getcommonoption", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 114, connect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 116, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -109,19 +109,19 @@ PHP_METHOD(Leevel_Log_Manager, makeConnectFile) {
 	ZVAL_STRING(&_1, "file");
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 115, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 117, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
 }
 
 /**
- * 创建 monolog 日志驱动
+ * 创建 syslog 日志驱动
  *
  * @param array $options
- * @return \Leevel\Log\Monolog
+ * @return \Leevel\Log\Syslog
  */
-PHP_METHOD(Leevel_Log_Manager, makeConnectMonolog) {
+PHP_METHOD(Leevel_Log_Manager, makeConnectSyslog) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, _0, _1;
@@ -143,12 +143,12 @@ PHP_METHOD(Leevel_Log_Manager, makeConnectMonolog) {
 	}
 
 
-	object_init_ex(return_value, leevel_log_monolog_ce);
+	object_init_ex(return_value, leevel_log_syslog_ce);
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "monolog");
+	ZVAL_STRING(&_1, "syslog");
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 116, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 118, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

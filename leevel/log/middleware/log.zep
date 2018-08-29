@@ -54,11 +54,11 @@ class Log
      * 响应
      * 
      * @param \Closure $next
-     * @param \Leevel\Http\Request $request
-     * @param \Leevel\Http\Response $response
+     * @param \Leevel\Http\IRequest $request
+     * @param \Leevel\Http\IResponse $response
      * @return void
      */
-    public function terminate(<Closure> next, <Request> request, <Response> response)
+    public function terminate(<Closure> next, <IRequest> request, <IResponse> response)
     {
         this->saveLog();
 
@@ -67,17 +67,9 @@ class Log
     
     /**
      * 保存日志
-     *
-     * @return void
      */
     protected function saveLog()
     {
-        var enabled;
-
-        let enabled = this->manager->container()->make("option")->get("log\\enabled");
-
-        if enabled {
-            this->manager->save();
-        }
+        this->manager->flush();
     }
 }

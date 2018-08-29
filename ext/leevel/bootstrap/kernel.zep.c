@@ -158,7 +158,7 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, handle) {
 				ZEPHIR_CALL_METHOD(&_6$$6, &e, "getprevious", NULL, 0);
 				zephir_check_call_status();
 				ZVAL_LONG(&_7$$6, 1);
-				ZEPHIR_CALL_METHOD(NULL, &fatalException, "__construct", NULL, 67, &_2$$6, &_3$$6, &_7$$6, &_4$$6, &_5$$6, &_6$$6);
+				ZEPHIR_CALL_METHOD(NULL, &fatalException, "__construct", NULL, 65, &_2$$6, &_3$$6, &_7$$6, &_4$$6, &_5$$6, &_6$$6);
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, this_ptr, "reportexception", NULL, 0, &fatalException);
 				zephir_check_call_status();

@@ -130,7 +130,7 @@ PHP_METHOD(Leevel_Cookie_Provider_Register, cookieClosure) {
 	ZVAL_STRING(&_1, "cookie\\");
 	ZEPHIR_CALL_METHOD(&_2, &_0, "get", NULL, 0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 83, &_2);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 81, &_2);
 	zephir_check_call_status();
 	RETURN_MM();
 

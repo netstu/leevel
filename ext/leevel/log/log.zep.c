@@ -17,18 +17,15 @@
 #include "kernel/array.h"
 #include "kernel/operators.h"
 #include "kernel/fcall.h"
-#include "kernel/concat.h"
-#include "kernel/exception.h"
-#include "ext/spl/spl_exceptions.h"
-#include "kernel/variables.h"
 
 
 /**
- * 日志仓储
+ * 日志仓储.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.07
+ * @since 2017.03.03
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Log_Log) {
@@ -43,28 +40,35 @@ ZEPHIR_INIT_CLASS(Leevel_Log_Log) {
 	zend_declare_property_null(leevel_log_log_ce, SL("connect"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 当前记录的日志信息
+	 * 当前记录的日志信息.
 	 *
 	 * @var array
 	 */
 	zend_declare_property_null(leevel_log_log_ce, SL("logs"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 日志过滤器
+	 * 日志过滤器.
 	 *
-	 * @var callable
+	 * @var \Closure
 	 */
 	zend_declare_property_null(leevel_log_log_ce, SL("filter"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 日志处理器
+	 * 日志处理器.
 	 *
-	 * @var callable
+	 * @var \Closure
 	 */
 	zend_declare_property_null(leevel_log_log_ce, SL("processor"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/**
-	 * 配置
+	 * 日志数量.
+	 *
+	 * @var int
+	 */
+	zend_declare_property_long(leevel_log_log_ce, SL("count"), 0, ZEND_ACC_PROTECTED TSRMLS_CC);
+
+	/**
+	 * 配置.
 	 *
 	 * @var array
 	 */
@@ -78,11 +82,10 @@ ZEPHIR_INIT_CLASS(Leevel_Log_Log) {
 }
 
 /**
- * 构造函数
+ * 构造函数.
  *
  * @param \Leevel\Log\IConnect $connect
- * @param array $option
- * @return void
+ * @param array                $option
  */
 PHP_METHOD(Leevel_Log_Log, __construct) {
 
@@ -116,10 +119,11 @@ PHP_METHOD(Leevel_Log_Log, __construct) {
 }
 
 /**
- * 修改单个配置
+ * 设置配置.
  *
  * @param string $name
- * @param mixed $value
+ * @param mixed  $value
+ *
  * @return $this
  */
 PHP_METHOD(Leevel_Log_Log, setOption) {
@@ -143,539 +147,354 @@ PHP_METHOD(Leevel_Log_Log, setOption) {
 }
 
 /**
- * 记录 emergency 日志
+ * 系统无法使用.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, emergency) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "emergency");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 alert 日志
+ * 必须立即采取行动.
+ *
+ * 比如: 整个网站宕机，数据库不可用等等.
+ * 这种错误应该通过短信通知你.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, alert) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "alert");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 critical 日志
+ * 临界条件.
+ *
+ * 比如: 应用程序组件不可用，意外异常.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, critical) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "critical");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 error 日志
+ * 运行时错误，不需要立即处理.
+ * 但是需要被记录和监控.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, error) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "error");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 warning 日志
+ * 非错误的异常事件.
+ *
+ * 比如: 弃用的 API 接口, API 使用不足, 不良事物.
+ * 它们不一定是错误的.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, warning) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "warning");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 notice 日志
+ * 正常重要事件.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, notice) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "notice");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 info 日志
+ * 想记录的日志.
+ *
+ * 比如: 用户日志, SQL 日志.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, info) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "info");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录 debug 日志
+ * 调试信息.
  *
  * @param string $message
- * @param array $context
- * @param boolean $write
- * @return array
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, debug) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zend_bool write;
 	zval context;
-	zval *message, message_sub, *context_param = NULL, *write_param = NULL, action, _0;
+	zval *message_param = NULL, *context_param = NULL, _0;
+	zval message;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&action);
+	ZVAL_UNDEF(&message);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 2, &message, &context_param, &write_param);
+	zephir_fetch_params(1, 1, 1, &message_param, &context_param);
 
+	zephir_get_strval(&message, message_param);
 	if (!context_param) {
 		ZEPHIR_INIT_VAR(&context);
 		array_init(&context);
 	} else {
 		zephir_get_arrval(&context, context_param);
 	}
-	if (!write_param) {
-		write = 0;
-	} else {
-		write = zephir_get_boolval(write_param);
-	}
 
 
-	if (write) {
-		ZEPHIR_INIT_VAR(&action);
-		ZVAL_STRING(&action, "write");
-	} else {
-		ZEPHIR_INIT_NVAR(&action);
-		ZVAL_STRING(&action, "log");
-	}
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "debug");
-	ZEPHIR_RETURN_CALL_METHOD_ZVAL(this_ptr, &action, NULL, 0, &_0, message, &context);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "log", NULL, 0, &_0, &message, &context);
 	zephir_check_call_status();
-	RETURN_MM();
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 记录日志
+ * 记录特定级别的日志信息.
  *
- * @param string $level
- * @param mixed $message
- * @param array $context
- * @return array
+ * @param mixed  $level
+ * @param string $message
+ * @param array  $context
  */
 PHP_METHOD(Leevel_Log_Log, log) {
 
-	zend_bool _10;
+	zend_bool _4, _9, _12;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval context;
-	zval *level_param = NULL, *message = NULL, message_sub, *context_param = NULL, data, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _11, _12, _13, _14$$6;
-	zval level;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&level);
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&data);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_8);
-	ZVAL_UNDEF(&_9);
-	ZVAL_UNDEF(&_11);
-	ZVAL_UNDEF(&_12);
-	ZVAL_UNDEF(&_13);
-	ZVAL_UNDEF(&_14$$6);
-	ZVAL_UNDEF(&context);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 1, &level_param, &message, &context_param);
-
-	zephir_get_strval(&level, level_param);
-	ZEPHIR_SEPARATE_PARAM(message);
-	if (!context_param) {
-		ZEPHIR_INIT_VAR(&context);
-		array_init(&context);
-	} else {
-		zephir_get_arrval(&context, context_param);
-	}
-
-
-	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &_0, SL("enabled"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 253 TSRMLS_CC);
-	if (!(zephir_is_true(&_1))) {
-		RETURN_MM_NULL();
-	}
-	zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_3, &_2, SL("level"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 258 TSRMLS_CC);
-	if (!(zephir_fast_in_array(&level, &_3 TSRMLS_CC))) {
-		RETURN_MM_NULL();
-	}
-	zephir_read_property(&_4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_5, &_4, SL("time_format"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 262 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_6, "date", NULL, 31, &_5);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_7, this_ptr, "formatmessage", NULL, 0, message);
-	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_8);
-	ZEPHIR_CONCAT_VV(&_8, &_6, &_7);
-	ZEPHIR_CPY_WRT(message, &_8);
-	ZEPHIR_INIT_VAR(&data);
-	zephir_create_array(&data, 3, 0 TSRMLS_CC);
-	zephir_array_fast_append(&data, &level);
-	zephir_array_fast_append(&data, message);
-	zephir_array_fast_append(&data, &context);
-	ZEPHIR_OBS_VAR(&_9);
-	zephir_read_property(&_9, this_ptr, SL("filter"), PH_NOISY_CC);
-	_10 = Z_TYPE_P(&_9) != IS_NULL;
-	if (_10) {
-		ZEPHIR_INIT_VAR(&_11);
-		zephir_read_property(&_12, this_ptr, SL("filter"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_USER_FUNC_ARRAY(&_11, &_12, &data);
-		zephir_check_call_status();
-		_10 = ZEPHIR_IS_FALSE_IDENTICAL(&_11);
-	}
-	if (_10) {
-		RETURN_MM_NULL();
-	}
-	zephir_read_property(&_13, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_array_isset(&_13, &level))) {
-		ZEPHIR_INIT_VAR(&_14$$6);
-		array_init(&_14$$6);
-		zephir_update_property_array(this_ptr, SL("logs"), &level, &_14$$6 TSRMLS_CC);
-	}
-	zephir_update_property_array_multi(this_ptr, SL("logs"), &data TSRMLS_CC, SL("za"), 2, &level);
-	RETURN_CCTOR(&data);
-
-}
-
-/**
- * 记录错误消息并写入
- *
- * @param string $level 日志类型
- * @param string $message 应该被记录的错误信息
- * @param array $context
- * @return void
- */
-PHP_METHOD(Leevel_Log_Log, write) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval context, _0;
-	zval *level_param = NULL, *message_param = NULL, *context_param = NULL, _1;
+	zval *level_param = NULL, *message_param = NULL, *context_param = NULL, __$true, data, _0, _1, _2, _3, _5, _6, _7, _8, _10, _11, _13, _14, _15;
 	zval level, message;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&level);
 	ZVAL_UNDEF(&message);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&context);
+	ZVAL_BOOL(&__$true, 1);
+	ZVAL_UNDEF(&data);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
+	ZVAL_UNDEF(&_7);
+	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_10);
+	ZVAL_UNDEF(&_11);
+	ZVAL_UNDEF(&_13);
+	ZVAL_UNDEF(&_14);
+	ZVAL_UNDEF(&_15);
+	ZVAL_UNDEF(&context);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 1, &level_param, &message_param, &context_param);
@@ -690,46 +509,78 @@ PHP_METHOD(Leevel_Log_Log, write) {
 	}
 
 
-	ZEPHIR_INIT_VAR(&_0);
-	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_1, this_ptr, "log", NULL, 0, &level, &message, &context);
+	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch_string(&_1, &_0, SL("levels"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 225 TSRMLS_CC);
+	ZEPHIR_CALL_FUNCTION(&_2, "in_array", NULL, 52, &level, &_1, &__$true);
 	zephir_check_call_status();
-	zephir_array_fast_append(&_0, &_1);
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "savestore", NULL, 0, &_0);
-	zephir_check_call_status();
+	if (!(zephir_is_true(&_2))) {
+		RETURN_MM_NULL();
+	}
+	ZEPHIR_INIT_VAR(&data);
+	zephir_create_array(&data, 3, 0 TSRMLS_CC);
+	zephir_array_fast_append(&data, &level);
+	zephir_array_fast_append(&data, &message);
+	zephir_array_fast_append(&data, &context);
+	zephir_read_property(&_3, this_ptr, SL("filter"), PH_NOISY_CC | PH_READONLY);
+	_4 = Z_TYPE_P(&_3) != IS_NULL;
+	if (_4) {
+		ZEPHIR_INIT_VAR(&_5);
+		zephir_read_property(&_6, this_ptr, SL("filter"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_CALL_USER_FUNC_ARRAY(&_5, &_6, &data);
+		zephir_check_call_status();
+		_4 = ZEPHIR_IS_FALSE_IDENTICAL(&_5);
+	}
+	if (_4) {
+		RETURN_MM_NULL();
+	}
+	RETURN_ON_FAILURE(zephir_property_incr(this_ptr, SL("count") TSRMLS_CC));
+	zephir_update_property_array_multi(this_ptr, SL("logs"), &data TSRMLS_CC, SL("za"), 2, &level);
+	zephir_read_property(&_7, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	zephir_array_fetch_string(&_8, &_7, SL("buffer"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 242 TSRMLS_CC);
+	_9 = ZEPHIR_IS_FALSE_IDENTICAL(&_8);
+	if (!(_9)) {
+		zephir_read_property(&_10, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_OBS_VAR(&_11);
+		zephir_array_fetch_string(&_11, &_10, SL("buffer_size"), PH_NOISY, "leevel/log/log.zep", 243 TSRMLS_CC);
+		_12 = zephir_is_true(&_11);
+		if (_12) {
+			zephir_read_property(&_13, this_ptr, SL("count"), PH_NOISY_CC | PH_READONLY);
+			zephir_read_property(&_14, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+			zephir_array_fetch_string(&_15, &_14, SL("buffer_size"), PH_NOISY | PH_READONLY, "leevel/log/log.zep", 243 TSRMLS_CC);
+			_12 = ZEPHIR_GE(&_13, &_15);
+		}
+		_9 = _12;
+	}
+	if (_9) {
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "flush", NULL, 0);
+		zephir_check_call_status();
+	}
 	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 保存日志信息
- *
- * @return void
+ * 保存日志信息.
  */
-PHP_METHOD(Leevel_Log_Log, save) {
+PHP_METHOD(Leevel_Log_Log, flush) {
 
-	zval data, _0, _1, *_2;
-	zephir_fcall_cache_entry *_3 = NULL;
+	zval data, _0, *_1;
+	zephir_fcall_cache_entry *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_is_true(&_0))) {
-		RETURN_MM_NULL();
-	}
-	zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "leevel/log/log.zep", 316);
-	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
+	zephir_is_iterable(&_0, 0, "leevel/log/log.zep", 259);
+	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
 	{
 		ZEPHIR_INIT_NVAR(&data);
-		ZVAL_COPY(&data, _2);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "savestore", &_3, 0, &data);
+		ZVAL_COPY(&data, _1);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "savestore", &_2, 0, &data);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&data);
@@ -740,76 +591,25 @@ PHP_METHOD(Leevel_Log_Log, save) {
 }
 
 /**
- * 注册日志过滤器
- *
- * @param callable $filter
- * @return void
- */
-PHP_METHOD(Leevel_Log_Log, registerFilter) {
-
-	zval *filter, filter_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&filter_sub);
-
-	zephir_fetch_params(0, 1, 0, &filter);
-
-
-
-	if (!(zephir_is_callable(filter TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Filter must be callable.", "leevel/log/log.zep", 328);
-		return;
-	}
-	zephir_update_property_zval(this_ptr, SL("filter"), filter);
-
-}
-
-/**
- * 注册日志处理器
- *
- * @param callable $processor
- * @return void
- */
-PHP_METHOD(Leevel_Log_Log, registerProcessor) {
-
-	zval *processor, processor_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&processor_sub);
-
-	zephir_fetch_params(0, 1, 0, &processor);
-
-
-
-	if (!(zephir_is_callable(processor TSRMLS_CC))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_InvalidArgumentException, "Processor must be callable.", "leevel/log/log.zep", 343);
-		return;
-	}
-	zephir_update_property_zval(this_ptr, SL("processor"), processor);
-
-}
-
-/**
- * 清理日志记录
+ * 清理日志记录.
  *
  * @param string $level
- * @return int
  */
 PHP_METHOD(Leevel_Log_Log, clear) {
 
-	zend_bool _0;
-	zval *level = NULL, level_sub, __$null, count, _1, _2$$3, _3$$3, _4$$3, _5$$4, _6$$4;
+	zval *level = NULL, level_sub, __$null, _0$$3, _1$$3, _2, _3$$4, _4$$4, _5$$4, _6$$4, _7$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&level_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&count);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$3);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_4$$4);
 	ZVAL_UNDEF(&_5$$4);
 	ZVAL_UNDEF(&_6$$4);
+	ZVAL_UNDEF(&_7$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &level);
@@ -820,48 +620,48 @@ PHP_METHOD(Leevel_Log_Log, clear) {
 	}
 
 
-	_0 = zephir_is_true(level);
-	if (_0) {
-		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, level);
+	if (Z_TYPE_P(level) == IS_NULL) {
+		ZEPHIR_INIT_ZVAL_NREF(_0$$3);
+		ZVAL_LONG(&_0$$3, 0);
+		zephir_update_property_zval(this_ptr, SL("count"), &_0$$3);
+		ZEPHIR_INIT_VAR(&_1$$3);
+		array_init(&_1$$3);
+		zephir_update_property_zval(this_ptr, SL("logs"), &_1$$3);
 	}
-	if (_0) {
-		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "leevel/log/log.zep", 360 TSRMLS_CC);
-		ZEPHIR_INIT_VAR(&count);
-		ZVAL_LONG(&count, zephir_fast_count_int(&_3$$3 TSRMLS_CC));
-		ZEPHIR_INIT_VAR(&_4$$3);
-		array_init(&_4$$3);
-		zephir_update_property_array(this_ptr, SL("logs"), level, &_4$$3 TSRMLS_CC);
-	} else {
-		zephir_read_property(&_5$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_INIT_NVAR(&count);
-		ZVAL_LONG(&count, zephir_fast_count_int(&_5$$4 TSRMLS_CC));
+	zephir_read_property(&_2, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_2, level)) {
+		zephir_read_property(&_3$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_4$$4, &_3$$4, level, PH_NOISY | PH_READONLY, "leevel/log/log.zep", 275 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_6$$4);
-		array_init(&_6$$4);
-		zephir_update_property_zval(this_ptr, SL("logs"), &_6$$4);
+		ZVAL_LONG(&_6$$4, zephir_fast_count_int(&_4$$4 TSRMLS_CC));
+		zephir_read_property(&_5$$4, this_ptr, SL("count"), PH_NOISY_CC);
+		ZEPHIR_SUB_ASSIGN(&_5$$4, &_6$$4)
+		zephir_update_property_zval(this_ptr, SL("count"), &_5$$4);
+		ZEPHIR_INIT_VAR(&_7$$4);
+		array_init(&_7$$4);
+		zephir_update_property_array(this_ptr, SL("logs"), level, &_7$$4 TSRMLS_CC);
 	}
-	RETURN_CCTOR(&count);
+	ZEPHIR_MM_RESTORE();
 
 }
 
 /**
- * 获取日志记录
+ * 获取日志记录.
  *
  * @param string $level
+ *
  * @return array
  */
-PHP_METHOD(Leevel_Log_Log, get) {
+PHP_METHOD(Leevel_Log_Log, all) {
 
-	zend_bool _0;
-	zval *level = NULL, level_sub, __$null, _1, _2$$3, _3$$3;
+	zval *level = NULL, level_sub, __$null, _0, _1$$4, _2$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&level_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1$$4);
+	ZVAL_UNDEF(&_2$$4);
 
 	zephir_fetch_params(0, 0, 1, &level);
 
@@ -871,41 +671,39 @@ PHP_METHOD(Leevel_Log_Log, get) {
 	}
 
 
-	_0 = zephir_is_true(level);
-	if (_0) {
-		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, level);
-	}
-	if (_0) {
-		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "leevel/log/log.zep", 379 TSRMLS_CC);
-		RETURN_CTORW(&_3$$3);
-	} else {
+	if (Z_TYPE_P(level) == IS_NULL) {
 		RETURN_MEMBER(getThis(), "logs");
 	}
+	zephir_read_property(&_0, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_0, level)) {
+		zephir_read_property(&_1$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_2$$4, &_1$$4, level, PH_NOISY | PH_READONLY, "leevel/log/log.zep", 294 TSRMLS_CC);
+		RETURN_CTORW(&_2$$4);
+	}
+	array_init(return_value);
+	return;
 
 }
 
 /**
- * 获取日志记录数量
+ * 获取日志记录数量.
  *
  * @param string $level
+ *
  * @return int
  */
 PHP_METHOD(Leevel_Log_Log, count) {
 
-	zend_bool _0;
-	zval *level = NULL, level_sub, __$null, _1, _2$$3, _3$$3, _4$$4;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *level = NULL, level_sub, __$null, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&level_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$3);
-	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_0);
 
-	zephir_fetch_params(0, 0, 1, &level);
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &level);
 
 	if (!level) {
 		level = &level_sub;
@@ -913,40 +711,133 @@ PHP_METHOD(Leevel_Log_Log, count) {
 	}
 
 
-	_0 = zephir_is_true(level);
-	if (_0) {
-		zephir_read_property(&_1, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		_0 = zephir_array_isset(&_1, level);
+	if (Z_TYPE_P(level) == IS_NULL) {
+		RETURN_MM_MEMBER(getThis(), "count");
 	}
-	if (_0) {
-		zephir_read_property(&_2$$3, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, level, PH_NOISY | PH_READONLY, "leevel/log/log.zep", 394 TSRMLS_CC);
-		RETURN_LONG(zephir_fast_count_int(&_3$$3 TSRMLS_CC));
-	} else {
-		zephir_read_property(&_4$$4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);
-		RETURN_LONG(zephir_fast_count_int(&_4$$4 TSRMLS_CC));
-	}
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "all", NULL, 0, level);
+	zephir_check_call_status();
+	RETURN_MM_LONG(zephir_fast_count_int(&_0 TSRMLS_CC));
 
 }
 
 /**
- * 存储日志
+ * 注册日志过滤器.
+ *
+ * @param \Closure $filter
+ */
+PHP_METHOD(Leevel_Log_Log, filter) {
+
+	zval *filter, filter_sub;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&filter_sub);
+
+	zephir_fetch_params(0, 1, 0, &filter);
+
+
+
+	zephir_update_property_zval(this_ptr, SL("filter"), filter);
+
+}
+
+/**
+ * 注册日志处理器.
+ *
+ * @param \Closure $processor
+ */
+PHP_METHOD(Leevel_Log_Log, processor) {
+
+	zval *processor, processor_sub;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&processor_sub);
+
+	zephir_fetch_params(0, 1, 0, &processor);
+
+
+
+	zephir_update_property_zval(this_ptr, SL("processor"), processor);
+
+}
+
+/**
+ * 是否为 Monolog.
+ *
+ * @return bool
+ */
+PHP_METHOD(Leevel_Log_Log, isMonolog) {
+
+	zval _0;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+
+
+	zephir_read_property(&_0, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+	RETURN_BOOL((zephir_method_exists_ex(&_0, SL("getmonolog") TSRMLS_CC) == SUCCESS));
+
+}
+
+/**
+ * 取得 Monolog.
+ *
+ * @return null|\Monolog\Logger
+ */
+PHP_METHOD(Leevel_Log_Log, getMonolog) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "ismonolog", NULL, 0);
+	zephir_check_call_status();
+	if (!(zephir_is_true(&_0))) {
+		RETURN_MM_NULL();
+	}
+	zephir_read_property(&_1, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_RETURN_CALL_METHOD(&_1, "getmonolog", NULL, 0);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 返回连接.
+ *
+ * @return \Leevel\Log\IConnect
+ */
+PHP_METHOD(Leevel_Log_Log, getConnect) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_MEMBER(getThis(), "connect");
+
+}
+
+/**
+ * 存储日志.
  *
  * @param array $data
- * @return void
  */
 PHP_METHOD(Leevel_Log_Log, saveStore) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *data_param = NULL, _0, _3, _1$$3, _2$$3;
+	zval *data_param = NULL, value, _0, _4, *_1$$3, _2$$4, _3$$4;
 	zval data;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data);
+	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_1$$3);
-	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_2$$4);
+	ZVAL_UNDEF(&_3$$4);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &data_param);
@@ -954,111 +845,24 @@ PHP_METHOD(Leevel_Log_Log, saveStore) {
 	zephir_get_arrval(&data, data_param);
 
 
-	ZEPHIR_OBS_VAR(&_0);
-	zephir_read_property(&_0, this_ptr, SL("processor"), PH_NOISY_CC);
+	zephir_read_property(&_0, this_ptr, SL("processor"), PH_NOISY_CC | PH_READONLY);
 	if (Z_TYPE_P(&_0) != IS_NULL) {
-		ZEPHIR_INIT_VAR(&_1$$3);
-		zephir_read_property(&_2$$3, this_ptr, SL("processor"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_USER_FUNC_ARRAY(&_1$$3, &_2$$3, &data);
-		zephir_check_call_status();
+		zephir_is_iterable(&data, 0, "leevel/log/log.zep", 383);
+		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&data), _1$$3)
+		{
+			ZEPHIR_INIT_NVAR(&value);
+			ZVAL_COPY(&value, _1$$3);
+			ZEPHIR_INIT_NVAR(&_2$$4);
+			zephir_read_property(&_3$$4, this_ptr, SL("processor"), PH_NOISY_CC | PH_READONLY);
+			ZEPHIR_CALL_USER_FUNC_ARRAY(&_2$$4, &_3$$4, &value);
+			zephir_check_call_status();
+		} ZEND_HASH_FOREACH_END();
+		ZEPHIR_INIT_NVAR(&value);
 	}
-	zephir_read_property(&_3, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, &_3, "save", NULL, 0, &data);
+	zephir_read_property(&_4, this_ptr, SL("connect"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(NULL, &_4, "flush", NULL, 0, &data);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * 格式化日志消息
- *
- * @param mixed $message
- * @return mixed
- */
-PHP_METHOD(Leevel_Log_Log, formatMessage) {
-
-	zend_bool _0, _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *message, message_sub, _2$$3, _3$$5, _4$$5;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&message_sub);
-	ZVAL_UNDEF(&_2$$3);
-	ZVAL_UNDEF(&_3$$5);
-	ZVAL_UNDEF(&_4$$5);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &message);
-
-
-
-	_0 = Z_TYPE_P(message) == IS_OBJECT;
-	if (_0) {
-		_0 = zephir_is_instance_of(message, SL("Leevel\\Log\\Ijson") TSRMLS_CC);
-	}
-	_1 = Z_TYPE_P(message) == IS_OBJECT;
-	if (_1) {
-		_1 = zephir_is_instance_of(message, SL("Leevel\\Log\\Iarray") TSRMLS_CC);
-	}
-	if (Z_TYPE_P(message) == IS_ARRAY) {
-		ZEPHIR_INIT_VAR(&_2$$3);
-		zephir_var_export_ex(&_2$$3, message TSRMLS_CC);
-		RETURN_CCTOR(&_2$$3);
-	} else if (_0) {
-		ZEPHIR_RETURN_CALL_METHOD(message, "tojson", NULL, 0);
-		zephir_check_call_status();
-		RETURN_MM();
-	} else if (_1) {
-		ZEPHIR_CALL_METHOD(&_3$$5, message, "toarray", NULL, 0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_4$$5);
-		zephir_var_export_ex(&_4$$5, &_3$$5 TSRMLS_CC);
-		RETURN_CCTOR(&_4$$5);
-	} else if (zephir_is_scalar(message)) {
-		RETVAL_ZVAL(message, 1, 0);
-		RETURN_MM();
-	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Message is invalid.", "leevel/log/log.zep", 433);
-	return;
-
-}
-
-/**
- * call 
- *
- * @param string $method
- * @param array $args
- * @return mixed
- */
-PHP_METHOD(Leevel_Log_Log, __call) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval args, _0;
-	zval *method_param = NULL, *args_param = NULL, _1;
-	zval method;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&method);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&args);
-	ZVAL_UNDEF(&_0);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
-
-	zephir_get_strval(&method, method_param);
-	zephir_get_arrval(&args, args_param);
-
-
-	ZEPHIR_INIT_VAR(&_0);
-	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&_1);
-	zephir_read_property(&_1, this_ptr, SL("connect"), PH_NOISY_CC);
-	zephir_array_fast_append(&_0, &_1);
-	zephir_array_fast_append(&_0, &method);
-	ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_0, &args);
-	zephir_check_call_status();
-	RETURN_MM();
 
 }
 
@@ -1083,9 +887,8 @@ zend_object *zephir_init_properties_Leevel_Log_Log(zend_class_entry *class_type 
 		if (Z_TYPE_P(&_0) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_1$$3);
 			zephir_create_array(&_1$$3, 3, 0 TSRMLS_CC);
-			zephir_array_update_string(&_1$$3, SL("enabled"), &__$true, PH_COPY | PH_SEPARATE);
 			ZEPHIR_INIT_VAR(&_2$$3);
-			zephir_create_array(&_2$$3, 9, 0 TSRMLS_CC);
+			zephir_create_array(&_2$$3, 8, 0 TSRMLS_CC);
 			ZEPHIR_INIT_VAR(&_3$$3);
 			ZVAL_STRING(&_3$$3, "debug");
 			zephir_array_fast_append(&_2$$3, &_3$$3);
@@ -1110,11 +913,9 @@ zend_object *zephir_init_properties_Leevel_Log_Log(zend_class_entry *class_type 
 			ZEPHIR_INIT_NVAR(&_3$$3);
 			ZVAL_STRING(&_3$$3, "emergency");
 			zephir_array_fast_append(&_2$$3, &_3$$3);
-			ZEPHIR_INIT_NVAR(&_3$$3);
-			ZVAL_STRING(&_3$$3, "sql");
-			zephir_array_fast_append(&_2$$3, &_3$$3);
-			zephir_array_update_string(&_1$$3, SL("level"), &_2$$3, PH_COPY | PH_SEPARATE);
-			add_assoc_stringl_ex(&_1$$3, SL("time_format"), SL("[Y-m-d H:i]"));
+			zephir_array_update_string(&_1$$3, SL("levels"), &_2$$3, PH_COPY | PH_SEPARATE);
+			zephir_array_update_string(&_1$$3, SL("buffer"), &__$true, PH_COPY | PH_SEPARATE);
+			add_assoc_long_ex(&_1$$3, SL("buffer_size"), 100);
 			zephir_update_property_zval(this_ptr, SL("option"), &_1$$3);
 		}
 		zephir_read_property(&_4, this_ptr, SL("logs"), PH_NOISY_CC | PH_READONLY);

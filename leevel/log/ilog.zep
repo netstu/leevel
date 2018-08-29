@@ -13,145 +13,234 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Log;
 
+use Closure;
+
 /**
- * ILog 接口
+ * ILog 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.07
+ * @since 2017.04.11
+ *
  * @version 1.0
  */
 interface ILog
 {
-
     /**
-     * debug
+     * debug.
      *
      * @var string
      */
     const DEBUG = "debug";
 
     /**
-     * info
+     * info.
      *
      * @var string
      */
     const INFO = "info";
 
     /**
-     * notice
+     * notice.
      *
      * @var string
      */
     const NOTICE = "notice";
 
     /**
-     * warning
+     * warning.
      *
      * @var string
      */
     const WARNING = "warning";
 
     /**
-     * error
+     * error.
      *
      * @var string
      */
     const ERROR = "error";
 
     /**
-     * critical
+     * critical.
      *
      * @var string
      */
     const CRITICAL = "critical";
 
     /**
-     * alert
+     * alert.
      *
      * @var string
      */
     const ALERT = "alert";
 
     /**
-     * emergency
+     * emergency.
      *
      * @var string
      */
     const EMERGENCY = "emergency";
 
     /**
-     * sql
-     *
-     * @var string
-     */
-    const SQL = "sql";
-
-    /**
-     * 修改单个配置
+     * 设置配置.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return $this
      */
     public function setOption(string name, var value);
-
+    
     /**
-     * 记录错误消息并写入
+     * 系统无法使用.
      *
-     * @param string $level 日志类型
-     * @param string $message 应该被记录的错误信息
-     * @param array $context
-     * @return void
+     * @param string $message
+     * @param array  $context
      */
-    public function write(string level, string message, array context = []);
-
+    public function emergency(string message, array context = []) -> void;
+    
     /**
-     * 保存日志信息
+     * 必须立即采取行动.
      *
-     * @return void
-     */
-    public function save();
-
-    /**
-     * 注册日志过滤器
+     * 比如: 整个网站宕机，数据库不可用等等.
+     * 这种错误应该通过短信通知你.
      *
-     * @param callable $filter
-     * @return void
+     * @param string $message
+     * @param array  $context
      */
-    public function registerFilter(var filter);
-
+    public function alert(string message, array context = []) -> void;
+    
     /**
-     * 注册日志处理器
+     * 临界条件.
      *
-     * @param callable $processor
-     * @return void
+     * 比如: 应用程序组件不可用，意外异常.
+     *
+     * @param string $message
+     * @param array  $context
      */
-    public function registerProcessor(var processor);
-
+    public function critical(string message, array context = []) -> void;
+    
     /**
-     * 清理日志记录
+     * 运行时错误，不需要立即处理.
+     * 但是需要被记录和监控.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    public function error(string message, array context = []) -> void;
+    
+    /**
+     * 非错误的异常事件.
+     *
+     * 比如: 弃用的 API 接口, API 使用不足, 不良事物.
+     * 它们不一定是错误的.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    public function warning(string message, array context = []) -> void;
+    
+    /**
+     * 正常重要事件.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    public function notice(string message, array context = []) -> void;
+    
+    /**
+     * 想记录的日志.
+     *
+     * 比如: 用户日志, SQL 日志.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    public function info(string message, array context = []) -> void;
+    
+    /**
+     * 调试信息.
+     *
+     * @param string $message
+     * @param array  $context
+     */
+    public function debug(string message, array context = []) -> void;
+    
+    /**
+     * 记录特定级别的日志信息.
+     *
+     * @param mixed  $level
+     * @param string $message
+     * @param array  $context
+     */
+    public function log(string level, string message, array context = []) -> void;
+    
+    /**
+     * 保存日志信息.
+     */
+    public function flush() -> void;
+    
+    /**
+     * 清理日志记录.
      *
      * @param string $level
-     * @return int
      */
-    public function clear(var level = null);
-
+    public function clear(var level = null) -> void;
+    
     /**
-     * 获取日志记录
+     * 获取日志记录.
      *
      * @param string $level
+     *
      * @return array
      */
-    public function get(var level = null);
-
+    public function all(var level = null) -> array;
+    
     /**
-     * 获取日志记录数量
+     * 获取日志记录数量.
      *
      * @param string $level
+     *
      * @return int
      */
-    public function count(var level = null);
+    public function count(var level = null) -> int;
+    
+    /**
+     * 注册日志过滤器.
+     *
+     * @param \Closure $filter
+     */
+    public function filter(<Closure> filter) -> void;
+    
+    /**
+     * 注册日志处理器.
+     *
+     * @param \Closure $processor
+     */
+    public function processor(<Closure> processor) -> void;
+    
+    /**
+     * 是否为 Monolog.
+     *
+     * @return bool
+     */
+    public function isMonolog() -> bool;
+    
+    /**
+     * 取得 Monolog.
+     *
+     * @return null|\Monolog\Logger
+     */
+    public function getMonolog();
+    
+    /**
+     * 返回连接.
+     *
+     * @return \Leevel\Log\IConnect
+     */
+    public function getConnect() -> <IConnect>;
 }

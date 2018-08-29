@@ -15,7 +15,6 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/operators.h"
 
 
 /**
@@ -66,8 +65,8 @@ PHP_METHOD(Leevel_Log_Middleware_Log, __construct) {
  * 响应
  * 
  * @param \Closure $next
- * @param \Leevel\Http\Request $request
- * @param \Leevel\Http\Response $response
+ * @param \Leevel\Http\IRequest $request
+ * @param \Leevel\Http\IResponse $response
  * @return void
  */
 PHP_METHOD(Leevel_Log_Middleware_Log, terminate) {
@@ -95,40 +94,20 @@ PHP_METHOD(Leevel_Log_Middleware_Log, terminate) {
 
 /**
  * 保存日志
- *
- * @return void
  */
 PHP_METHOD(Leevel_Log_Middleware_Log, saveLog) {
 
-	zval enabled, _0, _1, _2, _3, _4$$3;
+	zval _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&enabled);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4$$3);
 
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_1, &_0, "container", NULL, 0);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "flush", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_3);
-	ZVAL_STRING(&_3, "option");
-	ZEPHIR_CALL_METHOD(&_2, &_1, "make", NULL, 0, &_3);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_3);
-	ZVAL_STRING(&_3, "log\\enabled");
-	ZEPHIR_CALL_METHOD(&enabled, &_2, "get", NULL, 0, &_3);
-	zephir_check_call_status();
-	if (zephir_is_true(&enabled)) {
-		zephir_read_property(&_4$$3, this_ptr, SL("manager"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "save", NULL, 0);
-		zephir_check_call_status();
-	}
 	ZEPHIR_MM_RESTORE();
 
 }

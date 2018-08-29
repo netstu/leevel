@@ -13,68 +13,152 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Log;
 
-use RuntimeException;
-use Leevel\Log\Connect;
-use Leevel\Log\IConnect;
+use InvalidArgumentException;
 
 /**
- * log.file
+ * log.file.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.08
+ * @since 2017.06.05
+ *
  * @version 1.0
  */
-class File extends Connect implements IConnect
+class File implements IConnect
 {
-
     /**
-     * 配置
+     * 配置.
      *
      * @var array
      */
     protected option = [
+        "channel" : "development",
         "name" : "Y-m-d H",
         "size" : 2097152,
         "path" : ""
     ];
-
+    
     /**
-     * 日志写入接口
+     * 构造函数.
+     *
+     * @param array $option
+     */
+    public function __construct(array option = []) -> void
+    {
+        let this->option = array_merge(this->option, option);
+    }
+    
+    /**
+     * 设置配置.
+     *
+     * @param string $name
+     * @param mixed  $value
+     *
+     * @return $this
+     */
+    public function setOption(string name, var value)
+    {
+        let this->option[name] = value;
+
+        return this;
+    }
+    
+    /**
+     * 日志写入接口.
      *
      * @param array $datas
-     * @return void
      */
-    public function save(array datas)
+    public function flush(array datas) -> void
     {
-        var filepath, item;
+        var level, filepath, value;
+    
+        let level = datas[0][0];
+        let filepath = this->normalizePath(level);
 
-        // 保存日志
-        let filepath = this->getPath(datas[0][0]);
         this->checkSize(filepath);
 
-        // 记录到系统
-        for item in datas {
-            error_log(
-                this->formatMessage(item[1], item[2]) . PHP_EOL,
-                3,
-                filepath
-            );
+        for value in datas {
+            error_log(call_user_func_array([this, "formatMessage"], value), 3, filepath);
         }
     }
-
+    
     /**
-     * 格式化日志信息
+     * 验证日志文件大小.
      *
-     * @param string $message 应该被记录的错误信息
-     * @param array $contexts
+     * @param string $filePath
+     */
+    protected function checkSize(string filePath) -> void
+    {
+        var dirname;
+    
+        let dirname = dirname(filePath);
+
+        if ! (is_file(filePath)) {
+            if ! (is_dir(dirname)) {
+                if is_dir(dirname(dirname)) && ! (is_writable(dirname(dirname))) {
+                    throw new InvalidArgumentException(
+                        sprintf("Unable to create the %s directory.", dirname)
+                    );
+                }
+
+                mkdir(dirname, 0777, true);
+            }
+
+            if ! (is_writable(dirname)) {
+                throw new InvalidArgumentException(
+                    sprintf("Dir %s is not writeable.", dirname)
+                );
+            }
+        }
+
+        // 清理文件状态缓存 http://php.net/manual/zh/function.clearstatcache.php
+        clearstatcache();
+
+        if is_file(filePath) && 
+            floor(this->option["size"]) <= filesize(filePath) {
+            rename(filePath,
+                dirname . "/" . basename(filePath, ".log") . "_" .
+                (time() - filemtime(filePath)) . ".log");
+        }
+    }
+    
+    /**
+     * 格式化日志路径.
+     *
+     * @param string $level
+     *
      * @return string
      */
-    protected function formatMessage(string message, array contexts = [])
+    protected function normalizePath(string level) -> string
     {
-        return message . " " .
-            json_encode(contexts, JSON_UNESCAPED_UNICODE);
+        if ! (this->option["path"]) {
+            throw new InvalidArgumentException(
+                "Path for log has not set."
+            );
+        }
+
+        return this->option["path"] . "/" . this->option["channel"] . "." .
+            (level ? level . "/" : "") . date(this->option["name"]) . ".log";
+    }
+    
+    /**
+     * 格式化日志信息.
+     *
+     * @param string $level
+     * @param string $message
+     * @param array  $contexts
+     *
+     * @return string
+     */
+    protected function formatMessage(string level, string message, array contexts = []) -> string
+    {
+        return sprintf(
+            "[%s] %s %s: %s" . PHP_EOL,
+            date("Y-m-d H:i:s"), message, level,
+            json_encode(contexts, JSON_UNESCAPED_UNICODE)
+        );
     }
 }

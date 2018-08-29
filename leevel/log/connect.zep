@@ -13,110 +13,161 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Log;
 
-use RuntimeException;
+use Monolog\Formatter\LineFormatter;
+use Monolog\Handler\HandlerInterface;
+use Monolog\Logger;
 
 /**
- * aconnect 驱动抽象类
+ * connect 驱动抽象类.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.07
+ * @since 2017.09.01
+ *
  * @version 1.0
  */
-abstract class Connect
+abstract class Connect implements IConnect
 {
-
     /**
-     * 配置
+     * Monolog.
+     *
+     * @var \Monolog\Logger
+     */
+    protected monolog;
+    
+    /**
+     * 配置.
      *
      * @var array
      */
-    protected option = [];
+    protected option = [
+        "channel" : "development"
+    ];
+    
+    /**
+     * Monolog 支持日志级别
+     *
+     * @var array
+     */
+    protected supportLevel = [
+        "debug" : 100,
+        "info" : 200,
+        "notice" : 250,
+        "warning" : 300,
+        "error" : 400,
+        "critical" : 500,
+        "alert" : 550,
+        "emergency" : 600
+    ];
 
     /**
-     * 构造函数
+     * 构造函数.
      *
      * @param array $option
-     * @return void
      */
-    public function __construct(array option = [])
+    public function __construct(array option = []) -> void
     {
         let this->option = array_merge(this->option, option);
-    }
 
+        let this->monolog = new Logger(this->option["channel"]);
+    }
+    
     /**
-     * 修改单个配置
+     * 设置配置.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return $this
      */
     public function setOption(string name, var value)
     {
         let this->option[name] = value;
-        
+
         return this;
     }
-
+    
     /**
-     * 验证日志文件大小
+     * 日志写入接口.
      *
-     * @param string $filepath
-     * @return void
+     * @param array $data
      */
-    protected function checkSize(string filepath)
+    public function flush(array data) -> void
     {
-        var filedir;
-
-        let filedir = dirname(filepath);
-
-        // 如果不是文件，则创建
-        if ! is_file(filepath) &&
-            ! is_dir(filedir) &&
-            ! mkdir(filedir, 0777, true) {
-            throw new RuntimeException(
-                sprintf("Unable to create log file：%s.", filepath)
-            );
-        }
-
-        // 检测日志文件大小，超过配置大小则备份日志文件重新生成
-        if is_file(filepath) &&
-            floor(this->option["size"]) <= filesize(filepath) {
-            rename(
-                filepath, filedir . "/" .
-                date("Y-m-d H.i.s") . "_" .
-                basename(filepath)
-            );
+        var value, method;
+    
+        for value in data {
+            let method = this->normalizeLevel(array_shift(value));
+            call_user_func_array([this->monolog, method], value);
         }
     }
     
     /**
-     * 获取日志路径
+     * 取得 Monolog.
+     *
+     * @return \Monolog\Logger
+     */
+    public function getMonolog() -> <Logger>
+    {
+        return this->monolog;
+    }
+    
+    /**
+     * 设置默认格式化.
+     *
+     * @param \Monolog\Handler\HandlerInterface $handler
+     *
+     * @return \Monolog\Handler\HandlerInterface
+     */
+    protected function normalizeHandler(<HandlerInterface> handler) -> <HandlerInterface>
+    {
+        return handler->setFormatter(this->lineFormatter());
+    }
+    
+    /**
+     * 默认行格式化.
+     *
+     * @return \Monolog\Formatter\LineFormatter
+     */
+    protected function lineFormatter() -> <LineFormatter>
+    {
+        return new LineFormatter(null, null, true, true);
+    }
+    
+    /**
+     * 格式化级别
+     * 不支持级别归并到 DEBUG.
      *
      * @param string $level
-     * @param string $filepath
+     *
      * @return string
      */
-    protected function getPath(string level = "")
+    protected function normalizeLevel(string level) -> string
     {
-        var filepath;
-
-        // 不存在路径，则直接使用项目默认路径
-        if empty filepath {
-            if ! this->option["path"] {
-                throw new RuntimeException(
-                    "Default path for log has not specified."
-                );
-            }
-
-            let filepath =  this->option["path"] . "/" .
-                (level ? level . "/" : "") .
-                date(this->option["name"]) .
-                ".log";
+        if ! (in_array(level, array_keys(this->supportLevel), true)) {
+            return ILog::DEBUG;
         }
 
-        return filepath;
+        return level;
+    }
+    
+    /**
+     * 获取 Monolog 级别
+     * 不支持级别归并到 DEBUG.
+     *
+     * @param string $level
+     *
+     * @return int
+     */
+    protected function normalizeMonologLevel(string level) -> int
+    {
+        if isset this->supportLevel[level] {
+            return this->supportLevel[level];
+        }
+
+        return this->supportLevel[ILog::DEBUG];
     }
 }

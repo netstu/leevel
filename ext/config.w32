@@ -14,9 +14,9 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/di", "provider.zep.c icontainer.zep.c container.zep.c containerinvalidargumentexception.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/flow", "icontrol.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/http", "iresponse.zep.c bag.zep.c response.zep.c file.zep.c fileexception.zep.c headerbag.zep.c irequest.zep.c jsonresponse.zep.c apiresponse.zep.c filebag.zep.c filenotfoundexception.zep.c fileresponse.zep.c redirectresponse.zep.c request.zep.c responseheaderbag.zep.c serverbag.zep.c uploadedfile.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/log", "iconnect.zep.c connect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c syslog.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/manager", "manager.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/mvc", "iview.zep.c icontroller.zep.c ientity.zep.c controller.zep.c imodel.zep.c view.zep.c", "leevel");
-	ADD_SOURCES(configure_module_dirname + "/leevel/log", "connect.zep.c iconnect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c monolog.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/cookie", "icookie.zep.c cookie.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/event", "idispatch.zep.c isubject.zep.c dispatch.zep.c eventprovider.zep.c observer.zep.c subject.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/i18n", "ii18n.zep.c i18n.zep.c", "leevel");

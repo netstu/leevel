@@ -19,10 +19,9 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/di/icontainer.zep.c
 	leevel/http/bag.zep.c
 	leevel/http/response.zep.c
+	leevel/log/iconnect.zep.c
 	leevel/manager/manager.zep.c
 	leevel/mvc/iview.zep.c
-	leevel/log/connect.zep.c
-	leevel/log/iconnect.zep.c
 	leevel/cookie/icookie.zep.c
 	leevel/di/container.zep.c
 	leevel/event/idispatch.zep.c
@@ -35,6 +34,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/i18n/ii18n.zep.c
 	leevel/kernel/ikernel.zep.c
 	leevel/kernel/iproject.zep.c
+	leevel/log/connect.zep.c
 	leevel/log/ilog.zep.c
 	leevel/mvc/icontroller.zep.c
 	leevel/mvc/ientity.zep.c
@@ -93,8 +93,8 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/log/log.zep.c
 	leevel/log/manager.zep.c
 	leevel/log/middleware/log.zep.c
-	leevel/log/monolog.zep.c
 	leevel/log/provider/register.zep.c
+	leevel/log/syslog.zep.c
 	leevel/mail.zep.c
 	leevel/mail/provider/register.zep.c
 	leevel/mvc/controller.zep.c

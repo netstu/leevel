@@ -308,21 +308,21 @@ PHP_METHOD(Leevel_View_Connect, parseDisplayFile) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 27, &file);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 40, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_CALL_METHOD(&_2$$3, this_ptr, "parsefile", NULL, 0, &file, &ext);
 		zephir_check_call_status();
 		zephir_get_strval(&file, &_2$$3);
 	}
-	ZEPHIR_CALL_FUNCTION(&_3, "is_file", &_1, 27, &file);
+	ZEPHIR_CALL_FUNCTION(&_3, "is_file", &_1, 40, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_3))) {
 		ZEPHIR_CALL_METHOD(&_4$$4, this_ptr, "parsedefaultfile", NULL, 0, &file);
 		zephir_check_call_status();
 		zephir_get_strval(&file, &_4$$4);
 	}
-	ZEPHIR_CALL_FUNCTION(&_5, "is_file", &_1, 27, &file);
+	ZEPHIR_CALL_FUNCTION(&_5, "is_file", &_1, 40, &file);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_5))) {
 		ZEPHIR_INIT_VAR(&_6$$5);
@@ -423,7 +423,7 @@ PHP_METHOD(Leevel_View_Connect, parseFile) {
 	ZEPHIR_INIT_NVAR(&tpl);
 	zephir_fast_trim(&tpl, &_0, NULL , ZEPHIR_TRIM_BOTH TSRMLS_CC);
 	ZVAL_LONG(&_3, 4);
-	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 55, &tpl, &_3);
+	ZEPHIR_CALL_FUNCTION(&_4, "pathinfo", NULL, 53, &tpl, &_3);
 	zephir_check_call_status();
 	_5 = zephir_is_true(&_4);
 	if (!(_5)) {
@@ -496,7 +496,7 @@ PHP_METHOD(Leevel_View_Connect, parseFile) {
 		zephir_get_strval(&tpl, &_23$$4);
 		zephir_read_property(&_28$$4, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		zephir_array_fetch_string(&_29$$4, &_28$$4, SL("theme_path"), PH_NOISY | PH_READONLY, "leevel/view/connect.zep", 212 TSRMLS_CC);
-		ZEPHIR_CALL_FUNCTION(&_30$$4, "dirname", NULL, 26, &_29$$4);
+		ZEPHIR_CALL_FUNCTION(&_30$$4, "dirname", NULL, 44, &_29$$4);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&result);
 		ZEPHIR_CONCAT_VS(&result, &_30$$4, "/");
@@ -626,7 +626,7 @@ PHP_METHOD(Leevel_View_Connect, parseDefaultFile) {
 	zephir_get_strval(&tpl, tpl_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 27, &tpl);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", &_1, 40, &tpl);
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
 		RETURN_CTOR(&tpl);
@@ -688,7 +688,7 @@ PHP_METHOD(Leevel_View_Connect, parseDefaultFile) {
 	zephir_array_fetch_string(&_25, &_24, SL("theme_path_default"), PH_NOISY | PH_READONLY, "leevel/view/connect.zep", 286 TSRMLS_CC);
 	_26 = zephir_is_true(&_25);
 	if (_26) {
-		ZEPHIR_CALL_FUNCTION(&_27, "is_file", &_1, 27, &tempTpl);
+		ZEPHIR_CALL_FUNCTION(&_27, "is_file", &_1, 40, &tempTpl);
 		zephir_check_call_status();
 		_26 = zephir_is_true(&_27);
 	}
@@ -697,7 +697,7 @@ PHP_METHOD(Leevel_View_Connect, parseDefaultFile) {
 	}
 	zephir_read_property(&_28, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	zephir_array_fetch_string(&_29, &_28, SL("theme_path"), PH_NOISY | PH_READONLY, "leevel/view/connect.zep", 291 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_30, "dirname", NULL, 26, &_29);
+	ZEPHIR_CALL_FUNCTION(&_30, "dirname", NULL, 44, &_29);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&tempTpl);
 	ZEPHIR_CONCAT_VSV(&tempTpl, &_30, "/default/", &tpl);
@@ -705,7 +705,7 @@ PHP_METHOD(Leevel_View_Connect, parseDefaultFile) {
 	zephir_array_fetch_string(&_32, &_31, SL("theme_name"), PH_NOISY | PH_READONLY, "leevel/view/connect.zep", 293 TSRMLS_CC);
 	_33 = !ZEPHIR_IS_STRING(&_32, "default");
 	if (_33) {
-		ZEPHIR_CALL_FUNCTION(&_34, "is_file", &_1, 27, &tempTpl);
+		ZEPHIR_CALL_FUNCTION(&_34, "is_file", &_1, 40, &tempTpl);
 		zephir_check_call_status();
 		_33 = zephir_is_true(&_34);
 	}

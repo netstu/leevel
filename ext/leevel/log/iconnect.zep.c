@@ -13,11 +13,12 @@
 
 
 /**
- * IConnect 接口
+ * IConnect 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2010.01.07
+ * @since 2017.04.23
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Log_IConnect) {
@@ -43,5 +44,5 @@ ZEPHIR_DOC_METHOD(Leevel_Log_IConnect, setOption);
  * @param array $data
  * @return void
  */
-ZEPHIR_DOC_METHOD(Leevel_Log_IConnect, save);
+ZEPHIR_DOC_METHOD(Leevel_Log_IConnect, flush);
 

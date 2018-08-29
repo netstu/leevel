@@ -16,11 +16,12 @@
 namespace Leevel\Log;
 
 /**
- * IConnect 接口
+ * IConnect 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2010.01.07
+ * @since 2017.04.23
+ *
  * @version 1.0
  */
 interface IConnect
@@ -40,5 +41,5 @@ interface IConnect
      * @param array $data
      * @return void
      */
-    public function save(array datas);
+    public function flush(array datas) -> void;
 }
