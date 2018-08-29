@@ -14,6 +14,18 @@
 
 Leevel is an open source web framework delivered as a C extension and supplement for the QueryPHP framework providing high performance and lower resource consumption.
 
+* Site: <https://www.queryphp.com/>
+* API: <http://api.queryphp.com>
+* Document: <https://www.leevel.vip/>
+
+## The core packages
+
+ * QueryPHP: <https://github.com/hunzhiwange/queryphp/> & <https://gitee.com/dyhb/queryphp/>
+ * Framework: <https://github.com/hunzhiwange/framework/> & <https://gitee.com/dyhb/framework/>
+ * Leevel: <https://github.com/hunzhiwange/leevel/> & <https://gitee.com/dyhb/queryyetsimple>
+ * Test: <https://github.com/queryyetsimple/tests/>
+ * Package: <https://github.com/queryyetsimple/>
+
 ## Requirement
 
 ```
