@@ -51,7 +51,7 @@ ZEPHIR_DOC_METHOD(Leevel_Router_IUrl, getRequest);
  * 
  * @param string $name
  * @param mixed $value
- * @return void
+ * @return $this
  */
 ZEPHIR_DOC_METHOD(Leevel_Router_IUrl, setOption);
 

@@ -13,12 +13,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Log\Middleware;
 
 use Closure;
+use Leevel\Http\IRequest;
+use Leevel\Http\IResponse;
 use Leevel\Log\Manager;
-use Leevel\Http\Request;
-use Leevel\Http\Response;
 
 /**
  * log 中间件

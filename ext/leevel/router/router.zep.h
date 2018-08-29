@@ -36,7 +36,7 @@ PHP_METHOD(Leevel_Router_Router, matchRouter);
 PHP_METHOD(Leevel_Router_Router, urlRouterBind);
 PHP_METHOD(Leevel_Router_Router, resolveMatchedData);
 PHP_METHOD(Leevel_Router_Router, normalizeMatchedData);
-PHP_METHOD(Leevel_Router_Router, tryRouterBind);
+PHP_METHOD(Leevel_Router_Router, findRouterBind);
 PHP_METHOD(Leevel_Router_Router, normalizeRouterBind);
 PHP_METHOD(Leevel_Router_Router, dispatchToRoute);
 PHP_METHOD(Leevel_Router_Router, runRoute);
@@ -62,7 +62,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router___construct, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_dispatch, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_setmatcheddata, 0, 0, 1)
@@ -70,7 +70,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_setmatcheddata, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_throughmiddleware, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, passed, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, passed, Leevel\\Http\\IRequest, 0)
 	ZEND_ARG_ARRAY_INFO(0, passedExtend, 1)
 ZEND_END_ARG_INFO()
 
@@ -158,11 +158,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_normalizematcheddata, 0, 0, 
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_dispatchtoroute, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_router_router_runroute, 0, 0, 2)
-	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\Request, 0)
+	ZEND_ARG_OBJ_INFO(0, request, Leevel\\Http\\IRequest, 0)
 	ZEND_ARG_INFO(0, bind)
 ZEND_END_ARG_INFO()
 
@@ -200,7 +200,7 @@ ZEPHIR_INIT_FUNCS(leevel_router_router_method_entry) {
 	PHP_ME(Leevel_Router_Router, urlRouterBind, arginfo_leevel_router_router_urlrouterbind, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Router_Router, resolveMatchedData, arginfo_leevel_router_router_resolvematcheddata, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Router_Router, normalizeMatchedData, arginfo_leevel_router_router_normalizematcheddata, ZEND_ACC_PROTECTED)
-	PHP_ME(Leevel_Router_Router, tryRouterBind, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_Router_Router, findRouterBind, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Router_Router, normalizeRouterBind, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Router_Router, dispatchToRoute, arginfo_leevel_router_router_dispatchtoroute, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Router_Router, runRoute, arginfo_leevel_router_router_runroute, ZEND_ACC_PROTECTED)

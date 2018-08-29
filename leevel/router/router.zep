@@ -22,7 +22,7 @@ use ReflectionMethod;
 use ReflectionException;
 use BadMethodCallException;
 use InvalidArgumentException;
-use Leevel\Http\Request;
+use Leevel\Http\IRequest;
 use Leevel\Di\IContainer;
 use Leevel\Http\Response;
 use Leevel\Http\IResponse;
@@ -52,7 +52,7 @@ class Router implements IRouter, IMacro
     /**
      * http 请求
      *
-     * @var \Leevel\Http\Request
+     * @var \Leevel\Http\IRequest
      */
     protected request;
     
@@ -140,27 +140,6 @@ class Router implements IRouter, IMacro
      * @var string
      */
     protected controllerDir = "App\\Controller";
-    
-    /**
-     * 匹配应用名字
-     *
-     * @var string
-     */
-    protected matchedApp;
-    
-    /**
-     * 匹配控制器名字
-     *
-     * @var string
-     */
-    protected matchedController;
-    
-    /**
-     * 匹配方法名字
-     *
-     * @var string
-     */
-    protected matchedAction;
 
     /**
      * 注册的动态扩展
@@ -183,10 +162,10 @@ class Router implements IRouter, IMacro
     /**
      * 分发请求到路由
      *
-     * @param \Leevel\Http\Request $request
+     * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    public function dispatch(<Request> request)
+    public function dispatch(<IRequest> request) -> <IResponse>
     {
         let this->request = request;
 
@@ -200,9 +179,6 @@ class Router implements IRouter, IMacro
      */
     public function initRequest()
     {
-        let this->matchedApp = null;
-        let this->matchedController = null;
-        let this->matchedAction = null;
         let this->matchedData = null;
     }
     
@@ -223,11 +199,11 @@ class Router implements IRouter, IMacro
     /**
      * 穿越中间件
      *
-     * @param \Leevel\Http\Request $passed
+     * @param \Leevel\Http\IRequest $passed
      * @param array $passedExtend
      * @return void
      */
-    public function throughMiddleware(<Request> passed, array passedExtend = [])
+    public function throughMiddleware(<IRequest> passed, array passedExtend = [])
     {
         var method, pipeline;
     
@@ -455,6 +431,7 @@ class Router implements IRouter, IMacro
 
         // 匹配基础路径
         let basepath = "";
+
         for item in this->getBasepaths() {
             if strpos(path, item) === 0 {
                 let path = substr(path, strlen(item) + 1);
@@ -464,11 +441,17 @@ class Router implements IRouter, IMacro
         }
 
         let path = trim(path, "/");
-        let paths = explode("/", path);
+        let paths = path ? explode("/", path) : [];
 
         // 应用
         if paths && this->findApp(paths[0]) {
             let result[self::APP] = substr(array_shift(paths), 1);
+        }
+
+        if ! paths {
+            let result[IRouter::CONTROLLER] = IRouter::DEFAULT_HOME_CONTROLLER;
+
+            return result;
         }
 
         let tmpListPathsParams = this->normalizePathsAndParams(paths);
@@ -635,20 +618,16 @@ class Router implements IRouter, IMacro
         var dataPathInfo, bind;
     
         if true === this->isMatched && ! (is_null(this->matchedData)) {
-            return this->tryRouterBind();
+            return this->findRouterBind();
         }
 
         this->initRequest();
-        if this->request->isCli() {
-            this->resolveMatchedData(this->normalizeMatchedData("Cli"));
-
-            return this->tryRouterBind();
-        }
 
         let dataPathInfo = this->normalizeMatchedData("PathInfo");
         this->resolveMatchedData(dataPathInfo);
 
         let bind = this->normalizeRouterBind();
+
         if bind === false {
             let bind = this->urlRouterBind(dataPathInfo);
         }
@@ -676,7 +655,7 @@ class Router implements IRouter, IMacro
 
         this->resolveMatchedData(data);
 
-        return this->tryRouterBind();
+        return this->findRouterBind();
     }
     
     /**
@@ -708,7 +687,7 @@ class Router implements IRouter, IMacro
      *
      * @return callable|void
      */
-    protected function tryRouterBind()
+    protected function findRouterBind()
     {
         var bind;
     
@@ -735,10 +714,10 @@ class Router implements IRouter, IMacro
     /**
      * 发送路由并返回响应
      *
-     * @param \Leevel\Http\Request $request
+     * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    protected function dispatchToRoute(<Request> request)
+    protected function dispatchToRoute(<IRequest> request) -> <IResponse>
     {
         return this->runRoute(request, this->matchRouter());
     }
@@ -746,11 +725,11 @@ class Router implements IRouter, IMacro
     /**
      * 运行路由
      * 
-     * @param \Leevel\Http\Request $request
+     * @param \Leevel\Http\IRequest $request
      * @param callable $bind
      * @return \Leevel\Http\IResponse
      */
-    protected function runRoute(<Request> request, bind)
+    protected function runRoute(<IRequest> request, var bind) -> <IResponse>
     {
         var response, result;
     
@@ -835,9 +814,7 @@ class Router implements IRouter, IMacro
     
     /**
      * 智能 restful 解析
-     * 路由匹配如果没有匹配上方法器则系统会进入 restful 解析
-     *
-     * @return void
+     * 路由匹配如果没有匹配上方法则系统会进入 restful 解析.
      */
     protected function pathinfoRestful()
     {
@@ -846,12 +823,6 @@ class Router implements IRouter, IMacro
         }
 
         switch (this->request->getMethod()) {
-            case "GET":
-                if ! (empty(this->matchedData[self::PARAMS])) {
-                    let this->matchedData[self::ACTION] = self::RESTFUL_SHOW;
-                }
-                break;
-
             case "POST":
                 let this->matchedData[self::ACTION] = self::RESTFUL_STORE;
                 break;
@@ -862,6 +833,11 @@ class Router implements IRouter, IMacro
 
             case "DELETE":
                 let this->matchedData[self::ACTION] = self::RESTFUL_DESTROY;
+                break;
+
+            case "GET":
+            default:
+                let this->matchedData[self::ACTION] = self::RESTFUL_SHOW;
                 break;
         }
     }
@@ -895,7 +871,7 @@ class Router implements IRouter, IMacro
             let method = action;
         }
         
-        if controller instanceof IController {
+        if is_object(controller) && controller instanceof IController {
             controller->setView(this->container->make("Leevel\\Mvc\\IView"));
         }
 
@@ -922,8 +898,14 @@ class Router implements IRouter, IMacro
         let matchedMiddlewares = this->matchedMiddlewares();
 
         return [
-            "handle" : array_merge(this->globalMiddlewares["handle"], matchedMiddlewares["handle"]), 
-            "terminate" : array_merge(this->globalMiddlewares["terminate"], matchedMiddlewares["terminate"])
+            "handle" : array_merge(
+                isset this->globalMiddlewares["handle"] ? this->globalMiddlewares["handle"] : [],
+                isset matchedMiddlewares["handle"] ? matchedMiddlewares["handle"] : []
+            ), 
+            "terminate" : array_merge(
+                isset this->globalMiddlewares["terminate"] ? this->globalMiddlewares["terminate"] : [],
+                isset matchedMiddlewares["terminate"] ? matchedMiddlewares["terminate"] : []
+            )
         ];
     }
     
@@ -934,22 +916,7 @@ class Router implements IRouter, IMacro
      */
     protected function matchedApp() -> string
     {
-        var app;
-    
-        if this->matchedApp {
-            let app = this->matchedApp;
-        } else {
-            let this->matchedApp = env("app_name");
-
-            if this->matchedApp {
-                let app = this->matchedApp;
-            } else {
-                let app = this->matchedData[self::APP];
-                let this->matchedApp = this->matchedData[self::APP];
-            }
-        }
-
-        return ucfirst(app);
+        return ucfirst(this->matchedData[self::APP]);
     }
     
     /**
@@ -959,21 +926,7 @@ class Router implements IRouter, IMacro
      */
     protected function matchedController() -> string
     {
-        var controller;
-    
-        if this->matchedController {
-            let controller = this->matchedController;
-        } else {
-            let this->matchedController = env("controller_name");
-
-            if this->matchedController {
-                let controller = this->matchedController;
-            } else {
-                let controller = this->matchedData[self::CONTROLLER];
-            }
-        }
-
-        return ucfirst(controller);
+        return ucfirst(this->matchedData[self::CONTROLLER]);
     }
     
     /**
@@ -984,18 +937,8 @@ class Router implements IRouter, IMacro
     protected function matchedAction() -> string
     {
         var action;
-    
-        if this->matchedAction {
-            let action = this->matchedAction;
-        } else {
-            let this->matchedAction = env("action_name");
 
-            if this->matchedAction {
-                let action = this->matchedAction;
-            } else {
-                let action = this->matchedData[self::ACTION];
-            }
-        }
+        let action = this->matchedData[self::ACTION];
 
         if strpos(action, "-") !== false {
             let action = str_replace("-", "_", action);

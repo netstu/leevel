@@ -59,11 +59,13 @@ abstract class Connect
      * 
      * @param string $name
      * @param mixed $value
-     * @return void
+     * @return $this
      */
     public function setOption(string name, var value)
     {
         let this->option[name] = value;
+
+        return this;
     }
 
     /**

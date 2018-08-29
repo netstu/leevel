@@ -67,7 +67,7 @@ ZEPHIR_INIT_CLASS(Leevel_Router_ResponseFactory) {
 /**
  * 构造函数
  *
- * @param \Leevel\Mvc\IViewy $view
+ * @param \Leevel\Mvc\IView $view
  * @param \Leevel\Router\Redirect $redirector
  * @return void
  */

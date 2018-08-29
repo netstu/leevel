@@ -50,7 +50,7 @@ interface IUrl
      * 
      * @param string $name
      * @param mixed $value
-     * @return void
+     * @return $this
      */
     public function setOption(var name, var value);
 }

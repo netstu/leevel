@@ -31,8 +31,8 @@ ZEPHIR_INIT_CLASS(Leevel_Router_Match_IMatch) {
 /**
  * 匹配数据项
  *
- * @param \Leevel\Router\Router $router
- * @param \Leevel\Http\Request $request
+ * @param \Leevel\Router\IRouter $router
+ * @param \Leevel\Http\IRequest $request
  * @return array
  */
 ZEPHIR_DOC_METHOD(Leevel_Router_Match_IMatch, matche);

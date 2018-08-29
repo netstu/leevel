@@ -19,7 +19,7 @@ use Exception;
 use Throwable;
 use ErrorException;
 use Leevel\Http\IRequest;
-use Leevel\Router\Router;
+use Leevel\Router\IRouter;
 use Leevel\Kernel\IKernel;
 use Leevel\Http\IResponse;
 use Leevel\Kernel\IProject;
@@ -49,7 +49,7 @@ abstract class Kernel implements IKernel
     /**
      * 路由
      *
-     * @var \Leevel\Router\Router
+     * @var \Leevel\Router\IRouter
      */
     protected router;
     
@@ -69,10 +69,9 @@ abstract class Kernel implements IKernel
      * 构造函数
      *
      * @param \Leevel\Kernel\IProject $project
-     * @param \Leevel\Router\Router $router
-     * @return void
+     * @param \Leevel\Router\IRouter $router
      */
-    public function __construct(<IProject> project, <Router> router)
+    public function __construct(<IProject> project, <IRouter> router)
     {
         let this->project = project;
         let this->router = router;
@@ -84,7 +83,7 @@ abstract class Kernel implements IKernel
      * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    public function handle(<IRequest> request)
+    public function handle(<IRequest> request) -> <IResponse>
     {
         var response, e, fatalException;
     
@@ -96,12 +95,14 @@ abstract class Kernel implements IKernel
             let response = this->getResponseWithRequest(request);
 
             let response = this->prepareTrace(response);
+
+            this->middlewareTerminate(request, response);
         } catch Exception, e {
             this->reportException(e);
 
             let response = this->renderException(request, e);
         } catch Throwable, e {
-            let fatalException = new ErrorException(     
+            let fatalException = new ErrorException(
                 e->getMessage(),
                 e->getCode(),
                 E_ERROR,
@@ -123,7 +124,7 @@ abstract class Kernel implements IKernel
      * 
      * @return \Leevel\Bootstrap\Runtime\IRuntime
      */
-    protected function getRuntime()
+    protected function getRuntime() -> <IRuntime>
     {
         return this->project->make("Leevel\\Kernel\\Runtime\\IRuntime");
     }
@@ -133,11 +134,9 @@ abstract class Kernel implements IKernel
      *
      * @param \Leevel\Http\IRequest $request
      * @param \Leevel\Http\IResponse $response
-     * @return void
      */
-    public function terminate(<IRequest> request, <IResponse> response)
+    public function terminate(<IRequest> request, <IResponse> response) -> void
     {
-        this->router->throughMiddleware(request, [response]);
     }
     
     /**
@@ -145,7 +144,7 @@ abstract class Kernel implements IKernel
      *
      * @return \Leevel\Kernel\IProject
      */
-    public function getProject()
+    public function getProject() -> <IProject>
     {
         return this->project;
     }
@@ -154,7 +153,6 @@ abstract class Kernel implements IKernel
      * 注册基础服务
      * 
      * @param \Leevel\Http\IRequest $request
-     * @return void
      */
     protected function registerBaseService(<IRequest> request)
     {
@@ -167,7 +165,7 @@ abstract class Kernel implements IKernel
      * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    protected function getResponseWithRequest(<IRequest> request)
+    protected function getResponseWithRequest(<IRequest> request) -> <IResponse>
     {
         return this->dispatchRouter(request);
     }
@@ -178,15 +176,13 @@ abstract class Kernel implements IKernel
      * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    protected function dispatchRouter(<IRequest> request)
+    protected function dispatchRouter(<IRequest> request) -> <IResponse>
     {
         return this->router->dispatch(request);
     }
     
     /**
      * 初始化
-     *
-     * @return void
      */
     protected function bootstrap()
     {
@@ -197,7 +193,6 @@ abstract class Kernel implements IKernel
      * 上报错误
      *
      * @param \Exception $e
-     * @return void
      */
     protected function reportException(<Exception> e)
     {
@@ -211,7 +206,7 @@ abstract class Kernel implements IKernel
      * @param \Exception $e
      * @return \Leevel\Http\IResponse
      */
-    protected function renderException(<IRequest> request, <Exception> e)
+    protected function renderException(<IRequest> request, <Exception> e) -> <IResponse>
     {
         return this->getRuntime()->render(request, e);
     }
@@ -222,7 +217,7 @@ abstract class Kernel implements IKernel
      * @param \Leevel\Http\IResponse $response
      * @return \Leevel\Http\IResponse
      */
-    protected function prepareTrace(<IResponse> response)
+    protected function prepareTrace(<IResponse> response) -> <IResponse>
     {
         var logs, data;
     
@@ -230,7 +225,7 @@ abstract class Kernel implements IKernel
             return response;
         }
 
-        let logs = this->project->make("Leevel\\Log\\ILog")->get();
+        let logs = this->project->make("Leevel\\Log\\ILog")->all();
         let data = response->getData();
 
         if (response instanceof ApiResponse || 
@@ -244,5 +239,16 @@ abstract class Kernel implements IKernel
         }
 
         return response;
+    }
+
+    /**
+     * 中间件结束响应.
+     *
+     * @param \Leevel\Http\IRequest  $request
+     * @param \Leevel\Http\IResponse $response
+     */
+    protected function middlewareTerminate(<IRequest> request, <IResponse> response)
+    {
+        this->router->throughMiddleware(request, [response]);
     }
 }

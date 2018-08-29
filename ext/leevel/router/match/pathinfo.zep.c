@@ -14,10 +14,6 @@
 #include "kernel/main.h"
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
-#include "kernel/string.h"
-#include "kernel/operators.h"
-#include "kernel/array.h"
-#include "kernel/concat.h"
 
 
 /**
@@ -35,14 +31,14 @@ ZEPHIR_INIT_CLASS(Leevel_Router_Match_PathInfo) {
 	/**
 	 * Router
 	 * 
-	 * @var \Leevel\Router\Router
+	 * @var \Leevel\Router\IRouter
 	 */
 	zend_declare_property_null(leevel_router_match_pathinfo_ce, SL("router"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
 	/** 
 	 * HTTP Request
 	 * 
-	 * @var \Leevel\Http\Request
+	 * @var \Leevel\Http\IRequest
 	 */
 	zend_declare_property_null(leevel_router_match_pathinfo_ce, SL("request"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
@@ -54,45 +50,28 @@ ZEPHIR_INIT_CLASS(Leevel_Router_Match_PathInfo) {
 /**
  * 匹配数据项
  *
- * @param \Leevel\Router\Router $router
- * @param \Leevel\Http\Request $request
+ * @param \Leevel\Router\IRouter $router
+ * @param \Leevel\Http\IRequest $request
  * @return array
  */
 PHP_METHOD(Leevel_Router_Match_PathInfo, matche) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *router, router_sub, *request, request_sub, pathInfo, _0, _1, _2;
+	zval *router, router_sub, *request, request_sub, _0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&router_sub);
 	ZVAL_UNDEF(&request_sub);
-	ZVAL_UNDEF(&pathInfo);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 2, 0, &router, &request);
 
 
 
-	ZEPHIR_CALL_METHOD(&pathInfo, request, "getpathinfo", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, request, "getpathinfo", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&_0);
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "/");
-	zephir_fast_trim(&_0, &pathInfo, &_1, ZEPHIR_TRIM_BOTH TSRMLS_CC);
-	ZEPHIR_CPY_WRT(&pathInfo, &_0);
-	if (!(zephir_is_true(&pathInfo))) {
-		zephir_create_array(return_value, 2, 0 TSRMLS_CC);
-		add_assoc_stringl_ex(return_value, SL("_c"), SL("home"));
-		add_assoc_stringl_ex(return_value, SL("_a"), SL("handle"));
-		RETURN_MM();
-	}
-	ZEPHIR_INIT_VAR(&_2);
-	ZEPHIR_CONCAT_SV(&_2, "/", &pathInfo);
-	ZEPHIR_CPY_WRT(&pathInfo, &_2);
-	ZEPHIR_RETURN_CALL_METHOD(router, "matchepath", NULL, 0, &pathInfo);
+	ZEPHIR_RETURN_CALL_METHOD(router, "matchepath", NULL, 0, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 

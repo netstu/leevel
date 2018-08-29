@@ -360,7 +360,7 @@ PHP_METHOD(Leevel_Router_RouterProvider, getRouterCachePath) {
 	ZEPHIR_MM_GROW();
 
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "pathcacherouterfile", NULL, 0);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "routercachedpath", NULL, 0);
 	zephir_check_call_status();
 	RETURN_MM();
 

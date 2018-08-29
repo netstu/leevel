@@ -15,8 +15,8 @@
 #include "kernel/object.h"
 #include "kernel/memory.h"
 #include "kernel/fcall.h"
-#include "kernel/array.h"
 #include "kernel/operators.h"
+#include "kernel/array.h"
 
 
 /**
@@ -42,7 +42,7 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Kernel) {
 	/**
 	 * 路由
 	 *
-	 * @var \Leevel\Router\Router
+	 * @var \Leevel\Router\IRouter
 	 */
 	zend_declare_property_null(leevel_bootstrap_kernel_ce, SL("router"), ZEND_ACC_PROTECTED TSRMLS_CC);
 
@@ -64,8 +64,7 @@ ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Kernel) {
  * 构造函数
  *
  * @param \Leevel\Kernel\IProject $project
- * @param \Leevel\Router\Router $router
- * @return void
+ * @param \Leevel\Router\IRouter $router
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, __construct) {
 
@@ -126,6 +125,8 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, handle) {
 		ZEPHIR_CALL_METHOD(&_0$$3, this_ptr, "preparetrace", NULL, 0, &response);
 		zephir_check_call_status_or_jump(try_end_1);
 		ZEPHIR_CPY_WRT(&response, &_0$$3);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "middlewareterminate", NULL, 0, request, &response);
+		zephir_check_call_status_or_jump(try_end_1);
 
 	try_end_1:
 
@@ -200,32 +201,19 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, getRuntime) {
  *
  * @param \Leevel\Http\IRequest $request
  * @param \Leevel\Http\IResponse $response
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, terminate) {
 
-	zval _1;
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *request, request_sub, *response, response_sub, _0;
+	zval *request, request_sub, *response, response_sub;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&request_sub);
 	ZVAL_UNDEF(&response_sub);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &request, &response);
+	zephir_fetch_params(0, 2, 0, &request, &response);
 
 
 
-	zephir_read_property(&_0, this_ptr, SL("router"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_1);
-	zephir_create_array(&_1, 1, 0 TSRMLS_CC);
-	zephir_array_fast_append(&_1, response);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "throughmiddleware", NULL, 0, request, &_1);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
 
 }
 
@@ -247,7 +235,6 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, getProject) {
  * 注册基础服务
  * 
  * @param \Leevel\Http\IRequest $request
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, registerBaseService) {
 
@@ -327,8 +314,6 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, dispatchRouter) {
 
 /**
  * 初始化
- *
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, bootstrap) {
 
@@ -353,7 +338,6 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, bootstrap) {
  * 上报错误
  *
  * @param \Exception $e
- * @return void
  */
 PHP_METHOD(Leevel_Bootstrap_Kernel, reportException) {
 
@@ -449,7 +433,7 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, prepareTrace) {
 	ZVAL_STRING(&_4, "Leevel\\Log\\ILog");
 	ZEPHIR_CALL_METHOD(&_3, &_2, "make", NULL, 0, &_4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&logs, &_3, "get", NULL, 0);
+	ZEPHIR_CALL_METHOD(&logs, &_3, "all", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&data, response, "getdata", NULL, 0);
 	zephir_check_call_status();
@@ -481,6 +465,39 @@ PHP_METHOD(Leevel_Bootstrap_Kernel, prepareTrace) {
 	}
 	RETVAL_ZVAL(response, 1, 0);
 	RETURN_MM();
+
+}
+
+/**
+ * 中间件结束响应.
+ *
+ * @param \Leevel\Http\IRequest  $request
+ * @param \Leevel\Http\IResponse $response
+ */
+PHP_METHOD(Leevel_Bootstrap_Kernel, middlewareTerminate) {
+
+	zval _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *request, request_sub, *response, response_sub, _0;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&request_sub);
+	ZVAL_UNDEF(&response_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &request, &response);
+
+
+
+	zephir_read_property(&_0, this_ptr, SL("router"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_1);
+	zephir_create_array(&_1, 1, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_1, response);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "throughmiddleware", NULL, 0, request, &_1);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
 
 }
 

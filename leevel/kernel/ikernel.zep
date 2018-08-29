@@ -34,7 +34,7 @@ interface IKernel
      * @param \Leevel\Http\IRequest $request
      * @return \Leevel\Http\IResponse
      */
-    public function handle(<IRequest> request)-> <IResponse>;
+    public function handle(<IRequest> request) -> <IResponse>;
     
     /**
      * 执行结束
@@ -43,12 +43,12 @@ interface IKernel
      * @param \Leevel\Http\IResponse $response
      * @return void
      */
-    public function terminate(<IRequest> request, <IResponse> response)-> void;
+    public function terminate(<IRequest> request, <IResponse> response) -> void;
     
     /**
      * 返回项目
      *
      * @return \Leevel\Kernel\IProject
      */
-    public function getProject()-> <IProject>;
+    public function getProject() -> <IProject>;
 }
