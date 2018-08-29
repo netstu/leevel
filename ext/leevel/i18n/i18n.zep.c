@@ -24,8 +24,9 @@
  * 国际化组件
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.06
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_I18n_I18n) {
@@ -117,16 +118,16 @@ PHP_METHOD(Leevel_I18n_I18n, getText) {
 	zephir_read_property(&_0, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_2);
 	zephir_read_property(&_2, this_ptr, SL("i18n"), PH_NOISY_CC);
-	zephir_array_fetch(&_1, &_0, &_2, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
-	zephir_array_fetch_long(&_3, &arr, 0, PH_READONLY, "leevel/i18n/i18n.zep", 74 TSRMLS_CC);
+	zephir_array_fetch(&_1, &_0, &_2, PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, &arr, 0, PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
 	if (zephir_array_isset(&_1, &_3)) {
 		zephir_read_property(&_4$$4, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_6$$4);
 		zephir_read_property(&_6$$4, this_ptr, SL("i18n"), PH_NOISY_CC);
-		zephir_array_fetch(&_5$$4, &_4$$4, &_6$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+		zephir_array_fetch(&_5$$4, &_4$$4, &_6$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 76 TSRMLS_CC);
 		ZEPHIR_OBS_VAR(&_8$$4);
-		zephir_array_fetch_long(&_8$$4, &arr, 0, PH_NOISY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
-		zephir_array_fetch(&_7$$4, &_5$$4, &_8$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 75 TSRMLS_CC);
+		zephir_array_fetch_long(&_8$$4, &arr, 0, PH_NOISY, "leevel/i18n/i18n.zep", 76 TSRMLS_CC);
+		zephir_array_fetch(&_7$$4, &_5$$4, &_8$$4, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 76 TSRMLS_CC);
 		zephir_array_update_long(&arr, 0, &_7$$4, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
 	if (zephir_fast_count_int(&arr TSRMLS_CC) > 1) {
@@ -137,7 +138,7 @@ PHP_METHOD(Leevel_I18n_I18n, getText) {
 		zephir_check_call_status();
 		zephir_array_update_long(&arr, 0, &_9$$5, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 	}
-	zephir_array_fetch_long(&_11, &arr, 0, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 82 TSRMLS_CC);
+	zephir_array_fetch_long(&_11, &arr, 0, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 83 TSRMLS_CC);
 	RETURN_CTOR(&_11);
 
 }
@@ -211,7 +212,7 @@ PHP_METHOD(Leevel_I18n_I18n, addText) {
 	if (zephir_array_key_exists(&_0, &i18n TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_1$$3);
 		zephir_read_property(&_2$$3, this_ptr, SL("text"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, &i18n, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 107 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, &i18n, PH_NOISY | PH_READONLY, "leevel/i18n/i18n.zep", 108 TSRMLS_CC);
 		zephir_fast_array_merge(&_1$$3, &_3$$3, &data TSRMLS_CC);
 		zephir_update_property_array(this_ptr, SL("text"), &i18n, &_1$$3 TSRMLS_CC);
 	} else {

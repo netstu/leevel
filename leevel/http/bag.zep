@@ -15,21 +15,23 @@
  */
 namespace Leevel\Http;
 
-use Countable;
 use ArrayIterator;
-use JsonSerializable;
+use Countable;
 use IteratorAggregate;
-use Leevel\Support\IJson;
+use JsonSerializable;
 use Leevel\Support\IArray;
+use Leevel\Support\IJson;
 
 /**
  * http bag
- * This class borrows heavily from the Symfony4 Framework and is part of the symfony package
+ * This class borrows heavily from the Symfony4 Framework and is part of the symfony package.
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
- * @since 2018.03.04
+ *
+ * @since 2018.02.19
+ *
  * @version 1.0
+ *
  * @see Symfony\Component\HttpFoundation (https://github.com/symfony/symfony)
  */
 class Bag implements IArray, IJson, Countable, IteratorAggregate, JsonSerializable

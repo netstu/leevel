@@ -19,7 +19,7 @@ namespace Leevel\View;
  * iconnect 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.02
  * @version 1.0
  */

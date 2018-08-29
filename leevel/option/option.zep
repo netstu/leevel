@@ -22,7 +22,7 @@ use Leevel\Option\IOption;
  * 配置管理类
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.12.24
  * @version 1.0
  */

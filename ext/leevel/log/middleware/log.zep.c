@@ -22,7 +22,7 @@
  * log 中间件
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.28
  * @version 1.0
  */

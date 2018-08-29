@@ -24,7 +24,7 @@ use RuntimeException;
  * \SplObserver 无法识别 container
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.02.01
  * @link http://php.net/manual/zh/class.splobserver.php
  * @version 1.0

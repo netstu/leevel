@@ -27,7 +27,7 @@ use Leevel\Manager\Manager as Managers;
  * view 入口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.12
  * @version 1.0
  */

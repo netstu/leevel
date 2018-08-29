@@ -29,8 +29,9 @@ use InvalidArgumentException;
  * IOC 容器
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.24
+ * 
  * @version 1.0
  */
 class Container implements IContainer, ArrayAccess {
@@ -199,6 +200,7 @@ class Container implements IContainer, ArrayAccess {
                 if typeof key == "integer" {
                     continue;
                 }
+
                 this->alias(key, item);
             }
         } else {
@@ -498,6 +500,7 @@ class Container implements IContainer, ArrayAccess {
         var classObject;
 
         let classObject = param->getClass();
+
         if ! classObject || ! (typeof classObject == "object" && classObject instanceof ReflectionClass) {
             return false;
         }

@@ -27,7 +27,7 @@ use Leevel\Http\ResponseHeaderBag;
  * 响应工厂
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.03.03
  * @version 1.0
  */

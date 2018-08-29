@@ -22,19 +22,13 @@ use BadMethodCallException;
  * 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.25
+ * 
  * @version 1.0
  */
 abstract class Provider
 {
-    /**
-     * 是否延迟载入
-     *
-     * @var boolean
-     */
-    public static defer = false;
-    
     /**
      * IOC 容器
      *
@@ -52,9 +46,7 @@ abstract class Provider
     {
         let this->container = container;
         
-        if ! (static::isDeferred()) {
-            this->registerAlias();
-        }
+        this->registerAlias();
     }
     
     /**
@@ -63,7 +55,7 @@ abstract class Provider
      * @return void
      */
     abstract public function register();
-    
+
     /**
      * 注册服务别名
      *
@@ -71,8 +63,14 @@ abstract class Provider
      */
     public function registerAlias()
     {
-        if ! (static::isDeferred()) && static::providers() {
-            this->container->alias(static::providers());
+        var providers;
+
+        if ! static::isDeferred() {
+            let providers = static::providers();
+
+            if ! empty providers {
+                this->container->alias(providers);
+            }
         }
     }
     
@@ -93,7 +91,7 @@ abstract class Provider
      */
     public static function isDeferred() -> boolean
     {
-        return self::defer;
+        return false;
     }
     
     /**

@@ -22,8 +22,9 @@
  * 事件服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.02.01
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Event_EventProvider) {
@@ -71,7 +72,7 @@ PHP_METHOD(Leevel_Event_EventProvider, bootstrap) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getlisteners", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&_0, 0, "leevel/event/eventprovider.zep", 57);
+	zephir_is_iterable(&_0, 0, "leevel/event/eventprovider.zep", 58);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&event);
@@ -82,7 +83,7 @@ PHP_METHOD(Leevel_Event_EventProvider, bootstrap) {
 		}
 		ZEPHIR_INIT_NVAR(&listeners);
 		ZVAL_COPY(&listeners, _1);
-		zephir_is_iterable(&listeners, 0, "leevel/event/eventprovider.zep", 56);
+		zephir_is_iterable(&listeners, 0, "leevel/event/eventprovider.zep", 57);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&listeners), _5$$3, _6$$3, _4$$3)
 		{
 			ZEPHIR_INIT_NVAR(&key);

@@ -23,7 +23,7 @@ use Leevel\Log\IConnect;
  * log.file
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.08
  * @version 1.0
  */

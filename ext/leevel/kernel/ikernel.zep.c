@@ -16,7 +16,7 @@
  * 内核执行接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.05.21
  * @version 1.0
  */

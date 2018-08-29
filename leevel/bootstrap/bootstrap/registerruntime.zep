@@ -25,8 +25,9 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  * 注册运行时异常
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.04.25
+ * 
  * @version 1.0
  */
 class RegisterRuntime

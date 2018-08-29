@@ -18,7 +18,7 @@
  * response header bag
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.03.05
  * @version 1.0
  */

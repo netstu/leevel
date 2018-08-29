@@ -19,8 +19,9 @@ namespace Leevel\Cookie;
  * ICookie 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.06
+ * 
  * @version 1.0
  */
 interface ICookie

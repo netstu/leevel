@@ -23,8 +23,9 @@
  * 内核执行
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2016.11.18
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Bootstrap_Kernel) {

@@ -19,7 +19,7 @@ namespace Leevel\Log;
  * IConnect 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2010.01.07
  * @version 1.0
  */

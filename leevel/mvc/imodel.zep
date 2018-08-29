@@ -19,7 +19,7 @@ namespace Leevel\Mvc;
  * IModel 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.07.10
  * @version 1.0
  */

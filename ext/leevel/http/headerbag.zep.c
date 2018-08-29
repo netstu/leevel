@@ -24,8 +24,9 @@
  * header bag
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.03.04
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Http_HeaderBag) {
@@ -129,7 +130,7 @@ PHP_METHOD(Leevel_Http_HeaderBag, add) {
 	}
 
 
-	zephir_is_iterable(&elements, 0, "leevel/http/headerbag.zep", 59);
+	zephir_is_iterable(&elements, 0, "leevel/http/headerbag.zep", 60);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&elements), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -184,7 +185,7 @@ PHP_METHOD(Leevel_Http_HeaderBag, __toString) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&content);
 	ZVAL_STRING(&content, "");
-	zephir_is_iterable(&headers, 0, "leevel/http/headerbag.zep", 84);
+	zephir_is_iterable(&headers, 0, "leevel/http/headerbag.zep", 85);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&headers), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);

@@ -13,6 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel;
 
 use Leevel\Support\Facade;
@@ -21,13 +22,13 @@ use Leevel\Support\Facade;
  * 沙盒 leevel
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2018.08.18
+ * 
  * @version 1.0
  */
 class Leevel extends Facade
 {
-
     /**
      * 返回门面名字
      *

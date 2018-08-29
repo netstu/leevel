@@ -19,7 +19,7 @@ namespace Leevel\Mvc;
  * 实体基础接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.12.24
  * @version 1.0
  */

@@ -32,8 +32,9 @@ use Leevel\Support\IMacro;
  * 集合
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.02.03
+ * 
  * @version 1.0
  */
 class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Countable, JsonSerializable

@@ -21,8 +21,9 @@ use Leevel\Kernel\IProject;
  * 遍历服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.05.02
+ * 
  * @version 1.0
  */
 class TraverseProvider

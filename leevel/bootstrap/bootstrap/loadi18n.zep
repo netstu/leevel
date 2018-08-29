@@ -24,8 +24,9 @@ use Leevel\Kernel\IProject;
  * 读取语言包
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.05.03
+ * 
  * @version 1.0
  */
 class LoadI18n
@@ -43,9 +44,9 @@ class LoadI18n
         let i18nDefault = project->make("option")->get("i18n\\default");
 
         if project->isCachedI18n(i18nDefault) {
-            let data = (array)require project->pathCacheI18nFile(i18nDefault);
+            let data = (array) require project->i18nCachedPath(i18nDefault);
         } else {
-            let load = (new Load([project->pathI18n()]))->
+            let load = (new Load([project->i18nPath()]))->
 
             setI18n(i18nDefault)->
 

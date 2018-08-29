@@ -22,7 +22,7 @@
  * mail 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.08.26
  * @version 1.0
  */

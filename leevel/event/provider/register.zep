@@ -24,8 +24,9 @@ use Leevel\Event\Dispatch;
  * event 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.26
+ * 
  * @version 1.0
  */
 class Register extends Provider

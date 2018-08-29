@@ -21,7 +21,7 @@
  * Session 中间件
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.11.14
  * @version 1.0
  */

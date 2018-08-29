@@ -18,8 +18,9 @@
  * 沙盒 cookie
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ * 
  * @since 2017.12.23
+ * 
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Cookie) {

@@ -24,20 +24,12 @@ use Leevel\Throttler\Throttler;
  * throttler 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.28
  * @version 1.0
  */
 class Register extends Provider
 {
-
-    /**
-     * 是否延迟载入
-     *
-     * @var boolean
-     */
-    public static defer = true;
-
     /**
      * 创建一个服务容器提供者实例
      *
@@ -75,7 +67,15 @@ class Register extends Provider
             "Leevel\\Throttler\\Middleware\\Throttler"
         ];
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function isDeferred() -> boolean
+    {
+        return true;
+    }
+
     /**
      * 注册 throttler 服务
      *

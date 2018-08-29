@@ -21,8 +21,9 @@ use Closure;
  * IContainer 接口
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.04.13
+ * 
  * @version 1.0
  */
 interface IContainer

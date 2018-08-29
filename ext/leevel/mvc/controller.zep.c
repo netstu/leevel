@@ -26,7 +26,7 @@
  * 基类控制器
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2017.12.24
  * @version 1.0
  */

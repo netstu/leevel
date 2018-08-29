@@ -23,8 +23,9 @@
  * Api 响应请求
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
- * @since 2018.03.06
+ *
+ * @since 2018.03.01
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Http_ApiResponse) {

@@ -28,7 +28,7 @@ use Leevel\Router\ResponseFactory;
  * router 服务提供者
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.01.28
  * @version 1.0
  */

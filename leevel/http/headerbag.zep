@@ -19,8 +19,9 @@ namespace Leevel\Http;
  * header bag
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.03.04
+ * 
  * @version 1.0
  */
 class HeaderBag extends Bag

@@ -13,14 +13,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Http;
 
 /**
  * Api 响应请求
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
- * @since 2018.03.06
+ *
+ * @since 2018.03.01
+ *
  * @version 1.0
  */
 class ApiResponse extends JsonResponse

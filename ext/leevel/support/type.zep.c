@@ -27,7 +27,7 @@
  * 类型判断辅助函数
  *
  * @author Xiangmin Liu <635750556@qq.com>
- * @package $$
+ *
  * @since 2018.02.03
  * @version 1.0
  */
