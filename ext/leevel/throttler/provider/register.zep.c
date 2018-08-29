@@ -167,17 +167,17 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttler) {
 /**
  * 创建 throttler 服务闭包
  *
- * @param \Leevel\Kernel\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Throttler\Throttler
  */
 PHP_METHOD(Leevel_Throttler_Provider_Register, throttlerClosure) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, throttler, _1, _2, _3, _4, _5, _6;
+	zval *container, container_sub, throttler, _1, _2, _3, _4, _5, _6;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&throttler);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
@@ -187,7 +187,7 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttlerClosure) {
 	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
@@ -199,11 +199,11 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttlerClosure) {
 	if (zephir_has_constructor(&throttler TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
 		ZVAL_STRING(&_2, "cache");
-		ZEPHIR_CALL_METHOD(&_1, project, "make", NULL, 0, &_2);
+		ZEPHIR_CALL_METHOD(&_1, container, "make", NULL, 0, &_2);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_2);
 		ZVAL_STRING(&_2, "option");
-		ZEPHIR_CALL_METHOD(&_4, project, "make", NULL, 0, &_2);
+		ZEPHIR_CALL_METHOD(&_4, container, "make", NULL, 0, &_2);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_2);
 		ZVAL_STRING(&_2, "throttler\\driver");
@@ -216,7 +216,7 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttlerClosure) {
 	}
 	ZEPHIR_INIT_NVAR(&_2);
 	ZVAL_STRING(&_2, "request");
-	ZEPHIR_CALL_METHOD(&_6, project, "make", NULL, 0, &_2);
+	ZEPHIR_CALL_METHOD(&_6, container, "make", NULL, 0, &_2);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &throttler, "setrequest", NULL, 0, &_6);
 	zephir_check_call_status();

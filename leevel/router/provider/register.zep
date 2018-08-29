@@ -97,12 +97,12 @@ class Register extends Provider
     /**
      * 创建 router 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Router\Router
      */
-    protected function routerClosure(var project)
+    protected function routerClosure(<IContainer> container)
     {
-        return new Router(project);
+        return new Router(container);
     }
 
     /**
@@ -118,15 +118,15 @@ class Register extends Provider
     /**
      * 创建 url 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Router\Url
      */
-    protected function urlClosure(var project)
+    protected function urlClosure(<IContainer> container)
     {
         var option, request, options = [], item;
         
-        let option = project->make("option");
-        let request = project->make("request");
+        let option = container->make("option");
+        let request = container->make("request");
 
         for item in [
             "with_suffix",
@@ -147,21 +147,23 @@ class Register extends Provider
      */
     protected function redirect()
     {
-        this->container->bind("redirect", this->container->share(Closure::fromCallable([this, "redirectClosure"])));
+        this->container->bind("redirect", this->container->share(
+            Closure::fromCallable([this, "redirectClosure"])
+        ));
     }
 
     /**
      * 创建 redirect 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Router\Redirect
      */
-    protected function redirectClosure(var project)
+    protected function redirectClosure(<IContainer> container)
     {
         var redirect, session;
 
-        let redirect = new Redirect(project->make("url"));
-        let session = project->make("session");
+        let redirect = new Redirect(container->make("url"));
+        let session = container->make("session");
 
         if (session !== false) {
             redirect->setSession(session);
@@ -183,15 +185,15 @@ class Register extends Provider
     /**
      * 创建 response 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Router\ResponseFactory
      */
-    protected function responseClosure(var project)
+    protected function responseClosure(<IContainer> container)
     {
         var option, response;
 
-        let option = project->make("option");
-        let response = new ResponseFactory(project->make("view"), project->make("redirect"));
+        let option = container->make("option");
+        let response = new ResponseFactory(container->make("view"), container->make("redirect"));
 
         return response->
 

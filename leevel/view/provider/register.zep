@@ -22,6 +22,7 @@ use Leevel\Di\Provider;
 use Leevel\View\Manager;
 use Leevel\Di\IContainer;
 use Leevel\View\Compiler;
+use Leevel\Kernel\IProject;
 use Twig_Loader_Filesystem;
 
 /**
@@ -100,12 +101,12 @@ class Register extends Provider
     /**
      * 创建 view.views 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\View\Manager
      */
-    protected function viewViewsClosure(var project)
+    protected function viewViewsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -121,12 +122,12 @@ class Register extends Provider
     /**
      * 创建 view.view 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function viewViewClosure(var project)
+    protected function viewViewClosure(<IContainer> container)
     {
-        return project->make("view.views")->connect();
+        return container->make("view.views")->connect();
     }
     
     /**
@@ -142,10 +143,10 @@ class Register extends Provider
     /**
      * 创建 view.compiler 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\View\Compiler
      */
-    protected function viewCompilerClosure(var project)
+    protected function viewCompilerClosure(<IContainer> container)
     {
         return new Compiler();
     }
@@ -163,12 +164,12 @@ class Register extends Provider
     /**
      * 创建 view.parser 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\View\Parser
      */
-    protected function viewParserClosure(var project)
+    protected function viewParserClosure(<IContainer> container)
     {
-        return (new Parser(project->make("view.compiler")))->
+        return (new Parser(container->make("view.compiler")))->
 
         registerCompilers()->
 
@@ -188,15 +189,15 @@ class Register extends Provider
     /**
      * 创建 view.twig.parser 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Kernel\IProject $project
      * @return \Twig_Environment
      */
-    protected function viewTwigParserClosure(var project)
+    protected function viewTwigParserClosure(<IProject> project)
     {
         return new Twig_Environment(new Twig_Loader_Filesystem(), [
             "auto_reload" : true, 
             "debug" : project->development(), 
-            "cache" : project->pathApplicationCache("theme") . "/" . project->make("request")->app()
+            "cache" : project->runtimePath("theme") . "/" . project->make("request")->app()
         ]);
     }
 }

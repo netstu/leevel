@@ -1614,7 +1614,7 @@ PHP_METHOD(Leevel_Collection_Collection, getArrayElements) {
 	if (Z_TYPE_P(elements) == IS_ARRAY) {
 		RETVAL_ZVAL(elements, 1, 0);
 		RETURN_MM();
-	} else if (zephir_is_instance_of(elements, SL("Leevel\\Collection\\self") TSRMLS_CC)) {
+	} else if (zephir_instance_of_ev(elements, leevel_collection_collection_ce TSRMLS_CC)) {
 		ZEPHIR_RETURN_CALL_METHOD(elements, "all", NULL, 0);
 		zephir_check_call_status();
 		RETURN_MM();

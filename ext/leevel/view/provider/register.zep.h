@@ -22,23 +22,23 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register___construct, 0, 0, 
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register_viewviewsclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register_viewviewclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register_viewcompilerclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register_viewparserclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_provider_register_viewtwigparserclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, project, Leevel\\Kernel\\IProject, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_view_provider_register_method_entry) {

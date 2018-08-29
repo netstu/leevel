@@ -102,29 +102,29 @@ PHP_METHOD(Leevel_Cookie_Provider_Register, register) {
 /**
  * 创建 cookie 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Cookie\Cookie
  */
 PHP_METHOD(Leevel_Cookie_Provider_Register, cookieClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _1, _2;
+	zval *container, container_sub, _0, _1, _2;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	object_init_ex(return_value, leevel_cookie_cookie_ce);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "option");
-	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "cookie\\");

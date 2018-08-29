@@ -89,18 +89,18 @@ class Register extends Provider
     /**
      * 创建 throttler 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Throttler\Throttler
      */
-    protected function throttlerClosure(var project)
+    protected function throttlerClosure(<IContainer> container)
     {
         var throttler;
 
         let throttler = new Throttler(
-            project->make("cache")->connect(project->make("option")->get("throttler\\driver"))
+            container->make("cache")->connect(container->make("option")->get("throttler\\driver"))
         );
 
-        throttler->setRequest(project->make("request"));
+        throttler->setRequest(container->make("request"));
 
         return throttler;
     }

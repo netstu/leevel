@@ -693,7 +693,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
 
         if is_array(elements) {
             return elements;
-        } elseif elements instanceof self {
+        } elseif elements instanceof Collection {
             return elements->all();
         } elseif elements instanceof IArray {
             return elements->toArray();

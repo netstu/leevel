@@ -101,21 +101,21 @@ PHP_METHOD(Leevel_Validate_Provider_Register, register) {
 /**
  * 创建 validate 服务闭包
  *
- * @param \Leevel\Kernel\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Validate\Validate
  */
 PHP_METHOD(Leevel_Validate_Provider_Register, validateClosure) {
 
 	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0;
+	zval *container, container_sub, _0;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
@@ -128,7 +128,7 @@ PHP_METHOD(Leevel_Validate_Provider_Register, validateClosure) {
 		ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "container", NULL, 0, project);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "container", NULL, 0, container);
 	zephir_check_call_status();
 	RETURN_MM();
 

@@ -186,24 +186,24 @@ PHP_METHOD(Leevel_View_Provider_Register, viewViews) {
 /**
  * 创建 view.views 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\View\Manager
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewViewsClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *container, container_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	object_init_ex(return_value, leevel_view_manager_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 119, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 119, container);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -250,27 +250,27 @@ PHP_METHOD(Leevel_View_Provider_Register, viewView) {
 /**
  * 创建 view.view 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return object
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewViewClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _1;
+	zval *container, container_sub, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "view.views");
-	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
 	zephir_check_call_status();
@@ -319,20 +319,20 @@ PHP_METHOD(Leevel_View_Provider_Register, viewCompiler) {
 /**
  * 创建 view.compiler 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\View\Compiler
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewCompilerClosure) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *container, container_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
@@ -389,24 +389,24 @@ PHP_METHOD(Leevel_View_Provider_Register, viewParser) {
 /**
  * 创建 view.parser 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\View\Parser
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewParserClosure) {
 
 	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _2, _3, _4;
+	zval *container, container_sub, _0, _2, _3, _4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
@@ -418,7 +418,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewParserClosure) {
 	if (zephir_has_constructor(&_0 TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_3);
 		ZVAL_STRING(&_3, "view.compiler");
-		ZEPHIR_CALL_METHOD(&_2, project, "make", NULL, 0, &_3);
+		ZEPHIR_CALL_METHOD(&_2, container, "make", NULL, 0, &_3);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 0, &_2);
 		zephir_check_call_status();
@@ -472,7 +472,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParser) {
 /**
  * 创建 view.twig.parser 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Kernel\IProject $project
  * @return \Twig_Environment
  */
 PHP_METHOD(Leevel_View_Provider_Register, viewTwigParserClosure) {
@@ -520,7 +520,7 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParserClosure) {
 		zephir_array_update_string(&_3, SL("debug"), &_4, PH_COPY | PH_SEPARATE);
 		ZEPHIR_INIT_VAR(&_5);
 		ZVAL_STRING(&_5, "theme");
-		ZEPHIR_CALL_METHOD(&_4, project, "pathapplicationcache", NULL, 0, &_5);
+		ZEPHIR_CALL_METHOD(&_4, project, "runtimepath", NULL, 0, &_5);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_5);
 		ZVAL_STRING(&_5, "request");

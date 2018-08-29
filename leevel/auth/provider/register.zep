@@ -86,12 +86,12 @@ class Register extends Provider
     /**
      * 创建 auths 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Auth\Manager
      */
-    protected function authsClosure(var project)
+    protected function authsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -107,11 +107,11 @@ class Register extends Provider
     /**
      * 创建 auth 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function authClosure(var project)
+    protected function authClosure(<IContainer> container)
     {
-        return project->make("auths")->connect();
+        return container->make("auths")->connect();
     }
 }

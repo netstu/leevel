@@ -85,12 +85,12 @@ class Register extends Provider
     /**
      * 创建 databases 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Database\Manager
      */
-    protected function databasesClosure(var project)
+    protected function databasesClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -106,11 +106,11 @@ class Register extends Provider
     /**
      * 创建 database 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function databaseClosure(var project)
+    protected function databaseClosure(<IContainer> container)
     {
-        return project->make("databases")->connect();
+        return container->make("databases")->connect();
     }
 }

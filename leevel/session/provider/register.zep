@@ -86,12 +86,12 @@ class Register extends Provider
     /**
      * 创建 sessions 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Session\Manager
      */
-    protected function sessionsClosure(var project)
+    protected function sessionsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
 
     /**
@@ -107,12 +107,12 @@ class Register extends Provider
     /**
      * 创建 session 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function sessionClosure(var project)
+    protected function sessionClosure(<IContainer> container)
     {
-        return project->make("sessions")->connect();
+        return container->make("sessions")->connect();
     }
     
     /**

@@ -84,12 +84,12 @@ class Register extends Provider
     /**
      * 创建 mails 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Mail\Manager
      */
-    protected function mailsClosure(var project)
+    protected function mailsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -105,11 +105,11 @@ class Register extends Provider
     /**
      * 创建 mail 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function mailClosure(var project)
+    protected function mailClosure(<IContainer> container)
     {
-        return project->make("mails")->connect();
+        return container->make("mails")->connect();
     }
 }

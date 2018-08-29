@@ -97,12 +97,12 @@ class Register extends Provider
     /**
      * 创建 auths 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Cache\Manager
      */
-    protected function cachesClosure(var project)
+    protected function cachesClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -118,12 +118,12 @@ class Register extends Provider
     /**
      * 创建 cache 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function cacheClosure(var project)
+    protected function cacheClosure(<IContainer> container)
     {
-        return project->make("caches")->connect();
+        return container->make("caches")->connect();
     }
     
     /**
@@ -139,11 +139,11 @@ class Register extends Provider
     /**
      * 创建 cache.load 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Cache\Load
      */
-    protected function cacheLoadClosure(var project)
+    protected function cacheLoadClosure(<IContainer> container)
     {
-        return new Load(project, project->make("cache"));
+        return new Load(container, container->make("cache"));
     }
 }

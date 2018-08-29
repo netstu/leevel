@@ -56,12 +56,12 @@ class Register extends Provider
     /**
      * 创建 event 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Event\Dispatch
      */
-    protected function eventClosure(var project)
+    protected function eventClosure(<IContainer> container)
     {
-        return new Dispatch(project);
+        return new Dispatch(container);
     }
     
     /**

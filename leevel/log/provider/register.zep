@@ -86,12 +86,12 @@ class Register extends Provider
     /**
      * 创建 logs 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Log\Manager
      */
-    protected function logsClosure(var project)
+    protected function logsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -107,12 +107,12 @@ class Register extends Provider
     /**
      * 创建 log 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function logClosure(var project)
+    protected function logClosure(<IContainer> container)
     {
-        return project->make("logs")->connect();
+        return container->make("logs")->connect();
     }
     
     /**

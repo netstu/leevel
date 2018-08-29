@@ -55,12 +55,12 @@ class Register extends Provider
     /**
      * 创建 validate 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Validate\Validate
      */
-    protected function validateClosure(var project)
+    protected function validateClosure(<IContainer> container)
     {
-        return (new Validate())->container(project);
+        return (new Validate())->container(container);
     }
     
     /**

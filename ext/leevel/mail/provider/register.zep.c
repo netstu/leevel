@@ -158,20 +158,20 @@ PHP_METHOD(Leevel_Mail_Provider_Register, mails) {
 /**
  * 创建 mails 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Mail\Manager
  */
 PHP_METHOD(Leevel_Mail_Provider_Register, mailsClosure) {
 
 	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *container, container_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
@@ -180,7 +180,7 @@ PHP_METHOD(Leevel_Mail_Provider_Register, mailsClosure) {
 	}
 	object_init_ex(return_value, _0);
 	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, project);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, container);
 		zephir_check_call_status();
 	}
 	RETURN_MM();
@@ -228,27 +228,27 @@ PHP_METHOD(Leevel_Mail_Provider_Register, mail) {
 /**
  * 创建 mail 服务闭包
  *
- * @param \Leevel\Kernel\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return object
  */
 PHP_METHOD(Leevel_Mail_Provider_Register, mailClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _1;
+	zval *container, container_sub, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "mails");
-	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
 	zephir_check_call_status();

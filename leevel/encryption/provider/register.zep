@@ -55,14 +55,14 @@ class Register extends Provider
     /**
      * 创建 encryption 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Encryption\Encryption
      */
-    protected function encryptionClosure(var project)
+    protected function encryptionClosure(<IContainer> container)
     {
         var option;
 
-        let option = project->make("option");
+        let option = container->make("option");
 
         return new Encryption(option->get("auth_key"), option->get("auth_expiry"));
     }

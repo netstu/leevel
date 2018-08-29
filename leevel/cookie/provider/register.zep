@@ -56,12 +56,12 @@ class Register extends Provider
     /**
      * 创建 cookie 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Cookie\Cookie
      */
-    protected function cookieClosure(var project)
+    protected function cookieClosure(<IContainer> container)
     {
-        return new Cookie(project->make("option")->get("cookie\\"));
+        return new Cookie(container->make("option")->get("cookie\\"));
     }
     
     /**

@@ -92,12 +92,12 @@ class Register extends Provider
     /**
      * 创建 filesystems 闭包
      * 
-     * @param \Leevel\Project\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return \Leevel\Filesystem\Manager
      */
-    protected function filesystemsClosure(var project)
+    protected function filesystemsClosure(<IContainer> container)
     {
-        return new Manager(project);
+        return new Manager(container);
     }
     
     /**
@@ -113,11 +113,11 @@ class Register extends Provider
     /**
      * 创建 filesystem 服务闭包
      *
-     * @param \Leevel\Kernel\IProject $project
+     * @param \Leevel\Di\IContainer $container
      * @return object
      */
-    protected function filesystemClosure(var project)
+    protected function filesystemClosure(<IContainer> container)
     {
-        return project->make("filesystems")->connect();
+        return container->make("filesystems")->connect();
     }
 }

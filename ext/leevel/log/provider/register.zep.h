@@ -17,11 +17,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_provider_register___construct, 0, 0, 1
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_provider_register_logsclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_log_provider_register_logclosure, 0, 0, 1)
-	ZEND_ARG_INFO(0, project)
+	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_log_provider_register_method_entry) {

@@ -102,24 +102,24 @@ PHP_METHOD(Leevel_Event_Provider_Register, register) {
 /**
  * 创建 event 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Event\Dispatch
  */
 PHP_METHOD(Leevel_Event_Provider_Register, eventClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *container, container_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	object_init_ex(return_value, leevel_event_dispatch_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 85, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 85, container);
 	zephir_check_call_status();
 	RETURN_MM();
 

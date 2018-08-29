@@ -163,24 +163,24 @@ PHP_METHOD(Leevel_Log_Provider_Register, logs) {
 /**
  * 创建 logs 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Log\Manager
  */
 PHP_METHOD(Leevel_Log_Provider_Register, logsClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub;
+	zval *container, container_sub;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	object_init_ex(return_value, leevel_log_manager_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 119, project);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 119, container);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -227,27 +227,27 @@ PHP_METHOD(Leevel_Log_Provider_Register, log) {
 /**
  * 创建 log 服务闭包
  *
- * @param \Leevel\Kernel\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return object
  */
 PHP_METHOD(Leevel_Log_Provider_Register, logClosure) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, _0, _1;
+	zval *container, container_sub, _0, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "logs");
-	ZEPHIR_CALL_METHOD(&_0, project, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "connect", NULL, 0);
 	zephir_check_call_status();

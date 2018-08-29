@@ -102,30 +102,30 @@ PHP_METHOD(Leevel_Encryption_Provider_Register, register) {
 /**
  * 创建 encryption 闭包
  * 
- * @param \Leevel\Project\IProject $project
+ * @param \Leevel\Di\IContainer $container
  * @return \Leevel\Encryption\Encryption
  */
 PHP_METHOD(Leevel_Encryption_Provider_Register, encryptionClosure) {
 
 	zend_class_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, option, _0, _2, _3;
+	zval *container, container_sub, option, _0, _2, _3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
+	ZVAL_UNDEF(&container_sub);
 	ZVAL_UNDEF(&option);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
+	zephir_fetch_params(1, 1, 0, &container);
 
 
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "option");
-	ZEPHIR_CALL_METHOD(&option, project, "make", NULL, 0, &_0);
+	ZEPHIR_CALL_METHOD(&option, container, "make", NULL, 0, &_0);
 	zephir_check_call_status();
 	if (!_1) {
 	_1 = zephir_fetch_class_str_ex(SL("Leevel\\Encryption\\Encryption"), ZEND_FETCH_CLASS_AUTO);
