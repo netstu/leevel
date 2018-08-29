@@ -30,13 +30,6 @@ ZEPHIR_INIT_CLASS(Leevel_Throttler_Provider_Register) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Throttler\\Provider, Register, leevel, throttler_provider_register, leevel_di_provider_ce, leevel_throttler_provider_register_method_entry, 0);
 
-	/**
-	 * 是否延迟载入
-	 *
-	 * @var boolean
-	 */
-	zend_declare_property_bool(leevel_throttler_provider_register_ce, SL("defer"), 1, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
-
 	return SUCCESS;
 
 }
@@ -118,6 +111,18 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, providers) {
 	ZVAL_STRING(&_1, "Leevel\\Throttler\\Middleware\\Throttler");
 	zephir_array_fast_append(return_value, &_1);
 	RETURN_MM();
+
+}
+
+/**
+ * {@inheritdoc}
+ */
+PHP_METHOD(Leevel_Throttler_Provider_Register, isDeferred) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_BOOL(1);
 
 }
 

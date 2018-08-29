@@ -45,6 +45,8 @@ class LoadI18n
 
         if project->isCachedI18n(i18nDefault) {
             let data = (array) require project->i18nCachedPath(i18nDefault);
+
+            let data = isset data[i18nDefault] ? data[i18nDefault] : [];
         } else {
             let load = (new Load([project->i18nPath()]))->
 
@@ -58,7 +60,7 @@ class LoadI18n
         let i18n = new I18n(i18nDefault);
         project->instance("i18n", i18n);
 
-        i18n->addText(i18nDefault, data);
+        i18n->addtext(i18nDefault, data);
     }
     
     /**

@@ -37,24 +37,31 @@ class LoadOption
      * @param \Leevel\Kernel\IProject $project
      * @return void
      */
-    public function handle(<IProject> project)
+    public function handle()
     {
-        var data, load, option;
+        var data, load, option, test, args, project;
+
+        let args = func_get_args();
+        let project = args[0];
     
         if project->isCachedOption() {
-            let data = (array)require project->pathCacheOptionFile();
+            let data = (array)require project->optionCachedPath();
             this->setEnvs(data["app"]["_env"]);
         } else {
-            let load = new Load(project->pathOption());
+            let load = new Load(project->optionPath());
             let data = load->loadData(project);
         }
 
         let option = new Option(data);
         project->instance("option", option);
 
-        Facade::setContainer(project);
+        let test = 2 === func_num_args();
 
-        this->initialization(option);
+        if (! test) {
+            Facade::setContainer(project);
+
+            this->initialization(option);
+        }
     }
     
     /**

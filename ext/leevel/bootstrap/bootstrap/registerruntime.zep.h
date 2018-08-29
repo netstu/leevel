@@ -12,10 +12,6 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, renderHttpResponse);
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, formatErrorException);
 PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, getRuntime);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_bootstrap_registerruntime_handle, 0, 0, 1)
-	ZEND_ARG_OBJ_INFO(0, project, Leevel\\Kernel\\IProject, 0)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_bootstrap_registerruntime_seterrorhandle, 0, 0, 2)
 	ZEND_ARG_INFO(0, code)
 	ZEND_ARG_INFO(0, description)
@@ -41,7 +37,7 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_bootstrap_registerruntime_format
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_bootstrap_bootstrap_registerruntime_method_entry) {
-	PHP_ME(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle, arginfo_leevel_bootstrap_bootstrap_registerruntime_handle, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setErrorHandle, arginfo_leevel_bootstrap_bootstrap_registerruntime_seterrorhandle, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Bootstrap_RegisterRuntime, registerShutdownFunction, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Bootstrap_RegisterRuntime, setExceptionHandler, arginfo_leevel_bootstrap_bootstrap_registerruntime_setexceptionhandler, ZEND_ACC_PUBLIC)

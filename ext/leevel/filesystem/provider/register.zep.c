@@ -31,13 +31,6 @@ ZEPHIR_INIT_CLASS(Leevel_Filesystem_Provider_Register) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Filesystem\\Provider, Register, leevel, filesystem_provider_register, leevel_di_provider_ce, leevel_filesystem_provider_register_method_entry, 0);
 
-	/**
-	 * 是否延迟载入
-	 *
-	 * @var boolean
-	 */
-	zend_declare_property_bool(leevel_filesystem_provider_register_ce, SL("defer"), 1, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
-
 	return SUCCESS;
 
 }
@@ -122,6 +115,18 @@ PHP_METHOD(Leevel_Filesystem_Provider_Register, providers) {
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(return_value, SL("filesystem"), &_0, PH_COPY | PH_SEPARATE);
 	RETURN_MM();
+
+}
+
+/**
+ * {@inheritdoc}
+ */
+PHP_METHOD(Leevel_Filesystem_Provider_Register, isDeferred) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_BOOL(1);
 
 }
 

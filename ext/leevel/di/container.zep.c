@@ -348,7 +348,7 @@ PHP_METHOD(Leevel_Di_Container, alias) {
 
 
 	if (Z_TYPE_P(alias) == IS_ARRAY) {
-		zephir_is_iterable(alias, 0, "leevel/di/container.zep", 205);
+		zephir_is_iterable(alias, 0, "leevel/di/container.zep", 206);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(alias), _1$$3, _2$$3, _0$$3)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -375,7 +375,7 @@ PHP_METHOD(Leevel_Di_Container, alias) {
 			zephir_create_array(&tmp, 1, 0 TSRMLS_CC);
 			zephir_array_fast_append(&tmp, value);
 		}
-		zephir_is_iterable(&tmp, 0, "leevel/di/container.zep", 211);
+		zephir_is_iterable(&tmp, 0, "leevel/di/container.zep", 212);
 		ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmp), _4$$6)
 		{
 			ZEPHIR_INIT_NVAR(&item);
@@ -445,7 +445,7 @@ PHP_METHOD(Leevel_Di_Container, make) {
 	zephir_read_property(&_1, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2$$3, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 232 TSRMLS_CC);
+		zephir_array_fetch(&_3$$3, &_2$$3, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 233 TSRMLS_CC);
 		RETURN_CTOR(&_3$$3);
 	}
 	zephir_read_property(&_4, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
@@ -456,11 +456,11 @@ PHP_METHOD(Leevel_Di_Container, make) {
 	}
 	zephir_read_property(&_6, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&_7);
-	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "leevel/di/container.zep", 240 TSRMLS_CC);
+	zephir_array_fetch(&_7, &_6, name, PH_NOISY, "leevel/di/container.zep", 241 TSRMLS_CC);
 	_8 = Z_TYPE_P(&_7) != IS_STRING;
 	if (_8) {
 		zephir_read_property(&_9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 240 TSRMLS_CC);
+		zephir_array_fetch(&_10, &_9, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 241 TSRMLS_CC);
 		_8 = zephir_is_callable(&_10 TSRMLS_CC);
 	}
 	if (_8) {
@@ -473,30 +473,30 @@ PHP_METHOD(Leevel_Di_Container, make) {
 		ZEPHIR_UNREF(&args);
 		zephir_check_call_status();
 		zephir_read_property(&_11$$5, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 246 TSRMLS_CC);
+		zephir_array_fetch(&_12$$5, &_11$$5, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 247 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&instance);
 		ZEPHIR_CALL_USER_FUNC_ARRAY(&instance, &_12$$5, &args);
 		zephir_check_call_status();
 	} else {
 		zephir_read_property(&_13$$7, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 		ZEPHIR_OBS_VAR(&_14$$7);
-		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "leevel/di/container.zep", 248 TSRMLS_CC);
+		zephir_array_fetch(&_14$$7, &_13$$7, name, PH_NOISY, "leevel/di/container.zep", 249 TSRMLS_CC);
 		if (Z_TYPE_P(&_14$$7) == IS_STRING) {
 			zephir_read_property(&_15$$8, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
-			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 249 TSRMLS_CC);
+			zephir_array_fetch(&_16$$8, &_15$$8, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 250 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&instance, this_ptr, "getinjectionobject", &_5, 0, &_16$$8, &args);
 			zephir_check_call_status();
 		} else {
 			zephir_read_property(&_17$$9, this_ptr, SL("services"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&instance);
-			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "leevel/di/container.zep", 251 TSRMLS_CC);
+			zephir_array_fetch(&instance, &_17$$9, name, PH_NOISY, "leevel/di/container.zep", 252 TSRMLS_CC);
 		}
 	}
 	zephir_read_property(&_18, this_ptr, SL("singletons"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_fast_in_array(name, &_18 TSRMLS_CC)) {
 		zephir_update_property_array(this_ptr, SL("instances"), name, &instance TSRMLS_CC);
 		zephir_read_property(&_19$$10, this_ptr, SL("instances"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 258 TSRMLS_CC);
+		zephir_array_fetch(&_20$$10, &_19$$10, name, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 259 TSRMLS_CC);
 		RETURN_CTOR(&_20$$10);
 	} else {
 		RETURN_CCTOR(&instance);
@@ -574,26 +574,26 @@ PHP_METHOD(Leevel_Di_Container, call) {
 		_6 = Z_TYPE_P(callback) == IS_ARRAY;
 	}
 	if (_6) {
-		zephir_array_fetch_long(&_7$$6, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 288 TSRMLS_CC);
+		zephir_array_fetch_long(&_7$$6, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 289 TSRMLS_CC);
 		if (!(Z_TYPE_P(&_7$$6) == IS_OBJECT)) {
-			zephir_array_fetch_long(&_8$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 289 TSRMLS_CC);
+			zephir_array_fetch_long(&_8$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 290 TSRMLS_CC);
 			if (!(Z_TYPE_P(&_8$$7) == IS_STRING)) {
-				ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The classname must be string.", "leevel/di/container.zep", 290);
+				ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "The classname must be string.", "leevel/di/container.zep", 291);
 				return;
 			}
-			zephir_array_fetch_long(&_10$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 293 TSRMLS_CC);
+			zephir_array_fetch_long(&_10$$7, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 294 TSRMLS_CC);
 			ZEPHIR_CALL_METHOD(&_9$$7, this_ptr, "getinjectionobject", NULL, 0, &_10$$7);
 			zephir_check_call_status();
 			zephir_array_update_long(callback, 0, &_9$$7, PH_COPY | PH_SEPARATE ZEPHIR_DEBUG_PARAMS_DUMMY);
 		}
 		_11$$6 = !(zephir_array_isset_long(callback, 1));
 		if (!(_11$$6)) {
-			zephir_array_fetch_long(&_12$$6, callback, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 296 TSRMLS_CC);
+			zephir_array_fetch_long(&_12$$6, callback, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 297 TSRMLS_CC);
 			_11$$6 = ZEPHIR_IS_EMPTY(&_12$$6);
 		}
 		if (_11$$6) {
 			ZEPHIR_INIT_VAR(&_13$$9);
-			zephir_array_fetch_long(&_14$$9, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 297 TSRMLS_CC);
+			zephir_array_fetch_long(&_14$$9, callback, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 298 TSRMLS_CC);
 			if ((zephir_method_exists_ex(&_14$$9, SL("handle") TSRMLS_CC) == SUCCESS)) {
 				ZEPHIR_INIT_NVAR(&_13$$9);
 				ZVAL_STRING(&_13$$9, "handle");
@@ -752,7 +752,7 @@ PHP_METHOD(Leevel_Di_Container, getAlias) {
 	zephir_read_property(&_1, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
 	if (zephir_array_isset(&_1, name)) {
 		zephir_read_property(&_2, this_ptr, SL("alias"), PH_NOISY_CC | PH_READONLY);
-		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "leevel/di/container.zep", 361 TSRMLS_CC);
+		zephir_array_fetch(&_0, &_2, name, PH_NOISY, "leevel/di/container.zep", 362 TSRMLS_CC);
 	} else {
 		ZEPHIR_CPY_WRT(&_0, name);
 	}
@@ -801,7 +801,7 @@ PHP_METHOD(Leevel_Di_Container, getInjectionObject) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 3, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 379 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 380 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -850,11 +850,11 @@ PHP_METHOD(Leevel_Di_Container, normalizeInjectionArgs) {
 	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "parseinjection", NULL, 0, value, &args);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&tmpArgs);
-	zephir_array_fetch_long(&tmpArgs, &tmp, 0, PH_NOISY, "leevel/di/container.zep", 404 TSRMLS_CC);
+	zephir_array_fetch_long(&tmpArgs, &tmp, 0, PH_NOISY, "leevel/di/container.zep", 405 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&required);
-	zephir_array_fetch_long(&required, &tmp, 1, PH_NOISY, "leevel/di/container.zep", 405 TSRMLS_CC);
+	zephir_array_fetch_long(&required, &tmp, 1, PH_NOISY, "leevel/di/container.zep", 406 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&validArgs);
-	zephir_array_fetch_long(&validArgs, &tmp, 2, PH_NOISY, "leevel/di/container.zep", 406 TSRMLS_CC);
+	zephir_array_fetch_long(&validArgs, &tmp, 2, PH_NOISY, "leevel/di/container.zep", 407 TSRMLS_CC);
 	if (ZEPHIR_LT(&validArgs, &required)) {
 		ZEPHIR_INIT_VAR(&_0$$3);
 		object_init_ex(&_0$$3, leevel_di_containerinvalidargumentexception_ce);
@@ -864,7 +864,7 @@ PHP_METHOD(Leevel_Di_Container, normalizeInjectionArgs) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$3, "__construct", NULL, 3, &_2$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 415 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$3, "leevel/di/container.zep", 416 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -931,7 +931,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&validArgs);
 	ZVAL_LONG(&validArgs, zephir_fast_count_int(&param TSRMLS_CC));
-	zephir_is_iterable(&param, 0, "leevel/di/container.zep", 473);
+	zephir_is_iterable(&param, 0, "leevel/di/container.zep", 474);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&param), _0)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -948,7 +948,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 				zephir_check_call_status_or_jump(try_end_1);
 				if (zephir_array_key_exists(&args, &argsclass TSRMLS_CC)) {
 					ZEPHIR_OBS_NVAR(&data);
-					zephir_array_fetch(&data, &args, &argsclass, PH_NOISY, "leevel/di/container.zep", 444 TSRMLS_CC);
+					zephir_array_fetch(&data, &args, &argsclass, PH_NOISY, "leevel/di/container.zep", 445 TSRMLS_CC);
 				} else if (zephir_is_true(&_3$$5)) {
 					ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
 					zephir_check_call_status_or_jump(try_end_1);
@@ -965,7 +965,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 					ZEPHIR_OBS_NVAR(&data);
 					ZEPHIR_OBS_NVAR(&_6$$9);
 					zephir_read_property(&_6$$9, &item, SL("name"), PH_NOISY_CC);
-					zephir_array_fetch(&data, &args, &_6$$9, PH_NOISY, "leevel/di/container.zep", 454 TSRMLS_CC);
+					zephir_array_fetch(&data, &args, &_6$$9, PH_NOISY, "leevel/di/container.zep", 455 TSRMLS_CC);
 				} else {
 					ZEPHIR_CALL_METHOD(&data, &item, "getdefaultvalue", NULL, 0);
 					zephir_check_call_status_or_jump(try_end_1);
@@ -977,7 +977,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 					ZEPHIR_OBS_NVAR(&data);
 					ZEPHIR_OBS_NVAR(&_8$$11);
 					zephir_read_property(&_8$$11, &item, SL("name"), PH_NOISY_CC);
-					zephir_array_fetch(&data, &args, &_8$$11, PH_NOISY, "leevel/di/container.zep", 459 TSRMLS_CC);
+					zephir_array_fetch(&data, &args, &_8$$11, PH_NOISY, "leevel/di/container.zep", 460 TSRMLS_CC);
 					ZEPHIR_SEPARATE(&validArgs);
 					zephir_increment(&validArgs);
 				} else {
@@ -1006,7 +1006,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 				zephir_check_call_status();
 				ZEPHIR_CALL_METHOD(NULL, &_11$$13, "__construct", &_13, 21, &_12$$13);
 				zephir_check_call_status();
-				zephir_throw_exception_debug(&_11$$13, "leevel/di/container.zep", 469 TSRMLS_CC);
+				zephir_throw_exception_debug(&_11$$13, "leevel/di/container.zep", 470 TSRMLS_CC);
 				ZEPHIR_MM_RESTORE();
 				return;
 			}
@@ -1017,7 +1017,7 @@ PHP_METHOD(Leevel_Di_Container, parseInjection) {
 		ZEPHIR_CALL_FUNCTION(&_14$$14, "array_values", NULL, 36, &result);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&result, &_14$$14);
-		zephir_is_iterable(&args, 0, "leevel/di/container.zep", 482);
+		zephir_is_iterable(&args, 0, "leevel/di/container.zep", 483);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&args), _16$$14, _17$$14, _15$$14)
 		{
 			ZEPHIR_INIT_NVAR(&k);
@@ -1130,7 +1130,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassInstance) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 21, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 529 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 531 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1186,7 +1186,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassFromContainer) {
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &_1$$6, "__construct", NULL, 21, &_3$$6);
 			zephir_check_call_status();
-			zephir_throw_exception_debug(&_1$$6, "leevel/di/container.zep", 556 TSRMLS_CC);
+			zephir_throw_exception_debug(&_1$$6, "leevel/di/container.zep", 558 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();
 			return;
 		}
@@ -1200,7 +1200,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassFromContainer) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_5, "__construct", NULL, 21, &_7);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_5, "leevel/di/container.zep", 562 TSRMLS_CC);
+	zephir_throw_exception_debug(&_5, "leevel/di/container.zep", 564 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -1245,7 +1245,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassNotExists) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_0$$4, "__construct", NULL, 21, &_2$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_0$$4, "leevel/di/container.zep", 581 TSRMLS_CC);
+		zephir_throw_exception_debug(&_0$$4, "leevel/di/container.zep", 583 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1294,7 +1294,7 @@ PHP_METHOD(Leevel_Di_Container, parseReflection) {
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "leevel/di/container.zep", 603);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Unsupported callback types.", "leevel/di/container.zep", 605);
 	return;
 
 }
@@ -1359,8 +1359,8 @@ PHP_METHOD(Leevel_Di_Container, parseMethodReflection) {
 
 	ZEPHIR_INIT_VAR(&reflection);
 	object_init_ex(&reflection, zephir_get_internal_ce(SL("reflectionmethod")));
-	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 635 TSRMLS_CC);
-	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 635 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, injection, 0, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 637 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, injection, 1, PH_NOISY | PH_READONLY, "leevel/di/container.zep", 637 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, &reflection, "__construct", NULL, 39, &_0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&param, &reflection, "getparameters", NULL, 40);
@@ -1416,7 +1416,7 @@ PHP_METHOD(Leevel_Di_Container, parseClassReflection) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 21, &_3$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_1$$3, "leevel/di/container.zep", 657 TSRMLS_CC);
+		zephir_throw_exception_debug(&_1$$3, "leevel/di/container.zep", 659 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -1689,7 +1689,7 @@ PHP_METHOD(Leevel_Di_Container, __call) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 2, &_2);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 777 TSRMLS_CC);
+	zephir_throw_exception_debug(&_0, "leevel/di/container.zep", 779 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 

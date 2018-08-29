@@ -13,10 +13,11 @@
 
 #include "kernel/main.h"
 #include "kernel/memory.h"
+#include "kernel/main.h"
+#include "kernel/array.h"
 #include "kernel/fcall.h"
 #include "kernel/operators.h"
 #include "kernel/require.h"
-#include "kernel/array.h"
 #include "kernel/object.h"
 #include "kernel/concat.h"
 
@@ -48,15 +49,17 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, handle) {
 
 	zend_class_entry *_6$$4 = NULL;
 	zval _3$$3;
+	zend_bool test = 0;
+	zval data, load, option, args, project, _0, _8, _1$$3, _2$$3, _4$$3, _5$$3, _7$$4;
 	zephir_fcall_cache_entry *_9 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, data, load, option, _0, _8, _1$$3, _2$$3, _4$$3, _5$$3, _7$$4;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&project_sub);
 	ZVAL_UNDEF(&data);
 	ZVAL_UNDEF(&load);
 	ZVAL_UNDEF(&option);
+	ZVAL_UNDEF(&args);
+	ZVAL_UNDEF(&project);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_1$$3);
@@ -67,14 +70,15 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, handle) {
 	ZVAL_UNDEF(&_3$$3);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &project);
 
-
-
-	ZEPHIR_CALL_METHOD(&_0, project, "iscachedoption", NULL, 0);
+	ZEPHIR_INIT_VAR(&args);
+	zephir_get_args(&args);
+	ZEPHIR_OBS_VAR(&project);
+	zephir_array_fetch_long(&project, &args, 0, PH_NOISY, "leevel/bootstrap/bootstrap/loadoption.zep", 45 TSRMLS_CC);
+	ZEPHIR_CALL_METHOD(&_0, &project, "iscachedoption", NULL, 0);
 	zephir_check_call_status();
 	if (zephir_is_true(&_0)) {
-		ZEPHIR_CALL_METHOD(&_1$$3, project, "pathcacheoptionfile", NULL, 0);
+		ZEPHIR_CALL_METHOD(&_1$$3, &project, "optioncachedpath", NULL, 0);
 		zephir_check_call_status();
 		ZEPHIR_OBSERVE_OR_NULLIFY_PPZV(&_2$$3);
 		if (zephir_require_zval_ret(&_2$$3, &_1$$3 TSRMLS_CC) == FAILURE) {
@@ -82,8 +86,8 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, handle) {
 		}
 		zephir_get_arrval(&_3$$3, &_2$$3);
 		ZEPHIR_CPY_WRT(&data, &_3$$3);
-		zephir_array_fetch_string(&_4$$3, &data, SL("app"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/loadoption.zep", 46 TSRMLS_CC);
-		zephir_array_fetch_string(&_5$$3, &_4$$3, SL("_env"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/loadoption.zep", 46 TSRMLS_CC);
+		zephir_array_fetch_string(&_4$$3, &data, SL("app"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/loadoption.zep", 49 TSRMLS_CC);
+		zephir_array_fetch_string(&_5$$3, &_4$$3, SL("_env"), PH_NOISY | PH_READONLY, "leevel/bootstrap/bootstrap/loadoption.zep", 49 TSRMLS_CC);
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setenvs", NULL, 0, &_5$$3);
 		zephir_check_call_status();
 	} else {
@@ -93,12 +97,12 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, handle) {
 		}
 		object_init_ex(&load, _6$$4);
 		if (zephir_has_constructor(&load TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(&_7$$4, project, "pathoption", NULL, 0);
+			ZEPHIR_CALL_METHOD(&_7$$4, &project, "optionpath", NULL, 0);
 			zephir_check_call_status();
 			ZEPHIR_CALL_METHOD(NULL, &load, "__construct", NULL, 0, &_7$$4);
 			zephir_check_call_status();
 		}
-		ZEPHIR_CALL_METHOD(&data, &load, "loaddata", NULL, 0, project);
+		ZEPHIR_CALL_METHOD(&data, &load, "loaddata", NULL, 0, &project);
 		zephir_check_call_status();
 	}
 	ZEPHIR_INIT_VAR(&option);
@@ -107,12 +111,15 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, handle) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_8);
 	ZVAL_STRING(&_8, "option");
-	ZEPHIR_CALL_METHOD(NULL, project, "instance", NULL, 0, &_8, &option);
+	ZEPHIR_CALL_METHOD(NULL, &project, "instance", NULL, 0, &_8, &option);
 	zephir_check_call_status();
-	ZEPHIR_CALL_CE_STATIC(NULL, leevel_support_facade_ce, "setcontainer", &_9, 0, project);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "initialization", NULL, 0, &option);
-	zephir_check_call_status();
+	test = 2 == ZEND_NUM_ARGS();
+	if (!test) {
+		ZEPHIR_CALL_CE_STATIC(NULL, leevel_support_facade_ce, "setcontainer", &_9, 0, &project);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "initialization", NULL, 0, &option);
+		zephir_check_call_status();
+	}
 	ZEPHIR_MM_RESTORE();
 
 }
@@ -143,7 +150,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadOption, setEnvs) {
 	zephir_get_arrval(&env, env_param);
 
 
-	zephir_is_iterable(&env, 0, "leevel/bootstrap/bootstrap/loadoption.zep", 73);
+	zephir_is_iterable(&env, 0, "leevel/bootstrap/bootstrap/loadoption.zep", 80);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&env), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);

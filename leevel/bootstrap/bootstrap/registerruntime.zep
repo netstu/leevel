@@ -45,20 +45,28 @@ class RegisterRuntime
      * @param \Leevel\Kernel\IProject $project
      * @return void
      */
-    public function handle(<IProject> project)
+    public function handle()
     {
+        var test, args, project;
+
+        let args = func_get_args();
+        let project = args[0];
         let this->project = project;
 
-        error_reporting(E_ALL);
-    
-        set_error_handler([this, "setErrorHandle"]);
+        let test = 2 === func_num_args();
 
-        set_exception_handler([this, "setExceptionHandler"]);
+        if (! test) {
+            error_reporting(E_ALL);
+        
+            set_error_handler([this, "setErrorHandle"]);
 
-        register_shutdown_function([this, "registerShutdownFunction"]);
+            set_exception_handler([this, "setExceptionHandler"]);
 
-        if project->environment() === "production" {
-            ini_set("display_errors", "Off");
+            register_shutdown_function([this, "registerShutdownFunction"]);
+
+            if project->environment() === "production" {
+                ini_set("display_errors", "Off");
+            }
         }
     }
     

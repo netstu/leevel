@@ -31,13 +31,6 @@ ZEPHIR_INIT_CLASS(Leevel_Cache_Provider_Register) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Cache\\Provider, Register, leevel, cache_provider_register, leevel_di_provider_ce, leevel_cache_provider_register_method_entry, 0);
 
-	/**
-	 * 是否延迟载入
-	 *
-	 * @var boolean
-	 */
-	zend_declare_property_bool(leevel_cache_provider_register_ce, SL("defer"), 1, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC TSRMLS_CC);
-
 	return SUCCESS;
 
 }
@@ -98,24 +91,22 @@ PHP_METHOD(Leevel_Cache_Provider_Register, register) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, providers) {
 
+	zval _1;
 	zval _0;
-	zval tem, _1;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&tem);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(&tem);
-	zephir_create_array(&tem, 3, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 3, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Cache\\Manager");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tem, SL("caches"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("caches"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
@@ -124,14 +115,26 @@ PHP_METHOD(Leevel_Cache_Provider_Register, providers) {
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Cache\\ICache");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tem, SL("cache"), &_0, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(return_value, SL("cache"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
 	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Cache\\Load");
 	zephir_array_fast_append(&_0, &_1);
-	zephir_array_update_string(&tem, SL("cache.load"), &_0, PH_COPY | PH_SEPARATE);
-	RETURN_CCTOR(&tem);
+	zephir_array_update_string(return_value, SL("cache.load"), &_0, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
+
+}
+
+/**
+ * {@inheritdoc}
+ */
+PHP_METHOD(Leevel_Cache_Provider_Register, isDeferred) {
+
+	zval *this_ptr = getThis();
+
+
+	RETURN_BOOL(1);
 
 }
 
