@@ -189,20 +189,16 @@ PHP_METHOD(Leevel_Mvc_Controller, getAssign) {
 PHP_METHOD(Leevel_Mvc_Controller, deleteAssign) {
 
 	zval _1;
+	zval _0, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, _0, _2, _3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
-
-
 
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
 	zephir_check_call_status();
@@ -311,63 +307,9 @@ PHP_METHOD(Leevel_Mvc_Controller, checkView) {
 
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller", "leevel/mvc/controller.zep", 158);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "View is not set in controller.", "leevel/mvc/controller.zep", 158);
 		return;
 	}
-
-}
-
-/**
- * 赋值
- *
- * @param mixed $key
- * @param mixed $value
- * @return void
- */
-PHP_METHOD(Leevel_Mvc_Controller, __set) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *key, key_sub, *value, value_sub;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&key_sub);
-	ZVAL_UNDEF(&value_sub);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &key, &value);
-
-
-
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "assign", NULL, 0, key, value);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
-
-}
-
-/**
- * 获取值
- *
- * @param string $key
- * @return mixed
- */
-PHP_METHOD(Leevel_Mvc_Controller, __get) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *key_param = NULL;
-	zval key;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&key);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &key_param);
-
-	zephir_get_strval(&key, key_param);
-
-
-	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "getassign", NULL, 0, &key);
-	zephir_check_call_status();
-	RETURN_MM();
 
 }
 

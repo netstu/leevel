@@ -17,7 +17,7 @@ namespace Leevel\Mvc;
 
 use RuntimeException;
 use Leevel\Mvc\IView;
-use Leevel\View\IView as ViewIView;
+use Leevel\View\IView as IViews;
 
 /**
  * 基类控制器
@@ -65,7 +65,7 @@ abstract class Controller implements IController
      * @param \Leevel\View\IView $theme
      * @return $this
      */
-    public function switchView(<ViewIView> theme)
+    public function switchView(<IViews> theme)
     {
         this->checkView();
         this->view->switchView(theme);
@@ -80,7 +80,7 @@ abstract class Controller implements IController
      * @param mixed $value
      * @return $this
      */
-    public function assign(var name, value = null)
+    public function assign(var name, var value = null)
     {
         this->checkView();
         this->view->assign(name, value);
@@ -107,9 +107,9 @@ abstract class Controller implements IController
      * @param mixed $name
      * @return $this
      */
-    public function deleteAssign(var name)
+    public function deleteAssign()
     {
-        $this->checkView();
+        this->checkView();
 
         call_user_func_array([
             this->view,
@@ -155,30 +155,7 @@ abstract class Controller implements IController
     protected function checkView()
     {
         if ! this->view {
-            throw new RuntimeException("View is not set in controller");
+            throw new RuntimeException("View is not set in controller.");
         }
-    }
-
-    /**
-     * 赋值
-     *
-     * @param mixed $key
-     * @param mixed $value
-     * @return void
-     */
-    public function __set(var key, var value)
-    {
-        this->assign(key, value);
-    }
-
-    /**
-     * 获取值
-     *
-     * @param string $key
-     * @return mixed
-     */
-    public function __get(string key)
-    {
-        return this->getAssign(key);
     }
 }

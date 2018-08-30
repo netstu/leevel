@@ -97,7 +97,7 @@ class Register extends Provider
         var throttler;
 
         let throttler = new Throttler(
-            container->make("cache")->connect(container->make("option")->get("throttler\\driver"))
+            container->make("caches")->connect(container->make("option")->get("throttler\\driver"))
         );
 
         throttler->setRequest(container->make("request"));

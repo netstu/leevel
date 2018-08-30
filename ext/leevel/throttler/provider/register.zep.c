@@ -198,7 +198,7 @@ PHP_METHOD(Leevel_Throttler_Provider_Register, throttlerClosure) {
 	object_init_ex(&throttler, _0);
 	if (zephir_has_constructor(&throttler TSRMLS_CC)) {
 		ZEPHIR_INIT_VAR(&_2);
-		ZVAL_STRING(&_2, "cache");
+		ZVAL_STRING(&_2, "caches");
 		ZEPHIR_CALL_METHOD(&_1, container, "make", NULL, 0, &_2);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&_2);

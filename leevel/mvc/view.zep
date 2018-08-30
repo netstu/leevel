@@ -15,9 +15,8 @@
  */
 namespace Leevel\Mvc;
 
-use RuntimeException;
 use Leevel\Mvc\IView;
-use Leevel\View\IView as ViewIView;
+use Leevel\View\IView as IViews;
 
 /**
  * 视图
@@ -43,7 +42,7 @@ class View implements IView
      * @param \Leevel\View\IView $theme
      * @return void
      */
-    public function __construct(<ViewIView> theme)
+    public function __construct(<IViews> theme)
     {
         let this->theme = theme;
     }
@@ -54,7 +53,7 @@ class View implements IView
      * @param \Leevel\View\IView $theme
      * @return $this
      */
-    public function switchView(<ViewIView> theme)
+    public function switchView(<IViews> theme)
     {
         var assign;
 
@@ -74,7 +73,6 @@ class View implements IView
      */
     public function assign(var name, var value = null)
     {
-        this->checkTheme();
         this->theme->setVar(name, value);
 
         return this;
@@ -88,8 +86,6 @@ class View implements IView
      */
     public function getAssign(var name = null)
     {
-        this->checkTheme();
-
         return this->theme->getVar(name);
     }
 
@@ -99,11 +95,9 @@ class View implements IView
      * @param mixed $name
      * @return $this
      */
-    public function deleteAssign(var name)
+    public function deleteAssign()
     {
         var args;
-
-        this->checkTheme();
 
         let args = func_get_args();
 
@@ -123,7 +117,6 @@ class View implements IView
      */
     public function clearAssign()
     {
-        this->checkTheme();
         this->theme->clearVar();
         
         return this;
@@ -139,20 +132,6 @@ class View implements IView
      */
     public function display(var file = null, array! vars = [], var ext = null)
     {
-        this->checkTheme();
-
         return this->theme->display(file, vars, ext, false);
-    }
-
-    /**
-     * 验证 theme
-     *
-     * @return void
-     */
-    protected function checkTheme()
-    {
-        if ! this->theme {
-            throw new RuntimeException("Theme is not set in view");
-        }
     }
 }

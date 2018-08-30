@@ -346,6 +346,85 @@ PHP_METHOD(Leevel_Manager_Manager, setDefaultDriver) {
 }
 
 /**
+ * 获取容器配置值.
+ *
+ * @param string $name
+ *
+ * @return mixed
+ */
+PHP_METHOD(Leevel_Manager_Manager, getContainerOption) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *name = NULL, name_sub, __$null, tmp, _0, _1, _2;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &name);
+
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
+	}
+
+
+	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "normalizeoptionname", NULL, 0, name);
+	zephir_check_call_status();
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "option");
+	ZEPHIR_CALL_METHOD(&_1, &_0, "make", NULL, 0, &_2);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(&_1, "get", NULL, 0, &tmp);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 设置容器配置值.
+ *
+ * @param string $name
+ * @param mixed  $value
+ */
+PHP_METHOD(Leevel_Manager_Manager, setContainerOption) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *name, name_sub, *value, value_sub, tmp, _0, _1, _2;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_UNDEF(&value_sub);
+	ZVAL_UNDEF(&tmp);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &name, &value);
+
+
+
+	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "normalizeoptionname", NULL, 0, name);
+	zephir_check_call_status();
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_INIT_VAR(&_2);
+	ZVAL_STRING(&_2, "option");
+	ZEPHIR_CALL_METHOD(&_1, &_0, "make", NULL, 0, &_2);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_1, "set", NULL, 0, &tmp, value);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
  * 取得配置命名空间
  *
  * @return string
@@ -447,7 +526,7 @@ PHP_METHOD(Leevel_Manager_Manager, makeConnect) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_2$$3, "__construct", NULL, 25, &_4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_2$$3, "leevel/manager/manager.zep", 216 TSRMLS_CC);
+		zephir_throw_exception_debug(&_2$$3, "leevel/manager/manager.zep", 245 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -710,7 +789,7 @@ PHP_METHOD(Leevel_Manager_Manager, filterCommonOption) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "defaultcommonoption", NULL, 0);
 	zephir_check_call_status();
-	zephir_is_iterable(&_0, 0, "leevel/manager/manager.zep", 343);
+	zephir_is_iterable(&_0, 0, "leevel/manager/manager.zep", 372);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_0), _1)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -806,7 +885,7 @@ PHP_METHOD(Leevel_Manager_Manager, filterNullOfOption) {
 
 	ZEPHIR_INIT_VAR(&result);
 	array_init(&result);
-	zephir_is_iterable(&options, 0, "leevel/manager/manager.zep", 387);
+	zephir_is_iterable(&options, 0, "leevel/manager/manager.zep", 416);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&options), _1, _2, _0)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -824,89 +903,6 @@ PHP_METHOD(Leevel_Manager_Manager, filterNullOfOption) {
 	ZEPHIR_INIT_NVAR(&value);
 	ZEPHIR_INIT_NVAR(&key);
 	RETURN_CTOR(&result);
-
-}
-
-/**
- * 获取容器配置值.
- *
- * @param string $name
- *
- * @return mixed
- */
-PHP_METHOD(Leevel_Manager_Manager, getContainerOption) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, tmp, _0, _1, _2;
-	zval name;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 1, &name_param);
-
-	if (!name_param) {
-		ZEPHIR_INIT_VAR(&name);
-		ZVAL_STRING(&name, "");
-	} else {
-		zephir_get_strval(&name, name_param);
-	}
-
-
-	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "normalizeoptionname", NULL, 0, &name);
-	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "option");
-	ZEPHIR_CALL_METHOD(&_1, &_0, "make", NULL, 0, &_2);
-	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_METHOD(&_1, "get", NULL, 0, &tmp);
-	zephir_check_call_status();
-	RETURN_MM();
-
-}
-
-/**
- * 设置容器配置值.
- *
- * @param string $name
- * @param mixed  $value
- */
-PHP_METHOD(Leevel_Manager_Manager, setContainerOption) {
-
-	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name_param = NULL, *value, value_sub, tmp, _0, _1, _2;
-	zval name;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&value_sub);
-	ZVAL_UNDEF(&tmp);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
-
-	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 0, &name_param, &value);
-
-	zephir_get_strval(&name, name_param);
-
-
-	ZEPHIR_CALL_METHOD(&tmp, this_ptr, "normalizeoptionname", NULL, 0, &name);
-	zephir_check_call_status();
-	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_2);
-	ZVAL_STRING(&_2, "option");
-	ZEPHIR_CALL_METHOD(&_1, &_0, "make", NULL, 0, &_2);
-	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &_1, "set", NULL, 0, &tmp, value);
-	zephir_check_call_status();
-	ZEPHIR_MM_RESTORE();
 
 }
 

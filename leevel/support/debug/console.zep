@@ -125,7 +125,7 @@ console.log( '%cThe PHP Framework For Code Poem As Free As Wind %c(http://www.qu
      * @param array $messages
      * @return array
      */
-    protected function formatMessages(array messages) -> array
+    protected static function formatMessages(array messages) -> array
     {
         var item;
         array result = [];

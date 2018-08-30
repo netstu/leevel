@@ -39,7 +39,7 @@ ZEPHIR_INIT_FUNCS(leevel_support_debug_console_method_entry) {
 	PHP_ME(Leevel_Support_Debug_Console, jsonTrace, arginfo_leevel_support_debug_console_jsontrace, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Debug_Console, getOutputToConsole, arginfo_leevel_support_debug_console_getoutputtoconsole, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Debug_Console, normalizeLog, arginfo_leevel_support_debug_console_normalizelog, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
-	PHP_ME(Leevel_Support_Debug_Console, formatMessages, arginfo_leevel_support_debug_console_formatmessages, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_Support_Debug_Console, formatMessages, arginfo_leevel_support_debug_console_formatmessages, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Debug_Console, formatMessage, arginfo_leevel_support_debug_console_formatmessage, ZEND_ACC_PROTECTED|ZEND_ACC_STATIC)
 	PHP_FE_END
 };

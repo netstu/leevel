@@ -15,7 +15,7 @@
  */
 namespace Leevel\Mvc;
 
-use Leevel\View\IView as ViewIView;
+use Leevel\View\IView as IViews;
 
 /**
  * IView 接口
@@ -34,7 +34,7 @@ interface IView
      * @param \Leevel\View\IView $theme
      * @return $this
      */
-    public function switchView(<ViewIView> theme);
+    public function switchView(<IViews> theme);
 
     /**
      * 变量赋值
@@ -59,7 +59,7 @@ interface IView
      * @param mixed $name
      * @return $this
      */
-    public function deleteAssign(var name);
+    public function deleteAssign();
 
     /**
      * 清空变量值

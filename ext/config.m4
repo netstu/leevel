@@ -39,7 +39,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/log/connect.zep.c
 	leevel/log/ilog.zep.c
 	leevel/mvc/icontroller.zep.c
-	leevel/mvc/ientity.zep.c
 	leevel/option/ioption.zep.c
 	leevel/pipeline/ipipeline.zep.c
 	leevel/router/iresponsefactory.zep.c
@@ -98,7 +97,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/mail.zep.c
 	leevel/mail/provider/register.zep.c
 	leevel/mvc/controller.zep.c
-	leevel/mvc/imodel.zep.c
 	leevel/mvc/view.zep.c
 	leevel/option.zep.c
 	leevel/option/option.zep.c

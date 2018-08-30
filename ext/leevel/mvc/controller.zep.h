@@ -12,8 +12,6 @@ PHP_METHOD(Leevel_Mvc_Controller, deleteAssign);
 PHP_METHOD(Leevel_Mvc_Controller, clearAssign);
 PHP_METHOD(Leevel_Mvc_Controller, display);
 PHP_METHOD(Leevel_Mvc_Controller, checkView);
-PHP_METHOD(Leevel_Mvc_Controller, __set);
-PHP_METHOD(Leevel_Mvc_Controller, __get);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller_setview, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, view, Leevel\\Mvc\\IView, 0)
@@ -32,23 +30,10 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller_getassign, 0, 0, 0)
 	ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller_deleteassign, 0, 0, 1)
-	ZEND_ARG_INFO(0, name)
-ZEND_END_ARG_INFO()
-
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller_display, 0, 0, 0)
 	ZEND_ARG_INFO(0, file)
 	ZEND_ARG_ARRAY_INFO(0, vars, 1)
 	ZEND_ARG_INFO(0, ext)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller___set, 0, 0, 2)
-	ZEND_ARG_INFO(0, key)
-	ZEND_ARG_INFO(0, value)
-ZEND_END_ARG_INFO()
-
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_mvc_controller___get, 0, 0, 1)
-	ZEND_ARG_INFO(0, key)
 ZEND_END_ARG_INFO()
 
 ZEPHIR_INIT_FUNCS(leevel_mvc_controller_method_entry) {
@@ -57,11 +42,9 @@ ZEPHIR_INIT_FUNCS(leevel_mvc_controller_method_entry) {
 	PHP_ME(Leevel_Mvc_Controller, switchView, arginfo_leevel_mvc_controller_switchview, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Mvc_Controller, assign, arginfo_leevel_mvc_controller_assign, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Mvc_Controller, getAssign, arginfo_leevel_mvc_controller_getassign, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Mvc_Controller, deleteAssign, arginfo_leevel_mvc_controller_deleteassign, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Mvc_Controller, deleteAssign, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Mvc_Controller, clearAssign, NULL, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Mvc_Controller, display, arginfo_leevel_mvc_controller_display, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Mvc_Controller, checkView, NULL, ZEND_ACC_PROTECTED)
-	PHP_ME(Leevel_Mvc_Controller, __set, arginfo_leevel_mvc_controller___set, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Mvc_Controller, __get, arginfo_leevel_mvc_controller___get, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

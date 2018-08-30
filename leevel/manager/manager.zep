@@ -170,6 +170,35 @@ abstract class Manager
     }
 
     /**
+     * 获取容器配置值.
+     *
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function getContainerOption(var name = null)
+    {
+        var tmp;
+        let tmp = this->normalizeOptionName(name);
+
+        return this->container->make("option")->get(tmp);
+    }
+
+    /**
+     * 设置容器配置值.
+     *
+     * @param string $name
+     * @param mixed  $value
+     */
+    public function setContainerOption(var name, var value)-> void
+    {
+        var tmp;
+        let tmp = this->normalizeOptionName(name);
+
+        this->container->make("option")->set(tmp, value);
+    }
+
+    /**
      * 取得配置命名空间
      *
      * @return string
@@ -264,11 +293,11 @@ abstract class Manager
     {
         var tmp;
 
-        if typeof options == "null" {
+        if typeof options === "null" {
             return [];
         }
 
-        if typeof options == "string" {
+        if typeof options === "string" {
             let tmp = this->getContainerOption("connect.".options);
 
             if typeof tmp != "array" {
@@ -385,34 +414,5 @@ abstract class Manager
         }
 
         return result;
-    }
-
-    /**
-     * 获取容器配置值.
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    protected function getContainerOption(string name = null)
-    {
-        var tmp;
-        let tmp = this->normalizeOptionName(name);
-
-        return this->container->make("option")->get(tmp);
-    }
-
-    /**
-     * 设置容器配置值.
-     *
-     * @param string $name
-     * @param mixed  $value
-     */
-    protected function setContainerOption(string name, var value)-> void
-    {
-        var tmp;
-        let tmp = this->normalizeOptionName(name);
-
-        this->container->make("option")->set(tmp, value);
     }
 }

@@ -17,7 +17,7 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/view", "connect.zep.c iconnect.zep.c iview.zep.c html.zep.c manager.zep.c phpui.zep.c twig.zep.c v8js.zep.c view.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/log", "iconnect.zep.c connect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c syslog.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/manager", "manager.zep.c", "leevel");
-	ADD_SOURCES(configure_module_dirname + "/leevel/mvc", "iview.zep.c icontroller.zep.c ientity.zep.c controller.zep.c imodel.zep.c view.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/mvc", "iview.zep.c icontroller.zep.c controller.zep.c view.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/cookie", "icookie.zep.c cookie.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/event", "idispatch.zep.c isubject.zep.c dispatch.zep.c eventprovider.zep.c observer.zep.c subject.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/i18n", "ii18n.zep.c i18n.zep.c", "leevel");

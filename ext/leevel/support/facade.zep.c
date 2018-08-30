@@ -162,6 +162,46 @@ PHP_METHOD(Leevel_Support_Facade, facades) {
 }
 
 /**
+ * 删除实例.
+ *
+ * @param null|string $name
+ */
+PHP_METHOD(Leevel_Support_Facade, remove) {
+
+	zval *name = NULL, name_sub, __$null, _0$$3, _1, _2$$4;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name_sub);
+	ZVAL_NULL(&__$null);
+	ZVAL_UNDEF(&_0$$3);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2$$4);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 0, 1, &name);
+
+	if (!name) {
+		name = &name_sub;
+		name = &__$null;
+	}
+
+
+	if (Z_TYPE_P(name) == IS_NULL) {
+		ZEPHIR_INIT_VAR(&_0$$3);
+		array_init(&_0$$3);
+		zend_update_static_property(leevel_support_facade_ce, ZEND_STRL("instances"), &_0$$3);
+		RETURN_MM_NULL();
+	}
+	zephir_read_static_property_ce(&_1, leevel_support_facade_ce, SL("instances"), PH_NOISY_CC | PH_READONLY);
+	if (zephir_array_isset(&_1, name)) {
+		zephir_read_static_property_ce(&_2$$4, leevel_support_facade_ce, SL("instances"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_unset(&_2$$4, name, PH_SEPARATE);
+	}
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
  * 返回服务容器
  *
  * @return \Leevel\Di\IContainer

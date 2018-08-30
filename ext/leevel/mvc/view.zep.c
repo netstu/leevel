@@ -19,7 +19,6 @@
 #include "kernel/array.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
-#include "kernel/operators.h"
 
 
 /**
@@ -123,8 +122,6 @@ PHP_METHOD(Leevel_Mvc_View, assign) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
-	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(NULL, &_0, "setvar", NULL, 0, name, value);
 	zephir_check_call_status();
@@ -157,8 +154,6 @@ PHP_METHOD(Leevel_Mvc_View, getAssign) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
-	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "getvar", NULL, 0, name);
 	zephir_check_call_status();
@@ -175,11 +170,10 @@ PHP_METHOD(Leevel_Mvc_View, getAssign) {
 PHP_METHOD(Leevel_Mvc_View, deleteAssign) {
 
 	zval _1;
+	zval args, _0, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *name, name_sub, args, _0, _2, _3;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&name_sub);
 	ZVAL_UNDEF(&args);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_2);
@@ -187,12 +181,7 @@ PHP_METHOD(Leevel_Mvc_View, deleteAssign) {
 	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 0, &name);
 
-
-
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
-	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&args);
 	zephir_get_args(&args);
 	ZEPHIR_INIT_VAR(&_0);
@@ -226,8 +215,6 @@ PHP_METHOD(Leevel_Mvc_View, clearAssign) {
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
-	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(NULL, &_0, "clearvar", NULL, 0);
 	zephir_check_call_status();
@@ -276,34 +263,11 @@ PHP_METHOD(Leevel_Mvc_View, display) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checktheme", NULL, 0);
-	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_BOOL(&_1, 0);
 	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, file, &vars, ext, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
-
-}
-
-/**
- * 验证 theme
- *
- * @return void
- */
-PHP_METHOD(Leevel_Mvc_View, checkTheme) {
-
-	zval _0;
-	zval *this_ptr = getThis();
-
-	ZVAL_UNDEF(&_0);
-
-
-	zephir_read_property(&_0, this_ptr, SL("theme"), PH_NOISY_CC | PH_READONLY);
-	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Theme is not set in view", "leevel/mvc/view.zep", 155);
-		return;
-	}
 
 }
 
