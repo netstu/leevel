@@ -42,7 +42,7 @@ interface IDispatch
      * @param int $priority
      * @return void
      */
-    public function listeners(var event, var listener, int priority = 500);
+    public function register(var event, var listener, int priority = 500);
     
     /**
      * 获取一个事件监听器
@@ -50,7 +50,7 @@ interface IDispatch
      * @param string|object $event
      * @return array
      */
-    public function getListeners(string event) -> array;
+    public function get(var event) -> array;
     
     /**
      * 判断事件监听器是否存在
@@ -58,7 +58,7 @@ interface IDispatch
      * @param string|object $event
      * @return bool
      */
-    public function hasListeners(string event) -> boolean;
+    public function has(var event) -> boolean;
     
     /**
      * 删除一个事件所有监听器
@@ -66,5 +66,5 @@ interface IDispatch
      * @param string|object $event
      * @return void
      */
-    public function deleteListeners(string event);
+    public function delete(var event);
 }

@@ -84,11 +84,12 @@ class Dispatch implements IDispatch
 
         array_unshift(params, event);
 
-        if ! (this->hasListeners(name)) {
+        let listeners = this->get(name);
+
+        if empty listeners {
             return;
         }
 
-        let listeners = this->getListeners(name);
         ksort(listeners);
 
         for items in listeners {
@@ -105,7 +106,7 @@ class Dispatch implements IDispatch
      * @param int $priority
      * @return void
      */
-    public function listeners(var event, var listener, int priority = 500)
+    public function register(var event, var listener, int priority = 500)
     {
         var item, temp = [];
 
@@ -133,7 +134,7 @@ class Dispatch implements IDispatch
      * @param string|object $event
      * @return array
      */
-    public function getListeners(var event) -> array
+    public function get(var event) -> array
     {
         var listeners, key, item, priority, value, res;
     
@@ -147,7 +148,6 @@ class Dispatch implements IDispatch
 
         for key, item in this->wildcards {
             let key = this->prepareRegexForWildcard(key);
-
             let res = null;
 
             if preg_match(key, event, res) {
@@ -170,11 +170,9 @@ class Dispatch implements IDispatch
      * @param string|object $event
      * @return bool
      */
-    public function hasListeners(var event) -> boolean
+    public function has(var event) -> boolean
     {
-        let event = this->normalizeEvent(event);
-
-        return isset this->listeners[event] || isset this->wildcards[event];
+        return ! empty this->get(event);
     }
     
     /**
@@ -183,7 +181,7 @@ class Dispatch implements IDispatch
      * @param string|object $event
      * @return void
      */
-    public function deleteListeners(var event)
+    public function delete(var event)
     {
         let event = this->normalizeEvent(event);
 
@@ -235,7 +233,7 @@ class Dispatch implements IDispatch
     protected function prepareRegexForWildcard(var regex) -> string
     {
         let regex = preg_quote(regex, "/");
-        let regex = "/^" . str_replace("\\*", "(\\S)", regex) . "$/";
+        let regex = "/^" . str_replace("\\*", "(\\S+)", regex) . "$/";
 
         return regex;
     }

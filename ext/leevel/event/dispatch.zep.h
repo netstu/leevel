@@ -5,10 +5,10 @@ ZEPHIR_INIT_CLASS(Leevel_Event_Dispatch);
 
 PHP_METHOD(Leevel_Event_Dispatch, __construct);
 PHP_METHOD(Leevel_Event_Dispatch, run);
-PHP_METHOD(Leevel_Event_Dispatch, listeners);
-PHP_METHOD(Leevel_Event_Dispatch, getListeners);
-PHP_METHOD(Leevel_Event_Dispatch, hasListeners);
-PHP_METHOD(Leevel_Event_Dispatch, deleteListeners);
+PHP_METHOD(Leevel_Event_Dispatch, register);
+PHP_METHOD(Leevel_Event_Dispatch, get);
+PHP_METHOD(Leevel_Event_Dispatch, has);
+PHP_METHOD(Leevel_Event_Dispatch, delete);
 PHP_METHOD(Leevel_Event_Dispatch, normalizeEvent);
 PHP_METHOD(Leevel_Event_Dispatch, makeSubject);
 PHP_METHOD(Leevel_Event_Dispatch, prepareRegexForWildcard);
@@ -18,21 +18,21 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch___construct, 0, 0, 1)
 	ZEND_ARG_OBJ_INFO(0, container, Leevel\\Di\\IContainer, 0)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_listeners, 0, 0, 2)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_register, 0, 0, 2)
 	ZEND_ARG_INFO(0, event)
 	ZEND_ARG_INFO(0, listener)
 	ZEND_ARG_INFO(0, priority)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_getlisteners, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_get, 0, 0, 1)
 	ZEND_ARG_INFO(0, event)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_haslisteners, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_has, 0, 0, 1)
 	ZEND_ARG_INFO(0, event)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_deletelisteners, 0, 0, 1)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_event_dispatch_delete, 0, 0, 1)
 	ZEND_ARG_INFO(0, event)
 ZEND_END_ARG_INFO()
 
@@ -51,10 +51,10 @@ ZEND_END_ARG_INFO()
 ZEPHIR_INIT_FUNCS(leevel_event_dispatch_method_entry) {
 	PHP_ME(Leevel_Event_Dispatch, __construct, arginfo_leevel_event_dispatch___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Leevel_Event_Dispatch, run, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Event_Dispatch, listeners, arginfo_leevel_event_dispatch_listeners, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Event_Dispatch, getListeners, arginfo_leevel_event_dispatch_getlisteners, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Event_Dispatch, hasListeners, arginfo_leevel_event_dispatch_haslisteners, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_Event_Dispatch, deleteListeners, arginfo_leevel_event_dispatch_deletelisteners, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Event_Dispatch, register, arginfo_leevel_event_dispatch_register, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Event_Dispatch, get, arginfo_leevel_event_dispatch_get, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Event_Dispatch, has, arginfo_leevel_event_dispatch_has, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Event_Dispatch, delete, arginfo_leevel_event_dispatch_delete, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Event_Dispatch, normalizeEvent, arginfo_leevel_event_dispatch_normalizeevent, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Event_Dispatch, makeSubject, arginfo_leevel_event_dispatch_makesubject, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_Event_Dispatch, prepareRegexForWildcard, arginfo_leevel_event_dispatch_prepareregexforwildcard, ZEND_ACC_PROTECTED)

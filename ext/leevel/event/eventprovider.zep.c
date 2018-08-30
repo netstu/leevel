@@ -70,7 +70,7 @@ PHP_METHOD(Leevel_Event_EventProvider, bootstrap) {
 
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getlisteners", NULL, 0);
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "get", NULL, 0);
 	zephir_check_call_status();
 	zephir_is_iterable(&_0, 0, "leevel/event/eventprovider.zep", 58);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
@@ -95,10 +95,10 @@ PHP_METHOD(Leevel_Event_EventProvider, bootstrap) {
 			ZEPHIR_INIT_NVAR(&item);
 			ZVAL_COPY(&item, _4$$3);
 			if (Z_TYPE_P(&item) == IS_LONG) {
-				ZEPHIR_CALL_METHOD(NULL, dispatch, "listeners", &_7, 0, &event, &key, &item);
+				ZEPHIR_CALL_METHOD(NULL, dispatch, "register", &_7, 0, &event, &key, &item);
 				zephir_check_call_status();
 			} else {
-				ZEPHIR_CALL_METHOD(NULL, dispatch, "listeners", &_8, 0, &event, &item);
+				ZEPHIR_CALL_METHOD(NULL, dispatch, "register", &_8, 0, &event, &item);
 				zephir_check_call_status();
 			}
 		} ZEND_HASH_FOREACH_END();
@@ -129,7 +129,7 @@ PHP_METHOD(Leevel_Event_EventProvider, register) {
  *
  * @return array
  */
-PHP_METHOD(Leevel_Event_EventProvider, getListeners) {
+PHP_METHOD(Leevel_Event_EventProvider, get) {
 
 	zval *this_ptr = getThis();
 

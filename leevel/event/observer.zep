@@ -59,7 +59,7 @@ class Observer implements SplObserver
 
         if ! (is_callable([this, method])) {
             throw new RuntimeException(
-                sprintf("Observer %s must has run method", get_class(this))
+                sprintf("Observer %s must has run or handle method.", get_class(this))
             );
         }
 

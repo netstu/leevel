@@ -102,7 +102,7 @@ PHP_METHOD(Leevel_Event_Observer, update) {
 		ZEPHIR_INIT_VAR(&_2$$3);
 		zephir_get_class(&_2$$3, this_ptr, 0 TSRMLS_CC);
 		ZEPHIR_INIT_VAR(&_3$$3);
-		ZVAL_STRING(&_3$$3, "Observer %s must has run method");
+		ZVAL_STRING(&_3$$3, "Observer %s must has run or handle method.");
 		ZEPHIR_CALL_FUNCTION(&_4$$3, "sprintf", NULL, 1, &_3$$3, &_2$$3);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_1$$3, "__construct", NULL, 3, &_4$$3);

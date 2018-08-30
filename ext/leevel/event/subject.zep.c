@@ -197,7 +197,7 @@ PHP_METHOD(Leevel_Event_Subject, notify) {
 PHP_METHOD(Leevel_Event_Subject, attachs) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *observer = NULL, observer_sub, _0$$3, _1$$3, _2$$4, _3$$4, _4$$4, _5$$5;
+	zval *observer = NULL, observer_sub, _0$$3, _1$$3, _2$$4, _3$$4, _4$$4;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&observer_sub);
@@ -206,7 +206,6 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 	ZVAL_UNDEF(&_2$$4);
 	ZVAL_UNDEF(&_3$$4);
 	ZVAL_UNDEF(&_4$$4);
-	ZVAL_UNDEF(&_5$$5);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &observer);
@@ -234,11 +233,10 @@ PHP_METHOD(Leevel_Event_Subject, attachs) {
 		}
 	}
 	if (zephir_is_instance_of(observer, SL("SplObserver") TSRMLS_CC)) {
-		zephir_read_property(&_5$$5, this_ptr, SL("observers"), PH_NOISY_CC | PH_READONLY);
-		ZEPHIR_CALL_METHOD(NULL, &_5$$5, "attach", NULL, 0, observer);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "attach", NULL, 0, observer);
 		zephir_check_call_status();
 	} else {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver", "leevel/event/subject.zep", 123);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Invalid observer argument because it not instanceof SplObserver.", "leevel/event/subject.zep", 123);
 		return;
 	}
 	ZEPHIR_MM_RESTORE();

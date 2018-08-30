@@ -46,12 +46,12 @@ abstract class EventProvider extends Provider
     {
         var event, listeners, key, item;
     
-        for event, listeners in this->getListeners() {
+        for event, listeners in this->get() {
             for key, item in listeners {
                 if is_int(item) {
-                    dispatch->listeners(event, key, item);
+                    dispatch->register(event, key, item);
                 } else {
-                    dispatch->listeners(event, item);
+                    dispatch->register(event, item);
                 }
             }
         }
@@ -71,7 +71,7 @@ abstract class EventProvider extends Provider
      *
      * @return array
      */
-    public function getListeners() -> array
+    public function get() -> array
     {
         return this->listeners;
     }

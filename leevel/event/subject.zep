@@ -116,10 +116,10 @@ class Subject implements ISubject, SplSubject
         }
 
         if observer instanceof SplObserver {
-            this->observers->attach(observer);
+            this->attach(observer);
         } else {
             throw new InvalidArgumentException(
-                "Invalid observer argument because it not instanceof SplObserver"
+                "Invalid observer argument because it not instanceof SplObserver."
             );
         }
     }

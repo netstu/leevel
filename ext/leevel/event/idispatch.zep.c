@@ -44,7 +44,7 @@ ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, run);
  * @param int $priority
  * @return void
  */
-ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, listeners);
+ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, register);
 
 /**
  * 获取一个事件监听器
@@ -52,7 +52,7 @@ ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, listeners);
  * @param string|object $event
  * @return array
  */
-ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, getListeners);
+ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, get);
 
 /**
  * 判断事件监听器是否存在
@@ -60,7 +60,7 @@ ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, getListeners);
  * @param string|object $event
  * @return bool
  */
-ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, hasListeners);
+ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, has);
 
 /**
  * 删除一个事件所有监听器
@@ -68,5 +68,5 @@ ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, hasListeners);
  * @param string|object $event
  * @return void
  */
-ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, deleteListeners);
+ZEPHIR_DOC_METHOD(Leevel_Event_IDispatch, delete);
 
