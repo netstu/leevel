@@ -84,7 +84,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_delete, 0, 0, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cookie_cookie_clear, 0, 0, 0)
-	ZEND_ARG_INFO(0, deletePrefix)
 	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 

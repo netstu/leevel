@@ -536,12 +536,13 @@ PHP_METHOD(Leevel_Http_JsonResponse, isJsonData) {
 
 	zend_bool _0;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *data, data_sub, _1, _2;
+	zval *data, data_sub, _1, _2, _3;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&data_sub);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
+	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &data);
@@ -556,10 +557,12 @@ PHP_METHOD(Leevel_Http_JsonResponse, isJsonData) {
 		RETURN_MM_BOOL(0);
 	}
 	ZEPHIR_INIT_VAR(&_1);
-	zephir_json_decode(&_1, data, 0 );
-	ZEPHIR_CALL_FUNCTION(&_2, "json_last_error", NULL, 19);
+	ZEPHIR_CALL_FUNCTION(&_2, "strval", NULL, 11, data);
 	zephir_check_call_status();
-	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_2, 0));
+	zephir_json_decode(&_1, &_2, 0 );
+	ZEPHIR_CALL_FUNCTION(&_3, "json_last_error", NULL, 19);
+	zephir_check_call_status();
+	RETURN_MM_BOOL(ZEPHIR_IS_LONG_IDENTICAL(&_3, 0));
 
 }
 

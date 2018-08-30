@@ -410,15 +410,15 @@ class Router implements IRouter, IMacro
      * @param string $path
      * @return array
      */
-    public function matchePath(var path) -> array
+    public function matchePath(string path) -> array
     {
-        var result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams;
+        var result, query, tmpListPathQuery, item, basepath, paths, params, tmpListPathsParams, tmpPath;
     
         let result = [];
 
         if strpos(path, "?") !== false {
             let tmpListPathQuery = explode("?", path);
-            let path = tmpListPathQuery[0];
+            let tmpPath = tmpListPathQuery[0];
             let query = tmpListPathQuery[1];
 
             if query {
@@ -427,21 +427,23 @@ class Router implements IRouter, IMacro
                     let result[self::PARAMS][item[0]] = item[1];
                 }
             }
+        } else {
+            let tmpPath = path;
         }
 
         // 匹配基础路径
         let basepath = "";
 
         for item in this->getBasepaths() {
-            if strpos(path, item) === 0 {
-                let path = substr(path, strlen(item) + 1);
+            if strpos(tmpPath, item) === 0 {
+                let tmpPath = substr(path, strlen(item) + 1);
                 let basepath = item;
                 break;
             }
         }
 
-        let path = trim(path, "/");
-        let paths = path ? explode("/", path) : [];
+        let tmpPath = trim(tmpPath, "/");
+        let paths = tmpPath ? explode("/", tmpPath) : [];
 
         // 应用
         if paths && this->findApp(paths[0]) {

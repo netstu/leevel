@@ -1594,14 +1594,15 @@ PHP_METHOD(Leevel_Collection_Collection, checkType) {
  */
 PHP_METHOD(Leevel_Collection_Collection, getArrayElements) {
 
+	zend_bool _0, _1, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *elements = NULL, elements_sub, __$true, temp, _0$$6;
+	zval *elements = NULL, elements_sub, __$true, temp, _4$$6;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&elements_sub);
 	ZVAL_BOOL(&__$true, 1);
 	ZVAL_UNDEF(&temp);
-	ZVAL_UNDEF(&_0$$6);
+	ZVAL_UNDEF(&_4$$6);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &elements);
@@ -1611,23 +1612,39 @@ PHP_METHOD(Leevel_Collection_Collection, getArrayElements) {
 
 	ZEPHIR_INIT_VAR(&temp);
 	array_init(&temp);
+	_0 = Z_TYPE_P(elements) == IS_OBJECT;
+	if (_0) {
+		_0 = zephir_instance_of_ev(elements, leevel_collection_collection_ce TSRMLS_CC);
+	}
+	_1 = Z_TYPE_P(elements) == IS_OBJECT;
+	if (_1) {
+		_1 = zephir_instance_of_ev(elements, leevel_support_iarray_ce TSRMLS_CC);
+	}
+	_2 = Z_TYPE_P(elements) == IS_OBJECT;
+	if (_2) {
+		_2 = zephir_instance_of_ev(elements, leevel_support_ijson_ce TSRMLS_CC);
+	}
+	_3 = Z_TYPE_P(elements) == IS_OBJECT;
+	if (_3) {
+		_3 = zephir_is_instance_of(elements, SL("JsonSerializable") TSRMLS_CC);
+	}
 	if (Z_TYPE_P(elements) == IS_ARRAY) {
 		RETVAL_ZVAL(elements, 1, 0);
 		RETURN_MM();
-	} else if (zephir_instance_of_ev(elements, leevel_collection_collection_ce TSRMLS_CC)) {
+	} else if (_0) {
 		ZEPHIR_RETURN_CALL_METHOD(elements, "all", NULL, 0);
 		zephir_check_call_status();
 		RETURN_MM();
-	} else if (zephir_instance_of_ev(elements, leevel_support_iarray_ce TSRMLS_CC)) {
+	} else if (_1) {
 		ZEPHIR_RETURN_CALL_METHOD(elements, "toarray", NULL, 0);
 		zephir_check_call_status();
 		RETURN_MM();
-	} else if (zephir_instance_of_ev(elements, leevel_support_ijson_ce TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(&_0$$6, elements, "tojson", NULL, 0);
+	} else if (_2) {
+		ZEPHIR_CALL_METHOD(&_4$$6, elements, "tojson", NULL, 0);
 		zephir_check_call_status();
-		zephir_json_decode(return_value, &_0$$6, zephir_get_intval(&__$true) );
+		zephir_json_decode(return_value, &_4$$6, zephir_get_intval(&__$true) );
 		RETURN_MM();
-	} else if (zephir_is_instance_of(elements, SL("JsonSerializable") TSRMLS_CC)) {
+	} else if (_3) {
 		ZEPHIR_RETURN_CALL_METHOD(elements, "jsonserialize", NULL, 0);
 		zephir_check_call_status();
 		RETURN_MM();

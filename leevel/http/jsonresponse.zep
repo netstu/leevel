@@ -238,7 +238,7 @@ class JsonResponse extends Response
             return false;
         }
 
-        json_decode(data);
+        json_decode(strval(data));
 
         return json_last_error() === JSON_ERROR_NONE;
     }

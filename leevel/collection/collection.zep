@@ -75,7 +75,7 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
      * @param array $type
      * @return void
      */
-    public function __construct(elements = [], array type = null)
+    public function __construct(var elements = [], array type = null)
     {
         var key, value;
     
@@ -693,13 +693,13 @@ class Collection implements IMacro, IArray, IJson, Iterator, ArrayAccess, Counta
 
         if is_array(elements) {
             return elements;
-        } elseif elements instanceof Collection {
+        } elseif is_object(elements) && elements instanceof Collection {
             return elements->all();
-        } elseif elements instanceof IArray {
+        } elseif is_object(elements) && elements instanceof IArray {
             return elements->toArray();
-        } elseif elements instanceof IJson {
+        } elseif is_object(elements) && elements instanceof IJson {
             return json_decode(elements->toJson(), true);
-        } elseif elements instanceof JsonSerializable {
+        } elseif is_object(elements) && elements instanceof JsonSerializable {
             return elements->jsonSerialize();
         }
 

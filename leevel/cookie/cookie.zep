@@ -36,7 +36,6 @@ class Cookie implements ICookie
      * @var array
      */
     protected option = [
-        "prefix" : "q_",
         "expire" : 86400,
         "domain" : "",
         "path" : "/",
@@ -84,7 +83,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function set(string name, var value = "", array option = [])
+    public function set(string name, var value = "", array! option = [])
     {
         let option = this->normalizeOptions(option);
 
@@ -95,8 +94,6 @@ class Cookie implements ICookie
         if ! is_scalar(value) && ! is_null(value) {
             throw new Exception("Cookie value must be scalar or null.");
         }
-
-        let name = option["prefix"] . name;
 
         let option["expire"] = intval(option["expire"]);
 
@@ -126,16 +123,19 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function put(var keys, var value = null, array option = [])
+    public function put(var keys, var value = null, array! option = [])
     {
-        var key;
+        var key, tmpKeys;
+
         if typeof keys != "array" {
-            let keys = [
+            let tmpKeys = [
                 keys : value
             ];
+        } else {
+            let tmpKeys = keys;
         }
 
-        for key, value in keys {
+        for key, value in tmpKeys {
             this->set(key, value, option);
         }
     }
@@ -148,7 +148,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function push(string key, var value, array option = [])
+    public function push(string key, var value, array! option = [])
     {
         var arr;
         let arr = this->get(key, [], option);
@@ -164,7 +164,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function merge(string key, array value, array option = [])
+    public function merge(string key, array value, array! option = [])
     {
         this->set(key, array_merge(this->get(key, [], option), value), option);
     }
@@ -177,7 +177,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function pop(string key, array value, array option = [])
+    public function pop(string key, array value, array! option = [])
     {
         this->set(key, array_diff(this->get(key, [], option), value), option);
     }
@@ -191,7 +191,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function arr(string key, var keys, var value = null, array option = [])
+    public function arr(string key, var keys, var value = null, array! option = [])
     {
         var arr;
 
@@ -213,7 +213,7 @@ class Cookie implements ICookie
      * @param mixed $keys
      * @return void
      */
-    public function arrDelete(string key, var keys, array option = [])
+    public function arrDelete(string key, var keys, array! option = [])
     {
         var arr, tmp, deleteKey;
 
@@ -244,10 +244,9 @@ class Cookie implements ICookie
      * @param array $option
      * @return mixed
      */
-    public function get(string name, var defaults = null, array option = [])
+    public function get(string name, var defaults = null, array! option = [])
     {
         let option = this->normalizeOptions(option);
-        let name = option["prefix"] . name;
 
         if isset this->cookies[name] {
             if this->isJson(this->cookies[name][1]) {
@@ -267,7 +266,7 @@ class Cookie implements ICookie
      * @param array $option
      * @return void
      */
-    public function delete(string name, array option = [])
+    public function delete(string name, array! option = [])
     {
         this->set(name, null, option);
     }
@@ -275,25 +274,17 @@ class Cookie implements ICookie
     /**
      * 清空 cookie
      *
-     * @param boolean $deletePrefix
      * @param array $option
      * @return void
      */
-    public function clear(boolean deletePrefix = true, array option = [])
+    public function clear(array! option = [])
     {
-        var prefix, key;
+        var key;
+
         let option = this->normalizeOptions(option);
-        let prefix = option["prefix"];
-        let option["prefix"] = "";
 
         for key, _ in this->cookies {
-            if deletePrefix === true && prefix {
-                if strpos(key, prefix) === 0 {
-                    this->delete(key, option);
-                }
-            } else {
-                this->delete(key, option);
-            }
+            this->delete(key, option);
         }
     }
 
@@ -331,7 +322,7 @@ class Cookie implements ICookie
             return false;
         }
 
-        json_decode(data);
+        json_decode(strval(data));
 
         return json_last_error() === JSON_ERROR_NONE;
     }

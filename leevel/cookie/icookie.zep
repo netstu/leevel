@@ -43,7 +43,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function set(string name, var value = "", array option = []);
+    public function set(string name, var value = "", array! option = []);
 
     /**
      * 批量插入
@@ -53,7 +53,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function put(var keys, var value = null, array option = []);
+    public function put(var keys, var value = null, array! option = []);
 
     /**
      * 数组插入数据
@@ -63,7 +63,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function push(string key, var value, array option = []);
+    public function push(string key, var value, array! option = []);
 
     /**
      * 合并元素
@@ -73,7 +73,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function merge(string key, array value, array option = []);
+    public function merge(string key, array value, array! option = []);
 
     /**
      * 弹出元素
@@ -83,7 +83,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function pop(string key, array value, array option = []);
+    public function pop(string key, array value, array! option = []);
 
     /**
      * 数组插入键值对数据
@@ -94,7 +94,7 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function arr(string key, var keys, var value = null, array option = []);
+    public function arr(string key, var keys, var value = null, array! option = []);
 
     /**
      * 数组键值删除数据
@@ -103,7 +103,7 @@ interface ICookie
      * @param mixed $keys
      * @return void
      */
-    public function arrDelete(string key, var keys, array option = []);
+    public function arrDelete(string key, var keys, array! option = []);
 
     /**
      * 获取 cookie
@@ -113,7 +113,7 @@ interface ICookie
      * @param array $option
      * @return mixed
      */
-    public function get(string name, var defaults = null, array option = []);
+    public function get(string name, var defaults = null, array! option = []);
 
     /**
      * 删除 cookie
@@ -122,16 +122,15 @@ interface ICookie
      * @param array $option
      * @return void
      */
-    public function delete(string name, array option = []);
+    public function delete(string name, array! option = []);
 
     /**
      * 清空 cookie
      *
-     * @param boolean $deletePrefix
      * @param array $option
      * @return void
      */
-    public function clear(boolean deletePrefix = true, array option = []);
+    public function clear(array! option = []);
 
     /**
      * 返回所有 cookie

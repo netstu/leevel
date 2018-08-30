@@ -130,7 +130,6 @@ ZEPHIR_DOC_METHOD(Leevel_Cookie_ICookie, delete);
 /**
  * 清空 cookie
  *
- * @param boolean $deletePrefix
  * @param array $option
  * @return void
  */
