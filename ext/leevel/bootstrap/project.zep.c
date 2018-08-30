@@ -1085,7 +1085,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedI18n) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "i18ncachedpath", NULL, 0, &i18n);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 40, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 22, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1130,7 +1130,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedOption) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "optioncachedpath", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 40, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 22, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1175,7 +1175,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, isCachedRouter) {
 
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "routercachedpath", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 40, &_0);
+	ZEPHIR_RETURN_CALL_FUNCTION("is_file", NULL, 22, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -1549,7 +1549,7 @@ PHP_METHOD(Leevel_Bootstrap_Project, registerProviders) {
 	ZVAL_STRING(&_8, "_composer.providers");
 	ZEPHIR_CALL_METHOD(&providers, &_7, "get", NULL, 0, &_8, &_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_9, "array_values", NULL, 29, &providers);
+	ZEPHIR_CALL_FUNCTION(&_9, "array_values", NULL, 32, &providers);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&providers, &_9);
 	zephir_is_iterable(&providers, 0, "leevel/bootstrap/project.zep", 664);

@@ -73,7 +73,7 @@ ZEPHIR_INIT_CLASS(Leevel_View_Html) {
  * @param array $vars
  * @param string $ext 后缀
  * @param boolean $display 是否显示
- * @return string
+ * @return void|string
  */
 PHP_METHOD(Leevel_View_Html, display) {
 
@@ -135,7 +135,7 @@ PHP_METHOD(Leevel_View_Html, display) {
 	zephir_read_property(&_1, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
 	if (!(ZEPHIR_IS_EMPTY(&_1))) {
 		zephir_read_property(&_2$$4, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
-		zephir_is_iterable(&_2$$4, 0, "leevel/view/html.zep", 92);
+		zephir_is_iterable(&_2$$4, 0, "leevel/view/html.zep", 91);
 		ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_2$$4), _4$$4, _5$$4, _3$$4)
 		{
 			ZEPHIR_INIT_NVAR(&key);
@@ -222,7 +222,7 @@ PHP_METHOD(Leevel_View_Html, resolverParser) {
 
 	zephir_read_property(&_0, this_ptr, SL("parserResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Html theme not set parser resolver", "leevel/view/html.zep", 132);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Html theme not set parse resolver.", "leevel/view/html.zep", 131);
 		return;
 	}
 	zephir_read_property(&_1, this_ptr, SL("parserResolver"), PH_NOISY_CC | PH_READONLY);
@@ -298,7 +298,7 @@ PHP_METHOD(Leevel_View_Html, getCachePath) {
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	zephir_array_fetch_string(&_1, &_0, SL("theme_cache_path"), PH_NOISY | PH_READONLY, "leevel/view/html.zep", 160 TSRMLS_CC);
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme cache path must be set", "leevel/view/html.zep", 161);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Theme cache path must be set.", "leevel/view/html.zep", 161);
 		return;
 	}
 	ZEPHIR_INIT_VAR(&_2);
@@ -314,7 +314,7 @@ PHP_METHOD(Leevel_View_Html, getCachePath) {
 	ZEPHIR_INIT_NVAR(&file);
 	zephir_fast_str_replace(&file, &_5, &_6, &_2 TSRMLS_CC);
 	ZVAL_LONG(&_7, 4);
-	ZEPHIR_CALL_FUNCTION(&_8, "pathinfo", NULL, 53, &file, &_7);
+	ZEPHIR_CALL_FUNCTION(&_8, "pathinfo", NULL, 23, &file, &_7);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_9);
 	ZEPHIR_CONCAT_SV(&_9, ".", &_8);
@@ -368,11 +368,11 @@ PHP_METHOD(Leevel_View_Html, isCacheExpired) {
 
 
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-	zephir_array_fetch_string(&_1, &_0, SL("development"), PH_NOISY | PH_READONLY, "leevel/view/html.zep", 185 TSRMLS_CC);
+	zephir_array_fetch_string(&_1, &_0, SL("debug"), PH_NOISY | PH_READONLY, "leevel/view/html.zep", 185 TSRMLS_CC);
 	if (zephir_is_true(&_1)) {
 		RETURN_MM_BOOL(1);
 	}
-	ZEPHIR_CALL_FUNCTION(&_2, "is_file", NULL, 40, &cachepath);
+	ZEPHIR_CALL_FUNCTION(&_2, "is_file", NULL, 22, &cachepath);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
 		RETURN_MM_BOOL(1);
@@ -427,7 +427,7 @@ zend_object *zephir_init_properties_Leevel_View_Html(zend_class_entry *class_typ
 		if (Z_TYPE_P(&_2) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_3$$4);
 			zephir_create_array(&_3$$4, 11, 0 TSRMLS_CC);
-			zephir_array_update_string(&_3$$4, SL("development"), &__$false, PH_COPY | PH_SEPARATE);
+			zephir_array_update_string(&_3$$4, SL("debug"), &__$false, PH_COPY | PH_SEPARATE);
 			add_assoc_stringl_ex(&_3$$4, SL("controller_name"), SL("index"));
 			add_assoc_stringl_ex(&_3$$4, SL("action_name"), SL("index"));
 			add_assoc_stringl_ex(&_3$$4, SL("controlleraction_depr"), SL("_"));

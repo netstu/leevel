@@ -20,7 +20,7 @@ use Leevel\View\View;
 use Leevel\View\Html;
 use Leevel\View\Twig;
 use Leevel\View\Phpui;
-use Leevel\View\V8 as V8s;
+use Leevel\View\V8js;
 use Leevel\Manager\Manager as Managers;
 
 /**
@@ -112,17 +112,17 @@ class Manager extends Managers
     }
 
     /**
-     * 创建 v8 模板驱动
+     * 创建 v8js 模板驱动
      *
      * @param array $options
-     * @return \Leevel\View\V8
+     * @return \Leevel\View\V8js
      */
-    protected function makeConnectV8(array options = []) -> <V8s>
+    protected function makeConnectV8js(array options = []) -> <V8js>
     {
-        let options = this->normalizeConnectOption("v8", options);
+        let options = this->normalizeConnectOption("v8js", options);
         let options = array_merge(options, this->viewOptionCommon());
 
-        return new V8s(options);
+        return new V8js(options);
     }
 
     /**
@@ -140,9 +140,9 @@ class Manager extends Managers
             "development" : this->container->development(),
             "controller_name" : request->controller(),
             "action_name" : request->action(),
-            "theme_path" : this->container->pathApplicationTheme(),
-            "theme_cache_path" : this->container->pathApplicationCache("theme") .
-                "/" . strtolower(request->app()) // // 仅 html 模板需要缓存路径
+            "theme_path" : this->container->themePath(true),
+            "theme_cache_path" : this->container->runtimePath("theme") .
+                "/" . strtolower(request->app())
         ];
 
         return options;

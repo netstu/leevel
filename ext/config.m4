@@ -19,6 +19,8 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/di/icontainer.zep.c
 	leevel/http/bag.zep.c
 	leevel/http/response.zep.c
+	leevel/view/connect.zep.c
+	leevel/view/iconnect.zep.c
 	leevel/log/iconnect.zep.c
 	leevel/manager/manager.zep.c
 	leevel/mvc/iview.zep.c
@@ -45,8 +47,6 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/router/iurl.zep.c
 	leevel/router/match/imatch.zep.c
 	leevel/session/isession.zep.c
-	leevel/view/connect.zep.c
-	leevel/view/iconnect.zep.c
 	leevel/view/iview.zep.c
 	leevel/auth.zep.c
 	leevel/auth/provider/register.zep.c
@@ -129,7 +129,10 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/view.zep.c
 	leevel/view/html.zep.c
 	leevel/view/manager.zep.c
+	leevel/view/phpui.zep.c
 	leevel/view/provider/register.zep.c
+	leevel/view/twig.zep.c
+	leevel/view/v8js.zep.c
 	leevel/view/view.zep.c "
 	PHP_NEW_EXTENSION(leevel, $leevel_sources, $ext_shared,, )
 	PHP_SUBST(LEEVEL_SHARED_LIBADD)

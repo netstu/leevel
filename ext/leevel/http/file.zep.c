@@ -67,7 +67,7 @@ PHP_METHOD(Leevel_Http_File, __construct) {
 	zephir_get_strval(&path, path_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_file", NULL, 40, &path);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_file", NULL, 22, &path);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
 		ZEPHIR_INIT_VAR(&_1$$3);
@@ -121,7 +121,7 @@ PHP_METHOD(Leevel_Http_File, move) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "movetotarget", NULL, 0, &_0, &target);
 	zephir_check_call_status();
 	object_init_ex(return_value, leevel_http_file_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 41, &target);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 43, &target);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -171,14 +171,14 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 	}
 
 
-	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", NULL, 42, &directory);
+	ZEPHIR_CALL_FUNCTION(&_0, "is_dir", NULL, 44, &directory);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "is_writable", NULL, 43, &directory);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_writable", NULL, 45, &directory);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_CALL_FUNCTION(&_2$$3, "dirname", NULL, 44, &directory);
+		ZEPHIR_CALL_FUNCTION(&_2$$3, "dirname", NULL, 24, &directory);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_writable", NULL, 43, &_2$$3);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_writable", NULL, 45, &_2$$3);
 		zephir_check_call_status();
 		if (!zephir_is_true(&_3$$3)) {
 			ZEPHIR_INIT_VAR(&_4$$4);
@@ -194,7 +194,7 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 			return;
 		}
 		ZVAL_LONG(&_7$$3, 0777);
-		ZEPHIR_CALL_FUNCTION(NULL, "mkdir", NULL, 45, &directory, &_7$$3, &__$true);
+		ZEPHIR_CALL_FUNCTION(NULL, "mkdir", NULL, 46, &directory, &_7$$3, &__$true);
 		zephir_check_call_status();
 	} else if (!(zephir_is_true(&_1))) {
 		ZEPHIR_INIT_VAR(&_8$$5);
@@ -272,7 +272,7 @@ PHP_METHOD(Leevel_Http_File, moveToTarget) {
 	zephir_array_fast_append(&_2, &_3);
 	ZEPHIR_CALL_CE_STATIC(&_0, _1, "fromcallable", NULL, 0, &_2);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 46, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 47, &_0);
 	zephir_check_call_status();
 	if (isUploaded) {
 		ZEPHIR_INIT_VAR(&method);
@@ -283,10 +283,10 @@ PHP_METHOD(Leevel_Http_File, moveToTarget) {
 	}
 	ZEPHIR_CALL_FUNCTION(NULL, "call_user_func", NULL, 8, &method, &sourcePath, &target);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", NULL, 47);
+	ZEPHIR_CALL_FUNCTION(NULL, "restore_error_handler", NULL, 48);
 	zephir_check_call_status();
 	ZVAL_LONG(&_4, 0666);
-	ZEPHIR_CALL_FUNCTION(NULL, "chmod", NULL, 48, &target, &_4);
+	ZEPHIR_CALL_FUNCTION(NULL, "chmod", NULL, 49, &target, &_4);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 

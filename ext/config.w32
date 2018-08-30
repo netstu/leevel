@@ -14,6 +14,7 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/di", "provider.zep.c icontainer.zep.c container.zep.c containerinvalidargumentexception.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/flow", "icontrol.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/http", "iresponse.zep.c bag.zep.c response.zep.c file.zep.c fileexception.zep.c headerbag.zep.c irequest.zep.c jsonresponse.zep.c apiresponse.zep.c filebag.zep.c filenotfoundexception.zep.c fileresponse.zep.c redirectresponse.zep.c request.zep.c responseheaderbag.zep.c serverbag.zep.c uploadedfile.zep.c", "leevel");
+	ADD_SOURCES(configure_module_dirname + "/leevel/view", "connect.zep.c iconnect.zep.c iview.zep.c html.zep.c manager.zep.c phpui.zep.c twig.zep.c v8js.zep.c view.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/log", "iconnect.zep.c connect.zep.c ilog.zep.c file.zep.c log.zep.c manager.zep.c syslog.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/manager", "manager.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/mvc", "iview.zep.c icontroller.zep.c ientity.zep.c controller.zep.c imodel.zep.c view.zep.c", "leevel");
@@ -26,7 +27,6 @@ if (PHP_LEEVEL != "no") {
 	ADD_SOURCES(configure_module_dirname + "/leevel/router", "iresponsefactory.zep.c irouter.zep.c iurl.zep.c responsefactory.zep.c router.zep.c routerprovider.zep.c url.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/router/match", "imatch.zep.c pathinfo.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/session", "isession.zep.c manager.zep.c session.zep.c", "leevel");
-	ADD_SOURCES(configure_module_dirname + "/leevel/view", "connect.zep.c iconnect.zep.c iview.zep.c html.zep.c manager.zep.c view.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel", "auth.zep.c cache.zep.c cookie.zep.c database.zep.c db.zep.c encryption.zep.c event.zep.c filesystem.zep.c i18n.zep.c leevel.zep.c log.zep.c mail.zep.c option.zep.c page.zep.c request.zep.c response.zep.c router.zep.c session.zep.c throttler.zep.c url.zep.c validate.zep.c view.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/auth/provider", "register.zep.c", "leevel");
 	ADD_SOURCES(configure_module_dirname + "/leevel/bootstrap/bootstrap", "loadi18n.zep.c loadoption.zep.c registerruntime.zep.c traverseprovider.zep.c", "leevel");

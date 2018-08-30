@@ -131,7 +131,7 @@ PHP_METHOD(Leevel_Event_Dispatch, run) {
 		ZEPHIR_CPY_WRT(&event, &_1$$4);
 	}
 	ZEPHIR_MAKE_REF(&params);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 28, &params, &event);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 31, &params, &event);
 	ZEPHIR_UNREF(&params);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "haslisteners", NULL, 0, &name);
@@ -142,7 +142,7 @@ PHP_METHOD(Leevel_Event_Dispatch, run) {
 	ZEPHIR_CALL_METHOD(&listeners, this_ptr, "getlisteners", NULL, 0, &name);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&listeners);
-	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 49, &listeners);
+	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 50, &listeners);
 	ZEPHIR_UNREF(&listeners);
 	zephir_check_call_status();
 	zephir_is_iterable(&listeners, 0, "leevel/event/dispatch.zep", 98);

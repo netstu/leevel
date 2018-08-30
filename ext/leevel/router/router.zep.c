@@ -1139,7 +1139,7 @@ PHP_METHOD(Leevel_Router_Router, normalizePrefix) {
 			ZVAL_STRING(&_5$$4, " ");
 			zephir_fast_str_replace(&_3$$4, &_4$$4, &_5$$4, &item TSRMLS_CC);
 			ZEPHIR_CPY_WRT(&item, &_3$$4);
-			ZEPHIR_CALL_FUNCTION(&_6$$4, "ucwords", &_7, 23, &item);
+			ZEPHIR_CALL_FUNCTION(&_6$$4, "ucwords", &_7, 26, &item);
 			zephir_check_call_status();
 			ZEPHIR_INIT_NVAR(&_3$$4);
 			ZVAL_STRING(&_3$$4, " ");
@@ -2033,7 +2033,7 @@ PHP_METHOD(Leevel_Router_Router, matchedAction) {
 		ZEPHIR_CONCAT_SV(&_11$$4, "_", &_8$$4);
 		ZEPHIR_CPY_WRT(&action, &_11$$4);
 		ZEPHIR_INIT_VAR(&_12$$4);
-		ZEPHIR_CALL_FUNCTION(&_13$$4, "ucwords", NULL, 23, &action);
+		ZEPHIR_CALL_FUNCTION(&_13$$4, "ucwords", NULL, 26, &action);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_14$$4);
 		ZVAL_STRING(&_14$$4, " ");

@@ -16,7 +16,6 @@
 namespace Leevel\View;
 
 use RuntimeException;
-use BadMethodCallException;
 
 /**
  * 模板处理抽象类
@@ -185,7 +184,7 @@ abstract class Connect
             return this->formatFile(tpl);
         } else {
             if ! this->option["theme_path"] {
-                throw new RuntimeException("Theme path must be set");
+                throw new RuntimeException("Theme path must be set.");
             }
 
             // 空取默认控制器和方法
@@ -255,12 +254,8 @@ abstract class Connect
     {
         var source, tempTpl;
 
-        if is_file(tpl) {
-            return tpl;
-        }
-
         if ! $this->option["theme_path"] {
-            throw new RuntimeException("Theme path must be set");
+            throw new RuntimeException("Theme path must be set.");
         }
 
         let source = tpl;

@@ -128,7 +128,7 @@ PHP_METHOD(Leevel_Validate_Provider_Register, validateClosure) {
 		ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 0);
 		zephir_check_call_status();
 	}
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "container", NULL, 0, container);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "setcontainer", NULL, 0, container);
 	zephir_check_call_status();
 	RETURN_MM();
 

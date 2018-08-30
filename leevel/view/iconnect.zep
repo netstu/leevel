@@ -32,7 +32,7 @@ interface IConnect
      * @param array $vars
      * @param string $ext 后缀
      * @param boolean $display 是否显示
-     * @return string
+     * @return void|string
      */
     public function display(var file = null, array! vars = [], var ext = null, boolean display = true);
 

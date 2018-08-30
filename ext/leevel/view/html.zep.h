@@ -34,8 +34,8 @@ ZEND_END_ARG_INFO()
 ZEPHIR_INIT_FUNCS(leevel_view_html_method_entry) {
 	PHP_ME(Leevel_View_Html, display, arginfo_leevel_view_html_display, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_View_Html, setParseResolver, arginfo_leevel_view_html_setparseresolver, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_View_Html, resolverParser, NULL, ZEND_ACC_PUBLIC)
-	PHP_ME(Leevel_View_Html, parser, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_View_Html, resolverParser, NULL, ZEND_ACC_PROTECTED)
+	PHP_ME(Leevel_View_Html, parser, NULL, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_View_Html, getCachePath, arginfo_leevel_view_html_getcachepath, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_View_Html, isCacheExpired, arginfo_leevel_view_html_iscacheexpired, ZEND_ACC_PROTECTED)
 	PHP_FE_END

@@ -148,7 +148,6 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
  */
 PHP_METHOD(Leevel_View_Manager, makeConnectTwig) {
 
-	zend_class_entry *_6 = NULL;
 	zend_class_entry *_3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, parser, twig, _0, _1, _2, _5;
@@ -195,15 +194,10 @@ PHP_METHOD(Leevel_View_Manager, makeConnectTwig) {
 	ZEPHIR_CALL_CE_STATIC(&parser, _3, "fromcallable", NULL, 0, &_4);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&twig);
-	if (!_6) {
-	_6 = zephir_fetch_class_str_ex(SL("Leevel\\View\\Twig"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(&twig, _6);
-	if (zephir_has_constructor(&twig TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, &twig, "__construct", NULL, 0, &options);
-		zephir_check_call_status();
-	}
-	ZEPHIR_CALL_METHOD(NULL, &twig, "setparseresolver", NULL, 0, &parser);
+	object_init_ex(&twig, leevel_view_twig_ce);
+	ZEPHIR_CALL_METHOD(NULL, &twig, "__construct", NULL, 152, &options);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &twig, "setparseresolver", NULL, 154, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&twig);
 
@@ -217,7 +211,6 @@ PHP_METHOD(Leevel_View_Manager, makeConnectTwig) {
  */
 PHP_METHOD(Leevel_View_Manager, makeConnectPhpui) {
 
-	zend_class_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, _0, _1, _2;
 	zval options;
@@ -249,27 +242,21 @@ PHP_METHOD(Leevel_View_Manager, makeConnectPhpui) {
 	zephir_check_call_status();
 	zephir_fast_array_merge(&_1, &options, &_2 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&options, &_1);
-	if (!_3) {
-	_3 = zephir_fetch_class_str_ex(SL("Leevel\\View\\Phpui"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _3);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &options);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_view_phpui_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 152, &options);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }
 
 /**
- * 创建 v8 模板驱动
+ * 创建 v8js 模板驱动
  *
  * @param array $options
- * @return \Leevel\View\V8
+ * @return \Leevel\View\V8js
  */
-PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
+PHP_METHOD(Leevel_View_Manager, makeConnectV8js) {
 
-	zend_class_entry *_3 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *options_param = NULL, _0, _1, _2;
 	zval options;
@@ -292,7 +279,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
 
 
 	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "v8");
+	ZVAL_STRING(&_1, "v8js");
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&options, &_0);
@@ -301,14 +288,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8) {
 	zephir_check_call_status();
 	zephir_fast_array_merge(&_1, &options, &_2 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&options, &_1);
-	if (!_3) {
-	_3 = zephir_fetch_class_str_ex(SL("Leevel\\View\\V8"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _3);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &options);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_view_v8js_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 155, &options);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }
@@ -355,13 +337,14 @@ PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 	zephir_check_call_status();
 	zephir_array_update_string(&options, SL("action_name"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_4, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_3, &_4, "pathapplicationtheme", NULL, 0);
+	ZVAL_BOOL(&_5, 1);
+	ZEPHIR_CALL_METHOD(&_3, &_4, "themepath", NULL, 0, &_5);
 	zephir_check_call_status();
 	zephir_array_update_string(&options, SL("theme_path"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_INIT_NVAR(&_1);
 	ZVAL_STRING(&_1, "theme");
-	ZEPHIR_CALL_METHOD(&_3, &_5, "pathapplicationcache", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_3, &_5, "runtimepath", NULL, 0, &_1);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_1);
 	ZEPHIR_CALL_METHOD(&_6, &request, "app", NULL, 0);

@@ -180,7 +180,7 @@ PHP_METHOD(Leevel_Http_HeaderBag, __toString) {
 		RETURN_MM_STRING("");
 	}
 	ZEPHIR_MAKE_REF(&headers);
-	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 49, &headers);
+	ZEPHIR_CALL_FUNCTION(NULL, "ksort", NULL, 50, &headers);
 	ZEPHIR_UNREF(&headers);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&content);
@@ -198,7 +198,7 @@ PHP_METHOD(Leevel_Http_HeaderBag, __toString) {
 		ZVAL_COPY(&value, _0);
 		ZEPHIR_INIT_NVAR(&_3$$4);
 		ZVAL_STRING(&_3$$4, "-");
-		ZEPHIR_CALL_FUNCTION(&_4$$4, "ucwords", &_5, 23, &name, &_3$$4);
+		ZEPHIR_CALL_FUNCTION(&_4$$4, "ucwords", &_5, 26, &name, &_3$$4);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&name, &_4$$4);
 		ZEPHIR_INIT_LNVAR(_6$$4);

@@ -16,7 +16,6 @@
 namespace Leevel\View;
 
 use RuntimeException;
-use InvalidArgumentException;
 use Leevel\View\Connect;
 use Leevel\View\IConnect;
 
@@ -51,7 +50,7 @@ class Html extends Connect implements IConnect
      * @var array
      */
     protected option = [
-        "development" : false,
+        "debug" : false,
         "controller_name" : "index",
         "action_name" : "index",
         "controlleraction_depr" : "_",
@@ -71,7 +70,7 @@ class Html extends Connect implements IConnect
      * @param array $vars
      * @param string $ext 后缀
      * @param boolean $display 是否显示
-     * @return string
+     * @return void|string
      */
     public function display(var file = null, array! vars = [], var ext = null, boolean display = true)
     {
@@ -126,11 +125,12 @@ class Html extends Connect implements IConnect
      *
      * @return \Leevel\View\IParserr
      */
-    public function resolverParser()
+    protected function resolverParser()
     {
         if ! this->parserResolver {
-            throw new RuntimeException("Html theme not set parser resolver");
+            throw new RuntimeException("Html theme not set parse resolver.");
         }
+
         return call_user_func(this->parserResolver);
     }
 
@@ -139,7 +139,7 @@ class Html extends Connect implements IConnect
      *
      * @return \Leevel\View\IParserr
      */
-    public function parser()
+    protected function parser()
     {
         if typeof this->parser != "null" {
             return this->parser;
@@ -158,7 +158,7 @@ class Html extends Connect implements IConnect
     protected function getCachePath(string file)
     {
         if ! this->option["theme_cache_path"] {
-            throw new RuntimeException("Theme cache path must be set");
+            throw new RuntimeException("Theme cache path must be set.");
         }
 
         // 统一斜线
@@ -182,7 +182,7 @@ class Html extends Connect implements IConnect
     protected function isCacheExpired(string file, string cachepath)
     {
         // 开启调试
-        if this->option["development"] {
+        if this->option["debug"] {
             return true;
         }
 

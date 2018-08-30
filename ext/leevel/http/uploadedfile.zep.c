@@ -180,7 +180,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, getOriginalExtension) {
 
 	zephir_read_property(&_0, this_ptr, SL("originalName"), PH_NOISY_CC | PH_READONLY);
 	ZVAL_LONG(&_1, 4);
-	ZEPHIR_RETURN_CALL_FUNCTION("pathinfo", NULL, 53, &_0, &_1);
+	ZEPHIR_RETURN_CALL_FUNCTION("pathinfo", NULL, 23, &_0, &_1);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -302,7 +302,7 @@ PHP_METHOD(Leevel_Http_UploadedFile, move) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "movetotarget", NULL, 0, &_3$$3, &target, &_4$$3);
 		zephir_check_call_status();
 		object_init_ex(return_value, leevel_http_file_ce);
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 41, &target);
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 43, &target);
 		zephir_check_call_status();
 		RETURN_MM();
 	}

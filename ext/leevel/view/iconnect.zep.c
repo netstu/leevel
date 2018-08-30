@@ -35,7 +35,7 @@ ZEPHIR_INIT_CLASS(Leevel_View_IConnect) {
  * @param array $vars
  * @param string $ext 后缀
  * @param boolean $display 是否显示
- * @return string
+ * @return void|string
  */
 ZEPHIR_DOC_METHOD(Leevel_View_IConnect, display);
 

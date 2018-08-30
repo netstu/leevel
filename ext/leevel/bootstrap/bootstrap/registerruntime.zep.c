@@ -88,7 +88,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_RegisterRuntime, handle) {
 		ZEPHIR_INIT_VAR(&_2$$3);
 		ZVAL_STRING(&_2$$3, "setErrorHandle");
 		zephir_array_fast_append(&_1$$3, &_2$$3);
-		ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 46, &_1$$3);
+		ZEPHIR_CALL_FUNCTION(NULL, "set_error_handler", NULL, 47, &_1$$3);
 		zephir_check_call_status();
 		ZEPHIR_INIT_VAR(&_3$$3);
 		zephir_create_array(&_3$$3, 2, 0 TSRMLS_CC);

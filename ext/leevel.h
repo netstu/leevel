@@ -14,6 +14,8 @@
 #include "leevel/di/icontainer.zep.h"
 #include "leevel/http/bag.zep.h"
 #include "leevel/http/response.zep.h"
+#include "leevel/view/connect.zep.h"
+#include "leevel/view/iconnect.zep.h"
 #include "leevel/log/iconnect.zep.h"
 #include "leevel/manager/manager.zep.h"
 #include "leevel/mvc/iview.zep.h"
@@ -40,8 +42,6 @@
 #include "leevel/router/iurl.zep.h"
 #include "leevel/router/match/imatch.zep.h"
 #include "leevel/session/isession.zep.h"
-#include "leevel/view/connect.zep.h"
-#include "leevel/view/iconnect.zep.h"
 #include "leevel/view/iview.zep.h"
 #include "leevel/auth.zep.h"
 #include "leevel/auth/provider/register.zep.h"
@@ -124,7 +124,10 @@
 #include "leevel/view.zep.h"
 #include "leevel/view/html.zep.h"
 #include "leevel/view/manager.zep.h"
+#include "leevel/view/phpui.zep.h"
 #include "leevel/view/provider/register.zep.h"
+#include "leevel/view/twig.zep.h"
+#include "leevel/view/v8js.zep.h"
 #include "leevel/view/view.zep.h"
 
 #endif

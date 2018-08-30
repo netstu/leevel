@@ -299,7 +299,7 @@ PHP_METHOD(Leevel_Pipeline_Pipeline, traverseGenerator) {
 	ZEPHIR_CALL_CE_STATIC(&next, _8, "fromcallable", NULL, 0, &_9);
 	zephir_check_call_status();
 	ZEPHIR_MAKE_REF(&args);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 28, &args, &next);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 31, &args, &next);
 	ZEPHIR_UNREF(&args);
 	zephir_check_call_status();
 	zephir_read_property(&_11, this_ptr, SL("generator"), PH_NOISY_CC | PH_READONLY);
@@ -375,7 +375,7 @@ PHP_METHOD(Leevel_Pipeline_Pipeline, stageGenerator) {
 	array_init(&temp);
 	ZVAL_NULL(&_0);
 	ZEPHIR_MAKE_REF(&stage);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 28, &stage, &_0);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 31, &stage, &_0);
 	ZEPHIR_UNREF(&stage);
 	zephir_check_call_status();
 	zephir_is_iterable(&stage, 0, "leevel/pipeline/pipeline.zep", 205);

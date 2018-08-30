@@ -194,14 +194,14 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _3);
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "is_file", &_5, 40, &item);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "is_file", &_5, 22, &item);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_4$$3))) {
 			ZEPHIR_INIT_LNVAR(_6$$4);
 			ZEPHIR_CONCAT_VSV(&_6$$4, &path, "/", &item);
 			ZEPHIR_CPY_WRT(&item, &_6$$4);
 		}
-		ZEPHIR_CALL_FUNCTION(&_7$$3, "is_dir", &_8, 42, &item);
+		ZEPHIR_CALL_FUNCTION(&_7$$3, "is_dir", &_8, 44, &item);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_7$$3))) {
 			ZEPHIR_INIT_NVAR(&_9$$5);
@@ -210,7 +210,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 			ZVAL_STRING(&_10$$5, "I18n dir %s is not exist.");
 			ZEPHIR_CALL_FUNCTION(&_11$$5, "sprintf", &_12, 1, &_10$$5, &item);
 			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", &_13, 22, &_11$$5);
+			ZEPHIR_CALL_METHOD(NULL, &_9$$5, "__construct", &_13, 25, &_11$$5);
 			zephir_check_call_status();
 			zephir_throw_exception_debug(&_9$$5, "leevel/bootstrap/bootstrap/loadi18n.zep", 86 TSRMLS_CC);
 			ZEPHIR_MM_RESTORE();

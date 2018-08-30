@@ -29,6 +29,7 @@ zend_class_entry *leevel_support_ijson_ce;
 zend_class_entry *leevel_flow_icontrol_ce;
 zend_class_entry *leevel_http_iresponse_ce;
 zend_class_entry *leevel_di_icontainer_ce;
+zend_class_entry *leevel_view_iconnect_ce;
 zend_class_entry *leevel_log_iconnect_ce;
 zend_class_entry *leevel_mvc_iview_ce;
 zend_class_entry *leevel_cookie_icookie_ce;
@@ -48,7 +49,6 @@ zend_class_entry *leevel_router_irouter_ce;
 zend_class_entry *leevel_router_iurl_ce;
 zend_class_entry *leevel_router_match_imatch_ce;
 zend_class_entry *leevel_session_isession_ce;
-zend_class_entry *leevel_view_iconnect_ce;
 zend_class_entry *leevel_view_iview_ce;
 zend_class_entry *leevel_mvc_imodel_ce;
 zend_class_entry *leevel_support_ihtml_ce;
@@ -56,6 +56,7 @@ zend_class_entry *leevel_support_facade_ce;
 zend_class_entry *leevel_di_provider_ce;
 zend_class_entry *leevel_http_bag_ce;
 zend_class_entry *leevel_http_response_ce;
+zend_class_entry *leevel_view_connect_ce;
 zend_class_entry *leevel_manager_manager_ce;
 zend_class_entry *leevel_di_container_ce;
 zend_class_entry *leevel_http_file_ce;
@@ -63,7 +64,6 @@ zend_class_entry *leevel_http_fileexception_ce;
 zend_class_entry *leevel_http_headerbag_ce;
 zend_class_entry *leevel_http_jsonresponse_ce;
 zend_class_entry *leevel_log_connect_ce;
-zend_class_entry *leevel_view_connect_ce;
 zend_class_entry *leevel_auth_ce;
 zend_class_entry *leevel_auth_provider_register_ce;
 zend_class_entry *leevel_bootstrap_bootstrap_loadi18n_ce;
@@ -143,7 +143,10 @@ zend_class_entry *leevel_validate_provider_register_ce;
 zend_class_entry *leevel_view_ce;
 zend_class_entry *leevel_view_html_ce;
 zend_class_entry *leevel_view_manager_ce;
+zend_class_entry *leevel_view_phpui_ce;
 zend_class_entry *leevel_view_provider_register_ce;
+zend_class_entry *leevel_view_twig_ce;
+zend_class_entry *leevel_view_v8js_ce;
 zend_class_entry *leevel_view_view_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(leevel)
@@ -162,6 +165,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Flow_IControl);
 	ZEPHIR_INIT(Leevel_Http_IResponse);
 	ZEPHIR_INIT(Leevel_Di_IContainer);
+	ZEPHIR_INIT(Leevel_View_IConnect);
 	ZEPHIR_INIT(Leevel_Log_IConnect);
 	ZEPHIR_INIT(Leevel_Mvc_IView);
 	ZEPHIR_INIT(Leevel_Cookie_ICookie);
@@ -181,7 +185,6 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Router_IUrl);
 	ZEPHIR_INIT(Leevel_Router_Match_IMatch);
 	ZEPHIR_INIT(Leevel_Session_ISession);
-	ZEPHIR_INIT(Leevel_View_IConnect);
 	ZEPHIR_INIT(Leevel_View_IView);
 	ZEPHIR_INIT(Leevel_Mvc_IModel);
 	ZEPHIR_INIT(Leevel_Support_IHtml);
@@ -189,6 +192,7 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Di_Provider);
 	ZEPHIR_INIT(Leevel_Http_Bag);
 	ZEPHIR_INIT(Leevel_Http_Response);
+	ZEPHIR_INIT(Leevel_View_Connect);
 	ZEPHIR_INIT(Leevel_Manager_Manager);
 	ZEPHIR_INIT(Leevel_Di_Container);
 	ZEPHIR_INIT(Leevel_Http_File);
@@ -196,7 +200,6 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_Http_HeaderBag);
 	ZEPHIR_INIT(Leevel_Http_JsonResponse);
 	ZEPHIR_INIT(Leevel_Log_Connect);
-	ZEPHIR_INIT(Leevel_View_Connect);
 	ZEPHIR_INIT(Leevel_Auth);
 	ZEPHIR_INIT(Leevel_Auth_Provider_Register);
 	ZEPHIR_INIT(Leevel_Bootstrap_Bootstrap_LoadI18n);
@@ -276,7 +279,10 @@ static PHP_MINIT_FUNCTION(leevel)
 	ZEPHIR_INIT(Leevel_View);
 	ZEPHIR_INIT(Leevel_View_Html);
 	ZEPHIR_INIT(Leevel_View_Manager);
+	ZEPHIR_INIT(Leevel_View_Phpui);
 	ZEPHIR_INIT(Leevel_View_Provider_Register);
+	ZEPHIR_INIT(Leevel_View_Twig);
+	ZEPHIR_INIT(Leevel_View_V8js);
 	ZEPHIR_INIT(Leevel_View_View);
 	return SUCCESS;
 }
