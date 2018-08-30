@@ -820,7 +820,8 @@ class Router implements IRouter, IMacro
      */
     protected function pathinfoRestful()
     {
-        if isset this->matchedData[self::ACTION] {
+        if ! isset this->matchedData[self::ACTION] ||
+            ! empty this->matchedData[self::ACTION] {
             return;
         }
 
