@@ -46,13 +46,17 @@ class CompilerForTest extends TestCase
 eot;
 
         $compiled = <<<'eot'
-<?php for ($i=1;$i<10;$i++):?>
+<?php for ($i=1;$i<10;$i++): ?>
     QueryPHP - 代码版本for <br>
-<?php endfor;?>
+<?php endfor; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
+    }
 
+    public function testForNode()
+    {
+        $parser = $this->createParser();
         $source = <<<'eot'
 <for start='1'>
     QueryPHP - node - for <br>
@@ -60,9 +64,9 @@ eot;
 eot;
 
         $compiled = <<<'eot'
-<?php for ($var = 1; $var <= 0; $var += 1):?>
+<?php for ($var = 1; $var <= 0; $var += 1): ?>
     QueryPHP - node - for <br>
-<?php endfor;?>
+<?php endfor; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
@@ -74,12 +78,17 @@ eot;
 eot;
 
         $compiled = <<<'eot'
-<?php for ($myValue = 1; $myValue <= 10; $myValue += 3):?>
+<?php for ($myValue = 1; $myValue <= 10; $myValue += 3): ?>
     QueryPHP for <br>
-<?php endfor;?>
+<?php endfor; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
+    }
+
+    public function testForJsStyle()
+    {
+        $parser = $this->createParser();
 
         $source = <<<'eot'
 {% for item in navigation %}
@@ -88,9 +97,9 @@ eot;
 eot;
 
         $compiled = <<<'eot'
-<?php foreach ($navigation as $key => $item):?>
-    <li><a href="<?php echo $item->href;?>"><?php echo $item->caption;?></a></li>
-<?php endforeach;?>
+<?php foreach ($navigation as $key => $item): ?>
+    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+<?php endforeach; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
@@ -102,9 +111,9 @@ eot;
 eot;
 
         $compiled = <<<'eot'
-<?php foreach ($navigation as $mykey => $item):?>
-    <li><a href="<?php echo $item->href;?>"><?php echo $item->caption;?></a></li>
-<?php endforeach;?>
+<?php foreach ($navigation as $mykey => $item): ?>
+    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+<?php endforeach; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
@@ -116,9 +125,62 @@ eot;
 eot;
 
         $compiled = <<<'eot'
-<?php foreach ($navigation as $mykey => $item):?>
-    <li><a href="<?php echo $item->href;?>"><?php echo $item->caption;?></a></li>
-<?php endforeach;?>
+<?php foreach ($navigation as $mykey => $item): ?>
+    <li><a href="<?php echo $item->href; ?>"><?php echo $item->caption; ?></a></li>
+<?php endforeach; ?>
+eot;
+
+        $this->assertSame($compiled, $parser->doCompile($source, null, true));
+    }
+
+    public function testForJsStyleException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'The node for lacks the required property: condition3.'
+        );
+
+        $parser = $this->createParser();
+
+        $source = <<<'eot'
+{% for item navigation %}
+{% /for %}
+eot;
+
+        $parser->doCompile($source, null, true);
+    }
+
+    public function testForJsStyleException2()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'For tag need “in“ separate.'
+        );
+
+        $parser = $this->createParser();
+
+        $source = <<<'eot'
+{% for key item navigation %}
+{% /for %}
+eot;
+
+        $parser->doCompile($source, null, true);
+    }
+
+    public function testForType()
+    {
+        $parser = $this->createParser();
+
+        $source = <<<'eot'
+<for start='10' end='1' var='myValue' step='3' type='-'>
+    QueryPHP for <br>
+</for>
+eot;
+
+        $compiled = <<<'eot'
+<?php for ($myValue = 10; $myValue >= 1; $myValue -= 3): ?>
+    QueryPHP for <br>
+<?php endfor; ?>
 eot;
 
         $this->assertSame($compiled, $parser->doCompile($source, null, true));
