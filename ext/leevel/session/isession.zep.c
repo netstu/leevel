@@ -13,218 +13,212 @@
 
 
 /**
- * ISession 接口
+ * ISession 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.09
+ * @since 2017.04.11
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_Session_ISession) {
 
 	ZEPHIR_REGISTER_INTERFACE(Leevel\\Session, ISession, leevel, session_isession, leevel_session_isession_method_entry);
 
+	/**
+	 * 默认 session 名字.
+	 *
+	 * @var string
+	 */
+	zephir_declare_class_constant_string(leevel_session_isession_ce, SL("SESSION_NAME"), "UID");
+
 	return SUCCESS;
 
 }
 
 /**
- * 修改单个配置
+ * 启动 session.
  *
- * @param string $name
- * @param mixed $value
- * @return $this
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setOption);
-
-/**
- * 启动 session
- *
- * @return $this
+ * @param string $sessionId
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, start);
 
 /**
- * 设置 session
+ * 程序执行保存 session.
+ */
+ZEPHIR_DOC_METHOD(Leevel_Session_ISession, save);
+
+/**
+ * 取回所有 session 数据.
+ *
+ * @return array
+ */
+ZEPHIR_DOC_METHOD(Leevel_Session_ISession, all);
+
+/**
+ * 设置 session.
  *
  * @param string $name
- * @param mxied $value
- * @return void
+ * @param mxied  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, set);
 
 /**
- * 批量插入
+ * 批量插入.
  *
- * @param string|array $keys
- * @param mixed $value
- * @return void
+ * @param array|string $keys
+ * @param mixed        $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, put);
 
 /**
- * 数组插入数据
+ * 数组插入数据.
  *
  * @param string $key
- * @param mixed $value
- * @return void
+ * @param mixed  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, push);
 
 /**
- * 合并元素
+ * 合并元素.
  *
  * @param string $key
- * @param array $value
- * @return void
+ * @param array  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, merge);
 
 /**
- * 弹出元素
+ * 弹出元素.
  *
  * @param string $key
- * @param mixed $value
- * @return void
+ * @param mixed  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, pop);
 
 /**
- * 数组插入键值对数据
+ * 数组插入键值对数据.
  *
  * @param string $key
- * @param mixed $keys
- * @param mixed $value
- * @return void
+ * @param mixed  $keys
+ * @param mixed  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, arr);
 
 /**
- * 数组键值删除数据
+ * 数组键值删除数据.
  *
  * @param string $key
- * @param mixed $keys
- * @return void
+ * @param mixed  $keys
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, arrDelete);
 
 /**
- * 取回 session
+ * 取回 session.
  *
  * @param string $name
- * @param mixed $value
+ * @param mixed  $value
+ *
  * @return mxied
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, get);
 
 /**
- * 返回数组部分数据
+ * 返回数组部分数据.
  *
  * @param string $name
- * @param mixed $value
+ * @param mixed  $value
+ *
  * @return mixed
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getPart);
 
 /**
- * 删除 session
+ * 删除 session.
  *
  * @param string $name
- * @param boolean $prefix
- * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, delete);
 
 /**
- * 是否存在 session
+ * 是否存在 session.
  *
  * @param string $name
- * @return boolean
+ *
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, has);
 
 /**
- * 删除 session
- *
- * @param boolean $prefix
- * @return void
+ * 删除 session.
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, clear);
 
 /**
- * 闪存一个数据，当前请求和下一个请求可用
+ * 闪存一个数据，当前请求和下一个请求可用.
  *
  * @param string $key
- * @param mixed $value
- * @return void
+ * @param mixed  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, flash);
 
 /**
- * 批量闪存数据，当前请求和下一个请求可用
+ * 批量闪存数据，当前请求和下一个请求可用.
  *
  * @param array $flash
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, flashs);
 
 /**
- * 闪存一个 flash 用于当前请求使用，下一个请求将无法获取
+ * 闪存一个 flash 用于当前请求使用，下一个请求将无法获取.
  *
  * @param string $key
- * @param mixed $value
- * @return void
+ * @param mixed  $value
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, nowFlash);
 
 /**
- * 保持所有闪存数据
- *
- * @return void
+ * 保持所有闪存数据.
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, rebuildFlash);
 
 /**
- * 保持闪存数据
+ * 保持闪存数据.
  *
- * @return void
+ * @param mixed $keys
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, keepFlash);
 
 /**
- * 返回闪存数据
+ * 返回闪存数据.
  *
  * @param string $key
- * @param mixed $defaults
+ * @param mixed  $defaults
+ *
  * @return mixed
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getFlash);
 
 /**
- * 删除闪存数据
+ * 删除闪存数据.
  *
- * @return void
+ * @param mixed $keys
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, deleteFlash);
 
 /**
- * 清理所有闪存数据
- *
- * @return void
+ * 清理所有闪存数据.
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, clearFlash);
 
 /**
- * 程序执行结束清理 flash
- *
- * @return void
+ * 程序执行结束清理 flash.
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, unregisterFlash);
 
 /**
  * 获取前一个请求地址
  *
- * @return string|null
+ * @return null|string
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, prevUrl);
 
@@ -232,142 +226,58 @@ ZEPHIR_DOC_METHOD(Leevel_Session_ISession, prevUrl);
  * 设置前一个请求地址
  *
  * @param string $url
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setPrevUrl);
 
 /**
- * 暂停 session
- *
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, pause);
-
-/**
- * 终止会话
- *
- * @return bool
+ * 终止会话.
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, destroy);
 
 /**
- * session 是否已经启动
+ * session 是否已经启动.
  *
- * @return boolean
+ * @return bool
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, isStart);
 
 /**
- * session 状态
- *
- * @return int
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, status);
-
-/**
- * 设置 SESSION 名字
+ * 设置 SESSION 名字.
  *
  * @param string $name
- * @return void
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setName);
 
 /**
- * 取得 SESSION 名字
+ * 取得 SESSION 名字.
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getName);
 
 /**
- * 设置 SESSION ID
+ * 设置 SESSION ID.
  *
- * @param string $name
- * @return void
+ * @param string $id
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setId);
 
 /**
- * 取得 SESSION ID
+ * 取得 SESSION ID.
  *
  * @return string
  */
 ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getId);
 
 /**
- * 设置 save path
- *
- * @param string $savepath
- * @return void
+ * 重新生成 SESSION ID.
  */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setSavePath);
+ZEPHIR_DOC_METHOD(Leevel_Session_ISession, regenerateId);
 
 /**
- * 获取 save path
+ * 返回连接.
  *
- * @return string
+ * @return \SessionHandlerInterface
  */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getSavePath);
-
-/**
- * 设置 cookie_domain
- *
- * @param string $domain
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setCookieDomain);
-
-/**
- * 获取 cookie_domain
- *
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getCookieDomain);
-
-/**
- * 设置 cache expire
- *
- * @param int $second
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setCacheExpire);
-
-/**
- * session 使用 cookie
- *
- * @return boolean
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setUseCookies);
-
-/**
- * 设置 cache limiter
- *
- * @param string $limiter
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setCacheLimiter);
-
-/**
- * 获取 cache limiter
- *
- * @return string
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getCacheLimiter);
-
-/**
- * 设置 session 垃圾回收概率分子
- * 分母为 session.gc_divisor
- *
- * @param int $probability
- * @return void
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, setGcProbability);
-
-/**
- * 获取 session 垃圾回收概率分子
- * 分母为 session.gc_divisor
- *
- * @return int
- */
-ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getGcProbability);
+ZEPHIR_DOC_METHOD(Leevel_Session_ISession, getConnect);
 

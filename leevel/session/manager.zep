@@ -15,9 +15,6 @@
  */
 namespace Leevel\Session;
 
-use Leevel\Session\Redis;
-use Leevel\Session\Session;
-use Leevel\Session\Memcache;
 use Leevel\Manager\Manager as Managers;
 
 /**
@@ -30,6 +27,15 @@ use Leevel\Manager\Manager as Managers;
  */
 class Manager extends Managers
 {
+    /**
+     * 返回 session 配置.
+     *
+     * @return array
+     */
+    public function getSessionOption() -> array
+    {
+        return this->normalizeConnectOption(this->getDefaultDriver(), []);
+    }
 
     /**
      * 取得配置命名空间
@@ -53,25 +59,28 @@ class Manager extends Managers
     }
 
     /**
-     * 创建 cookie 缓存
+     * 创建 nulls 缓存
      *
      * @param array $options
-     * @return null
+     * @return \Leevel\Session\Nulls
      */
-    protected function makeConnectCookie(array options = [])
+    protected function makeConnectNulls(array options = []) -> <Nulls>
     {
+        return new Nulls(
+            this->normalizeConnectOption("nulls", options)
+        );
     }
 
     /**
-     * 创建 memcache 缓存
+     * 创建 file 缓存
      *
      * @param array $options
-     * @return \Leevel\Session\Memcache
+     * @return \Leevel\Session\File
      */
-    protected function makeConnectMemcache(array options = [])
+    protected function makeConnectFile(array options = []) -> <File>
     {
-        return new Memcache(
-            this->normalizeConnectOption("memcache", options)
+        return new File(
+            this->normalizeConnectOption("file", options)
         );
     }
 
@@ -81,7 +90,7 @@ class Manager extends Managers
      * @param array $options
      * @return \Leevel\Session\Redis
      */
-    protected function makeConnectRedis(array options = [])
+    protected function makeConnectRedis(array options = []) -> <Redis>
     {
         return new Redis(
             this->normalizeConnectOption("redis", options)

@@ -16,8 +16,8 @@
 namespace Leevel\Session\Middleware;
 
 use Closure;
-use Leevel\Http\Request;
-use Leevel\Http\Response;
+use Leevel\Http\IRequest;
+use Leevel\Http\IResponse;
 use Leevel\Session\Manager;
 
 /**
@@ -53,12 +53,12 @@ class Session
      * 请求
      *
      * @param \Closure $next
-     * @param \Leevel\Http\Request $request
+     * @param \Leevel\Http\IRequest $request
      * @return void
      */
-    public function handle(<Closure> next, <Request> request)
+    public function handle(<Closure> next, <IRequest> request)
     {
-        this->startSession();
+        this->startSession(request);
 
         {next}(request);
     }
@@ -67,46 +67,79 @@ class Session
      * 响应
      *
      * @param \Closure $next
-     * @param \Leevel\Http\Request $request
-     * @param \Leevel\Http\Response $response
+     * @param \Leevel\Http\IRequest $request
+     * @param \Leevel\Http\IResponse $response
      * @return void
      */
-    public function terminate(<Closure> next, <Request> request, <Response> response)
+    public function terminate(<Closure> next, <IRequest> request, <IResponse> response)
     {
-        this->unregisterFlash();
         this->setPrevUrl(request);
+        this->saveSession();
+
+        if ! this->getSessionId(request) {
+            response->setCookie(
+                this->manager->getName(),
+                this->manager->getId(),
+                ["expire" : this->getSessionExpire()]
+            );
+        }
 
         {next}(request, response);
     }
     
     /**
-     * 启动 session
+     * 启动 session.
      *
-     * @return void
+     * @param \Leevel\Http\IRequest $request
      */
-    protected function startSession()
+    protected function startSession(<IRequest> request)
     {
-        this->manager->start();
+        this->manager->start(this->getSessionId(request));
+    }
+
+    /**
+     * 保存 session.
+     */
+    protected function saveSession()
+    {
+        this->manager->save();
     }
     
     /**
-     * 清理闪存
+     * 保存当期请求 URL.
      *
-     * @return void
+     * @param \Leevel\Http\IRequest $request
      */
-    protected function unregisterFlash()
-    {
-        this->manager->unregisterFlash();
-    }
-    
-    /**
-     * 保存当期请求 URL
-     *
-     * @param \Leevel\Http\Request $request
-     * @return void
-     */
-    protected function setPrevUrl(<Request> request)
+    protected function setPrevUrl(<IRequest> request)
     {
         this->manager->setPrevUrl(request->getUri());
+    }
+    
+    /**
+     * 获取 session ID.
+     *
+     * @param \Leevel\Http\IRequest $request
+     *
+     * @return null|string
+     */
+    protected function getSessionId(<IRequest> request)
+    {
+        return request->cookies->get(
+            this->manager->getName(), null
+        );
+    }
+
+    /**
+     * 获取 session 过期时间.
+     *
+     * @return int
+     */
+    protected function getSessionExpire() -> int
+    {
+        var option = [];
+
+        let option = this->manager->getSessionOption();
+
+        return isset option["expire"] ? option["expire"] : 0;
     }
 }

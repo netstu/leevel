@@ -15,7 +15,6 @@
 #include "kernel/fcall.h"
 #include "kernel/memory.h"
 #include "kernel/operators.h"
-#include "kernel/object.h"
 
 
 /**
@@ -31,6 +30,32 @@ ZEPHIR_INIT_CLASS(Leevel_Session_Manager) {
 	ZEPHIR_REGISTER_CLASS_EX(Leevel\\Session, Manager, leevel, session_manager, leevel_manager_manager_ce, leevel_session_manager_method_entry, 0);
 
 	return SUCCESS;
+
+}
+
+/**
+ * 返回 session 配置.
+ *
+ * @return array
+ */
+PHP_METHOD(Leevel_Session_Manager, getSessionOption) {
+
+	zval _0, _1;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getdefaultdriver", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(&_1);
+	array_init(&_1);
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "normalizeconnectoption", NULL, 0, &_0, &_1);
+	zephir_check_call_status();
+	RETURN_MM();
 
 }
 
@@ -71,25 +96,28 @@ PHP_METHOD(Leevel_Session_Manager, createConnect) {
 	object_init_ex(return_value, leevel_session_session_ce);
 	ZEPHIR_CALL_METHOD(&_0, this_ptr, "getcommonoption", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 135, connect, &_0);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 136, connect, &_0);
 	zephir_check_call_status();
 	RETURN_MM();
 
 }
 
 /**
- * 创建 cookie 缓存
+ * 创建 nulls 缓存
  *
  * @param array $options
- * @return null
+ * @return \Leevel\Session\Nulls
  */
-PHP_METHOD(Leevel_Session_Manager, makeConnectCookie) {
+PHP_METHOD(Leevel_Session_Manager, makeConnectNulls) {
 
-	zval *options_param = NULL;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *options_param = NULL, _0, _1;
 	zval options;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&options);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &options_param);
@@ -102,26 +130,35 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectCookie) {
 	}
 
 
+	object_init_ex(return_value, leevel_session_nulls_ce);
+	if (zephir_has_constructor(return_value TSRMLS_CC)) {
+		ZEPHIR_INIT_VAR(&_1);
+		ZVAL_STRING(&_1, "nulls");
+		ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_0);
+		zephir_check_call_status();
+	}
+	RETURN_MM();
 
 }
 
 /**
- * 创建 memcache 缓存
+ * 创建 file 缓存
  *
  * @param array $options
- * @return \Leevel\Session\Memcache
+ * @return \Leevel\Session\File
  */
-PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
+PHP_METHOD(Leevel_Session_Manager, makeConnectFile) {
 
-	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *options_param = NULL, _1, _2;
+	zval *options_param = NULL, _0, _1;
 	zval options;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&options);
+	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &options_param);
@@ -134,18 +171,13 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
 	}
 
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Session\\Memcache"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_2);
-		ZVAL_STRING(&_2, "memcache");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizeconnectoption", NULL, 0, &_2, &options);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_session_file_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "file");
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 137, &_0);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }
@@ -158,15 +190,14 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectMemcache) {
  */
 PHP_METHOD(Leevel_Session_Manager, makeConnectRedis) {
 
-	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *options_param = NULL, _1, _2;
+	zval *options_param = NULL, _0, _1;
 	zval options;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&options);
+	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &options_param);
@@ -179,18 +210,13 @@ PHP_METHOD(Leevel_Session_Manager, makeConnectRedis) {
 	}
 
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Session\\Redis"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_2);
-		ZVAL_STRING(&_2, "redis");
-		ZEPHIR_CALL_METHOD(&_1, this_ptr, "normalizeconnectoption", NULL, 0, &_2, &options);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_session_redis_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "redis");
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "normalizeconnectoption", NULL, 0, &_1, &options);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 138, &_0);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

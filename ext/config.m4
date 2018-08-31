@@ -24,6 +24,7 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/log/iconnect.zep.c
 	leevel/manager/manager.zep.c
 	leevel/mvc/iview.zep.c
+	leevel/session/connect.zep.c
 	leevel/cookie/icookie.zep.c
 	leevel/di/container.zep.c
 	leevel/event/idispatch.zep.c
@@ -112,12 +113,16 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/router/routerprovider.zep.c
 	leevel/router/url.zep.c
 	leevel/session.zep.c
+	leevel/session/file.zep.c
 	leevel/session/manager.zep.c
 	leevel/session/middleware/session.zep.c
+	leevel/session/nulls.zep.c
 	leevel/session/provider/register.zep.c
+	leevel/session/redis.zep.c
 	leevel/session/session.zep.c
 	leevel/support/debug/console.zep.c
 	leevel/support/ihtml.zep.c
+	leevel/support/str.zep.c
 	leevel/support/type.zep.c
 	leevel/throttler.zep.c
 	leevel/throttler/provider/register.zep.c

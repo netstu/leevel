@@ -13,219 +13,174 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Session;
 
+use Leevel\Support\Str;
 use RuntimeException;
-use BadMethodCallException;
 use SessionHandlerInterface;
-use Leevel\Session\ISession;
+use BadMethodCallException;
 
 /**
- * session 仓储
+ * session 仓储.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.09
+ * @since 2017.04.17
+ *
  * @version 1.0
  */
 class Session implements ISession
 {
     /**
-     * session handler 
+     * session ID.
+     * 相当于 session_id.
      *
-     * @var \SessionHandlerInterface|null
+     * @var string
+     */
+    protected id;
+    
+    /**
+     * session 名字.
+     * 相当于 session_name.
+     *
+     * @var string
+     */
+    protected name;
+    
+    /**
+     * session handler.
+     *
+     * @var \SessionHandlerInterface
      */
     protected connect;
-
+    
     /**
-     * session 是否开启
+     * session 是否开启.
      *
-     * @var boolean
+     * @var bool
      */
     protected started = false;
-
+    
     /**
-     * 配置
+     * session 数据.
+     *
+     * @var array
+     */
+    protected datas = [];
+    
+    /**
+     * 配置.
      *
      * @var array
      */
     protected option = [
-        "default" : null,
-        "prefix" : "q_",
         "id" : null,
-        "name" : null,
-        "cookie_domain" : null,
-        "cache_limiter" : null,
-        "expire" : 86400,
-        "save_path" : null,
-        "gc_probability" : null
+        "name" : null
     ];
-
+    
     /**
-     * session 状态启用
+     * 构造函数.
      *
-     * @var int
+     * @param \SessionHandlerInterface $connect
+     * @param array                    $option
      */
-    const SESSION_ACTIVE = 2;
-
-    /**
-     * session 状态未运行
-     *
-     * @var int
-     */
-    const SESSION_NONE = 1;
-
-    /**
-     * session 状态关闭
-     *
-     * @var int
-     */
-    const SESSION_DISABLED = 0;
-
-    /**
-     * 构造函数
-     *
-     * @param \SessionHandlerInterface|null $connect
-     * @param array $option
-     * @return void
-     */
-    public function __construct(<SessionHandlerInterface> connect = null, array option = [])
+    public function __construct(<SessionHandlerInterface> connect, array option = []) -> void
     {
         let this->connect = connect;
 
         let this->option = array_merge(this->option, option);
-    }
 
-    /**
-     * 修改单个配置
-     *
-     * @param string $name
-     * @param mixed $value
-     * @return $this
-     */
-    public function setOption(string name, var value)
-    {
-        let this->option[name] = value;
-        
-        return this;
+        this->setName(this->option["name"]);
     }
-
+    
     /**
-     * 启动 session
+     * 启动 session.
      *
-     * @return $this
+     * @param string $sessionId
      */
-    public function start()
+    public function start(var sessionId = null)
     {
-        if headers_sent() || this->isStart() || this->status() === self::SESSION_ACTIVE {
+        if this->isStart() {
             return this;
         }
 
-        // 设置 session 不自动启动
-        ini_set("session.auto_start", "0");
+        this->setId(sessionId ? sessionId : this->option["id"]);
 
-        // 设置 session id
-        if this->option["id"] {
-            this->setId(this->option["id"]);
-        }
-
-        // session name
-        if this->option["name"] {
-            this->setName(this->option["name"]);
-        }
-
-        // cookie set
-        this->setUseCookies(); 
-
-        // save path
-        if this->option["save_path"] {
-            this->setSavePath(this->option["save_path"]);
-        }
-        
-        // cookie domain
-        if this->option["cookie_domain"] {
-            this->setCookieDomain(this->option["cookie_domain"]);
-        }
-
-        // session expire
-        if this->option["expire"] {
-            this->setCacheExpire(this->option["expire"]);
-        }
-
-        // cache limiter
-        if this->option["cache_limiter"] {
-            this->setCacheLimiter(this->option["cache_limiter"]);
-        }
-
-        // gc_probability
-        if this->option["gc_probability"] {
-            this->setGcProbability(this->option["gc_probability"]);
-        }
-
-        // 驱动
-        if this->connect && ! session_set_save_handler(this->connect) {
-            throw new RuntimeException(
-                sprintf("Session drive %s settings failed.", get_class(this->connect))
-            );
-        }
-
-        // 启动 session
-        if ! session_start() {
-            throw new RuntimeException("Session start failed");
-        }
+        this->loadData();
 
         let this->started = true;
-
-        return this;
     }
-
+    
     /**
-     * 设置 session
-     *
-     * @param string $name
-     * @param mxied $value
-     * @return void
+     * 程序执行保存 session.
      */
-    public function set(string name, var value)
+    public function save() -> void
     {
-        this->checkStart();
-
-        let name = this->getNormalizeName(name);
-        let _SESSION[name] = value;
-    }
-
-    /**
-     * 批量插入
-     *
-     * @param string|array $keys
-     * @param mixed $value
-     * @return void
-     */
-    public function put(var keys, var value = null)
-    {
-        var item;
-
-        this->checkStart();
-
-        if typeof keys != "array" {
-            let keys = [
-                keys : value
-            ];
+        if ! (this->isStart()) {
+            throw new RuntimeException("Session is not start yet.");
         }
 
-        for item, value in keys {
+        this->unregisterFlash();
+
+        this->connect->write(this->getId(), serialize(this->datas));
+
+        let this->started = false;
+    }
+    
+    /**
+     * 取回所有 session 数据.
+     *
+     * @return array
+     */
+    public function all() -> array
+    {
+        return this->datas;
+    }
+    
+    /**
+     * 设置 session.
+     *
+     * @param string $name
+     * @param mxied  $value
+     */
+    public function set(string name, var value) -> void
+    {
+        var tmp;
+
+        let tmp = this->getNormalizeName(name);
+
+        let this->datas[tmp] = value;
+    }
+    
+    /**
+     * 批量插入.
+     *
+     * @param array|string $keys
+     * @param mixed        $value
+     */
+    public function put(var keys, var value = null) -> void
+    {
+        var item, tmp;
+    
+        if ! (is_array(keys)) {
+            let tmp = [keys : value];
+        } else {
+            let tmp = keys;
+        }
+
+        for item, value in tmp {
             this->set(item, value);
         }
     }
-
+    
     /**
-     * 数组插入数据
+     * 数组插入数据.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function push(string key, var value)
+    public function push(string key, var value) -> void
     {
         var arr;
 
@@ -234,40 +189,37 @@ class Session implements ISession
 
         this->set(key, arr);
     }
-
+    
     /**
-     * 合并元素
+     * 合并元素.
      *
      * @param string $key
-     * @param array $value
-     * @return void
+     * @param array  $value
      */
-    public function merge(string key, array value)
+    public function merge(string key, array value) -> void
     {
-        this->set(key, array_unique(array_merge(this->get(key, []), value)));
+        this->set(key, array_merge(this->get(key, []), value));
     }
-
+    
     /**
-     * 弹出元素
+     * 弹出元素.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function pop(string key, array value)
+    public function pop(string key, array value) -> void
     {
         this->set(key, array_diff(this->get(key, []), value));
     }
-
+    
     /**
-     * 数组插入键值对数据
+     * 数组插入键值对数据.
      *
      * @param string $key
-     * @param mixed $keys
-     * @param mixed $value
-     * @return void
+     * @param mixed  $keys
+     * @param mixed  $value
      */
-    public function arr(string key, var keys, var value = null)
+    public function arr(string key, var keys, var value = null) -> void
     {
         var arr;
 
@@ -281,29 +233,28 @@ class Session implements ISession
 
         this->set(key, arr);
     }
-
+    
     /**
-     * 数组键值删除数据
+     * 数组键值删除数据.
      *
      * @param string $key
-     * @param mixed $keys
-     * @return void
+     * @param mixed  $keys
      */
-    public function arrDelete(string key, var keys)
+    public function arrDelete(string key, var keys) -> void
     {
-        var arr, item, deleteKey;
+        var arr, item, tmp;
 
         let arr = this->get(key, []);
 
         if typeof keys != "array" {
-            let deleteKey = [
+            let tmp = [
                 keys
             ];
         } else {
-            let deleteKey = keys;
+            let tmp = keys;
         }
 
-        for item in deleteKey {
+        for item in tmp {
             if isset arr[item] {
                 unset arr[item];
             }
@@ -311,141 +262,117 @@ class Session implements ISession
 
         this->set(key, arr);
     }
-
+    
     /**
-     * 取回 session
+     * 取回 session.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return mxied
      */
     public function get(string name, var value = null)
     {
-        this->checkStart();
+        var tmp;
 
-        let name = this->getNormalizeName(name);
+        let tmp = this->getNormalizeName(name);
 
-        return isset _SESSION[name] ? _SESSION[name] : value;
+        return isset this->datas[tmp] ? this->datas[tmp] : value;
     }
-
+    
     /**
-     * 返回数组部分数据
+     * 返回数组部分数据.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return mixed
      */
-    public function getPart(string name, var value = null) {
+    public function getPart(string name, var value = null)
+    {
         return this->getPartData(name, value);
     }
-
+    
     /**
-     * 删除 session
+     * 删除 session.
      *
      * @param string $name
-     * @param boolean $prefix
+     */
+    public function delete(string name) -> void
+    {
+        var tmp;
+
+        let tmp = this->getNormalizeName(name);
+
+        if isset this->datas[tmp] {
+            unset this->datas[tmp];
+        }
+    }
+    
+    /**
+     * 是否存在 session.
+     *
+     * @param string $name
+     *
      * @return bool
      */
-    public function delete(string name, boolean prefix = true)
+    public function has(string name) -> bool
     {
-        this->checkStart();
+        var tmp;
 
-        if prefix {
-            let name = this->getNormalizeName(name);
-        }
+        let tmp = this->getNormalizeName(name);
 
-        if isset _SESSION[name] {
-            unset _SESSION[name];
-        }
-
-        return true;
+        return isset this->datas[tmp];
     }
-
+    
     /**
-     * 是否存在 session
-     *
-     * @param string $name
-     * @return boolean
+     * 删除 session.
      */
-    public function has(string name)
+    public function clear() -> void
     {
-        this->checkStart();
-
-        let name = this->getNormalizeName(name);
-
-        return isset _SESSION[name];
+        let this->datas = [];
     }
-
+    
     /**
-     * 删除 session
-     *
-     * @param boolean $prefix
-     * @return void
-     */
-    public function clear(boolean prefix = true)
-    {
-        var strPrefix, sKey;
-
-        this->checkStart();
-
-        let strPrefix = this->option["prefix"];
-
-        for sKey, _ in _SESSION {
-            if prefix === true && strPrefix && strpos(sKey, strPrefix) === 0 {
-                this->delete(sKey, false);
-            } else {
-                this->delete(sKey, false);
-            }
-        }
-    }
-
-    /**
-     * 闪存一个数据，当前请求和下一个请求可用
+     * 闪存一个数据，当前请求和下一个请求可用.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function flash(string key, var value = null)
+    public function flash(string key, var value) -> void
     {
-        if typeof value == "null" {
-            return this->getFlash(key);
-        } else {
-            this->set(this->flashDataKey(key), value);
+        this->set(this->flashDataKey(key), value);
 
-            this->mergeNewFlash([
-                key
-            ]);
+        this->mergeNewFlash([
+            key
+        ]);
 
-            this->popOldFlash([
-                key
-            ]);
-        }
+        this->popOldFlash([
+            key
+        ]);
     }
-
+    
     /**
-     * 批量闪存数据，当前请求和下一个请求可用
+     * 批量闪存数据，当前请求和下一个请求可用.
      *
      * @param array $flash
-     * @return void
      */
-    public function flashs(array flash)
+    public function flashs(array flash) -> void
     {
-        var item, value;
-
-        for item, value in flash {
-            this->flash(item, value);
+        var key, value;
+    
+        for key, value in flash {
+            this->flash(key, value);
         }
     }
-
+    
     /**
-     * 闪存一个 flash 用于当前请求使用，下一个请求将无法获取
+     * 闪存一个 flash 用于当前请求使用,下一个请求将无法获取.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function nowFlash(string key, var value)
+    public function nowFlash(string key, var value) -> void
     {
         this->set(this->flashDataKey(key), value);
 
@@ -455,42 +382,57 @@ class Session implements ISession
     }
 
     /**
-     * 保持所有闪存数据
+     * 批量闪存数据,用于当前请求使用，下一个请求将无法获取.
      *
-     * @return void
+     * @param string $key
+     * @param mixed  $value
      */
-    public function rebuildFlash()
+    public function nowFlashs(array flash)
     {
-        this->mergeNewFlash(this->get(this->flashOldKey(), []));
-        this->set(this->flashOldKey(), []);
+        var key, value;
+
+        for key, value in flash {
+            this->nowFlash(key, value);
+        }
     }
 
     /**
-     * 保持闪存数据
-     *
-     * @return void
+     * 保持所有闪存数据.
      */
-    public function keepFlash()
+    public function rebuildFlash() -> void
+    {
+        this->mergeNewFlash(this->get(this->flashOldKey(), []));
+
+        this->set(this->flashOldKey(), []);
+    }
+    
+    /**
+     * 保持闪存数据.
+     *
+     * @param mixed $keys
+     */
+    public function keepFlash() -> void
     {
         var keys, args = [];
 
         let args = func_get_args();
 
         if empty args {
-            throw new BadMethodCallException("Wrong number of parameters");
+            throw new BadMethodCallException("Wrong number of parameters.");
         }
 
-        let keys = typeof args[0] === "array" ? keys : args;
+        let keys = typeof args[0] === "array" ? args[0] : args;
 
         this->mergeNewFlash(keys);
         this->popOldFlash(keys);
     }
-
+    
     /**
-     * 返回闪存数据
+     * 返回闪存数据.
      *
      * @param string $key
-     * @param mixed $defaults
+     * @param mixed  $defaults
+     *
      * @return mixed
      */
     public function getFlash(string key, var defaults = null)
@@ -501,23 +443,23 @@ class Session implements ISession
             return this->get(this->flashDataKey(key), defaults);
         }
     }
-
+    
     /**
-     * 删除闪存数据
+     * 删除闪存数据.
      *
-     * @return void
+     * @param mixed $keys
      */
-    public function deleteFlash()
+    public function deleteFlash() -> void
     {
         var item, keys, args = [];
 
         let args = func_get_args();
 
         if empty args {
-            throw new BadMethodCallException("Wrong number of parameters");
+            throw new BadMethodCallException("Wrong number of parameters.");
         }
 
-        let keys = typeof args[0] === "array" ? keys : args;
+        let keys = typeof args[0] === "array" ? args[0] : args;
 
         for item in keys {
             this->delete(this->flashDataKey(item));
@@ -526,384 +468,247 @@ class Session implements ISession
         this->mergeOldFlash(keys);
         this->popNewFlash(keys);
     }
-
+    
     /**
-     * 清理所有闪存数据
-     *
-     * @return void
+     * 清理所有闪存数据.
      */
-    public function clearFlash()
+    public function clearFlash() -> void
     {
         var item, newKey;
 
         let newKey = this->get(this->flashNewKey(), []);
 
-        for item, _ in newKey {
+        for item in newKey {
             call_user_func([this, "deleteFlash"], item);
         }
     }
-
+    
     /**
-     * 程序执行结束清理 flash
-     *
-     * @return void
+     * 程序执行结束清理 flash.
      */
-    public function unregisterFlash()
+    public function unregisterFlash() -> void
     {
         var arr, old, item;
 
-        if this->isStart() {
-            let arr = this->get(this->flashNewKey(), []);
-            let old = this->get(this->flashOldKey(), []);
+        let arr = this->get(this->flashNewKey(), []);
+        let old = this->get(this->flashOldKey(), []);
 
-            for item in old {
-                this->delete(this->flashDataKey(item));
-            }
-
-            this->delete(this->flashNewKey());
-            this->set(this->flashOldKey(), arr);
+        for item in old {
+            this->delete(this->flashDataKey(item));
         }
-    }
 
+        this->delete(this->flashNewKey());
+        this->set(this->flashOldKey(), arr);
+    }
+    
     /**
      * 获取前一个请求地址
      *
-     * @return string|null
+     * @return null|string
      */
     public function prevUrl()
     {
         return this->get(this->prevUrlKey());
     }
-
+    
     /**
      * 设置前一个请求地址
      *
      * @param string $url
-     * @return void
      */
     public function setPrevUrl(string url)
     {
-        return this->set(this->prevUrlKey(), url);
+        this->set(this->prevUrlKey(), url);
     }
-
+    
     /**
-     * 暂停 session
-     *
-     * @return void
+     * 终止会话.
      */
-    public function pause()
+    public function destroy() -> void
     {
-        this->checkStart();
-        session_write_close();
-    }
+        this->clear();
+        this->connect->destroy(this->getId());
 
+        let this->id = null;
+        let this->started = false;
+    }
+    
     /**
-     * 终止会话
+     * session 是否已经启动.
      *
      * @return bool
      */
-    public function destroy()
-    {
-        var name;
-
-        this->checkStart();
-
-        this->clear(false);
-
-        let name = this->getName();
-
-        if isset _COOKIE[name] {
-            setcookie(name, "", time() - 42000, "/");
-        }
-
-        session_destroy();
-    }
-
-    /**
-     * session 是否已经启动
-     *
-     * @return boolean
-     */
-    public function isStart()
+    public function isStart() -> bool
     {
         return this->started;
     }
-
+    
     /**
-     * session 状态
-     *
-     * @return int
-     */
-    public function status(){
-        var status;
-
-        let status = session_status();
-
-        switch status {
-            case PHP_SESSION_DISABLED:
-                return self::SESSION_DISABLED;
-
-            case PHP_SESSION_ACTIVE:
-                return self::SESSION_ACTIVE;
-        }
-
-        return self::SESSION_NONE;
-    }
-
-    /**
-     * 设置 SESSION 名字
+     * 设置 SESSION 名字.
      *
      * @param string $name
-     * @return void
      */
-    public function setName(string name)
+    public function setName(var name = null) -> void
     {
-        session_name(name);
+        let this->name = name ? name : self::SESSION_NAME;
     }
-
+    
     /**
-     * 取得 SESSION 名字
+     * 取得 SESSION 名字.
+     *
+     * @return null|string
+     */
+    public function getName()
+    {
+        return this->name;
+    }
+    
+    /**
+     * 设置 SESSION ID.
+     *
+     * @param string $id
+     */
+    public function setId(var id = null) -> void
+    {
+        let this->id = id ? id : this->generateSessionId();
+    }
+    
+    /**
+     * 取得 SESSION ID.
+     *
+     * @return null|string
+     */
+    public function getId()
+    {
+        return this->id;
+    }
+    
+    /**
+     * 重新生成 SESSION ID.
      *
      * @return string
      */
-    public function getName() -> string
+    public function regenerateId() -> string
     {
-        return session_name();
-    }
+        let this->id = this->generateSessionId();
 
+        return this->id;
+    }
+    
     /**
-     * 设置 SESSION ID
+     * 返回连接.
+     *
+     * @return \SessionHandlerInterface
+     */
+    public function getConnect() -> <SessionHandlerInterface>
+    {
+        return this->connect;
+    }
+    
+    /**
+     * 生成 SESSION ID.
+     *
+     * @return string
+     */
+    protected function generateSessionId() -> string
+    {
+        return sha1(this->parseMicrotime() . "." . time() . "." . Str::randAlphaNum(32));
+    }
+    
+    /**
+     * 生成微秒数.
+     *
+     * @return string
+     */
+    protected function parseMicrotime() -> string
+    {
+        var usec, sec, tmpListUsecSec;
+    
+        let tmpListUsecSec = explode(" ", microtime());
+        let usec = tmpListUsecSec[0];
+        let sec = tmpListUsecSec[1];
+
+        return strval((double) usec + (double) sec);
+    }
+    
+    /**
+     * 返回 session 名字.
      *
      * @param string $name
-     * @return void
-     */
-    public function setId(string id)
-    {
-        session_id(id);
-    }
-
-    /**
-     * 取得 SESSION ID
      *
      * @return string
      */
-    public function getId() -> string
+    protected function getNormalizeName(string name) -> string
     {
-        return session_id();
+        return name;
     }
-
+    
     /**
-     * 重新生成 SESSION ID
-     * 
-     * @param bool $deleteOldSession
-     * @return $this
+     * 载入 session 数据.
      */
-    public function regenerateId(bool deleteOldSession = true)
+    protected function loadData() -> void
     {
-        session_regenerate_id(deleteOldSession);
-
-        return this;
+        let this->datas = array_merge(this->datas, this->loadDataFromConnect());
     }
-
+    
     /**
-     * 设置 save path
-     *
-     * @param string $savepath
-     * @return void
+     * 从驱动载入 session 数据.
      */
-    public function setSavePath(string savepath)
+    protected function loadDataFromConnect()
     {
-        session_save_path(savepath);
+        return this->connect->read(this->getId());
     }
-
+    
     /**
-     * 获取 save path
-     *
-     * @return string
-     */
-    public function getSavePath()
-    {
-        return session_save_path();
-    }
-
-    /**
-     * 设置 cookie_domain
-     *
-     * @param string $domain
-     * @return void
-     */
-    public function setCookieDomain(string domain)
-    {
-        ini_set("session.cookie_domain", domain);
-    }
-
-    /**
-     * 获取 cookie_domain
-     *
-     * @return string
-     */
-    public function getCookieDomain()
-    {
-        var result;
-
-        let result = ini_get("session.cookie_domain");
-
-        return result;
-    }
-
-    /**
-     * 设置 cache expire
-     *
-     * @param int $second
-     * @return void
-     */
-    public function setCacheExpire(int second)
-    {
-        let second = strval(second);
-
-        ini_set("session.gc_maxlifetime", second);
-        ini_set("session.cookie_lifetime", second);
-    }
-
-    /**
-     * session 使用 cookie
-     *
-     * @return boolean
-     */
-    public function setUseCookies()
-    {
-        ini_set("session.use_cookies", "1");
-        ini_set("session.use_trans_sid", "0");
-    }
-
-    /**
-     * 设置 cache limiter
-     *
-     * @param string $limiter
-     * @return void
-     */
-    public function setCacheLimiter(string limiter)
-    {
-        session_cache_limiter(limiter);
-    }
-
-    /**
-     * 获取 cache limiter
-     *
-     * @return string
-     */
-    public function getCacheLimiter()
-    {
-        return session_cache_limiter();
-    }
-
-    /**
-     * 设置 session 垃圾回收概率分子
-     * 分母为 session.gc_divisor
-     *
-     * @param int $probability
-     * @return void
-     */
-    public function setGcProbability(int probability)
-    {
-        let probability = strval(probability);
-
-        if probability >= 1 && probability <= 100 {
-            ini_set("session.gc_probability", probability);
-        }
-    }
-
-    /**
-     * 获取 session 垃圾回收概率分子
-     * 分母为 session.gc_divisor
-     *
-     * @return int
-     */
-    public function getGcProbability()
-    {
-        var result;
-
-        let result = ini_get("session.gc_probability");
-
-        return result;
-    }
-
-    /**
-     * 返回 session 名字
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function getNormalizeName(string name)
-    {
-        return this->option["prefix"] . name;
-    }
-
-    /**
-     * 验证 session 是否开启
-     *
-     * @return void
-     */
-    protected function checkStart()
-    {
-        if ! this->isStart() {
-            throw new RuntimeException("Session is not start yet");
-        }
-    }
-
-    /**
-     * 弹出旧闪存 KEY
+     * 弹出旧闪存 KEY.
      *
      * @param array $keys
-     * @return void
      */
-    protected function popOldFlash(array keys)
+    protected function popOldFlash(array keys) -> void
     {
         this->pop(this->flashOldKey(), keys);
     }
-
+    
     /**
-     * 合并旧闪存 KEY
+     * 合并旧闪存 KEY.
      *
      * @param array $keys
-     * @return void
      */
-    protected function mergeOldFlash(array keys)
+    protected function mergeOldFlash(array keys) -> void
     {
         this->merge(this->flashOldKey(), keys);
     }
-
+    
     /**
-     * 弹出新闪存 KEY
+     * 弹出新闪存 KEY.
      *
      * @param array $keys
-     * @return void
      */
-    protected function popNewFlash(array keys)
+    protected function popNewFlash(array keys) -> void
     {
         this->pop(this->flashNewKey(), keys);
     }
-
+    
     /**
-     * 合并新闪存 KEY
+     * 合并新闪存 KEY.
      *
      * @param array $keys
-     * @return void
      */
-    protected function mergeNewFlash(array keys)
+    protected function mergeNewFlash(array keys) -> void
     {
         this->merge(this->flashNewKey(), keys);
     }
-
+    
     /**
-     * 返回部分闪存数据
+     * 返回部分闪存数据.
      *
      * @param string $key
-     * @param mixed $defaults
+     * @param mixed  $defaults
      * @param string $type
+     *
      * @return mixed
      */
-    protected function getPartData(var key, var defaults = null, var type = null)
+    protected function getPartData(string key, var defaults = null, var type = null)
     {
         var name, value, parts, part, tempkeys, tempkey;
 
@@ -911,9 +716,11 @@ class Session implements ISession
         let tempkey = array_shift(tempkeys);
         let key = tempkey;
         let name = array_shift(tempkeys);
+
         if type == "flash" {
             let key = this->flashDataKey(key);
         }
+
         let value = this->get(key);
         
         if typeof value == "array" {
@@ -922,10 +729,12 @@ class Session implements ISession
             }
 
             let parts = explode(".", name);
+
             for part in parts {
                 if ! isset value[part] {
                     return defaults;
                 }
+
                 let value = value[part];
             }
             
@@ -934,61 +743,46 @@ class Session implements ISession
             return defaults;
         }
     }
-
+    
     /**
-     * 闪存值 KEY
+     * 闪存值 KEY.
      *
      * @param string $key
+     *
      * @return string
      */
-    protected function flashDataKey(string key)
+    protected function flashDataKey(string key) -> string
     {
         return "flash.data." . key;
     }
-
+    
     /**
-     * 新值闪存 KEY
+     * 新值闪存 KEY.
      *
      * @return string
      */
-    protected function flashNewKey()
+    protected function flashNewKey() -> string
     {
         return "flash.new.key";
     }
-
+    
     /**
-     * 旧值闪存 KEY
+     * 旧值闪存 KEY.
      *
      * @return string
      */
-    protected function flashOldKey()
+    protected function flashOldKey() -> string
     {
         return "flash.old.key";
     }
-
+    
     /**
-     * 前一个页面 KEY
+     * 前一个页面 KEY.
      *
      * @return string
      */
-    protected function prevUrlKey()
+    protected function prevUrlKey() -> string
     {
         return "prev.url.key";
-    }
-
-    /**
-     * call 
-     *
-     * @param string $method
-     * @param array $args
-     * @return mixed
-     */
-    public function __call(string method, array args)
-    {
-        if typeof this->connect == "null" {
-            throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
-        }
-
-        return call_user_func_array([this->connect, method], args);
     }
 }

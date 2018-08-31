@@ -13,358 +13,271 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\Session;
 
+use SessionHandlerInterface;
+
 /**
- * ISession 接口
+ * ISession 接口.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
- * @since 2018.01.09
+ * @since 2017.04.11
+ *
  * @version 1.0
  */
 interface ISession
 {
     /**
-     * 修改单个配置
+     * 默认 session 名字.
+     *
+     * @var string
+     */
+    const SESSION_NAME = "UID";
+
+    /**
+     * 启动 session.
+     *
+     * @param string $sessionId
+     */
+    public function start(var sessionId = null) -> void;
+    
+    /**
+     * 程序执行保存 session.
+     */
+    public function save() -> void;
+    
+    /**
+     * 取回所有 session 数据.
+     *
+     * @return array
+     */
+    public function all() -> array;
+    
+    /**
+     * 设置 session.
      *
      * @param string $name
-     * @param mixed $value
-     * @return $this
+     * @param mxied  $value
      */
-    public function setOption(string name, var value);
-
-     /**
-     * 启动 session
-     *
-     * @return $this
-     */
-    public function start();
-
+    public function set(string name, var value) -> void;
+    
     /**
-     * 设置 session
+     * 批量插入.
+     *
+     * @param array|string $keys
+     * @param mixed        $value
+     */
+    public function put(var keys, var value = null) -> void;
+    
+    /**
+     * 数组插入数据.
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function push(string key, var value) -> void;
+    
+    /**
+     * 合并元素.
+     *
+     * @param string $key
+     * @param array  $value
+     */
+    public function merge(string key, array value) -> void;
+    
+    /**
+     * 弹出元素.
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+    public function pop(string key, array value) -> void;
+    
+    /**
+     * 数组插入键值对数据.
+     *
+     * @param string $key
+     * @param mixed  $keys
+     * @param mixed  $value
+     */
+    public function arr(string key, var keys, var value = null) -> void;
+    
+    /**
+     * 数组键值删除数据.
+     *
+     * @param string $key
+     * @param mixed  $keys
+     */
+    public function arrDelete(string key, var keys) -> void;
+    
+    /**
+     * 取回 session.
      *
      * @param string $name
-     * @param mxied $value
-     * @return void
-     */
-    public function set(string name, var value);
-
-    /**
-     * 批量插入
+     * @param mixed  $value
      *
-     * @param string|array $keys
-     * @param mixed $value
-     * @return void
-     */
-    public function put(var keys, var value = null);
-
-    /**
-     * 数组插入数据
-     *
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    public function push(string key, var value);
-
-    /**
-     * 合并元素
-     *
-     * @param string $key
-     * @param array $value
-     * @return void
-     */
-    public function merge(string key, array value);
-
-    /**
-     * 弹出元素
-     *
-     * @param string $key
-     * @param mixed $value
-     * @return void
-     */
-    public function pop(string key, array value);
-
-    /**
-     * 数组插入键值对数据
-     *
-     * @param string $key
-     * @param mixed $keys
-     * @param mixed $value
-     * @return void
-     */
-    public function arr(string key, var keys, var value = null);
-
-    /**
-     * 数组键值删除数据
-     *
-     * @param string $key
-     * @param mixed $keys
-     * @return void
-     */
-    public function arrDelete(string key, var keys);
-
-    /**
-     * 取回 session
-     *
-     * @param string $name
-     * @param mixed $value
      * @return mxied
      */
     public function get(string name, var value = null);
-
+    
     /**
-     * 返回数组部分数据
+     * 返回数组部分数据.
      *
      * @param string $name
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function getPart(string name, var value = null);
-
+    
     /**
-     * 删除 session
+     * 删除 session.
      *
      * @param string $name
-     * @param boolean $prefix
+     */
+    public function delete(string name) -> void;
+    
+    /**
+     * 是否存在 session.
+     *
+     * @param string $name
+     *
      * @return bool
      */
-    public function delete(string name, boolean prefix = true);
-
+    public function has(string name) -> bool;
+    
     /**
-     * 是否存在 session
-     *
-     * @param string $name
-     * @return boolean
+     * 删除 session.
      */
-    public function has(string name);
-
+    public function clear() -> void;
+    
     /**
-     * 删除 session
-     *
-     * @param boolean $prefix
-     * @return void
-     */
-    public function clear(boolean prefix = true);
-
-    /**
-     * 闪存一个数据，当前请求和下一个请求可用
+     * 闪存一个数据，当前请求和下一个请求可用.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function flash(string key, var value = null);
-
+    public function flash(string key, var value) -> void;
+    
     /**
-     * 批量闪存数据，当前请求和下一个请求可用
+     * 批量闪存数据，当前请求和下一个请求可用.
      *
      * @param array $flash
-     * @return void
      */
-    public function flashs(array flash);
-
+    public function flashs(array flash) -> void;
+    
     /**
-     * 闪存一个 flash 用于当前请求使用，下一个请求将无法获取
+     * 闪存一个 flash 用于当前请求使用，下一个请求将无法获取.
      *
      * @param string $key
-     * @param mixed $value
-     * @return void
+     * @param mixed  $value
      */
-    public function nowFlash(string key, var value);
-
+    public function nowFlash(string key, var value) -> void;
+    
     /**
-     * 保持所有闪存数据
+     * 保持所有闪存数据.
+     */
+    public function rebuildFlash() -> void;
+    
+    /**
+     * 保持闪存数据.
      *
-     * @return void
+     * @param mixed $keys
      */
-    public function rebuildFlash();
-
+    public function keepFlash() -> void;
+    
     /**
-     * 保持闪存数据
-     *
-     * @return void
-     */
-    public function keepFlash();
-
-    /**
-     * 返回闪存数据
+     * 返回闪存数据.
      *
      * @param string $key
-     * @param mixed $defaults
+     * @param mixed  $defaults
+     *
      * @return mixed
      */
     public function getFlash(string key, var defaults = null);
-
+    
     /**
-     * 删除闪存数据
+     * 删除闪存数据.
      *
-     * @return void
+     * @param mixed $keys
      */
-    public function deleteFlash();
-
+    public function deleteFlash() -> void;
+    
     /**
-     * 清理所有闪存数据
-     *
-     * @return void
+     * 清理所有闪存数据.
      */
-    public function clearFlash();
-
+    public function clearFlash() -> void;
+    
     /**
-     * 程序执行结束清理 flash
-     *
-     * @return void
+     * 程序执行结束清理 flash.
      */
-    public function unregisterFlash();
-
+    public function unregisterFlash() -> void;
+    
     /**
      * 获取前一个请求地址
      *
-     * @return string|null
+     * @return null|string
      */
     public function prevUrl();
-
+    
     /**
      * 设置前一个请求地址
      *
      * @param string $url
-     * @return void
      */
-    public function setPrevUrl(string url);
-
+    public function setPrevUrl(string url) -> void;
+    
     /**
-     * 暂停 session
-     *
-     * @return void
+     * 终止会话.
      */
-    public function pause();
-
+    public function destroy() -> void;
+    
     /**
-     * 终止会话
+     * session 是否已经启动.
      *
      * @return bool
      */
-    public function destroy();
-
+    public function isStart() -> bool;
+    
     /**
-     * session 是否已经启动
-     *
-     * @return boolean
-     */
-    public function isStart();
-
-    /**
-     * session 状态
-     *
-     * @return int
-     */
-    public function status();
-
-    /**
-     * 设置 SESSION 名字
+     * 设置 SESSION 名字.
      *
      * @param string $name
-     * @return void
      */
-    public function setName(string name);
-
+    public function setName(string name) -> void;
+    
     /**
-     * 取得 SESSION 名字
+     * 取得 SESSION 名字.
      *
      * @return string
      */
     public function getName() -> string;
-
+    
     /**
-     * 设置 SESSION ID
+     * 设置 SESSION ID.
      *
-     * @param string $name
-     * @return void
+     * @param string $id
      */
-    public function setId(string id);
-
+    public function setId(var id = null) -> void;
+    
     /**
-     * 取得 SESSION ID
+     * 取得 SESSION ID.
      *
      * @return string
      */
     public function getId() -> string;
-
+    
     /**
-     * 设置 save path
-     *
-     * @param string $savepath
-     * @return void
+     * 重新生成 SESSION ID.
      */
-    public function setSavePath(string savepath);
-
+    public function regenerateId() -> void;
+    
     /**
-     * 获取 save path
+     * 返回连接.
      *
-     * @return string
+     * @return \SessionHandlerInterface
      */
-    public function getSavePath();
-
-    /**
-     * 设置 cookie_domain
-     *
-     * @param string $domain
-     * @return void
-     */
-    public function setCookieDomain(string domain);
-
-    /**
-     * 获取 cookie_domain
-     *
-     * @return string
-     */
-    public function getCookieDomain();
-
-    /**
-     * 设置 cache expire
-     *
-     * @param int $second
-     * @return void
-     */
-    public function setCacheExpire(int second);
-
-    /**
-     * session 使用 cookie
-     *
-     * @return boolean
-     */
-    public function setUseCookies();
-
-    /**
-     * 设置 cache limiter
-     *
-     * @param string $limiter
-     * @return void
-     */
-    public function setCacheLimiter(string limiter);
-
-    /**
-     * 获取 cache limiter
-     *
-     * @return string
-     */
-    public function getCacheLimiter();
-
-    /**
-     * 设置 session 垃圾回收概率分子
-     * 分母为 session.gc_divisor
-     *
-     * @param int $probability
-     * @return void
-     */
-    public function setGcProbability(int probability);
-
-    /**
-     * 获取 session 垃圾回收概率分子
-     * 分母为 session.gc_divisor
-     *
-     * @return int
-     */
-    public function getGcProbability();
+    public function getConnect() -> <SessionHandlerInterface>;
 }
