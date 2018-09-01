@@ -162,7 +162,7 @@ PHP_METHOD(Leevel_Session_Connect, write) {
 	zephir_read_property(&_0, this_ptr, SL("cache"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getsessionname", NULL, 0, sessionid);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_2, "unserialize", NULL, 29, sessiondata);
+	ZEPHIR_CALL_FUNCTION(&_2, "unserialize", NULL, 30, sessiondata);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &_0, "set", NULL, 0, &_1, &_2);
 	zephir_check_call_status();

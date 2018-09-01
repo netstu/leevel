@@ -97,7 +97,7 @@ PHP_METHOD(Leevel_View_V8js, __construct) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "v8js");
-	ZEPHIR_CALL_FUNCTION(&_1, "extension_loaded", NULL, 69, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "extension_loaded", NULL, 70, &_0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Please install php v8js extension.", "leevel/view/v8js.zep", 72);
@@ -145,7 +145,7 @@ PHP_METHOD(Leevel_View_V8js, __construct) {
 	{
 		ZEPHIR_INIT_NVAR(&item);
 		ZVAL_COPY(&item, _6);
-		ZEPHIR_CALL_FUNCTION(&_7$$4, "ucwords", &_8, 26, &item);
+		ZEPHIR_CALL_FUNCTION(&_7$$4, "ucwords", &_8, 23, &item);
 		zephir_check_call_status();
 		ZEPHIR_INIT_NVAR(&method);
 		ZEPHIR_CONCAT_SV(&method, "init", &_7$$4);
@@ -288,12 +288,12 @@ PHP_METHOD(Leevel_View_V8js, select) {
 	zephir_get_strval(&js, js_param);
 
 
-	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 61);
+	ZEPHIR_CALL_FUNCTION(NULL, "ob_start", NULL, 62);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("v8js"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(NULL, &_0, "executestring", NULL, 0, &js);
 	zephir_check_call_status();
-	ZEPHIR_RETURN_CALL_FUNCTION("ob_get_clean", NULL, 154);
+	ZEPHIR_RETURN_CALL_FUNCTION("ob_get_clean", NULL, 164);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -873,7 +873,7 @@ PHP_METHOD(Leevel_View_V8js, vuePackage) {
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&renderer);
 	zephir_array_fetch_string(&renderer, &_1, SL("vue_renderer"), PH_NOISY, "leevel/view/v8js.zep", 343 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_2, "is_file", &_3, 22, &vue);
+	ZEPHIR_CALL_FUNCTION(&_2, "is_file", &_3, 26, &vue);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
 		ZEPHIR_INIT_VAR(&_4$$3);
@@ -888,7 +888,7 @@ PHP_METHOD(Leevel_View_V8js, vuePackage) {
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
-	ZEPHIR_CALL_FUNCTION(&_8, "is_file", &_3, 22, &renderer);
+	ZEPHIR_CALL_FUNCTION(&_8, "is_file", &_3, 26, &renderer);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_8))) {
 		ZEPHIR_INIT_VAR(&_9$$4);
@@ -943,7 +943,7 @@ PHP_METHOD(Leevel_View_V8js, artPackage) {
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&art);
 	zephir_array_fetch_string(&art, &_0, SL("art_path"), PH_NOISY, "leevel/view/v8js.zep", 369 TSRMLS_CC);
-	ZEPHIR_CALL_FUNCTION(&_1, "is_file", NULL, 22, &art);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_file", NULL, 26, &art);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
 		ZEPHIR_INIT_VAR(&_2$$3);

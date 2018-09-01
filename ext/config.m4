@@ -19,12 +19,16 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/di/icontainer.zep.c
 	leevel/http/bag.zep.c
 	leevel/http/response.zep.c
+	leevel/manager/manager.zep.c
 	leevel/view/connect.zep.c
 	leevel/view/iconnect.zep.c
 	leevel/log/iconnect.zep.c
-	leevel/manager/manager.zep.c
 	leevel/mvc/iview.zep.c
+	leevel/cache/connect.zep.c
+	leevel/cache/iconnect.zep.c
 	leevel/session/connect.zep.c
+	leevel/cache/icache.zep.c
+	leevel/cache/redis/iconnect.zep.c
 	leevel/cookie/icookie.zep.c
 	leevel/di/container.zep.c
 	leevel/event/idispatch.zep.c
@@ -57,11 +61,16 @@ if test "$PHP_LEEVEL" = "yes"; then
 	leevel/bootstrap/kernel.zep.c
 	leevel/bootstrap/project.zep.c
 	leevel/cache.zep.c
+	leevel/cache/cache.zep.c
+	leevel/cache/file.zep.c
+	leevel/cache/load.zep.c
+	leevel/cache/manager.zep.c
 	leevel/cache/provider/register.zep.c
+	leevel/cache/redis.zep.c
+	leevel/cache/redis/phpredis.zep.c
 	leevel/collection/collection.zep.c
 	leevel/cookie.zep.c
 	leevel/cookie/cookie.zep.c
-	leevel/cookie/provider/register.zep.c
 	leevel/database.zep.c
 	leevel/database/provider/register.zep.c
 	leevel/db.zep.c

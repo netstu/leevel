@@ -184,7 +184,6 @@ PHP_METHOD(Leevel_Cache_Provider_Register, caches) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, cachesClosure) {
 
-	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *container, container_sub;
 	zval *this_ptr = getThis();
@@ -196,14 +195,9 @@ PHP_METHOD(Leevel_Cache_Provider_Register, cachesClosure) {
 
 
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Manager"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, container);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_cache_manager_ce);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 89, container);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }
@@ -323,32 +317,26 @@ PHP_METHOD(Leevel_Cache_Provider_Register, cacheLoad) {
  */
 PHP_METHOD(Leevel_Cache_Provider_Register, cacheLoadClosure) {
 
-	zend_class_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *container, container_sub, _1, _2;
+	zval *container, container_sub, _0, _1;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&container_sub);
+	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
-	ZVAL_UNDEF(&_2);
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &container);
 
 
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Load"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_2);
-		ZVAL_STRING(&_2, "cache");
-		ZEPHIR_CALL_METHOD(&_1, container, "make", NULL, 0, &_2);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, container, &_1);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_cache_load_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "cache");
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 90, container, &_0);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

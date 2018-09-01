@@ -92,46 +92,30 @@ PHP_METHOD(Leevel_Session_Redis, __construct) {
  */
 PHP_METHOD(Leevel_Session_Redis, createCache) {
 
-	zval _1, _3, _5, _6;
-	zend_class_entry *_0 = NULL, *_2 = NULL, *_4 = NULL;
+	zval _0, _1, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
+	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
 
 	ZEPHIR_MM_GROW();
 
-	if (!_0) {
-	_0 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Cache"), ZEND_FETCH_CLASS_AUTO);
-	}
-	object_init_ex(return_value, _0);
-	if (zephir_has_constructor(return_value TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(&_1);
-		if (!_2) {
-		_2 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Redis"), ZEND_FETCH_CLASS_AUTO);
-		}
-		object_init_ex(&_1, _2);
-		if (zephir_has_constructor(&_1 TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(&_3);
-			if (!_4) {
-			_4 = zephir_fetch_class_str_ex(SL("Leevel\\Cache\\Redis\\PhpRedis"), ZEND_FETCH_CLASS_AUTO);
-			}
-			object_init_ex(&_3, _4);
-			if (zephir_has_constructor(&_3 TSRMLS_CC)) {
-				zephir_read_property(&_5, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-				ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 0, &_5);
-				zephir_check_call_status();
-			}
-			zephir_read_property(&_6, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
-			ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 0, &_3, &_6);
-			zephir_check_call_status();
-		}
-		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1);
-		zephir_check_call_status();
-	}
+	object_init_ex(return_value, leevel_cache_cache_ce);
+	ZEPHIR_INIT_VAR(&_0);
+	object_init_ex(&_0, leevel_cache_redis_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	object_init_ex(&_1, leevel_cache_redis_phpredis_ce);
+	zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(NULL, &_1, "__construct", NULL, 87, &_2);
+	zephir_check_call_status();
+	zephir_read_property(&_3, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "__construct", NULL, 88, &_1, &_3);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 85, &_0);
+	zephir_check_call_status();
 	RETURN_MM();
 
 }

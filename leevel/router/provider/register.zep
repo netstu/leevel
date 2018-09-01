@@ -16,10 +16,12 @@
 namespace Leevel\Router\Provider;
 
 use Closure;
+use Leevel\Cookie\Cookie;
 use Leevel\Router\Url;
 use Leevel\Di\Provider;
 use Leevel\Di\IContainer;
 use Leevel\Http\Response;
+use Leevel\Mvc\View;
 use Leevel\Router\Router;
 use Leevel\Router\Redirect;
 use Leevel\Router\ResponseFactory;
@@ -57,6 +59,8 @@ class Register extends Provider
         this->url();
         this->redirect();
         this->response();
+        this->cookie();
+        this->view();
         this->cookieResolver();
     }
     
@@ -69,7 +73,8 @@ class Register extends Provider
     {
         return [
             "router" : [
-                "Leevel\\Router\\Router"
+                "Leevel\\Router\\Router",
+                "Leevel\\Router\\IRouter"
             ],
             "url" : [
                 "Leevel\\Router\\Url"
@@ -80,6 +85,14 @@ class Register extends Provider
             "response" : [
                 "Leevel\\Router\\IResponseFactory",
                 "Leevel\\Router\\ResponseFactory"
+            ],
+            "cookie" : [
+                "Leevel\\Cookie\\Cookie",
+                "Leevel\\Cookie\\ICookie"
+            ],
+            "view" : [
+                "Leevel\\Mvc\\View",
+                "Leevel\\Mvc\\IView"
             ]
         ];
     }
@@ -203,9 +216,45 @@ class Register extends Provider
     }
 
     /**
+     * 注册 cookie 服务
+     */
+    public function cookie()
+    {
+        this->container->singleton("cookie", Closure::fromCallable([this, "cookieClosure"]));
+    }
+
+    /**
+     * 创建 cookie 闭包
+     * 
+     * @param \Leevel\Di\IContainer $container
+     * @return \Leevel\Cookie\Cookie
+     */
+    protected function cookieClosure(<IContainer> container)
+    {
+        return new Cookie(container->make("option")->get("cookie\\"));
+    }
+
+    /**
+     * 注册 view 服务
+     */
+    public function view()
+    {
+        this->container->singleton("view", Closure::fromCallable([this, "viewClosure"]));
+    }
+
+    /**
+     * 创建 view 闭包
+     * 
+     * @param \Leevel\Di\IContainer $container
+     * @return \Leevel\Mvc\View
+     */
+    protected function viewClosure(<IContainer> container)
+    {
+        return new View(container->make("view.view"));
+    }
+
+    /**
      * 设置 COOKIE Resolver
-     *
-     * @return void
      */
     protected function cookieResolver()
     {

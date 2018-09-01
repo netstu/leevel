@@ -16,6 +16,10 @@
 
 namespace Leevel\Support;
 
+use BadMethodCallException;
+use Closure;
+use Leevel\Support\IMacro;
+
 /**
  * 字符串.
  *
@@ -25,8 +29,15 @@ namespace Leevel\Support;
  *
  * @version 1.0
  */
-class Str
+class Str implements IMacro
 {
+    /**
+     * 注册的动态扩展
+     *
+     * @var array
+     */
+    protected static macro = [];
+
     /**
      * 随机字母数字.
      *
@@ -465,5 +476,70 @@ class Str
         }
 
         return false;
+    }
+
+    /**
+     * 注册一个扩展
+     *
+     * @param string $name
+     * @param callable $macro
+     * @return void
+     */
+    public static function macro(string name, var macro)
+    {
+        let self::macro[name] = macro;
+    }
+    
+    /**
+     * 判断一个扩展是否注册
+     *
+     * @param string $name
+     * @return bool
+     */
+    public static function hasMacro(string name) -> boolean
+    {
+        return isset self::macro[name];
+    }
+
+    /**
+     * __callStatic 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以取消 PHP 版本的静态闭包绑定功能
+     *
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public static function callStaticMacro(string method, array args)
+    {
+        if self::hasMacro(method) {
+            return call_user_func_array(self::macro[method], args);
+        }
+
+        throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
+    }
+
+    /**
+     * __call 魔术方法隐射
+     * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+     * 即 Closure::bind($closures, null, get_called_class())
+     * 为保持功能一致，所以绑定对象但是不绑定作用域，即可以使用 $this,只能访问 public 属性
+     * 
+     * @param string $method
+     * @param array $args
+     * @return mixed
+     */
+    public function callMacro(string method, array args)
+    {
+        if self::hasMacro(method) {
+            if self::macro[method] instanceof Closure {
+                return call_user_func_array(self::macro[method]->bindTo(this), args);
+            } else {
+                return call_user_func_array(self::macro[method], args);
+            }
+        }
+
+        throw new BadMethodCallException(sprintf("Method %s is not exits.", method));
     }
 }

@@ -71,7 +71,7 @@ PHP_METHOD(Leevel_View_Manager, createConnect) {
 
 
 	object_init_ex(return_value, leevel_view_view_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 149, connect);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 159, connect);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -132,9 +132,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectHtml) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&html);
 	object_init_ex(&html, leevel_view_html_ce);
-	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 150, &options);
+	ZEPHIR_CALL_METHOD(NULL, &html, "__construct", NULL, 160, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 151, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &html, "setparseresolver", NULL, 161, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&html);
 
@@ -195,9 +195,9 @@ PHP_METHOD(Leevel_View_Manager, makeConnectTwig) {
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&twig);
 	object_init_ex(&twig, leevel_view_twig_ce);
-	ZEPHIR_CALL_METHOD(NULL, &twig, "__construct", NULL, 150, &options);
+	ZEPHIR_CALL_METHOD(NULL, &twig, "__construct", NULL, 160, &options);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &twig, "setparseresolver", NULL, 152, &parser);
+	ZEPHIR_CALL_METHOD(NULL, &twig, "setparseresolver", NULL, 162, &parser);
 	zephir_check_call_status();
 	RETURN_CCTOR(&twig);
 
@@ -243,7 +243,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectPhpui) {
 	zephir_fast_array_merge(&_1, &options, &_2 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&options, &_1);
 	object_init_ex(return_value, leevel_view_phpui_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 150, &options);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 160, &options);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -289,7 +289,7 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8js) {
 	zephir_fast_array_merge(&_1, &options, &_2 TSRMLS_CC);
 	ZEPHIR_CPY_WRT(&options, &_1);
 	object_init_ex(return_value, leevel_view_v8js_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 153, &options);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 163, &options);
 	zephir_check_call_status();
 	RETURN_MM();
 

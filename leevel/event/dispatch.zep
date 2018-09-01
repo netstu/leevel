@@ -148,7 +148,6 @@ class Dispatch implements IDispatch
 
         for key, item in this->wildcards {
             let key = this->prepareRegexForWildcard(key);
-            let res = null;
 
             if preg_match(key, event, res) {
                 for priority, value in item {

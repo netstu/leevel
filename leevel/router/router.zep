@@ -489,7 +489,7 @@ class Router implements IRouter, IMacro
      * @param callable $macro
      * @return void
      */
-    public static function macro(string name, macro)
+    public static function macro(string name, var macro)
     {
         let self::macro[name] = macro;
     }

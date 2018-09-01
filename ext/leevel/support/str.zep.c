@@ -22,6 +22,8 @@
 #include "kernel/time.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
+#include "kernel/object.h"
+#include "Zend/zend_closures.h"
 
 
 /**
@@ -37,6 +39,14 @@ ZEPHIR_INIT_CLASS(Leevel_Support_Str) {
 
 	ZEPHIR_REGISTER_CLASS(Leevel\\Support, Str, leevel, support_str, leevel_support_str_method_entry, 0);
 
+	/**
+	 * 注册的动态扩展
+	 *
+	 * @var array
+	 */
+	zend_declare_property_null(leevel_support_str_ce, SL("macro"), ZEND_ACC_PROTECTED|ZEND_ACC_STATIC TSRMLS_CC);
+
+	zend_class_implements(leevel_support_str_ce TSRMLS_CC, 1, leevel_support_imacro_ce);
 	return SUCCESS;
 
 }
@@ -443,7 +453,7 @@ PHP_METHOD(Leevel_Support_Str, randChinese) {
 			ZVAL_LONG(&i, _2);
 			ZEPHIR_INIT_NVAR(&_6$$5);
 			ZVAL_STRING(&_6$$5, "utf-8");
-			ZEPHIR_CALL_FUNCTION(&_7$$5, "mb_strlen", &_8, 141, charBox, &_6$$5);
+			ZEPHIR_CALL_FUNCTION(&_7$$5, "mb_strlen", &_8, 151, charBox, &_6$$5);
 			zephir_check_call_status();
 			ZVAL_LONG(&_9$$5, 0);
 			ZVAL_LONG(&_10$$5, (zephir_get_numberval(&_7$$5) - 1));
@@ -495,7 +505,7 @@ PHP_METHOD(Leevel_Support_Str, randStr) {
 	if (_0) {
 		RETURN_MM_STRING("");
 	}
-	ZEPHIR_CALL_FUNCTION(&_1, "str_shuffle", NULL, 142, charBox);
+	ZEPHIR_CALL_FUNCTION(&_1, "str_shuffle", NULL, 152, charBox);
 	zephir_check_call_status();
 	ZVAL_LONG(&_2, 0);
 	ZVAL_LONG(&_3, length);
@@ -568,11 +578,11 @@ PHP_METHOD(Leevel_Support_Str, strEncoding) {
 		RETURN_MM();
 	}
 	if (Z_TYPE_P(contents) == IS_STRING) {
-		ZEPHIR_RETURN_CALL_FUNCTION("mb_convert_encoding", NULL, 143, contents, &toChar, &fromChar);
+		ZEPHIR_RETURN_CALL_FUNCTION("mb_convert_encoding", NULL, 153, contents, &toChar, &fromChar);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
-	zephir_is_iterable(contents, 1, "leevel/support/str.zep", 302);
+	zephir_is_iterable(contents, 1, "leevel/support/str.zep", 313);
 	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(contents), _6, _7, _5)
 	{
 		ZEPHIR_INIT_NVAR(&key);
@@ -645,7 +655,7 @@ PHP_METHOD(Leevel_Support_Str, substr) {
 
 	ZVAL_LONG(&_0, start);
 	ZVAL_LONG(&_1, length);
-	ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 144, &strings, &_0, &_1, &charset);
+	ZEPHIR_RETURN_CALL_FUNCTION("mb_substr", NULL, 154, &strings, &_0, &_1, &charset);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -709,7 +719,7 @@ PHP_METHOD(Leevel_Support_Str, formatDate) {
 	ZVAL_LONG(&sec, (zephir_get_numberval(&_0) - dateTemp));
 	if (ZEPHIR_LT_LONG(&sec, 0)) {
 		ZVAL_LONG(&_1$$3, dateTemp);
-		ZEPHIR_RETURN_CALL_FUNCTION("date", &_2, 116, &dateFormat, &_1$$3);
+		ZEPHIR_RETURN_CALL_FUNCTION("date", &_2, 80, &dateFormat, &_1$$3);
 		zephir_check_call_status();
 		RETURN_MM();
 	}
@@ -726,7 +736,7 @@ PHP_METHOD(Leevel_Support_Str, formatDate) {
 			ZEPHIR_INIT_VAR(&_7$$5);
 			if (zephir_array_isset_string(&lang, SL("seconds"))) {
 				ZEPHIR_OBS_NVAR(&_7$$5);
-				zephir_array_fetch_string(&_7$$5, &lang, SL("seconds"), PH_NOISY, "leevel/support/str.zep", 345 TSRMLS_CC);
+				zephir_array_fetch_string(&_7$$5, &lang, SL("seconds"), PH_NOISY, "leevel/support/str.zep", 356 TSRMLS_CC);
 			} else {
 				ZEPHIR_INIT_NVAR(&_7$$5);
 				ZVAL_STRING(&_7$$5, "seconds ago");
@@ -737,7 +747,7 @@ PHP_METHOD(Leevel_Support_Str, formatDate) {
 		ZEPHIR_INIT_VAR(&_8$$4);
 		if (zephir_array_isset_string(&lang, SL("minutes"))) {
 			ZEPHIR_OBS_NVAR(&_8$$4);
-			zephir_array_fetch_string(&_8$$4, &lang, SL("minutes"), PH_NOISY, "leevel/support/str.zep", 348 TSRMLS_CC);
+			zephir_array_fetch_string(&_8$$4, &lang, SL("minutes"), PH_NOISY, "leevel/support/str.zep", 359 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&_8$$4);
 			ZVAL_STRING(&_8$$4, "minutes ago");
@@ -748,7 +758,7 @@ PHP_METHOD(Leevel_Support_Str, formatDate) {
 		ZEPHIR_INIT_VAR(&_9$$6);
 		if (zephir_array_isset_string(&lang, SL("hours"))) {
 			ZEPHIR_OBS_NVAR(&_9$$6);
-			zephir_array_fetch_string(&_9$$6, &lang, SL("hours"), PH_NOISY, "leevel/support/str.zep", 350 TSRMLS_CC);
+			zephir_array_fetch_string(&_9$$6, &lang, SL("hours"), PH_NOISY, "leevel/support/str.zep", 361 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&_9$$6);
 			ZVAL_STRING(&_9$$6, "hours ago");
@@ -757,7 +767,7 @@ PHP_METHOD(Leevel_Support_Str, formatDate) {
 		RETURN_MM();
 	}
 	ZVAL_LONG(&_10, dateTemp);
-	ZEPHIR_RETURN_CALL_FUNCTION("date", &_2, 116, &dateFormat, &_10);
+	ZEPHIR_RETURN_CALL_FUNCTION("date", &_2, 80, &dateFormat, &_10);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -915,7 +925,7 @@ PHP_METHOD(Leevel_Support_Str, camelize) {
 	ZEPHIR_INIT_VAR(&tmp);
 	ZEPHIR_CONCAT_VV(&tmp, &separator, &_0);
 	ZEPHIR_INIT_VAR(&_3);
-	ZEPHIR_CALL_FUNCTION(&_4, "ucwords", NULL, 26, &tmp);
+	ZEPHIR_CALL_FUNCTION(&_4, "ucwords", NULL, 23, &tmp);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(&_5);
 	ZVAL_STRING(&_5, " ");
@@ -964,7 +974,7 @@ PHP_METHOD(Leevel_Support_Str, unCamelize) {
 	ZEPHIR_CONCAT_SVS(&_0, "$1", &separator, "$2");
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "/([a-z])([A-Z])/");
-	ZEPHIR_CALL_FUNCTION(&_2, "preg_replace", NULL, 145, &_1, &_0, &value);
+	ZEPHIR_CALL_FUNCTION(&_2, "preg_replace", NULL, 155, &_1, &_0, &value);
 	zephir_check_call_status();
 	zephir_fast_strtolower(return_value, &_2);
 	RETURN_MM();
@@ -1086,6 +1096,205 @@ PHP_METHOD(Leevel_Support_Str, contains) {
 		RETURN_MM_BOOL(1);
 	}
 	RETURN_MM_BOOL(0);
+
+}
+
+/**
+ * 注册一个扩展
+ *
+ * @param string $name
+ * @param callable $macro
+ * @return void
+ */
+PHP_METHOD(Leevel_Support_Str, macro) {
+
+	zval *name_param = NULL, *macro, macro_sub;
+	zval name;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&macro_sub);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &name_param, &macro);
+
+	zephir_get_strval(&name, name_param);
+
+
+	zephir_update_static_property_array_multi_ce(leevel_support_str_ce, SL("macro"), macro TSRMLS_CC, SL("z"), 1, &name);
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 判断一个扩展是否注册
+ *
+ * @param string $name
+ * @return bool
+ */
+PHP_METHOD(Leevel_Support_Str, hasMacro) {
+
+	zval *name_param = NULL, _0;
+	zval name;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&name);
+	ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &name_param);
+
+	zephir_get_strval(&name, name_param);
+
+
+	zephir_read_static_property_ce(&_0, leevel_support_str_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
+	RETURN_MM_BOOL(zephir_array_isset(&_0, &name));
+
+}
+
+/**
+ * __callStatic 魔术方法隐射
+ * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+ * 即 Closure::bind($closures, null, get_called_class())
+ * 为保持功能一致，所以取消 PHP 版本的静态闭包绑定功能
+ *
+ * @param string $method
+ * @param array $args
+ * @return mixed
+ */
+PHP_METHOD(Leevel_Support_Str, callStaticMacro) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval args;
+	zval *method_param = NULL, *args_param = NULL, _0, _3, _4, _5, _1$$3, _2$$3;
+	zval method;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&method);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_3);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&args);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
+
+	zephir_get_strval(&method, method_param);
+	zephir_get_arrval(&args, args_param);
+
+
+	ZEPHIR_CALL_SELF(&_0, "hasmacro", NULL, 0, &method);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		zephir_read_static_property_ce(&_1$$3, leevel_support_str_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY | PH_READONLY, "leevel/support/str.zep", 517 TSRMLS_CC);
+		ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_2$$3, &args);
+		zephir_check_call_status();
+		RETURN_MM();
+	}
+	ZEPHIR_INIT_VAR(&_3);
+	object_init_ex(&_3, spl_ce_BadMethodCallException);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "Method %s is not exits.");
+	ZEPHIR_CALL_FUNCTION(&_5, "sprintf", NULL, 1, &_4, &method);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_3, "__construct", NULL, 2, &_5);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_3, "leevel/support/str.zep", 520 TSRMLS_CC);
+	ZEPHIR_MM_RESTORE();
+	return;
+
+}
+
+/**
+ * __call 魔术方法隐射
+ * 由于 zephir 对应的 C 扩展版本不支持对象内绑定 class
+ * 即 Closure::bind($closures, null, get_called_class())
+ * 为保持功能一致，所以绑定对象但是不绑定作用域，即可以使用 $this,只能访问 public 属性
+ * 
+ * @param string $method
+ * @param array $args
+ * @return mixed
+ */
+PHP_METHOD(Leevel_Support_Str, callMacro) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval args;
+	zval *method_param = NULL, *args_param = NULL, _0, _8, _9, _10, _1$$3, _2$$3, _3$$4, _4$$4, _5$$4, _6$$5, _7$$5;
+	zval method;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&method);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_8);
+	ZVAL_UNDEF(&_9);
+	ZVAL_UNDEF(&_10);
+	ZVAL_UNDEF(&_1$$3);
+	ZVAL_UNDEF(&_2$$3);
+	ZVAL_UNDEF(&_3$$4);
+	ZVAL_UNDEF(&_4$$4);
+	ZVAL_UNDEF(&_5$$4);
+	ZVAL_UNDEF(&_6$$5);
+	ZVAL_UNDEF(&_7$$5);
+	ZVAL_UNDEF(&args);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 2, 0, &method_param, &args_param);
+
+	zephir_get_strval(&method, method_param);
+	zephir_get_arrval(&args, args_param);
+
+
+	ZEPHIR_CALL_SELF(&_0, "hasmacro", NULL, 0, &method);
+	zephir_check_call_status();
+	if (zephir_is_true(&_0)) {
+		zephir_read_static_property_ce(&_1$$3, leevel_support_str_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
+		ZEPHIR_OBS_VAR(&_2$$3);
+		zephir_array_fetch(&_2$$3, &_1$$3, &method, PH_NOISY, "leevel/support/str.zep", 536 TSRMLS_CC);
+		if (zephir_instance_of_ev(&_2$$3, zend_ce_closure TSRMLS_CC)) {
+			zephir_read_static_property_ce(&_3$$4, leevel_support_str_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
+			zephir_array_fetch(&_4$$4, &_3$$4, &method, PH_NOISY | PH_READONLY, "leevel/support/str.zep", 537 TSRMLS_CC);
+			ZEPHIR_CALL_METHOD(&_5$$4, &_4$$4, "bindto", NULL, 0, this_ptr);
+			zephir_check_call_status();
+			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_5$$4, &args);
+			zephir_check_call_status();
+			RETURN_MM();
+		} else {
+			zephir_read_static_property_ce(&_6$$5, leevel_support_str_ce, SL("macro"), PH_NOISY_CC | PH_READONLY);
+			zephir_array_fetch(&_7$$5, &_6$$5, &method, PH_NOISY | PH_READONLY, "leevel/support/str.zep", 539 TSRMLS_CC);
+			ZEPHIR_CALL_USER_FUNC_ARRAY(return_value, &_7$$5, &args);
+			zephir_check_call_status();
+			RETURN_MM();
+		}
+	}
+	ZEPHIR_INIT_VAR(&_8);
+	object_init_ex(&_8, spl_ce_BadMethodCallException);
+	ZEPHIR_INIT_VAR(&_9);
+	ZVAL_STRING(&_9, "Method %s is not exits.");
+	ZEPHIR_CALL_FUNCTION(&_10, "sprintf", NULL, 1, &_9, &method);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, &_8, "__construct", NULL, 2, &_10);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(&_8, "leevel/support/str.zep", 543 TSRMLS_CC);
+	ZEPHIR_MM_RESTORE();
+	return;
+
+}
+
+void zephir_init_static_properties_Leevel_Support_Str(TSRMLS_D) {
+
+	zval _0;
+		ZVAL_UNDEF(&_0);
+
+	ZEPHIR_MM_GROW();
+
+	ZEPHIR_INIT_VAR(&_0);
+	array_init(&_0);
+	zend_update_static_property(leevel_support_str_ce, ZEND_STRL("macro"), &_0);
+	ZEPHIR_MM_RESTORE();
 
 }
 

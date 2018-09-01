@@ -82,6 +82,10 @@ PHP_METHOD(Leevel_Router_Provider_Register, register) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "response", NULL, 0);
 	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookie", NULL, 0);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "view", NULL, 0);
+	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "cookieresolver", NULL, 0);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
@@ -104,11 +108,14 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 
 	ZEPHIR_MM_GROW();
 
-	zephir_create_array(return_value, 4, 0 TSRMLS_CC);
+	zephir_create_array(return_value, 6, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
-	zephir_create_array(&_0, 1, 0 TSRMLS_CC);
+	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_1);
 	ZVAL_STRING(&_1, "Leevel\\Router\\Router");
+	zephir_array_fast_append(&_0, &_1);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Router\\IRouter");
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(return_value, SL("router"), &_0, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_NVAR(&_0);
@@ -132,6 +139,24 @@ PHP_METHOD(Leevel_Router_Provider_Register, providers) {
 	ZVAL_STRING(&_1, "Leevel\\Router\\ResponseFactory");
 	zephir_array_fast_append(&_0, &_1);
 	zephir_array_update_string(return_value, SL("response"), &_0, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Cookie\\Cookie");
+	zephir_array_fast_append(&_0, &_1);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Cookie\\ICookie");
+	zephir_array_fast_append(&_0, &_1);
+	zephir_array_update_string(return_value, SL("cookie"), &_0, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_NVAR(&_0);
+	zephir_create_array(&_0, 2, 0 TSRMLS_CC);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Mvc\\View");
+	zephir_array_fast_append(&_0, &_1);
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "Leevel\\Mvc\\IView");
+	zephir_array_fast_append(&_0, &_1);
+	zephir_array_update_string(return_value, SL("view"), &_0, PH_COPY | PH_SEPARATE);
 	RETURN_MM();
 
 }
@@ -194,7 +219,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, routerClosure) {
 
 
 	object_init_ex(return_value, leevel_router_router_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 125, container);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 133, container);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -290,7 +315,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "subdomain_on");
 	zephir_array_fast_append(&_1, &_0);
-	zephir_is_iterable(&_1, 0, "leevel/router/provider/register.zep", 140);
+	zephir_is_iterable(&_1, 0, "leevel/router/provider/register.zep", 153);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_1), _2)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -301,7 +326,7 @@ PHP_METHOD(Leevel_Router_Provider_Register, urlClosure) {
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&item);
 	object_init_ex(return_value, leevel_router_url_ce);
-	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 126, &request, &options);
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 134, &request, &options);
 	zephir_check_call_status();
 	RETURN_MM();
 
@@ -478,13 +503,13 @@ PHP_METHOD(Leevel_Router_Provider_Register, responseClosure) {
 	ZVAL_STRING(&_0, "redirect");
 	ZEPHIR_CALL_METHOD(&_2, container, "make", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, &response, "__construct", NULL, 127, &_1, &_2);
+	ZEPHIR_CALL_METHOD(NULL, &response, "__construct", NULL, 135, &_1, &_2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "view\\action_success");
 	ZEPHIR_CALL_METHOD(&_4, &option, "get", NULL, 0, &_0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_3, &response, "setviewsuccesstemplate", NULL, 128, &_4);
+	ZEPHIR_CALL_METHOD(&_3, &response, "setviewsuccesstemplate", NULL, 136, &_4);
 	zephir_check_call_status();
 	ZEPHIR_INIT_NVAR(&_0);
 	ZVAL_STRING(&_0, "view\\action_fail");
@@ -497,9 +522,148 @@ PHP_METHOD(Leevel_Router_Provider_Register, responseClosure) {
 }
 
 /**
+ * 注册 cookie 服务
+ */
+PHP_METHOD(Leevel_Router_Provider_Register, cookie) {
+
+	zval _3;
+	zend_class_entry *_2;
+	zval _0, _1, _4;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	_2 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_INIT_VAR(&_3);
+	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_3, this_ptr);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "cookieClosure");
+	zephir_array_fast_append(&_3, &_4);
+	ZEPHIR_CALL_CE_STATIC(&_1, _2, "fromcallable", NULL, 0, &_3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_4);
+	ZVAL_STRING(&_4, "cookie");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_4, &_1);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 创建 cookie 闭包
+ * 
+ * @param \Leevel\Di\IContainer $container
+ * @return \Leevel\Cookie\Cookie
+ */
+PHP_METHOD(Leevel_Router_Provider_Register, cookieClosure) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *container, container_sub, _0, _1, _2;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&container_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_2);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &container);
+
+
+
+	object_init_ex(return_value, leevel_cookie_cookie_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "option");
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_1);
+	ZVAL_STRING(&_1, "cookie\\");
+	ZEPHIR_CALL_METHOD(&_2, &_0, "get", NULL, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 137, &_2);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
+ * 注册 view 服务
+ */
+PHP_METHOD(Leevel_Router_Provider_Register, view) {
+
+	zval _3;
+	zend_class_entry *_2;
+	zval _0, _1, _4;
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+	ZVAL_UNDEF(&_4);
+	ZVAL_UNDEF(&_3);
+
+	ZEPHIR_MM_GROW();
+
+	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
+	_2 = zephir_fetch_class_str_ex(SL("Closure"), ZEND_FETCH_CLASS_AUTO);
+	ZEPHIR_INIT_VAR(&_3);
+	zephir_create_array(&_3, 2, 0 TSRMLS_CC);
+	zephir_array_fast_append(&_3, this_ptr);
+	ZEPHIR_INIT_VAR(&_4);
+	ZVAL_STRING(&_4, "viewClosure");
+	zephir_array_fast_append(&_3, &_4);
+	ZEPHIR_CALL_CE_STATIC(&_1, _2, "fromcallable", NULL, 0, &_3);
+	zephir_check_call_status();
+	ZEPHIR_INIT_NVAR(&_4);
+	ZVAL_STRING(&_4, "view");
+	ZEPHIR_CALL_METHOD(NULL, &_0, "singleton", NULL, 0, &_4, &_1);
+	zephir_check_call_status();
+	ZEPHIR_MM_RESTORE();
+
+}
+
+/**
+ * 创建 view 闭包
+ * 
+ * @param \Leevel\Di\IContainer $container
+ * @return \Leevel\Mvc\View
+ */
+PHP_METHOD(Leevel_Router_Provider_Register, viewClosure) {
+
+	zend_long ZEPHIR_LAST_CALL_STATUS;
+	zval *container, container_sub, _0, _1;
+	zval *this_ptr = getThis();
+
+	ZVAL_UNDEF(&container_sub);
+	ZVAL_UNDEF(&_0);
+	ZVAL_UNDEF(&_1);
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 1, 0, &container);
+
+
+
+	object_init_ex(return_value, leevel_mvc_view_ce);
+	ZEPHIR_INIT_VAR(&_1);
+	ZVAL_STRING(&_1, "view.view");
+	ZEPHIR_CALL_METHOD(&_0, container, "make", NULL, 0, &_1);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 138, &_0);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+/**
  * 设置 COOKIE Resolver
- *
- * @return void
  */
 PHP_METHOD(Leevel_Router_Provider_Register, cookieResolver) {
 

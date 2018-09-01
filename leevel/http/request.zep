@@ -15,6 +15,7 @@
  */
 namespace Leevel\Http;
 
+use Closure;
 use ArrayAccess;
 use SplFileObject;
 use RuntimeException;
@@ -1610,7 +1611,7 @@ class Request implements IMacro, IRequest, IArray, ArrayAccess
      * @param callable $macro
      * @return void
      */
-    public static function macro(string name, macro)
+    public static function macro(string name, var macro)
     {
         let self::macro[name] = macro;
     }

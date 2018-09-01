@@ -21,6 +21,11 @@ PHP_METHOD(Leevel_Support_Str, unCamelize);
 PHP_METHOD(Leevel_Support_Str, startsWith);
 PHP_METHOD(Leevel_Support_Str, endsWith);
 PHP_METHOD(Leevel_Support_Str, contains);
+PHP_METHOD(Leevel_Support_Str, macro);
+PHP_METHOD(Leevel_Support_Str, hasMacro);
+PHP_METHOD(Leevel_Support_Str, callStaticMacro);
+PHP_METHOD(Leevel_Support_Str, callMacro);
+void zephir_init_static_properties_Leevel_Support_Str(TSRMLS_D);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_randalphanum, 0, 0, 1)
 	ZEND_ARG_INFO(0, length)
@@ -116,6 +121,25 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_contains, 0, 0, 2)
 	ZEND_ARG_INFO(0, search)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_macro, 0, 0, 2)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, macro)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_hasmacro, 0, 0, 1)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_callstaticmacro, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_support_str_callmacro, 0, 0, 2)
+	ZEND_ARG_INFO(0, method)
+	ZEND_ARG_ARRAY_INFO(0, args, 0)
+ZEND_END_ARG_INFO()
+
 ZEPHIR_INIT_FUNCS(leevel_support_str_method_entry) {
 	PHP_ME(Leevel_Support_Str, randAlphaNum, arginfo_leevel_support_str_randalphanum, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Str, randAlphaNumLowercase, arginfo_leevel_support_str_randalphanumlowercase, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
@@ -135,5 +159,9 @@ ZEPHIR_INIT_FUNCS(leevel_support_str_method_entry) {
 	PHP_ME(Leevel_Support_Str, startsWith, arginfo_leevel_support_str_startswith, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Str, endsWith, arginfo_leevel_support_str_endswith, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
 	PHP_ME(Leevel_Support_Str, contains, arginfo_leevel_support_str_contains, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Leevel_Support_Str, macro, arginfo_leevel_support_str_macro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Leevel_Support_Str, hasMacro, arginfo_leevel_support_str_hasmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Leevel_Support_Str, callStaticMacro, arginfo_leevel_support_str_callstaticmacro, ZEND_ACC_PUBLIC|ZEND_ACC_STATIC)
+	PHP_ME(Leevel_Support_Str, callMacro, arginfo_leevel_support_str_callmacro, ZEND_ACC_PUBLIC)
 	PHP_FE_END
 };

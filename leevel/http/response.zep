@@ -1041,7 +1041,7 @@ class Response implements IControl, IMacro, IResponse
      * @param callable $macro
      * @return void
      */
-    public static function macro(string name, macro)
+    public static function macro(string name, var macro)
     {
         let self::macro[name] = macro;
     }
