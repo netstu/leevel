@@ -87,7 +87,7 @@ class File extends SplFileObject
             mkdir(directory, 0777, true);
         } elseif ! (is_writable(directory)) {
             throw new FileException(
-                sprintf("Unable to write in the %s directory", directory)
+                sprintf("Unable to write in the %s directory.", directory)
             );
         }
 

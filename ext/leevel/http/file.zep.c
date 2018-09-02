@@ -200,7 +200,7 @@ PHP_METHOD(Leevel_Http_File, getTargetFile) {
 		ZEPHIR_INIT_VAR(&_8$$5);
 		object_init_ex(&_8$$5, leevel_http_fileexception_ce);
 		ZEPHIR_INIT_VAR(&_9$$5);
-		ZVAL_STRING(&_9$$5, "Unable to write in the %s directory");
+		ZVAL_STRING(&_9$$5, "Unable to write in the %s directory.");
 		ZEPHIR_CALL_FUNCTION(&_10$$5, "sprintf", NULL, 1, &_9$$5, &directory);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_8$$5, "__construct", NULL, 3, &_10$$5);
