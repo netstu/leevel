@@ -21,6 +21,10 @@ PHP_METHOD(Leevel_Bootstrap_Project, setRuntimePath);
 PHP_METHOD(Leevel_Bootstrap_Project, runtimePath);
 PHP_METHOD(Leevel_Bootstrap_Project, setStoragePath);
 PHP_METHOD(Leevel_Bootstrap_Project, storagePath);
+PHP_METHOD(Leevel_Bootstrap_Project, setPublicPath);
+PHP_METHOD(Leevel_Bootstrap_Project, publicPath);
+PHP_METHOD(Leevel_Bootstrap_Project, setThemesPath);
+PHP_METHOD(Leevel_Bootstrap_Project, themesPath);
 PHP_METHOD(Leevel_Bootstrap_Project, setOptionPath);
 PHP_METHOD(Leevel_Bootstrap_Project, optionPath);
 PHP_METHOD(Leevel_Bootstrap_Project, setI18nPath);
@@ -113,6 +117,22 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_storagepath, 0, 0, 0)
 	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_setpublicpath, 0, 0, 1)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_publicpath, 0, 0, 0)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_setthemespath, 0, 0, 1)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_themespath, 0, 0, 0)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_bootstrap_project_setoptionpath, 0, 0, 1)
 	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
@@ -196,6 +216,10 @@ ZEPHIR_INIT_FUNCS(leevel_bootstrap_project_method_entry) {
 	PHP_ME(Leevel_Bootstrap_Project, runtimePath, arginfo_leevel_bootstrap_project_runtimepath, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, setStoragePath, arginfo_leevel_bootstrap_project_setstoragepath, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, storagePath, arginfo_leevel_bootstrap_project_storagepath, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, setPublicPath, arginfo_leevel_bootstrap_project_setpublicpath, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, publicPath, arginfo_leevel_bootstrap_project_publicpath, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, setThemesPath, arginfo_leevel_bootstrap_project_setthemespath, ZEND_ACC_PUBLIC)
+	PHP_ME(Leevel_Bootstrap_Project, themesPath, arginfo_leevel_bootstrap_project_themespath, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, setOptionPath, arginfo_leevel_bootstrap_project_setoptionpath, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, optionPath, arginfo_leevel_bootstrap_project_optionpath, ZEND_ACC_PUBLIC)
 	PHP_ME(Leevel_Bootstrap_Project, setI18nPath, arginfo_leevel_bootstrap_project_seti18npath, ZEND_ACC_PUBLIC)

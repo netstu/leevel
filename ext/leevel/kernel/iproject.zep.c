@@ -170,6 +170,38 @@ ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setStoragePath);
 ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, storagePath);
 
 /**
+ * 设置资源路径.
+ *
+ * @param string $path
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setPublicPath);
+
+/**
+ * 资源路径.
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, publicPath);
+
+/**
+ * 设置主题路径.
+ *
+ * @param string $path
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, setThemesPath);
+
+/**
+ * 主题路径.
+ *
+ * @param string $path
+ *
+ * @return string
+ */
+ZEPHIR_DOC_METHOD(Leevel_Kernel_IProject, themesPath);
+
+/**
  * 设置配置路径.
  *
  * @param string $path

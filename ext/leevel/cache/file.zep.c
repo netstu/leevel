@@ -310,7 +310,7 @@ PHP_METHOD(Leevel_Cache_File, isExpired) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval option;
-	zval *name_param = NULL, *option_param = NULL, filePath, _0, _1, _2, _3, _4, _5;
+	zval *name_param = NULL, *option_param = NULL, filePath, _0, _1, _2, _3, _4, _5, _6;
 	zval name;
 	zval *this_ptr = getThis();
 
@@ -322,6 +322,7 @@ PHP_METHOD(Leevel_Cache_File, isExpired) {
 	ZVAL_UNDEF(&_3);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
+	ZVAL_UNDEF(&_6);
 	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
@@ -334,20 +335,21 @@ PHP_METHOD(Leevel_Cache_File, isExpired) {
 	ZEPHIR_CALL_METHOD(&filePath, this_ptr, "getcachepath", NULL, 0, &name);
 	zephir_check_call_status();
 	zephir_array_fetch_string(&_1, &option, SL("expire"), PH_NOISY | PH_READONLY, "leevel/cache/file.zep", 182 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "cachetime", NULL, 0, &name, &_1);
+	ZVAL_LONG(&_2, zephir_get_intval(&_1));
+	ZEPHIR_CALL_METHOD(&_0, this_ptr, "cachetime", NULL, 0, &name, &_2);
 	zephir_check_call_status();
 	zephir_array_update_string(&option, SL("expire"), &_0, PH_COPY | PH_SEPARATE);
-	zephir_array_fetch_string(&_2, &option, SL("expire"), PH_NOISY | PH_READONLY, "leevel/cache/file.zep", 184 TSRMLS_CC);
-	if (ZEPHIR_LE_LONG(&_2, 0)) {
+	zephir_array_fetch_string(&_3, &option, SL("expire"), PH_NOISY | PH_READONLY, "leevel/cache/file.zep", 184 TSRMLS_CC);
+	if (ZEPHIR_LE_LONG(&_3, 0)) {
 		RETURN_MM_BOOL(1);
 	}
-	ZEPHIR_INIT_VAR(&_3);
-	zephir_filemtime(&_3, &filePath TSRMLS_CC);
-	ZEPHIR_OBS_VAR(&_4);
-	zephir_array_fetch_string(&_4, &option, SL("expire"), PH_NOISY, "leevel/cache/file.zep", 188 TSRMLS_CC);
-	ZEPHIR_INIT_VAR(&_5);
-	zephir_time(&_5);
-	RETURN_MM_BOOL(ZEPHIR_GT_LONG(&_5, (zephir_get_numberval(&_3) + zephir_get_intval(&_4))));
+	ZEPHIR_INIT_VAR(&_4);
+	zephir_filemtime(&_4, &filePath TSRMLS_CC);
+	ZEPHIR_OBS_VAR(&_5);
+	zephir_array_fetch_string(&_5, &option, SL("expire"), PH_NOISY, "leevel/cache/file.zep", 188 TSRMLS_CC);
+	ZEPHIR_INIT_VAR(&_6);
+	zephir_time(&_6);
+	RETURN_MM_BOOL(ZEPHIR_GT_LONG(&_6, (zephir_get_numberval(&_4) + zephir_get_intval(&_5))));
 
 }
 

@@ -57,6 +57,22 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_storagepath, 0, 0, 0)
 	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_setpublicpath, 0, 0, 1)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_publicpath, 0, 0, 0)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_setthemespath, 0, 0, 1)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_themespath, 0, 0, 0)
+	ZEND_ARG_INFO(0, path)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_kernel_iproject_setoptionpath, 0, 0, 1)
 	ZEND_ARG_INFO(0, path)
 ZEND_END_ARG_INFO()
@@ -126,6 +142,10 @@ ZEPHIR_INIT_FUNCS(leevel_kernel_iproject_method_entry) {
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, runtimePath, arginfo_leevel_kernel_iproject_runtimepath)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, setStoragePath, arginfo_leevel_kernel_iproject_setstoragepath)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, storagePath, arginfo_leevel_kernel_iproject_storagepath)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, setPublicPath, arginfo_leevel_kernel_iproject_setpublicpath)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, publicPath, arginfo_leevel_kernel_iproject_publicpath)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, setThemesPath, arginfo_leevel_kernel_iproject_setthemespath)
+	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, themesPath, arginfo_leevel_kernel_iproject_themespath)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, setOptionPath, arginfo_leevel_kernel_iproject_setoptionpath)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, optionPath, arginfo_leevel_kernel_iproject_optionpath)
 	PHP_ABSTRACT_ME(Leevel_Kernel_IProject, setI18nPath, arginfo_leevel_kernel_iproject_seti18npath)

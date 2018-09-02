@@ -95,7 +95,7 @@ class Redis extends Connect implements IConnect
             let data = serialize(data);
         }
 
-        let option["expire"] = this->cacheTime(name, option["expire"]);
+        let option["expire"] = this->cacheTime(name, intval(option["expire"]));
 
         this->handle->set(
             this->getCacheName(name), data,

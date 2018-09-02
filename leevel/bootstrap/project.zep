@@ -77,6 +77,20 @@ class Project extends Container implements IProject
      * @var string
      */
     protected storagePath;
+
+    /**
+     * 资源路径.
+     *
+     * @var string
+     */
+    protected publicPath;
+
+    /**
+     * 主题路径.
+     *
+     * @var string
+     */
+    protected themesPath;
     
     /**
      * 配置路径.
@@ -344,6 +358,52 @@ class Project extends Container implements IProject
     public function storagePath(string path = "") -> string
     {
         return (this->storagePath ? this->storagePath: this->path . DIRECTORY_SEPARATOR . "storage") .
+            this->normalizePath(path);
+    }
+
+    /**
+     * 设置资源路径.
+     *
+     * @param string $path
+     */
+    public function setPublicPath(string path)
+    {
+        let this->publicPath = path;
+    }
+    
+    /**
+     * 资源路径.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function publicPath(string path = "") -> string
+    {
+        return (this->publicPath ? this->publicPath: this->path . DIRECTORY_SEPARATOR . "public") .
+            this->normalizePath(path);
+    }
+
+    /**
+     * 设置主题路径.
+     *
+     * @param string $path
+     */
+    public function setThemesPath(string path)
+    {
+        let this->themesPath = path;
+    }
+    
+    /**
+     * 主题路径.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function themesPath(string path = "") -> string
+    {
+        return (this->themesPath ? this->themesPath: this->path . DIRECTORY_SEPARATOR . "themes") .
             this->normalizePath(path);
     }
     

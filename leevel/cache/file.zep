@@ -179,7 +179,7 @@ class File extends Connect implements IConnect
     
         let filePath = this->getCachePath(name);
 
-        let option["expire"] = this->cacheTime(name, option["expire"]);
+        let option["expire"] = this->cacheTime(name, intval(option["expire"]));
 
         if option["expire"] <= 0 {
             return true;

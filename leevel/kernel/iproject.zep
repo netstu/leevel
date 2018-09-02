@@ -169,6 +169,38 @@ interface IProject extends IContainer
      * @return string
      */
     public function storagePath(string path = "") -> string;
+
+    /**
+     * 设置资源路径.
+     *
+     * @param string $path
+     */
+    public function setPublicPath(string path);
+
+    /**
+     * 资源路径.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function publicPath(string path = "") -> string;
+
+    /**
+     * 设置主题路径.
+     *
+     * @param string $path
+     */
+    public function setThemesPath(string path);
+    
+    /**
+     * 主题路径.
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public function themesPath(string path = "") -> string;
     
     /**
      * 设置配置路径.

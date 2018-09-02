@@ -206,7 +206,8 @@ PHP_METHOD(Leevel_Cache_Redis, set) {
 		ZEPHIR_CPY_WRT(data, &_2$$3);
 	}
 	zephir_array_fetch_string(&_4, &option, SL("expire"), PH_NOISY | PH_READONLY, "leevel/cache/redis.zep", 98 TSRMLS_CC);
-	ZEPHIR_CALL_METHOD(&_3, this_ptr, "cachetime", NULL, 0, &name, &_4);
+	ZVAL_LONG(&_5, zephir_get_intval(&_4));
+	ZEPHIR_CALL_METHOD(&_3, this_ptr, "cachetime", NULL, 0, &name, &_5);
 	zephir_check_call_status();
 	zephir_array_update_string(&option, SL("expire"), &_3, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_5, this_ptr, SL("handle"), PH_NOISY_CC | PH_READONLY);
