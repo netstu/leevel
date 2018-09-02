@@ -118,16 +118,15 @@ class Load
      * 刷新缓存数据.
      *
      * @param array|string $names
-     * @param array        $option
      */
-    public function refresh(var names, array! option = []) -> void
+    public function refresh(var names) -> void
     {
         var name, tmpNames;
     
         let tmpNames = is_array(names) ? names : [names];
 
         for name in tmpNames {
-            this->delete(name, option);
+            this->delete(name);
         }
     }
     
@@ -161,11 +160,10 @@ class Load
      * 删除缓存数据.
      *
      * @param string $name
-     * @param array  $option
      */
-    protected function delete(string name, array! options = []) -> void
+    protected function delete(string name) -> void
     {
-        this->deletePersistence(name, options);
+        this->deletePersistence(name);
     }
     
     /**
@@ -272,11 +270,10 @@ class Load
      * 清除缓存.
      *
      * @param string $name
-     * @param array  $option
      */
-    protected function deletePersistence(string name, array! option = []) -> void
+    protected function deletePersistence(string name) -> void
     {
-        this->cache->delete(name, option);
+        this->cache->delete(name);
     }
     
     /**

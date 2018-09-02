@@ -35,7 +35,6 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_refresh, 0, 0, 1)
 	ZEND_ARG_INFO(0, names)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_dataloaded, 0, 0, 1)
@@ -46,7 +45,6 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_delete, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_ARRAY_INFO(0, options, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_cache, 0, 0, 1)
@@ -74,7 +72,6 @@ ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_deletepersistence, 0, 0, 1)
 	ZEND_ARG_INFO(0, name)
-	ZEND_ARG_ARRAY_INFO(0, option, 1)
 ZEND_END_ARG_INFO()
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_cache_load_parse, 0, 0, 1)

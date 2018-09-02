@@ -224,30 +224,21 @@ PHP_METHOD(Leevel_Cache_Load, data) {
  * 刷新缓存数据.
  *
  * @param array|string $names
- * @param array        $option
  */
 PHP_METHOD(Leevel_Cache_Load, refresh) {
 
 	zephir_fcall_cache_entry *_1 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval option;
-	zval *names, names_sub, *option_param = NULL, name, tmpNames, *_0;
+	zval *names, names_sub, name, tmpNames, *_0;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&names_sub);
 	ZVAL_UNDEF(&name);
 	ZVAL_UNDEF(&tmpNames);
-	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &names, &option_param);
+	zephir_fetch_params(1, 1, 0, &names);
 
-	if (!option_param) {
-		ZEPHIR_INIT_VAR(&option);
-		array_init(&option);
-	} else {
-	ZEPHIR_OBS_COPY_OR_DUP(&option, option_param);
-	}
 
 
 	if (Z_TYPE_P(names) == IS_ARRAY) {
@@ -257,12 +248,12 @@ PHP_METHOD(Leevel_Cache_Load, refresh) {
 		zephir_create_array(&tmpNames, 1, 0 TSRMLS_CC);
 		zephir_array_fast_append(&tmpNames, names);
 	}
-	zephir_is_iterable(&tmpNames, 0, "leevel/cache/load.zep", 132);
+	zephir_is_iterable(&tmpNames, 0, "leevel/cache/load.zep", 131);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmpNames), _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
 		ZVAL_COPY(&name, _0);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", &_1, 0, &name, &option);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "delete", &_1, 0, &name);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&name);
@@ -322,7 +313,7 @@ PHP_METHOD(Leevel_Cache_Load, dataLoaded) {
 		zephir_create_array(&tmpNames, 1, 0 TSRMLS_CC);
 		zephir_array_fast_append(&tmpNames, names);
 	}
-	zephir_is_iterable(&tmpNames, 0, "leevel/cache/load.zep", 157);
+	zephir_is_iterable(&tmpNames, 0, "leevel/cache/load.zep", 156);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&tmpNames), _0)
 	{
 		ZEPHIR_INIT_NVAR(&name);
@@ -332,7 +323,7 @@ PHP_METHOD(Leevel_Cache_Load, dataLoaded) {
 		if (zephir_array_key_exists(&_2$$3, &name TSRMLS_CC)) {
 			zephir_read_property(&_3$$3, this_ptr, SL("cacheLoaded"), PH_NOISY_CC | PH_READONLY);
 			ZEPHIR_OBS_NVAR(&_1$$3);
-			zephir_array_fetch(&_1$$3, &_3$$3, &name, PH_NOISY, "leevel/cache/load.zep", 153 TSRMLS_CC);
+			zephir_array_fetch(&_1$$3, &_3$$3, &name, PH_NOISY, "leevel/cache/load.zep", 152 TSRMLS_CC);
 		} else {
 			ZEPHIR_INIT_NVAR(&_1$$3);
 			ZVAL_BOOL(&_1$$3, 0);
@@ -357,32 +348,23 @@ PHP_METHOD(Leevel_Cache_Load, dataLoaded) {
  * 删除缓存数据.
  *
  * @param string $name
- * @param array  $option
  */
 PHP_METHOD(Leevel_Cache_Load, delete) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval options;
-	zval *name_param = NULL, *options_param = NULL;
+	zval *name_param = NULL;
 	zval name;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&name);
-	ZVAL_UNDEF(&options);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &name_param, &options_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
 	zephir_get_strval(&name, name_param);
-	if (!options_param) {
-		ZEPHIR_INIT_VAR(&options);
-		array_init(&options);
-	} else {
-	ZEPHIR_OBS_COPY_OR_DUP(&options, options_param);
-	}
 
 
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "deletepersistence", NULL, 0, &name, &options);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "deletepersistence", NULL, 0, &name);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -499,9 +481,9 @@ PHP_METHOD(Leevel_Cache_Load, update) {
 	ZEPHIR_CALL_METHOD(&tmpListNameParams, this_ptr, "parse", NULL, 0, &name);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&tempName);
-	zephir_array_fetch_long(&tempName, &tmpListNameParams, 0, PH_NOISY, "leevel/cache/load.zep", 211 TSRMLS_CC);
+	zephir_array_fetch_long(&tempName, &tmpListNameParams, 0, PH_NOISY, "leevel/cache/load.zep", 209 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&params);
-	zephir_array_fetch_long(&params, &tmpListNameParams, 1, PH_NOISY, "leevel/cache/load.zep", 212 TSRMLS_CC);
+	zephir_array_fetch_long(&params, &tmpListNameParams, 1, PH_NOISY, "leevel/cache/load.zep", 210 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "@");
 	ZEPHIR_INIT_VAR(&_1);
@@ -510,9 +492,9 @@ PHP_METHOD(Leevel_Cache_Load, update) {
 		ZEPHIR_INIT_VAR(&tmpListNameMethod);
 		zephir_fast_explode_str(&tmpListNameMethod, SL("@"), &tempName, LONG_MAX TSRMLS_CC);
 		ZEPHIR_OBS_NVAR(&tempName);
-		zephir_array_fetch_long(&tempName, &tmpListNameMethod, 0, PH_NOISY, "leevel/cache/load.zep", 216 TSRMLS_CC);
+		zephir_array_fetch_long(&tempName, &tmpListNameMethod, 0, PH_NOISY, "leevel/cache/load.zep", 214 TSRMLS_CC);
 		ZEPHIR_OBS_VAR(&method);
-		zephir_array_fetch_long(&method, &tmpListNameMethod, 1, PH_NOISY, "leevel/cache/load.zep", 217 TSRMLS_CC);
+		zephir_array_fetch_long(&method, &tmpListNameMethod, 1, PH_NOISY, "leevel/cache/load.zep", 215 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(&method);
 		ZVAL_STRING(&method, "handle");
@@ -529,7 +511,7 @@ PHP_METHOD(Leevel_Cache_Load, update) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_3$$5, "__construct", NULL, 21, &_5$$5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_3$$5, "leevel/cache/load.zep", 227 TSRMLS_CC);
+		zephir_throw_exception_debug(&_3$$5, "leevel/cache/load.zep", 225 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -548,7 +530,7 @@ PHP_METHOD(Leevel_Cache_Load, update) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_7$$6, "__construct", NULL, 21, &_10$$6);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_7$$6, "leevel/cache/load.zep", 235 TSRMLS_CC);
+		zephir_throw_exception_debug(&_7$$6, "leevel/cache/load.zep", 233 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -650,34 +632,25 @@ PHP_METHOD(Leevel_Cache_Load, setPersistence) {
  * 清除缓存.
  *
  * @param string $name
- * @param array  $option
  */
 PHP_METHOD(Leevel_Cache_Load, deletePersistence) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval option;
-	zval *name_param = NULL, *option_param = NULL, _0;
+	zval *name_param = NULL, _0;
 	zval name;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&name);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&option);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 1, 1, &name_param, &option_param);
+	zephir_fetch_params(1, 1, 0, &name_param);
 
 	zephir_get_strval(&name, name_param);
-	if (!option_param) {
-		ZEPHIR_INIT_VAR(&option);
-		array_init(&option);
-	} else {
-	ZEPHIR_OBS_COPY_OR_DUP(&option, option_param);
-	}
 
 
 	zephir_read_property(&_0, this_ptr, SL("cache"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(NULL, &_0, "delete", NULL, 0, &name, &option);
+	ZEPHIR_CALL_METHOD(NULL, &_0, "delete", NULL, 0, &name);
 	zephir_check_call_status();
 	ZEPHIR_MM_RESTORE();
 
@@ -720,9 +693,9 @@ PHP_METHOD(Leevel_Cache_Load, parse) {
 	ZEPHIR_CALL_FUNCTION(&temp, "array_pad", NULL, 84, &_0, &_2, &_1);
 	zephir_check_call_status();
 	ZEPHIR_OBS_VAR(&tempName);
-	zephir_array_fetch_long(&tempName, &temp, 0, PH_NOISY, "leevel/cache/load.zep", 294 TSRMLS_CC);
+	zephir_array_fetch_long(&tempName, &temp, 0, PH_NOISY, "leevel/cache/load.zep", 291 TSRMLS_CC);
 	ZEPHIR_OBS_VAR(&args);
-	zephir_array_fetch_long(&args, &temp, 1, PH_NOISY, "leevel/cache/load.zep", 295 TSRMLS_CC);
+	zephir_array_fetch_long(&args, &temp, 1, PH_NOISY, "leevel/cache/load.zep", 292 TSRMLS_CC);
 	if (Z_TYPE_P(&args) == IS_STRING) {
 		ZEPHIR_INIT_VAR(&_3$$3);
 		zephir_fast_explode_str(&_3$$3, SL(","), &args, LONG_MAX TSRMLS_CC);
