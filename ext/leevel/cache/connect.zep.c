@@ -275,7 +275,7 @@ PHP_METHOD(Leevel_Cache_Connect, prepareRegexForWildcard) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "/");
-	ZEPHIR_CALL_FUNCTION(&_1, "preg_quote", NULL, 29, &regex, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "preg_quote", NULL, 28, &regex, &_0);
 	zephir_check_call_status();
 	zephir_get_strval(&regex, &_1);
 	ZEPHIR_INIT_NVAR(&_0);

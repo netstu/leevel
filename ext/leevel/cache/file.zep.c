@@ -174,7 +174,7 @@ PHP_METHOD(Leevel_Cache_File, get) {
 	}
 	zephir_array_fetch_string(&_9, &option, SL("serialize"), PH_NOISY | PH_READONLY, "leevel/cache/file.zep", 114 TSRMLS_CC);
 	if (zephir_is_true(&_9)) {
-		ZEPHIR_CALL_FUNCTION(&_10$$10, "unserialize", NULL, 30, &data);
+		ZEPHIR_CALL_FUNCTION(&_10$$10, "unserialize", NULL, 29, &data);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&data, &_10$$10);
 	}
@@ -437,20 +437,20 @@ PHP_METHOD(Leevel_Cache_File, writeData) {
 	zephir_get_strval(&data, data_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&dirname, "dirname", &_0, 28, &fileName);
+	ZEPHIR_CALL_FUNCTION(&dirname, "dirname", &_0, 47, &fileName);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "is_dir", &_2, 46, &dirname);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_dir", &_2, 45, &dirname);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "dirname", &_0, 28, &dirname);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "dirname", &_0, 47, &dirname);
 		zephir_check_call_status();
-		ZEPHIR_CALL_FUNCTION(&_4$$3, "is_dir", &_2, 46, &_3$$3);
+		ZEPHIR_CALL_FUNCTION(&_4$$3, "is_dir", &_2, 45, &_3$$3);
 		zephir_check_call_status();
 		_5$$3 = zephir_is_true(&_4$$3);
 		if (_5$$3) {
-			ZEPHIR_CALL_FUNCTION(&_6$$3, "dirname", &_0, 28, &dirname);
+			ZEPHIR_CALL_FUNCTION(&_6$$3, "dirname", &_0, 47, &dirname);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_7$$3, "is_writable", &_8, 47, &_6$$3);
+			ZEPHIR_CALL_FUNCTION(&_7$$3, "is_writable", &_8, 46, &_6$$3);
 			zephir_check_call_status();
 			_5$$3 = !zephir_is_true(&_7$$3);
 		}
@@ -471,7 +471,7 @@ PHP_METHOD(Leevel_Cache_File, writeData) {
 		ZEPHIR_CALL_FUNCTION(NULL, "mkdir", NULL, 48, &dirname, &_13$$3, &__$true);
 		zephir_check_call_status();
 	}
-	ZEPHIR_CALL_FUNCTION(&_14, "is_writable", &_8, 47, &dirname);
+	ZEPHIR_CALL_FUNCTION(&_14, "is_writable", &_8, 46, &dirname);
 	zephir_check_call_status();
 	_15 = !zephir_is_true(&_14);
 	if (!(_15)) {

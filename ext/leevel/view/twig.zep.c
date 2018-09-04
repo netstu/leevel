@@ -12,11 +12,11 @@
 #include <Zend/zend_interfaces.h>
 
 #include "kernel/main.h"
-#include "kernel/memory.h"
 #include "kernel/fcall.h"
+#include "kernel/memory.h"
+#include "kernel/operators.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
-#include "kernel/operators.h"
 #include "kernel/object.h"
 #include "kernel/file.h"
 #include "kernel/array.h"
@@ -75,29 +75,25 @@ ZEPHIR_INIT_CLASS(Leevel_View_Twig) {
  */
 PHP_METHOD(Leevel_View_Twig, display) {
 
-	zephir_fcall_cache_entry *_1 = NULL;
+	zephir_fcall_cache_entry *_0 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool display;
 	zval vars;
-	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, *display_param = NULL, __$null, _0, _2$$5;
+	zval *file_param = NULL, *vars_param = NULL, *ext = NULL, ext_sub, *display_param = NULL, __$null, tmpFile, _1$$5;
+	zval file;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&file);
 	ZVAL_UNDEF(&ext_sub);
 	ZVAL_NULL(&__$null);
-	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_2$$5);
+	ZVAL_UNDEF(&tmpFile);
+	ZVAL_UNDEF(&_1$$5);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 4, &file, &vars_param, &ext, &display_param);
+	zephir_fetch_params(1, 1, 3, &file_param, &vars_param, &ext, &display_param);
 
-	if (!file) {
-		file = &file_sub;
-		ZEPHIR_CPY_WRT(file, &__$null);
-	} else {
-		ZEPHIR_SEPARATE_PARAM(file);
-	}
+	zephir_get_strval(&file, file_param);
 	if (!vars_param) {
 		ZEPHIR_INIT_VAR(&vars);
 		array_init(&vars);
@@ -115,21 +111,20 @@ PHP_METHOD(Leevel_View_Twig, display) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parsedisplayfile", NULL, 0, file, ext);
+	ZEPHIR_CALL_METHOD(&tmpFile, this_ptr, "parsedisplayfile", NULL, 0, &file, ext);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(file, &_0);
 	if (1 == 1) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setvar", NULL, 0, &vars);
 		zephir_check_call_status();
 	}
 	if (display == 0) {
-		ZEPHIR_RETURN_CALL_METHOD(this_ptr, "renderfile", &_1, 0, file);
+		ZEPHIR_RETURN_CALL_METHOD(this_ptr, "renderfile", &_0, 0, &tmpFile);
 		zephir_check_call_status();
 		RETURN_MM();
 	} else {
-		ZEPHIR_CALL_METHOD(&_2$$5, this_ptr, "renderfile", &_1, 0, file);
+		ZEPHIR_CALL_METHOD(&_1$$5, this_ptr, "renderfile", &_0, 0, &tmpFile);
 		zephir_check_call_status();
-		zend_print_zval(&_2$$5, 0);
+		zend_print_zval(&_1$$5, 0);
 	}
 	ZEPHIR_MM_RESTORE();
 
@@ -172,7 +167,7 @@ PHP_METHOD(Leevel_View_Twig, resolverParser) {
 
 	zephir_read_property(&_0, this_ptr, SL("parseResolver"), PH_NOISY_CC | PH_READONLY);
 	if (!(zephir_is_true(&_0))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Twig theme not set parse resolver.", "leevel/view/twig.zep", 107);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(spl_ce_RuntimeException, "Twig theme not set parse resolver.", "leevel/view/twig.zep", 104);
 		return;
 	}
 	zephir_read_property(&_1, this_ptr, SL("parseResolver"), PH_NOISY_CC | PH_READONLY);
@@ -244,7 +239,7 @@ PHP_METHOD(Leevel_View_Twig, renderFile) {
 	zephir_read_property(&_0, this_ptr, SL("parser"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_CALL_METHOD(&loader, &_0, "getloader", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "dirname", NULL, 28, &file);
+	ZEPHIR_CALL_FUNCTION(&_1, "dirname", NULL, 47, &file);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, &loader, "setpaths", NULL, 0, &_1);
 	zephir_check_call_status();
@@ -286,13 +281,8 @@ zend_object *zephir_init_properties_Leevel_View_Twig(zend_class_entry *class_typ
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_2) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_3$$4);
-			zephir_create_array(&_3$$4, 7, 0 TSRMLS_CC);
-			add_assoc_stringl_ex(&_3$$4, SL("controller_name"), SL("index"));
-			add_assoc_stringl_ex(&_3$$4, SL("action_name"), SL("index"));
-			add_assoc_stringl_ex(&_3$$4, SL("controlleraction_depr"), SL("_"));
-			add_assoc_stringl_ex(&_3$$4, SL("theme_name"), SL("default"));
+			zephir_create_array(&_3$$4, 2, 0 TSRMLS_CC);
 			add_assoc_stringl_ex(&_3$$4, SL("theme_path"), SL(""));
-			add_assoc_stringl_ex(&_3$$4, SL("theme_path_default"), SL(""));
 			add_assoc_stringl_ex(&_3$$4, SL("suffix"), SL(".twig"));
 			zephir_update_property_zval(this_ptr, SL("option"), &_3$$4);
 		}

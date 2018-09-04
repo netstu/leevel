@@ -132,20 +132,10 @@ class Manager extends Managers
      */
     protected function viewOptionCommon()
     {
-        var options, request;
-
-        let request = this->container->make("request");
-
-        let options =  [
-            "development" : this->container->development(),
-            "controller_name" : request->controller(),
-            "action_name" : request->action(),
-            "theme_path" : this->container->themePath(true),
-            "theme_cache_path" : this->container->runtimePath("theme") .
-                "/" . strtolower(request->app())
+        return [
+            "theme_path" : this->container->themesPath(),
+            "cache_path" : this->container->runtimePath("theme")
         ];
-
-        return options;
     }
 
     /**

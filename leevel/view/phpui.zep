@@ -33,12 +33,7 @@ class Phpui extends Connect implements IConnect
      * @var array
      */
     protected option = [
-        "controller_name" : "index",
-        "action_name" : "index",
-        "controlleraction_depr" : "_",
-        "theme_name" : "default",
         "theme_path" : "",
-        "theme_path_default" : "",
         "suffix" : ".php"
     ];
     
@@ -52,12 +47,12 @@ class Phpui extends Connect implements IConnect
      *
      * @return void|string
      */
-    public function display(var file = null, array! vars = [], var ext = null, bool display = true)
+    public function display(string file, array! vars = [], var ext = null, bool display = true)
     {
-        var result, key, value;
+        var result, key, value, tmpFile;
     
         // 加载视图文件
-        let file = this->parseDisplayFile(file, ext);
+        let tmpFile = this->parseDisplayFile(file, ext);
 
         // 变量赋值
         if typeof vars == "array" {
@@ -73,13 +68,13 @@ class Phpui extends Connect implements IConnect
         // 返回类型
         if display === false {
             ob_start();
-            require file;
+            require tmpFile;
             let result = ob_get_contents();
             ob_end_clean();
 
             return result;
         } else {
-            require file;
+            require tmpFile;
         }
     }
 }

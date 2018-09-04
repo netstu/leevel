@@ -17,8 +17,6 @@
 #include "kernel/array.h"
 #include "kernel/object.h"
 #include "kernel/operators.h"
-#include "kernel/concat.h"
-#include "kernel/string.h"
 
 
 /**
@@ -302,58 +300,29 @@ PHP_METHOD(Leevel_View_Manager, makeConnectV8js) {
  */
 PHP_METHOD(Leevel_View_Manager, viewOptionCommon) {
 
-	zval options, request, _0, _1, _2, _3, _4, _5, _6, _7;
+	zval _0, _1, _2, _3;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&options);
-	ZVAL_UNDEF(&request);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_2);
 	ZVAL_UNDEF(&_3);
-	ZVAL_UNDEF(&_4);
-	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
 
 	ZEPHIR_MM_GROW();
 
+	zephir_create_array(return_value, 2, 0 TSRMLS_CC);
 	zephir_read_property(&_0, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_VAR(&_1);
-	ZVAL_STRING(&_1, "request");
-	ZEPHIR_CALL_METHOD(&request, &_0, "make", NULL, 0, &_1);
+	ZEPHIR_CALL_METHOD(&_1, &_0, "themespath", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_INIT_VAR(&options);
-	zephir_create_array(&options, 5, 0 TSRMLS_CC);
+	zephir_array_update_string(return_value, SL("theme_path"), &_1, PH_COPY | PH_SEPARATE);
 	zephir_read_property(&_2, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_CALL_METHOD(&_3, &_2, "development", NULL, 0);
+	ZEPHIR_INIT_VAR(&_3);
+	ZVAL_STRING(&_3, "theme");
+	ZEPHIR_CALL_METHOD(&_1, &_2, "runtimepath", NULL, 0, &_3);
 	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("development"), &_3, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(&_3, &request, "controller", NULL, 0);
-	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("controller_name"), &_3, PH_COPY | PH_SEPARATE);
-	ZEPHIR_CALL_METHOD(&_3, &request, "action", NULL, 0);
-	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("action_name"), &_3, PH_COPY | PH_SEPARATE);
-	zephir_read_property(&_4, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZVAL_BOOL(&_5, 1);
-	ZEPHIR_CALL_METHOD(&_3, &_4, "themepath", NULL, 0, &_5);
-	zephir_check_call_status();
-	zephir_array_update_string(&options, SL("theme_path"), &_3, PH_COPY | PH_SEPARATE);
-	zephir_read_property(&_5, this_ptr, SL("container"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_INIT_NVAR(&_1);
-	ZVAL_STRING(&_1, "theme");
-	ZEPHIR_CALL_METHOD(&_3, &_5, "runtimepath", NULL, 0, &_1);
-	zephir_check_call_status();
-	ZEPHIR_INIT_NVAR(&_1);
-	ZEPHIR_CALL_METHOD(&_6, &request, "app", NULL, 0);
-	zephir_check_call_status();
-	zephir_fast_strtolower(&_1, &_6);
-	ZEPHIR_INIT_VAR(&_7);
-	ZEPHIR_CONCAT_VSV(&_7, &_3, "/", &_1);
-	zephir_array_update_string(&options, SL("theme_cache_path"), &_7, PH_COPY | PH_SEPARATE);
-	RETURN_CCTOR(&options);
+	zephir_array_update_string(return_value, SL("cache_path"), &_1, PH_COPY | PH_SEPARATE);
+	RETURN_MM();
 
 }
 

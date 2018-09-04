@@ -50,17 +50,9 @@ class Html extends Connect implements IConnect
      * @var array
      */
     protected option = [
-        "debug" : false,
-        "controller_name" : "index",
-        "action_name" : "index",
-        "controlleraction_depr" : "_",
-        "theme_name" : "default",
         "theme_path" : "",
-        "theme_path_default" : "",
         "suffix" : ".html",
-        "theme_cache_path" : "",
-        "cache_children" : false,
-        "cache_lifetime" : 2592000
+        "cache_path" : ""
     ];
 
     /**
@@ -72,12 +64,12 @@ class Html extends Connect implements IConnect
      * @param boolean $display 是否显示
      * @return void|string
      */
-    public function display(var file = null, array! vars = [], var ext = null, boolean display = true)
+    public function display(string file, array! vars = [], var ext = null, boolean display = true)
     {
-        var cachepath, result, key, value;
+        var cachepath, result, key, value, tmpFile;
 
         // 加载视图文件
-        let file = this->parseDisplayFile(file, ext);
+        let tmpFile = this->parseDisplayFile(file, ext);
 
         // 变量赋值
         if typeof vars == "array" {
@@ -90,10 +82,10 @@ class Html extends Connect implements IConnect
             }
         }
 
-        let cachepath = this->getCachePath(file); // 编译文件路径
+        let cachepath = this->getCachePath(tmpFile); // 编译文件路径
 
-        if this->isCacheExpired(file, cachepath) { // 重新编译
-            this->parser()->doCompile(file, cachepath);
+        if this->isCacheExpired(tmpFile, cachepath) { // 重新编译
+            this->parser()->doCompile(tmpFile, cachepath);
         }
 
         // 返回类型
@@ -118,6 +110,25 @@ class Html extends Connect implements IConnect
     public function setParseResolver(parserResolver)
     {
         let this->parserResolver = parserResolver;
+    }
+
+    /**
+     * 获取编译路径
+     *
+     * @param string $file
+     * @return string
+     */
+    public function getCachePath(string file)
+    {
+        if ! this->option["cache_path"] {
+            throw new RuntimeException("Theme cache path must be set.");
+        }
+
+        let file = str_replace("//", "/", str_replace("\\", "/", file));
+
+        let file = basename(file, "." . pathinfo(file, PATHINFO_EXTENSION)) . "." . md5(file) . ".php";
+
+        return this->option["cache_path"] . "/" . file;
     }
 
     /**
@@ -146,30 +157,8 @@ class Html extends Connect implements IConnect
         }
 
         let this->parser = this->resolverParser();
+
         return this->parser;
-    }
-
-    /**
-     * 获取编译路径
-     *
-     * @param string $file
-     * @return string
-     */
-    protected function getCachePath(string file)
-    {
-        if ! this->option["theme_cache_path"] {
-            throw new RuntimeException("Theme cache path must be set.");
-        }
-
-        // 统一斜线
-        let file = str_replace("//", "/", str_replace("\\", "/", file));
-
-        // 统一缓存文件
-        let file = basename(file, "." . pathinfo(file, PATHINFO_EXTENSION)) .
-            "." . md5(file) . ".php";
-
-        // 返回真实路径
-        return this->option["theme_cache_path"] . "/" . file;
     }
 
     /**
@@ -181,27 +170,10 @@ class Html extends Connect implements IConnect
      */
     protected function isCacheExpired(string file, string cachepath)
     {
-        // 开启调试
-        if this->option["debug"] {
-            return true;
-        }
-
-        // 缓存文件不存在过期
         if ! is_file(cachepath) {
             return true;
         }
 
-        // 编译过期时间为 <= 0 表示永不过期
-        if this->option["cache_lifetime"] <= 0 {
-            return false;
-        }
-
-        // 缓存时间到期
-        if filemtime(cachepath) + intval(this->option["cache_lifetime"]) < time() {
-            return true;
-        }
-
-        // 文件有更新
         if filemtime(file) >= filemtime(cachepath) {
             return true;
         }

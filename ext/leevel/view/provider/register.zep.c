@@ -16,15 +16,15 @@
 #include "kernel/memory.h"
 #include "kernel/array.h"
 #include "kernel/object.h"
-#include "kernel/concat.h"
 
 
 /**
- * view 服务提供者
+ * view 服务提供者.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
  * @since 2017.05.12
+ *
  * @version 1.0
  */
 ZEPHIR_INIT_CLASS(Leevel_View_Provider_Register) {
@@ -480,17 +480,15 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParserClosure) {
 	zval _3;
 	zend_class_entry *_0 = NULL, *_2 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
-	zval *project, project_sub, __$true, _1, _4, _5, _6, _7, _8;
+	zval *project, project_sub, __$true, __$false, _1, _4, _5;
 	zval *this_ptr = getThis();
 
 	ZVAL_UNDEF(&project_sub);
 	ZVAL_BOOL(&__$true, 1);
+	ZVAL_BOOL(&__$false, 0);
 	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&_4);
 	ZVAL_UNDEF(&_5);
-	ZVAL_UNDEF(&_6);
-	ZVAL_UNDEF(&_7);
-	ZVAL_UNDEF(&_8);
 	ZVAL_UNDEF(&_3);
 
 	ZEPHIR_MM_GROW();
@@ -513,24 +511,15 @@ PHP_METHOD(Leevel_View_Provider_Register, viewTwigParserClosure) {
 			zephir_check_call_status();
 		}
 		ZEPHIR_INIT_VAR(&_3);
-		zephir_create_array(&_3, 3, 0 TSRMLS_CC);
+		zephir_create_array(&_3, 4, 0 TSRMLS_CC);
 		zephir_array_update_string(&_3, SL("auto_reload"), &__$true, PH_COPY | PH_SEPARATE);
-		ZEPHIR_CALL_METHOD(&_4, project, "development", NULL, 0);
-		zephir_check_call_status();
-		zephir_array_update_string(&_3, SL("debug"), &_4, PH_COPY | PH_SEPARATE);
+		zephir_array_update_string(&_3, SL("debug"), &__$false, PH_COPY | PH_SEPARATE);
+		zephir_array_update_string(&_3, SL("strict_variables"), &__$true, PH_COPY | PH_SEPARATE);
 		ZEPHIR_INIT_VAR(&_5);
 		ZVAL_STRING(&_5, "theme");
 		ZEPHIR_CALL_METHOD(&_4, project, "runtimepath", NULL, 0, &_5);
 		zephir_check_call_status();
-		ZEPHIR_INIT_NVAR(&_5);
-		ZVAL_STRING(&_5, "request");
-		ZEPHIR_CALL_METHOD(&_6, project, "make", NULL, 0, &_5);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(&_7, &_6, "app", NULL, 0);
-		zephir_check_call_status();
-		ZEPHIR_INIT_VAR(&_8);
-		ZEPHIR_CONCAT_VSV(&_8, &_4, "/", &_7);
-		zephir_array_update_string(&_3, SL("cache"), &_8, PH_COPY | PH_SEPARATE);
+		zephir_array_update_string(&_3, SL("cache"), &_4, PH_COPY | PH_SEPARATE);
 		ZEPHIR_CALL_METHOD(NULL, return_value, "__construct", NULL, 0, &_1, &_3);
 		zephir_check_call_status();
 	}

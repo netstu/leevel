@@ -17,9 +17,9 @@
 #include "kernel/fcall.h"
 #include "kernel/array.h"
 #include "kernel/main.h"
+#include "kernel/operators.h"
 #include "ext/spl/spl_exceptions.h"
 #include "kernel/exception.h"
-#include "kernel/operators.h"
 
 
 /**
@@ -255,22 +255,20 @@ PHP_METHOD(Leevel_Mvc_Controller, display) {
 
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zval vars;
-	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, __$null, _0;
+	zval *file_param = NULL, *vars_param = NULL, *ext = NULL, ext_sub, __$null, _0;
+	zval file;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&file);
 	ZVAL_UNDEF(&ext_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&_0);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 3, &file, &vars_param, &ext);
+	zephir_fetch_params(1, 1, 2, &file_param, &vars_param, &ext);
 
-	if (!file) {
-		file = &file_sub;
-		file = &__$null;
-	}
+	zephir_get_strval(&file, file_param);
 	if (!vars_param) {
 		ZEPHIR_INIT_VAR(&vars);
 		array_init(&vars);
@@ -286,7 +284,7 @@ PHP_METHOD(Leevel_Mvc_Controller, display) {
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "checkview", NULL, 0);
 	zephir_check_call_status();
 	zephir_read_property(&_0, this_ptr, SL("view"), PH_NOISY_CC | PH_READONLY);
-	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, file, &vars, ext);
+	ZEPHIR_RETURN_CALL_METHOD(&_0, "display", NULL, 0, &file, &vars, ext);
 	zephir_check_call_status();
 	RETURN_MM();
 

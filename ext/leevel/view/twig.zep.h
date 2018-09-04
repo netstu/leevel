@@ -10,7 +10,7 @@ PHP_METHOD(Leevel_View_Twig, parser);
 PHP_METHOD(Leevel_View_Twig, renderFile);
 zend_object *zephir_init_properties_Leevel_View_Twig(zend_class_entry *class_type TSRMLS_DC);
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_twig_display, 0, 0, 0)
+ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_twig_display, 0, 0, 1)
 	ZEND_ARG_INFO(0, file)
 	ZEND_ARG_ARRAY_INFO(0, vars, 1)
 	ZEND_ARG_INFO(0, ext)

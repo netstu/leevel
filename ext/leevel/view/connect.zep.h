@@ -12,7 +12,6 @@ PHP_METHOD(Leevel_View_Connect, clearVar);
 PHP_METHOD(Leevel_View_Connect, parseDisplayFile);
 PHP_METHOD(Leevel_View_Connect, parseFile);
 PHP_METHOD(Leevel_View_Connect, formatFile);
-PHP_METHOD(Leevel_View_Connect, parseDefaultFile);
 zend_object *zephir_init_properties_Leevel_View_Connect(zend_class_entry *class_type TSRMLS_DC);
 
 ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_connect___construct, 0, 0, 0)
@@ -47,10 +46,6 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_connect_formatfile, 0, 0, 1)
 	ZEND_ARG_INFO(0, content)
 ZEND_END_ARG_INFO()
 
-ZEND_BEGIN_ARG_INFO_EX(arginfo_leevel_view_connect_parsedefaultfile, 0, 0, 1)
-	ZEND_ARG_INFO(0, tpl)
-ZEND_END_ARG_INFO()
-
 ZEPHIR_INIT_FUNCS(leevel_view_connect_method_entry) {
 	PHP_ME(Leevel_View_Connect, __construct, arginfo_leevel_view_connect___construct, ZEND_ACC_PUBLIC|ZEND_ACC_CTOR)
 	PHP_ME(Leevel_View_Connect, setOption, arginfo_leevel_view_connect_setoption, ZEND_ACC_PUBLIC)
@@ -61,6 +56,5 @@ ZEPHIR_INIT_FUNCS(leevel_view_connect_method_entry) {
 	PHP_ME(Leevel_View_Connect, parseDisplayFile, arginfo_leevel_view_connect_parsedisplayfile, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_View_Connect, parseFile, arginfo_leevel_view_connect_parsefile, ZEND_ACC_PROTECTED)
 	PHP_ME(Leevel_View_Connect, formatFile, arginfo_leevel_view_connect_formatfile, ZEND_ACC_PROTECTED)
-	PHP_ME(Leevel_View_Connect, parseDefaultFile, arginfo_leevel_view_connect_parsedefaultfile, ZEND_ACC_PROTECTED)
 	PHP_FE_END
 };

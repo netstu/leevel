@@ -100,7 +100,7 @@ PHP_METHOD(Leevel_View_V8js, __construct) {
 	ZEPHIR_CALL_FUNCTION(&_1, "extension_loaded", NULL, 70, &_0);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Please install php v8js extension.", "leevel/view/v8js.zep", 72);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Please install php v8js extension.", "leevel/view/v8js.zep", 73);
 		return;
 	}
 	ZEPHIR_CALL_PARENT(NULL, leevel_view_v8js_ce, getThis(), "__construct", &_2, 0, &option);
@@ -140,7 +140,7 @@ PHP_METHOD(Leevel_View_V8js, __construct) {
 	ZEPHIR_INIT_NVAR(&_4);
 	ZVAL_STRING(&_4, "module");
 	zephir_array_fast_append(&_5, &_4);
-	zephir_is_iterable(&_5, 0, "leevel/view/v8js.zep", 83);
+	zephir_is_iterable(&_5, 0, "leevel/view/v8js.zep", 84);
 	ZEND_HASH_FOREACH_VAL(Z_ARRVAL_P(&_5), _6)
 	{
 		ZEPHIR_INIT_NVAR(&item);
@@ -183,34 +183,30 @@ PHP_METHOD(Leevel_View_V8js, getV8js) {
  */
 PHP_METHOD(Leevel_View_V8js, display) {
 
-	zend_string *_4;
-	zend_ulong _3;
-	zephir_fcall_cache_entry *_5 = NULL;
+	zend_string *_3;
+	zend_ulong _2;
+	zephir_fcall_cache_entry *_4 = NULL;
 	zend_long ZEPHIR_LAST_CALL_STATUS;
 	zend_bool display;
 	zval vars;
-	zval *file = NULL, file_sub, *vars_param = NULL, *ext = NULL, ext_sub, *display_param = NULL, __$null, key, value, source, _0, _1, *_2;
+	zval *file_param = NULL, *vars_param = NULL, *ext = NULL, ext_sub, *display_param = NULL, __$null, key, value, source, tmpFile, _0, *_1;
+	zval file;
 	zval *this_ptr = getThis();
 
-	ZVAL_UNDEF(&file_sub);
+	ZVAL_UNDEF(&file);
 	ZVAL_UNDEF(&ext_sub);
 	ZVAL_NULL(&__$null);
 	ZVAL_UNDEF(&key);
 	ZVAL_UNDEF(&value);
 	ZVAL_UNDEF(&source);
+	ZVAL_UNDEF(&tmpFile);
 	ZVAL_UNDEF(&_0);
-	ZVAL_UNDEF(&_1);
 	ZVAL_UNDEF(&vars);
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 0, 4, &file, &vars_param, &ext, &display_param);
+	zephir_fetch_params(1, 1, 3, &file_param, &vars_param, &ext, &display_param);
 
-	if (!file) {
-		file = &file_sub;
-		ZEPHIR_CPY_WRT(file, &__$null);
-	} else {
-		ZEPHIR_SEPARATE_PARAM(file);
-	}
+	zephir_get_strval(&file, file_param);
 	if (!vars_param) {
 		ZEPHIR_INIT_VAR(&vars);
 		array_init(&vars);
@@ -228,32 +224,31 @@ PHP_METHOD(Leevel_View_V8js, display) {
 	}
 
 
-	ZEPHIR_CALL_METHOD(&_0, this_ptr, "parsedisplayfile", NULL, 0, file, ext);
+	ZEPHIR_CALL_METHOD(&tmpFile, this_ptr, "parsedisplayfile", NULL, 0, &file, ext);
 	zephir_check_call_status();
-	ZEPHIR_CPY_WRT(file, &_0);
 	if (1 == 1) {
 		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setvar", NULL, 0, &vars);
 		zephir_check_call_status();
 	}
-	zephir_read_property(&_1, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
-	zephir_is_iterable(&_1, 0, "leevel/view/v8js.zep", 121);
-	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_1), _3, _4, _2)
+	zephir_read_property(&_0, this_ptr, SL("vars"), PH_NOISY_CC | PH_READONLY);
+	zephir_is_iterable(&_0, 0, "leevel/view/v8js.zep", 122);
+	ZEND_HASH_FOREACH_KEY_VAL(Z_ARRVAL_P(&_0), _2, _3, _1)
 	{
 		ZEPHIR_INIT_NVAR(&key);
-		if (_4 != NULL) { 
-			ZVAL_STR_COPY(&key, _4);
+		if (_3 != NULL) { 
+			ZVAL_STR_COPY(&key, _3);
 		} else {
-			ZVAL_LONG(&key, _3);
+			ZVAL_LONG(&key, _2);
 		}
 		ZEPHIR_INIT_NVAR(&value);
-		ZVAL_COPY(&value, _2);
-		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setv8jsprop", &_5, 0, &key, &value);
+		ZVAL_COPY(&value, _1);
+		ZEPHIR_CALL_METHOD(NULL, this_ptr, "setv8jsprop", &_4, 0, &key, &value);
 		zephir_check_call_status();
 	} ZEND_HASH_FOREACH_END();
 	ZEPHIR_INIT_NVAR(&value);
 	ZEPHIR_INIT_NVAR(&key);
 	ZEPHIR_INIT_VAR(&source);
-	zephir_file_get_contents(&source, file TSRMLS_CC);
+	zephir_file_get_contents(&source, &tmpFile TSRMLS_CC);
 	if (display == 0) {
 		ZEPHIR_RETURN_CALL_METHOD(this_ptr, "select", NULL, 0, &source);
 		zephir_check_call_status();
@@ -645,7 +640,7 @@ PHP_METHOD(Leevel_View_V8js, initLoadClosure) {
 
 	zephir_concat_self_str(&package, SL("Package") TSRMLS_CC);
 	if (!((zephir_method_exists(this_ptr, package TSRMLS_CC)  == SUCCESS))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Package is not preset, we just support vue and art.", "leevel/view/v8js.zep", 269);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_RuntimeException, "Package is not preset, we just support vue and art.", "leevel/view/v8js.zep", 270);
 		return;
 	}
 	ZEPHIR_CALL_METHOD_ZVAL(NULL, this_ptr, package, NULL, 0);
@@ -869,10 +864,10 @@ PHP_METHOD(Leevel_View_V8js, vuePackage) {
 
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&vue);
-	zephir_array_fetch_string(&vue, &_0, SL("vue_path"), PH_NOISY, "leevel/view/v8js.zep", 342 TSRMLS_CC);
+	zephir_array_fetch_string(&vue, &_0, SL("vue_path"), PH_NOISY, "leevel/view/v8js.zep", 343 TSRMLS_CC);
 	zephir_read_property(&_1, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&renderer);
-	zephir_array_fetch_string(&renderer, &_1, SL("vue_renderer"), PH_NOISY, "leevel/view/v8js.zep", 343 TSRMLS_CC);
+	zephir_array_fetch_string(&renderer, &_1, SL("vue_renderer"), PH_NOISY, "leevel/view/v8js.zep", 344 TSRMLS_CC);
 	ZEPHIR_CALL_FUNCTION(&_2, "is_file", &_3, 26, &vue);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_2))) {
@@ -884,7 +879,7 @@ PHP_METHOD(Leevel_View_V8js, vuePackage) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_4$$3, "__construct", NULL, 3, &_6$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_4$$3, "leevel/view/v8js.zep", 348 TSRMLS_CC);
+		zephir_throw_exception_debug(&_4$$3, "leevel/view/v8js.zep", 349 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -899,7 +894,7 @@ PHP_METHOD(Leevel_View_V8js, vuePackage) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_9$$4, "__construct", NULL, 3, &_11$$4);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_9$$4, "leevel/view/v8js.zep", 354 TSRMLS_CC);
+		zephir_throw_exception_debug(&_9$$4, "leevel/view/v8js.zep", 355 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -942,7 +937,7 @@ PHP_METHOD(Leevel_View_V8js, artPackage) {
 
 	zephir_read_property(&_0, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 	ZEPHIR_OBS_VAR(&art);
-	zephir_array_fetch_string(&art, &_0, SL("art_path"), PH_NOISY, "leevel/view/v8js.zep", 369 TSRMLS_CC);
+	zephir_array_fetch_string(&art, &_0, SL("art_path"), PH_NOISY, "leevel/view/v8js.zep", 370 TSRMLS_CC);
 	ZEPHIR_CALL_FUNCTION(&_1, "is_file", NULL, 26, &art);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
@@ -954,7 +949,7 @@ PHP_METHOD(Leevel_View_V8js, artPackage) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, &_2$$3, "__construct", NULL, 3, &_4$$3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(&_2$$3, "leevel/view/v8js.zep", 374 TSRMLS_CC);
+		zephir_throw_exception_debug(&_2$$3, "leevel/view/v8js.zep", 375 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
@@ -997,13 +992,8 @@ zend_object *zephir_init_properties_Leevel_View_V8js(zend_class_entry *class_typ
 		zephir_read_property(&_2, this_ptr, SL("option"), PH_NOISY_CC | PH_READONLY);
 		if (Z_TYPE_P(&_2) == IS_NULL) {
 			ZEPHIR_INIT_VAR(&_3$$4);
-			zephir_create_array(&_3$$4, 10, 0 TSRMLS_CC);
-			add_assoc_stringl_ex(&_3$$4, SL("controller_name"), SL("index"));
-			add_assoc_stringl_ex(&_3$$4, SL("action_name"), SL("index"));
-			add_assoc_stringl_ex(&_3$$4, SL("controlleraction_depr"), SL("_"));
-			add_assoc_stringl_ex(&_3$$4, SL("theme_name"), SL("default"));
+			zephir_create_array(&_3$$4, 5, 0 TSRMLS_CC);
 			add_assoc_stringl_ex(&_3$$4, SL("theme_path"), SL(""));
-			add_assoc_stringl_ex(&_3$$4, SL("theme_path_default"), SL(""));
 			add_assoc_stringl_ex(&_3$$4, SL("suffix"), SL(".js"));
 			add_assoc_stringl_ex(&_3$$4, SL("vue_path"), SL("node_modules/vue/dist/vue.js"));
 			add_assoc_stringl_ex(&_3$$4, SL("vue_renderer"), SL("node_modules/vue-server-renderer/basic.js"));

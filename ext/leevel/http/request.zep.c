@@ -2899,7 +2899,7 @@ PHP_METHOD(Leevel_Http_Request, getEnter) {
 	}
 	ZEPHIR_CALL_METHOD(&scriptName, this_ptr, "getscriptname", NULL, 0);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_1, "dirname", NULL, 28, &scriptName);
+	ZEPHIR_CALL_FUNCTION(&_1, "dirname", NULL, 47, &scriptName);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(&scriptName, &_1);
 	ZEPHIR_SINIT_VAR(_2);
@@ -3464,7 +3464,7 @@ PHP_METHOD(Leevel_Http_Request, getBasePath) {
 	ZEPHIR_INIT_NVAR(&_3);
 	zephir_basename(&_3, &baseUrl TSRMLS_CC);
 	if (ZEPHIR_IS_IDENTICAL(&_3, &filename)) {
-		ZEPHIR_CALL_FUNCTION(&basePath, "dirname", NULL, 28, &baseUrl);
+		ZEPHIR_CALL_FUNCTION(&basePath, "dirname", NULL, 47, &baseUrl);
 		zephir_check_call_status();
 	} else {
 		ZEPHIR_CPY_WRT(&basePath, &baseUrl);
@@ -3686,7 +3686,7 @@ PHP_METHOD(Leevel_Http_Request, getBaseUrl) {
 			zephir_update_property_zval(this_ptr, SL("baseUrl"), &prefix);
 			RETURN_MM_MEMBER(getThis(), "baseUrl");
 		}
-		ZEPHIR_CALL_FUNCTION(&_38$$10, "dirname", NULL, 28, &url);
+		ZEPHIR_CALL_FUNCTION(&_38$$10, "dirname", NULL, 47, &url);
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(&prefix, this_ptr, "geturlencodedprefix", &_37, 0, &requestUri, &_38$$10);
 		zephir_check_call_status();

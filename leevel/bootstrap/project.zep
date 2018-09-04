@@ -288,8 +288,7 @@ class Project extends Container implements IProject
      */
     public function themePath(var app = false) -> string
     {
-        return this->appPath(app) ."/ui/theme/" .
-            this->make("option")->get("view\\theme_name");
+        return this->appPath(app) ."/ui/theme";
     }
     
     /**

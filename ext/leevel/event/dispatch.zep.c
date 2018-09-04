@@ -130,7 +130,7 @@ PHP_METHOD(Leevel_Event_Dispatch, run) {
 		ZEPHIR_CPY_WRT(&event, &_1$$4);
 	}
 	ZEPHIR_MAKE_REF(&params);
-	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 33, &params, &event);
+	ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", NULL, 32, &params, &event);
 	ZEPHIR_UNREF(&params);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(&listeners, this_ptr, "get", NULL, 0, &name);
@@ -497,7 +497,7 @@ PHP_METHOD(Leevel_Event_Dispatch, prepareRegexForWildcard) {
 
 	ZEPHIR_INIT_VAR(&_0);
 	ZVAL_STRING(&_0, "/");
-	ZEPHIR_CALL_FUNCTION(&_1, "preg_quote", NULL, 29, regex, &_0);
+	ZEPHIR_CALL_FUNCTION(&_1, "preg_quote", NULL, 28, regex, &_0);
 	zephir_check_call_status();
 	ZEPHIR_CPY_WRT(regex, &_1);
 	ZEPHIR_INIT_NVAR(&_0);

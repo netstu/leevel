@@ -49,12 +49,7 @@ class Twig extends Connect implements IConnect
      * @var array
      */
     protected option = [
-        "controller_name" : "index",
-        "action_name" : "index",
-        "controlleraction_depr" : "_",
-        "theme_name" : "default",
         "theme_path" : "",
-        "theme_path_default" : "",
         "suffix" : ".twig"
     ];
     
@@ -68,10 +63,12 @@ class Twig extends Connect implements IConnect
      *
      * @return void|string
      */
-    public function display(var file = null, array! vars = [], var ext = null, bool display = true)
+    public function display(string file, array! vars = [], var ext = null, bool display = true)
     {
+        var tmpFile;
+        
         // 加载视图文件
-        let file = this->parseDisplayFile(file, ext);
+        let tmpFile = this->parseDisplayFile(file, ext);
 
         // 变量赋值
         if typeof vars == "array" {
@@ -80,9 +77,9 @@ class Twig extends Connect implements IConnect
 
         // 返回类型
         if display === false {
-            return this->renderFile(file);
+            return this->renderFile(tmpFile);
         } else {
-            echo this->renderFile(file);
+            echo this->renderFile(tmpFile);
         }
     }
     

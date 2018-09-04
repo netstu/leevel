@@ -38,15 +38,16 @@ class V8js extends Connect implements IConnect
      * @var array
      */
     protected option = [
-        "controller_name" : "index",
-        "action_name" : "index",
-        "controlleraction_depr" : "_",
-        "theme_name" : "default",
         "theme_path" : "",
-        "theme_path_default" : "",
         "suffix" : ".js",
+
+        // node_modules/vue/dist/vue.js
         "vue_path" : "node_modules/vue/dist/vue.js",
+
+        // node_modules/vue-server-renderer/basic.js
         "vue_renderer" : "node_modules/vue-server-renderer/basic.js",
+
+        // node_modules/art-template/lib/template-web.js
         "art_path" : "node_modules/art-template/lib/template-web.js"
     ];
     
@@ -102,12 +103,12 @@ class V8js extends Connect implements IConnect
      *
      * @return void|string
      */
-    public function display(var file = null, array! vars = [], var ext = null, bool display = true)
+    public function display(string file, array! vars = [], var ext = null, bool display = true)
     {
-        var key, value, source;
+        var key, value, source, tmpFile;
     
         // 加载视图文件
-        let file = this->parseDisplayFile(file, ext);
+        let tmpFile = this->parseDisplayFile(file, ext);
 
         // 传递变量
         if typeof vars == "array" {
@@ -118,7 +119,7 @@ class V8js extends Connect implements IConnect
             this->setV8jsProp(key, value);
         }
 
-        let source = file_get_contents(file);
+        let source = file_get_contents(tmpFile);
 
         // 返回类型
         if display === false {

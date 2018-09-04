@@ -201,7 +201,7 @@ PHP_METHOD(Leevel_Bootstrap_Bootstrap_LoadI18n, getExtend) {
 			ZEPHIR_CONCAT_VSV(&_6$$4, &path, "/", &item);
 			ZEPHIR_CPY_WRT(&item, &_6$$4);
 		}
-		ZEPHIR_CALL_FUNCTION(&_7$$3, "is_dir", &_8, 46, &item);
+		ZEPHIR_CALL_FUNCTION(&_7$$3, "is_dir", &_8, 45, &item);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_7$$3))) {
 			ZEPHIR_INIT_NVAR(&_9$$5);

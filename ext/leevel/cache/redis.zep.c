@@ -146,7 +146,7 @@ PHP_METHOD(Leevel_Cache_Redis, get) {
 		_4 = Z_TYPE_P(&data) == IS_STRING;
 	}
 	if (_4) {
-		ZEPHIR_CALL_FUNCTION(&_5$$4, "unserialize", NULL, 30, &data);
+		ZEPHIR_CALL_FUNCTION(&_5$$4, "unserialize", NULL, 29, &data);
 		zephir_check_call_status();
 		ZEPHIR_CPY_WRT(&data, &_5$$4);
 	}

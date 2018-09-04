@@ -133,6 +133,7 @@ abstract class Connect
     public function clearVar()
     {
         let this->vars = [];
+        
         return this;
     }
 
@@ -145,14 +146,8 @@ abstract class Connect
      */
     protected function parseDisplayFile(string file, string ext = "")
     {
-        // 加载视图文件
         if ! is_file(file) {
             let file = this->parseFile(file, ext);
-        }
-
-        // 分析默认视图文件
-        if ! is_file(file) {
-            let file = this->parseDefaultFile(file);
         }
 
         if ! is_file(file) {
@@ -173,58 +168,23 @@ abstract class Connect
      */
     protected function parseFile(string tpl, string ext = "")
     {
-        var arr, theme, tempTheme, tempTpl, result = "";
+        var tplTmp;
 
-        let tpl = trim(str_replace("->", ".", tpl));
+        let tplTmp = trim(str_replace("->", ".", tpl));
 
-        // 完整路径或者变量
-        if pathinfo(tpl, PATHINFO_EXTENSION) ||
-            strpos(tpl, "$") === 0 ||
-            strpos(tpl, "(") !== false {
-            return this->formatFile(tpl);
-        } else {
-            if ! this->option["theme_path"] {
-                throw new RuntimeException("Theme path must be set.");
-            }
-
-            // 空取默认控制器和方法
-            if tpl == "" {
-                let tpl = this->option["controller_name"] .
-                    this->option["controlleraction_depr"] .
-                    this->option["action_name"];
-            }
-
-            // 分析主题
-            if strpos(tpl, "@") !== false {
-                let arr = explode("@", tpl);
-                let tempTheme = array_shift(arr);
-                let theme = tempTheme;
-                let tempTpl = array_shift(arr);
-                let tpl = tempTpl; 
-            }
-
-            let tpl = str_replace([
-                "+",
-                ":"
-            ], this->option["controlleraction_depr"], tpl);
-
-            let result = dirname(this->option["theme_path"]) . "/";
-            if theme {
-                let result .= theme . "/";
-            } else {
-                let result .= this->option["theme_name"] . "/";
-            }
-
-            let result .= tpl;
-
-            if ! empty ext {
-                let result .= ext;
-            } else {
-                let result .= this->option["suffix"];
-            }
-
-            return result;
+        // 完整路径或者变量以及表达式路径
+        if pathinfo(tplTmp, PATHINFO_EXTENSION) ||
+            strpos(tplTmp, "$") === 0 ||
+            strpos(tplTmp, "(") !== false {
+            return this->formatFile(tplTmp);
         }
+
+        if ! this->option["theme_path"] {
+            throw new RuntimeException("Theme path must be set.");
+        }
+
+        return this->option["theme_path"] . "/" . tplTmp . 
+            (! empty ext ? ext : this->option["suffix"]);
     }
 
     /**
@@ -242,53 +202,5 @@ abstract class Connect
             "->",
             "::"
         ], content);
-    }
-
-    /**
-     * 匹配默认地址（文件不存在）
-     *
-     * @param string $tpl 文件地址
-     * @return string
-     */
-    protected function parseDefaultFile(string tpl)
-    {
-        var source, tempTpl;
-
-        if ! $this->option["theme_path"] {
-            throw new RuntimeException("Theme path must be set.");
-        }
-
-        let source = tpl;
-
-        // 物理路径
-        if strpos(tpl, ":") !== false ||
-            strpos(tpl, "/") === 0 ||
-            strpos(tpl, "\\") === 0 {
-            let tpl = str_replace(
-                str_replace(
-                    "\\",
-                    "/",
-                    this->option["theme_path"] . "/"
-                ),
-                "",
-                str_replace("\\", "/", tpl)
-            );
-        }
-
-        // 备用地址
-        let tempTpl = this->option["theme_path_default"] . "/" . tpl;
-
-        if this->option["theme_path_default"] && is_file(tempTpl) {
-            return tempTpl;
-        }
-
-        // default 主题
-        let tempTpl = dirname(this->option["theme_path"]) . "/default/" . tpl;
-        
-        if this->option["theme_name"] != "default" && is_file(tempTpl) {
-            return tempTpl;
-        }
-
-        return source;
     }
 }

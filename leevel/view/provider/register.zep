@@ -13,29 +13,30 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Leevel\View\Provider;
 
 use Closure;
-use Twig_Environment;
-use Leevel\View\Parser;
-use Leevel\Di\Provider;
-use Leevel\View\Manager;
 use Leevel\Di\IContainer;
-use Leevel\View\Compiler;
+use Leevel\Di\Provider;
 use Leevel\Kernel\IProject;
+use Leevel\View\Compiler;
+use Leevel\View\Manager;
+use Leevel\View\Parser;
+use Twig_Environment;
 use Twig_Loader_Filesystem;
 
 /**
- * view 服务提供者
+ * view 服务提供者.
  *
  * @author Xiangmin Liu <635750556@qq.com>
  *
  * @since 2017.05.12
+ *
  * @version 1.0
  */
 class Register extends Provider
 {
-
     /**
      * 创建一个服务容器提供者实例
      *
@@ -196,8 +197,9 @@ class Register extends Provider
     {
         return new Twig_Environment(new Twig_Loader_Filesystem(), [
             "auto_reload" : true, 
-            "debug" : project->development(), 
-            "cache" : project->runtimePath("theme") . "/" . project->make("request")->app()
+            "debug" : false,
+            "strict_variables" : true,
+            "cache" : project->runtimePath("theme")
         ]);
     }
 }

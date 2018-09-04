@@ -221,23 +221,23 @@ PHP_METHOD(Leevel_Log_File, checkSize) {
 	zephir_get_strval(&filePath, filePath_param);
 
 
-	ZEPHIR_CALL_FUNCTION(&dirname, "dirname", &_0, 28, &filePath);
+	ZEPHIR_CALL_FUNCTION(&dirname, "dirname", &_0, 47, &filePath);
 	zephir_check_call_status();
 	ZEPHIR_CALL_FUNCTION(&_1, "is_file", &_2, 26, &filePath);
 	zephir_check_call_status();
 	if (!(zephir_is_true(&_1))) {
-		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_dir", &_4, 46, &dirname);
+		ZEPHIR_CALL_FUNCTION(&_3$$3, "is_dir", &_4, 45, &dirname);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_3$$3))) {
-			ZEPHIR_CALL_FUNCTION(&_5$$4, "dirname", &_0, 28, &dirname);
+			ZEPHIR_CALL_FUNCTION(&_5$$4, "dirname", &_0, 47, &dirname);
 			zephir_check_call_status();
-			ZEPHIR_CALL_FUNCTION(&_6$$4, "is_dir", &_4, 46, &_5$$4);
+			ZEPHIR_CALL_FUNCTION(&_6$$4, "is_dir", &_4, 45, &_5$$4);
 			zephir_check_call_status();
 			_7$$4 = zephir_is_true(&_6$$4);
 			if (_7$$4) {
-				ZEPHIR_CALL_FUNCTION(&_8$$4, "dirname", &_0, 28, &dirname);
+				ZEPHIR_CALL_FUNCTION(&_8$$4, "dirname", &_0, 47, &dirname);
 				zephir_check_call_status();
-				ZEPHIR_CALL_FUNCTION(&_9$$4, "is_writable", &_10, 47, &_8$$4);
+				ZEPHIR_CALL_FUNCTION(&_9$$4, "is_writable", &_10, 46, &_8$$4);
 				zephir_check_call_status();
 				_7$$4 = !zephir_is_true(&_9$$4);
 			}
@@ -258,7 +258,7 @@ PHP_METHOD(Leevel_Log_File, checkSize) {
 			ZEPHIR_CALL_FUNCTION(NULL, "mkdir", NULL, 48, &dirname, &_15$$4, &__$true);
 			zephir_check_call_status();
 		}
-		ZEPHIR_CALL_FUNCTION(&_16$$3, "is_writable", &_10, 47, &dirname);
+		ZEPHIR_CALL_FUNCTION(&_16$$3, "is_writable", &_10, 46, &dirname);
 		zephir_check_call_status();
 		if (!(zephir_is_true(&_16$$3))) {
 			ZEPHIR_INIT_VAR(&_17$$6);
