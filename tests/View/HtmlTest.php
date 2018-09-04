@@ -45,9 +45,8 @@ class HtmlTest extends TestCase
     public function testBaseUse()
     {
         $html = new Html([
-            'debug'            => true,
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
@@ -73,9 +72,8 @@ class HtmlTest extends TestCase
     public function testDisplayReturn()
     {
         $html = new Html([
-            'debug'            => true,
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
@@ -92,9 +90,8 @@ class HtmlTest extends TestCase
     public function testDisplayWithVar()
     {
         $html = new Html([
-            'debug'            => true,
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
@@ -114,9 +111,8 @@ class HtmlTest extends TestCase
         );
 
         $html = new Html([
-            'debug'            => true,
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->display('html_test', ['foo' => 'bar'], null, false);
@@ -130,8 +126,7 @@ class HtmlTest extends TestCase
         );
 
         $html = new Html([
-            'debug'      => true,
-            'theme_path' => __DIR__.'/assert/default',
+            'theme_path' => __DIR__.'/assert',
         ]);
 
         $html->setParseResolver(function () {
@@ -141,37 +136,14 @@ class HtmlTest extends TestCase
         $html->display('html_test', ['foo' => 'bar'], null, false);
     }
 
-    public function testDebugSetFalse()
-    {
-        $html = new Html([
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
-        ]);
-
-        $html->setParseResolver(function () {
-            return $this->makeHtml();
-        });
-
-        $html->setVar('foo', 'bar');
-
-        $result = $html->display('html_test_debug_false', [], null, false);
-
-        $this->assertSame('hello html debug false,bar.', $result);
-    }
-
     public function testCacheLifetime()
     {
         $html = new Html([
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
-            'cache_lifetime'   => 0,
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
-        $cachePath = $this->invokeTestMethod(
-            $html,
-            'getCachePath',
-            [__DIR__.'/assert/default/html_test_cachelisfetime.html']
-        );
+        $cachePath = $html->getCachePath(__DIR__.'/assert/html_test_cachelisfetime.html');
 
         $html->setParseResolver(function () {
             return $this->makeHtml();
@@ -191,9 +163,8 @@ class HtmlTest extends TestCase
     public function testCacheLifetime2()
     {
         $html = new Html([
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
-            'cache_lifetime'   => -5,
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
@@ -202,11 +173,7 @@ class HtmlTest extends TestCase
 
         $html->setVar('foo', 'bar');
 
-        $cachePath = $this->invokeTestMethod(
-            $html,
-            'getCachePath',
-            [__DIR__.'/assert/default/html_test_cachelisfetime2.html']
-        );
+        $cachePath = $html->getCachePath(__DIR__.'/assert/html_test_cachelisfetime2.html');
 
         $this->assertFalse(is_file($cachePath));
 
@@ -226,9 +193,8 @@ class HtmlTest extends TestCase
     public function testCacheLifetime3()
     {
         $html = new Html([
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
-            'cache_lifetime'   => 1,
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
@@ -237,11 +203,7 @@ class HtmlTest extends TestCase
 
         $html->setVar('foo', 'bar');
 
-        $cachePath = $this->invokeTestMethod(
-            $html,
-            'getCachePath',
-            [__DIR__.'/assert/default/html_test_cachelisfetime3.html']
-        );
+        $cachePath = $html->getCachePath(__DIR__.'/assert/html_test_cachelisfetime3.html');
 
         // 模板不存在，已过期
         $this->assertFalse(is_file($cachePath));
@@ -251,44 +213,24 @@ class HtmlTest extends TestCase
         $this->assertTrue(is_file($cachePath));
 
         $this->assertSame('hello html cachelifetime3,bar.', $result);
-
-        // 未到 1 秒钟，未过期
-        $result = $html->display('html_test_cachelisfetime3', [], null, false);
-
-        $this->assertFalse(filemtime($cachePath) + 1 < time());
-
-        $this->assertSame('hello html cachelifetime3,bar.', $result);
-
-        // 2 秒钟超过了缓存时间 1 秒过期
-        sleep(2);
-
-        $this->assertTrue(filemtime($cachePath) + 1 < time());
-
-        $result = $html->display('html_test_cachelisfetime3', [], null, false);
-
-        $this->assertSame('hello html cachelifetime3,bar.', $result);
     }
 
     public function testCacheLifetime4()
     {
         $html = new Html([
-            'theme_path'       => __DIR__.'/assert/default',
-            'theme_cache_path' => __DIR__.'/cache_html',
+            'theme_path'       => __DIR__.'/assert',
+            'cache_path'       => __DIR__.'/cache_html',
         ]);
 
         $html->setParseResolver(function () {
             return $this->makeHtml();
         });
 
-        $cachePath = $this->invokeTestMethod(
-            $html,
-            'getCachePath',
-            [__DIR__.'/assert/default/html_test_cachelisfetime4.html']
-        );
+        $cachePath = $html->getCachePath(__DIR__.'/assert/html_test_cachelisfetime4.html');
 
         $html->setVar('foo', 'bar');
 
-        $file = __DIR__.'/assert/default/html_test_cachelisfetime4.html';
+        $file = __DIR__.'/assert/html_test_cachelisfetime4.html';
 
         file_put_contents($file, 'hello html cachelifetime4,{$foo}.');
 
